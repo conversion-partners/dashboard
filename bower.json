@@ -1,0 +1,32 @@
+{
+  "name": "core9-components",
+  "version": "0.0.0",
+  "authors": [
+    "jessec <robertjessecooke@gmail.com>"
+  ],
+  "description": "testing stuff",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^0.9.0",
+    "es6-shim": "~0.31.2",
+    "traceur": "~0.0.89",
+    "es6-module-loader": "ModuleLoader/es6-module-loader#~0.16.6",
+    "systemjs": "systemjs/systemjs#~0.16.11",
+    "restful.js": "~0.6.1",
+    "footable": "~2.0.3",
+    "gridmanager.js": "~0.3.1",
+    "iron-ajax": "PolymerElements/iron-ajax#~0.9.5",
+    "materialize": "~0.96.1"
+  },
+  "resolutions": {
+    "polymer": "^0.9.0",
+    "webcomponentsjs": "0.7.0"
+  }
+}

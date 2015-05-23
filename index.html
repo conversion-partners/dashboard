@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+<head>
+<title>unquote</title>
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+<script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+<script src="bower_components/es6-shim/es6-shim.min.js"></script>
+<script src="bower_components/systemjs/dist/system.js"></script>
+<script src="app/elements/core9-router/js/router.js"></script>
+<script>
+	//window.Polymer = window.Polymer || {};
+	//window.Polymer.dom = 'shadow';
+</script>
+<script>
+	Core9 = {
+		workspace : {},
+		cleanWorkspace : function() {
+			console.log(Core9.workspace);
+			while (Core9.workspace.firstChild) {
+				try {
+					Core9.workspace.removeChild(Core9.workspace.firstChild);
+				} catch (e) {
+					// TODO: handle exception
+				}
+
+			}
+		},
+		unwrapModule : function(mod) {
+			for (key in mod) {
+				if (mod.hasOwnProperty(key)) {
+					var value = mod[key];
+					return value;
+				}
+			}
+		},
+		multiImport : function(modules) {
+			return Promise.all(modules.map(function(m) {
+				return System.import(m)
+			}))
+		}
+	};
+</script>
+<link rel="stylesheet" href="bower_components/materialize/dist/css/materialize.min.css">
+
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="app/elements/elements.html">
+<link rel="stylesheet" href="style.css">
+
+<script type="text/javascript">
+	Router.config({
+		root : '/core9-components/',
+		mode : 'history'
+	});
+	var routes = {
+		'/home$/' : function() {
+			console.log('home', arguments);
+			Core9.cleanWorkspace();
+			Core9.iframeContent.style.marginTop = "43px";
+			Core9.iframeContent.style.left = "0px";
+			Core9.iframePlaceholder.appendChild(Core9.iframeContent);
+		},
+		'/devices$/' : function() {
+			console.log('hitting device...');
+			Core9.cleanWorkspace();
+			Core9.iframeContent.style.marginTop = "0px";
+			Core9.iframeContent.style.left = "-300px";
+			Core9.workspace.appendChild(Core9.iframeContent);
+		},
+		'/settings/setup$/' : function() {
+			console.log('settings/setup', arguments);
+			Core9.cleanWorkspace();
+			Core9.workspace.appendChild(document.createElement("core9-setup"));
+		},
+		'/forms$/' : function() {
+			console.log('forms', arguments);
+			Core9.cleanWorkspace();
+			Core9.workspace.appendChild(Core9.grid);
+		},
+	  '/pages$/' : function(req) {
+	        console.log('files', arguments);
+	        Core9.cleanWorkspace();
+	        Core9.workspace.appendChild(document.createElement("core9-pages"));
+	  },
+		'/files$/' : function(req) {
+			console.log('files', arguments);
+			Core9.cleanWorkspace();
+			Core9.workspace.appendChild(Core9.fileManager);
+		},
+		'default' : function() {
+			console.log('hitting default...');
+
+			Core9.cleanWorkspace();
+
+		}
+	}
+	Router.addRoutes(routes).listen();
+	//history.pushState(null, null, "products/edit/test");
+</script>
+<script type="text/javascript" src="bower_components/materialize/dist/js/materialize.min.js"></script>
+</head>
+<body fullbleed>
+	<div id="iframe-placeholder">
+		<iframe id="content" src="/core9-components/bower_components/gridmanager.js/demo/tinymce.html"></iframe>
+	</div>
+
+	<core9-menu id="menu">
+	<div id="workspace"></div>
+	</core9-menu>
+
+	<script src="/core9-components/init.js"></script>
+	<script>
+		Core9.workspace = document.getElementById('workspace');
+		Core9.iframePlaceholder = document.getElementById('iframe-placeholder');
+		Core9.iframeContent = document.getElementById('content');
+		Core9.grid = document.createElement("core9-grid");
+		Core9.fileManager = document.createElement("core9-filemanager");
+		Core9.setup = document.createElement("core9-setup");
+		Core9.pages = document.createElement("core9-pages");
+	</script>
+</body>
+</html>
