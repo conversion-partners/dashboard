@@ -204,6 +204,7 @@ input[type=file] {
 
 						reader.onload = function(event) {
 							// POST Image to server
+							console.log(that.FILE);
 							postMedia.headers = {};
 							postMedia.headers[customheader] = that
 									.fileToJson(this.xFile);
