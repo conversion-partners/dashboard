@@ -108,11 +108,19 @@ input[type=file] {
 
 				reader.onload = function(event) {
 					// POST Image to server
-					console.log(that.FILE);
-					postMedia.headers = {};
-					postMedia.headers[customheader] = that
-							.fileToJson(this.xFile);
-					postMedia.xFile = this.xFile;
+					//console.log(that.FILE);
+
+					that.FILE.setHeaders({
+						"file" : that.fileToJson(this.xFile)
+					});
+					that.FILE.setBody(event.target.result);
+					//that.FILE.sent();
+
+
+ 					postMedia.headers = {};
+					//postMedia.headers[customheader] = that
+					//		.fileToJson(this.xFile);
+					postMedia.File = this.xFile;
 					postMedia.body = event.target.result;
 					postMedia.generateRequest();
 				};
@@ -249,7 +257,6 @@ input[type=file] {
 
 				init(modules);
 				//var restful = modules[0];
-
 
 			});
 </script>
