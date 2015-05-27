@@ -44,9 +44,10 @@ File = {
 	                        console.log(oXHR.responseText);
 	                        console.log(JSON.parse(oXHR.responseText));
 	                    }
+	                    return JSON.parse(oXHR.responseText);
 	                }
 
-	                oXHR.open('GET', 'http://192.168.1.71:8080/testdb/mybucket.files/?page=1&pagesize=2', true);
+	                oXHR.open('GET', 'http://192.168.1.71:8080/testdb/mybucket.files/?'+params, true);
 	                oXHR.setRequestHeader("Authorization", "Basic " + Base64.encode("admin" + ":" + "changeit"));
 	                oXHR.send();
 
