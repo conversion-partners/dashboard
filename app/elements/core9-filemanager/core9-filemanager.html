@@ -14,20 +14,21 @@
 	height: 100%;
 	width: 96%;
 }
+
 core9-filedrop, core9-filedrop a {
-            width: calc( 100%  );
-            display: block;
-            padding: 1em;
-            margin: 1em;
-            min-height: 1em;
-            font-size: 1em;
-            text-align: center;
-            color: rgb(170, 170, 170);
-            border: 1px solid black;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            background-color: #fff;
-            margin-left:0px;
+	width: calc(100%);
+	display: block;
+	padding: 1em;
+	margin: 1em;
+	min-height: 1em;
+	font-size: 1em;
+	text-align: center;
+	color: rgb(170, 170, 170);
+	border: 1px solid black;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	background-color: #fff;
+	margin-left: 0px;
 }
 </style>
 <template>
@@ -39,123 +40,61 @@ core9-filedrop, core9-filedrop a {
 
 
 
-    <!-- Using Custom Elements -->
-    <core9-filedrop>
-
-    </core9-filedrop>
+	<!-- Using Custom Elements -->
+	<core9-filedrop> </core9-filedrop>
 
 
-<div class="input-field col s5">
-	 <input id="filter" type="text" />
-		<label>Search:</label>
-</div>
-		<div class="input-field col s5">
-		 <select id="filterstatus" class="filter-status">
+	<div class="input-field col s5">
+		<input id="filter" type="text" /> <label>Search:</label>
+	</div>
+	<div class="input-field col s5">
+		<select id="filterstatus" class="filter-status">
 			<option></option>
 			<option value="active">Active</option>
 			<option value="disabled">Disabled</option>
 			<option value="suspended">Suspended</option>
-		</select>
-		<label>Status:</label>
-		</div>
-<script>
+		</select> <label>Status:</label>
+	</div>
+	<script>
 $(document).ready(function() {
     $('select').material_select();
   });
 </script>
 
-	<table id="table2" class="table" data-filter="#filter" data-filter-minimum="3" data-filter-timeout="500"
-		data-filter-text-only="true" data-page-size="5"
-	>
-		<thead>
-			<tr>
-				<th>First Name</th>
-				<th>Last Name</th>
-				<th data-hide="phone,tablet">Job Title</th>
-				<th data-hide="phone,tablet">DOB</th>
-				<th data-hide="phone">Status</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>Isidra</td>
-				<td><a href="#">Boudreaux</a></td>
-				<td>Traffic Court Referee</td>
-				<td data-value="78025368997">22 Jun 1972</td>
-				<td data-value="1"><span class="status-metro status-active" title="Active">Active</span></td>
-			</tr>
-			<tr>
-				<td>Shona</td>
-				<td>Woldt</td>
-				<td><a href="#">Airline Transport Pilot</a></td>
-				<td data-value="370961043292">3 Oct 1981</td>
-				<td data-value="2"><span class="status-metro status-disabled" title="Disabled">Disabled</span></td>
-			</tr>
-			<tr>
-				<td>Granville</td>
-				<td>Leonardo</td>
-				<td>Business Services Sales Representative</td>
-				<td data-value="-22133780420">19 Apr 1969</td>
-				<td data-value="3"><span class="status-metro status-suspended" title="Suspended">Suspended</span></td>
-			</tr>
-			<tr>
-				<td>Easer</td>
-				<td>Dragoo</td>
-				<td>Drywall Stripper</td>
-				<td data-value="250833505574">13 Dec 1977</td>
-				<td data-value="1"><span class="status-metro status-active" title="Active">Active</span></td>
-			</tr>
-			<tr>
-				<td>Maple</td>
-				<td>Halladay</td>
-				<td>Aviation Tactical Readiness Officer</td>
-				<td data-value="694116650726">30 Dec 1991</td>
-				<td data-value="3"><span class="status-metro status-suspended" title="Suspended">Suspended</span></td>
-			</tr>
-			<tr>
-				<td>Maxine</td>
-				<td><a href="#">Woldt</a></td>
-				<td><a href="#">Business Services Sales Representative</a></td>
-				<td data-value="561440464855">17 Oct 1987</td>
-				<td data-value="2"><span class="status-metro status-disabled" title="Disabled">Disabled</span></td>
-			</tr>
-			<tr>
-				<td>Lorraine</td>
-				<td>Mcgaughy</td>
-				<td>Hemodialysis Technician</td>
-				<td data-value="437400551390">11 Nov 1983</td>
-				<td data-value="2"><span class="status-metro status-disabled" title="Disabled">Disabled</span></td>
-			</tr>
-			<tr>
-				<td>Lizzee</td>
-				<td><a href="#">Goodlow</a></td>
-				<td>Technical Services Librarian</td>
-				<td data-value="-257733999319">1 Nov 1961</td>
-				<td data-value="3"><span class="status-metro status-suspended" title="Suspended">Suspended</span></td>
-			</tr>
-			<tr>
-				<td>Judi</td>
-				<td>Badgett</td>
-				<td>Electrical Lineworker</td>
-				<td data-value="362134712000">23 Jun 1981</td>
-				<td data-value="1"><span class="status-metro status-active" title="Active">Active</span></td>
-			</tr>
-			<tr>
-				<td>Lauri</td>
-				<td>Hyland</td>
-				<td>Blackjack Supervisor</td>
-				<td data-value="500874333932">15 Nov 1985</td>
-				<td data-value="3"><span class="status-metro status-suspended" title="Suspended">Suspended</span></td>
-			</tr>
-		</tbody>
-		<tfoot>
-			<tr>
-				<td colspan="5">
-					<div class="pagination pagination-centered"></div>
-				</td>
-			</tr>
-		</tfoot>
-	</table>
+
+  <table id="table2" class="table" data-filter="#filter" data-filter-minimum="3" data-filter-timeout="500"
+    data-filter-text-only="true" data-page-size="5"
+  >
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th data-hide="phone,tablet">Job Title</th>
+        <th data-hide="phone,tablet">DOB</th>
+        <th data-hide="phone">Status</th>
+        <th data-hide="phone">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+    <template is="dom-repeat" items="{{checks}}">
+          <tr>
+        <td>{{item.first}}</td>
+        <td><a href="#">{{item.last}}</a></td>
+        <td>Traffic Court Referee</td>
+        <td data-value="78025368997">22 Jun 1972</td>
+        <td data-value="1"><span class="status-metro status-active" title="Active">Active</span></td>
+        <td><a class="row-delete" href="#"><span class="glyphicon glyphicon-remove">x</span></a></td>
+      </tr>
+      </template>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="6">
+          <div class="pagination pagination-centered"></div>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
 
 
 	<content></content>
@@ -163,7 +102,21 @@ $(document).ready(function() {
 </template> </dom-module>
 
 <script type="text/javascript">
+var forceRedraw = function(element){
 
+    if (!element) { return; }
+
+    var n = document.createTextNode(' ');
+    var disp = element.style.display;  // don't worry about previous display style
+
+    element.appendChild(n);
+    element.style.display = 'none';
+
+    setTimeout(function(){
+        element.style.display = disp;
+        n.parentNode.removeChild(n);
+    },20); // you can play with this timeout to make it as short as possible
+}
 </script>
 
 <script>
@@ -178,29 +131,53 @@ $(document).ready(function() {
 						Polymer({
 							is : 'core9-filemanager',
 							ready : function() {
-								FILE.config({
-									server : 'localhost',
-									scheme : 'http',
-									port : 8080,
-									db : 'testdb',
-									collection : 'mybucket.files'
+
+							var that = this;
+
+
+								$.ajax({
+								    url: 'http://192.168.1.71:8080/testdb/mybucket.files/?page=1&pagesize=2',
+								    type: 'GET',
+								    dataType: 'json',
+								    beforeSend: function (xhr) {
+								        xhr.setRequestHeader("Authorization", "Basic "
+						                          + Base64.encode("admin" + ":" + "changeit"));
+								    }
+								}).complete(function (result) {
+
+					                 that.checksOrg = [
+		                                            {first: 'Bob', last: 'Smith'},
+		                                            {first: 'Sally', last: 'Johnson'},
+		                                            {first: 'Sally', last: 'Johnson'},
+		                                            {first: 'Sally', last: 'Johnson'},
+		                                            {first: 'Sally', last: 'Johnson'},
+		                                            {first: 'Sally', last: 'Johnson'},
+		                                            {first: 'Sally', last: 'Johnson'},
+		                                            {first: 'Sally', last: 'Johnson'},
+		                                            {first: 'Sally', last: 'Johnson'},
+		                                            {first: 'Sally', last: 'Johnson'}
+		                                        ];
+
+
+									console.log(JSON.parse(result.responseText));
+
+									var res = JSON.parse(result.responseText);
+
+									var files = res._embedded['rh:file'];
+									for (var i = 0; i < files.length; i++) {
+									    console.log(files[i]);
+									    that.checksOrg.push({first: files[i].filename, last: files[i]._lastupdated_on});
+									}
+
+
+									that.checks = that.checksOrg;
+
+
+								}).fail(function (result) {
+									console.log(result);
 								});
 
 
-								var p1 = new Promise(
-									    function(resolve, reject) {
-									    	return FILE.get('page=1&pagesize=2');
-									    });
-
-
-								p1.then(function(val) {
-									    	  console.log(val);
-									    });
-
-
-
-								console.log(FILE.collectionExists());
-                console.log(FILE);
 								var table2 = this.$.table2;
 								var statusFilter = this.$.filterstatus;
 								var filter = this.$.filter;
@@ -242,6 +219,17 @@ $(document).ready(function() {
 										filter : $(this).val()
 									});
 								});
+
+			                      try {
+			                          setTimeout(function(){
+			                        	   console.log("running timer");
+			                        	   var sort = $('.footable-sort-indicator');
+			                        	   console.log(sort);
+			                        	   $(sort[0]).trigger('click');
+			                        	  }, 100);
+			                      } catch (e) {
+			                        // TODO: handle exception
+			                      }
 
 							}
 						});

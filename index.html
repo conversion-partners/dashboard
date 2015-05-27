@@ -3,8 +3,9 @@
 <head>
 <title>unquote</title>
 <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+<script src="app/elements/core9-file/js/base64.js"></script>
 <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-<script src="bower_components/es6-shim/es6-shim.min.js"></script>
+<!-- <script src="bower_components/es6-shim/es6-shim.min.js"></script> -->
 <script src="bower_components/systemjs/dist/system.js"></script>
 <script src="app/elements/core9-router/js/router.js"></script>
 <script>
@@ -84,7 +85,7 @@
 		'/files$/' : function(req) {
 			console.log('files', arguments);
 			Core9.cleanWorkspace();
-			Core9.workspace.appendChild(Core9.fileManager);
+			Core9.workspace.appendChild(document.createElement("core9-filemanager"));
 		},
 		'default' : function() {
 			console.log('hitting default...');
