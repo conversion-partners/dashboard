@@ -182,9 +182,14 @@ $(document).ready(function() {
 								FILE.config({
 									server : 'localhost',
 									port : 8080,
-									db : 'core9-backend',
-									collection : 'files'
+									db : 'testdb',
+									collection : 'mybucket.files'
 								});
+
+
+								var files = FILE.get({page:1,pagesize:2});
+
+
 								console.log(FILE.collectionExists());
                 console.log(FILE);
 								var table2 = this.$.table2;
