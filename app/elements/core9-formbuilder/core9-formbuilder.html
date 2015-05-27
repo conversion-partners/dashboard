@@ -14,6 +14,7 @@ juicy-ace-editor {
   height: 424px;
   position: relative;
 }
+
 </style>
 <template>
 <div id="" style="background-color:#fff; width:100%; height:100%;position:fixed;">
@@ -21,6 +22,11 @@ juicy-ace-editor {
 
 <juicy-ace-editor>Editable code here</juicy-ace-editor>
 
+<a id="savebtn" href="javascript:void(0);"  class="waves-effect waves-light btn">save</a>
+
+<script>
+
+</script>
 
 </div>
 </template> </dom-module>
@@ -31,9 +37,22 @@ juicy-ace-editor {
 
 
 
+
+
+
             Polymer({
               is : 'core9-formbuilder',
-              ready : function() {}
+              ready : function() {
+
+            	  this.$.savebtn.addEventListener("click", function(){
+            		    var juicyAce = document.querySelector("juicy-ace-editor"); // or get the reference in any other way
+            		    var myContent = juicyAce.editor.getValue();
+            		    console.log(myContent);
+            		    return false;
+            		});
+
+
+              }
 
             });
 </script>
