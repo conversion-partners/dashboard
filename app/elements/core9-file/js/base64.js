@@ -139,3 +139,9 @@ _utf8_decode : function (utftext) {
 }
 
 }
+
+
+export
+{
+	Base64
+}

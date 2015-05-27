@@ -1,9 +1,4 @@
-<!--
-Copyright 2015 Smörgåsbord Development. All rights reserved.
--->
-<!-- <link rel="import" href="../../../bower_components/polymer/polymer.html" /> -->
-<link rel="import" href="../../../bower_components/iron-ajax/iron-ajax.html" />
-<dom-module id="core9-filedrop" attributes="url customheader value maxfilesize allowedmimetypes">
+<dom-module id="core9-filedrop">
 <style>
 :host {
 	display: -webkit-box;
@@ -13,13 +8,492 @@ Copyright 2015 Smörgåsbord Development. All rights reserved.
 	display: flex;
 }
 
-input[type=file] {
-	display: none;
+.upload_form_cont {
+    background: -moz-linear-gradient(#ffffff, #f2f2f2);
+    background: -ms-linear-gradient(#ffffff, #f2f2f2);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #f2f2f2));
+    background: -webkit-linear-gradient(#ffffff, #f2f2f2);
+    background: -o-linear-gradient(#ffffff, #f2f2f2);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f2f2f2');
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f2f2f2')";
+    background: linear-gradient(#ffffff, #f2f2f2);
+
+    color:#000;
+    overflow:hidden;
 }
+#upload_form {
+    float:left;
+    padding:20px;
+    width:700px;
+}
+#preview {
+    background-color:#fff;
+    display:block;
+    float:right;
+    width:200px;
+}
+#upload_form > div {
+    margin-bottom:10px;
+}
+#speed,#remaining {
+    float:left;
+    width:100px;
+}
+#b_transfered {
+    float:right;
+    text-align:right;
+}
+.clear_both {
+    clear:both;
+}
+input {
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -ms-border-radius:10px;
+    -o-border-radius:10px;
+    -webkit-border-radius:10px;
+
+    border:1px solid #ccc;
+    font-size:14pt;
+    padding:5px 10px;
+}
+input[type=button] {
+    background: -moz-linear-gradient(#ffffff, #dfdfdf);
+    background: -ms-linear-gradient(#ffffff, #dfdfdf);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #dfdfdf));
+    background: -webkit-linear-gradient(#ffffff, #dfdfdf);
+    background: -o-linear-gradient(#ffffff, #dfdfdf);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#dfdfdf');
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#dfdfdf')";
+    background: linear-gradient(#ffffff, #dfdfdf);
+}
+#image_file {
+    width:400px;
+}
+#progress_info {
+    font-size:10pt;
+}
+#fileinfo,#error,#error2,#abort,#warnsize {
+    color:#aaa;
+    display:none;
+    font-size:10pt;
+    font-style:italic;
+    margin-top:10px;
+}
+#progress {
+    border:1px solid #ccc;
+    display:none;
+    float:left;
+    height:14px;
+
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -ms-border-radius:10px;
+    -o-border-radius:10px;
+    -webkit-border-radius:10px;
+
+    background: -moz-linear-gradient(#66cc00, #4b9500);
+    background: -ms-linear-gradient(#66cc00, #4b9500);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #66cc00), color-stop(100%, #4b9500));
+    background: -webkit-linear-gradient(#66cc00, #4b9500);
+    background: -o-linear-gradient(#66cc00, #4b9500);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#66cc00', endColorstr='#4b9500');
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#66cc00', endColorstr='#4b9500')";
+    background: linear-gradient(#66cc00, #4b9500);
+}
+#progress_percent {
+    float:right;
+}
+#upload_response {
+    margin-top: 10px;
+    padding: 20px;
+    overflow: hidden;
+    display: none;
+    border: 1px solid #ccc;
+
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -ms-border-radius:10px;
+    -o-border-radius:10px;
+    -webkit-border-radius:10px;
+
+    box-shadow: 0 0 5px #ccc;
+    background: -moz-linear-gradient(#bbb, #eee);
+    background: -ms-linear-gradient(#bbb, #eee);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #bbb), color-stop(100%, #eee));
+    background: -webkit-linear-gradient(#bbb, #eee);
+    background: -o-linear-gradient(#bbb, #eee);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#bbb', endColorstr='#eee');
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#bbb', endColorstr='#eee')";
+    background: linear-gradient(#bbb, #eee);
+}
+
 </style>
-<template> <iron-ajax id="postMedia" method="POST" url="{{url}}" on-core-response="{{handleResponse}}"
-	on-core-error="{{handleError}}"
-></iron-ajax> <input type="file" id="txtUploadFile" /> <content id="content"></content> </template> </dom-module>
+<template>
+
+            <div class="upload_form_cont">
+                <form id="upload_form" enctype="multipart/form-data" method="post" action="upload.php">
+                    <div>
+                        <div><label for="image_file">Please select image file</label></div>
+                        <div><input type="file" name="image_file" id="image_file" onchange="fileSelected();" /></div>
+                    </div>
+                    <div>
+                        <input type="button" value="Upload" onclick="startUploading()" />
+                    </div>
+                    <div id="fileinfo">
+                        <div id="filename"></div>
+                        <div id="filesize"></div>
+                        <div id="filetype"></div>
+                        <div id="filedim"></div>
+                    </div>
+                    <div id="error">You should select valid image files only!</div>
+                    <div id="error2">An error occurred while uploading the file</div>
+                    <div id="abort">The upload has been canceled by the user or the browser dropped the connection</div>
+                    <div id="warnsize">Your file is very big. We can't accept it. Please select more small file</div>
+
+                    <div id="progress_info">
+                        <div id="progress"></div>
+                        <div id="progress_percent">&nbsp;</div>
+                        <div class="clear_both"></div>
+                        <div>
+                            <div id="speed">&nbsp;</div>
+                            <div id="remaining">&nbsp;</div>
+                            <div id="b_transfered">&nbsp;</div>
+                            <div class="clear_both"></div>
+                        </div>
+                        <div id="upload_response"></div>
+                    </div>
+                </form>
+
+                <img id="preview" />
+            </div>
+
+            <script>
+            /**
+            *
+            *  Base64 encode / decode
+            *  http://www.webtoolkit.info/
+            *
+            **/
+            var Base64 = {
+
+            // private property
+            _keyStr : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
+
+            // public method for encoding
+            encode : function (input) {
+                var output = "";
+                var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
+                var i = 0;
+
+                input = Base64._utf8_encode(input);
+
+                while (i < input.length) {
+
+                    chr1 = input.charCodeAt(i++);
+                    chr2 = input.charCodeAt(i++);
+                    chr3 = input.charCodeAt(i++);
+
+                    enc1 = chr1 >> 2;
+                    enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+                    enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+                    enc4 = chr3 & 63;
+
+                    if (isNaN(chr2)) {
+                        enc3 = enc4 = 64;
+                    } else if (isNaN(chr3)) {
+                        enc4 = 64;
+                    }
+
+                    output = output +
+                    this._keyStr.charAt(enc1) + this._keyStr.charAt(enc2) +
+                    this._keyStr.charAt(enc3) + this._keyStr.charAt(enc4);
+
+                }
+
+                return output;
+            },
+
+            // public method for decoding
+            decode : function (input) {
+                var output = "";
+                var chr1, chr2, chr3;
+                var enc1, enc2, enc3, enc4;
+                var i = 0;
+
+                input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+
+                while (i < input.length) {
+
+                    enc1 = this._keyStr.indexOf(input.charAt(i++));
+                    enc2 = this._keyStr.indexOf(input.charAt(i++));
+                    enc3 = this._keyStr.indexOf(input.charAt(i++));
+                    enc4 = this._keyStr.indexOf(input.charAt(i++));
+
+                    chr1 = (enc1 << 2) | (enc2 >> 4);
+                    chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+                    chr3 = ((enc3 & 3) << 6) | enc4;
+
+                    output = output + String.fromCharCode(chr1);
+
+                    if (enc3 != 64) {
+                        output = output + String.fromCharCode(chr2);
+                    }
+                    if (enc4 != 64) {
+                        output = output + String.fromCharCode(chr3);
+                    }
+
+                }
+
+                output = Base64._utf8_decode(output);
+
+                return output;
+
+            },
+
+            // private method for UTF-8 encoding
+            _utf8_encode : function (string) {
+                string = string.replace(/\r\n/g,"\n");
+                var utftext = "";
+
+                for (var n = 0; n < string.length; n++) {
+
+                    var c = string.charCodeAt(n);
+
+                    if (c < 128) {
+                        utftext += String.fromCharCode(c);
+                    }
+                    else if((c > 127) && (c < 2048)) {
+                        utftext += String.fromCharCode((c >> 6) | 192);
+                        utftext += String.fromCharCode((c & 63) | 128);
+                    }
+                    else {
+                        utftext += String.fromCharCode((c >> 12) | 224);
+                        utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+                        utftext += String.fromCharCode((c & 63) | 128);
+                    }
+
+                }
+
+                return utftext;
+            },
+
+            // private method for UTF-8 decoding
+            _utf8_decode : function (utftext) {
+                var string = "";
+                var i = 0;
+                var c = c1 = c2 = 0;
+
+                while ( i < utftext.length ) {
+
+                    c = utftext.charCodeAt(i);
+
+                    if (c < 128) {
+                        string += String.fromCharCode(c);
+                        i++;
+                    }
+                    else if((c > 191) && (c < 224)) {
+                        c2 = utftext.charCodeAt(i+1);
+                        string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+                        i += 2;
+                    }
+                    else {
+                        c2 = utftext.charCodeAt(i+1);
+                        c3 = utftext.charCodeAt(i+2);
+                        string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+                        i += 3;
+                    }
+
+                }
+
+                return string;
+            }
+
+            }
+
+            // common variables
+            var iBytesUploaded = 0;
+            var iBytesTotal = 0;
+            var iPreviousBytesLoaded = 0;
+            var iMaxFilesize = 1048576; // 1MB
+            var oTimer = 0;
+            var sResultFileSize = '';
+
+            function secondsToTime(secs) { // we will use this function to convert seconds in normal time format
+                var hr = Math.floor(secs / 3600);
+                var min = Math.floor((secs - (hr * 3600))/60);
+                var sec = Math.floor(secs - (hr * 3600) -  (min * 60));
+
+                if (hr < 10) {hr = "0" + hr; }
+                if (min < 10) {min = "0" + min;}
+                if (sec < 10) {sec = "0" + sec;}
+                if (hr) {hr = "00";}
+                return hr + ':' + min + ':' + sec;
+            };
+
+            function bytesToSize(bytes) {
+                var sizes = ['Bytes', 'KB', 'MB'];
+                if (bytes == 0) return 'n/a';
+                var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+                return (bytes / Math.pow(1024, i)).toFixed(1) + ' ' + sizes[i];
+            };
+
+            function fileSelected() {
+
+                // hide different warnings
+                document.getElementById('upload_response').style.display = 'none';
+                document.getElementById('error').style.display = 'none';
+                document.getElementById('error2').style.display = 'none';
+                document.getElementById('abort').style.display = 'none';
+                document.getElementById('warnsize').style.display = 'none';
+
+                // get selected file element
+                var oFile = document.getElementById('image_file').files[0];
+
+                // filter for image files
+                var rFilter = /^(image\/bmp|image\/gif|image\/jpeg|image\/png|image\/tiff)$/i;
+                if (! rFilter.test(oFile.type)) {
+                    document.getElementById('error').style.display = 'block';
+                    return;
+                }
+
+                // little test for filesize
+                if (oFile.size > iMaxFilesize) {
+                    document.getElementById('warnsize').style.display = 'block';
+                    return;
+                }
+
+                // get preview element
+                var oImage = document.getElementById('preview');
+
+                // prepare HTML5 FileReader
+                var oReader = new FileReader();
+                    oReader.onload = function(e){
+
+                    // e.target.result contains the DataURL which we will use as a source of the image
+                    oImage.src = e.target.result;
+
+                    oImage.onload = function () { // binding onload event
+
+                        // we are going to display some custom image information here
+                        sResultFileSize = bytesToSize(oFile.size);
+                        document.getElementById('fileinfo').style.display = 'block';
+                        document.getElementById('filename').innerHTML = 'Name: ' + oFile.name;
+                        document.getElementById('filesize').innerHTML = 'Size: ' + sResultFileSize;
+                        document.getElementById('filetype').innerHTML = 'Type: ' + oFile.type;
+                        document.getElementById('filedim').innerHTML = 'Dimension: ' + oImage.naturalWidth + ' x ' + oImage.naturalHeight;
+                    };
+                };
+
+                // read selected file as DataURL
+                oReader.readAsDataURL(oFile);
+            }
+
+            function startUploading() {
+                // cleanup all temp states
+                iPreviousBytesLoaded = 0;
+                document.getElementById('upload_response').style.display = 'none';
+                document.getElementById('error').style.display = 'none';
+                document.getElementById('error2').style.display = 'none';
+                document.getElementById('abort').style.display = 'none';
+                document.getElementById('warnsize').style.display = 'none';
+                document.getElementById('progress_percent').innerHTML = '';
+                var oProgress = document.getElementById('progress');
+                oProgress.style.display = 'block';
+                oProgress.style.width = '0px';
+
+                // get form data for POSTing
+                //var vFD = document.getElementById('upload_form').getFormData(); // for FF3
+                var vFD = new FormData(document.getElementById('upload_form'));
+                vFD.append("properties",'{filename:"test_png.png"}');
+
+                // create XMLHttpRequest object, adding few event listeners, and POSTing our data
+                var oXHR = new XMLHttpRequest();
+                oXHR.upload.addEventListener('progress', uploadProgress, false);
+                oXHR.addEventListener('load', uploadFinish, false);
+                oXHR.addEventListener('error', uploadError, false);
+                oXHR.addEventListener('abort', uploadAbort, false);
+                oXHR.open('POST', 'http://192.168.1.71:8080/testdb/mybucket.files', true);
+                oXHR.setRequestHeader("Authorization", "Basic " + Base64.encode("admin" + ":" + "changeit"));
+                oXHR.send(vFD);
+
+                // set inner timer
+                oTimer = setInterval(doInnerUpdates, 300);
+            }
+
+            function doInnerUpdates() { // we will use this function to display upload speed
+                var iCB = iBytesUploaded;
+                var iDiff = iCB - iPreviousBytesLoaded;
+
+                // if nothing new loaded - exit
+                if (iDiff == 0)
+                    return;
+
+                iPreviousBytesLoaded = iCB;
+                iDiff = iDiff * 2;
+                var iBytesRem = iBytesTotal - iPreviousBytesLoaded;
+                var secondsRemaining = iBytesRem / iDiff;
+
+                // update speed info
+                var iSpeed = iDiff.toString() + 'B/s';
+                if (iDiff > 1024 * 1024) {
+                    iSpeed = (Math.round(iDiff * 100/(1024*1024))/100).toString() + 'MB/s';
+                } else if (iDiff > 1024) {
+                    iSpeed =  (Math.round(iDiff * 100/1024)/100).toString() + 'KB/s';
+                }
+
+                document.getElementById('speed').innerHTML = iSpeed;
+                document.getElementById('remaining').innerHTML = '| ' + secondsToTime(secondsRemaining);
+            }
+
+            function uploadProgress(e) { // upload process in progress
+                if (e.lengthComputable) {
+                    iBytesUploaded = e.loaded;
+                    iBytesTotal = e.total;
+                    var iPercentComplete = Math.round(e.loaded * 100 / e.total);
+                    var iBytesTransfered = bytesToSize(iBytesUploaded);
+
+                    document.getElementById('progress_percent').innerHTML = iPercentComplete.toString() + '%';
+                    document.getElementById('progress').style.width = (iPercentComplete * 4).toString() + 'px';
+                    document.getElementById('b_transfered').innerHTML = iBytesTransfered;
+                    if (iPercentComplete == 100) {
+                        var oUploadResponse = document.getElementById('upload_response');
+                        oUploadResponse.innerHTML = '<h1>Please wait...processing</h1>';
+                        oUploadResponse.style.display = 'block';
+                    }
+                } else {
+                    document.getElementById('progress').innerHTML = 'unable to compute';
+                }
+            }
+
+            function uploadFinish(e) { // upload successfully finished
+                var oUploadResponse = document.getElementById('upload_response');
+                oUploadResponse.innerHTML = e.target.responseText;
+                oUploadResponse.style.display = 'block';
+
+                document.getElementById('progress_percent').innerHTML = '100%';
+                document.getElementById('progress').style.width = '400px';
+                document.getElementById('filesize').innerHTML = sResultFileSize;
+                document.getElementById('remaining').innerHTML = '| 00:00:00';
+
+                clearInterval(oTimer);
+            }
+
+            function uploadError(e) { // upload error
+                document.getElementById('error2').style.display = 'block';
+                clearInterval(oTimer);
+            }
+
+            function uploadAbort(e) { // upload abort
+                document.getElementById('abort').style.display = 'block';
+                clearInterval(oTimer);
+            }
+            </script>
+
+
+  <content id="content"></content>
+</template>
+</dom-module>
 
 
 <script>
@@ -28,235 +502,16 @@ input[type=file] {
 		"use strict";
 		Polymer({
 			is : 'core9-filedrop',
-			url : "",
-			customheader : "x-file",
 			FILE : Core9.unwrapModule(modules[0]),
 			ready : function() {
 
-				this.setupDrop();
-				this.setupSelect();
+				  var Base64 = Core9.unwrapModule(modules[1]);
 
-				if (!this.maxfilesize) {
-					this.maxfilesize = 524288; //512kb
-				}
-
-				if (!this.allowedmimetypes) {
-					this.allowedmimetypes = [ "image/gif", "image/jpeg",
-							"image/png", "image/svg+xml" ];
-				} else {
-					this.allowedmimetypes = this.allowedmimetypes.split(",");
-				}
-			},
-			checkFile : function(file) {
-				var m;
-
-				if (this.allowedmimetypes.indexOf(file.type) < 0) {
-					if (file.type) {
-						m = "File type [" + file.type + "] is not allowed.";
-					} else {
-						m = file.name + " has invalid mime type.";
-					}
-
-					this.fire("fileSelectError", {
-						file : file,
-						message : m
-					});
-					return false;
-				}
-
-				if (file.size > this.maxfilesize) {
-					m = [ "File ", file.name,
-							" is too big. Maximum file size is: ",
-							(this.maxfilesize / 1024), "kb." ].join("");
-
-					this.fire("fileSelectError", {
-						file : file,
-						message : m
-					});
-					return false;
-				}
-
-				return true;
-			},
-			openFile : function() {
-				var element = this.$.txtUploadFile;
-				var ev;
-
-				if (document.createEvent) {
-					ev = document.createEvent("MouseEvents");
-					ev.initMouseEvent("click", true, false, window, 0, 0, 0, 0,
-							0, false, false, false, false, 2, null);
-					element.dispatchEvent(ev);
-				} else {
-					ev = document.createEventObject();
-					ev.button = 2;
-					element.fireEvent('onclick', ev);
-				}
-			},
-			fileToJson : function(file) {
-				return JSON.stringify({
-					type : file.type,
-					name : encodeURIComponent(file.name)
-				});
-			},
-			readData : function(file) {
-				var postMedia = this.$.postMedia;
-				console.log(postMedia);
-				var customheader = this.customheader;
-				var reader = new FileReader();
-				var that = this;
-
-				reader.onload = function(event) {
-					// POST Image to server
-					//console.log(that.FILE);
-
-					that.FILE.setHeaders({
-						"file" : that.fileToJson(this.xFile)
-					});
-					that.FILE.setBody(event.target.result);
-					//that.FILE.sent();
-
-
- 					postMedia.headers = {};
-					//postMedia.headers[customheader] = that
-					//		.fileToJson(this.xFile);
-					postMedia.File = this.xFile;
-					postMedia.body = event.target.result;
-					postMedia.generateRequest();
-				};
-
-				reader.xFile = {
-					type : file.type,
-					name : file.name
-				};
-				this.fire('fileUploading', reader.xFile);
-				reader.readAsDataURL(file);
-			},
-			setupSelect : function() {
-				var onFileSelected = function(e) {
-					var files = e.target.files;
-
-					for (var i = 0; i < files.length; i++) {
-						var file = files[i];
-
-						if (!this.checkFile(file)) {
-							continue;
-						}
-
-						this.readData(files[i]);
-					}
-				};
-
-				this.$.txtUploadFile.addEventListener("change", onFileSelected
-						.bind(this), false);
-			},
-			setupDrop : function() {
-				var postMedia = this.$.postMedia;
-				var customheader = this.customheader;
-
-				if (typeof window.FileReader === 'undefined') {
-					// TODO: Browser does not support 'FileReader'
-				}
-
-				this.onpaste = function(event) {
-					var items = event.clipboardData.items;
-
-					for (var i = 0, item; item = event.clipboardData.items[i]; i++) {
-						if (item.kind == "file") {
-							var blob = item.getAsFile();
-
-							this.readData(blob);
-						}
-					}
-				};
-
-				this.ondragleave = function() {
-					if (this.classList.contains("hover")) {
-						this.classList.remove("hover");
-					}
-				};
-
-				this.ondragover = function(e) {
-					e.stopPropagation();
-
-					if (!this.classList.contains("hover")) {
-						this.classList.add("hover");
-					}
-
-					return false;
-				};
-
-				this.ondragend = function() {
-					if (this.classList.contains("hover")) {
-						this.classList.remove("hover");
-					}
-
-					return false;
-				};
-
-				this.ondrop = function(e) {
-					if (this.classList.contains("hover")) {
-						this.classList.remove("hover");
-					}
-
-					e.preventDefault();
-
-					var that = this;
-
-					for (var i = 0, file; file = e.dataTransfer.files[i]; i++) {
-						if (!this.checkFile(file)) {
-							continue;
-						}
-
-						var reader = new FileReader();
-
-						reader.onload = function(event) {
-							// POST Image to server
-							console.log(that.FILE);
-							postMedia.headers = {};
-							postMedia.headers[customheader] = that
-									.fileToJson(this.xFile);
-							postMedia.body = event.target.result;
-							postMedia.xFile = this.xFile;
-							postMedia.generateRequest();
-						};
-
-						reader.xFile = {
-							type : file.type,
-							name : file.name
-						}
-						this.fire('fileUploading', reader.xFile);
-						reader.readAsDataURL(file);
-					}
-
-					return false;
-				};
-			},
-			handleResponse : function(ev, res) {
-				this.value = res.xhr.getResponseHeader("x-file-location");
-
-				var xFile = JSON.parse(res.xhr
-						.getResponseHeader(this.customheader));
-				xFile.status = res.xhr.status;
-				xFile.statusText = res.xhr.statusText;
-
-				this.fire('fileUploaded', xFile);
-			},
-			handleError : function(ev, res) {
-				var xFile = ev.srcElement.xFile;
-				xFile.status = res.xhr.status;
-				xFile.statusText = res.xhr.statusText;
-
-				this.fire('fileUploadError', xFile);
 			}
 		});
 	}
-
-	Core9.multiImport([ 'app/elements/core9-file/js/file' ]).then(
+	Core9.multiImport([ 'app/elements/core9-file/js/file', 'app/elements/core9-file/js/base64'  ]).then(
 			function(modules) {
-
 				init(modules);
-				//var restful = modules[0];
-
 			});
 </script>
