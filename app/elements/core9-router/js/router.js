@@ -112,7 +112,7 @@ var Router = {
 				}else{
 					Router.add(indexKey, routes[key]);
 				}
-				
+
 			}
 		}
 		return this;
