@@ -26,13 +26,11 @@ File = {
 	},
 	get : function(params) {
 		Core9.multiImport(
-				[ '../../../../bower_components/restful.js/dist/restful.min',
-						'app/elements/core9-file/js/base64' ]).then(
+				[ 'app/elements/core9-file/js/base64' ]).then(
 				function(modules) {
-					var rest = modules[0];
-					var Base64 = Core9.unwrapModule(modules[1]);
+					var Base64 = Core9.unwrapModule(modules[0]);
 					console.log(params);
-					console.log(rest);
+
 
 
 	                // create XMLHttpRequest object, adding few event listeners, and POSTing our data

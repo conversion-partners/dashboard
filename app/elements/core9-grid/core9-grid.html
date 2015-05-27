@@ -33,12 +33,10 @@
 	}
 
 	multiImport(
-			[ '../../bower_components/restful.js/dist/restful.min',
-					'app/elements/core9-grid/fileapi' ]).then(
+			[ 'app/elements/core9-grid/fileapi' ]).then(
 			function(modules) {
 
-				var restful = modules[0];
-				var FILE = unwrapModule(modules[1]);
+				var FILE = unwrapModule(modules[0]);
 
 				var mycanvas = this.$.mycanvas;
 				console.log(mycanvas);

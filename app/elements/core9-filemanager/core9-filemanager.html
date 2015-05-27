@@ -173,7 +173,6 @@ $(document).ready(function() {
 			.then(
 					function(modules) {
 
-						//var restful = modules[0];
 						var FILE = Core9.unwrapModule(modules[0]);
 
 						Polymer({
@@ -188,7 +187,16 @@ $(document).ready(function() {
 								});
 
 
-								var files = FILE.get('page=1&pagesize=2');
+								var p1 = new Promise(
+									    function(resolve, reject) {
+									    	return FILE.get('page=1&pagesize=2');
+									    });
+
+
+								p1.then(function(val) {
+									    	  console.log(val);
+									    });
+
 
 
 								console.log(FILE.collectionExists());
