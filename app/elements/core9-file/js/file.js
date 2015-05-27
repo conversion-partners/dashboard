@@ -42,6 +42,7 @@ File = {
 	                oXHR.onreadystatechange = function() {
 	                    if (oXHR.readyState == 4) {
 	                        console.log(oXHR.responseText);
+	                        console.log(JSON.parse(oXHR.responseText));
 	                    }
 	                }
 
