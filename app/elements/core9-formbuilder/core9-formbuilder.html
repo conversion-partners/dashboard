@@ -17,13 +17,13 @@ juicy-ace-editor {
 
 </style>
 <template>
-<div id="" style="background-color:#fff; width:100%; height:100%;position:fixed;">
+<div id="editorworkspace" style="background-color:#fff; width:100%; height:100%;position:fixed;">
 
 
 <juicy-ace-editor>Editable code here</juicy-ace-editor>
 
 <a id="savebtn" href="javascript:void(0);"  class="waves-effect waves-light btn">save</a>
-
+<a id="closebtn" href="javascript:void(0);"  class="waves-effect waves-light btn">close</a>
 <script>
 
 </script>
@@ -50,6 +50,11 @@ juicy-ace-editor {
             		    console.log(myContent);
             		    return false;
             		});
+
+                  this.$.closebtn.addEventListener("click", function(){
+                      document.getElementById("editorworkspace").style.display = "none";
+                      return false;
+                  });
 
 
               }
