@@ -35,22 +35,19 @@ File = {
 					console.log(rest);
 
 
-					var api = rest(File.server)
-				    .header("Authorization", "Basic " + Base64.encode("admin" + ":" + "changeit"))
-				    .protocol(File.scheme)
-				    .port(File.port);
+	                // create XMLHttpRequest object, adding few event listeners, and POSTing our data
+	                var oXHR = new XMLHttpRequest();
 
-					var fileCollection = api.all(File.collectionUrl);
 
-					fileCollection.getAll().then(function(response) {
-					    var fileEntities = response.body();
-					    console.log(fileEntities);
-					    /*fileEntities.forEach(function(commentEntity) {
-					        var file = fileEntity.data();
-					        console.log(file.body);
-					    })*/
-					});
+	                oXHR.onreadystatechange = function() {
+	                    if (oXHR.readyState == 4) {
+	                        console.log(oXHR.responseText);
+	                    }
+	                }
 
+	                oXHR.open('GET', 'http://192.168.1.71:8080/testdb/mybucket.files/?page=1&pagesize=2', true);
+	                oXHR.setRequestHeader("Authorization", "Basic " + Base64.encode("admin" + ":" + "changeit"));
+	                oXHR.send();
 
 
 
