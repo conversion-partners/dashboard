@@ -75,7 +75,7 @@
 		'/forms$/' : function() {
 			console.log('forms', arguments);
 			Core9.cleanWorkspace();
-			Core9.workspace.appendChild(Core9.grid);
+			Core9.workspace.appendChild(document.createElement("core9-forms"));
 		},
 	  '/pages$/' : function(req) {
 	        console.log('files', arguments);
