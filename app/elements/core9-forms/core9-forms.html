@@ -1,4 +1,5 @@
 
+<link rel="import" href="../core9-formbuilder/core9-formbuilder.html">
 <dom-module id="core9-forms">
 <link rel="stylesheet" href="core9-forms.css">
 <link href="../../../bower_components/footable/css/footable.core.min.css" rel="stylesheet" type="text/css" />
@@ -18,7 +19,7 @@
 <template>
 <div>
 <div id="new-form-panel" style="background-color:#ccc; width:100%; height:100%;position:fixed;display:none;">
-
+<core9-formbuilder></core9-formbuilder>
 </div>
 	<p>
 		Search: <input id="filter" type="text" /> Status: <select id="filterstatus" class="filter-status">
