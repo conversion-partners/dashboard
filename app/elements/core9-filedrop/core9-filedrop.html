@@ -414,7 +414,7 @@ input[type=button] {
                 oXHR.addEventListener('load', uploadFinish, false);
                 oXHR.addEventListener('error', uploadError, false);
                 oXHR.addEventListener('abort', uploadAbort, false);
-                oXHR.open('POST', 'http://192.168.1.71:8080/testdb/mybucket.files', true);
+                oXHR.open('POST', 'http://127.0.0.1:8080/testdb/mybucket.files', true);
                 oXHR.setRequestHeader("Authorization", "Basic " + Base64.encode("admin" + ":" + "changeit"));
                 oXHR.send(vFD);
 

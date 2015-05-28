@@ -2,7 +2,7 @@
 
 USER=admin
 PASS=changeit
-IP=192.168.1.71
+IP=127.0.0.1
 PORT=8080
 FILE=test_png.png
 TESTDB=testdb
