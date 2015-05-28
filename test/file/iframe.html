@@ -5,17 +5,17 @@
 <title>Insert title here</title>
 <style>
 iframe {
-  border: 0;
-  position: fixed;
-  _margin-top: 42px;
-  _margin-bottom: -42px;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
+	border: 0;
+	position: fixed;
+	_margin-top: 42px;
+	_margin-bottom: -42px;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
 }
 </style>
 <script src="../../bower_components/draggabilly/dist/draggabilly.pkgd.absolute.js"></script>
@@ -25,44 +25,51 @@ iframe {
 
 
 
-<script>
+	<script>
+		addIframe = function(html) {
 
-addIframe = function(html){
-	var iframe = document.createElement('iframe');
-	//var html = '<!DOCTYPE html><html><head><title>Title of the document</title></head><body>The content <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />of the document......<script>console.log("script run...")\;console.log(window)\;<\/script></body></html>';
-	iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(html);
-	document.body.appendChild(iframe);
-	console.log('iframe.contentWindow =');
-	console.log(iframe.contentWindow);
-}
+			var iframe = document.createElement('iframe');
+			document.body.appendChild(iframe);
+			iframe.contentWindow.document.open();
+			iframe.contentWindow.document.write(html);
+			iframe.contentWindow.document.close();
 
-var xhr = new XMLHttpRequest();
-xhr.onreadystatechange = function() {
-    if (xhr.readyState == 4) {
-        console.log(xhr.responseText);
-        addIframe(xhr.responseText);
-    }
-}
-xhr.open('GET', 'grid-example.html', true);
-xhr.send(null);
+		}
 
-var menu = document.createElement('div');
-menu.innerHTML = '<div style="width:200px;height:400px;background-color: #ddd;color:#fff;z-index:9999;" class="draggable"><p> You can drag one element </p></div>';
-document.body.appendChild(menu);
+		var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4) {
+				addIframe(xhr.responseText);
+			}
+		}
+		xhr.open('GET', 'grid-example.html', true);
+		xhr.send(null);
 
+		var menu = document.createElement('div');
+		menu.innerHTML = '<div style="width:200px;height:400px;background-color: #ddd;color:#fff;z-index:9999;" class="draggable"><p> You can drag one element </p></div>';
+		document.body.appendChild(menu);
 
-var draggie = new Draggabilly( menu, {});
+		var draggie = new Draggabilly(menu, {});
 
-//file/string upload
-/* var formData = new FormData();
-var blob = new Blob(['Lorem ipsum'], {type: 'plain/text'});
-formData.append('file', blob, "readme.txt");
+		//file/string upload
+		/* var formData = new FormData();
+		 var blob = new Blob(['Lorem ipsum'], {type: 'plain/text'});
+		 formData.append('file', blob, "readme.txt");
 
-var request = new XMLHttpRequest();
-request.open("POST", "http://example.org/upload");
-request.send(formData); */
-//file/string upload
+		 var request = new XMLHttpRequest();
+		 request.open("POST", "http://example.org/upload");
+		 request.send(formData); */
+		//file/string upload
+		showIframeContent = function(iframe) {
+			var document = iframe.contentDocument;
+			var serializer = new XMLSerializer();
+			var content = serializer.serializeToString(document);
+			console.log(content);
+		}
 
-</script>
+		setTimeout(function() {
+			showIframeContent(document.getElementsByTagName('iframe')[0]);
+		}, 1000);
+	</script>
 </body>
 </html>
