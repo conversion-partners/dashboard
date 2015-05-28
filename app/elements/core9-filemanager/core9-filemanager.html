@@ -136,7 +136,7 @@ var forceRedraw = function(element){
 
 
 								$.ajax({
-								    url: 'http://192.168.1.71:8080/testdb/mybucket.files/?page=1&pagesize=200',
+								    url: 'http://127.0.0.1:8080/testdb/mybucket.files/?page=1&pagesize=200',
 								    type: 'GET',
 								    dataType: 'json',
 								    beforeSend: function (xhr) {
@@ -156,10 +156,13 @@ var forceRedraw = function(element){
 									var res = JSON.parse(result.responseText);
 
 									var files = res._embedded['rh:file'];
-									for (var i = 0; i < files.length; i++) {
-									    console.log(files[i]);
-									    that.checksOrg.push({first: files[i].filename, last: files[i]._lastupdated_on});
+									if(typeof files !== 'undefined'){
+										for (var i = 0; i < files.length; i++) {
+										    console.log(files[i]);
+										    that.checksOrg.push({first: files[i].filename, last: files[i]._lastupdated_on});
+										}	
 									}
+									
 
 
 									that.checks = that.checksOrg;
