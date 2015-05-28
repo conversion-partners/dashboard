@@ -19,6 +19,7 @@ iframe {
 }
 </style>
 <script>
+  var iframeLoadedEvent = new Event('iframeLoadedEvent');
 	var ajax = function(method, url, data, callback) {
 		var xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function() {
@@ -50,6 +51,12 @@ iframe {
 			iframe.contentWindow.document.open();
 			iframe.contentWindow.document.write(data.responseText);
 			iframe.contentWindow.document.close();
+
+			iframeWindow = iframe.contentWindow || iframe.contentDocument.parentWindow;
+			iframeWindow.onload = function(){
+			    window.dispatchEvent(iframeLoadedEvent);
+			};
+
 		});
 
 		ajax('GET', 'menu.html', null, function(data) {
@@ -64,18 +71,8 @@ iframe {
 
 		});
 
-		//create popup window
-
-
-		//periodical message sender
-		setInterval(function(){
-			var domain = location.protocol +"//"+ location.host;
-			var iframe = document.getElementsByTagName('iframe')[0].contentWindow;
-		  var message = 'Hello!  The time is: ' + (new Date().getTime());
-		  console.log('blog.local:  sending message:  ' + message);
-		  iframe.postMessage(message,domain); //send the message and target URI
-		},6000);
 
 	</script>
+  <script src="/dashboard/app/elements/core9-iframe/js/parent.js"></script>
 </body>
 </html>
