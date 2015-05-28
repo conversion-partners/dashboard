@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+iframe {
+  border: 0;
+  position: fixed;
+  _margin-top: 42px;
+  _margin-bottom: -42px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+</style>
+</head>
+<body>
+
+<script>
+var iframe = document.createElement('iframe');
+var html = '<!DOCTYPE html><html><head><title>Title of the document</title></head><body>The content of the document......</body></html>';
+iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(html);
+document.body.appendChild(iframe);
+console.log('iframe.contentWindow =');
+console.log(iframe.contentWindow);
+</script>
+</body>
+</html>
