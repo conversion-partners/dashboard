@@ -64,9 +64,18 @@ iframe {
 
 		});
 
-		setTimeout(function() {
-			//showIframeContent(document.getElementsByTagName('iframe')[0]);
-		}, 1000);
+		//create popup window
+
+
+		//periodical message sender
+		setInterval(function(){
+			var domain = location.protocol +"//"+ location.host;
+			var iframe = document.getElementsByTagName('iframe')[0].contentWindow;
+		  var message = 'Hello!  The time is: ' + (new Date().getTime());
+		  console.log('blog.local:  sending message:  ' + message);
+		  iframe.postMessage(message,domain); //send the message and target URI
+		},6000);
+
 	</script>
 </body>
 </html>
