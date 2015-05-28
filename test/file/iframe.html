@@ -26,12 +26,25 @@ iframe {
 
 
 <script>
-var iframe = document.createElement('iframe');
-var html = '<!DOCTYPE html><html><head><title>Title of the document</title></head><body>The content <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />of the document......<script>console.log("script run...")\;console.log(window)\;<\/script></body></html>';
-iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(html);
-document.body.appendChild(iframe);
-console.log('iframe.contentWindow =');
-console.log(iframe.contentWindow);
+
+addIframe = function(html){
+	var iframe = document.createElement('iframe');
+	//var html = '<!DOCTYPE html><html><head><title>Title of the document</title></head><body>The content <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />of the document......<script>console.log("script run...")\;console.log(window)\;<\/script></body></html>';
+	iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(html);
+	document.body.appendChild(iframe);
+	console.log('iframe.contentWindow =');
+	console.log(iframe.contentWindow);
+}
+
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4) {
+        console.log(xhr.responseText);
+        addIframe(xhr.responseText);
+    }
+}
+xhr.open('GET', 'uploaded.html', true);
+xhr.send(null);
 
 var menu = document.createElement('div');
 menu.innerHTML = '<div style="width:200px;height:400px;background-color: #ddd;color:#fff;z-index:9999;" class="draggable"><p> You can drag one element </p></div>';
