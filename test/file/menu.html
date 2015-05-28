@@ -3,10 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <title>Menu</title>
+
 </head>
 <body>
 	<div style="width: 200px; height: 400px; background-color: #ddd; color: #fff; z-index: 9999;" class="draggable">
 		<p>You can drag one element</p>
+
+<script id="myscript">
+function myFunction() {
+    console.log("The form was submitted");
+}
+</script>
+
+<form action="javascript:void(0);" onsubmit="myFunction()">
+  Enter name: <input type="text" name="fname">
+  <input type="submit" value="Submit"  onclick="myFunction()">
+</form>
+
+
+
 	</div>
+
+	<script>
+
+     var formData = new FormData();
+     var blob = new Blob(['Lorem ipsum'], {type: 'plain/text'});
+     formData.append('file', blob, "readme.txt");
+
+     var request = new XMLHttpRequest();
+     //request.open("POST", "http://example.org/upload");
+     //request.send(formData);
+	</script>
+
 </body>
 </html>

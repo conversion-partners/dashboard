@@ -35,6 +35,25 @@ iframe {
 		var content = serializer.serializeToString(document);
 		console.log(content);
 	}
+	function loadjscssfile(filename, filetype){
+	    if (filetype=="js"){ //if filename is a external JavaScript file
+	        var fileref=document.createElement('script')
+	        fileref.setAttribute("type","text/javascript")
+	        fileref.setAttribute("src", filename)
+	    }
+	    else if (filetype=="css"){ //if filename is an external CSS file
+	        var fileref=document.createElement("link")
+	        fileref.setAttribute("rel", "stylesheet")
+	        fileref.setAttribute("type", "text/css")
+	        fileref.setAttribute("href", filename)
+	    }
+	    if (typeof fileref!="undefined")
+	        document.getElementsByTagName("head")[0].appendChild(fileref)
+	}
+
+/* 	loadjscssfile("myscript.js", "js") //dynamically load and add this .js file
+	loadjscssfile("javascript.php", "js") //dynamically load "javascript.php" as a JavaScript file
+	loadjscssfile("mystyle.css", "css") ////dynamically load and add this .css file */
 </script>
 <script src="../../bower_components/draggabilly/dist/draggabilly.pkgd.absolute.js"></script>
 </head>
@@ -59,18 +78,8 @@ iframe {
 			var draggie = new Draggabilly(menu, {});
 		});
 
-		//file/string upload
-		/* var formData = new FormData();
-		 var blob = new Blob(['Lorem ipsum'], {type: 'plain/text'});
-		 formData.append('file', blob, "readme.txt");
-
-		 var request = new XMLHttpRequest();
-		 request.open("POST", "http://example.org/upload");
-		 request.send(formData); */
-		//file/string upload
-
 		setTimeout(function() {
-			showIframeContent(document.getElementsByTagName('iframe')[0]);
+			//showIframeContent(document.getElementsByTagName('iframe')[0]);
 		}, 1000);
 	</script>
 </body>
