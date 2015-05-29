@@ -6,39 +6,68 @@
 
 </head>
 <body>
-	<div style="width: 200px; height: 400px; background-color: #ddd; color: #fff; z-index: 9999; padding:30px;" class="draggable">
+	<div
+		style="width: 200px; height: 400px; background-color: #ddd; color: #fff; z-index: 9999; padding: 30px;"
+		class="draggable">
 		<p>You can drag one element</p>
 
-<script id="evalscript">
-(function(){
-	var form = document.getElementById('savepage');
-	form.addEventListener("submit", function(evt){
-	       console.log(evt);
-	       showIframeContent(document.getElementsByTagName('iframe')[0]);
-		     evt.preventDefault();
-	       return false;
-	});
-})();
-</script>
 
-<form id="savepage">
-  Enter name: <input type="text" name="filename">
-  <input type="submit" value="Submit">
-</form>
 
+		<form id="savepage">
+			Enter name: <input type="text" name="filename"> <input
+				type="submit" value="Submit">
+		</form>
+		<form id="addelement">
+		<input type="submit" value="Add element">
+		</form>
 
 
 	</div>
 
+	<script id="evalscript">
+	
+		
+	
+		(function() {
+			var that = this;
+			that.addElement = function(element){
+				var message = 'gm.appendHTMLSelectedCols(\'<p>my cont hi ha ho s</p>\');'
+				sentMessageToIframe(message);
+			}
+			
+			var save = document.getElementById('savepage');
+			save.addEventListener("submit", function(evt) {
+				console.log(evt);
+				showIframeContent(document.getElementsByTagName('iframe')[0]);
+				evt.preventDefault();
+				return false;
+			});
+			
+			var addElement = document.getElementById('addelement');
+			addElement.addEventListener("submit", function(evt) {
+				console.log(evt);
+				evt.preventDefault();
+				that.addElement("button");
+				return false;
+			}); 
+			
+			
+			
+		})();
+	</script>
+
+
+
 	<script>
+		var formData = new FormData();
+		var blob = new Blob([ 'Lorem ipsum' ], {
+			type : 'plain/text'
+		});
+		formData.append('file', blob, "readme.txt");
 
-     var formData = new FormData();
-     var blob = new Blob(['Lorem ipsum'], {type: 'plain/text'});
-     formData.append('file', blob, "readme.txt");
-
-     var request = new XMLHttpRequest();
-     //request.open("POST", "http://example.org/upload");
-     //request.send(formData);
+		var request = new XMLHttpRequest();
+		//request.open("POST", "http://example.org/upload");
+		//request.send(formData);
 	</script>
 
 </body>
