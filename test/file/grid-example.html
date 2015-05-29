@@ -150,11 +150,6 @@
   <script>
     $(document).ready(function(){ 
         window.gm = jQuery("#mycanvas").gridmanager().data('gridmanager');
-
-        $(".myexternalcontrol").on("click", function(e){
-            // Example use of internal gridmanager function:
-            gm.appendHTMLSelectedCols('<p>my content to append to all my selected cols</p>');
-        });
         
         $.getScript( "/dashboard/app/elements/core9-iframe/js/child.js", function( data, textStatus, jqxhr ) {
         	  console.log( data.data ); // Data returned
