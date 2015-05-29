@@ -12,8 +12,6 @@
 iframe#site {
 	border: 0;
 	position: fixed;
-  margin-top: 50px;
-	margin-bottom: -50px;
 	top: 0;
 	left: 0;
 	right: 0;
@@ -59,11 +57,11 @@ iframe#contextmenu {
 }
 
 #content {
-	transition: height 500ms ease;
-	-moz-transition: height 500ms ease;
-	-ms-transition: height 500ms ease;
-	-o-transition: height 500ms ease;
-	-webkit-transition: height 500ms ease;
+	transition: width 500ms ease;
+	-moz-transition: width 500ms ease;
+	-ms-transition: width 500ms ease;
+	-o-transition: width 500ms ease;
+	-webkit-transition: width 500ms ease;
 }
 </style>
 <script>
@@ -90,18 +88,20 @@ iframe#contextmenu {
 <body>
 
 
-	<div id="content" style="position: fixed; width: 100%; height: 100%; background-color: rgb(54, 65, 76);"></div>
+	<div id="content" style="position: fixed; width: 100%; height: 100%; background-color: rgb(54, 65, 76);">
+	 <div style="float:right;width:20px;height:20px;background-color: #ddd;margin-right:-20px;"></div>
+	</div>
 	<script>
 		document.getElementById('content')
 				.addEventListener(
 						'click',
 						function() {
 
-							if (this.style.height == '50px'
-									|| this.style.height == '') {
-								this.style.height = '100%'
+							if (this.style.width == '0px'
+									|| this.style.width == '') {
+								this.style.width = '100%'
 							} else {
-								this.style.height = '50px';
+								this.style.width = '0px';
 							}
 						}, false);
 	</script>
