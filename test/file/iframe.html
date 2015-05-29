@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-iframe {
+iframe#site {
 	border: 0;
 	position: fixed;
 	_margin-top: 42px;
@@ -16,6 +16,19 @@ iframe {
 	width: 100%;
 	height: 100%;
 	z-index: -1;
+}
+#menu {
+	border: 0;
+	position: absolute;
+	_margin-top: 42px;
+	_margin-bottom: -42px;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 400px;
+	height: 600px;
+	z-index: 1;
 }
 </style>
 <script>
@@ -45,8 +58,28 @@ iframe {
 
 
 	<script>
+	
+	ajax('GET', 'customsize/customsize.html', null, function(data) {
+		var iframe = document.createElement('iframe');
+		var div = document.createElement('div');
+		div.setAttribute('id','menu');
+		div.appendChild(iframe);
+		document.body.appendChild(div);
+		iframe.contentWindow.document.open();
+		iframe.contentWindow.document.write(data.responseText);
+		iframe.contentWindow.document.close();
+
+
+		iframeWindow = iframe.contentWindow || iframe.contentDocument.parentWindow;
+		iframeWindow.onload = function(){
+		    window.dispatchEvent(iframeLoadedEvent);
+		};
+		DragDrop.bind(document.getElementById('menu'));
+	});
+	
 		ajax('GET', 'grid-example.html', null, function(data) {
 			var iframe = document.createElement('iframe');
+			iframe.setAttribute('id','site');
 			document.body.appendChild(iframe);
 			iframe.contentWindow.document.open();
 			iframe.contentWindow.document.write(data.responseText);
@@ -58,15 +91,17 @@ iframe {
 			};
 
 		});
+		
 
-		ajax('GET', 'menu.html', null, function(data) {
+
+/* 		ajax('GET', 'menu.html', null, function(data) {
 			var menu = document.createElement('div');
 			menu.innerHTML = data.responseText;
 			document.body.appendChild(menu);
 			var x = document.getElementById("evalscript").innerHTML;
 			eval(x);
 			DragDrop.bind(document.getElementById('contextmenu'));
-		});
+		}); */
 
 
 	</script>
