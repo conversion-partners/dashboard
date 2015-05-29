@@ -4,12 +4,16 @@
 <meta charset="UTF-8">
 <title>unquote</title>
 <style>
-*{margin:0px;padding:0px;}
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
 iframe#site {
 	border: 0;
 	position: fixed;
-	_margin-top: 42px;
-	_margin-bottom: -42px;
+  margin-top: 50px;
+	margin-bottom: -50px;
 	top: 0;
 	left: 0;
 	right: 0;
@@ -18,6 +22,7 @@ iframe#site {
 	height: 100%;
 	z-index: -1;
 }
+
 #menu {
 	border: 0;
 	position: absolute;
@@ -32,11 +37,13 @@ iframe#site {
 	z-index: 999;
 	background-color: transparent;
 }
-#draghandler{
+
+#draghandler {
 	background-color: #243342;
-	height:20px;
-	width:calc(100% - 30px);
+	height: 20px;
+	width: calc(100% - 30px);
 }
+
 iframe#contextmenu {
 	border: 0;
 	position: absolute;
@@ -50,9 +57,17 @@ iframe#contextmenu {
 	height: 400px;
 	z-index: -1;
 }
+
+#content {
+	transition: height 500ms ease;
+	-moz-transition: height 500ms ease;
+	-ms-transition: height 500ms ease;
+	-o-transition: height 500ms ease;
+	-webkit-transition: height 500ms ease;
+}
 </style>
 <script>
-  var iframeLoadedEvent = new Event('iframeLoadedEvent');
+	var iframeLoadedEvent = new Event('iframeLoadedEvent');
 	var ajax = function(method, url, data, callback) {
 		var xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function() {
@@ -75,61 +90,70 @@ iframe#contextmenu {
 <body>
 
 
-<div style="position:fixed;width:100%;height:100%;background-color: rgb(54, 65, 76);"></div>
+	<div id="content" style="position: fixed; width: 100%; height: 100%; background-color: rgb(54, 65, 76);"></div>
+	<script>
+		document.getElementById('content')
+				.addEventListener(
+						'click',
+						function() {
 
+							if (this.style.height == '50px'
+									|| this.style.height == '') {
+								this.style.height = '100%'
+							} else {
+								this.style.height = '50px';
+							}
+						}, false);
+	</script>
 
 	<script>
+		ajax('GET', 'customsize/customsize.html', null, function(data) {
+			var iframe = document.createElement('iframe');
+			iframe.setAttribute('id', 'contextmenu');
+			var div = document.createElement('div');
+			div.setAttribute('id', 'menu');
+			var dragHandler = document.createElement('div');
+			dragHandler.setAttribute('id', 'draghandler');
+			div.appendChild(dragHandler);
+			div.appendChild(iframe);
+			document.body.appendChild(div);
+			iframe.contentWindow.document.open();
+			iframe.contentWindow.document.write(data.responseText);
+			iframe.contentWindow.document.close();
 
-	ajax('GET', 'customsize/customsize.html', null, function(data) {
-		var iframe = document.createElement('iframe');
-		iframe.setAttribute('id','contextmenu');
-		var div = document.createElement('div');
-		div.setAttribute('id','menu');
-		var dragHandler = document.createElement('div');
-		dragHandler.setAttribute('id','draghandler');
-		div.appendChild(dragHandler);
-		div.appendChild(iframe);
-		document.body.appendChild(div);
-		iframe.contentWindow.document.open();
-		iframe.contentWindow.document.write(data.responseText);
-		iframe.contentWindow.document.close();
-
-
-		iframeWindow = iframe.contentWindow || iframe.contentDocument.parentWindow;
-		iframeWindow.onload = function(){
-		    window.dispatchEvent(iframeLoadedEvent);
-		};
-		DragDrop.bind(document.getElementById('menu'));
-	});
+			iframeWindow = iframe.contentWindow
+					|| iframe.contentDocument.parentWindow;
+			iframeWindow.onload = function() {
+				window.dispatchEvent(iframeLoadedEvent);
+			};
+			DragDrop.bind(document.getElementById('menu'));
+		});
 
 		ajax('GET', 'grid-example.html', null, function(data) {
 			var iframe = document.createElement('iframe');
-			iframe.setAttribute('id','site');
+			iframe.setAttribute('id', 'site');
 			document.body.appendChild(iframe);
 			iframe.contentWindow.document.open();
 			iframe.contentWindow.document.write(data.responseText);
 			iframe.contentWindow.document.close();
 
-			iframeWindow = iframe.contentWindow || iframe.contentDocument.parentWindow;
-			iframeWindow.onload = function(){
-			    window.dispatchEvent(iframeLoadedEvent);
+			iframeWindow = iframe.contentWindow
+					|| iframe.contentDocument.parentWindow;
+			iframeWindow.onload = function() {
+				window.dispatchEvent(iframeLoadedEvent);
 			};
 
 		});
 
-
-
-/* 		ajax('GET', 'menu.html', null, function(data) {
-			var menu = document.createElement('div');
-			menu.innerHTML = data.responseText;
-			document.body.appendChild(menu);
-			var x = document.getElementById("evalscript").innerHTML;
-			eval(x);
-			DragDrop.bind(document.getElementById('contextmenu'));
-		}); */
-
-
+		/* 		ajax('GET', 'menu.html', null, function(data) {
+		 var menu = document.createElement('div');
+		 menu.innerHTML = data.responseText;
+		 document.body.appendChild(menu);
+		 var x = document.getElementById("evalscript").innerHTML;
+		 eval(x);
+		 DragDrop.bind(document.getElementById('contextmenu'));
+		 }); */
 	</script>
-  <script src="/dashboard/app/elements/core9-iframe/js/parent.js"></script>
+	<script src="/dashboard/app/elements/core9-iframe/js/parent.js"></script>
 </body>
 </html>
