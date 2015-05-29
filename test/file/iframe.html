@@ -26,9 +26,23 @@ iframe#site {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	width: 400px;
-	height: 600px;
+	width: 250px;
+	height: 420px;
 	z-index: 1;
+	background-color: #ccc;
+}
+iframe#contextmenu {
+	border: 0;
+	position: absolute;
+	_margin-top: 42px;
+	_margin-bottom: -42px;
+	top: 20px;
+	left: 10px;
+	right: 0;
+	bottom: 0;
+	width: 230px;
+	height: 400px;
+	z-index: -1;
 }
 </style>
 <script>
@@ -61,6 +75,7 @@ iframe#site {
 	
 	ajax('GET', 'customsize/customsize.html', null, function(data) {
 		var iframe = document.createElement('iframe');
+		iframe.setAttribute('id','contextmenu');
 		var div = document.createElement('div');
 		div.setAttribute('id','menu');
 		div.appendChild(iframe);
