@@ -37,7 +37,7 @@ iframe {
 		console.log(content);
 	}
 </script>
-<script src="../../bower_components/draggabilly/dist/draggabilly.pkgd.absolute.js"></script>
+<script src="/dashboard/app/elements/core9-dragdrop/js/drag-drop.min.js"></script>
 </head>
 <body>
 
@@ -62,13 +62,10 @@ iframe {
 		ajax('GET', 'menu.html', null, function(data) {
 			var menu = document.createElement('div');
 			menu.innerHTML = data.responseText;
-			var html = menu.firstChild;
-			console.log(html);
 			document.body.appendChild(menu);
-			var draggie = new Draggabilly(menu, {});
 			var x = document.getElementById("evalscript").innerHTML;
-		  eval(x);
-
+			eval(x);
+			DragDrop.bind(document.getElementById('contextmenu'));
 		});
 
 
