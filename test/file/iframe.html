@@ -56,12 +56,24 @@ iframe#contextmenu {
 	z-index: -1;
 }
 
-#content {
+.panel {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background-color: rgb(54, 65, 76);
 	transition: width 500ms ease;
 	-moz-transition: width 500ms ease;
 	-ms-transition: width 500ms ease;
 	-o-transition: width 500ms ease;
 	-webkit-transition: width 500ms ease;
+}
+
+.panelbutton {
+	float: right;
+	width: 40px;
+	height: 20px;
+	background-color: #ddd;
+	margin-right: -20px;
 }
 </style>
 <script>
@@ -82,25 +94,32 @@ iframe#contextmenu {
 		var content = serializer.serializeToString(document);
 		console.log(content);
 	}
-</script>
-<script src="/dashboard/app/elements/core9-dragdrop/js/drag-drop.min.js"></script>
-</head>
-<body>
-
-
-	<div id="content" style="position: fixed; width: 100%; height: 100%; background-color: rgb(54, 65, 76);">
-		<div id="panelswitch" style="float: right; width: 40px; height: 20px; background-color: #ddd; margin-right: -20px;"></div>
-	</div>
-	<script>
-		document.getElementById('panelswitch').addEventListener('click',
+	var panelSwitch = function(panelSwitch, panelId) {
+		document.getElementById(panelSwitch).addEventListener('click',
 				function() {
-					var panel = document.getElementById('content');
+					var panel = document.getElementById(panelId);
 					if (panel.style.width == '0px' || panel.style.width == '') {
 						panel.style.width = '100%'
 					} else {
 						panel.style.width = '0px';
 					}
 				}, false);
+	}
+</script>
+<script src="/dashboard/app/elements/core9-dragdrop/js/drag-drop.min.js"></script>
+</head>
+<body>
+
+
+	<div id="panel-content" class="panel">
+		<div id="panelswitch" class="panelbutton"></div>
+	</div>
+	<div id="panel-login" class="panel" style="z-index:1000;background-color: rgb(18, 111, 203);">
+		<div id="loginswitch" class="panelbutton"></div>
+	</div>
+	<script>
+		panelSwitch('panelswitch', 'panel-content');
+		panelSwitch('loginswitch', 'panel-login');
 	</script>
 
 	<script>
