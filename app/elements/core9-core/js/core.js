@@ -2,7 +2,17 @@ Core9 = {
 
 }
 
+Core9.guid = function() {
+	function s4() {
+		return Math.floor((1 + Math.random()) * 0x10000).toString(16)
+				.substring(1);
+	}
+	return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4()
+			+ s4() + s4();
+}
+
 Core9.iframeLoadedEvent = new Event('iframeLoadedEvent');
+
 Core9.ajax = function(method, url, data, callback) {
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
@@ -65,31 +75,31 @@ Core9.panel = {
 		create : function(id, zIndex, classes, content) {
 			var panel = Core9.panel.__createPanel(id, zIndex, classes, content);
 
-		    Core9.ajax('GET', 'grid-example.html', null, function(data) {
-		        var iframe = document.createElement('iframe');
-		        iframe.setAttribute('id', 'site');
-		        document.body.appendChild(iframe);
-		        iframe.contentWindow.document.open();
-		        iframe.contentWindow.document.write(data.responseText);
-		        iframe.contentWindow.document.close();
+			Core9.ajax('GET', content, null, function(data) {
+				var guid = Core9.guid();
+				var iframe = document.createElement('iframe');
+				iframe.setAttribute('id', guid);
+				iframe.className = "fullbleed"
+				document.body.appendChild(iframe);
+				iframe.contentWindow.document.open();
+				iframe.contentWindow.document.write(data.responseText);
+				iframe.contentWindow.document.close();
 
-		        iframeWindow = iframe.contentWindow
-		            || iframe.contentDocument.parentWindow;
-		        iframeWindow.onload = function() {
-		          window.dispatchEvent(Core9.iframeLoadedEvent);
-		          var iframe = document.getElementById('site');
+				iframeWindow = iframe.contentWindow
+						|| iframe.contentDocument.parentWindow;
+				iframeWindow.onload = function() {
+					window.dispatchEvent(Core9.iframeLoadedEvent);
+					var iframe = document.getElementById(guid);
 
-		          setTimeout(function(){
-		        	  panel.appendChild(iframe);
-		        	  iframe.contentWindow.document.open();
-				        iframe.contentWindow.document.write(data.responseText);
-				        iframe.contentWindow.document.close();
-		          }, 1);
-		        };
+					setTimeout(function() {
+						panel.appendChild(iframe);
+						iframe.contentWindow.document.open();
+						iframe.contentWindow.document.write(data.responseText);
+						iframe.contentWindow.document.close();
+					}, 1);
+				};
 
-		      });
-
-
+			});
 
 			return panel;
 		}
