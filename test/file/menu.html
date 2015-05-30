@@ -8,17 +8,17 @@
 <body>
 	<div id="contextmenu"
 		style="box-shadow: 0 1px 2px #999;
-		border:solid 1px #999; 
+		border:solid 1px #999;
 		position:absolute;
-		width: 200px; 
-		height: 400px; 
-		background-color: #fff; 
-		color: #000; 
+		width: 200px;
+		height: 400px;
+		background-color: #fff;
+		color: #000;
 		border-top-right-radius: 5px;
   		border-bottom-right-radius: 5px;
   		border-bottom-left-radius: 5px;
-  		border-top-left-radius: 5px; 
-  		z-index: 9999; 
+  		border-top-left-radius: 5px;
+  		z-index: 9999;
   		padding: 15px;"
 		class="">
 		<p>You can drag one element</p>
@@ -37,16 +37,16 @@
 	</div>
 
 	<script id="evalscript">
-	
-		
-	
+
+
+
 		(function() {
 			var that = this;
 			that.addElement = function(element){
 				var message = 'gm.appendHTMLSelectedCols(\'<p>my cont hi ha ho s</p>\');'
 				sentMessageToIframe(message);
 			}
-			
+
 			var save = document.getElementById('savepage');
 			save.addEventListener("submit", function(evt) {
 				console.log(evt);
@@ -54,30 +54,30 @@
 				evt.preventDefault();
 				return false;
 			});
-			
+
 			var addElement = document.getElementById('addelement');
 			addElement.addEventListener("submit", function(evt) {
 				console.log(evt);
 				evt.preventDefault();
 				that.addElement("button");
 				return false;
-			}); 
-			
-			
-			
+			});
+
+
+
 		})();
 	</script>
 
 
 
 	<script>
-		var formData = new FormData();
+/* 		var formData = new FormData();
 		var blob = new Blob([ 'Lorem ipsum' ], {
 			type : 'plain/text'
 		});
 		formData.append('file', blob, "readme.txt");
 
-		var request = new XMLHttpRequest();
+		var request = new XMLHttpRequest(); */
 		//request.open("POST", "http://example.org/upload");
 		//request.send(formData);
 	</script>

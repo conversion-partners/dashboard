@@ -29,3 +29,58 @@ Core9.panelSwitch = function(panelSwitch, panelId) {
 		}
 	}, false);
 }
+
+Core9.panel = {
+	__registry : {},
+
+	__activatePanelButton : function(panel, button) {
+		button.addEventListener('click', function() {
+			if (panel.style.width == '100%') {
+				panel.style.width = '0px'
+			} else {
+				panel.style.width = '100%';
+			}
+		}, false);
+
+		return button;
+	},
+	__createPanelButton : function() {
+		var panelButton = document.createElement('div');
+		panelButton.style.zIndex = "9";
+		panelButton.className = "panelbutton";
+		return panelButton;
+	},
+	__createPanel : function(id, zIndex, classes, content) {
+		var panel = document.createElement('div');
+		panel.setAttribute('id', id);
+		panel.style.zIndex = zIndex.toString();
+		panel.className = "panel " + classes;
+		panel.style.width = '100%';
+		panel.appendChild(Core9.panel.__activatePanelButton(panel, Core9.panel
+				.__createPanelButton()));
+		return panel;
+	},
+
+	iframe : {
+		create : function(id, zIndex, classes, content) {
+			var panel = Core9.panel.__createPanel(id, zIndex, classes, content);
+			return panel;
+		}
+	},
+	div : {
+		create : function(id, zIndex, classes, content) {
+			console.log(arguments);
+		}
+	},
+
+	create : function(id, zIndex, classes, type, content) {
+		return Core9.panel[type]['create'](id, zIndex, classes, content);
+	},
+	remove : function(id) {
+	},
+	update : function(id, classes, content) {
+	},
+	get : function(id) {
+	}
+
+}
