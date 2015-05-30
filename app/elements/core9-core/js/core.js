@@ -115,8 +115,9 @@ Core9.panel = {
 
 			Core9.ajax('GET', content, null, function(data) {
 				var guid = Core9.guid();
-				 var menu = document.createElement('div');
-				 panel.innerHTML = data.responseText.replace('evalscript', 'evalscript-'+guid);
+				 var div = document.createElement('div');
+				 div.innerHTML = data.responseText.replace('evalscript', 'evalscript-'+guid);
+				 panel.appendChild(div);
 				 var x = document.getElementById('evalscript-'+guid).innerHTML;
 				 eval(x);
 			});
