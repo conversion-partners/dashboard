@@ -112,6 +112,16 @@ Core9.panel = {
 	div : {
 		create : function(id, zIndex, classes, content, button) {
 			var panel = Core9.panel.__createPanel(id, zIndex, classes, content, button);
+
+			Core9.ajax('GET', content, null, function(data) {
+				var guid = Core9.guid();
+				 var menu = document.createElement('div');
+				 panel.innerHTML = data.responseText.replace('evalscript', 'evalscript-'+guid);
+				 var x = document.getElementById('evalscript-'+guid).innerHTML;
+				 eval(x);
+			});
+
+
 			return panel;
 		}
 	},
