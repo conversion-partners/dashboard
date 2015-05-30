@@ -76,36 +76,7 @@ iframe#contextmenu {
 	margin-right: -20px;
 }
 </style>
-<script>
-	var iframeLoadedEvent = new Event('iframeLoadedEvent');
-	var ajax = function(method, url, data, callback) {
-		var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState == 4) {
-				callback(xhr);
-			}
-		}
-		xhr.open(method, url, true);
-		xhr.send(null);
-	}
-	var showIframeContent = function(iframe) {
-		var document = iframe.contentDocument;
-		var serializer = new XMLSerializer();
-		var content = serializer.serializeToString(document);
-		console.log(content);
-	}
-	var panelSwitch = function(panelSwitch, panelId) {
-		document.getElementById(panelSwitch).addEventListener('click',
-				function() {
-					var panel = document.getElementById(panelId);
-					if (panel.style.width == '0px' || panel.style.width == '') {
-						panel.style.width = '100%'
-					} else {
-						panel.style.width = '0px';
-					}
-				}, false);
-	}
-</script>
+<script src="/dashboard/app/elements/core9-core/js/core.js"></script>
 <script src="/dashboard/app/elements/core9-dragdrop/js/drag-drop.min.js"></script>
 </head>
 <body>
@@ -114,16 +85,16 @@ iframe#contextmenu {
 	<div id="panel-content" class="panel">
 		<div id="panelswitch" class="panelbutton"></div>
 	</div>
-	<div id="panel-login" class="panel" style="z-index:1000;background-color: rgb(18, 111, 203);">
+	<div id="panel-login" class="panel" style="z-index: 1000; background-color: rgb(18, 111, 203);">
 		<div id="loginswitch" class="panelbutton"></div>
 	</div>
 	<script>
-		panelSwitch('panelswitch', 'panel-content');
-		panelSwitch('loginswitch', 'panel-login');
+		Core9.panelSwitch('panelswitch', 'panel-content');
+		Core9.panelSwitch('loginswitch', 'panel-login');
 	</script>
 
 	<script>
-		ajax('GET', 'customsize/customsize.html', null, function(data) {
+		Core9.ajax('GET', 'customsize/customsize.html', null, function(data) {
 			var iframe = document.createElement('iframe');
 			iframe.setAttribute('id', 'contextmenu');
 			var div = document.createElement('div');
@@ -140,12 +111,12 @@ iframe#contextmenu {
 			iframeWindow = iframe.contentWindow
 					|| iframe.contentDocument.parentWindow;
 			iframeWindow.onload = function() {
-				window.dispatchEvent(iframeLoadedEvent);
+				window.dispatchEvent(Core9.iframeLoadedEvent);
 			};
 			DragDrop.bind(document.getElementById('menu'));
 		});
 
-		ajax('GET', 'grid-example.html', null, function(data) {
+		Core9.ajax('GET', 'grid-example.html', null, function(data) {
 			var iframe = document.createElement('iframe');
 			iframe.setAttribute('id', 'site');
 			document.body.appendChild(iframe);
@@ -156,19 +127,10 @@ iframe#contextmenu {
 			iframeWindow = iframe.contentWindow
 					|| iframe.contentDocument.parentWindow;
 			iframeWindow.onload = function() {
-				window.dispatchEvent(iframeLoadedEvent);
+				window.dispatchEvent(Core9.iframeLoadedEvent);
 			};
 
 		});
-
-		/* 		ajax('GET', 'menu.html', null, function(data) {
-		 var menu = document.createElement('div');
-		 menu.innerHTML = data.responseText;
-		 document.body.appendChild(menu);
-		 var x = document.getElementById("evalscript").innerHTML;
-		 eval(x);
-		 DragDrop.bind(document.getElementById('contextmenu'));
-		 }); */
 	</script>
 	<script src="/dashboard/app/elements/core9-iframe/js/parent.js"></script>
 </body>
