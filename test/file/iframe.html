@@ -90,8 +90,11 @@ iframe#contextmenu {
 	<script>
 
 
-    document.body.appendChild(Core9.panel.create('panel-content', 1, '', 'iframe', 'menu.html'));
-		document.body.appendChild(Core9.panel.create('panel-login', 1005, 'red', 'iframe', 'menu.html'));
+
+    document.body.appendChild(Core9.panel.create('panel-iframe', -1, '', 'iframe', 'grid-example.html'));
+
+    document.body.appendChild(Core9.panel.create('panel-content', 1, '', 'div', 'menu.html'));
+		document.body.appendChild(Core9.panel.create('panel-login', 1005, 'red', 'div', 'menu.html'));
 
 	</script>
 
@@ -118,21 +121,7 @@ iframe#contextmenu {
 			DragDrop.bind(document.getElementById('menu'));
 		});
 
-		Core9.ajax('GET', 'grid-example.html', null, function(data) {
-			var iframe = document.createElement('iframe');
-			iframe.setAttribute('id', 'site');
-			document.body.appendChild(iframe);
-			iframe.contentWindow.document.open();
-			iframe.contentWindow.document.write(data.responseText);
-			iframe.contentWindow.document.close();
 
-			iframeWindow = iframe.contentWindow
-					|| iframe.contentDocument.parentWindow;
-			iframeWindow.onload = function() {
-				window.dispatchEvent(Core9.iframeLoadedEvent);
-			};
-
-		});
 	</script>
 	<script src="/dashboard/app/elements/core9-iframe/js/parent.js"></script>
 </body>

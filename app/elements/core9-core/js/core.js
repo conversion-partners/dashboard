@@ -64,12 +64,40 @@ Core9.panel = {
 	iframe : {
 		create : function(id, zIndex, classes, content) {
 			var panel = Core9.panel.__createPanel(id, zIndex, classes, content);
+
+		    Core9.ajax('GET', 'grid-example.html', null, function(data) {
+		        var iframe = document.createElement('iframe');
+		        iframe.setAttribute('id', 'site');
+		        document.body.appendChild(iframe);
+		        iframe.contentWindow.document.open();
+		        iframe.contentWindow.document.write(data.responseText);
+		        iframe.contentWindow.document.close();
+
+		        iframeWindow = iframe.contentWindow
+		            || iframe.contentDocument.parentWindow;
+		        iframeWindow.onload = function() {
+		          window.dispatchEvent(Core9.iframeLoadedEvent);
+		          var iframe = document.getElementById('site');
+
+		          setTimeout(function(){
+		        	  panel.appendChild(iframe);
+		        	  iframe.contentWindow.document.open();
+				        iframe.contentWindow.document.write(data.responseText);
+				        iframe.contentWindow.document.close();
+		          }, 1);
+		        };
+
+		      });
+
+
+
 			return panel;
 		}
 	},
 	div : {
 		create : function(id, zIndex, classes, content) {
-			console.log(arguments);
+			var panel = Core9.panel.__createPanel(id, zIndex, classes, content);
+			return panel;
 		}
 	},
 
