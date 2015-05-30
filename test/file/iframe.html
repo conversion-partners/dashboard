@@ -89,19 +89,19 @@ iframe#contextmenu {
 
 
 	<div id="content" style="position: fixed; width: 100%; height: 100%; background-color: rgb(54, 65, 76);">
-	 <div style="float:right;width:20px;height:20px;background-color: #ddd;margin-right:-20px;"></div>
+	 <div id="panelswitch" style="float:right;width:40px;height:20px;background-color: #ddd;margin-right:-20px;"></div>
 	</div>
 	<script>
-		document.getElementById('content')
+		document.getElementById('panelswitch')
 				.addEventListener(
 						'click',
 						function() {
-
-							if (this.style.width == '0px'
-									|| this.style.width == '') {
-								this.style.width = '100%'
+							  var panel = document.getElementById('content');
+							if (panel.style.width == '0px'
+									|| panel.style.width == '') {
+								panel.style.width = '100%'
 							} else {
-								this.style.width = '0px';
+								panel.style.width = '0px';
 							}
 						}, false);
 	</script>
