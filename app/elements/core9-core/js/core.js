@@ -40,6 +40,14 @@ Core9.panelSwitch = function(panelSwitch, panelId) {
 	}, false);
 }
 
+Core9.iframe = {
+	write : function(iframe, content) {
+		iframe.contentWindow.document.open();
+		iframe.contentWindow.document.write(content);
+		iframe.contentWindow.document.close();
+	}
+}
+
 Core9.panel = {
 	__registry : {},
 
@@ -60,42 +68,39 @@ Core9.panel = {
 		panelButton.className = "panelbutton";
 		return panelButton;
 	},
-	__createPanel : function(id, zIndex, classes, content) {
+	__createPanel : function(id, zIndex, classes, content, button) {
 		var panel = document.createElement('div');
 		panel.setAttribute('id', id);
 		panel.style.zIndex = zIndex.toString();
 		panel.className = "panel " + classes;
-		panel.style.width = '100%';
-		panel.appendChild(Core9.panel.__activatePanelButton(panel, Core9.panel
-				.__createPanelButton()));
+		if(button){
+			panel.style.width = '100%';
+			panel.appendChild(Core9.panel.__activatePanelButton(panel, Core9.panel
+					.__createPanelButton()));
+		}
+
 		return panel;
 	},
 
 	iframe : {
-		create : function(id, zIndex, classes, content) {
-			var panel = Core9.panel.__createPanel(id, zIndex, classes, content);
+		create : function(id, zIndex, classes, content, button) {
+			var panel = Core9.panel.__createPanel(id, zIndex, classes, content, button);
 
 			Core9.ajax('GET', content, null, function(data) {
 				var guid = Core9.guid();
 				var iframe = document.createElement('iframe');
 				iframe.setAttribute('id', guid);
-				iframe.className = "fullbleed"
+				iframe.className = "iframe " + classes;
 				document.body.appendChild(iframe);
-				iframe.contentWindow.document.open();
-				iframe.contentWindow.document.write(data.responseText);
-				iframe.contentWindow.document.close();
-
+				Core9.iframe.write(iframe, data.responseText);
 				iframeWindow = iframe.contentWindow
 						|| iframe.contentDocument.parentWindow;
 				iframeWindow.onload = function() {
 					window.dispatchEvent(Core9.iframeLoadedEvent);
 					var iframe = document.getElementById(guid);
-
 					setTimeout(function() {
 						panel.appendChild(iframe);
-						iframe.contentWindow.document.open();
-						iframe.contentWindow.document.write(data.responseText);
-						iframe.contentWindow.document.close();
+						Core9.iframe.write(iframe, data.responseText);
 					}, 1);
 				};
 
@@ -105,14 +110,14 @@ Core9.panel = {
 		}
 	},
 	div : {
-		create : function(id, zIndex, classes, content) {
-			var panel = Core9.panel.__createPanel(id, zIndex, classes, content);
+		create : function(id, zIndex, classes, content, button) {
+			var panel = Core9.panel.__createPanel(id, zIndex, classes, content, button);
 			return panel;
 		}
 	},
 
-	create : function(id, zIndex, classes, type, content) {
-		return Core9.panel[type]['create'](id, zIndex, classes, content);
+	create : function(id, zIndex, classes, type, content, button) {
+		return Core9.panel[type]['create'](id, zIndex, classes, content, button);
 	},
 	remove : function(id) {
 	},
