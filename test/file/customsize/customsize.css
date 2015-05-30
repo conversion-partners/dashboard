@@ -6,15 +6,6 @@ body {
 	position:fixed;
 }
 
-#pushobj {
-	position: absolute;
-	top: 0px;
-	left: 450px;
-	color: #fff;
-	background: #243342;
-	font-family: 'Open Sans Condensed', sans-serif;
-	font-size: 2em;
-}
 
 #menu {
 	position: absolute;
