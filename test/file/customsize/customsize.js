@@ -198,11 +198,19 @@ $(document).ready(
 				menuHeight : 400
 			});
 
+			var postClick = function() {
+				Core9.sentMessageToParent("menu item clicked : "
+						+ this.textContent);
+			}
 			var addItemsToMenu = function(title, items) {
 				console.log('adding to menu : ..');
+				$('a').unbind('click',postClick);
 				var $addTo = $('#menu').multilevelpushmenu('findmenusbytitle',
 						title).first();
 				$('#menu').multilevelpushmenu('additems', items, $addTo, 0);
+
+				$('a').on('click',postClick);
+
 			}
 
 			var removeItemsFromMenu = function(title) {
