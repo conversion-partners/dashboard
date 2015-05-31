@@ -1,0 +1,71 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+.fullbleed {
+  border: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.panel {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(54, 65, 76);
+  transition: width 500ms ease;
+  -moz-transition: width 500ms ease;
+  -ms-transition: width 500ms ease;
+  -o-transition: width 500ms ease;
+  -webkit-transition: width 500ms ease;
+    overflow-x: hidden;
+}
+
+.panelbutton {
+  float: right;
+  width: 40px;
+  height: 20px;
+  background-color: #ddd;
+  margin-right: -20px;
+}
+
+#panel-iframe-menu, iframe.menu {
+  border: 0;
+  _position: absolute;
+  _margin-top: 42px;
+  _margin-bottom: -42px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 230px;
+  height: 420px;
+  z-index: 999;
+  background-color: transparent;
+    float: right;
+  position: relative;
+}
+iframe.menu {
+  top:20px;
+  display: none;
+}
+div.menu {
+  overflow: hidden;
+}
+#draghandler {
+  background-color: #243342;
+  height: 20px;
+  width: calc(100% - 30px);
+    margin-bottom: -20px;
+}
+
+.red {
+  background-color:red;
+}

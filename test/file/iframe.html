@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
 <link rel="shortcut icon" href="/dashboard/favicon.ico">
 <link rel="stylesheet" href="/dashboard/bower_components/materialize/dist/css/materialize.min.css">
+<link rel="stylesheet" href="style.css">
 <script src="/dashboard/app/elements/core9-iframe/js/parent.js"></script>
 <script src="/dashboard/app/elements/core9-core/js/core.js"></script>
 <script src="/dashboard/app/elements/core9-dragdrop/js/drag-drop.min.js"></script>
@@ -22,8 +23,7 @@ System.baseURL = '/dashboard/';
   window.Polymer.dom = 'shadow';
 </script>
 <link rel="import" href="/dashboard/app/elements/elements.html">
-
-
+<script type="text/javascript" src="/dashboard/bower_components/materialize/dist/js/materialize.min.js"></script>
 <script type="text/javascript">
   Router.config({
     root : '/core9-components/',
@@ -55,86 +55,8 @@ System.baseURL = '/dashboard/';
   Router.addRoutes(routes).listen();
   //history.pushState(null, null, "products/edit/test");
 </script>
-<script type="text/javascript" src="/dashboard/bower_components/materialize/dist/js/materialize.min.js"></script>
-<style>
-* {
-	margin: 0px;
-	padding: 0px;
-}
-
-.fullbleed {
-	border: 0;
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	width: 100%;
-	height: 100%;
-	z-index: -1;
-}
-
-.panel {
-	position: fixed;
-	width: 100%;
-	height: 100%;
-	background-color: rgb(54, 65, 76);
-	transition: width 500ms ease;
-	-moz-transition: width 500ms ease;
-	-ms-transition: width 500ms ease;
-	-o-transition: width 500ms ease;
-	-webkit-transition: width 500ms ease;
-	  overflow-x: hidden;
-}
-
-.panelbutton {
-	float: right;
-	width: 40px;
-	height: 20px;
-	background-color: #ddd;
-	margin-right: -20px;
-}
-
-#panel-iframe-menu, iframe.menu {
-  border: 0;
-  _position: absolute;
-  _margin-top: 42px;
-  _margin-bottom: -42px;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 230px;
-  height: 420px;
-  z-index: 999;
-  background-color: transparent;
-    float: right;
-  position: relative;
-}
-iframe.menu {
-  top:20px;
-  display: none;
-}
-div.menu {
-  overflow: hidden;
-}
-#draghandler {
-  background-color: #243342;
-  height: 20px;
-  width: calc(100% - 30px);
-    margin-bottom: -20px;
-}
-
-.red {
-  background-color:red;
-}
-</style>
-
 </head>
 <body>
-
-
-
 
 <script>
     document.body.appendChild(Core9.panel.create('panel-iframe-site', -1, 'fullbleed', 'iframe', 'grid-example.html', false));
@@ -196,8 +118,6 @@ var addItems = [
           addItems : addItems
     }
 
-
-
 window.addEventListener('iframeLoadedEvent', function (e) {
 	  if(event.detail.classes == "menu"){
 		    var iframe = document.getElementsByClassName('menu')[1];
@@ -209,9 +129,6 @@ window.addEventListener('iframeLoadedEvent', function (e) {
 
 	  }
 	}, false);
-
-
-
 </script>
 </body>
 </html>
