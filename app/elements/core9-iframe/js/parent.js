@@ -9,11 +9,18 @@ eventer(messageEvent,function(e) {
 },false);
 
 
-var sentMessageToIframe = function (message){
+var sentMessageToIframe = function (iframe, message){
 		var domain = location.protocol + "//" + location.host;
-		var iframe = document.getElementsByTagName('iframe')[0].contentWindow;
-		console.log('parent iframe:  sending message:  ' + message);
-		iframe.postMessage(message, domain); // send the message and target URI
+
+		if(arguments.length == 1){
+			var iframes = document.getElementsByTagName('iframe');
+			for (var int = 0; int < iframes.length; int++) {
+				var iframe = iframes[int].contentWindow;
+				iframe.postMessage(message, domain);
+			}
+		}else{
+			iframe.postMessage(message, domain);
+		}
  }
 
 
