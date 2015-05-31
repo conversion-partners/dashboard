@@ -27,7 +27,9 @@
     "json-editor": "~0.7.18",
     "juicy-ace-editor": "~0.0.5",
     "labjs": "*",
-    "multilevelpushmenu": "~2.1.4"
+    "multilevelpushmenu": "~2.1.4",
+    "components-font-awesome": "~4.3.0",
+    "tinymce": "~4.1.10"
   },
   "resolutions": {
     "polymer": "^0.9.0",
