@@ -88,6 +88,7 @@ Core9.panel = {
 				iframeWindow = iframe.contentWindow
 						|| iframe.contentDocument.parentWindow;
 				iframeWindow.onload = function() {
+					Core9.iframeLoadedEvent.detail = {id : guid};
 					window.dispatchEvent(Core9.iframeLoadedEvent);
 					/* not working without F12
   					setTimeout(function() {

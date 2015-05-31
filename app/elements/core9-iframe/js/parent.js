@@ -3,8 +3,6 @@ var listenToPostMessages = function(){
 	var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
 	var eventer = window[eventMethod];
 	var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
-
-	// Listen to message from child window
 	eventer(messageEvent,function(e) {
 	  console.log('parent received message!:  ',e.data);
 	},false);
@@ -26,11 +24,7 @@ var sentMessageToIframe = function (message, iframe){
 		}
  }
 
-
-
-
-
 window.addEventListener('iframeLoadedEvent', function (e) {
-	var message = 'console.log("Hello!  The time is: ' + (new Date().getTime()) + '");';
+	var message = 'console.log(iframe with id : '+event.detail.id+' has loaded);';
 	sentMessageToIframe(message);
 }, false);
