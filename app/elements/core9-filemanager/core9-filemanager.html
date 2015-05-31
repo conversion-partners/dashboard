@@ -106,7 +106,7 @@ $(document).ready(function() {
 <script>
 
 
-	Core9.multiImport([ 'app/elements/core9-file/js/file' ])
+	Core9.system.multiImport([ '/dashboard/app/elements/core9-file/js/file' ])
 			.then(
 					function(modules) {
 
@@ -144,9 +144,9 @@ $(document).ready(function() {
 										for (var i = 0; i < files.length; i++) {
 										    console.log(files[i]);
 										    that.checksOrg.push({first: files[i].filename, last: files[i]._lastupdated_on});
-										}	
+										}
 									}
-									
+
 
 
 									that.checks = that.checksOrg;

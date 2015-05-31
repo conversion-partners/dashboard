@@ -503,15 +503,15 @@ input[type=button] {
 		"use strict";
 		Polymer({
 			is : 'core9-filedrop',
-			FILE : Core9.unwrapModule(modules[0]),
+			FILE : Core9.system.unwrapModule(modules[0]),
 			ready : function() {
 
-				  var Base64 = Core9.unwrapModule(modules[1]);
+				  var Base64 = Core9.system.unwrapModule(modules[1]);
 
 			}
 		});
 	}
-	Core9.multiImport([ 'app/elements/core9-file/js/file', 'app/elements/core9-file/js/base64'  ]).then(
+	Core9.system.multiImport([ '/dashboard/app/elements/core9-file/js/file', '/dashboard/app/elements/core9-file/js/base64'  ]).then(
 			function(modules) {
 				init(modules);
 			});

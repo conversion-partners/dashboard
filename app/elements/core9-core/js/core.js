@@ -38,6 +38,22 @@ Core9.iframe = {
 	}
 }
 
+Core9.system = {
+	    unwrapModule : function(mod) {
+	      for (key in mod) {
+	        if (mod.hasOwnProperty(key)) {
+	          var value = mod[key];
+	          return value;
+	        }
+	      }
+	    },
+	    multiImport : function(modules) {
+	      return Promise.all(modules.map(function(m) {
+	        return System.import(m)
+	      }))
+	    }
+}
+
 Core9.panel = {
 	__registry : {},
 

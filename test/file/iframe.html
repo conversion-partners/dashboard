@@ -5,11 +5,71 @@
 <title>unquote</title>
 <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
 <link rel="shortcut icon" href="/dashboard/favicon.ico">
+<script src="/dashboard/app/elements/core9-iframe/js/parent.js"></script>
+<script src="/dashboard/app/elements/core9-core/js/core.js"></script>
+<script src="/dashboard/app/elements/core9-dragdrop/js/drag-drop.min.js"></script>
 <script src="/dashboard/app/elements/core9-file/js/base64.js"></script>
 <script src="/dashboard/bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
 <!-- <script src="bower_components/es6-shim/es6-shim.min.js"></script> -->
 <script src="/dashboard/bower_components/systemjs/dist/system.js"></script>
 <script src="/dashboard/app/elements/core9-router/js/router.js"></script>
+<script>
+  //window.Polymer = window.Polymer || {};
+  //window.Polymer.dom = 'shadow';
+</script>
+<script>
+Core9.workspace = {
+    cleanWorkspace : function() {
+      console.log(Core9.workspace);
+      while (Core9.workspace.firstChild) {
+        try {
+          Core9.workspace.removeChild(Core9.workspace.firstChild);
+        } catch (e) {
+          // TODO: handle exception
+        }
+
+      }
+    }
+  };
+</script>
+<link rel="stylesheet" href="/dashboard/bower_components/materialize/dist/css/materialize.min.css">
+
+<link rel="import" href="/dashboard/bower_components/polymer/polymer.html">
+<link rel="import" href="/dashboard/app/elements/elements.html">
+
+
+<script type="text/javascript">
+  Router.config({
+    root : '/core9-components/',
+    mode : 'history'
+  });
+  var routes = {
+    '/home$/' : function() {
+      console.log('home', arguments);
+    },
+    '/devices$/' : function() {
+      console.log('hitting device...');
+    },
+    '/settings/setup$/' : function() {
+      console.log('settings/setup', arguments);
+    },
+    '/forms$/' : function() {
+      console.log('forms', arguments);
+    },
+    '/pages$/' : function(req) {
+          console.log('files', arguments);
+    },
+    '/files$/' : function(req) {
+      console.log('files', arguments);
+    },
+    'default' : function() {
+      console.log('hitting default...');
+    }
+  }
+  Router.addRoutes(routes).listen();
+  //history.pushState(null, null, "products/edit/test");
+</script>
+<script type="text/javascript" src="/dashboard/bower_components/materialize/dist/js/materialize.min.js"></script>
 <style>
 * {
 	margin: 0px;
@@ -76,9 +136,7 @@ iframe.menu {
   background-color:red;
 }
 </style>
-<script src="/dashboard/app/elements/core9-iframe/js/parent.js"></script>
-<script src="/dashboard/app/elements/core9-core/js/core.js"></script>
-<script src="/dashboard/app/elements/core9-dragdrop/js/drag-drop.min.js"></script>
+
 </head>
 <body>
 
