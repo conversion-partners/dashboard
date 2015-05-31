@@ -55,13 +55,20 @@ System.baseURL = '/dashboard/';
   Router.addRoutes(routes).listen();
   //history.pushState(null, null, "products/edit/test");
 </script>
+<style>
+#panel-content > div {
+  width: 60%;
+  left: 20%;
+  position: relative;
+}
+</style>
 </head>
 <body>
 
 <script>
     document.body.appendChild(Core9.panel.create('panel-iframe-site', -1, 'fullbleed', 'iframe', 'grid-example.html', false));
-    document.body.appendChild(Core9.panel.create('panel-content', 1, '', 'div', '/dashboard/panels/files/list.html', false));
-		//document.body.appendChild(Core9.panel.create('panel-login', 1005, 'red', 'div', 'blank.html', true));
+    document.body.appendChild(Core9.panel.create('panel-content', 1, '', 'div', '/dashboard/panels/files/list.html', true));
+		document.body.appendChild(Core9.panel.create('panel-login', 1005, 'red', 'div', 'blank.html', true));
 		document.body.appendChild(Core9.panel.create('panel-iframe-menu', 999, 'menu', 'iframe', 'customsize/customsize.html', false));
 
 		var menu = document.getElementById('panel-iframe-menu');
