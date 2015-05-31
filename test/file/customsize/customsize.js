@@ -21,12 +21,16 @@ $(document).ready(function(){
 
 
 	$('a').on('click',function(){
-		sentMessageToParent("menu item clicked : " + this.textContent);
+		Core9.sentMessageToParent("menu item clicked : " + this.textContent);
 	});
 
 	var callback = function(event){
 		console.log('message from callback : ');
 		console.log(event)
+		if(event.data.action == 'addItems'){
+			var $addTo = $( '#menu' ).multilevelpushmenu( 'findmenusbytitle' , event.data.findmenusbytitle ).first();
+			$( '#menu' ).multilevelpushmenu( 'additems' , event.data.addItems , $addTo , 0 );
+		}
 	}
 	Core9.listenToPostMessages(callback);
 });
