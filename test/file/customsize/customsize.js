@@ -203,7 +203,7 @@ $(document).ready(
 						+ this.textContent);
 			}
 			var addItemsToMenu = function(title, items) {
-				console.log('adding to menu : ..');
+				//console.log('adding to menu : ..');
 				$('a').unbind('click',postClick);
 				var $addTo = $('#menu').multilevelpushmenu('findmenusbytitle',
 						title).first();

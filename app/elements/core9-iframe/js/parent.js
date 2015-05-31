@@ -4,15 +4,12 @@ var listenToPostMessages = function(){
 	var eventer = window[eventMethod];
 	var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
 	eventer(messageEvent,function(e) {
-	  console.log('parent received message!:  ',e.data);
 	},false);
 }
 listenToPostMessages();
 
 var sentMessageToIframe = function (message, iframe){
 		var domain = location.protocol + "//" + location.host;
-		console.log('parent sending message : ');
-		console.log(message);
 		if(arguments.length == 1){
 			var iframes = document.getElementsByTagName('iframe');
 			for (var int = 0; int < iframes.length; int++) {
@@ -25,6 +22,6 @@ var sentMessageToIframe = function (message, iframe){
  }
 
 window.addEventListener('iframeLoadedEvent', function (e) {
-	var message = 'console.log(iframe with id : '+event.detail.id+' has loaded);';
-	sentMessageToIframe(message);
+	//var message = 'console.log(iframe with id : '+event.detail.id+' has loaded);';
+	//sentMessageToIframe(message);
 }, false);

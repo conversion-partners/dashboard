@@ -135,14 +135,12 @@ $(document).ready(function() {
 		                                        ];
 
 
-									console.log(JSON.parse(result.responseText));
 
 									var res = JSON.parse(result.responseText);
 
 									var files = res._embedded['rh:file'];
 									if(typeof files !== 'undefined'){
 										for (var i = 0; i < files.length; i++) {
-										    console.log(files[i]);
 										    that.checksOrg.push({first: files[i].filename, last: files[i]._lastupdated_on});
 										}
 									}
@@ -201,9 +199,9 @@ $(document).ready(function() {
 
 			                      try {
 			                          setTimeout(function(){
-			                        	   console.log("running timer");
+			                        	   //console.log("running timer");
 			                        	   var sort = $('.footable-sort-indicator');
-			                        	   console.log(sort);
+			                        	   //console.log(sort);
 			                        	   $(sort[0]).trigger('click');
 			                        	  }, 100);
 			                      } catch (e) {
