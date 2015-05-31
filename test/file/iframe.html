@@ -162,7 +162,6 @@ div.menu {
     var dragHandler = document.createElement('div');
     dragHandler.setAttribute('id', 'draghandler');
     dragHandler.addEventListener('dblclick', function (e) {
-    	  console.log(this);
     	  var iframe = document.getElementsByClassName('menu')[1];
     	  var state = iframe.style.display;
     	  if(state == 'block'){
