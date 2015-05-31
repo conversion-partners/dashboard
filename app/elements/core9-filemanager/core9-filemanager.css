@@ -20,3 +20,7 @@ core9-filedrop, core9-filedrop a {
   background-color: #fff;
   margin-left: 0px;
 }
+
+.footable>thead>tr>th {
+	border-radius: 0px;
+}
