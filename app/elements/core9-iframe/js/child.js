@@ -9,10 +9,10 @@ window.addEventListener('message', function(event) {
 	event.source.postMessage('status: ...', event.origin);
 }, false);
 
+sentMessageToParent = function(message){
+	parent.postMessage(message,domain);
+}
 
-
-setInterval(function() {
-	// Send the message "Hello" to the parent window
-	// ...if the domain is still "davidwalsh.name"
-	parent.postMessage("Hello","http://www.convertforce.com");
-},1000);
+/*setInterval(function() {
+	parent.postMessage("Hello",domain);
+},1000);*/
