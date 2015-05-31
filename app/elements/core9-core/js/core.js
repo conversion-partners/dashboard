@@ -138,9 +138,14 @@ Core9.panel = {
 								div.innerHTML = data.responseText.replace(
 										'evalscript', 'evalscript-' + guid);
 								panel.appendChild(div);
-								var x = document.getElementById('evalscript-'
-										+ guid).innerHTML;
-								eval(x);
+								try {
+									var x = document.getElementById('evalscript-'
+											+ guid).innerHTML;
+									eval(x);
+								} catch (e) {
+									// TODO: handle exception
+								}
+
 							});
 
 			return panel;
