@@ -113,7 +113,7 @@ Core9.workspace = {
 
 #panel-iframe-menu, iframe.menu {
   border: 0;
-  position: absolute;
+  _position: absolute;
   _margin-top: 42px;
   _margin-bottom: -42px;
   top: 0;
@@ -124,6 +124,8 @@ Core9.workspace = {
   height: 420px;
   z-index: 999;
   background-color: transparent;
+    float: right;
+  position: relative;
 }
 iframe.menu {
   top:20px;
@@ -133,6 +135,7 @@ iframe.menu {
   background-color: #243342;
   height: 20px;
   width: calc(100% - 30px);
+    margin-bottom: -20px;
 }
 
 .red {
@@ -149,7 +152,7 @@ iframe.menu {
 <script>
     document.body.appendChild(Core9.panel.create('panel-iframe-site', -1, 'fullbleed', 'iframe', 'grid-example.html', false));
     document.body.appendChild(Core9.panel.create('panel-content', 1, '', 'div', '/dashboard/panels/files/list.html', true));
-		document.body.appendChild(Core9.panel.create('panel-login', 1005, 'red', 'div', 'blank.html', true));
+		//document.body.appendChild(Core9.panel.create('panel-login', 1005, 'red', 'div', 'blank.html', true));
 		document.body.appendChild(Core9.panel.create('panel-iframe-menu', 999, 'menu', 'iframe', 'customsize/customsize.html', false));
 
 		var menu = document.getElementById('panel-iframe-menu');
