@@ -81,7 +81,7 @@ iframe.menu {
 <script>
     document.body.appendChild(Core9.panel.create('panel-iframe-site', -1, 'fullbleed', 'iframe', 'grid-example.html', false));
     document.body.appendChild(Core9.panel.create('panel-content', 1, '', 'div', 'blank.html', true));
-		document.body.appendChild(Core9.panel.create('panel-login', 1005, 'red', 'div', 'blank.html', true));
+		//document.body.appendChild(Core9.panel.create('panel-login', 1005, 'red', 'div', 'blank.html', true));
 		document.body.appendChild(Core9.panel.create('panel-iframe-menu', 999, 'menu', 'iframe', 'customsize/customsize.html', false));
 
 		var menu = document.getElementById('panel-iframe-menu');
@@ -94,31 +94,34 @@ iframe.menu {
 
 var addItems = [
                 {
-                    name: 'Pages',
-                    id: 'pages',
-                    icon: 'fa fa-phone-square',
-                    link: '#',
-                    items: [
+                  name: 'Samsung',
+                  icon: 'fa fa-phone-square',
+                  link: '#',
+                  items: [
+                    {
+                      title: 'Samsung',
+                      icon: 'fa fa-phone-square',
+                      items: [
                         {
-                            title: 'Pages',
-                            id: 'pagesMenu',
-                            icon: 'fa fa-phone-square',
-                            items: [
-                                {
-                                    name: 'New Page',
-                                    icon: 'fa fa-phone-square',
-                                    link: '#'
-                                },
-                                {
-                                    name: 'Edit Page',
-                                    icon: 'fa fa-phone-square',
-                                    link: '#'
-                                }
-                            ]
+                          name: 'Samsung Galaxy S II',
+                          icon: 'fa fa-phone-square',
+                          link: '#'
+                        },
+                        {
+                          name: 'Samsung Galaxy S III',
+                          icon: 'fa fa-phone-square',
+                          link: '#'
+                        },
+                        {
+                          name: 'Samsung Galaxy S IV',
+                          icon: 'fa fa-phone-square',
+                          link: '#'
                         }
-                    ]
+                      ]
+                    }
+                  ]
                 }
-            ];
+              ];
 
     var message = {
           action : 'addItems',

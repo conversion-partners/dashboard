@@ -12,3 +12,14 @@ body {
 	top: 0px;
 	left: 0px;
 }
+
+
+#pushobj {
+  position: absolute;
+  top: 7px;
+  left: 300px;
+  color: #000;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 2em;
+  z-index: 1;
+}
