@@ -174,12 +174,12 @@ input[type=button] {
 			is : 'core9-filedrop',
 			ready : function() {
 
-				  var Base64 = Core9.system.unwrapModule(modules[1]);
+				  var Base64 = Core9.system.unwrapModule(modules[0]);
 
 			}
 		});
 	}
-	Core9.system.multiImport([ 'app/elements/core9-file/js/file', 'app/elements/core9-file/js/base64'  ]).then(
+	Core9.system.multiImport(['app/elements/core9-file/js/base64']).then(
 			function(modules) {
 				init(modules);
 			});
