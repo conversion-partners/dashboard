@@ -2,6 +2,19 @@ Core9 = {
 
 }
 
+Core9.workspace = {
+	cleanWorkspace : function() {
+		while (Core9.workspace.firstChild) {
+			try {
+				Core9.workspace.removeChild(Core9.workspace.firstChild);
+			} catch (e) {
+				// TODO: handle exception
+			}
+
+		}
+	}
+};
+
 Core9.guid = function() {
 	function s4() {
 		return Math.floor((1 + Math.random()) * 0x10000).toString(16)
@@ -38,20 +51,20 @@ Core9.iframe = {
 }
 
 Core9.system = {
-	    unwrapModule : function(mod) {
-	      for (key in mod) {
-	        if (mod.hasOwnProperty(key)) {
-	          var value = mod[key];
-	          return value;
-	        }
-	      }
-	    },
-	    multiImport : function(modules) {
-	      return Promise.all(modules.map(function(m) {
+	unwrapModule : function(mod) {
+		for (key in mod) {
+			if (mod.hasOwnProperty(key)) {
+				var value = mod[key];
+				return value;
+			}
+		}
+	},
+	multiImport : function(modules) {
+		return Promise.all(modules.map(function(m) {
 
-	        return System.import(m)
-	      }))
-	    }
+			return System.import(m)
+		}))
+	}
 }
 
 Core9.panel = {
@@ -97,27 +110,30 @@ Core9.panel = {
 			Core9.ajax('GET', content, null, function(data) {
 
 				var iframe = document.createElement('iframe');
-				iframe.setAttribute('id', id+'-'+guid);
+				iframe.setAttribute('id', id + '-' + guid);
 				iframe.className = "iframe " + classes;
 				document.body.appendChild(iframe);
 				Core9.iframe.write(iframe, data.responseText);
 				iframeWindow = iframe.contentWindow
 						|| iframe.contentDocument.parentWindow;
 				iframeWindow.onload = function() {
-					Core9.iframeLoadedEvent.detail = {id : guid, classes : classes};
+					Core9.iframeLoadedEvent.detail = {
+						id : guid,
+						classes : classes
+					};
 					window.dispatchEvent(Core9.iframeLoadedEvent);
-					/* not working without F12
-  					setTimeout(function() {
-						var iframe = document.getElementById(guid);
-						panel.appendChild(iframe);
-						Core9.iframe.write(iframe, data.responseText);
-					}, 1000);*/
+					/*
+					 * not working without F12 setTimeout(function() { var
+					 * iframe = document.getElementById(guid);
+					 * panel.appendChild(iframe); Core9.iframe.write(iframe,
+					 * data.responseText); }, 1000);
+					 */
 				};
 				content = data.responseText;
 			});
-			//Fixme too hacky!!
+			// Fixme too hacky!!
 			setTimeout(function() {
-				var iframe = document.getElementById(id+'-'+guid);
+				var iframe = document.getElementById(id + '-' + guid);
 				panel.appendChild(iframe);
 				Core9.iframe.write(iframe, content);
 			}, 1000);
@@ -129,23 +145,22 @@ Core9.panel = {
 			var panel = Core9.panel.__createPanel(id, zIndex, classes, content,
 					button);
 
-			Core9
-					.ajax('GET', content, null,
-							function(data) {
-								var guid = Core9.guid();
-								var div = document.createElement('div');
-								div.innerHTML = data.responseText.replace(
-										'evalscript', 'evalscript-' + guid);
-								panel.appendChild(div);
-								try {
-									var x = document.getElementById('evalscript-'
-											+ guid).innerHTML;
-									eval(x);
-								} catch (e) {
-									// TODO: handle exception
-								}
+			Core9.ajax('GET', content, null,
+					function(data) {
+						var guid = Core9.guid();
+						var div = document.createElement('div');
+						div.innerHTML = data.responseText.replace('evalscript',
+								'evalscript-' + guid);
+						panel.appendChild(div);
+						try {
+							var x = document.getElementById('evalscript-'
+									+ guid).innerHTML;
+							eval(x);
+						} catch (e) {
+							// TODO: handle exception
+						}
 
-							});
+					});
 
 			return panel;
 		}
