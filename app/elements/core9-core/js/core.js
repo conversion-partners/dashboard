@@ -81,14 +81,14 @@ Core9.panel = {
 			Core9.ajax('GET', content, null, function(data) {
 
 				var iframe = document.createElement('iframe');
-				iframe.setAttribute('id', guid);
+				iframe.setAttribute('id', id+'-'+guid);
 				iframe.className = "iframe " + classes;
 				document.body.appendChild(iframe);
 				Core9.iframe.write(iframe, data.responseText);
 				iframeWindow = iframe.contentWindow
 						|| iframe.contentDocument.parentWindow;
 				iframeWindow.onload = function() {
-					Core9.iframeLoadedEvent.detail = {id : guid};
+					Core9.iframeLoadedEvent.detail = {id : guid, classes : classes};
 					window.dispatchEvent(Core9.iframeLoadedEvent);
 					/* not working without F12
   					setTimeout(function() {
@@ -101,7 +101,7 @@ Core9.panel = {
 			});
 			//Fixme too hacky!!
 			setTimeout(function() {
-				var iframe = document.getElementById(guid);
+				var iframe = document.getElementById(id+'-'+guid);
 				panel.appendChild(iframe);
 				Core9.iframe.write(iframe, content);
 			}, 1000);

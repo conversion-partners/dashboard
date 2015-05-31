@@ -69,6 +69,7 @@ iframe.menu {
   background-color:red;
 }
 </style>
+<script src="/dashboard/app/elements/core9-iframe/js/parent.js"></script>
 <script src="/dashboard/app/elements/core9-core/js/core.js"></script>
 <script src="/dashboard/app/elements/core9-dragdrop/js/drag-drop.min.js"></script>
 </head>
@@ -89,6 +90,50 @@ iframe.menu {
     menu.appendChild(dragHandler);
 		DragDrop.bind(menu);
 </script>
-<script src="/dashboard/app/elements/core9-iframe/js/parent.js"></script>
+<script>
+
+var addItems = [
+                {
+                    name: 'Pages',
+                    id: 'pages',
+                    icon: 'fa fa-phone-square',
+                    link: '#',
+                    items: [
+                        {
+                            title: 'Pages',
+                            id: 'pagesMenu',
+                            icon: 'fa fa-phone-square',
+                            items: [
+                                {
+                                    name: 'New Page',
+                                    icon: 'fa fa-phone-square',
+                                    link: '#'
+                                },
+                                {
+                                    name: 'Edit Page',
+                                    icon: 'fa fa-phone-square',
+                                    link: '#'
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ];
+
+    var message = {
+          action : 'addItems',
+          findmenusbytitle : 'Mobile Phones',
+          addItems : addItems
+    }
+
+
+
+window.addEventListener('iframeLoadedEvent', function (e) {
+	  if(event.detail.classes == "menu"){
+		    var iframe = document.getElementsByClassName('menu')[1];
+		    sentMessageToIframe(message, iframe);
+	  }
+	}, false);
+</script>
 </body>
 </html>

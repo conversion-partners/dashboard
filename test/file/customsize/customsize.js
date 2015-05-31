@@ -21,7 +21,12 @@ $(document).ready(function(){
 
 
 	$('a').on('click',function(){
-
+		sentMessageToParent("menu item clicked : " + this.textContent);
 	});
 
+	var callback = function(event){
+		console.log('message from callback : ');
+		console.log(event)
+	}
+	Core9.listenToPostMessages(callback);
 });

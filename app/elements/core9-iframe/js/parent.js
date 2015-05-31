@@ -20,7 +20,7 @@ var sentMessageToIframe = function (message, iframe){
 				iframe.postMessage(message, domain);
 			}
 		}else{
-			iframe.postMessage(message, domain);
+			iframe.contentWindow.postMessage(message, domain);
 		}
  }
 
