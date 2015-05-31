@@ -283,52 +283,13 @@ $(document).ready(function(){
 
 	var callback = function(event){
 		var addItemsToMenu = function(title, items){
-
-
-			var addItems = [
-			                {
-			                  name: 'Samsung',
-			                  icon: 'fa fa-phone-square',
-			                  link: '#',
-			                  items: [
-			                    {
-			                      title: 'Samsung',
-			                      icon: 'fa fa-phone-square',
-			                      items: [
-			                        {
-			                          name: 'Samsung Galaxy S II',
-			                          icon: 'fa fa-phone-square',
-			                          link: '#'
-			                        },
-			                        {
-			                          name: 'Samsung Galaxy S III',
-			                          icon: 'fa fa-phone-square',
-			                          link: '#'
-			                        },
-			                        {
-			                          name: 'Samsung Galaxy S IV',
-			                          icon: 'fa fa-phone-square',
-			                          link: '#'
-			                        }
-			                      ]
-			                    }
-			                  ]
-			                }
-			              ];
-
-
-			var title = 'Mobile Phones';
-
-			var $addTo = $( '#menu' ).multilevelpushmenu( 'findmenusbytitle' , title ).first();
-			$( '#menu' ).multilevelpushmenu( 'additems' , addItems , $addTo , 0 );
-		}
-		console.log('message from callback : ');
-		console.log(event)
-		if(event.data.action == 'addItems'){
-			setTimeout(function(){
 				console.log('adding to menu : ..');
+				var $addTo = $( '#menu' ).multilevelpushmenu( 'findmenusbytitle' , title ).first();
+				$( '#menu' ).multilevelpushmenu( 'additems' , items , $addTo , 0 );
+		}
+		if(event.data.action == 'addItems'){
 				addItemsToMenu(event.data.findmenusbytitle, event.data.addItems);
-			}, 3000);
+
 		 }
 		}
 
@@ -337,7 +298,6 @@ $(document).ready(function(){
 
 		$( '#menu' ).multilevelpushmenu({
 			menu: arrMenu,
-			containersToPush: [$( '#pushobj' )],
 			menuWidth: 200, // '450px', '30em', '25%' will also work
 			menuHeight: 400
 		});
