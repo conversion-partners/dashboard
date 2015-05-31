@@ -1,6 +1,6 @@
 <dom-module id="core9-filedrop">
 
-<script src="core9-filedrop.js"></script>
+<!-- <script src="core9-filedrop.js"></script> -->
 
 <style>
 :host {
@@ -129,10 +129,10 @@ input[type=button] {
                 <form id="upload_form" enctype="multipart/form-data" method="post" action="upload.php">
                     <div>
                         <div><label for="image_file">Please select image file</label></div>
-                        <div><input type="file" name="image_file" id="image_file" onchange="fileSelected();" /></div>
+                        <div><input type="file" name="image_file" id="image_file" /></div> <!-- onchange="fileSelected();" -->
                     </div>
                     <div>
-                        <input type="button" value="Upload" onclick="startUploading()" />
+                        <input id="uploading" type="button" value="Upload" />  <!-- onclick="startUploading()" -->
                     </div>
                     <div id="fileinfo">
                         <div id="filename"></div>
@@ -174,8 +174,225 @@ input[type=button] {
 			is : 'core9-filedrop',
 			ready : function() {
 
-				  var Base64 = Core9.system.unwrapModule(modules[0]);
+				  var that = this;
 
+				  var Base64 = modules[0];
+
+
+				// common variables
+				  var iBytesUploaded = 0;
+				  var iBytesTotal = 0;
+				  var iPreviousBytesLoaded = 0;
+				  var iMaxFilesize = 1048576; // 1MB
+				  var oTimer = 0;
+				  var sResultFileSize = '';
+
+				  function secondsToTime(secs) { // we will use this function to convert seconds
+				                  // in normal time format
+				    var hr = Math.floor(secs / 3600);
+				    var min = Math.floor((secs - (hr * 3600)) / 60);
+				    var sec = Math.floor(secs - (hr * 3600) - (min * 60));
+
+				    if (hr < 10) {
+				      hr = "0" + hr;
+				    }
+				    if (min < 10) {
+				      min = "0" + min;
+				    }
+				    if (sec < 10) {
+				      sec = "0" + sec;
+				    }
+				    if (hr) {
+				      hr = "00";
+				    }
+				    return hr + ':' + min + ':' + sec;
+				  };
+
+				  function bytesToSize(bytes) {
+				    var sizes = [ 'Bytes', 'KB', 'MB' ];
+				    if (bytes == 0)
+				      return 'n/a';
+				    var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+				    return (bytes / Math.pow(1024, i)).toFixed(1) + ' ' + sizes[i];
+				  };
+
+				  function fileSelected() {
+				    // hide different warnings
+				    that.$.upload_response.style.display = 'none';
+				    that.$.error.style.display = 'none';
+				    that.$.error2.style.display = 'none';
+				    that.$.abort.style.display = 'none';
+				    that.$.warnsize.style.display = 'none';
+
+				    // get selected file element
+				    var oFile = that.$.image_file.files[0];
+
+				    // filter for image files
+				    var rFilter = /^(image\/bmp|image\/gif|image\/jpeg|image\/png|image\/tiff)$/i;
+				    if (!rFilter.test(oFile.type)) {
+				    	that.$.error.style.display = 'block';
+				      return;
+				    }
+
+				    // little test for filesize
+				    if (oFile.size > iMaxFilesize) {
+				    	that.$.warnsize.style.display = 'block';
+				      return;
+				    }
+
+				    // get preview element
+				    var oImage = that.$.preview;
+
+				    // prepare HTML5 FileReader
+				    var oReader = new FileReader();
+				    oReader.onload = function(e) {
+
+				      // e.target.result contains the DataURL which we will use as a source of
+				      // the image
+				      oImage.src = e.target.result;
+
+				      oImage.onload = function() { // binding onload event
+
+				        // we are going to display some custom image information here
+				        sResultFileSize = bytesToSize(oFile.size);
+				        that.$.fileinfo.style.display = 'block';
+				        that.$.filename.innerHTML = 'Name: '
+				            + oFile.name;
+				        that.$.filesize.innerHTML = 'Size: '
+				            + sResultFileSize;
+				        that.$.filetype.innerHTML = 'Type: '
+				            + oFile.type;
+				        that.$.filedim.innerHTML = 'Dimension: '
+				            + oImage.naturalWidth + ' x ' + oImage.naturalHeight;
+				      };
+				    };
+
+				    // read selected file as DataURL
+				    oReader.readAsDataURL(oFile);
+				  }
+
+				  function startUploading() {
+				    // cleanup all temp states
+				    iPreviousBytesLoaded = 0;
+				    that.$.upload_response.style.display = 'none';
+				    that.$.error.style.display = 'none';
+				    that.$.error2.style.display = 'none';
+				    that.$.abort.style.display = 'none';
+				    that.$.warnsize.style.display = 'none';
+				    that.$.progress_percent.innerHTML = '';
+				    var oProgress = that.$.progress;
+				    oProgress.style.display = 'block';
+				    oProgress.style.width = '0px';
+
+				    var oFile = that.$.image_file.files[0];
+				    // get form data for POSTing
+				    // var vFD = document.getElementById('upload_form').getFormData(); // for
+				    // FF3
+				    var vFD = new FormData(that.$.upload_form);
+				    vFD.append("properties", '{filename:"' + oFile.name + '"}');
+
+				    // create XMLHttpRequest object, adding few event listeners, and POSTing our
+				    // data
+				    var oXHR = new XMLHttpRequest();
+				    oXHR.upload.addEventListener('progress', uploadProgress, false);
+				    oXHR.addEventListener('load', uploadFinish, false);
+				    oXHR.addEventListener('error', uploadError, false);
+				    oXHR.addEventListener('abort', uploadAbort, false);
+				    oXHR.open('POST', 'http://127.0.0.1:8080/testdb/mybucket.files', true);
+				    oXHR.setRequestHeader("Authorization", "Basic "
+				        + Base64.encode("admin" + ":" + "changeit"));
+				    oXHR.send(vFD);
+
+				    // set inner timer
+				    oTimer = setInterval(doInnerUpdates, 300);
+				  }
+
+				  function doInnerUpdates() { // we will use this function to display upload speed
+				    var iCB = iBytesUploaded;
+				    var iDiff = iCB - iPreviousBytesLoaded;
+
+				    // if nothing new loaded - exit
+				    if (iDiff == 0)
+				      return;
+
+				    iPreviousBytesLoaded = iCB;
+				    iDiff = iDiff * 2;
+				    var iBytesRem = iBytesTotal - iPreviousBytesLoaded;
+				    var secondsRemaining = iBytesRem / iDiff;
+
+				    // update speed info
+				    var iSpeed = iDiff.toString() + 'B/s';
+				    if (iDiff > 1024 * 1024) {
+				      iSpeed = (Math.round(iDiff * 100 / (1024 * 1024)) / 100).toString()
+				          + 'MB/s';
+				    } else if (iDiff > 1024) {
+				      iSpeed = (Math.round(iDiff * 100 / 1024) / 100).toString() + 'KB/s';
+				    }
+
+				    that.$.speed.innerHTML = iSpeed;
+				    that.$.remaining.innerHTML = '| '
+				        + secondsToTime(secondsRemaining);
+				  }
+
+				  function uploadProgress(e) { // upload process in progress
+				    if (e.lengthComputable) {
+				      iBytesUploaded = e.loaded;
+				      iBytesTotal = e.total;
+				      var iPercentComplete = Math.round(e.loaded * 100 / e.total);
+				      var iBytesTransfered = bytesToSize(iBytesUploaded);
+
+				      that.$.progress_percent.innerHTML = iPercentComplete
+				          .toString()
+				          + '%';
+				      that.$.progress.style.width = (iPercentComplete * 4)
+				          .toString()
+				          + 'px';
+				      that.$.b_transfered.innerHTML = iBytesTransfered;
+				      if (iPercentComplete == 100) {
+				        var oUploadResponse = that.$.upload_response;
+				        oUploadResponse.innerHTML = '<h1>Please wait...processing</h1>';
+				        oUploadResponse.style.display = 'block';
+				      }
+				    } else {
+				    	that.$.progress.innerHTML = 'unable to compute';
+				    }
+				  }
+
+				  function uploadFinish(e) { // upload successfully finished
+				    var oUploadResponse = that.$.upload_response;
+				    oUploadResponse.innerHTML = e.target.responseText;
+				    oUploadResponse.style.display = 'block';
+
+				    that.$.progress_percent.innerHTML = '100%';
+				    that.$.progress.style.width = '400px';
+				    that.$.filesize.innerHTML = sResultFileSize;
+				    that.$.remaining.innerHTML = '| 00:00:00';
+
+				    clearInterval(oTimer);
+				  }
+
+				  function uploadError(e) { // upload error
+					  that.$.error2.style.display = 'block';
+				    clearInterval(oTimer);
+				  }
+
+				  function uploadAbort(e) { // upload abort
+					  that.$.abort.style.display = 'block';
+				    clearInterval(oTimer);
+				  }
+
+
+				  var imgFile =  that.$.upload_form.querySelector('#image_file');
+				  imgFile.addEventListener("change", function(){
+					  fileSelected();
+					  console.log(this);
+				  });
+
+				  var uploadButton =  that.$.upload_form.querySelector('#uploading');
+				  uploadButton.addEventListener("click", function(){
+					  startUploading();
+			            console.log(this);
+			    });
 			}
 		});
 	}

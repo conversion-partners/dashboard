@@ -36,7 +36,6 @@ function bytesToSize(bytes) {
 };
 
 function fileSelected() {
-
 	// hide different warnings
 	document.getElementById('upload_response').style.display = 'none';
 	document.getElementById('error').style.display = 'none';
