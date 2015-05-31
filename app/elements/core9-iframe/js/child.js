@@ -8,3 +8,11 @@ window.addEventListener('message', function(event) {
 	eval(event.data);
 	event.source.postMessage('status: ...', event.origin);
 }, false);
+
+
+
+setInterval(function() {
+	// Send the message "Hello" to the parent window
+	// ...if the domain is still "davidwalsh.name"
+	parent.postMessage("Hello","http://www.convertforce.com");
+},1000);

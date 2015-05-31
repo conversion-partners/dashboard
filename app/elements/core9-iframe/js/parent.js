@@ -1,4 +1,14 @@
 
+var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+var eventer = window[eventMethod];
+var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+
+// Listen to message from child window
+eventer(messageEvent,function(e) {
+  console.log('parent received message!:  ',e.data);
+},false);
+
+
 var sentMessageToIframe = function (message){
 		var domain = location.protocol + "//" + location.host;
 		var iframe = document.getElementsByTagName('iframe')[0].contentWindow;
