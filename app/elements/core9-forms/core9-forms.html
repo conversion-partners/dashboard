@@ -121,11 +121,12 @@ $('.add-row').click(function(e) {
 <script>
 
 
-	Core9.system.multiImport([ '/dashboard/app/elements/core9-file/js/file' ])
+
+	Core9.system.multiImport([ 'app/elements/core9-file/js/file' ])
 			.then(
 					function(modules) {
 
-						var FILE = Core9.unwrapModule(modules[0]);
+						var FILE = Core9.system.unwrapModule(modules[0]);
 
 						Polymer({
 							is : 'core9-forms',

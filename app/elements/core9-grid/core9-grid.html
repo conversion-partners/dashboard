@@ -17,26 +17,13 @@
 
 
 <script>
-	function unwrapModule(mod) {
-		for (key in mod) {
-			if (mod.hasOwnProperty(key)) {
-				var value = mod[key];
-				return value;
-			}
-		}
-	}
 
-	function multiImport(modules) {
-		return Promise.all(modules.map(function(m) {
-			return System.import(m)
-		}))
-	}
 
-	multiImport(
-			[ '/dashboard/app/elements/core9-grid/fileapi' ]).then(
+	Core9.system.multiImport(
+			[ 'app/elements/core9-grid/fileapi' ]).then(
 			function(modules) {
 
-				var FILE = unwrapModule(modules[0]);
+				var FILE = Core9.system.unwrapModule(modules[0]);
 
 				var mycanvas = this.$.mycanvas;
 				console.log(mycanvas);

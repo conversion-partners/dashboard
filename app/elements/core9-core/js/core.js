@@ -49,6 +49,7 @@ Core9.system = {
 	    },
 	    multiImport : function(modules) {
 	      return Promise.all(modules.map(function(m) {
+	    	System.baseURL = '/dashboard/';
 	        return System.import(m)
 	      }))
 	    }
