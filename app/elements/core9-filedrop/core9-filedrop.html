@@ -385,13 +385,11 @@ input[type=button] {
 				  var imgFile =  that.$.upload_form.querySelector('#image_file');
 				  imgFile.addEventListener("change", function(){
 					  fileSelected();
-					  console.log(this);
 				  });
 
 				  var uploadButton =  that.$.upload_form.querySelector('#uploading');
 				  uploadButton.addEventListener("click", function(){
 					  startUploading();
-			            console.log(this);
 			    });
 			}
 		});
