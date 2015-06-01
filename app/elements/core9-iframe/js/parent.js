@@ -5,6 +5,11 @@ var listenToPostMessages = function(){
 	var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
 	eventer(messageEvent,function(e) {
 		console.log(e.data);
+
+		if(e.data.action == 'menuClick'){
+			history.pushState(null, null, e.data.href);
+		}
+
 	},false);
 }
 listenToPostMessages();

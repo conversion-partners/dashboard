@@ -201,6 +201,7 @@ $(document).ready(
 			var postClick = function() {
 				Core9.sentMessageToParent(
 						{ action : "menuClick",
+						  href : this.href,
 						  data : this.textContent });
 			}
 			var addItemsToMenu = function(title, items) {
