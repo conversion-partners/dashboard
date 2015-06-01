@@ -127,6 +127,7 @@ var addItems = [
     }
 
 window.addEventListener('iframeLoadedEvent', function (e) {
+	console.log('adding iframeLoadedEvent');
 	  if(event.detail.classes == "menu"){
 		    var iframe = document.getElementsByClassName('menu')[1];
 

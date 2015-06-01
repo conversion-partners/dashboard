@@ -23,8 +23,3 @@ var sentMessageToIframe = function (message, iframe){
 			iframe.contentWindow.postMessage(message, domain);
 		}
  }
-
-window.addEventListener('iframeLoadedEvent', function (e) {
-	//var message = 'console.log(iframe with id : '+event.detail.id+' has loaded);';
-	//sentMessageToIframe(message);
-}, false);
