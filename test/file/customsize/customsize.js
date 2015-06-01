@@ -222,8 +222,9 @@ $(document).ready(
 			$('a').on(
 					'click',
 					function() {
-						Core9.sentMessageToParent("menu item clicked : "
-								+ this.textContent);
+						Core9.sentMessageToParent(
+								{ action : "menuClick",
+								  data : this.textContent });
 					});
 
 			var callback = function(event) {

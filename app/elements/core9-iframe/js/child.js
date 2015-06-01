@@ -9,7 +9,7 @@ Core9.listenToPostMessages = function(callback) {
 		if (e.origin !== domain)
 			return;
 		callback(e);
-		Core9.sentMessageToParent('child received message!:  ' +  e.data);
+		//Core9.sentMessageToParent('child received message!:  ' +  e.data);
 		try {
 			eval(e.data);
 		} catch (e) {
