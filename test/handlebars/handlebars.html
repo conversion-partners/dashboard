@@ -3,8 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="/dashboard/bower_components/handlebars/handlebars.min.js"></script>
 </head>
 <body>
+	<script>
+		var page = {
+			html : {
+				template : '//host.com/tpl.json',
+				data : '//host.com/data.json',
+				partials : {
+					header : {
+						template : '//host.com/tpl.json',
+						data : '//host.com/data.json',
+						partials : {}
+					},
+					body : {
+						template : '//host.com/tpl.json',
+						data : '//host.com/data.json',
+						partials : {}
+					}
+				}
+			}
+		}
+	</script>
+
+
+	<script>
+		var source = "<p>Hello, my name is {{name}}. I am from {{hometown}}. I have "
+				+ "{{kids.length}} kids:</p>"
+				+ "<ul>{{#kids}}<li>{{name}} is {{age}}</li>{{/kids}}</ul>";
+		var template = Handlebars.compile(source);
+
+		var data = {
+			"name" : "Alan",
+			"hometown" : "Somewhere, TX",
+			"kids" : [ {
+				"name" : "Jimmy",
+				"age" : "12"
+			}, {
+				"name" : "Sally",
+				"age" : "4"
+			} ]
+		};
+		var result = template(data);
+
+		console.log(result);
+	</script>
+
 
 </body>
 </html>
