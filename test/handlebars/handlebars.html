@@ -7,20 +7,32 @@
 </head>
 <body>
 	<script>
-		var page = {
-			html : {
-				template : '//host.com/tpl.json',
-				data : '//host.com/data.json',
-				partials : {
-					header : {
-						template : '//host.com/tpl.json',
-						data : '//host.com/data.json',
-						partials : {}
-					},
-					body : {
-						template : '//host.com/tpl.json',
-						data : '//host.com/data.json',
-						partials : {}
+		var html = {
+			template : 'template/html.json',
+			data : 'data/html.json',
+			partials : {
+				header : {
+					template : 'template/header.json',
+					data : 'data/header.json',
+					partials : {
+						global : {
+							template : 'template/header.global.json',
+							data : 'data/header.global.json',
+							partials : {
+
+							}
+						},
+					}
+				},
+				body : {
+					template : 'template/body.json',
+					data : 'data/body.json',
+					partials : {
+				        global : {
+				            template : 'template/body.global.json',
+				            data : 'data/body.global.json',
+				            partials : {}
+				          }
 					}
 				}
 			}
