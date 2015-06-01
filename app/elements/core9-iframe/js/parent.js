@@ -4,7 +4,7 @@ var listenToPostMessages = function(){
 	var eventer = window[eventMethod];
 	var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
 	eventer(messageEvent,function(e) {
-		console.log(e);
+		console.log(e.data);
 	},false);
 }
 listenToPostMessages();

@@ -199,8 +199,9 @@ $(document).ready(
 			});
 
 			var postClick = function() {
-				Core9.sentMessageToParent("menu item clicked : "
-						+ this.textContent);
+				Core9.sentMessageToParent(
+						{ action : "menuClick",
+						  data : this.textContent });
 			}
 			var addItemsToMenu = function(title, items) {
 				//console.log('adding to menu : ..');
@@ -212,6 +213,7 @@ $(document).ready(
 				$('a').on('click',postClick);
 
 			}
+			$('a').on('click',postClick);
 
 			var removeItemsFromMenu = function(title) {
 				var item = $('#menu').multilevelpushmenu('finditemsbyname',
@@ -219,13 +221,6 @@ $(document).ready(
 				$('#menu').multilevelpushmenu('removeitems', item);
 			}
 
-			$('a').on(
-					'click',
-					function() {
-						Core9.sentMessageToParent(
-								{ action : "menuClick",
-								  data : this.textContent });
-					});
 
 			var callback = function(event) {
 
