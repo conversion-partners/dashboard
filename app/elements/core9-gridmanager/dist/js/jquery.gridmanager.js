@@ -755,11 +755,41 @@
          */
         gm.saveremote =  function(){
         var canvas=gm.$el.find("#" + gm.options.canvasId);
-            $.ajax({
+/*            $.ajax({
               type: "POST",
               url:  gm.options.remoteURL,
               data: {content: canvas.html()}
-            });
+            });*/
+
+
+
+
+        var blob = new Blob([canvas.html()]);
+
+        var vFD = new FormData();
+	    vFD.append("properties", '{filename:"test.html"}');
+	    vFD.append("file", blob);
+
+
+
+
+
+        $.ajax
+        ({
+          type: "POST",
+          url: gm.options.remoteURL,
+          dataType: 'json',
+          async: false,
+          headers: {
+            "Authorization": "Basic " + btoa('admin' + ":" + 'changeit')
+          },
+          data: vFD,
+          contentType: false,
+          processData: false,
+          success: function (){
+            alert('Thanks for your comment!');
+          }
+        });
             gm.log("Save Function Called");
         };
 
@@ -1296,7 +1326,7 @@
         autoEdit: true,
 
         // URL to save to
-        remoteURL: "/replace-with-your-url",
+        remoteURL: "http://127.0.0.1:8080/testdb/mybucket.files",
 
         // Custom CSS to load
         //cssInclude: "/dashboard/bower_components/components-font-awesome/css/font-awesome.min.css",
