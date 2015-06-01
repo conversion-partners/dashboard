@@ -1299,8 +1299,8 @@
         remoteURL: "/replace-with-your-url",
 
         // Custom CSS to load
-        cssInclude: "/dashboard/bower_components/components-font-awesome/css/font-awesome.min.css",
-
+        //cssInclude: "/dashboard/bower_components/components-font-awesome/css/font-awesome.min.css",
+        cssInclude: "//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css",
         // Filter callback. Callback receives two params: the template grid element and whether is called from the init or deinit method
         filterCallback: null,
   /*
