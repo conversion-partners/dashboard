@@ -127,14 +127,11 @@ var addItems = [
     }
 
 window.addEventListener('iframeLoadedEvent', function (e) {
-	console.log('adding iframeLoadedEvent');
 	  if(event.detail.classes == "menu"){
 		    var iframe = document.getElementsByClassName('menu')[1];
-
 		    setTimeout(function(){
-		    	console.log('add to menu');
 		    	sentMessageToIframe(message, iframe);
-		    }, 2000);
+		    }, 1000);
 
 
 	  }
