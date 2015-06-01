@@ -35,6 +35,7 @@ System.baseURL = '/dashboard/';
     },
     '/devices$/' : function() {
       console.log('hitting device...');
+      document.querySelector('#panel-content > div.panelbutton').click();
     },
     '/settings/setup$/' : function() {
       console.log('settings/setup', arguments);
