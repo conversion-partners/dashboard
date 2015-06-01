@@ -31,7 +31,20 @@
 				        global : {
 				            template : 'template/body.global.json',
 				            data : 'data/body.global.json',
-				            partials : {}
+				            partials : {
+				                blog : {
+				                    template : 'template/blog.json',
+				                    data : 'data/blog.json',
+				                    partials : {
+				                        sidemenu : {
+				                            template : 'template/sidemenu.json',
+				                            data : 'data/sidemenu.json',
+				                            partials : {
+				                            }
+				                          }
+				                    }
+				                  }
+				            }
 				          }
 					}
 				}
