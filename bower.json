@@ -30,11 +30,11 @@
     "components-font-awesome": "~4.3.0",
     "tinymce": "~4.1.10",
     "handlebars": "~3.0.3",
-    "bootstrap": "~3.3.4",
-    "bootstrap-gtreetable": "~2.2.1-alpha"
+    "bootstrap": "~3.3.4"
   },
   "resolutions": {
     "polymer": "^0.9.0",
-    "webcomponentsjs": "^0.7.0"
+    "webcomponentsjs": "^0.7.0",
+    "bootstrap": "~3.3.4"
   }
 }
