@@ -191,11 +191,19 @@ var arrMenu = [ {
 
 $(document).ready(
 		function() {
+			
+			
+var body = document.body,
+    html = document.documentElement;
+
+var height = Math.max( body.scrollHeight, body.offsetHeight, 
+                       html.clientHeight, html.scrollHeight, html.offsetHeight );
+			
 			// HTML markup implementation, overlap mode
 			$('#menu').multilevelpushmenu({
 				menu : arrMenu,
 				menuWidth : 200, // '450px', '30em', '25%' will also work
-				menuHeight : '100%'
+				menuHeight : height
 			});
 
 			var postClick = function() {
