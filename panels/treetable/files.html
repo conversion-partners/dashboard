@@ -1,14 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+#content {
+  margin: 0 auto; height : 600px;
+  width: 700px;
+  position: relative;
+  background-color: #FFF;
+  height: 600px;
+}
+</style>
 </head>
 <body>
 
+  <div id="content">
+<table class="table gtreetable" id="gtreetable"><thead><tr><th>Category</th></tr></thead></table>
+</div>
 
 	<script id="evalscript">
 		(function() {
 
 			console.log('hi from files.html');
+
+			jQuery('#gtreetable').gtreetable({
+				  'source': function (id) {
+				      return {
+				        type: 'GET',
+				        url: '/dashboard/panels/treetable/data.json',
+				        data: { 'id': id },
+				        dataType: 'json',
+				        error: function(XMLHttpRequest) {
+				          alert(XMLHttpRequest.status+': '+XMLHttpRequest.responseText);
+				        }
+				      }
+				    }
+				});
 
 		})();
 	</script>
