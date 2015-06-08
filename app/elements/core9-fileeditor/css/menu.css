@@ -1,0 +1,52 @@
+#menutree li {
+	list-style: none;
+	margin-left: -20px;
+}
+
+li .menu_label+input[type=checkbox] {
+	opacity: 0;
+	display: none;
+}
+
+li .menu_label {
+	cursor: pointer;
+}
+
+li .menu_label+input[type=checkbox]+ol>li {
+	display: none;
+}
+
+li .menu_label+input[type=checkbox]:checked+ol>li {
+	display: block;
+}
+
+/* theme */
+li.page a {
+	background: url(document.png) 0 0 no-repeat;
+	padding-left: 20px;
+	text-decoration: none;
+	display: block;
+}
+
+li.page a[href*='.pdf'] {
+	background: url(document.png) 0 0 no-repeat;
+}
+
+li.page a[href*='.html'] {
+	background: url(document.png) 0 0 no-repeat;
+}
+
+li.page a[href$='.css'] {
+	background: url(document.png) 0 0 no-repeat;
+}
+
+li.page a[href$='.js'] {
+	background: url(document.png) 0 0 no-repeat;
+}
+
+li label {
+	background: url(folder-horizontal.png) 0px 1px no-repeat;
+	cursor: pointer;
+	display: block;
+	padding-left: 20px;
+}
