@@ -2,25 +2,27 @@
 <html>
 <head>
 <style>
-#editor_holder {
-	left: 400px;
-	height: 600px;
+#content {
+	margin: 0 auto; height : 600px;
 	width: 700px;
 	position: relative;
 	background-color: #FFF;
+	height: 600px;
 }
+
 h1, #submit {
-	margin-left:400px;
+	margin-left: 400px;
 	font-size: 14px;
 }
 </style>
 </head>
 <body>
-	<h1>Basic JSON Editor Example</h1>
+	<div id="content">
+		<h1>Basic JSON Editor Example</h1>
 
-	<div id='editor_holder'></div>
-	<button id='submit'>Submit (console.log)</button>
-
+		<div id='editor_holder'></div>
+		<button id='submit'>Submit (console.log)</button>
+	</div>
 	<script id="evalscript">
 		(function() {
 
