@@ -157,7 +157,7 @@ Core9.panel = {
 									+ guid).innerHTML;
 							eval(x);
 						} catch (e) {
-							// TODO: handle exception
+							console.log(e);
 						}
 
 					});
