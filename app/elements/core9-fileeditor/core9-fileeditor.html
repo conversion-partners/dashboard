@@ -1,6 +1,4 @@
 <dom-module id="core9-fileeditor">
-
-
 <style>
 :host {
 	display: -webkit-box;
@@ -59,6 +57,12 @@ li label { cursor: pointer; display: block; padding-left: 20px; background: url(
       </ol></li>
   </ol>
 
+
+<div id="click" class="click box menu-1">
+    <strong>right click me</strong>
+</div>
+
+
   <content id="content"></content>
 </template>
 </dom-module>
@@ -74,6 +78,23 @@ li label { cursor: pointer; display: block; padding-left: 20px; background: url(
 
 				  var that = this;
 
+				  var onClick = function(e) {
+					  console.log(e);
+					  e.preventDefault();
+					    return false;
+					}
+
+					var labels = that.$.menutree.querySelectorAll(".menu_label");
+					  console.log(labels);
+					  for (var int = 0; int < labels.length; int++) {
+						  labels[int].addEventListener('contextmenu', onClick);
+					}
+
+				         var labels = that.$.menutree.querySelectorAll("a");
+				            console.log(labels);
+				            for (var int = 0; int < labels.length; int++) {
+				              labels[int].addEventListener('contextmenu', onClick);
+				          }
 
 			}
 		});
