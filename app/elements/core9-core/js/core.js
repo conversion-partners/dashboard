@@ -154,8 +154,8 @@ Core9.panel = {
 						panel.appendChild(div);
 						try {
 							var x = document.getElementById('evalscript-'
-									+ guid).innerHTML;
-							eval(x);
+									+ guid);
+							if(x !== null)eval(x.innerHTML);
 						} catch (e) {
 							console.log(e);
 						}
