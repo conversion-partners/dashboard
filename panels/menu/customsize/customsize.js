@@ -191,14 +191,14 @@ var arrMenu = [ {
 
 $(document).ready(
 		function() {
-			
-			
+
+
 var body = document.body,
     html = document.documentElement;
 
-var height = Math.max( body.scrollHeight, body.offsetHeight, 
+var height = Math.max( body.scrollHeight, body.offsetHeight,
                        html.clientHeight, html.scrollHeight, html.offsetHeight );
-			
+
 			// HTML markup implementation, overlap mode
 			$('#menu').multilevelpushmenu({
 				menu : arrMenu,
@@ -243,3 +243,21 @@ var height = Math.max( body.scrollHeight, body.offsetHeight,
 			Core9.listenToPostMessages(callback);
 
 		});
+
+
+// to make menu draggable
+
+/* 		var menu = document.getElementById('panel-iframe-menu');
+var dragHandler = document.createElement('div');
+dragHandler.setAttribute('id', 'draghandler');
+dragHandler.addEventListener('dblclick', function (e) {
+	  var iframe = document.getElementsByClassName('menu')[1];
+	  var state = iframe.style.display;
+	  if(state == 'block'){
+		  iframe.style.display = 'none';
+	  }else{
+		  iframe.style.display = 'block';
+	  }
+});
+menu.appendChild(dragHandler);
+	DragDrop.bind(menu); */
