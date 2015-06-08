@@ -38,7 +38,6 @@
 
 #panel-iframe-menu, iframe.menu {
   border: 0;
-  _position: absolute;
   _margin-top: 42px;
   _margin-bottom: -42px;
   top: 0;
@@ -46,15 +45,15 @@
   right: 0;
   bottom: 0;
   width: 230px;
-  height: 420px;
+  height: 100%;
   z-index: 999;
   background-color: transparent;
-    float: right;
-  position: relative;
+  position: fixed;
 }
 iframe.menu {
   top:20px;
-  display: none;
+      float: left;
+  _display: none;
 }
 div.menu {
   overflow: hidden;

@@ -195,7 +195,7 @@ $(document).ready(
 			$('#menu').multilevelpushmenu({
 				menu : arrMenu,
 				menuWidth : 200, // '450px', '30em', '25%' will also work
-				menuHeight : 400
+				menuHeight : '100%'
 			});
 
 			var postClick = function() {
