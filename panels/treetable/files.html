@@ -14,27 +14,13 @@
 <body>
 
   <div id="content">
-<table class="table gtreetable" id="gtreetable"><thead><tr><th>Category</th></tr></thead></table>
+  <core9-fileeditor></core9-fileeditor>
 </div>
 
 	<script id="evalscript">
 		(function() {
 
-			console.log('hi from files.html');
-
-			jQuery('#gtreetable').gtreetable({
-				  'source': function (id) {
-				      return {
-				        type: 'GET',
-				        url: '/dashboard/panels/treetable/data.json',
-				        data: { 'id': id },
-				        dataType: 'json',
-				        error: function(XMLHttpRequest) {
-				          alert(XMLHttpRequest.status+': '+XMLHttpRequest.responseText);
-				        }
-				      }
-				    }
-				});
+			console.log('hi from files.html')
 
 		})();
 	</script>
