@@ -186,7 +186,7 @@ getHostElement = function(element){
 				var item = document.createElement('li');
 				var text = document.createTextNode(jsonItems.items[int][0]);
 				item.appendChild(text);
-				item.addEventListener('click', jsonItems.items[int][1](element));
+				item.addEventListener('click', jsonItems.items[int][1]);
 				ul.appendChild(item);
 
 			}
@@ -204,7 +204,7 @@ getHostElement = function(element){
 					.setAttribute(
 							"style",
 							"left:"
-									+ (mouse.pageX + 20)
+									+ (mouse.pageX - 500)
 									+ "px;top:"
 									+ (mouse.pageY + 10)
 									+ "px;width: 200px;height: 300px;background-color:red;position:absolute;z-index: 99999;");
@@ -213,7 +213,9 @@ getHostElement = function(element){
 			var ul = itemsFromJson(jsonItems);
 
 			menu.appendChild(ul);
-			document.body.appendChild(menu);
+			var host = getHostElement(element);
+			host.shadowRoot.appendChild(menu);
+			//document.body.appendChild(menu);
 		}
 		if (menu === null) {
 			menu = document.createElement('div');
@@ -241,12 +243,11 @@ getHostElement = function(element){
 		element.className = element.className + " selected";
 		
 		var callback = function() {
-			
-			var elem;
 			console.log('click on context menu :');
 			console.log(this);
 			console.log('for element : ');
-			console.log(elem);
+			var selectedElements = getHostElement(this).$.menutree.querySelector('.selected');
+			console.log(selectedElements);
 		}
 
 		var jsonItems = {}
