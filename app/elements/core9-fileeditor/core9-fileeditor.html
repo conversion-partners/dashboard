@@ -7,9 +7,11 @@
 	display: -webkit-flex;
 	display: flex;
 }
+
 #menutree {
-	margin-left:50px;
+	margin-left: 50px;
 }
+
 #menutree li {
 	list-style: none;
 	margin-left: -20px;
@@ -66,59 +68,59 @@ li label {
 	color: red;
 }
 
- #workspace {
-	position:absolute;
-	left:300px;
-	width:calc(100% - 300px);
-	height:100%;
-	background-color: #cdd;
+#workspace {
+	position: absolute;
+	left: 40px;
+	width: 100%;
+	height: calc(100% - 30px);
+	background-color: #f0f0f0;
 }
 
 juicy-ace-editor {
-  width: 100%;
-  height: calc(100% - 1px);
-  position: relative;
-} 
+	width: 100%;
+	height: calc(100% - 20px);
+	position: relative;
+}
+
+#top-menu li {
+	display: inline;
+	list-style-type: none;
+	padding-right: 20px;
+	padding-top:2px;
+	padding-bottom:2px;
+}
 </style>
 <template>
 
 <ol id="menutree">
-	<li><label class="menu_label" for="c1">Menu Gen14 Am0a1</label> <input
-		type="checkbox" id="c1" /> <!-- input must follow label for safari -->
+	<li><label class="menu_label" for="c1">Menu Gen14 Am0a1</label> <input type="checkbox" id="c1" /> <!-- input must follow label for safari -->
 		<ol>
-			<li><label for="c2" class="menu_label">Menu Am1a1</label> <input
-				type="checkbox" id="c2" />
+			<li><label for="c2" class="menu_label">Menu Am1a1</label> <input type="checkbox" id="c2" />
 				<ol>
 					<li class="page"><a href="#">Page Ap1a1</a></li>
 					<li class="page"><a href="#">Page Ap1a2</a></li>
 					<li class="page"><a href="#">Page Ap1a3</a></li>
 				</ol></li>
-			<li><label for="c3" class="menu_label">Menu Am1b1</label> <input
-				type="checkbox" id="c3" />
+			<li><label for="c3" class="menu_label">Menu Am1b1</label> <input type="checkbox" id="c3" />
 				<ol>
 					<li class="page"><a href="#">Page Ap1b1</a></li>
 
-					<li><label for="c4" class="menu_label">Menu Am2b1 </label> <input
-						type="checkbox" id="c4" />
+					<li><label for="c4" class="menu_label">Menu Am2b1 </label> <input type="checkbox" id="c4" />
 						<ol>
 							<li class="page"><a href="#">Page Ap2b1</a></li>
 						</ol></li>
 				</ol></li>
 		</ol></li>
-	<li><label class="menu_label" for="c5">Menu Bm0a1</label> <input
-		type="checkbox" id="c5" />
+	<li><label class="menu_label" for="c5">Menu Bm0a1</label> <input type="checkbox" id="c5" />
 		<ol>
-			<li><label for="c6" class="menu_label">Menu Bm1a1</label> <input
-				type="checkbox" id="c6" />
+			<li><label for="c6" class="menu_label">Menu Bm1a1</label> <input type="checkbox" id="c6" />
 				<ol>
 					<li class="page"><a href="#">Page Bp1a1</a></li>
 				</ol></li>
-			<li><label for="c7" class="menu_label">Menu Bm1b1</label> <input
-				type="checkbox" id="c7" />
+			<li><label for="c7" class="menu_label">Menu Bm1b1</label> <input type="checkbox" id="c7" />
 				<ol>
 					<li class="page"><a href="#">Page Bp1b1</a></li>
-					<li><label for="c8" class="menu_label">Menu Bm2b1</label> <input
-						type="checkbox" id="c8" />
+					<li><label for="c8" class="menu_label">Menu Bm2b1</label> <input type="checkbox" id="c8" />
 						<ol>
 							<li class="page"><a href="#">Page Bp2b1</a></li>
 						</ol></li>
@@ -127,8 +129,14 @@ juicy-ace-editor {
 </ol>
 
 <div id="workspace">
+	<ul id="top-menu">
+		<li><a id="showmenu" href="javascript:void(0);">files</a></li>
+		<li></li>
+		<li>Filename :</li>
+		<li><input type="text" name="filename" value="name"></li>
+	</ul>
 
-<juicy-ace-editor>Editable code here</juicy-ace-editor>
+	<juicy-ace-editor>Editable code here</juicy-ace-editor>
 
 </div>
 
@@ -146,14 +154,12 @@ juicy-ace-editor {
 		return hostElement;
 	}
 
-	removeElement = function(element){
+	removeElement = function(element) {
 		var node = element;
 		if (node.parentNode) {
-		  node.parentNode.removeChild(node);
+			node.parentNode.removeChild(node);
 		}
 	}
-	
-
 
 	function getMouseLocation(e) {
 		var evt = e ? e : window.event;
@@ -237,13 +243,14 @@ juicy-ace-editor {
 			show(menu);
 		} else {
 			var host = getHostElement(element);
-			var elem = host.shadowRoot.querySelector('#'+contextId);
+			var elem = host.shadowRoot.querySelector('#' + contextId);
 			removeElement(elem);
 		}
 	}
 
 	var initMenu = function(e) {
-		var selectedElements = getHostElement(e.target).$.menutree.querySelectorAll('.selected');
+		var selectedElements = getHostElement(e.target).$.menutree
+				.querySelectorAll('.selected');
 		if (selectedElements != null) {
 			for (var int = 0; int < selectedElements.length; int++) {
 				selectedElements[int].className = selectedElements[int].className
@@ -288,6 +295,17 @@ juicy-ace-editor {
 		}
 	}
 
+	var showFileBrowser = function(e){
+		var workspace = getHostElement(e.target).$.workspace;
+		var left = workspace.getBoundingClientRect().left;
+		if(left > 300){
+			workspace.style.left = "40px"
+		}else{
+			workspace.style.left = "301px"
+		}
+		return false;
+	}
+
 	init = function(modules) {
 
 		"use strict";
@@ -303,6 +321,8 @@ juicy-ace-editor {
 						'contextmenu', initMenu);
 				addClickEvent(this.$.menutree.querySelectorAll("a"),
 						'contextmenu', initMenu);
+
+				this.$.showmenu.addEventListener('click', showFileBrowser);
 
 			}
 		});
