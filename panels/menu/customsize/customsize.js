@@ -82,11 +82,11 @@ var arrMenu = [ {
 			} ]
 		} ]
 	}, {
-		name : 'Magazines',
+		name : 'Blocks',
 		icon : 'fa fa-book',
-		link : '#',
+		link : '/dashboard/blocks',
 		items : [ {
-			title : 'Magazines',
+			title : 'Blocks',
 			icon : 'fa fa-book',
 			items : [ {
 				name : 'National Geographics',

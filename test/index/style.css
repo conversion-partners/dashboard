@@ -18,7 +18,7 @@
 .panel {
   position: fixed;
   width: 100%;
-  height: 100%;
+  height: 101%;
   background-color: rgb(54, 65, 76);
   transition: width 500ms ease;
   -moz-transition: width 500ms ease;
