@@ -132,6 +132,7 @@ var contextMenu = function(event, jsonItems){
 			var item = document.createElement('li');
 			var text = document.createTextNode(jsonItems.items[int][0]);
 			item.appendChild(text);
+			item.addEventListener('click', jsonItems.items[int][1]);
 			ul.appendChild(item);
 			
 		}		
@@ -147,7 +148,7 @@ var contextMenu = function(event, jsonItems){
 	var mouse = getMouseLocation(event);
 	var menu = document.getElementById(contextId);
 	show = function(menu){
-		menu.setAttribute("style","left:"+mouse.pageX+"px;top:"+mouse.pageY+"px;width: 200px;height: 300px;background-color:red;position:absolute;z-index: 99999;");
+		menu.setAttribute("style","left:"+mouse.pageX+"px;top:"+(mouse.pageY + 10)+"px;width: 200px;height: 300px;background-color:red;position:absolute;z-index: 99999;");
 		menu.setAttribute("id", contextId);
 		
 		var ul = itemsFromJson(jsonItems);
@@ -166,13 +167,29 @@ var contextMenu = function(event, jsonItems){
 
 var initMenu = function(e) {
 	  console.log(e.target);
-	  
-	  var jsonItems = {
-			  items : [
-			           ['new','callback'],
-			           ['edit','callback']
-			  ]
+	  var callback = function(elem){
+		  console.log('click on context menu :');
+		  console.log(elem);
 	  }
+	  
+	  var jsonItems = {}
+	  if(e.target.nodeName === 'A'){
+		  jsonItems = {
+				  items : [
+				           ['edit',callback],
+				           ['delete',callback]
+				  ]
+		  }
+	  }else{
+		  jsonItems = {
+				  items : [
+				           ['new',callback],
+				           ['edit',callback]
+				  ]
+		  }  
+	  }
+	  
+
 	  
 	  contextMenu(e, jsonItems);
 	  e.preventDefault();
