@@ -223,6 +223,7 @@ var height = Math.max( body.scrollHeight, body.offsetHeight,
 
 			}
 			$('a').on('click',postClick);
+			$('.fa-reorder').on('click',postClick);
 
 			var removeItemsFromMenu = function(title) {
 				var item = $('#menu').multilevelpushmenu('finditemsbyname',

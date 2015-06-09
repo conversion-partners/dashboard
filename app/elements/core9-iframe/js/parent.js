@@ -5,7 +5,24 @@ var listenToPostMessages = function(){
 	var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
 	eventer(messageEvent,function(e) {
 		if(e.data.action == 'menuClick'){
-			history.pushState(null, null, e.data.href);
+			
+			if(typeof e.data.href !== 'undefined'){
+				history.pushState(null, null, e.data.href);
+			}else{
+				console.log(e.data);
+				var iframe = document.getElementById('panel-iframe-menu');//.childNodes[0];
+				
+				if(iframe.clientWidth > 239){
+					iframe.style.width = "40px";
+					iframe.childNodes[0].style.width = "40px";
+				}else{
+					iframe.style.width = "240px";
+					iframe.childNodes[0].style.width = "240px";
+				}
+				
+			}
+			
+			
 		}
 	},false);
 }
