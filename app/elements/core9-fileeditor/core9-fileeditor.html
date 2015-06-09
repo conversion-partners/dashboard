@@ -7,202 +7,239 @@
 	display: -webkit-flex;
 	display: flex;
 }
-#menutree li { list-style: none; margin-left: -20px; }
-li .menu_label + input[type="checkbox"] { opacity: 0; display: none; }
-li .menu_label { cursor: pointer; }
-li .menu_label + input[type="checkbox"] + ol > li { display: none; }
-li .menu_label + input[type="checkbox"]:checked + ol > li { display: block; }
-li.page a { padding-left: 20px; text-decoration: none; display: block; background: url(img/document.png) 0px 0px no-repeat; }
-li.page a[href*=".pdf"] { background: url(img/document.png) 0px 0px no-repeat; }
-li.page a[href*=".html"] { background: url(img/document.png) 0px 0px no-repeat; }
-li.page a[href$=".css"] { background: url(img/document.png) 0px 0px no-repeat; }
-li.page a[href$=".js"] { background: url(img/document.png) 0px 0px no-repeat; }
-li label { cursor: pointer; display: block; padding-left: 20px; background: url(img/folder-horizontal.png) 0px 1px no-repeat; }
 
+#menutree li {
+	list-style: none;
+	margin-left: -20px;
+}
 
+li .menu_label+input[type="checkbox"] {
+	opacity: 0;
+	display: none;
+}
+
+li .menu_label {
+	cursor: pointer;
+}
+
+li .menu_label+input[type="checkbox"]+ol>li {
+	display: none;
+}
+
+li .menu_label+input[type="checkbox"]:checked+ol>li {
+	display: block;
+}
+
+li.page a {
+	padding-left: 20px;
+	text-decoration: none;
+	display: block;
+	background: url(img/document.png) 0px 0px no-repeat;
+}
+
+li.page a[href*=".pdf"] {
+	background: url(img/document.png) 0px 0px no-repeat;
+}
+
+li.page a[href*=".html"] {
+	background: url(img/document.png) 0px 0px no-repeat;
+}
+
+li.page a[href$=".css"] {
+	background: url(img/document.png) 0px 0px no-repeat;
+}
+
+li.page a[href$=".js"] {
+	background: url(img/document.png) 0px 0px no-repeat;
+}
+
+li label {
+	cursor: pointer;
+	display: block;
+	padding-left: 20px;
+	background: url(img/folder-horizontal.png) 0px 1px no-repeat;
+}
 </style>
 <template>
 
-    <ol id="menutree">
-    <li><label class="menu_label" for="c1">Menu Gen14 Am0a1</label> <input type="checkbox" id="c1" /> <!-- input must follow label for safari -->
-      <ol>
-        <li><label for="c2" class="menu_label">Menu Am1a1</label> <input type="checkbox" id="c2" />
-          <ol>
-            <li class="page"><a href="#">Page Ap1a1</a></li>
-            <li class="page"><a href="#">Page Ap1a2</a></li>
-            <li class="page"><a href="#">Page Ap1a3</a></li>
-          </ol></li>
-        <li><label for="c3" class="menu_label">Menu Am1b1</label> <input type="checkbox" id="c3" />
-          <ol>
-            <li class="page"><a href="#">Page Ap1b1</a></li>
+<ol id="menutree">
+	<li><label class="menu_label" for="c1">Menu Gen14 Am0a1</label> <input
+		type="checkbox" id="c1" /> <!-- input must follow label for safari -->
+		<ol>
+			<li><label for="c2" class="menu_label">Menu Am1a1</label> <input
+				type="checkbox" id="c2" />
+				<ol>
+					<li class="page"><a href="#">Page Ap1a1</a></li>
+					<li class="page"><a href="#">Page Ap1a2</a></li>
+					<li class="page"><a href="#">Page Ap1a3</a></li>
+				</ol></li>
+			<li><label for="c3" class="menu_label">Menu Am1b1</label> <input
+				type="checkbox" id="c3" />
+				<ol>
+					<li class="page"><a href="#">Page Ap1b1</a></li>
 
-            <li><label for="c4" class="menu_label">Menu Am2b1 </label> <input type="checkbox" id="c4" />
-              <ol>
-                <li class="page"><a href="#">Page Ap2b1</a></li>
-              </ol></li>
-          </ol></li>
-      </ol></li>
-    <li><label class="menu_label" for="c5">Menu Bm0a1</label> <input type="checkbox" id="c5" />
-      <ol>
-        <li><label for="c6" class="menu_label">Menu Bm1a1</label> <input type="checkbox" id="c6" />
-          <ol>
-            <li class="page"><a href="#">Page Bp1a1</a></li>
-          </ol></li>
-        <li><label for="c7" class="menu_label">Menu Bm1b1</label> <input type="checkbox" id="c7" />
-          <ol>
-            <li class="page"><a href="#">Page Bp1b1</a></li>
-            <li><label for="c8" class="menu_label">Menu Bm2b1</label> <input type="checkbox" id="c8" />
-              <ol>
-                <li class="page"><a href="#">Page Bp2b1</a></li>
-              </ol></li>
-          </ol></li>
-      </ol></li>
-  </ol>
+					<li><label for="c4" class="menu_label">Menu Am2b1 </label> <input
+						type="checkbox" id="c4" />
+						<ol>
+							<li class="page"><a href="#">Page Ap2b1</a></li>
+						</ol></li>
+				</ol></li>
+		</ol></li>
+	<li><label class="menu_label" for="c5">Menu Bm0a1</label> <input
+		type="checkbox" id="c5" />
+		<ol>
+			<li><label for="c6" class="menu_label">Menu Bm1a1</label> <input
+				type="checkbox" id="c6" />
+				<ol>
+					<li class="page"><a href="#">Page Bp1a1</a></li>
+				</ol></li>
+			<li><label for="c7" class="menu_label">Menu Bm1b1</label> <input
+				type="checkbox" id="c7" />
+				<ol>
+					<li class="page"><a href="#">Page Bp1b1</a></li>
+					<li><label for="c8" class="menu_label">Menu Bm2b1</label> <input
+						type="checkbox" id="c8" />
+						<ol>
+							<li class="page"><a href="#">Page Bp2b1</a></li>
+						</ol></li>
+				</ol></li>
+		</ol></li>
+</ol>
 
 
 
 
 
-  <content id="content"></content>
-</template>
-</dom-module>
+<content id="content"></content> </template> </dom-module>
 
 
 <script>
-
-Element.prototype.remove = function() {
-    this.parentElement.removeChild(this);
-}
-NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
-    for(var i = 0, len = this.length; i < len; i++) {
-        if(this[i] && this[i].parentElement) {
-            this[i].parentElement.removeChild(this[i]);
-        }
-    }
-}
-
-function getMouseLocation(e){
-	 var evt = e ? e:window.event;
-	 var clickX=0, clickY=0;
-
-	 if ((evt.clientX || evt.clientY) &&
-	     document.body &&
-	     document.body.scrollLeft!=null) {
-	  clickX = evt.clientX + document.body.scrollLeft;
-	  clickY = evt.clientY + document.body.scrollTop;
-	 }
-	 if ((evt.clientX || evt.clientY) &&
-	     document.compatMode=='CSS1Compat' && 
-	     document.documentElement && 
-	     document.documentElement.scrollLeft!=null) {
-	  clickX = evt.clientX + document.documentElement.scrollLeft;
-	  clickY = evt.clientY + document.documentElement.scrollTop;
-	 }
-	 if (evt.pageX || evt.pageY) {
-	  clickX = evt.pageX;
-	  clickY = evt.pageY;
-	 }
-
-	 return {
-	  pageX : clickX,
-	  pageY : clickY,
-	  clientX : evt.clientX,
-	  clientY : evt.clientY, 
-	  screenX : evt.screenX,
-	  screenY : evt.screenY,
-	 }
-}
-
-
-var addClickEvent = function(elements, event, callback){
-	  for (var int = 0; int < elements.length; int++) {
-		  elements[int].addEventListener(event, callback);
+	Element.prototype.remove = function() {
+		this.parentElement.removeChild(this);
 	}
-}
-
-var contextMenu = function(event, jsonItems){
-	
-	itemsFromJson = function(jsonItems){
-		
-		var ul = document.createElement('ul');
-		var items = [];
-		
-		for (var int = 0; int < jsonItems.items.length; int++) {
-			
-			var item = document.createElement('li');
-			var text = document.createTextNode(jsonItems.items[int][0]);
-			item.appendChild(text);
-			item.addEventListener('click', jsonItems.items[int][1]);
-			ul.appendChild(item);
-			
-		}		
-
-	
-		
-		return ul;
-		
+	NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
+		for (var i = 0, len = this.length; i < len; i++) {
+			if (this[i] && this[i].parentElement) {
+				this[i].parentElement.removeChild(this[i]);
+			}
+		}
 	}
-	
-	var contextId = "context-menu";
-	var element = event.target;
-	var mouse = getMouseLocation(event);
-	var menu = document.getElementById(contextId);
-	show = function(menu){
-		menu.setAttribute("style","left:"+mouse.pageX+"px;top:"+(mouse.pageY + 10)+"px;width: 200px;height: 300px;background-color:red;position:absolute;z-index: 99999;");
-		menu.setAttribute("id", contextId);
-		
-		var ul = itemsFromJson(jsonItems);
 
-		menu.appendChild(ul);
-		document.body.appendChild(menu);
+	function getMouseLocation(e) {
+		var evt = e ? e : window.event;
+		var clickX = 0, clickY = 0;
+
+		if ((evt.clientX || evt.clientY) && document.body
+				&& document.body.scrollLeft != null) {
+			clickX = evt.clientX + document.body.scrollLeft;
+			clickY = evt.clientY + document.body.scrollTop;
+		}
+		if ((evt.clientX || evt.clientY) && document.compatMode == 'CSS1Compat'
+				&& document.documentElement
+				&& document.documentElement.scrollLeft != null) {
+			clickX = evt.clientX + document.documentElement.scrollLeft;
+			clickY = evt.clientY + document.documentElement.scrollTop;
+		}
+		if (evt.pageX || evt.pageY) {
+			clickX = evt.pageX;
+			clickY = evt.pageY;
+		}
+
+		return {
+			pageX : clickX,
+			pageY : clickY,
+			clientX : evt.clientX,
+			clientY : evt.clientY,
+			screenX : evt.screenX,
+			screenY : evt.screenY,
+		}
 	}
-	if(menu === null){
-		menu = document.createElement('div');
-		show(menu);
-	}else{
-		document.getElementById(contextId).remove();
+
+	var addClickEvent = function(elements, event, callback) {
+		for (var int = 0; int < elements.length; int++) {
+			elements[int].addEventListener(event, callback);
+		}
 	}
-}
 
+	var contextMenu = function(event, jsonItems) {
 
-var initMenu = function(e) {
-	  console.log(e.target);
-	  var callback = function(elem){
-		  console.log('click on context menu :');
-		  console.log(elem);
-	  }
-	  
-	  var jsonItems = {}
-	  if(e.target.nodeName === 'A'){
-		  jsonItems = {
-				  items : [
-				           ['edit',callback],
-				           ['delete',callback]
-				  ]
-		  }
-	  }else{
-		  jsonItems = {
-				  items : [
-				           ['new',callback],
-				           ['edit',callback]
-				  ]
-		  }  
-	  }
-	  
+		itemsFromJson = function(jsonItems) {
 
-	  
-	  contextMenu(e, jsonItems);
-	  e.preventDefault();
-	    return false;
-}
+			var ul = document.createElement('ul');
+			var items = [];
 
-var handleClickMenu = function(e) {
-	  console.log(e.target);
-	  if(e.target.nodeName === 'A'){
-		  e.preventDefault();
-		    return false;
-	  }
-}
+			for (var int = 0; int < jsonItems.items.length; int++) {
+
+				var item = document.createElement('li');
+				var text = document.createTextNode(jsonItems.items[int][0]);
+				item.appendChild(text);
+				item.addEventListener('click', jsonItems.items[int][1]);
+				ul.appendChild(item);
+
+			}
+
+			return ul;
+
+		}
+
+		var contextId = "context-menu";
+		var element = event.target;
+		var mouse = getMouseLocation(event);
+		var menu = document.getElementById(contextId);
+		show = function(menu) {
+			menu
+					.setAttribute(
+							"style",
+							"left:"
+									+ mouse.pageX
+									+ "px;top:"
+									+ (mouse.pageY + 10)
+									+ "px;width: 200px;height: 300px;background-color:red;position:absolute;z-index: 99999;");
+			menu.setAttribute("id", contextId);
+
+			var ul = itemsFromJson(jsonItems);
+
+			menu.appendChild(ul);
+			document.body.appendChild(menu);
+		}
+		if (menu === null) {
+			menu = document.createElement('div');
+			show(menu);
+		} else {
+			document.getElementById(contextId).remove();
+		}
+	}
+
+	var initMenu = function(e) {
+		console.log(e.target);
+		var callback = function(elem) {
+			console.log('click on context menu :');
+			console.log(elem);
+		}
+
+		var jsonItems = {}
+		if (e.target.nodeName === 'A') {
+			jsonItems = {
+				items : [ [ 'edit', callback ], [ 'delete', callback ] ]
+			}
+		} else {
+			jsonItems = {
+				items : [ [ 'new', callback ], [ 'edit', callback ] ]
+			}
+		}
+
+		contextMenu(e, jsonItems);
+		e.preventDefault();
+		return false;
+	}
+
+	var handleClickMenu = function(e) {
+		console.log(e.target);
+		if (e.target.nodeName === 'A') {
+			e.preventDefault();
+			return false;
+		}
+	}
 
 	init = function(modules) {
 
@@ -211,16 +248,19 @@ var handleClickMenu = function(e) {
 			is : 'core9-fileeditor',
 			ready : function() {
 
-				  addClickEvent(this.$.menutree.querySelectorAll(".menu_label"), 'click', handleClickMenu);					  
-				  addClickEvent(this.$.menutree.querySelectorAll("a"), 'click', handleClickMenu);
-			      addClickEvent(this.$.menutree.querySelectorAll(".menu_label"), 'contextmenu', initMenu);					  
-				  addClickEvent(this.$.menutree.querySelectorAll("a"), 'contextmenu', initMenu);
-
+				addClickEvent(this.$.menutree.querySelectorAll(".menu_label"),
+						'click', handleClickMenu);
+				addClickEvent(this.$.menutree.querySelectorAll("a"), 'click',
+						handleClickMenu);
+				addClickEvent(this.$.menutree.querySelectorAll(".menu_label"),
+						'contextmenu', initMenu);
+				addClickEvent(this.$.menutree.querySelectorAll("a"),
+						'contextmenu', initMenu);
 
 			}
 		});
 	}
-	Core9.system.multiImport(['app/elements/core9-file/js/base64']).then(
+	Core9.system.multiImport([ 'app/elements/core9-file/js/base64' ]).then(
 			function(modules) {
 				init(modules);
 			});
