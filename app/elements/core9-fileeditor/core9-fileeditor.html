@@ -59,6 +59,10 @@ li label {
 	padding-left: 20px;
 	background: url(img/folder-horizontal.png) 0px 1px no-repeat;
 }
+
+.selected {
+	color:red;
+}
 </style>
 <template>
 
@@ -114,6 +118,15 @@ li label {
 
 
 <script>
+
+getHostElement = function(element){
+	while(element.nodeType != 11) { // 11 = DOCUMENT_FRAGMENT_NODE
+		element = element.parentNode;
+	}
+	var hostElement = element.host;
+	return hostElement;
+}
+
 	Element.prototype.remove = function() {
 		this.parentElement.removeChild(this);
 	}
@@ -162,7 +175,7 @@ li label {
 	}
 
 	var contextMenu = function(event, jsonItems) {
-
+		var element = event.target;
 		itemsFromJson = function(jsonItems) {
 
 			var ul = document.createElement('ul');
@@ -173,7 +186,7 @@ li label {
 				var item = document.createElement('li');
 				var text = document.createTextNode(jsonItems.items[int][0]);
 				item.appendChild(text);
-				item.addEventListener('click', jsonItems.items[int][1]);
+				item.addEventListener('click', jsonItems.items[int][1](element));
 				ul.appendChild(item);
 
 			}
@@ -212,19 +225,38 @@ li label {
 
 	var initMenu = function(e) {
 		console.log(e.target);
-		var callback = function(elem) {
+
+		var host = getHostElement(e.target);
+		
+		var selectedElements = host.$.menutree.querySelectorAll('.selected');
+		if(selectedElements != null){
+			for (var int = 0; int < selectedElements.length; int++) {
+				selectedElements[int].className = selectedElements[int].className.replace('selected',''); 
+			}
+		}
+
+		
+		
+		var element = e.target;
+		element.className = element.className + " selected";
+		
+		var callback = function() {
+			
+			var elem;
 			console.log('click on context menu :');
+			console.log(this);
+			console.log('for element : ');
 			console.log(elem);
 		}
 
 		var jsonItems = {}
 		if (e.target.nodeName === 'A') {
 			jsonItems = {
-				items : [ [ 'edit', callback ], [ 'delete', callback ] ]
+				items : [ [ 'edit', callback ], [ 'rename', callback ], [ 'delete', callback ] ]
 			}
 		} else {
 			jsonItems = {
-				items : [ [ 'new', callback ], [ 'edit', callback ] ]
+				items : [ [ 'new file', callback ], [ 'new folder', callback ], [ 'edit', callback ] ]
 			}
 		}
 
@@ -247,7 +279,7 @@ li label {
 		Polymer({
 			is : 'core9-fileeditor',
 			ready : function() {
-
+				var that = this;
 				addClickEvent(this.$.menutree.querySelectorAll(".menu_label"),
 						'click', handleClickMenu);
 				addClickEvent(this.$.menutree.querySelectorAll("a"), 'click',
