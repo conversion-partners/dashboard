@@ -18,6 +18,8 @@ li.page a[href*=".html"] { background: url(img/document.png) 0px 0px no-repeat; 
 li.page a[href$=".css"] { background: url(img/document.png) 0px 0px no-repeat; }
 li.page a[href$=".js"] { background: url(img/document.png) 0px 0px no-repeat; }
 li label { cursor: pointer; display: block; padding-left: 20px; background: url(img/folder-horizontal.png) 0px 1px no-repeat; }
+
+
 </style>
 <template>
 
@@ -58,9 +60,7 @@ li label { cursor: pointer; display: block; padding-left: 20px; background: url(
   </ol>
 
 
-<div id="click" class="click box menu-1">
-    <strong>right click me</strong>
-</div>
+
 
 
   <content id="content"></content>
@@ -69,32 +69,126 @@ li label { cursor: pointer; display: block; padding-left: 20px; background: url(
 
 
 <script>
+
+Element.prototype.remove = function() {
+    this.parentElement.removeChild(this);
+}
+NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
+    for(var i = 0, len = this.length; i < len; i++) {
+        if(this[i] && this[i].parentElement) {
+            this[i].parentElement.removeChild(this[i]);
+        }
+    }
+}
+
+function getMouseLocation(e){
+	 var evt = e ? e:window.event;
+	 var clickX=0, clickY=0;
+
+	 if ((evt.clientX || evt.clientY) &&
+	     document.body &&
+	     document.body.scrollLeft!=null) {
+	  clickX = evt.clientX + document.body.scrollLeft;
+	  clickY = evt.clientY + document.body.scrollTop;
+	 }
+	 if ((evt.clientX || evt.clientY) &&
+	     document.compatMode=='CSS1Compat' && 
+	     document.documentElement && 
+	     document.documentElement.scrollLeft!=null) {
+	  clickX = evt.clientX + document.documentElement.scrollLeft;
+	  clickY = evt.clientY + document.documentElement.scrollTop;
+	 }
+	 if (evt.pageX || evt.pageY) {
+	  clickX = evt.pageX;
+	  clickY = evt.pageY;
+	 }
+
+	 return {
+	  pageX : clickX,
+	  pageY : clickY,
+	  clientX : evt.clientX,
+	  clientY : evt.clientY, 
+	  screenX : evt.screenX,
+	  screenY : evt.screenY,
+	 }
+}
+
+
+var addClickEvent = function(elements, event, callback){
+	  for (var int = 0; int < elements.length; int++) {
+		  elements[int].addEventListener(event, onClick);
+	}
+}
+
+var contextMenu = function(event, jsonItems){
+	
+	itemsFromJson = function(jsonItems){
+		
+		var ul = document.createElement('ul');
+		var items = [];
+		
+		for (var int = 0; int < jsonItems.items.length; int++) {
+			
+			var item = document.createElement('li');
+			var text = document.createTextNode(jsonItems.items[int][0]);
+			item.appendChild(text);
+			ul.appendChild(item);
+			
+		}		
+
+	
+		
+		return ul;
+		
+	}
+	
+	var contextId = "context-menu";
+	var element = event.target;
+	var mouse = getMouseLocation(event);
+	var menu = document.getElementById(contextId);
+	show = function(menu){
+		menu.setAttribute("style","left:"+mouse.pageX+"px;top:"+mouse.pageY+"px;width: 200px;height: 300px;background-color:red;position:absolute;z-index: 99999;");
+		menu.setAttribute("id", contextId);
+		
+		var ul = itemsFromJson(jsonItems);
+
+		menu.appendChild(ul);
+		document.body.appendChild(menu);
+	}
+	if(menu === null){
+		menu = document.createElement('div');
+		show(menu);
+	}else{
+		document.getElementById(contextId).remove();
+	}
+}
+
+
+var onClick = function(e) {
+	  console.log(e.target);
+	  
+	  var jsonItems = {
+			  items : [
+			           ['new','callback'],
+			           ['edit','callback']
+			  ]
+	  }
+	  
+	  contextMenu(e, jsonItems);
+	  e.preventDefault();
+	    return false;
+}
+
 	init = function(modules) {
 
 		"use strict";
 		Polymer({
 			is : 'core9-fileeditor',
 			ready : function() {
+					
+					  addClickEvent(this.$.menutree.querySelectorAll(".menu_label"), 'contextmenu', onClick);					  
+					  addClickEvent(this.$.menutree.querySelectorAll("a"), 'contextmenu', onClick);
 
-				  var that = this;
-
-				  var onClick = function(e) {
-					  console.log(e);
-					  e.preventDefault();
-					    return false;
-					}
-
-					var labels = that.$.menutree.querySelectorAll(".menu_label");
-					  console.log(labels);
-					  for (var int = 0; int < labels.length; int++) {
-						  labels[int].addEventListener('contextmenu', onClick);
-					}
-
-				         var labels = that.$.menutree.querySelectorAll("a");
-				            console.log(labels);
-				            for (var int = 0; int < labels.length; int++) {
-				              labels[int].addEventListener('contextmenu', onClick);
-				          }
 
 			}
 		});
