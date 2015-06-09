@@ -61,7 +61,7 @@ li label {
 }
 
 .selected {
-	color:red;
+	color: red;
 }
 </style>
 <template>
@@ -118,25 +118,22 @@ li label {
 
 
 <script>
-
-getHostElement = function(element){
-	while(element.nodeType != 11) { // 11 = DOCUMENT_FRAGMENT_NODE
-		element = element.parentNode;
+	getHostElement = function(element) {
+		while (element.nodeType != 11) { // 11 = DOCUMENT_FRAGMENT_NODE
+			element = element.parentNode;
+		}
+		var hostElement = element.host;
+		return hostElement;
 	}
-	var hostElement = element.host;
-	return hostElement;
-}
 
-	Element.prototype.remove = function() {
-		this.parentElement.removeChild(this);
-	}
-	NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
-		for (var i = 0, len = this.length; i < len; i++) {
-			if (this[i] && this[i].parentElement) {
-				this[i].parentElement.removeChild(this[i]);
-			}
+	removeElement = function(element){
+		var node = element;
+		if (node.parentNode) {
+		  node.parentNode.removeChild(node);
 		}
 	}
+	
+
 
 	function getMouseLocation(e) {
 		var evt = e ? e : window.event;
@@ -198,13 +195,13 @@ getHostElement = function(element){
 		var contextId = "context-menu";
 		var element = event.target;
 		var mouse = getMouseLocation(event);
-		var menu = document.getElementById(contextId);
+		var menu = getHostElement(element).shadowRoot.getElementById(contextId);
 		show = function(menu) {
 			menu
 					.setAttribute(
 							"style",
 							"left:"
-									+ (mouse.pageX - 500)
+									+ (mouse.pageX - 500) // hack!!
 									+ "px;top:"
 									+ (mouse.pageY + 10)
 									+ "px;width: 200px;height: 300px;background-color:red;position:absolute;z-index: 99999;");
@@ -213,51 +210,49 @@ getHostElement = function(element){
 			var ul = itemsFromJson(jsonItems);
 
 			menu.appendChild(ul);
-			var host = getHostElement(element);
-			host.shadowRoot.appendChild(menu);
-			//document.body.appendChild(menu);
+			getHostElement(element).shadowRoot.appendChild(menu);
 		}
 		if (menu === null) {
 			menu = document.createElement('div');
 			show(menu);
 		} else {
-			document.getElementById(contextId).remove();
+			var host = getHostElement(element);
+			var elem = host.shadowRoot.querySelector('#'+contextId);
+			removeElement(elem);
 		}
 	}
 
 	var initMenu = function(e) {
-		console.log(e.target);
-
-		var host = getHostElement(e.target);
-		
-		var selectedElements = host.$.menutree.querySelectorAll('.selected');
-		if(selectedElements != null){
+		var selectedElements = getHostElement(e.target).$.menutree.querySelectorAll('.selected');
+		if (selectedElements != null) {
 			for (var int = 0; int < selectedElements.length; int++) {
-				selectedElements[int].className = selectedElements[int].className.replace('selected',''); 
+				selectedElements[int].className = selectedElements[int].className
+						.replace(' selected', '');
 			}
 		}
 
-		
-		
 		var element = e.target;
 		element.className = element.className + " selected";
-		
+
 		var callback = function() {
 			console.log('click on context menu :');
 			console.log(this);
 			console.log('for element : ');
-			var selectedElements = getHostElement(this).$.menutree.querySelector('.selected');
+			var selectedElements = getHostElement(this).$.menutree
+					.querySelector('.selected');
 			console.log(selectedElements);
 		}
 
 		var jsonItems = {}
 		if (e.target.nodeName === 'A') {
 			jsonItems = {
-				items : [ [ 'edit', callback ], [ 'rename', callback ], [ 'delete', callback ] ]
+				items : [ [ 'edit', callback ], [ 'rename', callback ],
+						[ 'delete', callback ] ]
 			}
 		} else {
 			jsonItems = {
-				items : [ [ 'new file', callback ], [ 'new folder', callback ], [ 'edit', callback ] ]
+				items : [ [ 'new file', callback ], [ 'new folder', callback ],
+						[ 'edit', callback ] ]
 			}
 		}
 
@@ -267,7 +262,6 @@ getHostElement = function(element){
 	}
 
 	var handleClickMenu = function(e) {
-		console.log(e.target);
 		if (e.target.nodeName === 'A') {
 			e.preventDefault();
 			return false;
