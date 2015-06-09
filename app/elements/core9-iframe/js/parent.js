@@ -10,7 +10,7 @@ var listenToPostMessages = function(){
 				history.pushState(null, null, e.data.href);
 			}else{
 				console.log(e.data);
-				var iframe = document.getElementById('panel-iframe-menu');//.childNodes[0];
+				var iframe = document.getElementById('panel-iframe-menu');
 				
 				if(iframe.clientWidth > 239){
 					iframe.style.width = "40px";
