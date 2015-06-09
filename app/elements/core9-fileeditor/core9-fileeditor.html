@@ -116,7 +116,7 @@ function getMouseLocation(e){
 
 var addClickEvent = function(elements, event, callback){
 	  for (var int = 0; int < elements.length; int++) {
-		  elements[int].addEventListener(event, onClick);
+		  elements[int].addEventListener(event, callback);
 	}
 }
 
@@ -164,7 +164,7 @@ var contextMenu = function(event, jsonItems){
 }
 
 
-var onClick = function(e) {
+var initMenu = function(e) {
 	  console.log(e.target);
 	  
 	  var jsonItems = {
@@ -179,15 +179,25 @@ var onClick = function(e) {
 	    return false;
 }
 
+var handleClickMenu = function(e) {
+	  console.log(e.target);
+	  if(e.target.nodeName === 'A'){
+		  e.preventDefault();
+		    return false;
+	  }
+}
+
 	init = function(modules) {
 
 		"use strict";
 		Polymer({
 			is : 'core9-fileeditor',
 			ready : function() {
-					
-					  addClickEvent(this.$.menutree.querySelectorAll(".menu_label"), 'contextmenu', onClick);					  
-					  addClickEvent(this.$.menutree.querySelectorAll("a"), 'contextmenu', onClick);
+
+				  addClickEvent(this.$.menutree.querySelectorAll(".menu_label"), 'click', handleClickMenu);					  
+				  addClickEvent(this.$.menutree.querySelectorAll("a"), 'click', handleClickMenu);
+			      addClickEvent(this.$.menutree.querySelectorAll(".menu_label"), 'contextmenu', initMenu);					  
+				  addClickEvent(this.$.menutree.querySelectorAll("a"), 'contextmenu', initMenu);
 
 
 			}
