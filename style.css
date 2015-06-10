@@ -54,6 +54,7 @@ iframe.menu {
   _top:20px;
       float: left;
   _display: none;
+  visibility: hidden;
 }
 div.menu {
   overflow: hidden;

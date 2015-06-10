@@ -3,18 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <title>unquote</title>
-<meta name="viewport"
-	content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
 <link rel="shortcut icon" href="/dashboard/favicon.ico">
-<link rel="stylesheet"
-	href="/dashboard/bower_components/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/dashboard/bower_components/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="style.css">
 <script src="/dashboard/app/elements/core9-core/js/core.js"></script>
 <script src="/dashboard/app/elements/core9-core/js/iframe/parent.js"></script>
-<script
-	src="/dashboard/bower_components/json-editor/dist/jsoneditor.min.js"></script>
-<script
-	src="/dashboard/bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+<script src="/dashboard/bower_components/json-editor/dist/jsoneditor.min.js"></script>
+<script src="/dashboard/bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
 <script src="/dashboard/bower_components/systemjs/dist/system.js"></script>
 <script>
 	System.baseURL = '/dashboard/';
@@ -25,8 +21,7 @@
 	window.Polymer.dom = 'shadow';
 </script>
 <link rel="import" href="/dashboard/app/elements/elements.html">
-<script
-	src="/dashboard/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/dashboard/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript">
   Router.config({
     root : '/dashboard/',
@@ -46,6 +41,7 @@
 <body>
 
 	<script>
+	  // load menu in iframe needs to be in shadow root
      document.body
     .appendChild(Core9.panel
         .create(
@@ -55,9 +51,6 @@
             'iframe',
             '/dashboard/app/elements/core9-menu/customsize/customsize.html',
             false));
-	</script>
-	<script>
-
 
 	setTimeout(function() {
 		p.then(function(msg){
@@ -68,6 +61,7 @@
 						true));
 					Core9.iframe.parent.sentMessageToIframe(Core9.panel.__registry[key].menu, document.getElementsByClassName('menu')[1]);
 			});
+			document.getElementsByClassName('menu')[1].style.visibility = "visible";
 		});
 	}, 1000); // big fat hack needs a callback from on iframe loaded
 
