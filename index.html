@@ -119,7 +119,7 @@ core9-filemanager {
 								false));
 	</script>
 	<script>
-		var addItems = [ {
+/* 		var addItems = [ {
 			name : 'Samsung',
 			icon : 'fa fa-phone-square',
 			link : '/dashboard/devices',
@@ -140,18 +140,20 @@ core9-filemanager {
 					link : '#'
 				} ]
 			} ]
-		} ];
+		} ]; */
 
-		var message = {
+		var message; /* = {
 			action : 'addItems',
 			findmenusbytitle : 'Mobile Phones',
 			addItems : addItems
-		}
+		} */
 
 		
 		p.then(function(msg){
 			console.log("panel loaded.. " + msg);
-			console.log(Core9.panel.__registry);
+			console.log(Core9.panel.__registry['fileeditor']);
+			message = Core9.panel.__registry['fileeditor'].menu;
+			console.log(message);
 		});
 		
 		
