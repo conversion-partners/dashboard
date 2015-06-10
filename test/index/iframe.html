@@ -8,8 +8,8 @@
 <!-- <link rel="stylesheet" href="/dashboard/bower_components/materialize/dist/css/materialize.min.css"> -->
 <link rel="stylesheet" href="/dashboard/bower_components/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="style.css">
-<script src="/dashboard/app/elements/core9-core/js/iframe/parent.js"></script>
 <script src="/dashboard/app/elements/core9-core/js/core.js"></script>
+<script src="/dashboard/app/elements/core9-core/js/iframe/parent.js"></script>
 <script src="/dashboard/bower_components/json-editor/dist/jsoneditor.min.js"></script>
 <script src="/dashboard/app/elements/core9-dragdrop/js/drag-drop.min.js"></script>
 <script src="/dashboard/app/elements/core9-file/js/base64.js"></script>
@@ -123,7 +123,7 @@ core9-filemanager {
 			if (event.detail.classes == "menu") {
 				var iframe = document.getElementsByClassName('menu')[1];
 				setTimeout(function() {
-					sentMessageToIframe(message, iframe);
+					Core9.iframe.parent.sentMessageToIframe(message, iframe);
 				}, 1000);
 
 			}

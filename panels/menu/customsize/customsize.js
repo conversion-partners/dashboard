@@ -207,7 +207,7 @@ var height = Math.max( body.scrollHeight, body.offsetHeight,
 			});
 
 			var postClick = function() {
-				Core9.sentMessageToParent(
+				Core9.iframe.child.sentMessageToParent(
 						{ action : "menuClick",
 						  href : this.href,
 						  data : this.textContent });
@@ -241,7 +241,7 @@ var height = Math.max( body.scrollHeight, body.offsetHeight,
 				}
 			}
 
-			Core9.listenToPostMessages(callback);
+			Core9.iframe.child.listenToPostMessages(callback);
 
 		});
 
