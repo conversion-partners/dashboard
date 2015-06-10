@@ -6,7 +6,10 @@
   ],
   "description": "testing stuff",
   "license": "MIT",
-  "menu" : [ {
+  "menu-action" : {
+			"action" : "addItems",
+			"findmenusbytitle" : "Mobile Phones",
+			"addItems" : [ {
 			"name" : "Samsung",
 			"icon" : "fa fa-phone-square",
 			"link" : "/dashboard/devices",
@@ -27,10 +30,6 @@
 					"link" : "#"
 				} ]
 			} ]
-		} ],
-	"menu-action" : {
-			"action" : "addItems",
-			"findmenusbytitle" : "Mobile Phones",
-			"addItems" : "addItems"
-		}
+		} ]
+	}
 }
