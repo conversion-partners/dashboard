@@ -69,11 +69,25 @@ Core9.system = {
 
 Core9.panel = {
 	__registry : {},
-
-	add : function(listOfPanels){
-	
+	__getPanelJson : function(panel){
+		Core9.ajax('GET', '/dashboard/panels/'+panel+'/data.json', null, function(data){
+			Core9.panel.__registry[panel] = JSON.parse(data.responseText);
+			Core9.panel.__resolve(panel);
+		});
 	},
-	
+	__addToRegistry : function(panel){
+		var json = Core9.panel.__getPanelJson(panel);
+	},
+	add : function(listOfPanels, resolve) {
+		Core9.panel.__resolve = resolve;
+		if(listOfPanels.length == 0)return;
+		for (var i = 0; i < listOfPanels.length; i++) {
+			Core9.panel.__addToRegistry(listOfPanels[i]);
+		}
+	},
+	get : function() {
+		return Core9.panel.__registry;
+	},
 	__activatePanelButton : function(panel, button) {
 		button.addEventListener('click', function() {
 			if (panel.style.width == '100%') {
@@ -151,22 +165,21 @@ Core9.panel = {
 			var panel = Core9.panel.__createPanel(id, zIndex, classes, content,
 					button);
 
-			Core9.ajax('GET', content, null,
-					function(data) {
-						var guid = Core9.guid();
-						var div = document.createElement('div');
-						div.innerHTML = data.responseText.replace('evalscript',
-								'evalscript-' + guid);
-						panel.appendChild(div);
-						try {
-							var x = document.getElementById('evalscript-'
-									+ guid);
-							if(x !== null)eval(x.innerHTML);
-						} catch (e) {
-							console.log(e);
-						}
+			Core9.ajax('GET', content, null, function(data) {
+				var guid = Core9.guid();
+				var div = document.createElement('div');
+				div.innerHTML = data.responseText.replace('evalscript',
+						'evalscript-' + guid);
+				panel.appendChild(div);
+				try {
+					var x = document.getElementById('evalscript-' + guid);
+					if (x !== null)
+						eval(x.innerHTML);
+				} catch (e) {
+					console.log(e);
+				}
 
-					});
+			});
 
 			return panel;
 		}

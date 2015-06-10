@@ -31,7 +31,9 @@
 <script>
 	<!-- adding resources / panels -->
 	
-	Core9.panel.add(['fileeditor']);
+	var p = new Promise(function(resolve,reject){
+		Core9.panel.add(['fileeditor'], resolve);
+	});
 	
 	<!-- adding resources / panels -->
 </script>	
@@ -146,6 +148,13 @@ core9-filemanager {
 			addItems : addItems
 		}
 
+		
+		p.then(function(msg){
+			console.log("panel loaded.. " + msg);
+			console.log(Core9.panel.__registry);
+		});
+		
+		
 		window.addEventListener('iframeLoadedEvent', function(e) {
 			if (event.detail.classes == "menu") {
 				var iframe = document.getElementsByClassName('menu')[1];
