@@ -235,15 +235,12 @@ juicy-ace-editor {
 				.setAttribute(
 						"style",
 						"left:"
-								+ (mouse.pageX) // hack!!
+								+ mouse.pageX
 								+ "px;top:"
 								+ (mouse.pageY + 10)
 								+ "px;width: 200px;height: 300px;background-color:red;position:absolute;z-index: 99999;");
 		menu.setAttribute("id", Core9.menu.contextId);
-
-		var ul = Core9.menu.itemsFromJson(jsonItems);
-
-		menu.appendChild(ul);
+		menu.appendChild(Core9.menu.itemsFromJson(jsonItems));
 		Core9.menu.getHostElement(element).shadowRoot.appendChild(menu);
 	}
 
