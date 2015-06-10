@@ -1,0 +1,15 @@
+{
+  "name": "forms",
+  "version": "0.0.0",
+  "authors": [
+    "jessec <robertjessecooke@gmail.com>"
+  ],
+  "description" : "testing stuff",
+  "license" : "MIT",
+  "id" : "panel-form",
+  "z-index" : 5,
+  "class" : "",
+  "type" : "div",
+  "url" : "/dashboard/panels/forms/form.html",
+  "button" : true
+}
