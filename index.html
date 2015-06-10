@@ -75,8 +75,7 @@
 			}
 		}
 	Router.addRoutes(routes).listen();
-	
-	
+
 	//history.pushState(null, null, "products/edit/test");
 </script>
 <style>
@@ -138,15 +137,18 @@ core9-filemanager {
 		});
 		
 		
-		window.addEventListener('iframeLoadedEvent', function(e) {
-			if (event.detail.classes == "menu") {
-				var iframe = document.getElementsByClassName('menu')[1];
-				setTimeout(function() {
-					Core9.iframe.parent.sentMessageToIframe(message, iframe);
-				}, 1000);
-
+		
+		setTimeout(function() {
+			var iframe = document.getElementsByClassName('menu')[1];
+			Core9.iframe.parent.sentMessageToIframe(message, iframe);
+			alert('ho menu');
+		}, 1000);
+		
+/* 		window.addEventListener('iframeLoadedEvent', function(e) {
+			if (e.detail.classes == "menu") {
+				alert('hi menu');
 			}
-		}, false);
+		}, false); */
 	</script>
 </body>
 </html>
