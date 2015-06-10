@@ -4,9 +4,15 @@
   "authors": [
     "jessec <robertjessecooke@gmail.com>"
   ],
-  "description": "testing stuff",
-  "license": "MIT",
-  "menu-action" : {
+  "description" : "testing stuff",
+  "license" : "MIT",
+  "id" : "panel-files", 
+  "z-index" : 6,
+  "class" : "nocolour", 
+  "type" : "div", 
+  "url" : "/dashboard/panels/fileeditor/files.html",
+  "button" : true,  
+  "menu" : {
 			"action" : "addItems",
 			"findmenusbytitle" : "Mobile Phones",
 			"addItems" : [ {
