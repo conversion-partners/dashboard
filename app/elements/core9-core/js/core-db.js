@@ -3,5 +3,15 @@ if (typeof Core9 === 'undefined') {
 };
 
 Core9.db = {
-            
+     config : {
+		protocol : 'http://',
+		host : 'localhost',
+		port : '8080'
+} 
+}
+var DB = Core9.db;
+
+export
+{
+	DB
 }

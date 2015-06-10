@@ -303,12 +303,16 @@ juicy-ace-editor {
 	}
 
 	Core9.menu.init = function(modules) {
-
+		
+		var DB = Core9.system.unwrapModule(modules[0]);
+		
 		"use strict";
 		Polymer({
 			is : 'core9-fileeditor',
 			ready : function() {
-				var that = this;
+				
+				console.log(DB.config);
+
 				Core9.menu.addClickEvent(this.$.menutree
 						.querySelectorAll(".menu_label"), 'click',
 						Core9.menu.handleClickMenu);
