@@ -42,41 +42,6 @@
 		root : '/dashboard/',
 		mode : 'history'
 	});
-	var routes = {
-		'/home$/' : function() {
-			console.log('home', arguments);
-		},
-		'/devices$/' : function() {
-			console.log('hitting device...');
-			document.querySelector('#panel-content > div.panelbutton').click();
-		},
-		'/blocks$/' : function() {
-			console.log('hitting panel-files...');
-			document.querySelector('#panel-files > div.panelbutton').click();
-		},
-		'/settings/setup$/' : function() {
-			console.log('settings/setup', arguments);
-		},
-		'/forms$/' : function() {
-			console.log('forms', arguments);
-		},
-		'/pages$/' : function(req) {
-			console.log('files', arguments);
-		},
-		'/files$/' : function(req) {
-			console.log('files', arguments);
-		}
-	}
-	Router.addRoutes(routes).listen();
-
-/* 	var routes = {
-			'default' : function() {
-				console.log('hitting default...');
-			}
-		}
-	Router.addRoutes(routes).listen(); */
-
-	//history.pushState(null, null, "products/edit/test");
 </script>
 <style>
 core9-filemanager {
@@ -121,7 +86,6 @@ core9-filemanager {
 						true));
 					var iframe = document.getElementsByClassName('menu')[1];
 					Core9.iframe.parent.sentMessageToIframe(Core9.panel.__registry[key].menu, iframe);
-					//Router.addRoutes(routes).listen();
 			});
 		});
 	}, 1000); // big fat hack needs a callback from on iframe loaded
