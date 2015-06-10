@@ -87,41 +87,49 @@ juicy-ace-editor {
 	display: inline;
 	list-style-type: none;
 	padding-right: 20px;
-	padding-top:2px;
-	padding-bottom:2px;
+	padding-top: 2px;
+	padding-bottom: 2px;
 }
 </style>
 <template>
 
 <ol id="menutree">
-	<li><label class="menu_label" for="c1">Menu Gen14 Am0a1</label> <input type="checkbox" id="c1" /> <!-- input must follow label for safari -->
+	<li><label class="menu_label" for="c1">Menu Gen14 Am0a1</label> <input
+		type="checkbox" id="c1" /> <!-- input must follow label for safari -->
 		<ol>
-			<li><label for="c2" class="menu_label">Menu Am1a1</label> <input type="checkbox" id="c2" />
+			<li><label for="c2" class="menu_label">Menu Am1a1</label> <input
+				type="checkbox" id="c2" />
 				<ol>
 					<li class="page"><a href="#">Page Ap1a1</a></li>
 					<li class="page"><a href="#">Page Ap1a2</a></li>
 					<li class="page"><a href="#">Page Ap1a3</a></li>
 				</ol></li>
-			<li><label for="c3" class="menu_label">Menu Am1b1</label> <input type="checkbox" id="c3" />
+			<li><label for="c3" class="menu_label">Menu Am1b1</label> <input
+				type="checkbox" id="c3" />
 				<ol>
 					<li class="page"><a href="#">Page Ap1b1</a></li>
 
-					<li><label for="c4" class="menu_label">Menu Am2b1 </label> <input type="checkbox" id="c4" />
+					<li><label for="c4" class="menu_label">Menu Am2b1 </label> <input
+						type="checkbox" id="c4" />
 						<ol>
 							<li class="page"><a href="#">Page Ap2b1</a></li>
 						</ol></li>
 				</ol></li>
 		</ol></li>
-	<li><label class="menu_label" for="c5">Menu Bm0a1</label> <input type="checkbox" id="c5" />
+	<li><label class="menu_label" for="c5">Menu Bm0a1</label> <input
+		type="checkbox" id="c5" />
 		<ol>
-			<li><label for="c6" class="menu_label">Menu Bm1a1</label> <input type="checkbox" id="c6" />
+			<li><label for="c6" class="menu_label">Menu Bm1a1</label> <input
+				type="checkbox" id="c6" />
 				<ol>
 					<li class="page"><a href="#">Page Bp1a1</a></li>
 				</ol></li>
-			<li><label for="c7" class="menu_label">Menu Bm1b1</label> <input type="checkbox" id="c7" />
+			<li><label for="c7" class="menu_label">Menu Bm1b1</label> <input
+				type="checkbox" id="c7" />
 				<ol>
 					<li class="page"><a href="#">Page Bp1b1</a></li>
-					<li><label for="c8" class="menu_label">Menu Bm2b1</label> <input type="checkbox" id="c8" />
+					<li><label for="c8" class="menu_label">Menu Bm2b1</label> <input
+						type="checkbox" id="c8" />
 						<ol>
 							<li class="page"><a href="#">Page Bp2b1</a></li>
 						</ol></li>
@@ -147,25 +155,29 @@ juicy-ace-editor {
 
 
 <script>
-	getHostElement = function(element) {
+	if (typeof Core9 === 'undefined') {
+		Core9 = {}
+	};
+	if (typeof Core9.menu === 'undefined') {
+		Core9.menu = {}
+	};
+	Core9.menu.contextId = "context-menu";
+	Core9.menu.getHostElement = function(element) {
 		while (element.nodeType != 11) { // 11 = DOCUMENT_FRAGMENT_NODE
 			element = element.parentNode;
 		}
-		var hostElement = element.host;
-		return hostElement;
+		return element.host;
 	}
 
-	removeElement = function(element) {
-		var node = element;
-		if (node.parentNode) {
-			node.parentNode.removeChild(node);
+	Core9.menu.removeElement = function(element) {
+		if (element.parentNode) {
+			element.parentNode.removeChild(element);
 		}
 	}
 
-	function getMouseLocation(e) {
+	Core9.menu.getMouseLocation = function(e) {
 		var evt = e ? e : window.event;
 		var clickX = 0, clickY = 0;
-
 		if ((evt.clientX || evt.clientY) && document.body
 				&& document.body.scrollLeft != null) {
 			clickX = evt.clientX + document.body.scrollLeft;
@@ -181,7 +193,6 @@ juicy-ace-editor {
 			clickX = evt.pageX;
 			clickY = evt.pageY;
 		}
-
 		return {
 			pageX : clickX,
 			pageY : clickY,
@@ -192,65 +203,52 @@ juicy-ace-editor {
 		}
 	}
 
-	var addClickEvent = function(elements, event, callback) {
+	Core9.menu.addClickEvent = function(elements, event, callback) {
 		for (var int = 0; int < elements.length; int++) {
 			elements[int].addEventListener(event, callback);
 		}
 	}
 
-	var contextMenu = function(event, jsonItems) {
-		var element = event.target;
-		itemsFromJson = function(jsonItems) {
-
-			var ul = document.createElement('ul');
-			var items = [];
-
-			for (var int = 0; int < jsonItems.items.length; int++) {
-
-				var item = document.createElement('li');
-				var text = document.createTextNode(jsonItems.items[int][0]);
-				item.appendChild(text);
-				item.addEventListener('click', jsonItems.items[int][1]);
-				ul.appendChild(item);
-
-			}
-
-			return ul;
-
+	Core9.menu.itemsFromJson = function(jsonItems) {
+		var ul = document.createElement('ul');
+		for (var int = 0; int < jsonItems.items.length; int++) {
+			var item = document.createElement('li');
+			item.appendChild(document.createTextNode(jsonItems.items[int][0]));
+			item.addEventListener('click', jsonItems.items[int][1]);
+			ul.appendChild(item);
 		}
+		return ul;
+	}
 
-		var contextId = "context-menu";
-		var element = event.target;
-		var mouse = getMouseLocation(event);
-		var menu = getHostElement(element).shadowRoot.getElementById(contextId);
-		show = function(menu) {
-			menu
-					.setAttribute(
-							"style",
-							"left:"
-									+ (mouse.pageX) // hack!!
-									+ "px;top:"
-									+ (mouse.pageY + 10)
-									+ "px;width: 200px;height: 300px;background-color:red;position:absolute;z-index: 99999;");
-			menu.setAttribute("id", contextId);
-
-			var ul = itemsFromJson(jsonItems);
-
-			menu.appendChild(ul);
-			getHostElement(element).shadowRoot.appendChild(menu);
-		}
-		if (menu === null) {
-			menu = document.createElement('div');
-			show(menu);
+	Core9.menu.contextMenu = function(event, jsonItems) {
+		var host = Core9.menu.getHostElement(event.target).shadowRoot;
+		if (host.getElementById(Core9.menu.contextId) === null) {
+			Core9.menu.show(event.target, document.createElement('div'), jsonItems);
 		} else {
-			var host = getHostElement(element);
-			var elem = host.shadowRoot.querySelector('#' + contextId);
-			removeElement(elem);
+			Core9.menu.removeElement(host.querySelector('#' + Core9.menu.contextId));
 		}
 	}
 
-	var initMenu = function(e) {
-		var selectedElements = getHostElement(e.target).$.menutree
+	Core9.menu.show = function(element, menu, jsonItems) {
+		var mouse = Core9.menu.getMouseLocation(event);
+		menu
+				.setAttribute(
+						"style",
+						"left:"
+								+ (mouse.pageX) // hack!!
+								+ "px;top:"
+								+ (mouse.pageY + 10)
+								+ "px;width: 200px;height: 300px;background-color:red;position:absolute;z-index: 99999;");
+		menu.setAttribute("id", Core9.menu.contextId);
+
+		var ul = Core9.menu.itemsFromJson(jsonItems);
+
+		menu.appendChild(ul);
+		Core9.menu.getHostElement(element).shadowRoot.appendChild(menu);
+	}
+
+	Core9.menu.initMenu = function(e) {
+		var selectedElements = Core9.menu.getHostElement(e.target).$.menutree
 				.querySelectorAll('.selected');
 		if (selectedElements != null) {
 			for (var int = 0; int < selectedElements.length; int++) {
@@ -266,7 +264,7 @@ juicy-ace-editor {
 			console.log('click on context menu :');
 			console.log(this);
 			console.log('for element : ');
-			var selectedElements = getHostElement(this).$.menutree
+			var selectedElements = Core9.menu.getHostElement(this).$.menutree
 					.querySelector('.selected');
 			console.log(selectedElements);
 		}
@@ -284,52 +282,55 @@ juicy-ace-editor {
 			}
 		}
 
-		contextMenu(e, jsonItems);
+		Core9.menu.contextMenu(e, jsonItems);
 		e.preventDefault();
 		return false;
 	}
 
-	var handleClickMenu = function(e) {
+	Core9.menu.handleClickMenu = function(e) {
 		if (e.target.nodeName === 'A') {
 			e.preventDefault();
 			return false;
 		}
 	}
 
-	var showFileBrowser = function(e){
-		var workspace = getHostElement(e.target).$.workspace;
+	Core9.menu.showFileBrowser = function(e) {
+		var workspace = Core9.menu.getHostElement(e.target).$.workspace;
 		var left = workspace.getBoundingClientRect().left;
-		if(left > 300){
+		if (left > 300) {
 			workspace.style.left = "40px"
-		}else{
+		} else {
 			workspace.style.left = "301px"
 		}
 		return false;
 	}
 
-	init = function(modules) {
+	Core9.menu.init = function(modules) {
 
 		"use strict";
 		Polymer({
 			is : 'core9-fileeditor',
 			ready : function() {
 				var that = this;
-				addClickEvent(this.$.menutree.querySelectorAll(".menu_label"),
-						'click', handleClickMenu);
-				addClickEvent(this.$.menutree.querySelectorAll("a"), 'click',
-						handleClickMenu);
-				addClickEvent(this.$.menutree.querySelectorAll(".menu_label"),
-						'contextmenu', initMenu);
-				addClickEvent(this.$.menutree.querySelectorAll("a"),
-						'contextmenu', initMenu);
+				Core9.menu.addClickEvent(this.$.menutree
+						.querySelectorAll(".menu_label"), 'click',
+						Core9.menu.handleClickMenu);
+				Core9.menu.addClickEvent(this.$.menutree.querySelectorAll("a"),
+						'click', Core9.menu.handleClickMenu);
+				Core9.menu.addClickEvent(this.$.menutree
+						.querySelectorAll(".menu_label"), 'contextmenu',
+						Core9.menu.initMenu);
+				Core9.menu.addClickEvent(this.$.menutree.querySelectorAll("a"),
+						'contextmenu', Core9.menu.initMenu);
 
-				this.$.showmenu.addEventListener('click', showFileBrowser);
+				this.$.showmenu.addEventListener('click',
+						Core9.menu.showFileBrowser);
 
 			}
 		});
 	}
 	Core9.system.multiImport([ 'app/elements/core9-file/js/base64' ]).then(
 			function(modules) {
-				init(modules);
+				Core9.menu.init(modules);
 			});
 </script>
