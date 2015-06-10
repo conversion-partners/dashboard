@@ -74,8 +74,10 @@ Core9.panel = {
 		button.addEventListener('click', function() {
 			if (panel.style.width == '100%') {
 				panel.style.width = '0px'
+				panel.childNodes[1].style.width = "0px";
 			} else {
 				panel.style.width = '100%';
+				panel.childNodes[1].style.width = "100%";
 			}
 		}, false);
 
