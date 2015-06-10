@@ -27,7 +27,12 @@
 <link rel="import" href="/dashboard/app/elements/elements.html">
 <script
 	src="/dashboard/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
+<script type="text/javascript">
+  Router.config({
+    root : '/dashboard/',
+    mode : 'history'
+  });
+</script>
 <script>
 	<!-- adding resources / panels -->
 
@@ -37,15 +42,6 @@
 
 	<!-- adding resources / panels -->
 </script>
-<script type="text/javascript">
-	Router.config({
-		root : '/dashboard/',
-		mode : 'history'
-	});
-</script>
-<style>
-
-</style>
 </head>
 <body>
 
