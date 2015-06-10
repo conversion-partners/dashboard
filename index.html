@@ -37,7 +37,7 @@
 	<!-- adding resources / panels -->
 
 	var p = new Promise(function(resolve,reject){
-		Core9.panel.add(['fileeditor'], resolve);
+		Core9.panel.add(['fileeditor','files'], resolve);
 	});
 
 	<!-- adding resources / panels -->
@@ -46,25 +46,36 @@
 <body>
 
 	<script>
-		document.body.appendChild(Core9.panel.create('panel-iframe-site', -1,
+    document.body
+    .appendChild(Core9.panel
+        .create(
+            'panel-iframe-menu',
+            999,
+            'menu',
+            'iframe',
+            '/dashboard/app/elements/core9-menu/customsize/customsize.html',
+            false));
+
+	document.body.appendChild(Core9.panel.create('panel-iframe-site', -1,
 				'fullbleed', 'iframe',
 				'/dashboard/panels/grid/grid-example.html', false));
-		document.body.appendChild(Core9.panel.create('panel-content', 1, '',
-				'div', '/dashboard/panels/files/list.html', true));
+
+
+/* 		document.body.appendChild(Core9.panel.create('panel-content', 1, '',
+				'div', '/dashboard/panels/files/list.html', true)); */
+
+
+
 		document.body.appendChild(Core9.panel.create('panel-form', 5,
 				'nocolour', 'div', '/dashboard/panels/forms/form.html', true));
+
+
 		document.body.appendChild(Core9.panel.create('panel-login', 1005,
 				'fullbleed', 'iframe', '/dashboard/panels/login/index.html',
 				true));
-		document.body
-				.appendChild(Core9.panel
-						.create(
-								'panel-iframe-menu',
-								999,
-								'menu',
-								'iframe',
-								'/dashboard/app/elements/core9-menu/customsize/customsize.html',
-								false));
+
+
+
 	</script>
 	<script>
 
@@ -76,8 +87,7 @@
 				document.body.appendChild(Core9.panel.create(panel.id, panel['z-index'],
 						panel.class, panel.type, panel.url,
 						true));
-					var iframe = document.getElementsByClassName('menu')[1];
-					Core9.iframe.parent.sentMessageToIframe(Core9.panel.__registry[key].menu, iframe);
+					Core9.iframe.parent.sentMessageToIframe(Core9.panel.__registry[key].menu, document.getElementsByClassName('menu')[1]);
 			});
 		});
 	}, 1000); // big fat hack needs a callback from on iframe loaded

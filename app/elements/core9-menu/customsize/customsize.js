@@ -233,7 +233,7 @@ var height = Math.max( body.scrollHeight, body.offsetHeight,
 
 
 			var callback = function(event) {
-
+				if(typeof event.data === 'undefined' || typeof event.data.action === 'undefined')return;
 				if (event.data.action == 'addItems') {
 					addItemsToMenu(event.data.findmenusbytitle,
 							event.data.addItems);
