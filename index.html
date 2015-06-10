@@ -32,7 +32,7 @@
 	<!-- adding resources / panels -->
 
 	var p = new Promise(function(resolve,reject){
-		Core9.panel.add(['login','files','forms','grid','fileeditor'], resolve);
+		Core9.panel.add(['login','routes','files','forms','grid','fileeditor'], resolve);
 	});
 
 	<!-- adding resources / panels -->
@@ -56,10 +56,12 @@
 		p.then(function(msg){
 			Object.keys(Core9.panel.__registry).forEach(function(key) {
 			    var panel = Core9.panel.__registry[key];
-				document.body.appendChild(Core9.panel.create(panel.id, panel['z-index'],
-						panel.class, panel.type, panel.url,
-						true));
-					Core9.iframe.parent.sentMessageToIframe(Core9.panel.__registry[key].menu, document.getElementsByClassName('menu')[1]);
+			    if(panel.url){
+			        document.body.appendChild(Core9.panel.create(panel.id, panel['z-index'],
+			                panel.class, panel.type, panel.url,
+			                true));
+			              Core9.iframe.parent.sentMessageToIframe(Core9.panel.__registry[key].menu, document.getElementsByClassName('menu')[1]);
+			    }
 			});
 			document.getElementsByClassName('menu')[1].style.visibility = "visible";
 		});
