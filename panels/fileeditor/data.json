@@ -1,1 +1,36 @@
-{"nodes":[{"id":1,"name":"root","level":0,"type":"default"}]}
+{
+  "name": "fileeditor",
+  "version": "0.0.0",
+  "authors": [
+    "jessec <robertjessecooke@gmail.com>"
+  ],
+  "description": "testing stuff",
+  "license": "MIT",
+  "menu" : [ {
+			"name" : "Samsung",
+			"icon" : "fa fa-phone-square",
+			"link" : "/dashboard/devices",
+			"items" : [ {
+				"title" : "Samsung",
+				"icon" : "fa fa-phone-square",
+				"items" : [ {
+					"name" : "S II",
+					"icon" : "fa fa-phone-square",
+					"link" : "#"
+				}, {
+					"name" : "S III",
+					"icon" : "fa fa-phone-square",
+					"link" : "#"
+				}, {
+					"name" : "S IV",
+					"icon" : "fa fa-phone-square",
+					"link" : "#"
+				} ]
+			} ]
+		} ],
+	"menu-action" : {
+			"action" : "addItems",
+			"findmenusbytitle" : "Mobile Phones",
+			"addItems" : "addItems"
+		}
+}
