@@ -3,12 +3,12 @@ var arrMenu = [ {
 	id : 'menuID',
 	icon : 'fa fa-reorder',
 	items : [ {
-		name : 'Devices',
+		name : 'Pages',
 		id : 'itemID',
 		icon : 'fa fa-laptop',
 		link : '#',
 		items : [ {
-			title : 'Devices',
+			title : 'Pages',
 			icon : 'fa fa-laptop',
 			items : [ {
 				name : 'Mobile Phones',
@@ -182,6 +182,36 @@ var arrMenu = [ {
 		} ]
 	}, {
 		name : 'Collections',
+		link : '#'
+	}, {
+		name : 'Setup',
+		icon : 'fa fa-book',
+		link : '#',
+		items : [ {
+			title : 'Blocks',
+			icon : 'fa fa-book',
+			items : [ {
+				name : 'National Geographics',
+				link : '#'
+			}, {
+				name : 'Scientific American',
+				link : '#'
+			}, {
+				name : 'The Spectator',
+				link : '#'
+			}, {
+				name : 'Rambler',
+				link : '#'
+			}, {
+				name : 'Physics World',
+				link : '#'
+			}, {
+				name : 'The New Scientist',
+				link : '#'
+			} ]
+		} ]
+	}, {
+		name : 'Suport',
 		link : '#'
 	}, {
 		name : 'Credits',
