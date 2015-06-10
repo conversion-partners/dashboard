@@ -70,6 +70,10 @@ Core9.system = {
 Core9.panel = {
 	__registry : {},
 	__getPanelJson : function(panel){
+		Core9.ajax('GET', '/dashboard/panels/'+panel+'/routes.js', null, function(data){
+			eval(data.responseText);
+			Core9.panel.__resolve(panel);
+		});
 		Core9.ajax('GET', '/dashboard/panels/'+panel+'/data.json', null, function(data){
 			Core9.panel.__registry[panel] = JSON.parse(data.responseText);
 			Core9.panel.__resolve(panel);
