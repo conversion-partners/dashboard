@@ -37,7 +37,7 @@
 	<!-- adding resources / panels -->
 
 	var p = new Promise(function(resolve,reject){
-		Core9.panel.add(['fileeditor','files'], resolve);
+		Core9.panel.add(['fileeditor','files','forms','grid'], resolve);
 	});
 
 	<!-- adding resources / panels -->
@@ -56,9 +56,9 @@
             '/dashboard/app/elements/core9-menu/customsize/customsize.html',
             false));
 
-	document.body.appendChild(Core9.panel.create('panel-iframe-site', -1,
+/* 	document.body.appendChild(Core9.panel.create('panel-iframe-site', -1,
 				'fullbleed', 'iframe',
-				'/dashboard/panels/grid/grid-example.html', false));
+				'/dashboard/panels/grid/grid-example.html', false)); */
 
 
 /* 		document.body.appendChild(Core9.panel.create('panel-content', 1, '',
