@@ -1,122 +1,132 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <title>unquote</title>
 <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-<link rel="shortcut icon" href="favicon.ico">
-<script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-<!-- <script src="bower_components/es6-shim/es6-shim.min.js"></script> -->
-<script src="bower_components/systemjs/dist/system.js"></script>
-<script src="app/elements/core9-router/js/router.js"></script>
-<script>
-	//window.Polymer = window.Polymer || {};
-	//window.Polymer.dom = 'shadow';
-</script>
-<script>
-	Core9 = {
-		workspace : {},
-		cleanWorkspace : function() {
-			console.log(Core9.workspace);
-			while (Core9.workspace.firstChild) {
-				try {
-					Core9.workspace.removeChild(Core9.workspace.firstChild);
-				} catch (e) {
-					// TODO: handle exception
-				}
-
-			}
-		},
-		unwrapModule : function(mod) {
-			for (key in mod) {
-				if (mod.hasOwnProperty(key)) {
-					var value = mod[key];
-					return value;
-				}
-			}
-		},
-		multiImport : function(modules) {
-			return Promise.all(modules.map(function(m) {
-				return System.import(m)
-			}))
-		}
-	};
-</script>
-<link rel="stylesheet" href="bower_components/materialize/dist/css/materialize.min.css">
-
-
-<link rel="import" href="app/elements/elements.html">
+<link rel="shortcut icon" href="/dashboard/favicon.ico">
+<!-- <link rel="stylesheet" href="/dashboard/bower_components/materialize/dist/css/materialize.min.css"> -->
+<link rel="stylesheet" href="/dashboard/bower_components/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="style.css">
-
+<script src="/dashboard/app/elements/core9-core/js/core.js"></script>
+<script src="/dashboard/app/elements/core9-core/js/iframe/parent.js"></script>
+<script src="/dashboard/bower_components/json-editor/dist/jsoneditor.min.js"></script>
+<script src="/dashboard/app/elements/core9-dragdrop/js/drag-drop.min.js"></script>
+<script src="/dashboard/bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+<!-- <script src="bower_components/es6-shim/es6-shim.min.js"></script> -->
+<script src="/dashboard/bower_components/systemjs/dist/system.js"></script>
+<script>
+	System.baseURL = '/dashboard/';
+</script>
+<script src="/dashboard/app/elements/core9-router/js/router.js"></script>
+<script>
+	window.Polymer = window.Polymer || {};
+	window.Polymer.dom = 'shadow';
+</script>
+<link rel="import" href="/dashboard/app/elements/elements.html">
+<!-- <script type="text/javascript" src="/dashboard/bower_components/materialize/dist/js/materialize.min.js"></script> -->
+<script src="/dashboard/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	Router.config({
-		root : '/core9-components/',
+		root : '/dashboard/',
 		mode : 'history'
 	});
 	var routes = {
 		'/home$/' : function() {
 			console.log('home', arguments);
-			Core9.cleanWorkspace();
-			Core9.iframeContent.style.marginTop = "43px";
-			Core9.iframeContent.style.left = "0px";
-			Core9.iframePlaceholder.appendChild(Core9.iframeContent);
 		},
 		'/devices$/' : function() {
 			console.log('hitting device...');
-			Core9.cleanWorkspace();
-			Core9.iframeContent.style.marginTop = "0px";
-			Core9.iframeContent.style.left = "-300px";
-			Core9.workspace.appendChild(Core9.iframeContent);
+			document.querySelector('#panel-content > div.panelbutton').click();
+		},
+		'/blocks$/' : function() {
+			console.log('hitting panel-files...');
+			document.querySelector('#panel-files > div.panelbutton').click();
 		},
 		'/settings/setup$/' : function() {
 			console.log('settings/setup', arguments);
-			Core9.cleanWorkspace();
-			Core9.workspace.appendChild(document.createElement("core9-setup"));
 		},
 		'/forms$/' : function() {
 			console.log('forms', arguments);
-			Core9.cleanWorkspace();
-			Core9.workspace.appendChild(document.createElement("core9-forms"));
 		},
-	  '/pages$/' : function(req) {
-	        console.log('files', arguments);
-	        Core9.cleanWorkspace();
-	        Core9.workspace.appendChild(document.createElement("core9-pages"));
-	  },
+		'/pages$/' : function(req) {
+			console.log('files', arguments);
+		},
 		'/files$/' : function(req) {
 			console.log('files', arguments);
-			Core9.cleanWorkspace();
-			Core9.workspace.appendChild(document.createElement("core9-filemanager"));
 		},
 		'default' : function() {
 			console.log('hitting default...');
-
-			Core9.cleanWorkspace();
-
 		}
 	}
 	Router.addRoutes(routes).listen();
 	//history.pushState(null, null, "products/edit/test");
 </script>
-<script type="text/javascript" src="bower_components/materialize/dist/js/materialize.min.js"></script>
+<style>
+core9-filemanager {
+	width: 60%;
+	left: 20%;
+	position: relative;
+}
+</style>
 </head>
-<body fullbleed>
-	<div id="iframe-placeholder">
-		<iframe id="content" src="/dashboard/bower_components/gridmanager.js/demo/tinymce.html"></iframe>
-	</div>
+<body>
 
-	<core9-menu id="menu">
-	<div id="workspace"></div>
-	</core9-menu>
-
-	<script src="/dashboard/init.js"></script>
 	<script>
-		Core9.workspace = document.getElementById('workspace');
-		Core9.iframePlaceholder = document.getElementById('iframe-placeholder');
-		Core9.iframeContent = document.getElementById('content');
-		Core9.grid = document.createElement("core9-grid");
-		Core9.fileManager = document.createElement("core9-filemanager");
-		Core9.setup = document.createElement("core9-setup");
-		Core9.pages = document.createElement("core9-pages");
+		document.body.appendChild(Core9.panel.create('panel-iframe-site', -1,
+				'fullbleed', 'iframe',
+				'/dashboard/panels/grid/grid-example.html', false));
+		document.body.appendChild(Core9.panel.create('panel-content', 1, '',
+				'div', '/dashboard/panels/files/list.html', true));
+		document.body.appendChild(Core9.panel.create('panel-form', 5,
+				'nocolour', 'div', '/dashboard/panels/forms/form.html', true));
+	    document.body.appendChild(Core9.panel.create('panel-files', 6,
+	            'nocolour', 'div', '/dashboard/panels/treetable/files.html', true));
+
+		//document.body.appendChild(Core9.panel.create('panel-login', 1005, 'red', 'div', 'blank.html', true));
+		document.body.appendChild(Core9.panel.create('panel-iframe-menu', 999,
+				'menu', 'iframe',
+				'/dashboard/app/elements/core9-menu/customsize/customsize.html', false));
+	</script>
+	<script>
+		var addItems = [ {
+			name : 'Samsung',
+			icon : 'fa fa-phone-square',
+			link : '/dashboard/devices',
+			items : [ {
+				title : 'Samsung',
+				icon : 'fa fa-phone-square',
+				items : [ {
+					name : 'S II',
+					icon : 'fa fa-phone-square',
+					link : '#'
+				}, {
+					name : 'S III',
+					icon : 'fa fa-phone-square',
+					link : '#'
+				}, {
+					name : 'S IV',
+					icon : 'fa fa-phone-square',
+					link : '#'
+				} ]
+			} ]
+		} ];
+
+		var message = {
+			action : 'addItems',
+			findmenusbytitle : 'Mobile Phones',
+			addItems : addItems
+		}
+
+		window.addEventListener('iframeLoadedEvent', function(e) {
+			if (event.detail.classes == "menu") {
+				var iframe = document.getElementsByClassName('menu')[1];
+				setTimeout(function() {
+					Core9.iframe.parent.sentMessageToIframe(message, iframe);
+				}, 1000);
+
+			}
+		}, false);
 	</script>
 </body>
 </html>

@@ -1,43 +1,70 @@
-@CHARSET "UTF-8";
-html, body {
-	height: 100%;
-	margin: 0;
-	background-color: #34495e;
-	font-family: sans-serif;
-	z-index: 0;
+/* * {
+  margin: 0px;
+  padding: 0px;
+} */
+
+.fullbleed {
+  border: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 
-iframe#content {
-	border: 0;
-	position: fixed;
-	margin-top: 42px;
-	margin-bottom: -42px;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 1;
+.panel {
+  position: fixed;
+  width: 100%;
+  height: 101%;
+  background-color: rgb(54, 65, 76);
+  transition: width 500ms ease;
+  -moz-transition: width 500ms ease;
+  -ms-transition: width 500ms ease;
+  -o-transition: width 500ms ease;
+  -webkit-transition: width 500ms ease;
+    overflow-x: hidden;
 }
 
-#workspace {
-	width: 100%;
-	height: 90%;
-	_background-color: #2E547B;
-	background-color:#fff;
-	margin-top: 20px;
-	_padding: 50px;
-	_padding-bottom: 100px;
-	width: calc(100% - 300px);
-	height: calc(100% - 0px);
+.panelbutton {
+  float: right;
+  width: 40px;
+  height: 20px;
+  background-color: #ddd;
+  margin-right: -20px;
 }
 
-#menu {
-	z-index: 0;
+#panel-iframe-menu, iframe.menu {
+  border: 0;
+  _margin-top: 42px;
+  _margin-bottom: -42px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 240px;
+  height: 100%;
+  z-index: 999;
+  background-color: transparent;/* #336ca6; */
+  position: fixed;
+}
+iframe.menu {
+  _top:20px;
+      float: left;
+  _display: none;
+}
+div.menu {
+  overflow: hidden;
+}
+#draghandler {
+  background-color: #243342;
+  height: 20px;
+  width: calc(100% - 30px);
+    margin-bottom: -20px;
 }
 
-.footable>tfoot .pagination ul>li.active>a {
-  border-color: transparent;
+.red {
+  background-color:red;
 }
-
