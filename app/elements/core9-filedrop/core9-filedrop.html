@@ -299,7 +299,7 @@ input[type=button] {
 				    oXHR.addEventListener('abort', uploadAbort, false);
 				    oXHR.open('POST', 'http://127.0.0.1:8080/testdb/mybucket.files', true);
 				    oXHR.setRequestHeader("Authorization", "Basic "
-				        + Base64.encode("admin" + ":" + "changeit"));
+				        + btoa("admin" + ":" + "changeit"));
 				    oXHR.send(vFD);
 
 				    // set inner timer
@@ -393,7 +393,7 @@ input[type=button] {
 			}
 		});
 	}
-	Core9.system.multiImport(['app/elements/core9-file/js/base64']).then(
+	Core9.system.multiImport(['app/elements/core9-core/js/core-db']).then(
 			function(modules) {
 				init(modules);
 			});
