@@ -99,9 +99,7 @@ core9-filemanager {
 				'nocolour', 'div', '/dashboard/panels/forms/form.html', true));
 		
 		
-		document.body.appendChild(Core9.panel.create('panel-files', 6,
-				'nocolour', 'div', '/dashboard/panels/fileeditor/files.html',
-				true));
+
 
 		
 		
@@ -119,41 +117,24 @@ core9-filemanager {
 								false));
 	</script>
 	<script>
-/* 		var addItems = [ {
-			name : 'Samsung',
-			icon : 'fa fa-phone-square',
-			link : '/dashboard/devices',
-			items : [ {
-				title : 'Samsung',
-				icon : 'fa fa-phone-square',
-				items : [ {
-					name : 'S II',
-					icon : 'fa fa-phone-square',
-					link : '#'
-				}, {
-					name : 'S III',
-					icon : 'fa fa-phone-square',
-					link : '#'
-				}, {
-					name : 'S IV',
-					icon : 'fa fa-phone-square',
-					link : '#'
-				} ]
-			} ]
-		} ]; */
 
-		var message; /* = {
-			action : 'addItems',
-			findmenusbytitle : 'Mobile Phones',
-			addItems : addItems
-		} */
-
-		
+		var message;
 		p.then(function(msg){
 			console.log("panel loaded.. " + msg);
 			console.log(Core9.panel.__registry['fileeditor']);
 			message = Core9.panel.__registry['fileeditor'].menu;
-			console.log(message);
+			console.log(Core9.panel.__registry);
+			
+			Object.keys(Core9.panel.__registry).forEach(function(key) {
+			    console.log(key, Core9.panel.__registry[key]);
+			    var panel = Core9.panel.__registry[key];
+				document.body.appendChild(Core9.panel.create(panel.id, panel['z-index'],
+						panel.class, panel.type, panel.url,
+						true));
+			    
+			});
+
+			
 		});
 		
 		
