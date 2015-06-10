@@ -1,0 +1,15 @@
+{
+  "name": "login",
+  "version": "0.0.0",
+  "authors": [
+    "jessec <robertjessecooke@gmail.com>"
+  ],
+  "description" : "testing stuff",
+  "license" : "MIT",
+  "id" : "panel-login",
+  "z-index" : 1005,
+  "class" : "fullbleed",
+  "type" : "iframe",
+  "url" : "/dashboard/panels/login/index.html",
+  "button" : true
+}

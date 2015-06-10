@@ -37,7 +37,7 @@
 	<!-- adding resources / panels -->
 
 	var p = new Promise(function(resolve,reject){
-		Core9.panel.add(['login','fileeditor','files','forms','grid'], resolve);
+		Core9.panel.add(['login','files','forms','grid','fileeditor'], resolve);
 	});
 
 	<!-- adding resources / panels -->
@@ -46,7 +46,7 @@
 <body>
 
 	<script>
-/*     document.body
+     document.body
     .appendChild(Core9.panel
         .create(
             'panel-iframe-menu',
@@ -54,28 +54,7 @@
             'menu',
             'iframe',
             '/dashboard/app/elements/core9-menu/customsize/customsize.html',
-            false)); */
-
-/* 	document.body.appendChild(Core9.panel.create('panel-iframe-site', -1,
-				'fullbleed', 'iframe',
-				'/dashboard/panels/grid/grid-example.html', false)); */
-
-
-/* 		document.body.appendChild(Core9.panel.create('panel-content', 1, '',
-				'div', '/dashboard/panels/files/list.html', true)); */
-
-
-
-/* 		document.body.appendChild(Core9.panel.create('panel-form', 5,
-				'nocolour', 'div', '/dashboard/panels/forms/form.html', true)); */
-
-
-/* 		document.body.appendChild(Core9.panel.create('panel-login', 1005,
-				'fullbleed', 'iframe', '/dashboard/panels/login/index.html',
-				true)); */
-
-
-
+            false));
 	</script>
 	<script>
 
