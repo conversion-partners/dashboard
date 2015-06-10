@@ -223,9 +223,11 @@ juicy-ace-editor {
 	Core9.menu.contextMenu = function(event, jsonItems) {
 		var host = Core9.menu.getHostElement(event.target).shadowRoot;
 		if (host.getElementById(Core9.menu.contextId) === null) {
-			Core9.menu.show(event.target, document.createElement('div'), jsonItems);
+			Core9.menu.show(event.target, document.createElement('div'),
+					jsonItems);
 		} else {
-			Core9.menu.removeElement(host.querySelector('#' + Core9.menu.contextId));
+			Core9.menu.removeElement(host.querySelector('#'
+					+ Core9.menu.contextId));
 		}
 	}
 
@@ -303,14 +305,14 @@ juicy-ace-editor {
 	}
 
 	Core9.menu.init = function(modules) {
-		
+
 		var DB = Core9.system.unwrapModule(modules[0]);
-		
+
 		"use strict";
 		Polymer({
 			is : 'core9-fileeditor',
 			ready : function() {
-				
+
 				console.log(DB.config);
 
 				Core9.menu.addClickEvent(this.$.menutree
