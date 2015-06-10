@@ -28,11 +28,13 @@
 <script
 	src="/dashboard/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	
-	
+<script>
 	<!-- adding resources / panels -->
 	
-	<!-- adding resources / panels -->
+	Core9.panel.add(['settings']);
 	
+	<!-- adding resources / panels -->
+</script>	
 <script type="text/javascript">
 	Router.config({
 		root : '/dashboard/',
@@ -61,12 +63,21 @@
 		},
 		'/files$/' : function(req) {
 			console.log('files', arguments);
-		},
+		}/* ,
 		'default' : function() {
 			console.log('hitting default...');
-		}
+		} */
 	}
 	Router.addRoutes(routes).listen();
+	
+	var routes = {
+			'default' : function() {
+				console.log('hitting default...');
+			}
+		}
+	Router.addRoutes(routes).listen();
+	
+	
 	//history.pushState(null, null, "products/edit/test");
 </script>
 <style>

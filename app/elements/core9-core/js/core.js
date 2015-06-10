@@ -70,6 +70,10 @@ Core9.system = {
 Core9.panel = {
 	__registry : {},
 
+	add : function(listOfPanels){
+	
+	},
+	
 	__activatePanelButton : function(panel, button) {
 		button.addEventListener('click', function() {
 			if (panel.style.width == '100%') {
