@@ -68,3 +68,9 @@ div.menu {
 .login {
   background-color:rgb(0, 158, 255);
 }
+
+core9-filemanager {
+  width: 60%;
+  left: 20%;
+  position: relative;
+}
