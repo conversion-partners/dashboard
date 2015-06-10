@@ -27,7 +27,7 @@
 <link rel="import" href="/dashboard/app/elements/elements.html">
 <script
 	src="/dashboard/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-	
+
 <script>
 	<!-- adding resources / panels -->
 	
@@ -36,7 +36,7 @@
 	});
 	
 	<!-- adding resources / panels -->
-</script>	
+</script>
 <script type="text/javascript">
 	Router.config({
 		root : '/dashboard/',
@@ -117,36 +117,21 @@ core9-filemanager {
 	</script>
 	<script>
 
-		var message;
-		p.then(function(msg){
-			console.log("panel loaded.. " + msg);
-			console.log(Core9.panel.__registry['fileeditor']);
-			message = Core9.panel.__registry['fileeditor'].menu;
-			console.log(Core9.panel.__registry);
-			
+
+	setTimeout(function() {
+		p.then(function(msg){			
 			Object.keys(Core9.panel.__registry).forEach(function(key) {
-			    console.log(key, Core9.panel.__registry[key]);
 			    var panel = Core9.panel.__registry[key];
 				document.body.appendChild(Core9.panel.create(panel.id, panel['z-index'],
 						panel.class, panel.type, panel.url,
 						true));
-			    
+					var iframe = document.getElementsByClassName('menu')[1];
+					Core9.iframe.parent.sentMessageToIframe(Core9.panel.__registry[key].menu, iframe);
 			});
-
-			
 		});
+	}, 1000); // big fat hack needs a callback from on iframe loaded
+		
 
-		
-		setTimeout(function() {
-			var iframe = document.getElementsByClassName('menu')[1];
-			Core9.iframe.parent.sentMessageToIframe(message, iframe);
-		}, 1000);
-		
-/* 		window.addEventListener('iframeLoadedEvent', function(e) {
-			if (e.detail.classes == "menu") {
-				alert('hi menu');
-			}
-		}, false); */
 	</script>
 </body>
 </html>
