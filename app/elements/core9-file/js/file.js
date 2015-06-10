@@ -39,7 +39,7 @@ File = {
 			oXHR.open('GET', 'http://192.168.1.71:8080/testdb/mybucket.files/?'
 					+ params, true);
 			oXHR.setRequestHeader("Authorization", "Basic "
-					+ Base64.encode("admin" + ":" + "changeit"));
+					+ btoa("admin" + ":" + "changeit"));
 			oXHR.send();
 
 		});

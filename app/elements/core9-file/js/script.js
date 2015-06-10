@@ -101,7 +101,7 @@ function startUploading() {
     oXHR.addEventListener('error', uploadError, false);
     oXHR.addEventListener('abort', uploadAbort, false);
     oXHR.open('POST', 'http://192.168.1.71:8080/testdb/mybucket.files', true);
-    oXHR.setRequestHeader("Authorization", "Basic " + Base64.encode("admin" + ":" + "changeit"));
+    oXHR.setRequestHeader("Authorization", "Basic " + btoa("admin" + ":" + "changeit"));
     oXHR.send(vFD);
 
     // set inner timer
