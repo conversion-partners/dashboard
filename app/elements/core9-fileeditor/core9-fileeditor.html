@@ -161,6 +161,9 @@ juicy-ace-editor {
 	if (typeof Core9.menu === 'undefined') {
 		Core9.menu = {}
 	};
+	
+	Core9.menu.root = {};
+	
 	Core9.menu.contextId = "context-menu";
 	Core9.menu.getHostElement = function(element) {
 		while (element.nodeType != 11) { // 11 = DOCUMENT_FRAGMENT_NODE
@@ -262,11 +265,56 @@ juicy-ace-editor {
 		var callback = function() {
 			console.log('click on context menu :');
 			console.log(this);
+			var action = this.textContent;
 			console.log('for element : ');
 			var selectedElements = Core9.menu.getHostElement(this).$.menutree
 					.querySelector('.selected');
 			console.log(selectedElements);
-			console.log(selectedElements.getElementsByTagName("ol"));
+			
+			var nodes = selectedElements.parentNode.childNodes;
+			for (var i = 0; i < nodes.length; i++) {
+				console.log(nodes[i].tagName);
+				if(nodes[i].tagName === 'OL'){
+					if(action == 'new file'){
+						var li = document.createElement("li");
+						li.className = "page";
+						var a = document.createElement("a");
+						a.setAttribute('href','#');
+					    var text = document.createTextNode('New file');
+					    a.appendChild(text);
+					    li.appendChild(a);
+					    nodes[i].appendChild(li);
+						console.log(nodes[i]);
+						
+						Core9.menu.refreshClickEvents(Core9.menu.root);
+						
+					}
+					if(action == 'new folder'){
+						var li = document.createElement("li");
+						var label = document.createElement("label");
+						var ol = document.createElement("ol");
+					    var text = document.createTextNode('New folder');
+					    var input = document.createElement("input");
+					    input.type = "checkbox";
+					    label.className = "menu_label";
+					    label.appendChild(text);
+					    var guid = Core9.guid();
+					    label.htmlFor = guid;
+					    input.setAttribute('id',guid);
+					    
+					    
+					    li.appendChild(label);
+					    li.appendChild(input);
+					    li.appendChild(ol);
+					    
+					    nodes[i].appendChild(li);
+						console.log(nodes[i]);
+						
+						Core9.menu.refreshClickEvents(Core9.menu.root);
+					}
+				}
+			}
+			console.log();
 		}
 
 		var jsonItems = {}
@@ -304,6 +352,25 @@ juicy-ace-editor {
 		}
 		return false;
 	}
+	
+	Core9.menu.refreshClickEvents = function(that){
+		Core9.menu.root = that;
+		Core9.menu.addClickEvent(that.$.menutree
+				.querySelectorAll(".menu_label"), 'click',
+				Core9.menu.handleClickMenu);
+		Core9.menu.addClickEvent(that.$.menutree.querySelectorAll("a"),
+				'click', Core9.menu.handleClickMenu);
+		Core9.menu.addClickEvent(that.$.menutree
+				.querySelectorAll(".menu_label"), 'contextmenu',
+				Core9.menu.initMenu);
+		Core9.menu.addClickEvent(that.$.menutree.querySelectorAll("a"),
+				'contextmenu', Core9.menu.initMenu);
+
+		that.$.showmenu.addEventListener('click',
+				Core9.menu.showFileBrowser);
+		
+		
+	}
 
 	Core9.menu.init = function(modules) {
 
@@ -315,20 +382,8 @@ juicy-ace-editor {
 			ready : function() {
 
 				//console.log(DB.config);
-
-				Core9.menu.addClickEvent(this.$.menutree
-						.querySelectorAll(".menu_label"), 'click',
-						Core9.menu.handleClickMenu);
-				Core9.menu.addClickEvent(this.$.menutree.querySelectorAll("a"),
-						'click', Core9.menu.handleClickMenu);
-				Core9.menu.addClickEvent(this.$.menutree
-						.querySelectorAll(".menu_label"), 'contextmenu',
-						Core9.menu.initMenu);
-				Core9.menu.addClickEvent(this.$.menutree.querySelectorAll("a"),
-						'contextmenu', Core9.menu.initMenu);
-
-				this.$.showmenu.addEventListener('click',
-						Core9.menu.showFileBrowser);
+				var that = this;
+				Core9.menu.refreshClickEvents(that);
 
 			}
 		});
