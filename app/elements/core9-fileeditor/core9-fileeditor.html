@@ -92,7 +92,7 @@ juicy-ace-editor {
 }
 </style>
 <template>
-
+<div id="menucontainer">
 <ol id="menutree">
 	<li><label class="menu_label" for="c1">Menu Gen14 Am0a1</label> <input
 		type="checkbox" id="c1" /> <!-- input must follow label for safari -->
@@ -136,7 +136,7 @@ juicy-ace-editor {
 				</ol></li>
 		</ol></li>
 </ol>
-
+</div>
 <div id="workspace">
 	<ul id="top-menu">
 		<li><a id="showmenu" href="javascript:void(0);">files</a></li>
@@ -353,8 +353,18 @@ juicy-ace-editor {
 		return false;
 	}
 	
+	Core9.emptyElement = function(element){
+		while (element.firstChild) {
+			element.removeChild(element.firstChild);
+		}
+	}
+	
 	Core9.menu.refreshClickEvents = function(that){
 		Core9.menu.root = that;
+/* 		var menu = that.$.menutree.cloneNode(true);
+		Core9.emptyElement(that.$.menucontainer);
+		that.$.menucontainer.appendChild(menu); */
+		
 		Core9.menu.addClickEvent(that.$.menutree
 				.querySelectorAll(".menu_label"), 'click',
 				Core9.menu.handleClickMenu);
