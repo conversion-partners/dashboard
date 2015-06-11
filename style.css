@@ -75,3 +75,16 @@ core9-filemanager {
   left: 20%;
   position: relative;
 }
+
+.panelbutton > .open, .panelbutton > .close {
+	height:20px;
+	width:10px;
+}
+
+.panelbutton > .open {
+	float: right;
+}
+.panelbutton > .close {
+	float: left;
+}
+

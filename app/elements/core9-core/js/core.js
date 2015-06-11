@@ -93,6 +93,20 @@ Core9.panel = {
 		return Core9.panel.__registry;
 	},
 	__activatePanelButton : function(panel, button) {
+		// now close open
+
+		button.getElementsByClassName("open")[0].addEventListener('click', function() {
+				panel.style.width = '100%';
+				panel.childNodes[1].style.width = "100%";
+		}, false);
+		
+		button.getElementsByClassName("close")[0].addEventListener('click', function() {
+			panel.style.width = '0px'
+			panel.childNodes[1].style.width = "0px";
+		}, false);
+		
+
+/*
 		button.addEventListener('click', function() {
 			if (panel.style.width == '100%') {
 				panel.style.width = '0px'
@@ -102,11 +116,20 @@ Core9.panel = {
 				panel.childNodes[1].style.width = "100%";
 			}
 		}, false);
-
+*/
 		return button;
 	},
 	__createPanelButton : function() {
 		var panelButton = document.createElement('div');
+		var openButton = document.createElement('div');
+		var closeButton = document.createElement('div');
+		
+		openButton.className = "open";
+		closeButton.className = "close";
+		
+		panelButton.appendChild(openButton);
+		panelButton.appendChild(closeButton);
+		
 		panelButton.style.zIndex = "9";
 		panelButton.className = "panelbutton";
 		return panelButton;
