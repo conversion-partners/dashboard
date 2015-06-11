@@ -78,13 +78,16 @@ core9-filemanager {
 
 .panelbutton > .open, .panelbutton > .close {
 	height:20px;
-	width:10px;
+	width:5px;
 }
 
 .panelbutton > .open {
-	float: right;
+	float: left;
+	background-color: red;
 }
 .panelbutton > .close {
 	float: left;
+	background-color: red;
+	
 }
 
