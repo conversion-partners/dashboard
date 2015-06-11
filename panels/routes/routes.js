@@ -30,11 +30,11 @@ var routes = {
 	},
 	'/devices$/' : function() {
 		console.log('hitting device...');
-		document.querySelector('#panel-content > div.panelbutton').click();
+		openPanel('panel-content');
 	},
 	'/blocks$/' : function() {
 		console.log('hitting panel-files...');
-		document.querySelector('#panel-files > div.panelbutton').click();
+		openPanel('panel-files');
 	},
 	'/settings/setup$/' : function() {
 		console.log('settings/setup', arguments);
