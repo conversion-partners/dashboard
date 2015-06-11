@@ -30,8 +30,8 @@
 </script>
 <script>
 	<!-- adding resources / panels -->
-	Core9.panellist = ['login','routes','files','forms','grid','fileeditor'];
-
+	Core9.panellist = ['routes','files','forms','grid','fileeditor'];
+	//Core9.panellist = ['login','routes','files','forms','grid','fileeditor'];
 	var p = new Promise(function(resolve,reject){
 		Core9.panel.add(Core9.panellist, resolve); // order does matter
 	});
@@ -65,7 +65,8 @@
 			    }
 			});
 			setTimeout(function() {
-				Core9.panel.open('panel-login');
+				//Core9.panel.open('panel-login');
+				Core9.panel.open('panel-files');
 			}, 1000);
 			document.getElementsByClassName('menu')[1].style.visibility = "visible";
 		});

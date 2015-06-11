@@ -227,7 +227,7 @@ Core9.panel = {
 	},
 	get : function(id) {
 	},
-	close : function(){
+	close : function() {
 		for ( var i = 0; i < Core9.panellist.length; i++) {
 			var panel = Core9.panel.__registry[Core9.panellist[i]];
 			if (panel.id) {
@@ -239,8 +239,12 @@ Core9.panel = {
 	},
 	open : function(openPanel) {
 		this.close();
-		document.querySelector(
-				'#' + openPanel + ' > div.panelbutton > div.open').click();
+		var panel = document.querySelector('#' + openPanel
+				+ ' > div.panelbutton > div.open');
+		if (panel) {
+			panel.click();
+		}
+
 	}
 
 }
