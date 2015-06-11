@@ -215,7 +215,7 @@ var arrMenu = [ {
 		link : '#'
 	}, {
 		name : 'Credits',
-		link : '#'
+		link : '/dashboard/home'
 	} ]
 } ];
 

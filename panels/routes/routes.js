@@ -3,27 +3,30 @@ console.log('registry : ');
 
 console.log(Core9.panellist);
 
-var closeAllPanels = function(){
+var openPanel = function(openPanel){
 
 	for (var i = 0; i < Core9.panellist.length; i++) { 
 		console.log(Core9.panellist[i]);
-		
-		console.log(Core9.panel.__registry[Core9.panellist[i]]);
-		
+		var panel = Core9.panel.__registry[Core9.panellist[i]];
+		console.log(panel.id);
+		if(panel.id){
+			document.querySelector('#'+panel.id+' > div.panelbutton > div.close').click();
+		}
 	}
-
+	document.querySelector('#'+openPanel+' > div.panelbutton > div.open').click();
 }
 
 
 
 
 
-closeAllPanels();
+
 
 
 var routes = {
 	'/home$/' : function() {
 		console.log('home', arguments);
+		openPanel('panel-iframe-site');
 	},
 	'/devices$/' : function() {
 		console.log('hitting device...');
