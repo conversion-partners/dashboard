@@ -1,3 +1,26 @@
+
+console.log('registry : ');
+
+console.log(Core9.panel.__registry);
+
+var closeAllPanels = function(){
+
+	Object.keys(Core9.panel.__registry).forEach(function(key) {
+		var panel = Core9.panel.__registry[key];
+		console.log(panel);
+	});
+	
+}
+
+
+
+
+
+setTimeout(function(){ 
+	closeAllPanels();
+}, 3000);
+
+
 var routes = {
 	'/home$/' : function() {
 		console.log('home', arguments);
