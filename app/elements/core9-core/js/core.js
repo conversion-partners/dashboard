@@ -68,29 +68,33 @@ Core9.system = {
 }
 
 Core9.panel = {
-    __listOfPanels : {},
+	__listOfPanels : {},
 	__registry : {},
 	__resolve : {},
-	__setRegistry : function(panel, json){
+	__setRegistry : function(panel, json) {
 		Core9.panel.__registry[panel] = json;
 		var lastItem = Core9.panel.__listOfPanels[Core9.panel.__listOfPanels.length - 1];
-		if(panel == lastItem){
+		if (panel == lastItem) {
 			Core9.panel.__resolve('all panels loaded');
 		}
 	},
-	__setPanelJson : function(panel){
-		Core9.ajax('GET', '/dashboard/panels/'+panel+'/routes.js', null, function(data){
-			eval(data.responseText);
-		});
-		Core9.ajax('GET', '/dashboard/panels/'+panel+'/data.json', null, function(data){
-			Core9.panel.__setRegistry(panel, JSON.parse(data.responseText));
-		});
+	__setPanelJson : function(panel) {
+		Core9.ajax('GET', '/dashboard/panels/' + panel + '/routes.js', null,
+				function(data) {
+					eval(data.responseText);
+				});
+		Core9.ajax('GET', '/dashboard/panels/' + panel + '/data.json', null,
+				function(data) {
+					Core9.panel.__setRegistry(panel, JSON
+							.parse(data.responseText));
+				});
 	},
 	add : function(listOfPanels, resolve) {
-		if(listOfPanels.length == 0)return;
+		if (listOfPanels.length == 0)
+			return;
 		Core9.panel.__resolve = resolve;
 		Core9.panel.__listOfPanels = listOfPanels;
-		for (var i = 0; i < listOfPanels.length; i++) {
+		for ( var i = 0; i < listOfPanels.length; i++) {
 			Core9.panel.__setPanelJson(listOfPanels[i]);
 		}
 	},
@@ -100,41 +104,37 @@ Core9.panel = {
 	__activatePanelButton : function(panel, button) {
 		// now close open
 
-		button.getElementsByClassName("open")[0].addEventListener('click', function() {
-				panel.style.width = '100%';
-				panel.childNodes[1].style.width = "100%";
-		}, false);
-		
-		button.getElementsByClassName("close")[0].addEventListener('click', function() {
-			panel.style.width = '0px'
-			panel.childNodes[1].style.width = "0px";
-		}, false);
-		
+		button.getElementsByClassName("open")[0].addEventListener('click',
+				function() {
+					panel.style.width = '100%';
+					panel.childNodes[1].style.width = "100%";
+				}, false);
 
-/*
-		button.addEventListener('click', function() {
-			if (panel.style.width == '100%') {
-				panel.style.width = '0px'
-				panel.childNodes[1].style.width = "0px";
-			} else {
-				panel.style.width = '100%';
-				panel.childNodes[1].style.width = "100%";
-			}
-		}, false);
-*/
+		button.getElementsByClassName("close")[0].addEventListener('click',
+				function() {
+					panel.style.width = '0px'
+					panel.childNodes[1].style.width = "0px";
+				}, false);
+
+		/*
+		 * button.addEventListener('click', function() { if (panel.style.width ==
+		 * '100%') { panel.style.width = '0px' panel.childNodes[1].style.width =
+		 * "0px"; } else { panel.style.width = '100%';
+		 * panel.childNodes[1].style.width = "100%"; } }, false);
+		 */
 		return button;
 	},
 	__createPanelButton : function() {
 		var panelButton = document.createElement('div');
 		var openButton = document.createElement('div');
 		var closeButton = document.createElement('div');
-		
+
 		openButton.className = "open";
 		closeButton.className = "close";
-		
+
 		panelButton.appendChild(openButton);
 		panelButton.appendChild(closeButton);
-		
+
 		panelButton.style.zIndex = "9";
 		panelButton.className = "panelbutton";
 		return panelButton;
@@ -226,6 +226,21 @@ Core9.panel = {
 	update : function(id, classes, content) {
 	},
 	get : function(id) {
+	},
+	open : function(openPanel) {
+
+		for ( var i = 0; i < Core9.panellist.length; i++) {
+			console.log(Core9.panellist[i]);
+			var panel = Core9.panel.__registry[Core9.panellist[i]];
+			console.log(panel.id);
+			if (panel.id) {
+				document.querySelector(
+						'#' + panel.id + ' > div.panelbutton > div.close')
+						.click();
+			}
+		}
+		document.querySelector(
+				'#' + openPanel + ' > div.panelbutton > div.open').click();
 	}
 
 }

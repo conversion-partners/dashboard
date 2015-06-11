@@ -1,40 +1,16 @@
 
-console.log('registry : ');
-
-console.log(Core9.panellist);
-
-var openPanel = function(openPanel){
-
-	for (var i = 0; i < Core9.panellist.length; i++) { 
-		console.log(Core9.panellist[i]);
-		var panel = Core9.panel.__registry[Core9.panellist[i]];
-		console.log(panel.id);
-		if(panel.id){
-			document.querySelector('#'+panel.id+' > div.panelbutton > div.close').click();
-		}
-	}
-	document.querySelector('#'+openPanel+' > div.panelbutton > div.open').click();
-}
-
-
-
-
-
-
-
-
 var routes = {
 	'/home$/' : function() {
 		console.log('home', arguments);
-		openPanel('panel-iframe-site');
+		Core9.panel.open('panel-iframe-site');
 	},
 	'/devices$/' : function() {
 		console.log('hitting device...');
-		openPanel('panel-content');
+		Core9.panel.open('panel-content');
 	},
 	'/blocks$/' : function() {
 		console.log('hitting panel-files...');
-		openPanel('panel-files');
+		Core9.panel.open('panel-files');
 	},
 	'/settings/setup$/' : function() {
 		console.log('settings/setup', arguments);
