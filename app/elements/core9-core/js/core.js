@@ -228,11 +228,8 @@ Core9.panel = {
 	get : function(id) {
 	},
 	open : function(openPanel) {
-
 		for ( var i = 0; i < Core9.panellist.length; i++) {
-			console.log(Core9.panellist[i]);
 			var panel = Core9.panel.__registry[Core9.panellist[i]];
-			console.log(panel.id);
 			if (panel.id) {
 				document.querySelector(
 						'#' + panel.id + ' > div.panelbutton > div.close')

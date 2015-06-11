@@ -55,8 +55,6 @@
 
 	setTimeout(function() {
 		p.then(function(msg){
-			console.log('hi from p');
-			console.log(msg);
 			Object.keys(Core9.panel.__registry).forEach(function(key) {
 			    var panel = Core9.panel.__registry[key];
 			    if(panel.url){
