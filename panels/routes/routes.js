@@ -1,24 +1,24 @@
 
 console.log('registry : ');
 
-console.log(Core9.panel.__registry);
+console.log(Core9.panellist);
 
 var closeAllPanels = function(){
 
-	Object.keys(Core9.panel.__registry).forEach(function(key) {
-		var panel = Core9.panel.__registry[key];
-		console.log(panel);
-	});
-	
+	for (var i = 0; i < Core9.panellist.length; i++) { 
+		console.log(Core9.panellist[i]);
+		
+		console.log(Core9.panel.__registry[Core9.panellist[i]]);
+		
+	}
+
 }
 
 
 
 
 
-setTimeout(function(){ 
-	closeAllPanels();
-}, 3000);
+closeAllPanels();
 
 
 var routes = {

@@ -30,10 +30,10 @@
 </script>
 <script>
 	<!-- adding resources / panels -->
+	Core9.panellist = ['login','routes','files','forms','grid','fileeditor'];
 
 	var p = new Promise(function(resolve,reject){
-		Core9.panel.add(['login','routes','files','forms','grid','fileeditor'], resolve); // order does matter
-		//Core9.panel.add(['login','routes','files','forms','grid','fileeditor'], resolve); // order does matter
+		Core9.panel.add(Core9.panellist, resolve); // order does matter
 	});
 
 	<!-- adding resources / panels -->
@@ -55,6 +55,8 @@
 
 	setTimeout(function() {
 		p.then(function(msg){
+			console.log('hi from p');
+			console.log(msg);
 			Object.keys(Core9.panel.__registry).forEach(function(key) {
 			    var panel = Core9.panel.__registry[key];
 			    if(panel.url){
