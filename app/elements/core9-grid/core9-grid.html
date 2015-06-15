@@ -23,11 +23,7 @@
 		<option value="suspended">Suspended</option>
 	</select> <label>Status:</label>
 </div>
-<script>
-	$(document).ready(function() {
-		//$('select').material_select();
-	});
-</script>
+
 
 <br /><br />
 
@@ -73,7 +69,13 @@
 </table>
 
 
-<content></content> </template> </dom-module>
+<content></content> 
+<script>
+	$(document).ready(function() {
+
+	});
+</script>
+</template> </dom-module>
 
 
 
@@ -84,11 +86,22 @@
 		    return "/dashboard/"+name+"";
 		},
 		ready : function() {
-
 			var that = this;
 			
+
+			setTimeout(function(){ 
+				var callback = function(e){
+					console.log(this);
+					e.preventDefault();
+					return false;
+				}
+				var hrefs = that.$.table2.querySelectorAll('a');
+				for (var i = 0; i < hrefs.length; i++) {
+					hrefs[i].addEventListener('click', callback);
+				}
+				//console.log(hrefs); 
 			
-			
+			}, 100);
 
 			$
 					.ajax(
