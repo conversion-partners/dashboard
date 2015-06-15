@@ -11,6 +11,9 @@ var routes = {
 	},
 	'/settings/setup$/' : function() {
 	},
+	'/themes$/' : function(){
+		Core9.panel.open('panel-themes');
+	},
 	'/forms$/' : function() {
 	},
 	'/pages$/' : function(req) {

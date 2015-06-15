@@ -6,10 +6,36 @@
   ],
   "description" : "testing stuff",
   "license" : "MIT",
-  "id" : "panel-div-themes",
+  "id" : "panel-themes",
   "z-index" : 10,
   "class" : "",
   "type" : "div",
   "url" : "/dashboard/panels/themes/themes.html",
-  "button" : false
+  "button" : false,
+  "menu" : {
+			"action" : "addItems",
+			"findmenusbytitle" : "All Categories",
+			"addItems" : [ {
+			"name" : "Themes",
+			"icon" : "fa fa-phone-square",
+			"link" : "/dashboard/themes",
+			"items" : [ {
+				"title" : "Summer",
+				"icon" : "fa fa-phone-square",
+				"items" : [ {
+					"name" : "Block I",
+					"icon" : "fa fa-phone-square",
+					"link" : "#"
+				}, {
+					"name" : "Block III",
+					"icon" : "fa fa-phone-square",
+					"link" : "#"
+				}, {
+					"name" : "Block IV",
+					"icon" : "fa fa-phone-square",
+					"link" : "#"
+				} ]
+			} ]
+		} ]
+	}
 }
