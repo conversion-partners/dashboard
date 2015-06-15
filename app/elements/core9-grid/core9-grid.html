@@ -36,8 +36,8 @@
 >
 	<thead>
 		<tr>
-			<th>First Name</th>
-			<th>Last Name</th>
+			<th>Name</th>
+			<th>Category</th>
 			<th data-hide="phone,tablet">Job Title</th>
 			<th data-hide="phone,tablet">DOB</th>
 			<th data-hide="phone">Status</th>
@@ -47,9 +47,16 @@
 	<tbody>
 		<template is="dom-repeat" items="{{checks}}">
 		<tr>
-			<td>{{item.first}}</td>
+			<td>
+			
+			<a href$="{{computeUrl(item.first)}}">{{item.first}}</a>
+
+			
+			</td>
 			<td><a href="#">{{item.last}}</a></td>
-			<td>Traffic Court Referee</td>
+			<td>
+				<img alt="Canvas | The Multi-Purpose HTML5 Template - ThemeForest Item for Sale" border="0" class="landscape-image-magnifier preload no_preview" data-item-author="SemiColonWeb" data-item-category="Site Templates / Corporate" data-item-cost="16" data-item-name="Canvas | The Multi-Purpose HTML5 Template" data-preview-height="" data-preview-url="https://0.s3.envato.com/files/137613438/screenshots/01_preview.__large_preview.jpg" data-preview-width="" height="80" src="https://0.s3.envato.com/files/137613437/small.jpg" title="" width="80" data-tooltip="Canvas | The Multi-Purpose HTML5 Template">
+			</td>
 			<td data-value="78025368997">22 Jun 1972</td>
 			<td data-value="1"><span class="status-metro status-active" title="Active">Active</span></td>
 			<td><a class="row-delete" href="#"><span class="glyphicon glyphicon-remove">x</span></a></td>
@@ -73,9 +80,15 @@
 <script>
 	Polymer({
 		is : 'core9-grid',
+		computeUrl(name){
+		    return "/dashboard/"+name+"";
+		},
 		ready : function() {
 
 			var that = this;
+			
+			
+			
 
 			$
 					.ajax(
