@@ -1,0 +1,19 @@
+{
+  "name": "dashboard-custom-apps",
+  "version": "0.0.0",
+  "homepage": "https://github.com/conversion-partners/dashboard",
+  "authors": [
+    "trimm <robertjessecooke@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "core9-app": "*"
+  }
+}
