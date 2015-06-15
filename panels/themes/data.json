@@ -1,0 +1,15 @@
+{
+  "name": "themes",
+  "version": "0.0.0",
+  "authors": [
+    "jessec <robertjessecooke@gmail.com>"
+  ],
+  "description" : "testing stuff",
+  "license" : "MIT",
+  "id" : "panel-div-themes",
+  "z-index" : 10,
+  "class" : "",
+  "type" : "div",
+  "url" : "/dashboard/panels/themes/themes.html",
+  "button" : false
+}
