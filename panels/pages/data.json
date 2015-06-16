@@ -1,0 +1,158 @@
+{
+  "name": "pages",
+  "version": "0.0.0",
+  "authors": [
+    "jessec <robertjessecooke@gmail.com>"
+  ],
+  "description" : "testing stuff",
+  "license" : "MIT",
+  "id" : "panel-pages",
+  "z-index" : 10,
+  "class" : "",
+  "type" : "div",
+  "url" : "/dashboard/panels/themes/themes.html",
+  "button" : false,
+  "menu" : {
+			"action" : "addItems",
+			"findmenusbytitle" : "All Categories",
+			"addItems" : [ {
+			"name" : "Pages",
+			"icon" : "fa fa-phone-square",
+			"link" : "/dashboard/pages",
+			"items" : [ {
+				"title" : "Pages",
+				"icon" : "fa fa-phone-square",
+				"items" : [ {
+					"name" : "Easydrain",
+					"icon" : "fa fa-phone-square",
+					"link" : "#",
+					"items" : [ {
+							"title" : "Easydrain",
+							"icon" : "fa fa-phone-square",
+							"items" : [ {
+								"name" : "Blocks",
+								"icon" : "fa fa-phone-square",
+								"link" : "#",
+								"items" : [ {
+										"title" : "Headers",
+										"icon" : "fa fa-phone-square",
+										"items" : [ {
+											"name" : "Full menu",
+											"icon" : "fa fa-phone-square",
+											"link" : "/dashboard/theme/easydrain/blocks/full-menu/add"
+										}, {
+											"name" : "Minimal menu",
+											"icon" : "fa fa-phone-square",
+											"link" : "#"
+										} ]
+									} ]
+							}, {
+								"name" : "Templates",
+								"icon" : "fa fa-phone-square",
+								"link" : "#",
+								"items" : [ {
+										"title" : "Home page",
+										"icon" : "fa fa-phone-square",
+										"items" : [ {
+											"name" : "Full menu",
+											"icon" : "fa fa-phone-square",
+											"link" : "/dashboard/theme/easydrain/template/full-menu/add"
+										}, {
+											"name" : "Minimal menu",
+											"icon" : "fa fa-phone-square",
+											"link" : "#"
+										} ]
+									} ]
+							} ]
+						} ]
+				}, {
+					"name" : "Minimal site",
+					"icon" : "fa fa-phone-square",
+					"link" : "#",
+					"items" : [ {
+							"title" : "Easydrain",
+							"icon" : "fa fa-phone-square",
+							"items" : [ {
+								"name" : "Blocks",
+								"icon" : "fa fa-phone-square",
+								"link" : "#",
+								"items" : [ {
+										"title" : "Headers",
+										"icon" : "fa fa-phone-square",
+										"items" : [ {
+											"name" : "Full menu",
+											"icon" : "fa fa-phone-square",
+											"link" : "#"
+										}, {
+											"name" : "Minimal menu",
+											"icon" : "fa fa-phone-square",
+											"link" : "#"
+										} ]
+									} ]
+							}, {
+								"name" : "Templates",
+								"icon" : "fa fa-phone-square",
+								"link" : "#",
+								"items" : [ {
+										"title" : "Home page",
+										"icon" : "fa fa-phone-square",
+										"items" : [ {
+											"name" : "Full menu",
+											"icon" : "fa fa-phone-square",
+											"link" : "#"
+										}, {
+											"name" : "Minimal menu",
+											"icon" : "fa fa-phone-square",
+											"link" : "#"
+										} ]
+									} ]
+							} ]
+						} ]
+				}, {
+					"name" : "Minimal shop",
+					"icon" : "fa fa-phone-square",
+					"link" : "#",
+					"items" : [ {
+							"title" : "Easydrain",
+							"icon" : "fa fa-phone-square",
+							"items" : [ {
+								"name" : "Blocks",
+								"icon" : "fa fa-phone-square",
+								"link" : "#",
+								"items" : [ {
+										"title" : "Headers",
+										"icon" : "fa fa-phone-square",
+										"items" : [ {
+											"name" : "Full menu",
+											"icon" : "fa fa-phone-square",
+											"link" : "#"
+										}, {
+											"name" : "Minimal menu",
+											"icon" : "fa fa-phone-square",
+											"link" : "#"
+										} ]
+									} ]
+							}, {
+								"name" : "Templates",
+								"icon" : "fa fa-phone-square",
+								"link" : "#",
+								"items" : [ {
+										"title" : "Home page",
+										"icon" : "fa fa-phone-square",
+										"items" : [ {
+											"name" : "Full menu",
+											"icon" : "fa fa-phone-square",
+											"link" : "#"
+										}, {
+											"name" : "Minimal menu",
+											"icon" : "fa fa-phone-square",
+											"link" : "#"
+										} ]
+									} ]
+							} ]
+						} ]
+				} ]
+			} ]
+		} ]
+	}
+}
