@@ -13,6 +13,7 @@ Core9.iframe.parent = {
 		var messageEvent = eventMethod == "attachEvent" ? "onmessage"
 				: "message";
 		eventer(messageEvent, function(e) {
+			console.log(e);
 			if (e.data.action == 'menuClick') {
 
 				if (typeof e.data.href !== 'undefined') {

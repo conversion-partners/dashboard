@@ -39,7 +39,7 @@
 										"items" : [ {
 											"name" : "Full menu",
 											"icon" : "fa fa-phone-square",
-											"link" : "#"
+											"link" : "/dashboard/theme/easydrain/blocks/full-menu/add"
 										}, {
 											"name" : "Minimal menu",
 											"icon" : "fa fa-phone-square",
@@ -56,7 +56,7 @@
 										"items" : [ {
 											"name" : "Full menu",
 											"icon" : "fa fa-phone-square",
-											"link" : "#"
+											"link" : "/dashboard/theme/easydrain/template/full-menu/add"
 										}, {
 											"name" : "Minimal menu",
 											"icon" : "fa fa-phone-square",
