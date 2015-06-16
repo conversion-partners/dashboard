@@ -20,12 +20,51 @@
 			"icon" : "fa fa-phone-square",
 			"link" : "/dashboard/themes",
 			"items" : [ {
-				"title" : "Summer",
+				"title" : "Themes",
 				"icon" : "fa fa-phone-square",
 				"items" : [ {
-					"name" : "Block I",
+					"name" : "Easydrain",
 					"icon" : "fa fa-phone-square",
-					"link" : "#"
+					"link" : "#",
+					"items" : [ {
+							"title" : "Easydrain",
+							"icon" : "fa fa-phone-square",
+							"items" : [ {
+								"name" : "Blocks",
+								"icon" : "fa fa-phone-square",
+								"link" : "#",
+								"items" : [ {
+										"title" : "Headers",
+										"icon" : "fa fa-phone-square",
+										"items" : [ {
+											"name" : "Full menu",
+											"icon" : "fa fa-phone-square",
+											"link" : "#"
+										}, {
+											"name" : "Minimal menu",
+											"icon" : "fa fa-phone-square",
+											"link" : "#"
+										} ]
+									} ]
+							}, {
+								"name" : "Templates",
+								"icon" : "fa fa-phone-square",
+								"link" : "#",
+								"items" : [ {
+										"title" : "Home page",
+										"icon" : "fa fa-phone-square",
+										"items" : [ {
+											"name" : "Full menu",
+											"icon" : "fa fa-phone-square",
+											"link" : "#"
+										}, {
+											"name" : "Minimal menu",
+											"icon" : "fa fa-phone-square",
+											"link" : "#"
+										} ]
+									} ]
+							} ]
+						} ]
 				}, {
 					"name" : "Block III",
 					"icon" : "fa fa-phone-square",
