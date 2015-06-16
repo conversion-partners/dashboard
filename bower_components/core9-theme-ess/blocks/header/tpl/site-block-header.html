@@ -1,0 +1,37 @@
+{namespace site.block}
+/**
+ * Kennispark icon template
+ * @param id
+ * @param category1
+ * @param category2
+ * @param icon
+ * @param txt
+ * @param num
+ * @param title
+ * @param popup_title
+ * @param content
+ */
+{template .icon}
+<div class="mega-entry {$category1}{if $category2 != ''} {$category2}{/if} cat-all core9-block" data-type="icon" data-src="/jaarplan-nieuw/svg-generator.php?img={$icon}&amp;txt={$txt}&amp;num={$num}" data-width="320" data-height="240">
+  <div class="mega-covercaption mega-square-top mega-landscape-bottom mega-portrait-bottom">
+    <div class="mega-title">{$title?:''}</div>
+    <div class="mega-content">{$content?:''|noAutoescape}</div>
+  </div>
+  <a class="fancybox icon" id="{$id?:''}" rel="group" href="/jaarplan-nieuw/svg-generator.php?img={$icon}&amp;txt={$txt|escapeUri}&amp;num={$num}" title="{$popup_title?:''}" data-bkgrnd="
+    {if $category1 == 'start-grow'}
+      green
+    {elseif $category1 == 'innovate'}
+      pink
+    {elseif $category1 == 'settle'}
+      red
+    {elseif $category1 == 'general'}
+      blue
+    {elseif $category1 == 'milestones'}
+      purple
+    {/if}">
+    <div class="mega-hover">
+      <div class="mega-hoverview"></div>
+    </div>
+  </a>
+</div>
+{/template}
