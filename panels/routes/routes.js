@@ -18,6 +18,8 @@ var routes = {
 	'/forms$/' : function() {
 	},
 	'/pages$/' : function(req) {
+		console.log('pages..');
+		Core9.panel.open('panel-pages');
 	},
 	'/files$/' : function(req) {
 	}

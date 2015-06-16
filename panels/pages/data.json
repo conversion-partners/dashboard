@@ -7,10 +7,10 @@
   "description" : "testing stuff",
   "license" : "MIT",
   "id" : "panel-pages",
-  "z-index" : 10,
+  "z-index" : 11,
   "class" : "",
   "type" : "div",
-  "url" : "/dashboard/panels/themes/themes.html",
+  "url" : "/dashboard/panels/pages/pages.html",
   "button" : false,
   "menu" : {
 			"action" : "addItems",
