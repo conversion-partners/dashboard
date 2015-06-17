@@ -8,9 +8,9 @@
   "license" : "MIT",
   "id" : "panel-pages",
   "z-index" : 11,
-  "class" : "",
-  "type" : "div",
-  "url" : "/dashboard/panels/pages/pages.html",
+  "class" : "fullbleed",
+  "type" : "iframe",
+  "url" : "/dashboard/panels/pages/nestable.html",
   "button" : false,
   "menu" : {
 			"action" : "addItems",

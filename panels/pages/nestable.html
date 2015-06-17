@@ -98,15 +98,26 @@ p {
 .dd-hover > .dd-handle {
     background: #2ea8e5 !important;
 }
-
+.dd-handle {
+padding-left: 20px;
+}
 /**
  * Nestable Draggable Handles
  */
+.dd-content {
+	padding-left: 30px;
+}
+
+.dd-item > button {
+	left:30px;
+	margin-right: -5px;
+}
 
 .dd3-content {
     display: block;
     height: 30px;
     margin: 5px 0;
+    margin-left: 15px;
     padding: 5px 10px 5px 40px;
     color: #333;
     text-decoration: none;
@@ -283,10 +294,13 @@ p {
                     }
                 ];
         
+        var updateOutput = function(){
+        	console.log('update menu');
+        }
         // activate Nestable for list 1
         $('#nestable').nestable({
             group: 1,
-            maxDepth:20,
+            maxDepth:40,
             json: json,
             contentCallback: function(item) {
                 var content = item.content || '' ? item.content : item.id;
