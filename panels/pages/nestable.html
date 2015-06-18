@@ -194,7 +194,7 @@ p {
 	width: calc(100% - 700px);
 	min-height: 500px;
 	left: 550px;
-	top: -15px;
+	top: 0px;
 }
 </style>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -213,7 +213,21 @@ p {
 		<div class="dd" id="nestable"></div>
 
 		<div id="menuitemcontent">
+<div class="btn-group" role="group" aria-label="...">
+  <button type="button" class="btn btn-default">1</button>
+  <button type="button" class="btn btn-default">2</button>
 
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Dropdown
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li><a href="#">Dropdown link</a></li>
+      <li><a href="#">Dropdown link</a></li>
+    </ul>
+  </div>
+</div>
 			<div id='editor_holder'></div>
 			<button id='submit'>Submit (console.log)</button>
 
