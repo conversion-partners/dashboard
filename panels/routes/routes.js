@@ -26,7 +26,11 @@ var routes = {
 		''+
 		
 			'<button type=\'button\' class=\'btn  btn-xs  btn-primary dropdown-toggle\' data-toggle=\'dropdown\'><span class=\'caret\'></span><span class=\'sr-only\'>Toggle Dropdown</span></button>'+
-			'<ul class=\'dropdown-menu\' role=\'menu\'><li><a title=\'Save\'  href=\'#\' class=\'gm-save\'><span class=\'fa fa-save\'></span> Save</a></li><li><a title=\'Reset Grid\' href=\'#\' class=\'gm-resetgrid\'><span class=\'fa fa-trash-o\'></span> site</a></li></ul>' + 
+			
+			'<ul class=\'dropdown-menu\' role=\'menu\'>'+
+				'<li><a title=\'Save\'  href=\'#\' class=\'gm-save\'><span class=\'fa fa-save\'></span> Save</a></li>'+
+				'<li><a title=\'Reset Grid\' href=\'#\' class=\'gm-resetgrid\'><span class=\'fa fa-trash-o\'></span> site</a></li>'+
+			'</ul>' + 
 		
 		''+
 			'<button type=\'button\' class=\'btn  btn-xs  btn-primary dropdown-toggle\' data-toggle=\'dropdown\'><span class=\'caret\'></span><span class=\'sr-only\'>Toggle Dropdown</span></button>'+
