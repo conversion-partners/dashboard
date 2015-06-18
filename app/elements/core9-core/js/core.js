@@ -245,6 +245,9 @@ Core9.panel = {
 			panel.click();
 		}
 
+	},
+	getIframeById : function(id){
+		return document.getElementById(id).childNodes[1];
 	}
 
 }
