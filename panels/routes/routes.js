@@ -15,6 +15,10 @@ var routes = {
 		//Core9.panel.open('panel-themes');
 		Core9.panel.open('panel-iframe-site');
 		var iframe = Core9.panel.getIframeById('panel-iframe-site');
+		var cmd = 'window.gm = jQuery("#mycanvas").gridmanager().data("gridmanager");';
+		Core9.iframe.parent.sentMessageToIframe(cmd, iframe); 
+			
+		/**
 		var cmd = 'window.gm = jQuery("#mycanvas").gridmanager({controlAppend: "'+
 		'<div class=\'btn-group pull-right\'>'+
 		'<button title=\'Edit Source Code\' type=\'button\' class=\'btn btn-xs btn-primary gm-edit-mode\'><span class=\'fa fa-code\'></span></button><button title=\'Preview\' type=\'button\' class=\'btn btn-xs btn-primary gm-preview\'><span class=\'fa fa-eye\'></span></button>   '+
@@ -38,6 +42,7 @@ var routes = {
 		'</div>"}).data("gridmanager");';
 		
 		Core9.iframe.parent.sentMessageToIframe(cmd, iframe); 
+		**/
 	},
 	'/forms$/' : function() {
 	},
