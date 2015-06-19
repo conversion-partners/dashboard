@@ -307,6 +307,14 @@ body {
 								"description" : "Page title",
 								"minLength" : 4
 							},
+							"theme": {
+					              type: "string",
+					              enum: ["shunsine","clean","fluid"]
+					         },
+					         "template": {
+					              type: "string",
+					              enum: ["frontpage","contact","categories"]
+					         },
 							"percentage": {
 					              type: "integer",
 					              enum: getArray(101)
