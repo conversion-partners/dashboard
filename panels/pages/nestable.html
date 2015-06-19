@@ -190,16 +190,16 @@ overflow-x: hidden;
 			
 			<ul id="navlist">
 				<li style="width: 300px !important; height: 40px;">
-					<select class="js-example-data-array"></select> 
+					<select class="domain-data"></select> 
 				</li>
 				<li style="width: 98px !important; height: 40px;">
-					<select	class="js-example-data-array"></select>
+					<select class="language-data"></select>
 				</li>
 				<li style="width: 98px !important; height: 40px;">
-					<select class="js-example-data-array"></select>
+					<select	class="country-data"></select>
 				</li>
 				<li style="width: 300px !important; height: 40px;  padding-left: 42px;">
-					<select class="js-example-data-array"></select>
+					<select class="url-data"></select>
 				</li>
 			</ul>
 			
@@ -396,12 +396,19 @@ overflow-x: hidden;
             return dropdownList;
         	
         }
-        var selectList = makeDropDownFromJsonString(jsonStr);
+        var urlData = makeDropDownFromJsonString(jsonStr);
         
-        
-	 
-		$(".js-example-data-array").select2({
-		  data: selectList
+        $(".domain-data").select2({
+  		  data: ["www.easydrain.com","www.easydrain.nl","www.easydrain.de","www.easydrain.fr"]
+  		})
+        $(".language-data").select2({
+  		  data: ["","en","nl","de","fr"]
+  		})
+        $(".country-data").select2({
+  		  data: ["","GB","US","DE","NL"]
+  		})
+		$(".url-data").select2({
+		  data: urlData
 		})
         
 
