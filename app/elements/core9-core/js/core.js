@@ -112,8 +112,10 @@ Core9.panel = {
 
 		button.getElementsByClassName("close")[0].addEventListener('click',
 				function() {
-					panel.style.width = '0px'
-					panel.childNodes[1].style.width = "0px";
+					try{
+						panel.style.width = '0px'
+						panel.childNodes[1].style.width = "0px";
+					}catch(e){}
 				}, false);
 
 		/*

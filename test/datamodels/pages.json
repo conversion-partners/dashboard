@@ -7,11 +7,11 @@
 			"default" : {
 					"title" : "default",
 					"percentage" : 30,
-					"status" : "active",
 					"theme" : "moon",
 					"template" : "front-page",
 					"startdate" : "23/11/2014",
-					"enddate" : "29/11/2014"
+					"enddate" : "29/11/2014",
+					"status" : "active"
 					}
 			}
 }
