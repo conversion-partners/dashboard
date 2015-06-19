@@ -16,67 +16,12 @@
 	content="width=device-width, initial-scale=1, minimum-scale=1">
 <title>Nestable</title>
 <link rel="stylesheet"
+	href="/dashboard/bower_components/select2/dist/css/select2.min.css">
+<link rel="stylesheet"
 	href="/dashboard/bower_components/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="/dashboard/bower_components/nestable2/jquery.nestable.css">
-<link rel="stylesheet"
-	href="/dashboard/bower_components/select2/dist/css/select2.min.css">
 <style type="text/css">
-.cf:after {
-	visibility: hidden;
-	display: block;
-	font-size: 0;
-	content: " ";
-	clear: both;
-	height: 0;
-}
-
-* html .cf {
-	zoom: 1;
-}
-
-*:first-child+html .cf {
-	zoom: 1;
-}
-
-html {
-	margin: 0;
-	padding: 0;
-}
-
-body {
-	font-size: 100%;
-	margin: 0;
-	padding: 1.75em;
-	font-family: 'Helvetica Neue', Arial, sans-serif;
-}
-
-h1 {
-	font-size: 1.75em;
-	margin: 0 0 0.6em 0;
-}
-
-a {
-	color: #2996cc;
-}
-
-a:hover {
-	text-decoration: none;
-}
-
-p {
-	line-height: 1.5em;
-}
-
-.small {
-	color: #666;
-	font-size: 0.875em;
-}
-
-.large {
-	font-size: 1.25em;
-}
-
 /**
  * Nestable Extras
  */
@@ -196,20 +141,32 @@ p {
 	width: calc(100% - 550px);
 	min-height: 500px;
 	left: 550px;
-	top: 39px;
+	  top: 73px;
 }
 
 /** select2 **/
-.select2-container--default .select2-selection--single {
-	height: 34px;
+
+.select2-container, .form-group > .select2-container--default {
+	width:100% !important;
 }
 
-.select2-container--default .select2-selection--single .select2-selection__rendered
-	{
-	color: #444;
-	line-height: 34px;
-	font-weight: bold;
+#navlist {
+  margin-left: -40px;
+  margin-top: 20px;
 }
+
+#navlist li
+{
+_display: inline;
+display:inline-block;
+list-style-type: none;
+padding-right: 20px;
+
+}
+
+
+
+
 </style>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="/dashboard/bower_components/nestable2/jquery.nestable.js"></script>
@@ -226,16 +183,24 @@ p {
 
 	<div id="content" class="cf nestable-lists">
 
-		<div style="width: 100%;" class="btn-group" role="group" aria-label=""
-			style="width: 500px; left: 195px; top: -34px;">
-			<select class="js-example-data-array"
-				style="min-width: 300px; height: 40px;"></select> <select
-				class="js-example-data-array" style="min-width: 98px; height: 40px;"></select>
-			<select class="js-example-data-array"
-				style="min-width: 98px; height: 40px;"></select>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<select class="js-example-data-array"
-				style="min-width: 300px; height: 40px;"></select>
+		<div style="width: 100%;" class="btn-group" role="group" aria-label="" style="width: 500px; left: 195px; top: -34px;">
+			
+			<ul id="navlist">
+				<li style="width: 300px !important; height: 40px;">
+					<select class="js-example-data-array"></select> 
+				</li>
+				<li style="width: 98px !important; height: 40px;">
+					<select	class="js-example-data-array"></select>
+				</li>
+				<li style="width: 98px !important; height: 40px;">
+					<select class="js-example-data-array"></select>
+				</li>
+				<li style="width: 300px !important; height: 40px;">
+					<select class="js-example-data-array"></select>
+				</li>
+			</ul>
+			
+			
 		</div>
 
 		<div class="dd" id="nestable"></div>
@@ -350,11 +315,11 @@ p {
                 type: "string"
               },
             status: {
-              type: "integer",
+              type: "string",
               enum: [
-                active,disabled,archive
+                "active","disabled","archive"
               ],
-              default: active
+              default: "active"
             }
           }
         }
