@@ -375,7 +375,9 @@ body {
 							
 							$('#newpage').on('click', function(){
 								console.log(this);
-								var json = JSON.parse(jsonStr);
+								var content = $('#nestable').nestable('serialize');
+								console.log(content);
+								var json = content;//JSON.parse(jsonStr);
 								json.unshift({"id":1,
 									"page":"New Page"
 									});
