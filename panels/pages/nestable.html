@@ -168,12 +168,12 @@ body {
 	overflow-x: hidden;
 }
 
-#editor_holder2 > div > h3 > span {
-	display : block;
+#editor_holder2>div>h3>span {
+	display: block;
 }
 
-#editor_holder2 > div > h3 > div  {
-   	margin-left: 0px !important;
+#editor_holder2>div>h3>div {
+	margin-left: 0px !important;
 }
 </style>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -221,8 +221,11 @@ body {
 			</div>
 
 
-			<div id='editor_holder2'></div>
+			<div id='editor_holder'></div>
+    		<button id='submit'>Submit (console.log)</button>
 
+
+			<div id='editor_holder2'></div>
 			<button id='submit'>Submit (console.log)</button>
 			<button id='restore'>Restore to Default</button>
 			<span id='valid_indicator'></span>
@@ -258,33 +261,43 @@ body {
 			} ]
 		} ];
 
+		var getArray = function(nr) {
+			return Array.apply(null, {
+				length : nr
+			}).map(Number.call, Number)
+		}
+		
 		var activateEditor = function(page) {
 			try {
 				Core9.editor.destroy();
+				Core9.editor2.destroy();
 			} catch (e) {
 				// TODO: handle exception
 			}
 
-			var getArray = function(nr) {
-				return Array.apply(null, {
-					length : nr
-				}).map(Number.call, Number)
-			}
+			Core9.editor2 = new JSONEditor(document.getElementById('editor_holder'),{
+				disable_edit_json : true,
+				disable_collapse : true,
+				disable_properties : true,
+				format : 'grid',
+				theme : 'bootstrap3',
+		          schema: {
+		            type: "object",
+		            title: page,
+		            properties: {
+		              url: {
+		                type: "string"
+		              }
+		            }
+		          }
+		        });
+			
+			
+			
 
 			Core9.editor = new JSONEditor(document
 					.getElementById('editor_holder2'), {
 				ajax : true,
-				schema : {
-					type : "array",
-					title : page,
-					format : "tabs",
-					items : {
-						title : "Person",
-						headerTemplate : "{{i}} - {{self.name}}",
-						$ref : "basic_person.json",
-						title : "Basic Person"
-					}
-				},
 				disable_edit_json : true,
 				disable_collapse : true,
 				disable_properties : true,
@@ -292,12 +305,37 @@ body {
 				theme : 'bootstrap3',
 				startval : starting_value,
 				no_additional_properties : true,
-				required_by_default : true
+				required_by_default : true,
+				schema : {
+					type : "array",
+					title : page,
+					format : "tabs",
+					items : {
+						title : "Version",
+						headerTemplate : "{{i}} - {{self.name}}",
+						type : "object",
+						id : "person",
+						properties : {
+							"name" : {
+								"type" : "string",
+								"description" : "First and Last name",
+								"minLength" : 4
+							},
+							"age" : {
+								"type" : "integer",
+								"default" : 21,
+								"minimum" : 18,
+								"maximum" : 99
+							},
+							"gender" : {
+								"type" : "string",
+								"enum" : [ "male", "female" ]
+							}
+						}
+					}
+				}
 			});
 
-
-			
-			
 			Core9.editor.on('change', function() {
 				var errors = Core9.editor.validate();
 
