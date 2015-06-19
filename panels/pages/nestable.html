@@ -125,7 +125,7 @@
 
 /** content **/
 #content {
-  margin-left: 249px;
+	margin-left: 249px;
 	position: relative;
 }
 
@@ -137,38 +137,35 @@
 #menuitemcontent {
 	background-color: #fff;
 	position: absolute;
-	width: 815px;
+	width: 859px;
 	min-height: 500px;
 	left: 550px;
-	  top: 73px;
+	top: 73px;
 }
 
 /** select2 **/
-
-.select2-container, .form-group > .select2-container--default {
-	width:100% !important;
+.select2-container, .form-group>.select2-container--default {
+	width: 100% !important;
 }
 
 #navlist {
-  margin-left: -40px;
-  margin-top: 20px;
+	margin-left: -40px;
+	margin-top: 20px;
 }
 
-#navlist li
-{
-_display: inline;
-display:inline-block;
-list-style-type: none;
-padding-right: 20px;
-
+#navlist li {
+	_display: inline;
+	display: inline-block;
+	list-style-type: none;
+	padding-right: 20px;
 }
 
 .table>tbody>tr>td {
-	padding:5px;
+	padding: 5px;
 }
 
 body {
-overflow-x: hidden;
+	overflow-x: hidden;
 }
 </style>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -186,27 +183,26 @@ overflow-x: hidden;
 
 	<div id="content" class="cf nestable-lists">
 
-		<div style="width: 100%;" class="btn-group" role="group" aria-label="" style="width: 500px; left: 195px; top: -34px;">
-			
+		<div style="width: 100%;" class="btn-group" role="group" aria-label=""
+			style="width: 500px; left: 195px; top: -34px;">
+
 			<ul id="navlist">
-				<li style="width: 300px !important; height: 40px;">
-					<select class="domain-data"></select> 
-				</li>
-				<li style="width: 98px !important; height: 40px;">
-					<select class="language-data"></select>
-				</li>
-				<li style="width: 98px !important; height: 40px;">
-					<select	class="country-data"></select>
-				</li>
-				<li style="width: 300px !important; height: 40px;  padding-left: 42px;">
+				<li style="width: 300px !important; height: 40px;"><select
+					class="domain-data"></select></li>
+				<li style="width: 98px !important; height: 40px;"><select
+					class="language-data"></select></li>
+				<li style="width: 98px !important; height: 40px;"><select
+					class="country-data"></select></li>
+				<li
+					style="width: 300px !important; height: 40px; padding-left: 42px;">
 					<select class="url-data"></select>
 				</li>
 			</ul>
-			
-			
+
+
 		</div>
 
-		
+
 
 		<div id="menuitemcontent">
 			<div class="btn-group" role="group" aria-label=""
@@ -220,7 +216,7 @@ overflow-x: hidden;
 			<button id='submiteditor'>Save</button>
 			<div id='version_holder' style="margin-top: 10px;"></div>
 			<button id='submitversions'>Save</button>
-			
+
 		</div>
 
 		<div class="dd" id="nestable"></div>
@@ -229,212 +225,196 @@ overflow-x: hidden;
 
 
 	<script>
-	
-	Core9 = {};
-	Core9.editor = {};
-	Core9.editor2 = {};
-	
-	
-	var activateEditor = function(page){
-	try {
-		Core9.editor.destroy();
-		Core9.editor2.destroy();
-	} catch (e) {
-		// TODO: handle exception
-	}
+		Core9 = {};
+		Core9.editor = {};
+		Core9.editor2 = {};
 
-	var getArray =function(nr){
-		return	Array.apply(null, {length: nr}).map(Number.call, Number)
-	}
-		
-		
-   	Core9.editor = new JSONEditor(document.getElementById('version_holder'),{
-	    	disable_edit_json : true,
-	    	disable_collapse : true,
-	    	disable_properties : true,
-	    	format : 'grid',
-	    	theme: 'bootstrap3',
-	        schema: {
-	          type: "object",
-	          title: page,
-	          properties: {
-	          "versions": {
-	        	        "type": "array",
-	        	        "format": "table",
-	        	        "title": "Versions",
-	        	        "uniqueItems": true,
-	        	        "items": {
-	        	          "type": "object",
-	        	          "title": "Version",
-	        	          "properties": {
-	        	            "type": {
-	        	              "type": "integer",
-	        	              "enum": getArray(100),
-	        	              "default": 0
-	        	            },
-	        	            "name": {
-	        	              "type": "string"
-	        	            },
-	        	            theme: {
-	        	                  type: "string",
-	        	                  enum: [
-	        	                    "Toyota",
-	        	                    "BMW",
-	        	                    "Honda",
-	        	                    "Ford",
-	        	                    "Chevy",
-	        	                    "VW"
-	        	                  ]
-	        	                },
-	        	        	  template: {
-	        	              type: "string",
-	        	              enum: [
-	        	                "Toyota",
-	        	                "BMW",
-	        	                "Honda",
-	        	                "Ford",
-	        	                "Chevy",
-	        	                "VW"
-	        	              ]
-	        	            },
-	        	            "status": {
-		        	              "type": "string",
-		        	              "enum": ["active","pause"],
-		        	              "default": "active"
-		        	        }
-	        	          }
-	        	        },
-	        	        "default": [
-	        	          {
-	        	            "type": 0,
-	        	            "name": "Walter",
-	        	            "status":"active"
-	        	          }
-	        	        ]
-	        	      }
-	          }
-	        }
-	      });
-	      
-   	
-   	Core9.editor2 = new JSONEditor(document.getElementById('editor_holder'),{
-    	disable_edit_json : true,
-    	disable_collapse : true,
-    	disable_properties : true,
-    	format : 'grid',
-    	theme: 'bootstrap3',
-        schema: {
-          type: "object",
-          title: page,
-          properties: {
-              title: {
-                type: "string"
-              },
-              url: {
-                  type: "string"
-                }
-          }
-        }
-      });
-      
-   	
-   	
-	      // Hook up the submit button to log to the console
-	      document.getElementById('submiteditor').addEventListener('click',function() {
-	        // Get the value from the editor
-	        console.log(Core9.editor2.getValue());
-	      });
-	      document.getElementById('submitversions').addEventListener('click',function() {
-		        // Get the value from the editor
-		        console.log(Core9.editor.getValue());
-		      });
-	
-	}
-	
+		var activateEditor = function(page) {
+			try {
+				Core9.editor.destroy();
+				Core9.editor2.destroy();
+			} catch (e) {
+				// TODO: handle exception
+			}
 
-    $(document).ready(function() {
-    	
+			var getArray = function(nr) {
+				return Array.apply(null, {
+					length : nr
+				}).map(Number.call, Number)
+			}
 
+			Core9.editor = new JSONEditor(document
+					.getElementById('version_holder'), {
+				disable_edit_json : true,
+				disable_collapse : true,
+				disable_properties : true,
+				format : 'grid',
+				theme : 'bootstrap3',
+				schema : {
+					type : "object",
+					title : page,
+					properties : {
+						"versions" : {
+							"type" : "array",
+							"format" : "table",
+							"title" : "Versions",
+							"uniqueItems" : true,
+							"items" : {
+								"type" : "object",
+								"title" : "Version",
+								"properties" : {
+									"percentage" : {
+										"type" : "integer",
+										"enum" : getArray(100),
+										"default" : 0
+									},
+									"name" : {
+										"type" : "string"
+									},
+									"theme" : {
+										"type" : "string",
+										enum : [ "Toyota", "BMW", "Honda",
+												"Ford", "Chevy", "VW" ]
+									},
+									"template" : {
+										"type" : "string",
+										enum : [ "Toyota", "BMW", "Honda",
+												"Ford", "Chevy", "VW" ]
+									},
+									"status" : {
+										"type" : "string",
+										"enum" : [ "active", "pause" ],
+										"default" : "active"
+									}
+								}
+							},
+							"default" : [ {
+								"percentage" : 0,
+								"name" : "Walter",
+								"status" : "active"
+							} ]
+						}
+					}
+				}
+			});
 
+			Core9.editor2 = new JSONEditor(document
+					.getElementById('editor_holder'), {
+				disable_edit_json : true,
+				disable_collapse : true,
+				disable_properties : true,
+				format : 'grid',
+				theme : 'bootstrap3',
+				schema : {
+					type : "object",
+					title : page,
+					properties : {
+						title : {
+							type : "string"
+						},
+						url : {
+							type : "string"
+						}
+					}
+				}
+			});
 
-  
-        
-        var updateOutput = function(){
-        	var content = $('#nestable').nestable('serialize');
-			console.log(content);
-			console.log(JSON.stringify(content));
-        }
-        
-        var jsonStr = '[{"page":"Second item","id":2,"children":[{"page":"Item 3","id":3,"children":[{"page":"Item 4","id":4,"children":[{"foo":"Bar","value":"Item 5 value","page":"Item 5","id":5,"children":[{"page":"Item 6","id":6,"children":[{"page":"Item 7","id":7,"children":[{"page":"Item 8","id":8,"children":[{"page":"First item","id":1}]}]}]}]}]}]}]},{"page":"Item 9","id":9,"children":[{"page":"Item 10","id":10,"children":[{"page":"Item 11","id":11,"children":[{"page":"Item 12","id":12}]}]}]}]';
-        
-        
-        
-        function process(key,value,dropdownList) {
-            if(key == 'page'){
-            	if(!dropdownList.indexOf(value) > -1){
-            		dropdownList.push(value);
-            	}
-            }
-        }
+			// Hook up the submit button to log to the console
+			document.getElementById('submiteditor').addEventListener('click',
+					function() {
+						// Get the value from the editor
+						console.log(Core9.editor2.getValue());
+					});
+			document.getElementById('submitversions').addEventListener('click',
+					function() {
+						// Get the value from the editor
+						console.log(Core9.editor.getValue());
+					});
 
-        function traverse(o,func,dropdownList) {
-            for (var i in o) {
-                func.apply(this,[i,o[i],dropdownList]);  
-                if (o[i] !== null && typeof(o[i])=="object") {
-                    traverse(o[i],func,dropdownList);
-                }
-            }
-        }
+		}
 
+		$(document)
+				.ready(
+						function() {
 
-        
-        
-        var makeDropDownFromJsonString = function(jsonStr){
-        	var dropdownList = [];
-        	var json = JSON.parse(jsonStr);
-            traverse(json,process,dropdownList);
-            return dropdownList;
-        	
-        }
-        var urlData = makeDropDownFromJsonString(jsonStr);
-        
-        $(".domain-data").select2({
-  		  data: ["www.easydrain.com","www.easydrain.nl","www.easydrain.de","www.easydrain.fr"]
-  		})
-        $(".language-data").select2({
-  		  data: ["","en","nl","de","fr"]
-  		})
-        $(".country-data").select2({
-  		  data: ["","GB","US","DE","NL"]
-  		})
-		$(".url-data").select2({
-		  data: urlData
-		})
-        
+							var updateOutput = function() {
+								var content = $('#nestable').nestable(
+										'serialize');
+								console.log(content);
+								console.log(JSON.stringify(content));
+							}
 
-        $('#nestable').nestable({
-            group: 1,
-            maxDepth:20,
-            json: jsonStr,
-            contentCallback: function(item) {
-                var content = item.page || '' ? item.page : item.id;
-                content += '<div class="dd-handle dd3-handle">Drag</div>';
+							var jsonStr = '[{"page":"Second item","id":2,"children":[{"page":"Item 3","id":3,"children":[{"page":"Item 4","id":4,"children":[{"foo":"Bar","value":"Item 5 value","page":"Item 5","id":5,"children":[{"page":"Item 6","id":6,"children":[{"page":"Item 7","id":7,"children":[{"page":"Item 8","id":8,"children":[{"page":"First item","id":1}]}]}]}]}]}]}]},{"page":"Item 9","id":9,"children":[{"page":"Item 10","id":10,"children":[{"page":"Item 11","id":11,"children":[{"page":"Item 12","id":12}]}]}]}]';
 
-                return content;
-            },
-            callback: function(l,e){
-                //console.log(l);
-                var page = $(e[0]).find('.dd-content')[0].childNodes[0].textContent;
-                
-                activateEditor(page);
-                
-            }
-        }).on('change', updateOutput);
-    	
-        
+							function process(key, value, dropdownList) {
+								if (key == 'page') {
+									if (!dropdownList.indexOf(value) > -1) {
+										dropdownList.push(value);
+									}
+								}
+							}
 
-        
-    });
-</script>
+							function traverse(o, func, dropdownList) {
+								for ( var i in o) {
+									func.apply(this, [ i, o[i], dropdownList ]);
+									if (o[i] !== null
+											&& typeof (o[i]) == "object") {
+										traverse(o[i], func, dropdownList);
+									}
+								}
+							}
+
+							var makeDropDownFromJsonString = function(jsonStr) {
+								var dropdownList = [];
+								var json = JSON.parse(jsonStr);
+								traverse(json, process, dropdownList);
+								return dropdownList;
+
+							}
+							var urlData = makeDropDownFromJsonString(jsonStr);
+
+							$(".domain-data").select2(
+									{
+										data : [ "www.easydrain.com",
+												"www.easydrain.nl",
+												"www.easydrain.de",
+												"www.easydrain.fr" ]
+									})
+							$(".language-data").select2({
+								data : [ "", "en", "nl", "de", "fr" ]
+							})
+							$(".country-data").select2({
+								data : [ "", "GB", "US", "DE", "NL" ]
+							})
+							$(".url-data").select2({
+								data : urlData
+							})
+
+							$('#nestable')
+									.nestable(
+											{
+												group : 1,
+												maxDepth : 20,
+												json : jsonStr,
+												contentCallback : function(item) {
+													var content = item.page
+															|| '' ? item.page
+															: item.id;
+													content += '<div class="dd-handle dd3-handle">Drag</div>';
+
+													return content;
+												},
+												callback : function(l, e) {
+													//console.log(l);
+													var page = $(e[0]).find(
+															'.dd-content')[0].childNodes[0].textContent;
+
+													activateEditor(page);
+
+												}
+											}).on('change', updateOutput);
+
+						});
+	</script>
 </body>
 </html>

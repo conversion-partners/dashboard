@@ -1,0 +1,15 @@
+{
+	"domain" : "www.easydrain.nl",
+	"language" : "us",
+	"country" : "GB",
+	"url" : "/home",
+	"title" : "",
+	"versions" : {
+			"default" : {
+					"percentage" : 30,
+					"status" : "active",
+					"theme" : "moonshine",
+					"template" : "front-page"
+					}
+			}
+}
