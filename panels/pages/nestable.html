@@ -125,8 +125,7 @@
 
 /** content **/
 #content {
-	width: calc(100% - 450px);
-	margin-left: 300px;
+  margin-left: 249px;
 	position: relative;
 }
 
@@ -138,7 +137,7 @@
 #menuitemcontent {
 	background-color: #fff;
 	position: absolute;
-	width: calc(100% - 550px);
+	width: 815px;
 	min-height: 500px;
 	left: 550px;
 	  top: 73px;
@@ -168,7 +167,9 @@ padding-right: 20px;
 	padding:5px;
 }
 
-
+body {
+overflow-x: hidden;
+}
 </style>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="/dashboard/bower_components/nestable2/jquery.nestable.js"></script>
@@ -205,7 +206,7 @@ padding-right: 20px;
 			
 		</div>
 
-		<div class="dd" id="nestable"></div>
+		
 
 		<div id="menuitemcontent">
 			<div class="btn-group" role="group" aria-label=""
@@ -222,6 +223,7 @@ padding-right: 20px;
 			
 		</div>
 
+		<div class="dd" id="nestable"></div>
 
 	</div>
 
@@ -273,6 +275,28 @@ padding-right: 20px;
 	        	            "name": {
 	        	              "type": "string"
 	        	            },
+	        	            theme: {
+	        	                  type: "string",
+	        	                  enum: [
+	        	                    "Toyota",
+	        	                    "BMW",
+	        	                    "Honda",
+	        	                    "Ford",
+	        	                    "Chevy",
+	        	                    "VW"
+	        	                  ]
+	        	                },
+	        	        	  template: {
+	        	              type: "string",
+	        	              enum: [
+	        	                "Toyota",
+	        	                "BMW",
+	        	                "Honda",
+	        	                "Ford",
+	        	                "Chevy",
+	        	                "VW"
+	        	              ]
+	        	            },
 	        	            "status": {
 		        	              "type": "string",
 		        	              "enum": ["active","pause"],
@@ -303,23 +327,12 @@ padding-right: 20px;
           type: "object",
           title: page,
           properties: {
-            template: {
-              type: "string",
-              enum: [
-                "Toyota",
-                "BMW",
-                "Honda",
-                "Ford",
-                "Chevy",
-                "VW"
-              ]
-            },
-            title: {
-              type: "string"
-            },
-            url: {
+              title: {
                 type: "string"
-              }
+              },
+              url: {
+                  type: "string"
+                }
           }
         }
       });
