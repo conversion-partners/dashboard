@@ -167,6 +167,14 @@
 body {
 	overflow-x: hidden;
 }
+
+#editor_holder2 > div > h3 > span {
+	display : block;
+}
+
+#editor_holder2 > div > h3 > div  {
+   	margin-left: 0px !important;
+}
 </style>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="/dashboard/bower_components/nestable2/jquery.nestable.js"></script>
@@ -287,6 +295,9 @@ body {
 				required_by_default : true
 			});
 
+
+			
+			
 			Core9.editor.on('change', function() {
 				var errors = Core9.editor.validate();
 
