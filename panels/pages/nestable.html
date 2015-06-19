@@ -217,7 +217,7 @@ body {
 				style="width: 500px;">
 				<button type="button" class="btn btn-default">Preview</button>
 				<button type="button" class="btn btn-default">Edit</button>
-				<button type="button" class="btn btn-default">New</button>
+				<button id="newpage" type="button" class="btn btn-default">New</button>
 				<button type="button" class="btn btn-default">Delete</button>
 			</div>
 
@@ -232,8 +232,10 @@ body {
 			<span id='valid_indicator'></span>
 
 		</div>
-
-		<div class="dd" id="nestable"></div>
+		<div id="nestablecontainer">
+			<div class="dd" id="nestable"></div>
+		</div>
+		
 
 	</div>
 
@@ -366,6 +368,21 @@ body {
 		$(document)
 				.ready(
 						function() {
+							
+							
+							var jsonStr = '[{"page":"Second item","id":2,"children":[{"page":"Item 3","id":3,"children":[{"page":"Item 4","id":4,"children":[{"foo":"Bar","value":"Item 5 value","page":"Item 5","id":5,"children":[{"page":"Item 6","id":6,"children":[{"page":"Item 7","id":7,"children":[{"page":"Item 8","id":8,"children":[{"page":"First item","id":1}]}]}]}]}]}]}]},{"page":"Item 9","id":9,"children":[{"page":"Item 10","id":10,"children":[{"page":"Item 11","id":11,"children":[{"page":"Item 12","id":12}]}]}]}]';
+						
+							
+							$('#newpage').on('click', function(){
+								console.log(this);
+								var json = JSON.parse(jsonStr);
+								json.unshift({"id":1,
+									"page":"New Page"
+									});
+								console.log(json);
+								initNestable(JSON.stringify(json));
+							});
+							
 
 							var updateOutput = function() {
 								var content = $('#nestable').nestable(
@@ -374,7 +391,6 @@ body {
 								console.log(JSON.stringify(content));
 							}
 
-							var jsonStr = '[{"page":"Second item","id":2,"children":[{"page":"Item 3","id":3,"children":[{"page":"Item 4","id":4,"children":[{"foo":"Bar","value":"Item 5 value","page":"Item 5","id":5,"children":[{"page":"Item 6","id":6,"children":[{"page":"Item 7","id":7,"children":[{"page":"Item 8","id":8,"children":[{"page":"First item","id":1}]}]}]}]}]}]}]},{"page":"Item 9","id":9,"children":[{"page":"Item 10","id":10,"children":[{"page":"Item 11","id":11,"children":[{"page":"Item 12","id":12}]}]}]}]';
 
 							function process(key, value, dropdownList) {
 								if (key == 'page') {
@@ -419,30 +435,43 @@ body {
 							$(".url-data").select2({
 								data : urlData
 							})
+							
+							
+							var initNestable = function(jsonStr){
+								
+								var container = document.getElementById('nestablecontainer');
+								while ( container.firstChild ) container.removeChild( container.firstChild );
+								var div = document.createElement('div');
+								div.id = 'nestable';
+								div.className = 'dd';
+								container.appendChild(div);
+								
+								$('#nestable')
+								.nestable(
+										{
+											group : 1,
+											maxDepth : 20,
+											json : jsonStr,
+											contentCallback : function(item) {
+												var content = item.page
+														|| '' ? item.page
+														: item.id;
+												content += '<div class="dd-handle dd3-handle">Drag</div>';
 
-							$('#nestable')
-									.nestable(
-											{
-												group : 1,
-												maxDepth : 20,
-												json : jsonStr,
-												contentCallback : function(item) {
-													var content = item.page
-															|| '' ? item.page
-															: item.id;
-													content += '<div class="dd-handle dd3-handle">Drag</div>';
+												return content;
+											},
+											callback : function(l, e) {
+												//console.log(l);
+												var page = $(e[0]).find(
+														'.dd-content')[0].childNodes[0].textContent;
 
-													return content;
-												},
-												callback : function(l, e) {
-													//console.log(l);
-													var page = $(e[0]).find(
-															'.dd-content')[0].childNodes[0].textContent;
+												activateEditor(page);
 
-													activateEditor(page);
+											}
+										}).on('change', updateOutput);
+							}
 
-												}
-											}).on('change', updateOutput);
+							initNestable(jsonStr);
 
 						});
 	</script>
