@@ -137,7 +137,7 @@
 #menuitemcontent {
 	background-color: #fff;
 	position: absolute;
-	width: 859px;
+	width: 438px;
 	min-height: 500px;
 	left: 550px;
 	top: 73px;
@@ -212,10 +212,12 @@ body {
 				<button type="button" class="btn btn-default">Delete</button>
 			</div>
 
-			<div id='editor_holder' style="margin-top: 10px;"></div>
-			<button id='submiteditor'>Save</button>
-			<div id='version_holder' style="margin-top: 10px;"></div>
-			<button id='submitversions'>Save</button>
+
+			<div id='editor_holder2'></div>
+
+			<button id='submit'>Submit (console.log)</button>
+			<button id='restore'>Restore to Default</button>
+			<span id='valid_indicator'></span>
 
 		</div>
 
@@ -227,12 +229,30 @@ body {
 	<script>
 		Core9 = {};
 		Core9.editor = {};
-		Core9.editor2 = {};
+
+		var starting_value = [ {
+			name : "John Smith",
+			age : 35,
+			gender : "male",
+			location : {
+				city : "San Francisco",
+				state : "California",
+				citystate : ""
+			},
+			pets : [ {
+				name : "Spot",
+				type : "dog",
+				fixed : true
+			}, {
+				name : "Whiskers",
+				type : "cat",
+				fixed : false
+			} ]
+		} ];
 
 		var activateEditor = function(page) {
 			try {
 				Core9.editor.destroy();
-				Core9.editor2.destroy();
 			} catch (e) {
 				// TODO: handle exception
 			}
@@ -244,91 +264,51 @@ body {
 			}
 
 			Core9.editor = new JSONEditor(document
-					.getElementById('version_holder'), {
+					.getElementById('editor_holder2'), {
+				ajax : true,
+				schema : {
+					type : "array",
+					title : page,
+					format : "tabs",
+					items : {
+						title : "Person",
+						headerTemplate : "{{i}} - {{self.name}}",
+						$ref : "basic_person.json",
+						title : "Basic Person"
+					}
+				},
 				disable_edit_json : true,
 				disable_collapse : true,
 				disable_properties : true,
 				format : 'grid',
 				theme : 'bootstrap3',
-				schema : {
-					type : "object",
-					title : page,
-					properties : {
-						"versions" : {
-							"type" : "array",
-							"format" : "table",
-							"title" : "Versions",
-							"uniqueItems" : true,
-							"items" : {
-								"type" : "object",
-								"title" : "Version",
-								"properties" : {
-									"percentage" : {
-										"type" : "integer",
-										"enum" : getArray(100),
-										"default" : 0
-									},
-									"name" : {
-										"type" : "string"
-									},
-									"theme" : {
-										"type" : "string",
-										enum : [ "Toyota", "BMW", "Honda",
-												"Ford", "Chevy", "VW" ]
-									},
-									"template" : {
-										"type" : "string",
-										enum : [ "Toyota", "BMW", "Honda",
-												"Ford", "Chevy", "VW" ]
-									},
-									"status" : {
-										"type" : "string",
-										"enum" : [ "active", "pause" ],
-										"default" : "active"
-									}
-								}
-							},
-							"default" : [ {
-								"percentage" : 0,
-								"name" : "Walter",
-								"status" : "active"
-							} ]
-						}
-					}
+				startval : starting_value,
+				no_additional_properties : true,
+				required_by_default : true
+			});
+
+			Core9.editor.on('change', function() {
+				var errors = Core9.editor.validate();
+
+				var indicator = document.getElementById('valid_indicator');
+
+				if (errors.length) {
+					indicator.style.color = 'red';
+					indicator.textContent = "not valid";
+				} else {
+					indicator.style.color = 'green';
+					indicator.textContent = "valid";
 				}
 			});
 
-			Core9.editor2 = new JSONEditor(document
-					.getElementById('editor_holder'), {
-				disable_edit_json : true,
-				disable_collapse : true,
-				disable_properties : true,
-				format : 'grid',
-				theme : 'bootstrap3',
-				schema : {
-					type : "object",
-					title : page,
-					properties : {
-						title : {
-							type : "string"
-						},
-						url : {
-							type : "string"
-						}
-					}
-				}
-			});
-
-			// Hook up the submit button to log to the console
-			document.getElementById('submiteditor').addEventListener('click',
+			document.getElementById('submit').addEventListener('click',
 					function() {
-						// Get the value from the editor
-						console.log(Core9.editor2.getValue());
-					});
-			document.getElementById('submitversions').addEventListener('click',
-					function() {
-						// Get the value from the editor
 						console.log(Core9.editor.getValue());
+					});
+
+			document.getElementById('restore').addEventListener('click',
+					function() {
+						Core9.editor.setValue(starting_value);
 					});
 
 		}
