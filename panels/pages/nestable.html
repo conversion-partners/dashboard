@@ -164,7 +164,9 @@ padding-right: 20px;
 
 }
 
-
+.table>tbody>tr>td {
+	padding:5px;
+}
 
 
 </style>
@@ -195,7 +197,7 @@ padding-right: 20px;
 				<li style="width: 98px !important; height: 40px;">
 					<select class="js-example-data-array"></select>
 				</li>
-				<li style="width: 300px !important; height: 40px;">
+				<li style="width: 300px !important; height: 40px;  padding-left: 42px;">
 					<select class="js-example-data-array"></select>
 				</li>
 			</ul>
@@ -213,10 +215,11 @@ padding-right: 20px;
 				<button type="button" class="btn btn-default">Delete</button>
 			</div>
 
-			<div id='version_holder' style="margin-top: 10px;"></div>
 			<div id='editor_holder' style="margin-top: 10px;"></div>
-			<button id='submit'>Save</button>
-
+			<button id='submiteditor'>Save</button>
+			<div id='version_holder' style="margin-top: 10px;"></div>
+			<button id='submitversions'>Save</button>
+			
 		</div>
 
 
@@ -238,6 +241,9 @@ padding-right: 20px;
 		// TODO: handle exception
 	}
 
+	var getArray =function(nr){
+		return	Array.apply(null, {length: nr}).map(Number.call, Number)
+	}
 		
 		
    	Core9.editor = new JSONEditor(document.getElementById('version_holder'),{
@@ -260,25 +266,25 @@ padding-right: 20px;
 	        	          "title": "Version",
 	        	          "properties": {
 	        	            "type": {
-	        	              "type": "string",
-	        	              "enum": [
-	        	                "cat",
-	        	                "dog",
-	        	                "bird",
-	        	                "reptile",
-	        	                "other"
-	        	              ],
-	        	              "default": "dog"
+	        	              "type": "integer",
+	        	              "enum": getArray(100),
+	        	              "default": 0
 	        	            },
 	        	            "name": {
 	        	              "type": "string"
-	        	            }
+	        	            },
+	        	            "status": {
+		        	              "type": "string",
+		        	              "enum": ["active","pause"],
+		        	              "default": "active"
+		        	        }
 	        	          }
 	        	        },
 	        	        "default": [
 	        	          {
-	        	            "type": "dog",
-	        	            "name": "Walter"
+	        	            "type": 0,
+	        	            "name": "Walter",
+	        	            "status":"active"
 	        	          }
 	        	        ]
 	        	      }
@@ -313,14 +319,7 @@ padding-right: 20px;
             },
             url: {
                 type: "string"
-              },
-            status: {
-              type: "string",
-              enum: [
-                "active","disabled","archive"
-              ],
-              default: "active"
-            }
+              }
           }
         }
       });
@@ -328,10 +327,14 @@ padding-right: 20px;
    	
    	
 	      // Hook up the submit button to log to the console
-	      document.getElementById('submit').addEventListener('click',function() {
+	      document.getElementById('submiteditor').addEventListener('click',function() {
 	        // Get the value from the editor
-	        console.log(editor.getValue());
+	        console.log(Core9.editor2.getValue());
 	      });
+	      document.getElementById('submitversions').addEventListener('click',function() {
+		        // Get the value from the editor
+		        console.log(Core9.editor.getValue());
+		      });
 	
 	}
 	
