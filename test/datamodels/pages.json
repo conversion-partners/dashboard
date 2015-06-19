@@ -5,7 +5,7 @@
 	"url" : "/home",
 	"versions" : {
 			"default" : {
-					"title" : "",
+					"title" : "default",
 					"percentage" : 30,
 					"status" : "active",
 					"theme" : "moon",
