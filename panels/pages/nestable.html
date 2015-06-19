@@ -222,12 +222,12 @@ body {
 
 
 			<div id='editor_holder'></div>
-    		<button id='submit'>Submit (console.log)</button>
+    		<button id='submit'>Save</button>
 
 
 			<div id='editor_holder2'></div>
-			<button id='submit'>Submit (console.log)</button>
-			<button id='restore'>Restore to Default</button>
+			<button id='submit'>Save</button>
+			<button id='restore'>Restore</button>
 			<span id='valid_indicator'></span>
 
 		</div>
@@ -242,24 +242,10 @@ body {
 		Core9.editor = {};
 
 		var starting_value = [ {
-			name : "John Smith",
-			age : 35,
-			gender : "male",
-			location : {
-				city : "San Francisco",
-				state : "California",
-				citystate : ""
-			},
-			pets : [ {
-				name : "Spot",
-				type : "dog",
-				fixed : true
-			}, {
-				name : "Whiskers",
-				type : "cat",
-				fixed : false
-			} ]
-		} ];
+			title : "new title",
+			percentage : 100,
+			status : "active"
+			} ];
 
 		var getArray = function(nr) {
 			return Array.apply(null, {
@@ -312,24 +298,22 @@ body {
 					format : "tabs",
 					items : {
 						title : "Version",
-						headerTemplate : "{{i}} - {{self.name}}",
+						headerTemplate : "{{i}} - {{self.title}}",
 						type : "object",
 						id : "person",
 						properties : {
-							"name" : {
+							"title" : {
 								"type" : "string",
-								"description" : "First and Last name",
+								"description" : "Page title",
 								"minLength" : 4
 							},
-							"age" : {
-								"type" : "integer",
-								"default" : 21,
-								"minimum" : 18,
-								"maximum" : 99
-							},
-							"gender" : {
+							"percentage": {
+					              type: "integer",
+					              enum: getArray(101)
+					         },
+							"status" : {
 								"type" : "string",
-								"enum" : [ "male", "female" ]
+								"enum" : [ "active", "pauzed" ]
 							}
 						}
 					}
