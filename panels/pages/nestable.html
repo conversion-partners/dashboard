@@ -193,10 +193,10 @@ p {
 #menuitemcontent {
 	background-color: #fff;
 	position: absolute;
-	width: calc(100% - 700px);
+	width: calc(100% - 550px);
 	min-height: 500px;
 	left: 550px;
-	top: 5px;
+	top: 39px;
 }
 
 /** select2 **/
@@ -226,13 +226,17 @@ p {
 
 	<div id="content" class="cf nestable-lists">
 
-
-
-
-
-
-
-
+		<div style="width: 100%;" class="btn-group" role="group" aria-label=""
+			style="width: 500px; left: 195px; top: -34px;">
+			<select class="js-example-data-array"
+				style="min-width: 300px; height: 40px;"></select> <select
+				class="js-example-data-array" style="min-width: 98px; height: 40px;"></select>
+			<select class="js-example-data-array"
+				style="min-width: 98px; height: 40px;"></select>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<select class="js-example-data-array"
+				style="min-width: 300px; height: 40px;"></select>
+		</div>
 
 		<div class="dd" id="nestable"></div>
 
@@ -243,12 +247,8 @@ p {
 				<button type="button" class="btn btn-default">Middle</button>
 				<button type="button" class="btn btn-default">Right</button>
 			</div>
-			<div class="btn-group" role="group" aria-label=""
-				style="width: 500px; left: 195px; top: -34px;">
-				<select class="js-example-data-array"
-					style="min-width: 300px; height: 40px; margin-left: 25px;"></select>
-			</div>
-			<div id='editor_holder' style="margin-top: -30px;"></div>
+
+			<div id='editor_holder' style="margin-top: 10px;"></div>
 			<button id='submit'>Submit</button>
 
 		</div>
@@ -282,6 +282,38 @@ p {
 	          type: "object",
 	          title: page,
 	          properties: {
+	          "pets": {
+	        	        "type": "array",
+	        	        "format": "table",
+	        	        "title": "Pets",
+	        	        "uniqueItems": true,
+	        	        "items": {
+	        	          "type": "object",
+	        	          "title": "Pet",
+	        	          "properties": {
+	        	            "type": {
+	        	              "type": "string",
+	        	              "enum": [
+	        	                "cat",
+	        	                "dog",
+	        	                "bird",
+	        	                "reptile",
+	        	                "other"
+	        	              ],
+	        	              "default": "dog"
+	        	            },
+	        	            "name": {
+	        	              "type": "string"
+	        	            }
+	        	          }
+	        	        },
+	        	        "default": [
+	        	          {
+	        	            "type": "dog",
+	        	            "name": "Walter"
+	        	          }
+	        	        ]
+	        	      },
 	            make: {
 	              type: "string",
 	              enum: [
