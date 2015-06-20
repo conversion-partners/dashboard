@@ -184,6 +184,16 @@ body {
 	src="/dashboard/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script
 	src="/dashboard/bower_components/json-editor/dist/jsoneditor.min.js"></script>
+<script type="text/javascript">
+var guid = function() {
+	function s4() {
+		return Math.floor((1 + Math.random()) * 0x10000).toString(16)
+				.substring(1);
+	}
+	return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4()
+			+ s4() + s4();
+}
+</script>
 </head>
 <body>
 
@@ -218,7 +228,7 @@ body {
 				<button type="button" class="btn btn-default">Preview</button>
 				<button type="button" class="btn btn-default">Edit</button>
 				<button id="newpage" type="button" class="btn btn-default">New</button>
-				<button type="button" class="btn btn-default">Delete</button>
+				<button id="delpage" type="button" class="btn btn-default">Delete</button>
 			</div>
 
 
@@ -256,7 +266,10 @@ body {
 			}).map(Number.call, Number)
 		}
 		
-		var activateEditor = function(page) {
+		var activateEditor = function(page, id) {
+			console.log("id : ");
+			console.log(id);
+			document.getElementById('delpage').dataset.currentid = id;
 			try {
 				Core9.editor.destroy();
 				Core9.editor2.destroy();
@@ -378,13 +391,19 @@ body {
 								var content = $('#nestable').nestable('serialize');
 								console.log(content);
 								var json = content;//JSON.parse(jsonStr);
-								json.unshift({"id":1,
+								json.unshift({"id":guid(),
 									"page":"New Page"
 									});
 								console.log(json);
 								initNestable(JSON.stringify(json));
 							});
 							
+							$('#delpage').on('click', function(){
+								console.log(this);
+								
+								$('li[data-id="'+this.dataset.currentid+'"]').remove();
+								
+							});
 
 							var updateOutput = function() {
 								var content = $('#nestable').nestable(
@@ -439,6 +458,16 @@ body {
 							})
 							
 							
+							var getIdFromItem = function(element){
+								while(element.parentNode) {
+								    element = element.parentNode;
+								    if(element.tagName == 'LI'){
+								    	return element.dataset.id;
+								    }
+								}
+							}
+							
+							
 							var initNestable = function(jsonStr){
 								
 								var container = document.getElementById('nestablecontainer');
@@ -463,12 +492,9 @@ body {
 												return content;
 											},
 											callback : function(l, e) {
-												//console.log(l);
-												var page = $(e[0]).find(
-														'.dd-content')[0].childNodes[0].textContent;
-
-												activateEditor(page);
-
+												var element = $(e[0]).find('.dd-content')[0].childNodes[0];
+												var page = element.textContent;
+												activateEditor(page, getIdFromItem(element));
 											}
 										}).on('change', updateOutput);
 							}
