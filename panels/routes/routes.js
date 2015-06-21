@@ -1,7 +1,17 @@
 
+var initPanelIframeSite = true;
+
 var routes = {
 	'/home$/' : function() {
+		
 		Core9.panel.open('panel-iframe-site');
+		if(initPanelIframeSite){
+			var iframe = Core9.panel.getIframeById('panel-iframe-site');
+			var cmd = 'window.gm = jQuery("#mycanvas").gridmanager().data("gridmanager");';
+			Core9.iframe.parent.sentMessageToIframe(cmd, iframe); 
+			initPanelIframeSite = false;
+		}
+
 	},
 	'/devices$/' : function() {
 		Core9.panel.open('panel-content');
@@ -14,9 +24,12 @@ var routes = {
 	'/themes$/' : function(){
 		//Core9.panel.open('panel-themes');
 		Core9.panel.open('panel-iframe-site');
-		var iframe = Core9.panel.getIframeById('panel-iframe-site');
-		var cmd = 'window.gm = jQuery("#mycanvas").gridmanager().data("gridmanager");';
-		Core9.iframe.parent.sentMessageToIframe(cmd, iframe); 
+		if(initPanelIframeSite){
+			var iframe = Core9.panel.getIframeById('panel-iframe-site');
+			var cmd = 'window.gm = jQuery("#mycanvas").gridmanager().data("gridmanager");';
+			Core9.iframe.parent.sentMessageToIframe(cmd, iframe); 
+			initPanelIframeSite = false;
+		}
 			
 		/**
 		var cmd = 'window.gm = jQuery("#mycanvas").gridmanager({controlAppend: "'+
