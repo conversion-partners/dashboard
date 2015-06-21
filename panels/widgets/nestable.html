@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html lang="en" class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html lang="en" class="lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html lang="en" class="lt-ie9"> <![endif]-->
+<!--[if IE 9]>
+<html lang="en" class="ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, minimum-scale=1">
+<title>Nestable</title>
+<link rel="stylesheet"
+	href="/dashboard/bower_components/select2/dist/css/select2.min.css">
+<link rel="stylesheet"
+	href="/dashboard/bower_components/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="/dashboard/bower_components/nestable2/jquery.nestable.css">
+<style type="text/css">
+/**
+ * Nestable Extras
+ */
+@media only screen and (min-width: 700px) {
+	.dd {
+		float: left;
+		width: 48%;
+	}
+	.dd+.dd {
+		margin-left: 2%;
+	}
+}
+
+.dd-hover>.dd-handle {
+	background: #f5f5f5 !important;
+}
+
+.dd-handle {
+	padding-left: 20px;
+}
+/**
+ * Nestable Draggable Handles
+ */
+.dd-content {
+	padding-left: 30px;
+}
+
+.dd-item>button {
+	left: 30px;
+	margin-right: -5px;
+}
+
+.dd3-content {
+	display: block;
+	height: 30px;
+	margin: 5px 0;
+	margin-left: 15px;
+	padding: 5px 10px 5px 40px;
+	color: #333;
+	text-decoration: none;
+	font-weight: bold;
+	border: 1px solid #ccc;
+	background: #f5f5f5 !important;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+
+.dd3-content:hover {
+	color: #2ea8e5;
+	background: #fff;
+}
+
+.dd-dragel>.dd3-item>.dd3-content {
+	margin: 0;
+}
+
+.dd3-item>button {
+	margin-left: 30px;
+}
+
+.dd3-handle {
+	position: absolute;
+	margin: 0;
+	left: 0;
+	top: 0;
+	cursor: pointer;
+	width: 30px;
+	text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	border: 1px solid #aaa;
+	background: #ddd;
+	background: -webkit-linear-gradient(top, #ddd 0%, #bbb 100%);
+	background: -moz-linear-gradient(top, #ddd 0%, #bbb 100%);
+	background: linear-gradient(top, #ddd 0%, #bbb 100%);
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.dd3-handle:before {
+	content: '≡';
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 3px;
+	width: 100%;
+	text-align: center;
+	text-indent: 0;
+	color: #fff;
+	font-size: 20px;
+	font-weight: normal;
+}
+
+.dd3-handle:hover {
+	background: #ddd;
+}
+
+/** table example **/
+
+/** content **/
+#content {
+	margin-left: 249px;
+	position: relative;
+}
+
+#nestable {
+	margin-right: 50px;
+	width: 500px;
+}
+
+#menuitemcontent {
+	background-color: #fff;
+	position: absolute;
+	width: 438px;
+	min-height: 500px;
+	left: 550px;
+	  top: 100px;
+}
+
+/** select2 **/
+.select2-container, .form-group>.select2-container--default {
+	width: 100% !important;
+}
+
+#navlist {
+	margin-left: -40px;
+	margin-top: 20px;
+}
+
+#navlist li {
+	_display: inline;
+	display: inline-block;
+	list-style-type: none;
+	padding-right: 20px;
+}
+
+.table>tbody>tr>td {
+	padding: 5px;
+}
+
+body {
+	overflow-x: hidden;
+}
+
+#editor_holder2>div>h3>span {
+	display: block;
+}
+
+#editor_holder2>div>h3>div {
+	margin-left: 0px !important;
+}
+</style>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="/dashboard/bower_components/nestable2/jquery.nestable.js"></script>
+<script
+	src="/dashboard/bower_components/select2/dist/js/select2.full.min.js"></script>
+<script
+	src="/dashboard/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script
+	src="/dashboard/bower_components/json-editor/dist/jsoneditor.min.js"></script>
+<script type="text/javascript">
+var guid = function() {
+	function s4() {
+		return Math.floor((1 + Math.random()) * 0x10000).toString(16)
+				.substring(1);
+	}
+	return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4()
+			+ s4() + s4();
+}
+</script>
+</head>
+<body>
+
+
+
+	<div id="content" class="cf nestable-lists">
+
+		<div style="width: 100%;" class="btn-group" role="group" aria-label=""
+			style="width: 500px; left: 195px; top: -34px;">
+			<h1 style="margin-top:10px;font-size:16px;">Pages</h1>
+			<ul id="navlist">
+				<li style="width: 300px !important; height: 40px;"><select
+					class="domain-data"></select></li>
+				<li style="width: 98px !important; height: 40px;"><select
+					class="language-data"></select></li>
+				<li style="width: 98px !important; height: 40px;"><select
+					class="country-data"></select></li>
+				<li
+					style="width: 300px !important; height: 40px; padding-left: 42px;">
+					<select class="url-data"></select>
+				</li>
+			</ul>
+
+
+		</div>
+
+
+
+		<div id="menuitemcontent">
+			<div class="btn-group" role="group" aria-label=""
+				style="width: 500px;">
+				<button type="button" class="btn btn-default">Preview</button>
+				<button type="button" class="btn btn-default">Edit</button>
+				<button id="newpage" type="button" class="btn btn-default">New</button>
+				<button id="delpage" type="button" class="btn btn-default">Delete</button>
+			</div>
+
+
+			<div id='editor_holder'></div>
+    		<button id='submit'>Save</button>
+
+
+			<div id='editor_holder2'></div>
+			<button id='submit'>Save</button>
+			<button id='restore'>Restore</button>
+			<span id='valid_indicator'></span>
+
+		</div>
+		<div id="nestablecontainer">
+			<div class="dd" id="nestable"></div>
+		</div>
+		
+
+	</div>
+
+
+	<script>
+		Core9 = {};
+		Core9.editor = {};
+
+		var starting_value = [ {
+			title : "new title",
+			percentage : 100,
+			status : "active"
+			} ];
+
+		var getArray = function(nr) {
+			return Array.apply(null, {
+				length : nr
+			}).map(Number.call, Number)
+		}
+		
+		var activateEditor = function(page, id) {
+			console.log("id : ");
+			console.log(id);
+			document.getElementById('delpage').dataset.currentid = id;
+			try {
+				Core9.editor.destroy();
+				Core9.editor2.destroy();
+			} catch (e) {
+				// TODO: handle exception
+			}
+
+			Core9.editor2 = new JSONEditor(document.getElementById('editor_holder'),{
+				disable_edit_json : true,
+				disable_collapse : true,
+				disable_properties : true,
+				format : 'grid',
+				theme : 'bootstrap3',
+		          schema: {
+		            type: "object",
+		            title: page,
+		            properties: {
+		              url: {
+		                type: "string"
+		              }
+		            }
+		          }
+		        });
+			
+			
+			
+
+			Core9.editor = new JSONEditor(document
+					.getElementById('editor_holder2'), {
+				ajax : true,
+				disable_edit_json : true,
+				disable_collapse : true,
+				disable_properties : true,
+				format : 'grid',
+				theme : 'bootstrap3',
+				startval : starting_value,
+				no_additional_properties : true,
+				required_by_default : true,
+				schema : {
+					type : "array",
+					title : page,
+					format : "tabs",
+					items : {
+						title : "Version",
+						headerTemplate : "{{i}} - {{self.title}}",
+						type : "object",
+						id : "person",
+						properties : {
+							"title" : {
+								"type" : "string",
+								"description" : "Page title",
+								"minLength" : 4
+							},
+							"theme": {
+					              type: "string",
+					              enum: ["shunsine","clean","fluid"]
+					         },
+					         "template": {
+					              type: "string",
+					              enum: ["frontpage","contact","categories"]
+					         },
+							"percentage": {
+					              type: "integer",
+					              enum: getArray(101)
+					         },
+					         "startdate": {
+					        	 "type": "string",
+					             "format": "date"
+					         },
+					         "enddate": {
+					        	 "type": "string",
+					             "format": "date"
+					         },
+							"status" : {
+								"type" : "string",
+								"enum" : [ "active", "pauzed" ]
+							}
+						}
+					}
+				}
+			});
+
+			Core9.editor.on('change', function() {
+				var errors = Core9.editor.validate();
+
+				var indicator = document.getElementById('valid_indicator');
+
+				if (errors.length) {
+					indicator.style.color = 'red';
+					indicator.textContent = "not valid";
+				} else {
+					indicator.style.color = 'green';
+					indicator.textContent = "valid";
+				}
+			});
+
+			document.getElementById('submit').addEventListener('click',
+					function() {
+						console.log(Core9.editor.getValue());
+					});
+
+			document.getElementById('restore').addEventListener('click',
+					function() {
+						Core9.editor.setValue(starting_value);
+					});
+
+		}
+
+		$(document)
+				.ready(
+						function() {
+							
+							
+							var jsonStr = '[{"page":"Second item","id":2,"children":[{"page":"Item 3","id":3,"children":[{"page":"Item 4","id":4,"children":[{"foo":"Bar","value":"Item 5 value","page":"Item 5","id":5,"children":[{"page":"Item 6","id":6,"children":[{"page":"Item 7","id":7,"children":[{"page":"Item 8","id":8,"children":[{"page":"First item","id":1}]}]}]}]}]}]}]},{"page":"Item 9","id":9,"children":[{"page":"Item 10","id":10,"children":[{"page":"Item 11","id":11,"children":[{"page":"Item 12","id":12}]}]}]}]';
+						
+							
+							$('#newpage').on('click', function(){
+								console.log(this);
+								var content = $('#nestable').nestable('serialize');
+								console.log(content);
+								var json = content;//JSON.parse(jsonStr);
+								json.unshift({"id":guid(),
+									"page":"New Page"
+									});
+								console.log(json);
+								initNestable(JSON.stringify(json));
+							});
+							
+							$('#delpage').on('click', function(){
+								console.log(this);
+								
+								$('li[data-id="'+this.dataset.currentid+'"]').remove();
+								
+							});
+
+							var updateOutput = function() {
+								var content = $('#nestable').nestable(
+										'serialize');
+								console.log(content);
+								console.log(JSON.stringify(content));
+							}
+
+
+							function process(key, value, dropdownList) {
+								if (key == 'page') {
+									if (!dropdownList.indexOf(value) > -1) {
+										dropdownList.push(value);
+									}
+								}
+							}
+
+							function traverse(o, func, dropdownList) {
+								for ( var i in o) {
+									func.apply(this, [ i, o[i], dropdownList ]);
+									if (o[i] !== null
+											&& typeof (o[i]) == "object") {
+										traverse(o[i], func, dropdownList);
+									}
+								}
+							}
+
+							var makeDropDownFromJsonString = function(jsonStr) {
+								var dropdownList = [];
+								var json = JSON.parse(jsonStr);
+								traverse(json, process, dropdownList);
+								return dropdownList;
+
+							}
+							var urlData = makeDropDownFromJsonString(jsonStr);
+
+							$(".domain-data").select2(
+									{
+										data : [ "www.easydrain.com",
+												"www.easydrain.nl",
+												"www.easydrain.de",
+												"www.easydrain.fr" ]
+									})
+							$(".language-data").select2({
+								data : [ "", "en", "nl", "de", "fr" ]
+							})
+							$(".country-data").select2({
+								data : [ "", "GB", "US", "DE", "NL" ]
+							})
+							$(".url-data").select2({
+								data : urlData
+							})
+							
+							
+							var getIdFromItem = function(element){
+								while(element.parentNode) {
+								    element = element.parentNode;
+								    if(element.tagName == 'LI'){
+								    	return element.dataset.id;
+								    }
+								}
+							}
+							
+							
+							var initNestable = function(jsonStr){
+								
+								var container = document.getElementById('nestablecontainer');
+								while ( container.firstChild ) container.removeChild( container.firstChild );
+								var div = document.createElement('div');
+								div.id = 'nestable';
+								div.className = 'dd';
+								container.appendChild(div);
+								
+								$('#nestable')
+								.nestable(
+										{
+											group : 1,
+											maxDepth : 20,
+											json : jsonStr,
+											contentCallback : function(item) {
+												var content = item.page
+														|| '' ? item.page
+														: item.id;
+												content += '<div class="dd-handle dd3-handle">Drag</div>';
+
+												return content;
+											},
+											callback : function(l, e) {
+												var element = $(e[0]).find('.dd-content')[0].childNodes[0];
+												var page = element.textContent;
+												activateEditor(page, getIdFromItem(element));
+											}
+										}).on('change', updateOutput);
+							}
+
+							initNestable(jsonStr);
+
+						});
+	</script>
+</body>
+</html>
