@@ -140,7 +140,7 @@
 	width: 438px;
 	min-height: 500px;
 	left: 550px;
-	top: 73px;
+	top: 104px;
 }
 
 /** select2 **/
@@ -185,14 +185,14 @@ body {
 <script
 	src="/dashboard/bower_components/json-editor/dist/jsoneditor.min.js"></script>
 <script type="text/javascript">
-var guid = function() {
-	function s4() {
-		return Math.floor((1 + Math.random()) * 0x10000).toString(16)
-				.substring(1);
+	var guid = function() {
+		function s4() {
+			return Math.floor((1 + Math.random()) * 0x10000).toString(16)
+					.substring(1);
+		}
+		return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4()
+				+ s4() + s4();
 	}
-	return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4()
-			+ s4() + s4();
-}
 </script>
 </head>
 <body>
@@ -203,17 +203,17 @@ var guid = function() {
 
 		<div style="width: 100%;" class="btn-group" role="group" aria-label=""
 			style="width: 500px; left: 195px; top: -34px;">
-
+			<h1 style="margin-top: 10px; font-size: 16px;">Templates</h1>
 			<ul id="navlist">
-				<li style="width: 300px !important; height: 40px;"><select
+				<li style="width: 316px !important; height: 40px;"><select
 					class="domain-data"></select></li>
 				<li style="width: 98px !important; height: 40px;"><select
 					class="language-data"></select></li>
 				<li style="width: 98px !important; height: 40px;"><select
 					class="country-data"></select></li>
 				<li
-					style="width: 300px !important; height: 40px; padding-left: 42px;">
-					<select class="url-data"></select>
+					style="width: 300px !important; height: 40px; padding-left: 27px;">
+					<a href="#" class="btn btn-primary" role="button">New Theme</a>
 				</li>
 			</ul>
 
@@ -232,8 +232,7 @@ var guid = function() {
 			</div>
 
 
-			<div id='editor_holder'></div>
-    		<button id='submit'>Save</button>
+
 
 
 			<div id='editor_holder2'></div>
@@ -245,7 +244,7 @@ var guid = function() {
 		<div id="nestablecontainer">
 			<div class="dd" id="nestable"></div>
 		</div>
-		
+
 
 	</div>
 
@@ -258,44 +257,23 @@ var guid = function() {
 			title : "new title",
 			percentage : 100,
 			status : "active"
-			} ];
+		} ];
 
 		var getArray = function(nr) {
 			return Array.apply(null, {
 				length : nr
 			}).map(Number.call, Number)
 		}
-		
+
 		var activateEditor = function(page, id) {
 			console.log("id : ");
 			console.log(id);
 			document.getElementById('delpage').dataset.currentid = id;
 			try {
 				Core9.editor.destroy();
-				Core9.editor2.destroy();
 			} catch (e) {
 				// TODO: handle exception
 			}
-
-			Core9.editor2 = new JSONEditor(document.getElementById('editor_holder'),{
-				disable_edit_json : true,
-				disable_collapse : true,
-				disable_properties : true,
-				format : 'grid',
-				theme : 'bootstrap3',
-		          schema: {
-		            type: "object",
-		            title: page,
-		            properties: {
-		              url: {
-		                type: "string"
-		              }
-		            }
-		          }
-		        });
-			
-			
-			
 
 			Core9.editor = new JSONEditor(document
 					.getElementById('editor_holder2'), {
@@ -320,29 +298,8 @@ var guid = function() {
 						properties : {
 							"title" : {
 								"type" : "string",
-								"description" : "Page title",
 								"minLength" : 4
 							},
-							"theme": {
-					              type: "string",
-					              enum: ["shunsine","clean","fluid"]
-					         },
-					         "template": {
-					              type: "string",
-					              enum: ["frontpage","contact","categories"]
-					         },
-							"percentage": {
-					              type: "integer",
-					              enum: getArray(101)
-					         },
-					         "startdate": {
-					        	 "type": "string",
-					             "format": "date"
-					         },
-					         "enddate": {
-					        	 "type": "string",
-					             "format": "date"
-					         },
 							"status" : {
 								"type" : "string",
 								"enum" : [ "active", "pauzed" ]
@@ -381,29 +338,38 @@ var guid = function() {
 		$(document)
 				.ready(
 						function() {
-							
-							
+
 							var jsonStr = '[{"page":"Second item","id":2,"children":[{"page":"Item 3","id":3,"children":[{"page":"Item 4","id":4,"children":[{"foo":"Bar","value":"Item 5 value","page":"Item 5","id":5,"children":[{"page":"Item 6","id":6,"children":[{"page":"Item 7","id":7,"children":[{"page":"Item 8","id":8,"children":[{"page":"First item","id":1}]}]}]}]}]}]}]},{"page":"Item 9","id":9,"children":[{"page":"Item 10","id":10,"children":[{"page":"Item 11","id":11,"children":[{"page":"Item 12","id":12}]}]}]}]';
-						
-							
-							$('#newpage').on('click', function(){
-								console.log(this);
-								var content = $('#nestable').nestable('serialize');
-								console.log(content);
-								var json = content;//JSON.parse(jsonStr);
-								json.unshift({"id":guid(),
-									"page":"New Page"
+
+							$('#newpage').on(
+									'click',
+									function() {
+										console.log(this);
+										var content = $('#nestable').nestable(
+												'serialize');
+										console.log(content);
+										var json = content;//JSON.parse(jsonStr);
+										json.unshift({
+											"id" : guid(),
+											"page" : "New Page"
+										});
+										console.log(json);
+										initNestable(JSON.stringify(json));
 									});
-								console.log(json);
-								initNestable(JSON.stringify(json));
-							});
-							
-							$('#delpage').on('click', function(){
-								console.log(this);
-								
-								$('li[data-id="'+this.dataset.currentid+'"]').remove();
-								
-							});
+
+							$('#delpage')
+									.on(
+											'click',
+											function() {
+												console.log(this);
+
+												$(
+														'li[data-id="'
+																+ this.dataset.currentid
+																+ '"]')
+														.remove();
+
+											});
 
 							var updateOutput = function() {
 								var content = $('#nestable').nestable(
@@ -411,7 +377,6 @@ var guid = function() {
 								console.log(content);
 								console.log(JSON.stringify(content));
 							}
-
 
 							function process(key, value, dropdownList) {
 								if (key == 'page') {
@@ -453,50 +418,53 @@ var guid = function() {
 							$(".country-data").select2({
 								data : [ "", "GB", "US", "DE", "NL" ]
 							})
-							$(".url-data").select2({
-								data : urlData
-							})
-							
-							
-							var getIdFromItem = function(element){
-								while(element.parentNode) {
-								    element = element.parentNode;
-								    if(element.tagName == 'LI'){
-								    	return element.dataset.id;
-								    }
+
+
+							var getIdFromItem = function(element) {
+								while (element.parentNode) {
+									element = element.parentNode;
+									if (element.tagName == 'LI') {
+										return element.dataset.id;
+									}
 								}
 							}
-							
-							
-							var initNestable = function(jsonStr){
-								
-								var container = document.getElementById('nestablecontainer');
-								while ( container.firstChild ) container.removeChild( container.firstChild );
+
+							var initNestable = function(jsonStr) {
+
+								var container = document
+										.getElementById('nestablecontainer');
+								while (container.firstChild)
+									container.removeChild(container.firstChild);
 								var div = document.createElement('div');
 								div.id = 'nestable';
 								div.className = 'dd';
 								container.appendChild(div);
-								
-								$('#nestable')
-								.nestable(
-										{
-											group : 1,
-											maxDepth : 20,
-											json : jsonStr,
-											contentCallback : function(item) {
-												var content = item.page
-														|| '' ? item.page
-														: item.id;
-												content += '<div class="dd-handle dd3-handle">Drag</div>';
 
-												return content;
-											},
-											callback : function(l, e) {
-												var element = $(e[0]).find('.dd-content')[0].childNodes[0];
-												var page = element.textContent;
-												activateEditor(page, getIdFromItem(element));
-											}
-										}).on('change', updateOutput);
+								$('#nestable')
+										.nestable(
+												{
+													group : 1,
+													maxDepth : 20,
+													json : jsonStr,
+													contentCallback : function(
+															item) {
+														var content = item.page
+																|| '' ? item.page
+																: item.id;
+														content += '<div class="dd-handle dd3-handle">Drag</div>';
+
+														return content;
+													},
+													callback : function(l, e) {
+														var element = $(e[0])
+																.find(
+																		'.dd-content')[0].childNodes[0];
+														var page = element.textContent;
+														activateEditor(
+																page,
+																getIdFromItem(element));
+													}
+												}).on('change', updateOutput);
 							}
 
 							initNestable(jsonStr);
