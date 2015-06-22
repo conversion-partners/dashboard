@@ -33,17 +33,14 @@ System.config({
 <script>
 
 var init = function(modules){
-	
+	console.log(modules);
 	var db = Core9.system.unwrapModule(modules[0])
-	
 	var DB = db.getDB();
+	var axios = modules[1];
+	console.log(axios);
 	
 	var collections = DB.getCollections(function(){
-		if (this.readyState==4 && this.status==200)
-	    {
-	    	console.log(this.responseText);
-	    }
-		console.log(this);
+
 	});
 	
 	//console.log(collections);
@@ -55,7 +52,7 @@ var init = function(modules){
 
 <script>
 
-Core9.system.multiImport(['app/elements/core9-core/js/core-db','bower_components/superagent/lib/client']).then(
+Core9.system.multiImport(['app/elements/core9-core/js/core-db','bower_components/axios/dist/axios.standalone.min']).then(
 		function(modules) {
 			init(modules);
 		});
