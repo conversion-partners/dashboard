@@ -35,8 +35,9 @@ System.config({
 var init = function(modules){
 	var db = Core9.system.unwrapModule(modules[0]).getDB();
 	
-	var collections = db.getCollections(function(){
-
+	db.getCollections(function(data){
+		  console.log("Success!");
+		  console.log(data);
 	});
 
 }

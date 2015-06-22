@@ -16,17 +16,14 @@ Core9.db = {
 		return this;
 	},
 	getCollections : function(callback) {
-
-		Core9.db.get(Core9.db.__config.dburl).then(function(response) {
-		  console.log("Success!");
-		  console.log(JSON.parse(response));
+		Core9.db.__get(Core9.db.__config.dburl).then(function(response) {
+		  callback(JSON.parse(response)._embedded['rh:coll']);
 		}, function(error) {
 		  console.error("Failed!");
 		  console.error(error);
 		});
-		
 	},
-	get : function(url) {
+	__get : function(url) {
 		return new Promise(function(resolve, reject) {
 			var req = new XMLHttpRequest();
 			req.open('GET', url);
