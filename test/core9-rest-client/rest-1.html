@@ -3,8 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="/dashboard/bower_components/systemjs/dist/system.js"></script>
 </head>
 <body>
+<script>
+Core9 = {}
+Core9.system = {
+		unwrapModule : function(mod) {
+			for (key in mod) {
+				if (mod.hasOwnProperty(key)) {
+					var value = mod[key];
+					return value;
+				}
+			}
+		},
+		multiImport : function(modules) {
+			return Promise.all(modules.map(function(m) {
 
+				return System.import(m)
+			}))
+		}
+	}
+System.config({
+    baseURL: '/dashboard/'
+  });
+</script>
+
+
+<script>
+
+var init = function(db){
+	console.log(db);
+}
+
+</script>
+
+
+
+<script>
+System.import('app/elements/core9-core/js/core-db').then(function(m) {
+	init(Core9.system.unwrapModule(m));
+});
+</script>
 </body>
 </html>

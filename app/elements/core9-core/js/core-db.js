@@ -6,7 +6,9 @@ Core9.db = {
      config : {
 		protocol : 'http://',
 		host : 'localhost',
-		port : '8080'
+		port : '8080',
+		username : 'easydrain',
+		password : 'test'
 } 
 }
 var DB = Core9.db;
