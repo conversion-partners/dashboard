@@ -33,17 +33,12 @@ System.config({
 <script>
 
 var init = function(modules){
-	console.log(modules);
-	var db = Core9.system.unwrapModule(modules[0])
-	var DB = db.getDB();
-	var axios = modules[1];
-	console.log(axios);
+	var db = Core9.system.unwrapModule(modules[0]).getDB(modules[1]);
 	
-	var collections = DB.getCollections(function(){
+	var collections = db.getCollections(function(){
 
 	});
-	
-	//console.log(collections);
+
 }
 
 </script>

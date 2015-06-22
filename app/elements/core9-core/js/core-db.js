@@ -3,6 +3,7 @@ if (typeof Core9 === 'undefined') {
 };
 
 Core9.db = {
+    __axios : {},
 	__config : {
 		protocol : 'http://',
 		host : 'localhost',
@@ -11,7 +12,8 @@ Core9.db = {
 		password : 'changeit',
 		db : 'easydrain'
 	},
-	getDB : function(){
+	getDB : function(axios){
+		this.__axios = axios;
 		return this;
 	},
 	getCollections : function(callback){
