@@ -32,7 +32,8 @@
     "bootstrap": "~3.3.4",
     "core9-app": "*",
     "nestable2": "~1.2.3",
-    "select2": "~4.0.0"
+    "select2": "~4.0.0",
+    "superagent": "~1.2.0"
   },
   "resolutions": {
     "polymer": "^0.9.0",

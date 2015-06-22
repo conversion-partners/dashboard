@@ -33,7 +33,17 @@ System.config({
 <script>
 
 var init = function(db){
-	console.log(db);
+	var DB = db.getDB();
+	
+	var collections = DB.getCollections(function(){
+		if (this.readyState==4 && this.status==200)
+	    {
+	    	console.log(this.responseText);
+	    }
+		console.log(this);
+	});
+	
+	//console.log(collections);
 }
 
 </script>
