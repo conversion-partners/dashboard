@@ -21,18 +21,29 @@ Core9.db = {
 		}
 		return this;
 	},
+	creatCollection : function(collection, callback){
+		//http PUT 127.0.0.1:8080/myfirstdb/myfirstcoll desc='this is my first collection created with restheart'
+		
+		Core9.db.__do('PUT',Core9.db.__config.dburl+collection).then(function(response) {
+			  callback(response);
+			}, function(error) {
+				callback(error);
+			});	
+		
+	},
 	getCollections : function(callback) {
-		Core9.db.__get(Core9.db.__config.dburl).then(function(response) {
+		Core9.db.__do('GET',Core9.db.__config.dburl).then(function(response) {
 		  callback(JSON.parse(response)._embedded['rh:coll']);
 		}, function(error) {
 		  console.error("Failed!");
 		  console.error(error);
 		});
 	},
-	__get : function(url) {
+	__do : function(method, url) {
 		return new Promise(function(resolve, reject) {
 			var req = new XMLHttpRequest();
-			req.open('GET', url);
+			req.open(method, url);
+			req.setRequestHeader("Content-Type", "application/hal+json; charset=utf-8");
 			req.setRequestHeader("Authorization", "Basic " + btoa(Core9.db.__config.username + ":" + Core9.db.__config.password));
 			req.onload = function() {
 				if (req.status == 200) {
