@@ -33,7 +33,7 @@ System.config({
 <script>
 
 var init = function(modules){
-	var db = Core9.system.unwrapModule(modules[0]).getDB();
+	var db = Core9.system.unwrapModule(modules[0]).getDB({"username":"easydrain","password":"changeit"});
 	
 	db.getCollections(function(data){
 		  console.log("Success!");

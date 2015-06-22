@@ -4,6 +4,7 @@ if (typeof Core9 === 'undefined') {
 
 Core9.db = {
 	__config : {
+		// needs defaults of at least 3 chars
 		protocol : 'http://',
 		host : 'localhost',
 		port : '8080',
@@ -12,7 +13,12 @@ Core9.db = {
 		db : 'easydrain',
 		dburl : 'http://localhost:8080/easydrain/'
 	},
-	getDB : function() {
+	getDB : function(config) {
+		for (var key in config) {
+			  if (config.hasOwnProperty(key) && Core9.db.__config[key].length > 3) {
+			    	Core9.db.__config[key] = config[key];
+			  }
+		}
 		return this;
 	},
 	getCollections : function(callback) {
