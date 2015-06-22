@@ -32,7 +32,10 @@ System.config({
 
 <script>
 
-var init = function(db){
+var init = function(modules){
+	
+	var db = Core9.system.unwrapModule(modules[0])
+	
 	var DB = db.getDB();
 	
 	var collections = DB.getCollections(function(){
@@ -51,9 +54,12 @@ var init = function(db){
 
 
 <script>
-System.import('app/elements/core9-core/js/core-db').then(function(m) {
-	init(Core9.system.unwrapModule(m));
-});
+
+Core9.system.multiImport(['app/elements/core9-core/js/core-db','bower_components/superagent/lib/client']).then(
+		function(modules) {
+			init(modules);
+		});
+
 </script>
 </body>
 </html>
