@@ -35,7 +35,12 @@ System.config({
 var init = function(modules){
 	var db = Core9.system.unwrapModule(modules[0]).getDB({"username":"admin","password":"changeit"});
 	
-	db.creatCollection('rrrdasfaasdddd',function(data){
+	db.createCollection('tobedeleted',function(data){
+	 	console.log("Success!");
+		console.log(data);
+	});
+	
+	db.deleteCollection('tobedeleted','easydrain',function(data){
 	 	console.log("Success!");
 		console.log(data);
 	});
