@@ -3,29 +3,47 @@ if (typeof Core9 === 'undefined') {
 };
 
 Core9.db = {
-    __axios : {},
 	__config : {
 		protocol : 'http://',
 		host : 'localhost',
 		port : '8080',
 		username : 'easydrain',
 		password : 'changeit',
-		db : 'easydrain'
+		db : 'easydrain',
+		dburl : 'http://localhost:8080/easydrain/'
 	},
-	getDB : function(axios){
-		this.__axios = axios;
+	getDB : function() {
 		return this;
 	},
-	getCollections : function(callback){
+	getCollections : function(callback) {
 
-	    var oXHR = new XMLHttpRequest();
-	    oXHR.onreadystatechange=callback();
-	    oXHR.open('GET', this.__config.protocol + this.__config.host +':'+ this.__config.port +'/'+ this.__config.db +'/', true);
-	    oXHR.setRequestHeader("Authorization", "Basic "
-	        + btoa(this.__config.username + ":" + this.__config.password));
-	    oXHR.send();
-	    
-	    return oXHR.response;
+		Core9.db.get(Core9.db.__config.dburl).then(function(response) {
+		  console.log("Success!");
+		  console.log(JSON.parse(response));
+		}, function(error) {
+		  console.error("Failed!");
+		  console.error(error);
+		});
+		
+	},
+	get : function(url) {
+		return new Promise(function(resolve, reject) {
+			var req = new XMLHttpRequest();
+			req.open('GET', url);
+			req.setRequestHeader("Authorization", "Basic " + btoa(Core9.db.__config.username + ":" + Core9.db.__config.password));
+
+			req.onload = function() {
+				if (req.status == 200) {
+					resolve(req.response);
+				} else {
+					reject(Error(req.statusText));
+				}
+			};
+			req.onerror = function() {
+				reject(Error("Network Error"));
+			};
+			req.send();
+		});
 	}
 }
 var DB = Core9.db;

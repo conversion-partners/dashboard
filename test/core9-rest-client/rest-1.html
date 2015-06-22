@@ -33,7 +33,7 @@ System.config({
 <script>
 
 var init = function(modules){
-	var db = Core9.system.unwrapModule(modules[0]).getDB(modules[1]);
+	var db = Core9.system.unwrapModule(modules[0]).getDB();
 	
 	var collections = db.getCollections(function(){
 
@@ -47,7 +47,7 @@ var init = function(modules){
 
 <script>
 
-Core9.system.multiImport(['app/elements/core9-core/js/core-db','bower_components/axios/dist/axios.standalone.min']).then(
+Core9.system.multiImport(['app/elements/core9-core/js/core-db']).then(
 		function(modules) {
 			init(modules);
 		});
