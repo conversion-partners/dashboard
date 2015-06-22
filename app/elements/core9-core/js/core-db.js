@@ -34,7 +34,6 @@ Core9.db = {
 			var req = new XMLHttpRequest();
 			req.open('GET', url);
 			req.setRequestHeader("Authorization", "Basic " + btoa(Core9.db.__config.username + ":" + Core9.db.__config.password));
-
 			req.onload = function() {
 				if (req.status == 200) {
 					resolve(req.response);
