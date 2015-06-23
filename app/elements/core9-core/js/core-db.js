@@ -47,11 +47,12 @@ Core9.db = {
 					});
 		},
 		put : function(collection, id, data, callback) {
-			if (typeof id === 'undefined') {
+			if (typeof id === 'undefined' || id == null) {
 				id = Core9.db.__guid();
+				data._id = id;
 			}
 
-			Core9.db.__do('PUT', Core9.db.__config.dburl + collection +'/'+ id).then(
+			Core9.db.__do('PUT', Core9.db.__config.dburl + collection +'/'+ id, null, data).then(
 					function(response) {
 						callback(response);
 					}, function(error) {
@@ -79,7 +80,7 @@ Core9.db = {
 					});
 		}
 	},
-	__do : function(method, url, etag) {
+	__do : function(method, url, etag, data) {
 		return new Promise(function(resolve, reject) {
 			var req = new XMLHttpRequest();
 			req.open(method, url);
@@ -101,7 +102,12 @@ Core9.db = {
 			req.onerror = function() {
 				reject(Error("Network Error"));
 			};
-			req.send();
+			if(typeof data === 'undefined' || data == null){
+				req.send();
+			}else{
+				req.send(JSON.stringify(data));
+			}
+			
 		});
 	}
 }
