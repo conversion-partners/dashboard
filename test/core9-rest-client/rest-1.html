@@ -36,8 +36,9 @@ var init = function(modules){
 	var db = Core9.system.unwrapModule(modules[0]).getDB({"username":"admin","password":"changeit"});
 	
 	db.createCollection('tobedeleted',function(data){
-	 	console.log("Success!");
-		console.log(data);
+	 	console.log("Success created tobedeleted!");
+	 	console.log("Etag : ");
+	 	console.log(data);
 	});
 	
 	db.deleteCollection('tobedeleted','easydrain',function(data){
