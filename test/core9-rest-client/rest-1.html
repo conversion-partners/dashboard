@@ -6,80 +6,53 @@
 <script src="/dashboard/bower_components/systemjs/dist/system.js"></script>
 </head>
 <body>
-<script>
-Core9 = {}
-Core9.system = {
-		unwrapModule : function(mod) {
-			for (key in mod) {
-				if (mod.hasOwnProperty(key)) {
-					var value = mod[key];
-					return value;
+	<script>
+		Core9 = {}
+		Core9.system = {
+			unwrapModule : function(mod) {
+				for (key in mod) {
+					if (mod.hasOwnProperty(key)) {
+						var value = mod[key];
+						return value;
+					}
 				}
+			},
+			multiImport : function(modules) {
+				return Promise.all(modules.map(function(m) {
+
+					return System.import(m)
+				}))
 			}
-		},
-		multiImport : function(modules) {
-			return Promise.all(modules.map(function(m) {
-
-				return System.import(m)
-			}))
 		}
-	}
-System.config({
-    baseURL: '/dashboard/'
-  });
-</script>
+		System.config({
+			baseURL : '/dashboard/'
+		});
+	</script>
 
 
-<script>
-
-var init = function(modules){
-	var db = Core9.system.unwrapModule(modules[0]).getDB({"username":"admin","password":"changeit"});
-	
-	db.collection.create('tobedeleted',function(data){
-	 	console.log("Success created tobedeleted!");
-	 	console.log("Etag : ");
-	 	console.log(data);
-	 	
-	 	
-		db.collection.get('tobedeleted',function(data){
-		 	console.log(data);
-		 	
-		 	var etag = data._etag;
-		 	
-			db.collection.remove('tobedeleted', etag,function(data){
-			 	console.log("Success!");
-				console.log(data);
+	<script>
+		var init = function(modules) {
+			var db = Core9.system.unwrapModule(modules[0]).getDB({
+				"username" : "admin",
+				"password" : "changeit"
 			});
-		 	
-		});
-	 	
-	 	
-	});
-	
-	
 
-	
-	
-
-	
-	db.collection.getAll(function(data){
-		  console.log("Success!");
-		  console.log(data);
-	});
-
-}
-
-</script>
+			db.collection.create('tobedeleted', function(data) {
+				db.collection.remove('tobedeleted', function(data) {
+					db.collection.getAll(function(data) {
+					});
+				});
+			});
+		}
+	</script>
 
 
 
-<script>
-
-Core9.system.multiImport(['app/elements/core9-core/js/core-db']).then(
-		function(modules) {
-			init(modules);
-		});
-
-</script>
+	<script>
+		Core9.system.multiImport([ 'app/elements/core9-core/js/core-db' ])
+				.then(function(modules) {
+					init(modules);
+				});
+	</script>
 </body>
 </html>
