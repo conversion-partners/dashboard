@@ -58,8 +58,15 @@ Core9.db = {
 					Core9.db.__do('GET',
 							Core9.db.__config.dburl + collection + '/' + id, etag,
 							data).then(function(response) {
-						
-								callback(response);
+								console.log(JSON.parse(response));
+								etag = JSON.parse(response)._etag.$oid;
+								Core9.db.__do(method,
+										Core9.db.__config.dburl + collection + '/' + id, etag,
+										data).then(function(response) {
+									callback(response);
+								}, function(error) {
+									callback(error);
+								});
 						
 					}, function(error) {
 						callback(error);
