@@ -36,7 +36,7 @@ Core9.db = {
 					callback(error);
 				});	
 		},
-		remove : function(collection, callback){
+		remove : function(collection, etag, callback){
 			Core9.db.__do('DELETE',Core9.db.__config.dburl+collection).then(function(response) {
 				  callback(response);
 				}, function(error) {

@@ -39,18 +39,28 @@ var init = function(modules){
 	 	console.log("Success created tobedeleted!");
 	 	console.log("Etag : ");
 	 	console.log(data);
+	 	
+	 	
+		db.collection.get('tobedeleted',function(data){
+		 	console.log(data);
+		 	
+		 	var etag = data._etag;
+		 	
+			db.collection.remove('tobedeleted', etag,function(data){
+			 	console.log("Success!");
+				console.log(data);
+			});
+		 	
+		});
+	 	
+	 	
 	});
 	
 	
-	db.collection.get('tobedeleted',function(data){
-	 	console.log(data);
-	});
+
 	
 	
-	db.collection.remove('tobedeleted',function(data){
-	 	console.log("Success!");
-		console.log(data);
-	});
+
 	
 	db.collection.getAll(function(data){
 		  console.log("Success!");
