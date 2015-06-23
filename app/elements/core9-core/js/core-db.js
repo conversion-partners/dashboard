@@ -23,8 +23,7 @@ Core9.db = {
 	},
 	collection : {
 		get : function(collection, callback){
-			var url = Core9.db.__config.protocol+Core9.db.__config.host+':'+Core9.db.__config.port+'/'+Core9.db.__config.db+'/'+collection;
-			Core9.db.__do('GET',url).then(function(response) {
+			Core9.db.__do('GET',Core9.db.__config.dburl+collection).then(function(response) {
 				  callback(response);
 				}, function(error) {
 					callback(error);
@@ -37,9 +36,8 @@ Core9.db = {
 					callback(error);
 				});	
 		},
-		remove : function(collection, db, callback){
-			var url = Core9.db.__config.protocol+Core9.db.__config.host+':'+Core9.db.__config.port+'/'+db+'/'+collection;
-			Core9.db.__do('DELETE',url).then(function(response) {
+		remove : function(collection, callback){
+			Core9.db.__do('DELETE',Core9.db.__config.dburl+collection).then(function(response) {
 				  callback(response);
 				}, function(error) {
 					callback(error);
