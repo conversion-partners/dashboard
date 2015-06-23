@@ -51,6 +51,7 @@ Core9.db = {
 				id = Core9.db.__guid();
 				data._id = id;
 			}
+			// check data{'_id'} == equal to id
 
 			Core9.db.__do('PUT', Core9.db.__config.dburl + collection +'/'+ id, null, data).then(
 					function(response) {
