@@ -32,20 +32,40 @@ Core9.db = {
 	collection : {
 		doc : {
 			getAll : function(collection, callback) {
-
+				Core9.db.collection.get(collection, function(data) {
+					callback(JSON.parse(data)._embedded['rh:doc']);
+				});
 			},
 			put : function(collection, id, data, callback) {
+				var method = null;
+				var etag = null;
 				if (typeof id === 'undefined' || id == null) {
+					// insert
+					method = 'PUT';
 					id = Core9.db.__guid();
+					data._id = id;
+					Core9.db.__do(method,
+							Core9.db.__config.dburl + collection + '/' + id, etag,
+							data).then(function(response) {
+						callback(response);
+					}, function(error) {
+						callback(error);
+					});
+				}else{
+					// update
+					method = 'PATCH';
+					data._id = id;
+					Core9.db.__do('GET',
+							Core9.db.__config.dburl + collection + '/' + id, etag,
+							data).then(function(response) {
+						
+								callback(response);
+						
+					}, function(error) {
+						callback(error);
+					});
 				}
-				data._id = id;
-				Core9.db.__do('PUT',
-						Core9.db.__config.dburl + collection + '/' + id, null,
-						data).then(function(response) {
-					callback(response);
-				}, function(error) {
-					callback(error);
-				});
+
 
 			}
 		},
