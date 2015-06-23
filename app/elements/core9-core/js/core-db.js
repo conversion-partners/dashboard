@@ -30,6 +30,25 @@ Core9.db = {
 		return this;
 	},
 	collection : {
+		doc : {
+			getAll : function(collection, callback) {
+
+			},
+			put : function(collection, id, data, callback) {
+				if (typeof id === 'undefined' || id == null) {
+					id = Core9.db.__guid();
+				}
+				data._id = id;
+				Core9.db.__do('PUT',
+						Core9.db.__config.dburl + collection + '/' + id, null,
+						data).then(function(response) {
+					callback(response);
+				}, function(error) {
+					callback(error);
+				});
+
+			}
+		},
 		get : function(collection, callback) {
 			Core9.db.__do('GET', Core9.db.__config.dburl + collection).then(
 					function(response) {
@@ -45,19 +64,6 @@ Core9.db = {
 					}, function(error) {
 						callback(error);
 					});
-		},
-		put : function(collection, id, data, callback) {
-			if (typeof id === 'undefined' || id == null) {
-				id = Core9.db.__guid();
-			}
-			data._id = id;
-			Core9.db.__do('PUT', Core9.db.__config.dburl + collection +'/'+ id, null, data).then(
-					function(response) {
-						callback(response);
-					}, function(error) {
-						callback(error);
-					});
-
 		},
 		remove : function(collection, callback) {
 			Core9.db.collection.get(collection, function(data) {
@@ -101,12 +107,12 @@ Core9.db = {
 			req.onerror = function() {
 				reject(Error("Network Error"));
 			};
-			if(typeof data === 'undefined' || data == null){
+			if (typeof data === 'undefined' || data == null) {
 				req.send();
-			}else{
+			} else {
 				req.send(JSON.stringify(data));
 			}
-			
+
 		});
 	}
 }

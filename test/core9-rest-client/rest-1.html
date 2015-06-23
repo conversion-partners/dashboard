@@ -43,7 +43,8 @@
 						var json = {
 							"domain" : "www.easydrain.nl"
 						}
-						db.collection.put('config', null, json, function(data) {
+						db.collection.doc.put('config', null, json, function(
+								data) {
 							db.collection.remove('config', function(data) {
 								db.collection.getAll(function(data) {
 									console.log(data);
@@ -54,12 +55,14 @@
 				});
 			});
 
-			db.collection.create('config', function(data) {
+			db.collection.create('test', function(data) {
 				var json = {
 					"domain" : "www.easydrain.nl"
 				}
-				db.collection.put('config', null, json, function(data) {
-
+				db.collection.doc.put('test', null, json, function(data) {
+					db.collection.doc.getAll('test', function(data) {
+						console.log(data);
+					});
 				});
 			});
 
