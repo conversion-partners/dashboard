@@ -39,26 +39,30 @@
 
 			db.collection.create('tobedeleted', function(data) {
 				db.collection.remove('tobedeleted', function(data) {
-		 			db.collection.create('config', function(data) {
+					db.collection.create('config', function(data) {
 						var json = {
-								"domain" : "www.easydrain.nl"
+							"domain" : "www.easydrain.nl"
 						}
 						db.collection.put('config', null, json, function(data) {
-							db.collection.put('config', null, json, function(data) {
-								db.collection.remove('config', function(data) {
-									db.collection.getAll(function(data) {
-										console.log(data);
-									});
+							db.collection.remove('config', function(data) {
+								db.collection.getAll(function(data) {
+									console.log(data);
 								});
 							});
 						});
-					});  
+					});
 				});
 			});
-			
-			
 
-			
+			db.collection.create('config', function(data) {
+				var json = {
+					"domain" : "www.easydrain.nl"
+				}
+				db.collection.put('config', null, json, function(data) {
+
+				});
+			});
+
 		}
 	</script>
 

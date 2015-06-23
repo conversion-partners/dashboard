@@ -49,10 +49,8 @@ Core9.db = {
 		put : function(collection, id, data, callback) {
 			if (typeof id === 'undefined' || id == null) {
 				id = Core9.db.__guid();
-				data._id = id;
 			}
-			// check data{'_id'} == equal to id
-
+			data._id = id;
 			Core9.db.__do('PUT', Core9.db.__config.dburl + collection +'/'+ id, null, data).then(
 					function(response) {
 						callback(response);
