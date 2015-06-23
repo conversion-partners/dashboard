@@ -21,28 +21,38 @@ Core9.db = {
 		}
 		return this;
 	},
-	createCollection : function(collection, callback){
-		Core9.db.__do('PUT',Core9.db.__config.dburl+collection).then(function(response) {
-			  callback(response);
+	collection : {
+		get : function(collection, callback){
+			var url = Core9.db.__config.protocol+Core9.db.__config.host+':'+Core9.db.__config.port+'/'+Core9.db.__config.db+'/'+collection;
+			Core9.db.__do('GET',url).then(function(response) {
+				  callback(response);
+				}, function(error) {
+					callback(error);
+				});	
+		},
+		create : function(collection, callback){
+			Core9.db.__do('PUT',Core9.db.__config.dburl+collection).then(function(response) {
+				  callback(response);
+				}, function(error) {
+					callback(error);
+				});	
+		},
+		remove : function(collection, db, callback){
+			var url = Core9.db.__config.protocol+Core9.db.__config.host+':'+Core9.db.__config.port+'/'+db+'/'+collection;
+			Core9.db.__do('DELETE',url).then(function(response) {
+				  callback(response);
+				}, function(error) {
+					callback(error);
+				});	
+		},
+		getAll : function(callback) {
+			Core9.db.__do('GET',Core9.db.__config.dburl).then(function(response) {
+			  callback(JSON.parse(response)._embedded['rh:coll']);
 			}, function(error) {
-				callback(error);
-			});	
-	},
-	deleteCollection : function(collection, db, callback){
-		var url = Core9.db.__config.protocol+Core9.db.__config.host+':'+Core9.db.__config.port+'/'+db+'/'+collection;
-		Core9.db.__do('DELETE',url).then(function(response) {
-			  callback(response);
-			}, function(error) {
-				callback(error);
-			});	
-	},
-	getCollections : function(callback) {
-		Core9.db.__do('GET',Core9.db.__config.dburl).then(function(response) {
-		  callback(JSON.parse(response)._embedded['rh:coll']);
-		}, function(error) {
-		  console.error("Failed!");
-		  console.error(error);
-		});
+			  console.error("Failed!");
+			  console.error(error);
+			});
+		}
 	},
 	__do : function(method, url, etag) {
 		return new Promise(function(resolve, reject) {
