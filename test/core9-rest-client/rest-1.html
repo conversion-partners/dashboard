@@ -44,6 +44,19 @@
 					});
 				});
 			});
+			
+			
+			db.collection.create('config', function(data) {
+				
+				var json = {
+						"domain" : "www.easydrain.nl"
+				}
+				
+				db.collection.put('config', null, json, function(data) {
+
+				});
+			});
+			
 		}
 	</script>
 

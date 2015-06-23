@@ -3,6 +3,14 @@ if (typeof Core9 === 'undefined') {
 };
 
 Core9.db = {
+	__guid : function() {
+		function s4() {
+			return Math.floor((1 + Math.random()) * 0x10000).toString(16)
+					.substring(1);
+		}
+		return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4()
+				+ s4() + s4();
+	},
 	__config : {
 		// needs defaults of at least 3 chars
 		protocol : 'http://',
@@ -31,12 +39,25 @@ Core9.db = {
 					});
 		},
 		create : function(collection, callback) {
-			Core9.db.__do('PUT', Core9.db.__config.dburl + collection)
-					.then(function(response) {
+			Core9.db.__do('PUT', Core9.db.__config.dburl + collection).then(
+					function(response) {
 						callback(response);
 					}, function(error) {
 						callback(error);
 					});
+		},
+		put : function(collection, id, data, callback) {
+			if (typeof id === 'undefined') {
+				id = Core9.db.__guid();
+			}
+
+			Core9.db.__do('PUT', Core9.db.__config.dburl + collection +'/'+ id).then(
+					function(response) {
+						callback(response);
+					}, function(error) {
+						callback(error);
+					});
+
 		},
 		remove : function(collection, callback) {
 			Core9.db.collection.get(collection, function(data) {
