@@ -37,14 +37,12 @@ Core9.db = {
 				});
 			},
 			put : function(collection, id, data, callback) {
-				var method = null;
 				var etag = null;
 				if (typeof id === 'undefined' || id == null) {
 					// insert
-					method = 'PUT';
 					id = Core9.db.__guid();
 					data._id = id;
-					Core9.db.__do(method,
+					Core9.db.__do('PUT',
 							Core9.db.__config.dburl + collection + '/' + id, etag,
 							data).then(function(response) {
 						callback(response);
@@ -53,14 +51,12 @@ Core9.db = {
 					});
 				}else{
 					// update
-					method = 'PATCH';
 					data._id = id;
 					Core9.db.__do('GET',
 							Core9.db.__config.dburl + collection + '/' + id, etag,
 							data).then(function(response) {
-								console.log(JSON.parse(response));
 								etag = JSON.parse(response)._etag.$oid;
-								Core9.db.__do(method,
+								Core9.db.__do('PATCH',
 										Core9.db.__config.dburl + collection + '/' + id, etag,
 										data).then(function(response) {
 									callback(response);
