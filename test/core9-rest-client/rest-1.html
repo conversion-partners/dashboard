@@ -44,9 +44,11 @@
 								"domain" : "www.easydrain.nl"
 						}
 						db.collection.put('config', null, json, function(data) {
-							db.collection.remove('config', function(data) {
-								db.collection.getAll(function(data) {
-									console.log(data);
+							db.collection.put('config', null, json, function(data) {
+								db.collection.remove('config', function(data) {
+									db.collection.getAll(function(data) {
+										console.log(data);
+									});
 								});
 							});
 						});
