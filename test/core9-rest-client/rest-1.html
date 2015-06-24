@@ -66,7 +66,7 @@
 						var json = {
 							"domain2" : "www.easydrain.de"
 						}
-						db.collection.doc.put('test', id, json, function(data) {
+						db.collection.doc.patch('test', id, json, function(data) {
 							db.collection.doc.getAll('test', function(data) {
 								console.log(data);
 								db.collection.remove('test', function(data) {
