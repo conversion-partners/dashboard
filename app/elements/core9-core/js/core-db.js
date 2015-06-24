@@ -128,15 +128,17 @@ Core9.db = {
 					}, function(error) {
 						callback(error);
 					});
+				}else{
+					Core9.db.collection.doc.remove(collection, id, data,
+							function() {
+								Core9.db.collection.doc.put(collection, id, data,
+										function(data) {
+											callback(data);
+										});
+							});
 				}
 
-				Core9.db.collection.doc.remove(collection, id, data,
-						function() {
-							/*Core9.db.collection.doc.put(collection, id, data,
-									function(data) {
-										callback(data);
-									});*/
-						});
+
 
 			}
 		},
