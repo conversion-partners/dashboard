@@ -47,6 +47,7 @@
 								data) {
 							db.collection.remove('config', function(data) {
 								db.collection.getAll(function(data) {
+									console.log('test 1 : ');
 									console.log(data);
 								});
 							});
@@ -75,6 +76,33 @@
 						});
 
 					});
+				});
+			});
+			
+			db.collection.create('test2', function(data) {
+				var json = {
+					"domain3" : "www.easydrain.nl"
+				}
+				db.collection.doc.put('test2', null, json, function(data) {
+ 					db.collection.doc.getAll('test2', function(data) {
+						var id = data[0]._id;
+						console.log(data);
+						var json = {
+							"domain4" : "www.easydrain.de"
+						}
+						
+
+ 						db.collection.doc.put('test2', id, json, function(data) {
+							db.collection.doc.getAll('test2', function(data) {
+								console.log(data);
+								db.collection.remove('test2', function(data) {
+								});
+							});
+						}); 
+						
+						
+
+					}); 
 				});
 			});
 

@@ -131,10 +131,13 @@ Core9.db = {
 				}else{
 					Core9.db.collection.doc.remove(collection, id, data,
 							function() {
-								Core9.db.collection.doc.put(collection, id, data,
-										function(data) {
-											callback(data);
-										});
+								Core9.db.__do('PUT',
+										Core9.db.__config.dburl + collection + '/' + id,
+										null, data).then(function(response) {
+									callback(response);
+								}, function(error) {
+									callback(error);
+								});
 							});
 				}
 
