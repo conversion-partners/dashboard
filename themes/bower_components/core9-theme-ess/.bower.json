@@ -1,0 +1,32 @@
+{
+  "name": "core9-theme-ess",
+  "homepage": "https://github.com/conversion-partners/core9-theme-ess",
+  "authors": [
+    "trimm <robertjessecooke@gmail.com>"
+  ],
+  "description": "test app",
+  "main": "core9-theme-ess.json",
+  "keywords": [
+    "core9",
+    "dashboard",
+    "apps"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "d4cb008e98",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "d4cb008e982fad489925906c1a2051f06186e027"
+  },
+  "_source": "git://github.com/conversion-partners/core9-theme-ess.git",
+  "_target": "*",
+  "_originalSource": "core9-theme-ess",
+  "_direct": true
+}

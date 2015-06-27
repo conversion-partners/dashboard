@@ -30,7 +30,6 @@
     "tinymce": "~4.1.10",
     "handlebars": "~3.0.3",
     "bootstrap": "~3.3.4",
-    "core9-app": "*",
     "nestable2": "~1.2.3",
     "select2": "~4.0.0"
   },
