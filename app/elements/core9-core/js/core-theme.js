@@ -10,23 +10,34 @@ Core9.theme = {
     this.__async([this.__do('GET', '/dashboard/themes/bower.json', 'json', this.__getThemes)], callback);
   },
   __getThemes: function(bowerData, resolve) {
-    var json = JSON.parse(bowerData);
-    if(Object.keys(json.dependencies).lenght == 0){
-				resolve(json);
+    Core9.theme.__repo = JSON.parse(bowerData);
+    if(Object.keys(Core9.theme.__repo.dependencies).lenght == 0){
+				resolve(Core9.theme.__repo);
 		}
     var itterable = [];
-		for (var key in json.dependencies) {
-      if (json.dependencies.hasOwnProperty(key)) {
+		for (var key in Core9.theme.__repo.dependencies) {
+      if (Core9.theme.__repo.dependencies.hasOwnProperty(key)) {
 				itterable.push(Core9.theme.__do('GET', '/dashboard/themes/bower_components/'+key+'/bower.json'));
       }
     }
 		Core9.theme.__async(itterable, function(data){
+			var themes = [];
 			var themeData = [];
 			for (var i = 0; i < data.length; i++) {
-				themeData.push(JSON.parse(data[i]));
+				var j = JSON.parse(data[i]);
+				themes.push(j);
+				themeData.push(Core9.theme.__do('GET', '/dashboard/themes/bower_components/' + j.name + '/' + j.main));
 			}
-			json['themedata'] = themeData;
-			resolve(json);
+
+			Core9.theme.__async(themeData, function(dat){
+					for (var i = 0; i < dat.length; i++) {
+							themes[i]['data'] = JSON.parse(dat[i]);
+					}
+					Core9.theme.__repo['themes'] = themes;
+					resolve(Core9.theme.__repo);
+			});
+
+
 		});
   },
   __async: function(iterable, callback) {
