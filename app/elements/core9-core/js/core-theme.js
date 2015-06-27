@@ -21,7 +21,11 @@ Core9.theme = {
       }
     }
 		Core9.theme.__async(itterable, function(data){
-			json['themedata'] = data;
+			var themeData = [];
+			for (var i = 0; i < data.length; i++) {
+				themeData.push(JSON.parse(data[i]));
+			}
+			json['themedata'] = themeData;
 			resolve(json);
 		});
   },
