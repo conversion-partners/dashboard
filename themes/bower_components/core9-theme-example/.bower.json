@@ -1,11 +1,11 @@
 {
-  "name": "core9-app",
-  "homepage": "https://github.com/conversion-partners/core9-app",
+  "name": "core9-theme-example",
+  "homepage": "https://github.com/conversion-partners/core9-theme-example",
   "authors": [
     "trimm <robertjessecooke@gmail.com>"
   ],
   "description": "test app",
-  "main": "core9-app.json",
+  "main": "core9-theme-example.json",
   "keywords": [
     "core9",
     "dashboard",
@@ -19,14 +19,14 @@
     "test",
     "tests"
   ],
-  "_release": "d2d5a3f4ae",
+  "_release": "b8c723190f",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "d2d5a3f4ae949a96cf953b89a891f4963c393f40"
+    "commit": "b8c723190ffa9e6dc606ae47540df2958484bf17"
   },
-  "_source": "git://github.com/conversion-partners/core9-app.git",
+  "_source": "git://github.com/conversion-partners/core9-theme-example.git",
   "_target": "*",
-  "_originalSource": "core9-app",
+  "_originalSource": "core9-theme-example",
   "_direct": true
 }

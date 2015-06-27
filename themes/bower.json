@@ -18,7 +18,7 @@
     "tests"
   ],
   "dependencies": {
-    "core9-app": "*",
-    "core9-theme-ess": "*"
+    "core9-theme-ess": "*",
+    "core9-theme-example": "*"
   }
 }
