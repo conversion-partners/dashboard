@@ -21,17 +21,18 @@ Core9.theme = {
       }
     }
 		Core9.theme.__async(itterable, function(data){
-			var themes = [];
+			var themes = {};
 			var themeData = [];
 			for (var i = 0; i < data.length; i++) {
 				var j = JSON.parse(data[i]);
-				themes.push(j);
+				themes[j.name] = j;
 				themeData.push(Core9.theme.__do('GET', '/dashboard/themes/bower_components/' + j.name + '/' + j.main));
 			}
 
 			Core9.theme.__async(themeData, function(dat){
 					for (var i = 0; i < dat.length; i++) {
-							themes[i]['data'] = JSON.parse(dat[i]);
+						var d = JSON.parse(dat[i]);
+							themes[d.name]['data'] = d;
 					}
 					Core9.theme.__repo['themes'] = themes;
 					resolve(Core9.theme.__repo);
