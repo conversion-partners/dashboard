@@ -34,7 +34,14 @@
 		var init = function(modules) {
 			var theme = Core9.system.unwrapModule(modules[0]);
 
-      console.log(theme.get());
+      var callback = function(data){
+        console.log(data);
+        for (i = 0; i < data.length; i++) {
+            console.log(data[i]);
+        }
+      }
+      theme.get(callback);
+
 
 
 		}
