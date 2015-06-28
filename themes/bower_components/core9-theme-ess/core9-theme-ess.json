@@ -30,6 +30,28 @@
   "blocks": "",
   "templates": {
     "core9-theme-ess": {
+      "entries" : [
+        {
+          "language":"",
+          "country": "",
+          "item" : "Home page"
+        },
+        {
+          "language":"nl",
+          "country": "",
+          "item" : "Home page"
+        },
+        {
+          "language":"de",
+          "country": "",
+          "item" : "Home page"
+        },
+        {
+          "language":"nl",
+          "country": "BE",
+          "item" : "Home page"
+        }
+      ],
       "default": {
         "items": [{
           "id": 2,
