@@ -39,8 +39,24 @@
           "page": "Item 3"
         }]
       },
-      "language": {},
-      "country": {},
+      "language": {
+        "items": [{
+          "id": 2,
+          "page": "Second item"
+        }, {
+          "id": 3,
+          "page": "Item 3"
+        }]
+      },
+      "country": {
+        "items": [{
+          "id": 2,
+          "page": "Second item"
+        }, {
+          "id": 3,
+          "page": "Item 3"
+        }]
+      },
       "full": {
         "items": [{
           "id": 2,

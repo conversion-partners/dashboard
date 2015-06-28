@@ -424,46 +424,49 @@
 
 		}
 
+		function changeSelect2Data(className, dataCategory) {
+			$("."+className).select2({
+				data: dataCategory
+			});
+		}
 
 		var initTemplateSelectBoxes = function(themeData) {
 
 			var templateData = {
-				data: ["",
-					"www.easydrain.com",
-					"www.easydrain.nl",
-					"www.easydrain.de",
-					"www.easydrain.fr"
-				]
+				data: []
 			}
-
 			var languageData = {
 				dataCat1: ["", "en", "nl", "de", "fr"],
-				dataCat2: ["", "en"],
+				dataCat2: ["", "en"]
 			}
 			var countryData = {
 				dataCat1: ["", "UK", "NL", "DE", "FR"],
-				dataCat2: ["", "UK"],
+				dataCat2: ["", "UK"]
 			}
 
-			function changeData(className, dataCategory) {
-				$("."+className).select2({
-					data: dataCategory
-				});
-			}
+			for (var key in themeData) {
+          if(themeData.hasOwnProperty(key)){
+						templateData.data.push(key);
+						languageData[key] = [];
+
+            console.log(themeData[key]);
+          }
+       }
 
 			$(".template-data").on("change", function() {
 				$(".language-data").select2("destroy");
-				changeData("language-data",languageData["dataCat1"]);
+				console.log("selected : " + $(this).val());
+				changeSelect2Data("language-data",languageData[$(this).val()]);
 			});
 
 			$(".language-data").on("change", function() {
 				$(".country-data").select2("destroy");
-				changeData("country-data",countryData["dataCat1"]);
+				changeSelect2Data("country-data",countryData["dataCat1"]);
 			});
 
-			changeData("template-data",templateData["data"]);
-			changeData("language-data",languageData["dataCat2"]);
-			changeData("country-data",countryData["dataCat2"]);
+			changeSelect2Data("template-data",templateData["data"]);
+			changeSelect2Data("language-data",languageData["dataCat2"]);
+			changeSelect2Data("country-data",countryData["dataCat2"]);
 
 		}
 

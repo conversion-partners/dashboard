@@ -27,5 +27,45 @@
         } ]
       } ]
   },
-  "blocks" : ""
+  "blocks" : "",
+  "templates": {
+    "core9-theme-ess": {
+      "default": {
+        "items": [{
+          "id": 2,
+          "page": "Second item"
+        }, {
+          "id": 3,
+          "page": "Item 3"
+        }]
+      },
+      "language": {
+        "items": [{
+          "id": 2,
+          "page": "Second item"
+        }, {
+          "id": 3,
+          "page": "Item 3"
+        }]
+      },
+      "country": {
+        "items": [{
+          "id": 2,
+          "page": "Second item"
+        }, {
+          "id": 3,
+          "page": "Item 3"
+        }]
+      },
+      "full": {
+        "items": [{
+          "id": 2,
+          "page": "Second item"
+        }, {
+          "id": 3,
+          "page": "Item 3"
+        }]
+      }
+    }
+  }
 }
