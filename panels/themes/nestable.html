@@ -194,6 +194,8 @@
 
 	<script>
 		var THEMEDATA = null;
+		var DB = new loki();
+		var dbEntries = DB.addCollection('entries');
 	</script>
 
 </head>
@@ -217,7 +219,7 @@
 					<select class="country-data"></select>
 				</li>
 				<li style="width: 10px !important; height: 40px; padding-left: 0px;">
-					<a href="#" class="btn glyphicon glyphicon-refresh" role="button">&nbsp;</a>
+					<a id="refresh-templates" href="#" class="btn glyphicon glyphicon-refresh" role="button">&nbsp;</a>
 				</li>
 				<li style="width: 300px !important; height: 40px; padding-left: 57px;">
 					<a href="#" class="btn btn-primary" role="button">New Theme</a>
@@ -347,6 +349,23 @@
 			.ready(
 				function() {
 
+					$('#refresh-templates').on('click',function(){
+
+						var template = $(".template-data").val();
+						var language = $(".language-data").val();
+						var country = $(".country-data").val();
+
+						var entries = dbEntries.findObjects({
+							"template":template,
+							"language":{ '$eq' : language } ,
+							"country":{ '$eq' : country }
+							});
+
+
+
+						console.log(entries);
+
+					});
 
 					$('#newpage').on(
 						'click',
@@ -441,9 +460,6 @@
 		}
 
 		var initTemplateSelectBoxes = function(themeData) {
-
-			var db = new loki();
-			var dbEntries = db.addCollection('entries')
 
 			var templateData = {
 				data: [""]
