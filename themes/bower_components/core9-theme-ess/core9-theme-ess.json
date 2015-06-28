@@ -1,4 +1,48 @@
 {
   "name" : "core9-theme-ess",
+  "menu" : {
+    "name" : "core9-theme-ess",
+    "icon" : "fa fa-phone-square",
+    "link" : "/dashboard/themes/easydrain",
+    "items" : [ {
+        "title" : "Easydrain",
+        "icon" : "fa fa-phone-square",
+        "items" : [ {
+          "name" : "Blocks",
+          "icon" : "fa fa-phone-square",
+          "link" : "/dashboard/themes/easydrain/blocks",
+          "items" : [ {
+              "title" : "Headers",
+              "icon" : "fa fa-phone-square",
+              "items" : [ {
+                "name" : "Full menu",
+                "icon" : "fa fa-phone-square",
+                "link" : "/dashboard/themes/easydrain/blocks/full-menu/add"
+              }, {
+                "name" : "Minimal menu",
+                "icon" : "fa fa-phone-square",
+                "link" : "/dashboard/themes/easydrain/blocks/minimal-menu/add"
+              } ]
+            } ]
+        }, {
+          "name" : "Templates",
+          "icon" : "fa fa-phone-square",
+          "link" : "/dashboard/themes/easydrain/templates",
+          "items" : [ {
+              "title" : "Home page",
+              "icon" : "fa fa-phone-square",
+              "items" : [ {
+                "name" : "Full menu",
+                "icon" : "fa fa-phone-square",
+                "link" : "/dashboard/themes/easydrain/templates/full-menu/add"
+              }, {
+                "name" : "Minimal menu",
+                "icon" : "fa fa-phone-square",
+                "link" : "/dashboard/themes/easydrain/templates/minimal-menu/add"
+              } ]
+            } ]
+        } ]
+      } ]
+  },
   "blocks" : ""
 }

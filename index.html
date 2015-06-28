@@ -33,7 +33,7 @@
 	//Core9.panellist = ['routes','files','forms','grid','fileeditor'];
 	//Core9.panellist = ['login','routes','files','forms','grid','fileeditor','themes'];
 	Core9.panellist = ['routes','files','forms','grid','fileeditor','widgets','themes','pages'];
-	
+
 	var p = new Promise(function(resolve,reject){
 		Core9.panel.add(Core9.panellist, resolve); // order does matter
 	});
@@ -72,7 +72,7 @@
 			}, 1000);
 			document.getElementsByClassName('menu')[1].style.visibility = "visible";
 		});
-		
+
 	}, 1500); // big fat hack needs a callback from on iframe loaded
 
 	</script>
