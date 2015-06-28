@@ -431,6 +431,15 @@
 			});
 		}
 
+		function arrayContains(needle, arrhaystack)
+		{
+		    return (arrhaystack.indexOf(needle) > -1);
+		}
+
+		function isEmpty(str) {
+    	return (!str || 0 === str.length);
+		}
+
 		var initTemplateSelectBoxes = function(themeData) {
 
 			var db = new loki();
@@ -467,18 +476,44 @@
           }
        }
 
-			var nl = dbEntries.find( {"language":"nl"} );
-			console.log(nl);
+
 
 			$(".template-data").on("change", function() {
 				$(".language-data").select2("destroy");
+				$(".language-data").html("<option><option>");
 				console.log("selected : " + $(this).val());
-				changeSelect2Data("language-data",languageData[$(this).val()]);
+				var data = [];
+				var entries = dbEntries.find( {"template":$(this).val()});
+				console.log(entries);
+				for (i = 0; i < entries.length; i++) {
+						console.log(entries[i]);
+						var lang = entries[i]['language'];
+						if(!arrayContains(lang, data) && !isEmpty(lang)){
+							console.log("pushing : " + lang);
+							data.push(lang);
+						}
+				}
+				console.log(data);
+				changeSelect2Data("language-data",data);
 			});
 
 			$(".language-data").on("change", function() {
 				$(".country-data").select2("destroy");
-				changeSelect2Data("country-data",countryData["dataCat1"]);
+				$(".country-data").html("<option><option>");
+				console.log("selected : " + $(this).val());
+				var data = [];
+				var entries = dbEntries.find( {"template":$(".template-data").val(), "language":$(this).val()});
+				console.log(entries);
+				for (i = 0; i < entries.length; i++) {
+						console.log(entries[i]);
+						var country = entries[i]['country'];
+						if(!arrayContains(country, data) && !isEmpty(country)){
+							console.log("pushing : " + country);
+							data.push(country);
+						}
+				}
+				console.log(data);
+				changeSelect2Data("country-data",data);
 			});
 
 			changeSelect2Data("template-data",templateData["data"]);
