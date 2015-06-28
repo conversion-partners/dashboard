@@ -415,9 +415,6 @@
 				});
 
 
-
-
-
 		var getIdFromItem = function(element) {
 			while (element.parentNode) {
 				element = element.parentNode;
@@ -432,33 +429,6 @@
 				'serialize');
 			console.log(content);
 			console.log(JSON.stringify(content));
-		}
-
-		function process(key, value, dropdownList) {
-			if (key == 'page') {
-				if (!dropdownList.indexOf(value) > -1) {
-					dropdownList.push(value);
-				}
-			}
-		}
-
-		function traverse(o, func, dropdownList) {
-			for (var i in o) {
-				func.apply(this, [i, o[i], dropdownList]);
-				if (o[i] !== null && typeof(o[i]) == "object") {
-					traverse(o[i], func, dropdownList);
-				}
-			}
-		}
-
-		//var jsonStr = '[{"page":"Second item","id":2,"children":[{"page":"Item 3","id":3,"children":[{"page":"Item 4","id":4,"children":[{"foo":"Bar","value":"Item 5 value","page":"Item 5","id":5,"children":[{"page":"Item 6","id":6,"children":[{"page":"Item 7","id":7,"children":[{"page":"Item 8","id":8,"children":[{"page":"First item","id":1}]}]}]}]}]}]}]},{"page":"Item 9","id":9,"children":[{"page":"Item 10","id":10,"children":[{"page":"Item 11","id":11,"children":[{"page":"Item 12","id":12}]}]}]}]';
-		//var urlData = makeDropDownFromJsonString(jsonStr);
-		var makeDropDownFromJsonString = function(jsonStr) {
-			var dropdownList = [];
-			var json = JSON.parse(jsonStr);
-			traverse(json, process, dropdownList);
-			return dropdownList;
-
 		}
 
 		function changeSelect2Data(className, dataCategory) {
