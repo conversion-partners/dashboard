@@ -24,23 +24,6 @@
                 "link" : "/dashboard/themes/core9-theme-ess/blocks/minimal-menu/add"
               } ]
             } ]
-        }, {
-          "name" : "Templates",
-          "icon" : "fa fa-phone-square",
-          "link" : "/dashboard/themes/core9-theme-ess/templates",
-          "items" : [ {
-              "title" : "Home page",
-              "icon" : "fa fa-phone-square",
-              "items" : [ {
-                "name" : "Full menu",
-                "icon" : "fa fa-phone-square",
-                "link" : "/dashboard/themes/core9-theme-ess/templates/full-menu/add"
-              }, {
-                "name" : "Minimal menu",
-                "icon" : "fa fa-phone-square",
-                "link" : "/dashboard/themes/core9-theme-ess/templates/minimal-menu/add"
-              } ]
-            } ]
         } ]
       } ]
   },
