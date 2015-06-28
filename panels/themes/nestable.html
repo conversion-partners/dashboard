@@ -448,9 +448,8 @@
 			for (var key in themeData) {
           if(themeData.hasOwnProperty(key)){
 						templateData.data.push(key);
-						languageData[key] = [];
 
-            console.log(themeData[key]);
+            console.log(themeData[key].data.templates[key].entries);
           }
        }
 
