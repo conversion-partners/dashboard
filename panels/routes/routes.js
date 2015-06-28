@@ -26,14 +26,16 @@ var routes = {
 			var theme = Core9.system.unwrapModule(modules[0]);
       var callback = function(data){
         console.log(data);
-
-				var insert = {
-			      "action" : "addItems",
-			      "findmenusbytitle" : "Themes",
-			      "addItems" : [ data[0].themes['core9-theme-ess'].data.menu ]
-			  }
+				var themes = data[0].themes;
 				if(initPanelThemes){
-					Core9.iframe.parent.sentMessageToIframe(insert, document.getElementsByClassName('menu')[1]);
+				Object.keys(themes).forEach(function(key) {
+							var insert = {
+						      "action" : "addItems",
+						      "findmenusbytitle" : "Themes",
+						      "addItems" : [ themes[key].data.menu ]
+						  }
+							Core9.iframe.parent.sentMessageToIframe(insert, document.getElementsByClassName('menu')[1]);
+					});
 					initPanelThemes = false;
 				}
 
