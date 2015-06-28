@@ -21,7 +21,18 @@ var routes = {
 	'/settings/setup$/' : function() {
 	},
 	'/themes$/' : function(){
-		Core9.panel.open('panel-themes');
+		var init = function(modules) {
+			var theme = Core9.system.unwrapModule(modules[0]);
+      var callback = function(data){
+        console.log(data);
+      }
+      theme.get(callback);
+			Core9.panel.open('panel-themes');
+		}
+		Core9.system.multiImport([ 'app/elements/core9-core/js/core-theme' ])
+				.then(function(modules) {
+					init(modules);
+				});
 	},
 	'/themes/.*/' : function() {
 
