@@ -207,7 +207,7 @@
 			<h1 style="margin-top: 10px; font-size: 16px;">Templates</h1>
 			<ul id="navlist">
 				<li style="width: 263px !important; height: 40px;">
-					<select class="domain-data"></select>
+					<select class="template-data"></select>
 				</li>
 				<li style="width: 98px !important; height: 40px;">
 					<select class="language-data"></select>
@@ -424,59 +424,47 @@
 
 		}
 
-		var setTemplateSelectBoxes = function(themes, languages, countries) {
-
-			$(".domain-data").select2({
-				data: ["",
-					"www.easydrain.com",
-					"www.easydrain.nl",
-					"www.easydrain.de",
-					"www.easydrain.fr"
-				]
-			});
-			$(".language-data").select2({
-				data: ["", "en", "nl", "de", "fr"]
-			});
-			$(".country-data").select2({
-				data: ["", "GB", "US", "DE", "NL"]
-			});
-
-		}
 
 		var initTemplateSelectBoxes = function(themeData) {
 
-			$(".domain-data").select2({
+			var templateData = {
 				data: ["",
 					"www.easydrain.com",
 					"www.easydrain.nl",
 					"www.easydrain.de",
 					"www.easydrain.fr"
 				]
-			});
+			}
 
-			var data = {
+			var languageData = {
 				dataCat1: ["", "en", "nl", "de", "fr"],
 				dataCat2: ["", "en"],
 			}
+			var countryData = {
+				dataCat1: ["", "UK", "NL", "DE", "FR"],
+				dataCat2: ["", "UK"],
+			}
 
-			function changeData(dataCategory) {
-				$(".language-data").select2({
+			function changeData(className, dataCategory) {
+				$("."+className).select2({
 					data: dataCategory
 				});
 			}
 
-			$(".domain-data").on("change", function() {
+			$(".template-data").on("change", function() {
 				$(".language-data").select2("destroy");
-				changeData(data["dataCat1"]);
+				changeData("language-data",languageData["dataCat1"]);
 			});
 
-			changeData(data["dataCat2"]);
-
-			$(".country-data").select2({
-				data: ["", "GB", "US", "DE", "NL"]
+			$(".language-data").on("change", function() {
+				$(".country-data").select2("destroy");
+				changeData("country-data",countryData["dataCat1"]);
 			});
 
-			//setTemplateSelectBoxes();
+			changeData("template-data",templateData["data"]);
+			changeData("language-data",languageData["dataCat2"]);
+			changeData("country-data",countryData["dataCat2"]);
+
 		}
 
 		var initNestable = function(jsonStr, themeData) {
