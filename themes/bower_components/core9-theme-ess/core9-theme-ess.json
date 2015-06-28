@@ -1,111 +1,54 @@
 {
-  "name" : "core9-theme-ess",
-  "menu" : {
-    "name" : "core9-theme-ess",
-    "icon" : "fa fa-phone-square",
-    "link" : "/dashboard/themes/core9-theme-ess",
-    "items" : [ {
-        "title" : "Easydrain",
-        "icon" : "fa fa-phone-square",
-        "items" : [ {
-          "name" : "Blocks",
-          "icon" : "fa fa-phone-square",
-          "link" : "/dashboard/themes/core9-theme-ess/blocks",
-          "items" : [ {
-              "title" : "Headers",
-              "icon" : "fa fa-phone-square",
-              "items" : [ {
-                "name" : "Full menu",
-                "icon" : "fa fa-phone-square",
-                "link" : "/dashboard/themes/core9-theme-ess/blocks/full-menu/add"
-              }, {
-                "name" : "Minimal menu",
-                "icon" : "fa fa-phone-square",
-                "link" : "/dashboard/themes/core9-theme-ess/blocks/minimal-menu/add"
-              } ]
-            } ]
-        } ]
-      } ]
+  "name": "core9-theme-ess",
+  "menu": {
+    "name": "core9-theme-ess",
+    "icon": "fa fa-phone-square",
+    "link": "/dashboard/themes/core9-theme-ess",
+    "items": [{
+      "title": "Easydrain",
+      "icon": "fa fa-phone-square",
+      "items": [{
+        "name": "Blocks",
+        "icon": "fa fa-phone-square",
+        "link": "/dashboard/themes/core9-theme-ess/blocks",
+        "items": [{
+          "title": "Headers",
+          "icon": "fa fa-phone-square",
+          "items": [{
+            "name": "Full menu",
+            "icon": "fa fa-phone-square",
+            "link": "/dashboard/themes/core9-theme-ess/blocks/full-menu/add"
+          }, {
+            "name": "Minimal menu",
+            "icon": "fa fa-phone-square",
+            "link": "/dashboard/themes/core9-theme-ess/blocks/minimal-menu/add"
+          }]
+        }]
+      }]
+    }]
   },
-  "blocks" : "",
-  "templates" : {
-    "core9-theme-ess" : {
-      "default" : {},
-      "language" : {},
-      "country" : {},
-      "full" : {
-        "items" : [
-    {
-        "page": "Second item",
-        "id": 2,
-        "children": [
-            {
-                "page": "Item 3",
-                "id": 3,
-                "children": [
-                    {
-                        "page": "Item 4",
-                        "id": 4,
-                        "children": [
-                            {
-                                "foo": "Bar",
-                                "value": "Item 5 value",
-                                "page": "Item 5",
-                                "id": 5,
-                                "children": [
-                                    {
-                                        "page": "Item 6",
-                                        "id": 6,
-                                        "children": [
-                                            {
-                                                "page": "Item 7",
-                                                "id": 7,
-                                                "children": [
-                                                    {
-                                                        "page": "Item 8",
-                                                        "id": 8,
-                                                        "children": [
-                                                            {
-                                                                "page": "First item",
-                                                                "id": 1
-                                                            }
-                                                        ]
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "page": "Item 9",
-        "id": 9,
-        "children": [
-            {
-                "page": "Item 10",
-                "id": 10,
-                "children": [
-                    {
-                        "page": "Item 11",
-                        "id": 11,
-                        "children": [
-                            {
-                                "page": "Item 12",
-                                "id": 12
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    }
-]
+  "blocks": "",
+  "templates": {
+    "core9-theme-ess": {
+      "default": {
+        "items": [{
+          "id": 2,
+          "page": "Second item"
+        }, {
+          "id": 3,
+          "page": "Item 3"
+        }]
+      },
+      "language": {},
+      "country": {},
+      "full": {
+        "items": [{
+          "id": 2,
+          "page": "Second item"
+        }, {
+          "id": 3,
+          "page": "Item 3"
+        }]
       }
     }
   }
