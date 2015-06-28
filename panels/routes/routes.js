@@ -17,7 +17,9 @@ var routes = {
 	'/devices$/' : function() {
 		Core9.panel.open('panel-content');
 	},
-	'/blocks$/' : function() {
+	'/themes/.*/blocks/.*/add$/' : function(req) {
+		console.log('add block');
+		console.log(window.location);
 	},
 	'/settings/setup$/' : function() {
 	},
