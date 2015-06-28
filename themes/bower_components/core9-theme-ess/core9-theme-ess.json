@@ -34,22 +34,22 @@
         {
           "language":"",
           "country": "",
-          "item" : "Home page"
+          "page" : "Home page"
         },
         {
           "language":"nl",
           "country": "",
-          "item" : "Home page"
+          "page" : "Home page"
         },
         {
           "language":"de",
           "country": "",
-          "item" : "Home page"
+          "page" : "Home page"
         },
         {
           "language":"nl",
           "country": "BE",
-          "item" : "Home page"
+          "page" : "Home page"
         }
       ],
       "default": {

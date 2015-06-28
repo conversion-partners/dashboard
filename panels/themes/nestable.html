@@ -194,8 +194,10 @@
 
 	<script>
 		var THEMEDATA = null;
+		var pageInit = true;
 		var DB = new loki();
 		var dbEntries = DB.addCollection('entries');
+
 	</script>
 
 </head>
@@ -365,6 +367,29 @@
 
 						console.log(entries);
 
+						/**
+						[{
+		          "id": 2,
+		          "page": "Second item"
+		        }, {
+		          "id": 3,
+		          "page": "Item 3"
+		        }]
+						**/
+
+						var data = [];
+
+						for (i = 0; i < entries.length; i++) {
+								var item = {
+									"id" : guid(),
+									"page" : entries[i].page
+								}
+								data.push(item);
+						}
+
+						initNestable(JSON.stringify(data));
+
+
 					});
 
 					$('#newpage').on(
@@ -531,9 +556,10 @@
 
 		var initNestable = function(jsonStr, themeData) {
 			console.log(arguments);
-			if (themeData != null) {
+			if (themeData != null && pageInit) {
 				THEMEDATA = themeData;
 				initTemplateSelectBoxes(themeData);
+				pageInit = false;
 			}
 
 			var container = document
