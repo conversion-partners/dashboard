@@ -25,6 +25,16 @@ var routes = {
 			var theme = Core9.system.unwrapModule(modules[0]);
       var callback = function(data){
         console.log(data);
+
+				var insert = {
+			      "action" : "addItems",
+			      "findmenusbytitle" : "Themes",
+			      "addItems" : [ data[0].themes['core9-theme-ess'].data.menu ]
+			  }
+
+				Core9.iframe.parent.sentMessageToIframe(insert, document.getElementsByClassName('menu')[1]);
+
+
       }
       theme.get(callback);
 			Core9.panel.open('panel-themes');
