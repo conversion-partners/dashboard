@@ -448,8 +448,13 @@
 			for (var key in themeData) {
           if(themeData.hasOwnProperty(key)){
 						templateData.data.push(key);
+						try {
+							console.log(key);
+							console.log(themeData[key].data.templates[key].entries);
+						} catch (e) {
+							//console.log(e);
+						}
 
-            console.log(themeData[key].data.templates[key].entries);
           }
        }
 
