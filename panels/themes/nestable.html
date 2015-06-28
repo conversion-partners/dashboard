@@ -176,6 +176,7 @@ body {
 	margin-left: 0px !important;
 }
 </style>
+<script type="text/javascript" src="/dashboard/app/elements/core9-core/js/iframe/child.js"></script>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="/dashboard/bower_components/nestable2/jquery.nestable.js"></script>
 <script
@@ -194,6 +195,7 @@ body {
 				+ s4() + s4();
 	}
 </script>
+
 </head>
 <body>
 
@@ -250,7 +252,9 @@ body {
 
 
 	<script>
-		Core9 = {};
+	if (typeof Core9 === 'undefined') {
+		Core9 = {}
+	};
 		Core9.editor = {};
 
 		var starting_value = [ {
@@ -467,9 +471,25 @@ body {
 												}).on('change', updateOutput);
 							}
 
-							initNestable(jsonStr);
+							//initNestable(jsonStr);
+
+
 
 						});
+	</script>
+	<script>
+	var callback = function(event) {
+		//console.log(event.data);
+		try {
+			eval(event.data);
+		} catch (e) {
+
+		} finally {
+
+		}
+	}
+	//console.log(Core9);
+	Core9.iframe.child.listenToPostMessages(callback);
 	</script>
 </body>
 </html>
