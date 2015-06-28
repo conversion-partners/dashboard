@@ -38,7 +38,7 @@ var routes = {
 						  }
 							Core9.iframe.parent.sentMessageToIframe(insert, document.getElementsByClassName('menu')[1]);
 					});
-					Core9.iframe.parent.sentMessageToIframe('initNestable('+JSON.stringify(themes["core9-theme-ess"].data.templates["core9-theme-ess"].default.items)+','+JSON.stringify(themes)+');', Core9.panel.getIframeById('panel-themes'));
+					Core9.iframe.parent.sentMessageToIframe('initNestable([],'+JSON.stringify(themes)+');', Core9.panel.getIframeById('panel-themes'));
 					initPanelThemes = false;
 				}
 
