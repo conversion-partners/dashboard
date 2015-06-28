@@ -196,6 +196,10 @@ body {
 	}
 </script>
 
+<script>
+var THEMEDATA = null;
+</script>
+
 </head>
 <body>
 
@@ -436,6 +440,10 @@ body {
 						}
 
 						var initNestable = function(jsonStr, themeData) {
+							console.log(arguments);
+							if(themeData != null){
+								THEMEDATA = themeData;
+							}
 
 							var container = document
 									.getElementById('nestablecontainer');
