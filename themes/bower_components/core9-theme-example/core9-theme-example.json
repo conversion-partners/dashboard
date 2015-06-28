@@ -29,7 +29,7 @@
   },
   "blocks" : "",
   "templates": {
-    "core9-theme-ess": {
+    "core9-theme-example": {
       "entries" : [
         {
           "language":"",

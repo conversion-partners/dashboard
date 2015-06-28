@@ -446,15 +446,7 @@
 			var dbEntries = db.addCollection('entries')
 
 			var templateData = {
-				data: []
-			}
-			var languageData = {
-				dataCat1: ["", "en", "nl", "de", "fr"],
-				dataCat2: ["", "en"]
-			}
-			var countryData = {
-				dataCat1: ["", "UK", "NL", "DE", "FR"],
-				dataCat2: ["", "UK"]
+				data: [""]
 			}
 
 			for (var key in themeData) {
@@ -468,7 +460,6 @@
 									dbEntries.insert(entries[i]);
 							}
 							console.log(entries);
-
 						} catch (e) {
 							//console.log(e);
 						}
@@ -517,8 +508,8 @@
 			});
 
 			changeSelect2Data("template-data",templateData["data"]);
-			changeSelect2Data("language-data",languageData["dataCat2"]);
-			changeSelect2Data("country-data",countryData["dataCat2"]);
+			changeSelect2Data("language-data",[]);
+			changeSelect2Data("country-data",[]);
 
 		}
 
