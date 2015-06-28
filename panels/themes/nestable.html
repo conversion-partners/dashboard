@@ -433,6 +433,9 @@
 
 		var initTemplateSelectBoxes = function(themeData) {
 
+			var db = new loki();
+			var dbEntries = db.addCollection('entries')
+
 			var templateData = {
 				data: []
 			}
@@ -450,13 +453,22 @@
 						templateData.data.push(key);
 						try {
 							console.log(key);
-							console.log(themeData[key].data.templates[key].entries);
+							var entries = themeData[key].data.templates[key].entries;
+							for (i = 0; i < entries.length; i++) {
+									entries[i]["template"] = key;
+									dbEntries.insert(entries[i]);
+							}
+							console.log(entries);
+
 						} catch (e) {
 							//console.log(e);
 						}
 
           }
        }
+
+			var nl = dbEntries.find( {"language":"nl"} );
+			console.log(nl);
 
 			$(".template-data").on("change", function() {
 				$(".language-data").select2("destroy");
