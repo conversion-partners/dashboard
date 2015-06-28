@@ -1,5 +1,6 @@
 
 var initPanelIframeSite = true;
+var initPanelThemes = true;
 
 var routes = {
 	'/home$/' : function() {
@@ -31,8 +32,11 @@ var routes = {
 			      "findmenusbytitle" : "Themes",
 			      "addItems" : [ data[0].themes['core9-theme-ess'].data.menu ]
 			  }
+				if(initPanelThemes){
+					Core9.iframe.parent.sentMessageToIframe(insert, document.getElementsByClassName('menu')[1]);
+					initPanelThemes = false;
+				}
 
-				Core9.iframe.parent.sentMessageToIframe(insert, document.getElementsByClassName('menu')[1]);
 
 
       }
