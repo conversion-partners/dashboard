@@ -75,12 +75,12 @@
     }
   },
   "pages": {
-    "easydrain": {
+    "core9-theme-ess": {
       "entries" : [
         {
           "language":"",
           "country": "",
-          "page" : "Home page",
+          "page" : "Home page page",
           "versions" : {
             "a" : "id"
           }
@@ -88,7 +88,7 @@
         {
           "language":"",
           "country": "",
-          "page" : "Contact page",
+          "page" : "Contact page page",
           "versions" : {
             "a" : "id"
           }
@@ -96,7 +96,7 @@
         {
           "language":"nl",
           "country": "",
-          "page" : "Home page",
+          "page" : "Home page page",
           "versions" : {
             "a" : "id"
           }
@@ -104,7 +104,7 @@
         {
           "language":"de",
           "country": "",
-          "page" : "Home page",
+          "page" : "Home page page",
           "versions" : {
             "a" : "id"
           }
@@ -112,7 +112,7 @@
         {
           "language":"nl",
           "country": "BE",
-          "page" : "Home page",
+          "page" : "Home page page",
           "versions" : {
             "a" : "id"
           }

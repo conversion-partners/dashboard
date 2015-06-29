@@ -539,7 +539,7 @@ var initTemplateSelectBoxes = function(themeData) {
 				templateData.data.push(key);
 				try {
 					console.log(key);
-					var entries = themeData[key].data.templates[key].entries;
+					var entries = themeData[key].data.pages[key].entries;
 					for (i = 0; i < entries.length; i++) {
 							entries[i]["template"] = key;
 							dbEntries.insert(entries[i]);
