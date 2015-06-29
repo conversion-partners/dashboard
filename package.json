@@ -1,0 +1,25 @@
+{
+  "name": "dashboard",
+  "version": "0.0.0",
+  "description": "html+css+js+json",
+  "main": "init.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/conversion-partners/dashboard.git"
+  },
+  "author": "Robert Cooke",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/conversion-partners/dashboard/issues"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-express-server": "~0.5.1"
+  }
+}
