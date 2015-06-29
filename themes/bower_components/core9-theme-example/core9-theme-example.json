@@ -53,5 +53,51 @@
         }
       ]
     }
+  },
+  "pages": {
+    "ofa": {
+      "entries" : [
+        {
+          "language":"",
+          "country": "",
+          "page" : "Home page",
+          "versions" : {
+            "a" : "id"
+          }
+        },
+        {
+          "language":"",
+          "country": "",
+          "page" : "Contact page",
+          "versions" : {
+            "a" : "id"
+          }
+        },
+        {
+          "language":"nl",
+          "country": "",
+          "page" : "Home page",
+          "versions" : {
+            "a" : "id"
+          }
+        },
+        {
+          "language":"de",
+          "country": "",
+          "page" : "Home page",
+          "versions" : {
+            "a" : "id"
+          }
+        },
+        {
+          "language":"nl",
+          "country": "BE",
+          "page" : "Home page",
+          "versions" : {
+            "a" : "id"
+          }
+        }
+      ]
+    }
   }
 }
