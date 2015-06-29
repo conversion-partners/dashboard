@@ -490,12 +490,12 @@ var getIdFromItem = function(element){
 
 
 
-var initNestable = function(jsonStr){
+		var initNestable = function(jsonStr, themeData) {
 
 	console.log(arguments);
 	if (themeData != null && pageInit) {
 		THEMEDATA = themeData;
-		initTemplateSelectBoxes(themeData);
+		//initTemplateSelectBoxes(themeData);
 		pageInit = false;
 	}
 
