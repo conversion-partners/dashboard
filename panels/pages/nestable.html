@@ -196,6 +196,12 @@ var guid = function() {
 			+ s4() + s4();
 }
 </script>
+<script>
+var THEMEDATA = null;
+var pageInit = true;
+var DB = new loki();
+var dbEntries = DB.addCollection('pageentries');
+</script>
 </head>
 <body>
 
@@ -409,12 +415,7 @@ var guid = function() {
 
 							});
 
-							var updateOutput = function() {
-								var content = $('#nestable').nestable(
-										'serialize');
-								console.log(content);
-								console.log(JSON.stringify(content));
-							}
+
 
 
 							function process(key, value, dropdownList) {
@@ -462,55 +463,78 @@ var guid = function() {
 							})
 
 
-							var getIdFromItem = function(element){
-								while(element.parentNode) {
-								    element = element.parentNode;
-								    if(element.tagName == 'LI'){
-								    	return element.dataset.id;
-								    }
-								}
-							}
 
-
-							var initNestable = function(jsonStr){
-
-								var container = document.getElementById('nestablecontainer');
-								while ( container.firstChild ) container.removeChild( container.firstChild );
-								var div = document.createElement('div');
-								div.id = 'nestable';
-								div.className = 'dd';
-								container.appendChild(div);
-
-								$('#nestable')
-								.nestable(
-										{
-											group : 1,
-											maxDepth : 20,
-											json : jsonStr,
-											contentCallback : function(item) {
-												var content = item.page
-														|| '' ? item.page
-														: item.id;
-												content += '<div class="dd-handle dd3-handle">Drag</div>';
-
-												return content;
-											},
-											callback : function(l, e) {
-												var element = $(e[0]).find('.dd-content')[0].childNodes[0];
-												var page = element.textContent;
-												activateEditor(page, getIdFromItem(element));
-											}
-										}).on('change', updateOutput);
-							}
 
 							//initNestable(jsonStr);
 
 						});
 	</script>
 
+<script>
+
+var updateOutput = function() {
+	var content = $('#nestable').nestable(
+			'serialize');
+	console.log(content);
+	console.log(JSON.stringify(content));
+}
+
+var getIdFromItem = function(element){
+	while(element.parentNode) {
+			element = element.parentNode;
+			if(element.tagName == 'LI'){
+				return element.dataset.id;
+			}
+	}
+}
+
+
+
+var initNestable = function(jsonStr){
+
+	console.log(arguments);
+	if (themeData != null && pageInit) {
+		THEMEDATA = themeData;
+		initTemplateSelectBoxes(themeData);
+		pageInit = false;
+	}
+
+	var container = document.getElementById('nestablecontainer');
+	while ( container.firstChild ) container.removeChild( container.firstChild );
+	var div = document.createElement('div');
+	div.id = 'nestable';
+	div.className = 'dd';
+	container.appendChild(div);
+
+	$('#nestable')
+	.nestable(
+			{
+				group : 1,
+				maxDepth : 20,
+				json : jsonStr,
+				contentCallback : function(item) {
+					var content = item.page
+							|| '' ? item.page
+							: item.id;
+					content += '<div class="dd-handle dd3-handle">Drag</div>';
+
+					return content;
+				},
+				callback : function(l, e) {
+					var element = $(e[0]).find('.dd-content')[0].childNodes[0];
+					var page = element.textContent;
+					activateEditor(page, getIdFromItem(element));
+				}
+			}).on('change', updateOutput);
+}
+
+
+</script>
+
+
 	<script>
 		var callback = function(event) {
-				console.log(event);
+				console.log(event.data);
 				try {
 					eval(event.data);
 				} catch (e) {
