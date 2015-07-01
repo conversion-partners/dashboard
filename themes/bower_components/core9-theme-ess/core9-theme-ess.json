@@ -55,33 +55,81 @@
           "language":"",
           "country": "",
           "page" : "Contact page",
-          "versions" : {
-            "a" : "id"
-          }
+          "versions" : [
+                {
+                  "title": "page",
+    							"status" : "active"
+                },
+    						{
+    							"title": "page",
+    							"status" : "pauzed"
+    						},
+    						{
+    							"title": "page",
+    							"status" : "pauzed"
+    						}
+
+            ]
         },
         {
           "language":"nl",
           "country": "",
           "page" : "Home page",
-          "versions" : {
-            "a" : "id"
-          }
+          "versions" : [
+                {
+                  "title": "page",
+    							"status" : "active"
+                },
+    						{
+    							"title": "page",
+    							"status" : "pauzed"
+    						},
+    						{
+    							"title": "page",
+    							"status" : "pauzed"
+    						}
+
+            ]
         },
         {
           "language":"de",
           "country": "",
           "page" : "Home page",
-          "versions" : {
-            "a" : "id"
-          }
+          "versions" : [
+                {
+                  "title": "page",
+    							"status" : "active"
+                },
+    						{
+    							"title": "page",
+    							"status" : "pauzed"
+    						},
+    						{
+    							"title": "page",
+    							"status" : "pauzed"
+    						}
+
+            ]
         },
         {
           "language":"nl",
           "country": "BE",
           "page" : "Home page",
-          "versions" : {
-            "a" : "id"
-          }
+          "versions" : [
+                {
+                  "title": "page",
+    							"status" : "active"
+                },
+    						{
+    							"title": "page",
+    							"status" : "pauzed"
+    						},
+    						{
+    							"title": "page",
+    							"status" : "pauzed"
+    						}
+
+            ]
         }
       ]
     }

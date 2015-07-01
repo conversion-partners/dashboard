@@ -277,29 +277,16 @@
 			}).map(Number.call, Number)
 		}
 
-		var activateEditor = function(page, id) {
+		var activateEditor = function(page, id, pageData) {
+			console.log(pageData);
 			document.getElementById('delpage').dataset.currentid = id;
 			try {
 				Core9.editor.destroy();
 			} catch (e) {
 				// TODO: handle exception
 			}
-			var starting_value = [
-            {
-              title: page,
-							status : "active",
-							file : "test.html"
-            },
-						{
-							title: page,
-							status : "pauzed"
-						},
-						{
-							title: page,
-							status : "pauzed"
-						}
-
-        ];
+			
+			var starting_value = pageData.versions;
 
 			Core9.editor = new JSONEditor(document
 				.getElementById('editor_holder2'), {
@@ -361,22 +348,30 @@
 
 		}
 
+		var getSelectBoxEntries = function(page){
+			var template = $(".template-data").val();
+			var language = $(".language-data").val();
+			var country = $(".country-data").val();
+			if(country == null) {country = ""}
+			var query = {
+				"template": template,
+				"language": language,
+				"country": country
+				}
+			if(page){
+				query.page = page;
+			}
+			return dbEntries.findObjects(query);
+		}
+
+
 		$(document)
 			.ready(
 				function() {
 
 					$('#refresh-templates').on('click',function(){
 
-						var template = $(".template-data").val();
-						var language = $(".language-data").val();
-						var country = $(".country-data").val();
-						if(country == null) {country = ""}
-						var query = {
-							"template": template,
-							"language": language,
-							"country": country
-							}
-						var entries = dbEntries.findObjects(query);
+						var entries = getSelectBoxEntries();
 						var data = [];
 						for (i = 0; i < entries.length; i++) {
 								var item = {
@@ -534,9 +529,13 @@
 							.find(
 								'.dd-content')[0].childNodes[0];
 						var page = element.textContent;
+						var template = $(".template-data").val();
+						console.log(THEMEDATA);
 						activateEditor(
 							page,
-							getIdFromItem(element));
+							getIdFromItem(element),
+							getSelectBoxEntries(page)[0] // get only one sorry
+							);
 					}
 				}).on('change', updateOutput);
 		}
