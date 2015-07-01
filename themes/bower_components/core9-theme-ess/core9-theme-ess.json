@@ -141,41 +141,191 @@
           "language":"",
           "country": "",
           "page" : "Home page page",
-          "versions" : {
-            "a" : "id"
-          }
+          "versions" : [
+                {
+                  "title": "page",
+                  "theme" : "core9-theme-ess",
+                  "language" : "",
+                  "country" : "",
+                  "percentage" : "100",
+                  "startdate" : "",
+                  "enddate" : "",
+    							"status" : "active"
+                },
+    						{
+                  "title": "page",
+                  "theme" : "core9-theme-ess",
+                  "language" : "",
+                  "country" : "",
+                  "percentage" : "100",
+                  "startdate" : "",
+                  "enddate" : "",
+    							"status" : "active"
+    						},
+    						{
+                  "title": "page",
+                  "theme" : "core9-theme-ess",
+                  "language" : "",
+                  "country" : "",
+                  "percentage" : "100",
+                  "startdate" : "",
+                  "enddate" : "",
+    							"status" : "active"
+    						}
+
+            ]
         },
         {
           "language":"",
           "country": "",
           "page" : "Contact page page",
-          "versions" : {
-            "a" : "id"
-          }
+          "versions" : [
+                {
+                  "title": "page",
+                  "theme" : "core9-theme-ess",
+                  "language" : "",
+                  "country" : "",
+                  "percentage" : "100",
+                  "startdate" : "",
+                  "enddate" : "",
+    							"status" : "active"
+                },
+    						{
+                  "title": "page",
+                  "theme" : "core9-theme-ess",
+                  "language" : "",
+                  "country" : "",
+                  "percentage" : "100",
+                  "startdate" : "",
+                  "enddate" : "",
+    							"status" : "active"
+    						},
+    						{
+                  "title": "page",
+                  "theme" : "core9-theme-ess",
+                  "language" : "",
+                  "country" : "",
+                  "percentage" : "100",
+                  "startdate" : "",
+                  "enddate" : "",
+    							"status" : "active"
+    						}
+
+            ]
         },
         {
           "language":"nl",
           "country": "",
           "page" : "Home page page",
-          "versions" : {
-            "a" : "id"
-          }
+          "versions" : [
+                {
+                  "title": "page",
+                  "theme" : "core9-theme-ess",
+                  "language" : "",
+                  "country" : "",
+                  "percentage" : "100",
+                  "startdate" : "",
+                  "enddate" : "",
+    							"status" : "active"
+                },
+    						{
+                  "title": "page",
+                  "theme" : "core9-theme-ess",
+                  "language" : "",
+                  "country" : "",
+                  "percentage" : "100",
+                  "startdate" : "",
+                  "enddate" : "",
+    							"status" : "active"
+    						},
+    						{
+                  "title": "page",
+                  "theme" : "core9-theme-ess",
+                  "language" : "",
+                  "country" : "",
+                  "percentage" : "100",
+                  "startdate" : "",
+                  "enddate" : "",
+    							"status" : "active"
+    						}
+
+            ]
         },
         {
           "language":"de",
           "country": "",
           "page" : "Home page page",
-          "versions" : {
-            "a" : "id"
-          }
+          "versions" : [
+                {
+                  "title": "page",
+                  "theme" : "core9-theme-ess",
+                  "language" : "",
+                  "country" : "",
+                  "percentage" : "100",
+                  "startdate" : "",
+                  "enddate" : "",
+    							"status" : "active"
+                },
+    						{
+                  "title": "page",
+                  "theme" : "core9-theme-ess",
+                  "language" : "",
+                  "country" : "",
+                  "percentage" : "100",
+                  "startdate" : "",
+                  "enddate" : "",
+    							"status" : "active"
+    						},
+    						{
+                  "title": "page",
+                  "theme" : "core9-theme-ess",
+                  "language" : "",
+                  "country" : "",
+                  "percentage" : "100",
+                  "startdate" : "",
+                  "enddate" : "",
+    							"status" : "active"
+    						}
+
+            ]
         },
         {
           "language":"nl",
           "country": "BE",
           "page" : "Home page page",
-          "versions" : {
-            "a" : "id"
-          }
+          "versions" : [
+                {
+                  "title": "page",
+                  "theme" : "core9-theme-ess",
+                  "language" : "",
+                  "country" : "",
+                  "percentage" : "100",
+                  "startdate" : "",
+                  "enddate" : "",
+    							"status" : "active"
+                },
+    						{
+                  "title": "page",
+                  "theme" : "core9-theme-ess",
+                  "language" : "",
+                  "country" : "",
+                  "percentage" : "100",
+                  "startdate" : "",
+                  "enddate" : "",
+    							"status" : "active"
+    						},
+    						{
+                  "title": "page",
+                  "theme" : "core9-theme-ess",
+                  "language" : "",
+                  "country" : "",
+                  "percentage" : "100",
+                  "startdate" : "",
+                  "enddate" : "",
+    							"status" : "active"
+    						}
+
+            ]
         }
       ]
     }
