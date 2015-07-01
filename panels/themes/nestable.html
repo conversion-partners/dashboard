@@ -287,6 +287,23 @@
 				// TODO: handle exception
 			}
 
+			var starting_value = [
+            {
+              title: page,
+							status : "active",
+							file : "test.html"
+            },
+						{
+							title: page,
+							status : "pauzed"
+						},
+						{
+							title: page,
+							status : "pauzed"
+						}
+
+        ];
+
 			Core9.editor = new JSONEditor(document
 				.getElementById('editor_holder2'), {
 					ajax: true,
@@ -306,7 +323,7 @@
 							title: "Version",
 							headerTemplate: "{{i}} - {{self.title}}",
 							type: "object",
-							id: "person",
+							id: "templateid",
 							properties: {
 								"title": {
 									"type": "string",
