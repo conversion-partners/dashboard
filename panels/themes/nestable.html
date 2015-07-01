@@ -278,15 +278,12 @@
 		}
 
 		var activateEditor = function(page, id) {
-			console.log("id : ");
-			console.log(id);
 			document.getElementById('delpage').dataset.currentid = id;
 			try {
 				Core9.editor.destroy();
 			} catch (e) {
 				// TODO: handle exception
 			}
-
 			var starting_value = [
             {
               title: page,
@@ -374,20 +371,13 @@
 						var language = $(".language-data").val();
 						var country = $(".country-data").val();
 						if(country == null) {country = ""}
-
 						var query = {
 							"template": template,
 							"language": language,
 							"country": country
 							}
-
-							console.log(query);
-
 						var entries = dbEntries.findObjects(query);
-
-						console.log(entries);
 						var data = [];
-
 						for (i = 0; i < entries.length; i++) {
 								var item = {
 									"id" : guid(),
@@ -395,25 +385,19 @@
 								}
 								data.push(item);
 						}
-
 						initNestable(JSON.stringify(data));
-
-
 					});
 
 					$('#newpage').on(
 						'click',
 						function() {
-							console.log(this);
 							var content = $('#nestable').nestable(
 								'serialize');
-							console.log(content);
 							var json = content; //JSON.parse(jsonStr);
 							json.unshift({
 								"id": guid(),
 								"page": "New Page"
 							});
-							console.log(json);
 							initNestable(JSON.stringify(json));
 						});
 
@@ -421,14 +405,10 @@
 						.on(
 							'click',
 							function() {
-								console.log(this);
-
 								$(
 										'li[data-id="' + this.dataset.currentid + '"]')
 									.remove();
-
 							});
-
 				});
 
 
@@ -473,13 +453,11 @@
           if(themeData.hasOwnProperty(key)){
 						templateData.data.push(key);
 						try {
-							console.log(key);
 							var entries = themeData[key].data.templates[key].entries;
 							for (i = 0; i < entries.length; i++) {
 									entries[i]["template"] = key;
 									dbEntries.insert(entries[i]);
 							}
-							console.log(entries);
 						} catch (e) {
 							//console.log(e);
 						}
@@ -492,38 +470,28 @@
 			$(".template-data").on("change", function() {
 				$(".language-data").select2("destroy");
 				$(".language-data").html("<option><option>");
-				console.log("selected : " + $(this).val());
 				var data = [];
 				var entries = dbEntries.find( {"template":$(this).val()});
-				console.log(entries);
 				for (i = 0; i < entries.length; i++) {
-						console.log(entries[i]);
 						var lang = entries[i]['language'];
 						if(!arrayContains(lang, data) && !isEmpty(lang)){
-							console.log("pushing : " + lang);
 							data.push(lang);
 						}
 				}
-				console.log(data);
 				changeSelect2Data("language-data",data);
 			});
 
 			$(".language-data").on("change", function() {
 				$(".country-data").select2("destroy");
 				$(".country-data").html("<option><option>");
-				console.log("selected : " + $(this).val());
 				var data = [];
 				var entries = dbEntries.find( {"template":$(".template-data").val(), "language":$(this).val()});
-				console.log(entries);
 				for (i = 0; i < entries.length; i++) {
-						console.log(entries[i]);
 						var country = entries[i]['country'];
 						if(!arrayContains(country, data) && !isEmpty(country)){
-							console.log("pushing : " + country);
 							data.push(country);
 						}
 				}
-				console.log(data);
 				changeSelect2Data("country-data",data);
 			});
 
@@ -534,7 +502,6 @@
 		}
 
 		var initNestable = function(jsonStr, themeData) {
-			console.log(arguments);
 			if (themeData != null && pageInit) {
 				THEMEDATA = themeData;
 				initTemplateSelectBoxes(themeData);
@@ -576,16 +543,11 @@
 	</script>
 	<script>
 		var callback = function(event) {
-				console.log(event);
 				try {
 					eval(event.data);
 				} catch (e) {
-
-				} finally {
-
 				}
 			}
-			//console.log(Core9);
 		Core9.iframe.child.listenToPostMessages(callback);
 	</script>
 </body>
