@@ -6,10 +6,7 @@ var options = {
     path: './app.js'
 };
 
-var serverFiles = [
-    './index.html',
-    './'
-];
+var serverFiles = [];
 
 gulp.task( 'server:start', function() {
     server.listen( options, livereload.listen );
