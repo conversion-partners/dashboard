@@ -141,6 +141,7 @@
           "language":"",
           "country": "",
           "page" : "Home page page",
+          "url" : "/index.html",
           "versions" : [
                 {
                   "title": "page",
@@ -179,6 +180,7 @@
           "language":"",
           "country": "",
           "page" : "Contact page page",
+          "url" : "/index.html",
           "versions" : [
                 {
                   "title": "page",
@@ -217,6 +219,7 @@
           "language":"nl",
           "country": "",
           "page" : "Home page page",
+          "url" : "/index.html",
           "versions" : [
                 {
                   "title": "page",
@@ -255,6 +258,7 @@
           "language":"de",
           "country": "",
           "page" : "Home page page",
+          "url" : "/index.html",
           "versions" : [
                 {
                   "title": "page",
@@ -293,6 +297,7 @@
           "language":"nl",
           "country": "BE",
           "page" : "Home page page",
+          "url" : "/index.html",  
           "versions" : [
                 {
                   "title": "page",

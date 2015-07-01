@@ -268,8 +268,8 @@
 			}).map(Number.call, Number)
 		}
 
-		var activateEditor = function(page, id) {
-
+		var activateEditor = function(page, id, pageData) {
+			console.log(pageData);
 			document.getElementById('delpage').dataset.currentid = id;
 			try {
 				Core9.editor.destroy();
@@ -277,6 +277,9 @@
 			} catch (e) {
 				// TODO: handle exception
 			}
+
+
+			var starting_value = pageData.versions;
 
 			Core9.editor2 = new JSONEditor(document.getElementById('editor_holder'), {
 				disable_edit_json: true,
@@ -289,14 +292,12 @@
 					title: page,
 					properties: {
 						url: {
-							type: "string"
+							type: "string",
+							default : pageData.url
 						}
 					}
 				}
 			});
-
-
-
 
 			Core9.editor = new JSONEditor(document
 				.getElementById('editor_holder2'), {
@@ -383,6 +384,26 @@
 
 		}
 
+
+		var getSelectBoxEntries = function(page) {
+			var template = $(".template-data").val();
+			var language = $(".language-data").val();
+			var country = $(".country-data").val();
+			if (country == null) {
+				country = ""
+			}
+			var query = {
+				"template": template,
+				"language": language,
+				"country": country
+			}
+			if (page) {
+				query.page = page;
+			}
+			return dbEntries.findObjects(query);
+		}
+
+
 		$(document)
 			.ready(
 				function() {
@@ -390,18 +411,7 @@
 
 					$('#refresh-templates').on('click', function() {
 
-						var template = $(".template-data").val();
-						var language = $(".language-data").val();
-						var country = $(".country-data").val();
-						if (country == null) {
-							country = ""
-						}
-						var query = {
-							"template": template,
-							"language": language,
-							"country": country
-						}
-						var entries = dbEntries.findObjects(query);
+						var entries = getSelectBoxEntries();
 						var data = [];
 						for (i = 0; i < entries.length; i++) {
 							var item = {
@@ -553,22 +563,22 @@
 					callback: function(l, e) {
 						var element = $(e[0]).find('.dd-content')[0].childNodes[0];
 						var page = element.textContent;
-						activateEditor(page, getIdFromItem(element));
+						activateEditor(page, getIdFromItem(element), getSelectBoxEntries(page)[0]);
 					}
 				}).on('change', updateOutput);
 		}
 	</script>
 	<script>
 		var callback = function(event) {
-				console.log(event.data);
-				try {
-					eval(event.data);
-				} catch (e) {
+			console.log(event.data);
+			try {
+				eval(event.data);
+			} catch (e) {
 
-				} finally {
+			} finally {
 
-				}
 			}
+		}
 		Core9.iframe.child.listenToPostMessages(callback);
 	</script>
 

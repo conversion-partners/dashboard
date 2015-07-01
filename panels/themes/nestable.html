@@ -285,7 +285,7 @@
 			} catch (e) {
 				// TODO: handle exception
 			}
-			
+
 			var starting_value = pageData.versions;
 
 			Core9.editor = new JSONEditor(document
@@ -529,8 +529,6 @@
 							.find(
 								'.dd-content')[0].childNodes[0];
 						var page = element.textContent;
-						var template = $(".template-data").val();
-						console.log(THEMEDATA);
 						activateEditor(
 							page,
 							getIdFromItem(element),
