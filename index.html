@@ -7,12 +7,17 @@
 <link rel="shortcut icon" href="/dashboard/favicon.ico">
 <link rel="stylesheet" href="/dashboard/bower_components/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="style.css">
+<script src="/dashboard/bower_components/store-js/store.min.js"></script>
 <script src="/dashboard/app/elements/core9-core/js/core.js"></script>
 <script src="/dashboard/app/elements/core9-core/js/iframe/parent.js"></script>
 <script src="/dashboard/bower_components/json-editor/dist/jsoneditor.min.js"></script>
 <script src="/dashboard/bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
 <script src="/dashboard/bower_components/systemjs/dist/system.js"></script>
 <script>
+
+	store.set('username', 'easydrain');
+	store.set('account', 'easydrain');
+
 	System.baseURL = '/dashboard/';
 </script>
 <script src="/dashboard/app/elements/core9-router/js/router.js"></script>
