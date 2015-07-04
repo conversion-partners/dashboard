@@ -1,0 +1,338 @@
+{
+  "name": "core9-theme-ess",
+  "menu": {
+    "name": "core9-theme-ess",
+    "icon": "fa fa-phone-square",
+    "link": "/dashboard/themes/core9-theme-ess",
+    "items": [{
+      "title": "Easydrain",
+      "icon": "fa fa-phone-square",
+      "items": [{
+        "name": "Blocks",
+        "icon": "fa fa-phone-square",
+        "link": "/dashboard/themes/core9-theme-ess/blocks",
+        "items": [{
+          "title": "Headers",
+          "icon": "fa fa-phone-square",
+          "items": [{
+            "name": "Full menu",
+            "icon": "fa fa-phone-square",
+            "link": "/dashboard/themes/core9-theme-ess/blocks/full-menu/add"
+          }, {
+            "name": "Minimal menu",
+            "icon": "fa fa-phone-square",
+            "link": "/dashboard/themes/core9-theme-ess/blocks/minimal-menu/add"
+          }]
+        }]
+      }]
+    }]
+  },
+  "blocks": "",
+  "templates": {
+    "core9-theme-ess": {
+      "entries" : [
+        {
+          "language":"",
+          "country": "",
+          "page" : "Home page",
+          "versions" : [
+                {
+                  "title": "page",
+    							"status" : "active"
+                },
+    						{
+    							"title": "page",
+    							"status" : "pauzed"
+    						},
+    						{
+    							"title": "page",
+    							"status" : "pauzed"
+    						}
+
+            ]
+        },
+        {
+          "language":"",
+          "country": "",
+          "page" : "Contact page",
+          "versions" : [
+                {
+                  "title": "page",
+    							"status" : "active"
+                },
+    						{
+    							"title": "page",
+    							"status" : "pauzed"
+    						},
+    						{
+    							"title": "page",
+    							"status" : "pauzed"
+    						}
+
+            ]
+        },
+        {
+          "language":"nl",
+          "country": "",
+          "page" : "Home page",
+          "versions" : [
+                {
+                  "title": "page",
+    							"status" : "active"
+                },
+    						{
+    							"title": "page",
+    							"status" : "pauzed"
+    						},
+    						{
+    							"title": "page",
+    							"status" : "pauzed"
+    						}
+
+            ]
+        },
+        {
+          "language":"de",
+          "country": "",
+          "page" : "Home page",
+          "versions" : [
+                {
+                  "title": "page",
+    							"status" : "active"
+                },
+    						{
+    							"title": "page",
+    							"status" : "pauzed"
+    						},
+    						{
+    							"title": "page",
+    							"status" : "pauzed"
+    						}
+
+            ]
+        },
+        {
+          "language":"nl",
+          "country": "BE",
+          "page" : "Home page",
+          "versions" : [
+                {
+                  "title": "page",
+    							"status" : "active"
+                },
+    						{
+    							"title": "page",
+    							"status" : "pauzed"
+    						},
+    						{
+    							"title": "page",
+    							"status" : "pauzed"
+    						}
+
+            ]
+        }
+      ]
+    }
+  },
+  "pages": {
+    "core9-theme-ess": {
+      "entries" : [
+        {
+          "language":"",
+          "country": "",
+          "page" : "Home page page",
+          "url" : "/index.html",
+          "versions" : [
+                {
+                  "title": "page",
+                  "theme" : "core9-theme-ess",
+                  "language" : "",
+                  "country" : "",
+                  "percentage" : "100",
+                  "startdate" : "",
+                  "enddate" : "",
+    							"status" : "active"
+                },
+    						{
+                  "title": "page",
+                  "theme" : "core9-theme-ess",
+                  "language" : "",
+                  "country" : "",
+                  "percentage" : "100",
+                  "startdate" : "",
+                  "enddate" : "",
+    							"status" : "active"
+    						},
+    						{
+                  "title": "page",
+                  "theme" : "core9-theme-ess",
+                  "language" : "",
+                  "country" : "",
+                  "percentage" : "100",
+                  "startdate" : "",
+                  "enddate" : "",
+    							"status" : "active"
+    						}
+
+            ]
+        },
+        {
+          "language":"",
+          "country": "",
+          "page" : "Contact page page",
+          "url" : "/index.html",
+          "versions" : [
+                {
+                  "title": "page",
+                  "theme" : "core9-theme-ess",
+                  "language" : "",
+                  "country" : "",
+                  "percentage" : "100",
+                  "startdate" : "",
+                  "enddate" : "",
+    							"status" : "active"
+                },
+    						{
+                  "title": "page",
+                  "theme" : "core9-theme-ess",
+                  "language" : "",
+                  "country" : "",
+                  "percentage" : "100",
+                  "startdate" : "",
+                  "enddate" : "",
+    							"status" : "active"
+    						},
+    						{
+                  "title": "page",
+                  "theme" : "core9-theme-ess",
+                  "language" : "",
+                  "country" : "",
+                  "percentage" : "100",
+                  "startdate" : "",
+                  "enddate" : "",
+    							"status" : "active"
+    						}
+
+            ]
+        },
+        {
+          "language":"nl",
+          "country": "",
+          "page" : "Home page page",
+          "url" : "/index.html",
+          "versions" : [
+                {
+                  "title": "page",
+                  "theme" : "core9-theme-ess",
+                  "language" : "",
+                  "country" : "",
+                  "percentage" : "100",
+                  "startdate" : "",
+                  "enddate" : "",
+    							"status" : "active"
+                },
+    						{
+                  "title": "page",
+                  "theme" : "core9-theme-ess",
+                  "language" : "",
+                  "country" : "",
+                  "percentage" : "100",
+                  "startdate" : "",
+                  "enddate" : "",
+    							"status" : "active"
+    						},
+    						{
+                  "title": "page",
+                  "theme" : "core9-theme-ess",
+                  "language" : "",
+                  "country" : "",
+                  "percentage" : "100",
+                  "startdate" : "",
+                  "enddate" : "",
+    							"status" : "active"
+    						}
+
+            ]
+        },
+        {
+          "language":"de",
+          "country": "",
+          "page" : "Home page page",
+          "url" : "/index.html",
+          "versions" : [
+                {
+                  "title": "page",
+                  "theme" : "core9-theme-ess",
+                  "language" : "",
+                  "country" : "",
+                  "percentage" : "100",
+                  "startdate" : "",
+                  "enddate" : "",
+    							"status" : "active"
+                },
+    						{
+                  "title": "page",
+                  "theme" : "core9-theme-ess",
+                  "language" : "",
+                  "country" : "",
+                  "percentage" : "100",
+                  "startdate" : "",
+                  "enddate" : "",
+    							"status" : "active"
+    						},
+    						{
+                  "title": "page",
+                  "theme" : "core9-theme-ess",
+                  "language" : "",
+                  "country" : "",
+                  "percentage" : "100",
+                  "startdate" : "",
+                  "enddate" : "",
+    							"status" : "active"
+    						}
+
+            ]
+        },
+        {
+          "language":"nl",
+          "country": "BE",
+          "page" : "Home page page",
+          "url" : "/index.html",  
+          "versions" : [
+                {
+                  "title": "page",
+                  "theme" : "core9-theme-ess",
+                  "language" : "",
+                  "country" : "",
+                  "percentage" : "100",
+                  "startdate" : "",
+                  "enddate" : "",
+    							"status" : "active"
+                },
+    						{
+                  "title": "page",
+                  "theme" : "core9-theme-ess",
+                  "language" : "",
+                  "country" : "",
+                  "percentage" : "100",
+                  "startdate" : "",
+                  "enddate" : "",
+    							"status" : "active"
+    						},
+    						{
+                  "title": "page",
+                  "theme" : "core9-theme-ess",
+                  "language" : "",
+                  "country" : "",
+                  "percentage" : "100",
+                  "startdate" : "",
+                  "enddate" : "",
+    							"status" : "active"
+    						}
+
+            ]
+        }
+      ]
+    }
+  }
+}

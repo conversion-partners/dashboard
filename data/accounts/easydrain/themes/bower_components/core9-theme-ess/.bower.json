@@ -19,11 +19,11 @@
     "test",
     "tests"
   ],
-  "_release": "804debcc88",
+  "_release": "53bd8edd0d",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "804debcc885dfad448e6a81b286013be6f12b9b0"
+    "commit": "53bd8edd0dac502a441922306581e3e44855a34c"
   },
   "_source": "git://github.com/conversion-partners/core9-theme-ess.git",
   "_target": "*",
