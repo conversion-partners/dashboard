@@ -14,6 +14,15 @@ var routes = {
     }
 
   },
+  '/theme/edit$/': function() {
+
+    Core9.panel.open('panel-iframe-site');
+    var iframe = Core9.panel.getIframeById('panel-iframe-site');
+    Core9.iframe.write(iframe, "hi");
+    var cmd = 'window.gm = jQuery("#mycanvas").gridmanager().data("gridmanager");';
+    Core9.iframe.parent.sentMessageToIframe(cmd, iframe);
+
+  },
   '/devices$/': function() {
     Core9.panel.open('panel-content');
   },
