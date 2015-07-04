@@ -34,10 +34,10 @@
         {
           "language":"",
           "country": "",
-          "page" : "Home page",
+          "page" : "Home",
           "versions" : [
                 {
-                  "title": "page",
+                  "title": "blue",
     							"status" : "active"
                 },
     						{
@@ -297,7 +297,7 @@
           "language":"nl",
           "country": "BE",
           "page" : "Home page page",
-          "url" : "/index.html",  
+          "url" : "/index.html",
           "versions" : [
                 {
                   "title": "page",

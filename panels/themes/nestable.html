@@ -185,6 +185,7 @@
 			display: none;
 		}
 	</style>
+	<script src="/dashboard/bower_components/store-js/store.min.js"></script>
 	<script src="/dashboard/bower_components/lokijs/build/lokijs.min.js"></script>
 	<script type="text/javascript" src="/dashboard/app/elements/core9-core/js/iframe/child.js"></script>
 	<script src="/dashboard/bower_components/jquery/dist/jquery.min.js"></script>
@@ -216,6 +217,7 @@
 <body>
 
 	<div id="choose-theme">
+		<div id="choose-theme-template-page"></div>
 		<div id="choose-theme-select"></div>
 		<button id="edit-selected-theme">edit</button>
 	</div>
@@ -302,6 +304,8 @@
 			}
 
 			var starting_value = pageData.versions;
+
+			$('#choose-theme-template-page').html(page);
 
 
 			Core9.editor = new JSONEditor(document
@@ -390,6 +394,14 @@
 					$('#edit-selected-theme').on('click', function(){
 						var dropdown = $('#theme-select-dropdown').val();
 						console.log(dropdown);
+						var account = store.get('account');
+						var page = $('#choose-theme-template-page').html();
+						var template = '/dashboard/data/accounts/'+account+'/themes/bower_components/'+$(".template-data").val()+'/templates/pages/'+page+'/versions/'+dropdown+'/index.html'
+
+						store.set('template', template);
+						console.log(store.get('template'));
+
+
 					});
 
 
