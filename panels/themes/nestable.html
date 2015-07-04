@@ -174,8 +174,18 @@
 		#editor_holder2>div>h3>div {
 			margin-left: 0px !important;
 		}
+
+		#choose-theme {
+			width: 500px;
+			left: 350px;
+			height: 300px;
+			background-color: #ccc;
+			position: absolute;
+			z-index: 99;
+			display: none;
+		}
 	</style>
-  <script src="/dashboard/bower_components/lokijs/build/lokijs.min.js"></script>
+	<script src="/dashboard/bower_components/lokijs/build/lokijs.min.js"></script>
 	<script type="text/javascript" src="/dashboard/app/elements/core9-core/js/iframe/child.js"></script>
 	<script src="/dashboard/bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="/dashboard/bower_components/nestable2/jquery.nestable.js"></script>
@@ -198,12 +208,16 @@
 		var DB = new loki();
 		var dbEntries = DB.addCollection('themeentries');
 
+
 	</script>
 
 </head>
 
 <body>
 
+	<div id="choose-theme">
+		<div id="choose-theme-select"></div>
+	</div>
 
 
 	<div id="content" class="cf nestable-lists">
@@ -236,7 +250,7 @@
 		<div id="menuitemcontent">
 			<div class="btn-group" role="group" aria-label="" style="width: 500px;">
 				<button type="button" class="btn btn-default">Preview</button>
-				<button type="button" class="btn btn-default">Edit</button>
+				<button id="editpage" type="button" class="btn btn-default">Edit</button>
 				<button id="newpage" type="button" class="btn btn-default">New</button>
 				<button id="delpage" type="button" class="btn btn-default">Delete</button>
 			</div>
@@ -287,6 +301,7 @@
 			}
 
 			var starting_value = pageData.versions;
+
 
 			Core9.editor = new JSONEditor(document
 				.getElementById('editor_holder2'), {
@@ -348,17 +363,19 @@
 
 		}
 
-		var getSelectBoxEntries = function(page){
+		var getSelectBoxEntries = function(page) {
 			var template = $(".template-data").val();
 			var language = $(".language-data").val();
 			var country = $(".country-data").val();
-			if(country == null) {country = ""}
+			if (country == null) {
+				country = ""
+			}
 			var query = {
 				"template": template,
 				"language": language,
 				"country": country
-				}
-			if(page){
+			}
+			if (page) {
 				query.page = page;
 			}
 			return dbEntries.findObjects(query);
@@ -369,16 +386,43 @@
 			.ready(
 				function() {
 
-					$('#refresh-templates').on('click',function(){
+					$('#editpage').on('click', function() {
+
+						$('#choose-theme').toggle();
+
+						console.log(Core9.editor.getValue());
+
+						var select = document.createElement("select");
+						var versions = Core9.editor.getValue();
+						for (var i = 0; i < versions.length; i++) {
+							var status = versions[i].status;
+							if(status == 'active'){
+								var op = new Option();
+								op.value = versions[i].title;
+								op.text = versions[i].title;
+								select.options.add(op);
+							}
+
+						}
+
+
+
+						$('#choose-theme-select').append(select);
+
+					});
+
+
+
+					$('#refresh-templates').on('click', function() {
 
 						var entries = getSelectBoxEntries();
 						var data = [];
 						for (i = 0; i < entries.length; i++) {
-								var item = {
-									"id" : guid(),
-									"page" : entries[i].page
-								}
-								data.push(item);
+							var item = {
+								"id": guid(),
+								"page": entries[i].page
+							}
+							data.push(item);
 						}
 						initNestable(JSON.stringify(data));
 					});
@@ -424,18 +468,17 @@
 		}
 
 		function changeSelect2Data(className, dataCategory) {
-			$("."+className).select2({
+			$("." + className).select2({
 				data: dataCategory
 			});
 		}
 
-		function arrayContains(needle, arrhaystack)
-		{
-		    return (arrhaystack.indexOf(needle) > -1);
+		function arrayContains(needle, arrhaystack) {
+			return (arrhaystack.indexOf(needle) > -1);
 		}
 
 		function isEmpty(str) {
-    	return (!str || 0 === str.length);
+			return (!str || 0 === str.length);
 		}
 
 		var initTemplateSelectBoxes = function(themeData) {
@@ -445,20 +488,20 @@
 			}
 
 			for (var key in themeData) {
-          if(themeData.hasOwnProperty(key)){
-						templateData.data.push(key);
-						try {
-							var entries = themeData[key].data.templates[key].entries;
-							for (i = 0; i < entries.length; i++) {
-									entries[i]["template"] = key;
-									dbEntries.insert(entries[i]);
-							}
-						} catch (e) {
-							//console.log(e);
+				if (themeData.hasOwnProperty(key)) {
+					templateData.data.push(key);
+					try {
+						var entries = themeData[key].data.templates[key].entries;
+						for (i = 0; i < entries.length; i++) {
+							entries[i]["template"] = key;
+							dbEntries.insert(entries[i]);
 						}
+					} catch (e) {
+						//console.log(e);
+					}
 
-          }
-       }
+				}
+			}
 
 
 
@@ -466,33 +509,38 @@
 				$(".language-data").select2("destroy");
 				$(".language-data").html("<option><option>");
 				var data = [];
-				var entries = dbEntries.find( {"template":$(this).val()});
+				var entries = dbEntries.find({
+					"template": $(this).val()
+				});
 				for (i = 0; i < entries.length; i++) {
-						var lang = entries[i]['language'];
-						if(!arrayContains(lang, data) && !isEmpty(lang)){
-							data.push(lang);
-						}
+					var lang = entries[i]['language'];
+					if (!arrayContains(lang, data) && !isEmpty(lang)) {
+						data.push(lang);
+					}
 				}
-				changeSelect2Data("language-data",data);
+				changeSelect2Data("language-data", data);
 			});
 
 			$(".language-data").on("change", function() {
 				$(".country-data").select2("destroy");
 				$(".country-data").html("<option><option>");
 				var data = [];
-				var entries = dbEntries.find( {"template":$(".template-data").val(), "language":$(this).val()});
+				var entries = dbEntries.find({
+					"template": $(".template-data").val(),
+					"language": $(this).val()
+				});
 				for (i = 0; i < entries.length; i++) {
-						var country = entries[i]['country'];
-						if(!arrayContains(country, data) && !isEmpty(country)){
-							data.push(country);
-						}
+					var country = entries[i]['country'];
+					if (!arrayContains(country, data) && !isEmpty(country)) {
+						data.push(country);
+					}
 				}
-				changeSelect2Data("country-data",data);
+				changeSelect2Data("country-data", data);
 			});
 
-			changeSelect2Data("template-data",templateData["data"]);
-			changeSelect2Data("language-data",[]);
-			changeSelect2Data("country-data",[]);
+			changeSelect2Data("template-data", templateData["data"]);
+			changeSelect2Data("language-data", []);
+			changeSelect2Data("country-data", []);
 
 		}
 
@@ -533,18 +581,17 @@
 							page,
 							getIdFromItem(element),
 							getSelectBoxEntries(page)[0] // get only one sorry
-							);
+						);
 					}
 				}).on('change', updateOutput);
 		}
 	</script>
 	<script>
 		var callback = function(event) {
-				try {
-					eval(event.data);
-				} catch (e) {
-				}
-			}
+			try {
+				eval(event.data);
+			} catch (e) {}
+		}
 		Core9.iframe.child.listenToPostMessages(callback);
 	</script>
 </body>
