@@ -1,12 +1,14 @@
 var express = require('express');
 var app = express();
 
-app.get('/', function (req, res) {
-  res.redirect('/dashboard');
-});
 
 
 app.use('/dashboard', express.static('.'));
+
+app.get('*', function (req, res) {
+  res.redirect('/dashboard');
+});
+
 
 var server = app.listen(3000, function () {
 
