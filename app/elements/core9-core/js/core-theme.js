@@ -3,11 +3,15 @@ if (typeof Core9 === 'undefined') {
 };
 
 Core9.theme = {
+  __account : {},
   __repo: {
     themes: []
   },
+  setAccount : function(account){
+    Core9.theme.__account = account;
+  },
   get: function(callback) {
-    this.__async([this.__do('GET', '/dashboard/themes/bower.json', 'json', this.__getThemes)], callback);
+    Core9.theme.__async([Core9.theme.__do('GET', '/dashboard/data/accounts/'+Core9.theme.__account+'/themes/bower.json', 'json', Core9.theme.__getThemes)], callback);
   },
   __getThemes: function(bowerData, resolve) {
     Core9.theme.__repo = JSON.parse(bowerData);
@@ -17,7 +21,7 @@ Core9.theme = {
     var itterable = [];
 		for (var key in Core9.theme.__repo.dependencies) {
       if (Core9.theme.__repo.dependencies.hasOwnProperty(key)) {
-				itterable.push(Core9.theme.__do('GET', '/dashboard/themes/bower_components/'+key+'/bower.json'));
+				itterable.push(Core9.theme.__do('GET', '/dashboard/data/accounts/'+Core9.theme.__account+'/themes/bower_components/'+key+'/bower.json'));
       }
     }
 		Core9.theme.__async(itterable, function(data){
@@ -26,7 +30,7 @@ Core9.theme = {
 			for (var i = 0; i < data.length; i++) {
 				var j = JSON.parse(data[i]);
 				themes[j.name] = j;
-				themeData.push(Core9.theme.__do('GET', '/dashboard/themes/bower_components/' + j.name + '/' + j.main));
+				themeData.push(Core9.theme.__do('GET', '/dashboard/data/accounts/'+Core9.theme.__account+'/themes/bower_components/' + j.name + '/' + j.main));
 			}
 
 			Core9.theme.__async(themeData, function(dat){
