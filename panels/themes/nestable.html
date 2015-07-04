@@ -217,6 +217,7 @@
 
 	<div id="choose-theme">
 		<div id="choose-theme-select"></div>
+		<button id="edit-selected-theme">edit</button>
 	</div>
 
 
@@ -386,6 +387,12 @@
 			.ready(
 				function() {
 
+					$('#edit-selected-theme').on('click', function(){
+						var dropdown = $('#theme-select-dropdown').val();
+						console.log(dropdown);
+					});
+
+
 					$('#editpage').on('click', function() {
 
 						$('#choose-theme').toggle();
@@ -393,6 +400,7 @@
 						console.log(Core9.editor.getValue());
 
 						var select = document.createElement("select");
+						select.setAttribute("id", "theme-select-dropdown");
 						var versions = Core9.editor.getValue();
 						for (var i = 0; i < versions.length; i++) {
 							var status = versions[i].status;
