@@ -64,7 +64,7 @@ Core9.blocks.init = function() {
           Core9.blocks.emptyElement(columnDiv);
           console.log(block);
           Core9.blocks.insertBlock(block, columnDiv, function(block, columnDiv) {
-            var html = "<div class='core9-block'>" + block.block + "</div>";
+            var html = "<div class='core9-block' data-type='"+block.block+"'>" + block.block + "</div>";
 
             var c = document.createComment("gm-editable-region");
             columnDiv.appendChild(c);
