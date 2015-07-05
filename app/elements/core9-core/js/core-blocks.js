@@ -2,23 +2,60 @@ if (typeof Core9 === 'undefined') {
   Core9 = {}
 };
 
-Core9.blocks = function() {
+
+
+Core9.blocks = function() {}
+Core9.blocks.__getDir = function(path) {
+  return path.substring(0, path.lastIndexOf("/") + 1);
+}
+Core9.blocks.__getDataJsonFromTemplate = function(path) {
+  return Core9.blocks.__getDir(path) + "data.json";
+}
+Core9.blocks.__getJSON = function(url, callback) {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+      var json = JSON.parse(xmlhttp.responseText);
+      callback(json);
+    }
+  }
+  xmlhttp.open("GET", url, true);
+  xmlhttp.send();
+}
+
+Core9.blocks.init = function() {
   var data = {
     template: "/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/templates/pages/home/versions/blue/index.html"
   };
-  console.log(data.template);
+  //console.log(data.template);
+  var dataJson = Core9.blocks.__getDataJsonFromTemplate(data.template);
+  //console.log(dataJson);
 
-  var rows = document.getElementsByClassName('row');
+  Core9.blocks.__getJSON(dataJson, function(json) {
+    //console.log(json);
+    var blocks = json.blocks;
+    var rows = document.getElementsByClassName('row');
 
-  for (var i = 0; i < rows.length; i++) {
-      var columns = rows[i].getElementsByClassName("column");
-      for (var i = 0; i < columns.length; i++) {
-        var column = columns[i];
-        console.log(column);
+    for (var row = 0; row < rows.length; row++) {
+      var columns = rows[row].getElementsByClassName("column");
+      for (var column = 0; column < columns.length; column++) {
+        var columnDiv = columns[column];
+        //console.log(columnDiv);
+        try {
+          console.log("row :" + row);
+          console.log("column : " + column);
+          console.log(blocks[row][column]);
+        } catch (e) {
+
+        }
+
       }
-  }
+    }
+
+  });
+
 
 
 }
 
-Core9.blocks();
+Core9.blocks.init();

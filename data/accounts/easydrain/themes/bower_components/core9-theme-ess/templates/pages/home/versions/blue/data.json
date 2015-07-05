@@ -1,16 +1,17 @@
 {
-  "template" : {
-    "url" : "/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/templates/pages/home/versions/blue/index.html"
-  },
-  "blocks" : [
-
-    {
-      "block" : "",
-      "data" : "block-0-type-image.json",
-      "row" : 1,
-      "colomn" : 1
-    }
-
-  ]
-
+  "blocks": {
+    "0": [{
+      "block": "sdfas-image"
+    }],
+    "1": [{
+      "block": "sdfas-image"
+    }, {
+      "block": "aspod-image"
+    }],
+    "2": [{
+      "block": "sdfas-image"
+    }, {
+      "block": "aspod-image"
+    }]
+  }
 }
