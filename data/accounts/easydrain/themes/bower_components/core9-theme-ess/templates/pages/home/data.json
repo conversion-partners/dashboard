@@ -1,0 +1,16 @@
+{
+  "template" : {
+    "url" : "/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/templates/pages/home/versions/blue/index.html"
+  },
+  "blocks" : [
+
+    {
+      "block" : "",
+      "data" : "block-0-type-image.json",
+      "row" : 1,
+      "colomn" : 1
+    }
+
+  ]
+
+}
