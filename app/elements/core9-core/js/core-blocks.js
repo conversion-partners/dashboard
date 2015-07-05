@@ -65,7 +65,16 @@ Core9.blocks.init = function() {
           console.log(block);
           Core9.blocks.insertBlock(block, columnDiv, function(block, columnDiv) {
             var html = "<div class='core9-block'>" + block.block + "</div>";
+
+            var c = document.createComment("gm-editable-region");
+            columnDiv.appendChild(c);
+
             columnDiv.appendChild(Core9.blocks.convertStringToHtml(html));
+
+            var c = document.createComment("/gm-editable-region");
+            columnDiv.appendChild(c);
+
+
           })
         } catch (e) {
 
@@ -73,6 +82,8 @@ Core9.blocks.init = function() {
 
       }
     }
+
+    window.gm.reset();
 
   });
 
