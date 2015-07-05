@@ -32,7 +32,7 @@ var routes = {
       setTimeout(function(){
         Core9.iframe.parent.sentMessageToIframe(cmd, iframe);
       }, 2000); // smarter needs to be handled in sendMessage to iframe
-
+      initPanelIframeSite = false;
     }
     xhr.open("GET", template);
     xhr.responseType = "document";
