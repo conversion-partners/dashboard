@@ -4,5 +4,8 @@ if (typeof Core9 === 'undefined') {
 };
 
 Core9.blocks = function(){
-  
+    console.log(data.template);
 }
+
+
+Core9.blocks();

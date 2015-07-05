@@ -2,12 +2,15 @@ var initPanelIframeSite = true;
 var initPanelThemes = true;
 var initPanelpages = true;
 
-var sentJsToTemplate = function(iframe){
+var sentJsToTemplate = function(data, iframe){
 
   var xhr = new XMLHttpRequest();
   xhr.onload = function() {
     console.log(this.responseText);
-    Core9.iframe.parent.sentMessageToIframe(this.responseText, iframe);
+    var script = "var data = " + JSON.stringify(data) + ";";
+    script = script + this.responseText;
+    console.log(script);
+    Core9.iframe.parent.sentMessageToIframe(script, iframe);
   }
   xhr.open("GET", "/dashboard/app/elements/core9-core/js/core-blocks.js");
   xhr.responseType = "text";
@@ -38,18 +41,17 @@ var routes = {
 
     var xhr = new XMLHttpRequest();
     xhr.onload = function() {
-      var xml = this.responseXML;
-      console.log(xml);
-      console.log(Core9.xmlToString(xml))
-      var html = Core9.xmlToString(xml);
-
+      var html = Core9.xmlToString(this.responseXML);
       Core9.panel.open('panel-iframe-site');
       var iframe = Core9.panel.getIframeById('panel-iframe-site');
       Core9.iframe.write(iframe, html);
       var cmd = 'window.gm = jQuery("#mycanvas").gridmanager().data("gridmanager");';
       setTimeout(function(){
         Core9.iframe.parent.sentMessageToIframe(cmd, iframe);
-        sentJsToTemplate(iframe);
+        var data = {
+          "template" : template
+        }
+        sentJsToTemplate(data, iframe);
       }, 2000); // smarter needs to be handled in sendMessage to iframe
       initPanelIframeSite = false;
     }
