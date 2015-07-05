@@ -22,6 +22,20 @@ Core9.blocks.__getJSON = function(url, callback) {
   xmlhttp.open("GET", url, true);
   xmlhttp.send();
 }
+Core9.blocks.emptyElement = function(node) {
+  while (node.firstChild) {
+    node.removeChild(node.firstChild);
+  }
+}
+Core9.blocks.convertStringToHtml = function(string) {
+  var d = document.createElement('div');
+  d.innerHTML = string;
+  return d.firstChild;
+}
+
+Core9.blocks.insertBlock = function(block, columnDiv, callback) {
+  callback(block, columnDiv);
+}
 
 Core9.blocks.init = function() {
   var data = {
@@ -40,11 +54,19 @@ Core9.blocks.init = function() {
       var columns = rows[row].getElementsByClassName("column");
       for (var column = 0; column < columns.length; column++) {
         var columnDiv = columns[column];
-        //console.log(columnDiv);
+        console.log(columnDiv);
+
         try {
           console.log("row :" + row);
           console.log("column : " + column);
-          console.log(blocks[row][column]);
+          console.log();
+          var block = blocks[row][column];
+          Core9.blocks.emptyElement(columnDiv);
+          console.log(block);
+          Core9.blocks.insertBlock(block, columnDiv, function(block, columnDiv) {
+            var html = "<div class='core9-block'>" + block.block + "</div>";
+            columnDiv.appendChild(Core9.blocks.convertStringToHtml(html));
+          })
         } catch (e) {
 
         }
