@@ -386,6 +386,12 @@
 			return dbEntries.findObjects(query);
 		}
 
+		var postClick = function(url) {
+			Core9.iframe.child.sentMessageToParent(
+					{ action : "menuClick",
+						href : url,
+						data : "" });
+		}
 
 		$(document)
 			.ready(
@@ -401,7 +407,8 @@
 						store.set('template', template);
 						console.log(store.get('template'));
 
-
+						history.pushState(null, null, "/dashboard/theme/edit");
+						postClick("/dashboard/theme/edit");
 					});
 
 
