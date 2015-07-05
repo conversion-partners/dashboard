@@ -5,9 +5,14 @@ var app = express();
 
 app.use('/dashboard', express.static('.'));
 
-app.get('*', function (req, res) {
-  res.redirect('/dashboard');
-});
+///dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/templates/pages/Home/versions/blue/index.html
+
+app.use('/dashboard/data/accounts/.*', express.static('.'));
+
+
+//app.get('*', function (req, res) {
+  //res.redirect('/dashboard');
+//});
 
 
 var server = app.listen(3000, function () {

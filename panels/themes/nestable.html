@@ -403,7 +403,7 @@
 						var account = store.get('account');
 						var page = $('#choose-theme-template-page').html();
 						var template = '/dashboard/data/accounts/'+account+'/themes/bower_components/'+$(".template-data").val()+'/templates/pages/'+page+'/versions/'+dropdown+'/index.html'
-
+						template = template.toLowerCase();
 						store.set('template', template);
 						console.log(store.get('template'));
 
