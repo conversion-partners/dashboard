@@ -1,17 +1,17 @@
 {
   "blocks": {
     "0": [{
-      "block": "sdfas-image"
+      "block": "sdfas"
     }],
     "1": [{
-      "block": "sdfas-image"
+      "block": "sdfas"
     }, {
-      "block": "aspod-image"
+      "block": "aspod"
     }],
     "2": [{
-      "block": "sdfas-image"
+      "block": "sdfas"
     }, {
-      "block": "aspod-image"
+      "block": "aspod"
     }]
   }
 }
