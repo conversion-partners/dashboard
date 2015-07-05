@@ -2,6 +2,24 @@ var initPanelIframeSite = true;
 var initPanelThemes = true;
 var initPanelpages = true;
 
+var sentJsToTemplate = function(iframe){
+
+  var xhr = new XMLHttpRequest();
+  xhr.onload = function() {
+    console.log(this.responseText);
+    Core9.iframe.parent.sentMessageToIframe(this.responseText, iframe);
+  }
+  xhr.open("GET", "/dashboard/app/elements/core9-core/js/core-blocks.js");
+  xhr.responseType = "text";
+  xhr.send();
+
+
+
+
+}
+
+
+
 var routes = {
   '/home$/': function() {
 
@@ -31,6 +49,7 @@ var routes = {
       var cmd = 'window.gm = jQuery("#mycanvas").gridmanager().data("gridmanager");';
       setTimeout(function(){
         Core9.iframe.parent.sentMessageToIframe(cmd, iframe);
+        sentJsToTemplate(iframe);
       }, 2000); // smarter needs to be handled in sendMessage to iframe
       initPanelIframeSite = false;
     }
