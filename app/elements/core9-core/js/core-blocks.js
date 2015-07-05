@@ -1,3 +1,8 @@
 
+if (typeof Core9 === 'undefined') {
+	Core9 = {}
+};
 
-console.log('working');
+Core9.blocks = function(){
+  
+}
