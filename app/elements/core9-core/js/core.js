@@ -15,6 +15,20 @@ Core9.workspace = {
 	}
 };
 
+Core9.xmlToString = function(xmlData) {
+
+    var xmlString;
+    //IE
+    if (window.ActiveXObject){
+        xmlString = xmlData.xml;
+    }
+    // code for Mozilla, Firefox, Opera, etc.
+    else{
+        xmlString = (new XMLSerializer()).serializeToString(xmlData);
+    }
+    return xmlString;
+};
+
 Core9.guid = function() {
 	function s4() {
 		return Math.floor((1 + Math.random()) * 0x10000).toString(16)

@@ -10,9 +10,9 @@ app.use('/dashboard', express.static('.'));
 app.use('/dashboard/data/accounts/.*', express.static('.'));
 
 
-//app.get('*', function (req, res) {
-  //res.redirect('/dashboard');
-//});
+app.use('*', function (req, res) {
+  res.redirect('/dashboard');
+});
 
 
 var server = app.listen(3000, function () {

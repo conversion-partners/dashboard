@@ -18,11 +18,25 @@ var routes = {
 
     var template = store.get('template');
 
-    Core9.panel.open('panel-iframe-site');
-    var iframe = Core9.panel.getIframeById('panel-iframe-site');
-    Core9.iframe.write(iframe, template);
-    var cmd = 'window.gm = jQuery("#mycanvas").gridmanager().data("gridmanager");';
-    Core9.iframe.parent.sentMessageToIframe(cmd, iframe);
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function() {
+      var xml = this.responseXML;
+      console.log(xml);
+      console.log(Core9.xmlToString(xml))
+      var html = Core9.xmlToString(xml);
+
+      Core9.panel.open('panel-iframe-site');
+      var iframe = Core9.panel.getIframeById('panel-iframe-site');
+      Core9.iframe.write(iframe, html);
+      var cmd = 'window.gm = jQuery("#mycanvas").gridmanager().data("gridmanager");';
+      setTimeout(function(){
+        Core9.iframe.parent.sentMessageToIframe(cmd, iframe);
+      }, 2000); // smarter needs to be handled in sendMessage to iframe
+
+    }
+    xhr.open("GET", template);
+    xhr.responseType = "document";
+    xhr.send();
 
   },
   '/devices$/': function() {
