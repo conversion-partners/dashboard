@@ -16,9 +16,11 @@ var routes = {
   },
   '/theme/edit$/': function() {
 
+    var template = store.get('template');
+
     Core9.panel.open('panel-iframe-site');
     var iframe = Core9.panel.getIframeById('panel-iframe-site');
-    Core9.iframe.write(iframe, "hi");
+    Core9.iframe.write(iframe, template);
     var cmd = 'window.gm = jQuery("#mycanvas").gridmanager().data("gridmanager");';
     Core9.iframe.parent.sentMessageToIframe(cmd, iframe);
 
