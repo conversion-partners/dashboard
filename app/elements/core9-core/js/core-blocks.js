@@ -45,8 +45,11 @@ Core9.blocks.init = function() {
   var dataJson = Core9.blocks.__getDataJsonFromTemplate(data.template);
   //console.log(dataJson);
 
+  //window.gm.deinitCanvas();
+
   Core9.blocks.__getJSON(dataJson, function(json) {
     //console.log(json);
+
     var blocks = json.blocks;
     var rows = document.getElementsByClassName('row');
 
@@ -80,7 +83,8 @@ Core9.blocks.init = function() {
       }
     }
 
-    window.gm.reset();
+    //window.gm.init();
+    window.gm = jQuery("#mycanvas").gridmanager().data('gridmanager');
 
   });
 
