@@ -65,10 +65,10 @@ Core9.blocks.init = function() {
           console.log();
           var block = blocks[row][column];
           console.log(block);
-          if(block){
+          if (block) {
             Core9.blocks.insertBlock(block, columnDiv, function(block, columnDiv) {
               Core9.blocks.emptyElement(columnDiv);
-              var html = "<div class='core9-block' data-type='"+block.block+"'>" + block.block + "</div>";
+              var html = "<div class='core9-block' data-type='" + block.block + "'>" + block.block + "</div>";
               var c = document.createComment("gm-editable-region");
               columnDiv.appendChild(c);
               columnDiv.appendChild(Core9.blocks.convertStringToHtml(html));
@@ -84,7 +84,12 @@ Core9.blocks.init = function() {
     }
 
     //window.gm.init();
-    window.gm = jQuery("#mycanvas").gridmanager().data('gridmanager');
+
+    setTimeout(function() {
+      $('.gm-preview').trigger('click');
+      //window.gm = jQuery("#mycanvas").gridmanager().data('gridmanager');
+    }, 3000);
+
 
   });
 

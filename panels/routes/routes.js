@@ -47,7 +47,7 @@ var routes = {
       Core9.iframe.write(iframe, html);
       var cmd = 'window.gm = jQuery("#mycanvas").gridmanager().data("gridmanager");';
       setTimeout(function(){
-        Core9.iframe.parent.sentMessageToIframe(cmd, iframe);
+        //Core9.iframe.parent.sentMessageToIframe(cmd, iframe);
         var data = {
           "template" : template
         }
