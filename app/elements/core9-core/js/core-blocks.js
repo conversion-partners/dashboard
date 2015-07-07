@@ -33,8 +33,8 @@ Core9.blocks.convertStringToHtml = function(string) {
   return d.firstChild;
 }
 
-Core9.blocks.insertBlock = function(block, columnDiv, callback) {
-  callback(block, columnDiv);
+Core9.blocks.insertBlock = function(progress, block, columnDiv, callback) {
+  callback(progress, block, columnDiv);
 }
 
 Core9.blocks.init = function() {
@@ -52,28 +52,36 @@ Core9.blocks.init = function() {
 
     var blocks = json.blocks;
     var rows = document.getElementsByClassName('row');
-
-    for (var row = 0; row < rows.length; row++) {
+    var nrRows = rows.length;
+    for (var row = 0; row < nrRows; row++) {
       var columns = rows[row].getElementsByClassName("column");
-      for (var column = 0; column < columns.length; column++) {
+      var nrColumns = columns.length;
+      for (var column = 0; column < nrColumns; column++) {
         var columnDiv = columns[column];
-        console.log(columnDiv);
-
         try {
-          console.log("row :" + row);
-          console.log("column : " + column);
-          console.log();
+          var progress = {
+            "nrrows" : nrRows,
+            "row" : row,
+            "nrcolumns" : nrColumns,
+            "column" : column
+          }
           var block = blocks[row][column];
-          console.log(block);
           if (block) {
-            Core9.blocks.insertBlock(block, columnDiv, function(block, columnDiv) {
+            Core9.blocks.insertBlock(progress, block, columnDiv, function(progress, block, columnDiv) {
               Core9.blocks.emptyElement(columnDiv);
-              var html = "<div class='core9-block' data-type='" + block.block + "'>" + block.block + "</div>";
-              var c = document.createComment("gm-editable-region");
-              columnDiv.appendChild(c);
-              columnDiv.appendChild(Core9.blocks.convertStringToHtml(html));
-              var c = document.createComment("/gm-editable-region");
-              columnDiv.appendChild(c);
+
+              for (var i = 0; i < block.length; i++) {
+
+                var html = "<div class='core9-block' data-type='" + block[i].block + "'>" + block[i].block + "</div>";
+                var c = document.createComment("gm-editable-region");
+                columnDiv.appendChild(c);
+                columnDiv.appendChild(Core9.blocks.convertStringToHtml(html));
+                var c = document.createComment("/gm-editable-region");
+                columnDiv.appendChild(c);
+
+              }
+
+
             });
           }
         } catch (e) {
