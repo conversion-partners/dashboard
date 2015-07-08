@@ -46,6 +46,7 @@ Core9.blocks.init = function() {
   //console.log(dataJson);
 
   //window.gm.deinitCanvas();
+  //$('.gm-preview').trigger('click');
 
   Core9.blocks.__getJSON(dataJson, function(json) {
     //console.log(json);
@@ -94,7 +95,7 @@ Core9.blocks.init = function() {
     //window.gm.init();
 
     setTimeout(function() {
-      $('.gm-preview').trigger('click');
+      //$('.gm-preview').trigger('click');
       //window.gm = jQuery("#mycanvas").gridmanager().data('gridmanager');
     }, 3000);
 

@@ -45,9 +45,9 @@ var routes = {
       Core9.panel.open('panel-iframe-site');
       var iframe = Core9.panel.getIframeById('panel-iframe-site');
       Core9.iframe.write(iframe, html);
-      var cmd = 'window.gm = jQuery("#mycanvas").gridmanager().data("gridmanager");';
+      var cmd = 'window.gm = jQuery("#mycanvas").gridmanager().data("gridmanager");$(".gm-preview").trigger("click");';
       setTimeout(function(){
-        //Core9.iframe.parent.sentMessageToIframe(cmd, iframe);
+        Core9.iframe.parent.sentMessageToIframe(cmd, iframe);
         var data = {
           "template" : template
         }
