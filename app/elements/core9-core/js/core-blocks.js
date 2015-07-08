@@ -41,16 +41,8 @@ Core9.blocks.init = function() {
   var data = {
     template: "/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/templates/pages/home/versions/blue/index.html"
   };
-  //console.log(data.template);
   var dataJson = Core9.blocks.__getDataJsonFromTemplate(data.template);
-  //console.log(dataJson);
-
-  //window.gm.deinitCanvas();
-  //$('.gm-preview').trigger('click');
-
   Core9.blocks.__getJSON(dataJson, function(json) {
-    //console.log(json);
-
     var blocks = json.blocks;
     var rows = document.getElementsByClassName('row');
     var nrRows = rows.length;
@@ -61,10 +53,10 @@ Core9.blocks.init = function() {
         var columnDiv = columns[column];
         try {
           var progress = {
-            "nrrows" : nrRows,
-            "row" : row,
-            "nrcolumns" : nrColumns,
-            "column" : column
+            "nrrows": nrRows,
+            "row": row,
+            "nrcolumns": nrColumns,
+            "column": column
           }
           var block = blocks[row][column];
           if (block) {
@@ -85,9 +77,7 @@ Core9.blocks.init = function() {
 
             });
           }
-        } catch (e) {
-          //console.log(e);
-        }
+        } catch (e) {}
 
       }
     }
