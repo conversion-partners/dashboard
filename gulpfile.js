@@ -11,7 +11,7 @@ var serverFiles = [];
 
 
 gulp.task('shorthand', shell.task([
-  'cd data/accounts/easydrain/; nide -p 9999 --no-browser',
+  'cd data/accounts/easydrain/; /usr/bin/node /var/www/html/dashboard/node_modules/nide/main.js -p 9999 --no-browser',
   'echo hello',
   'echo world'
 ]));
