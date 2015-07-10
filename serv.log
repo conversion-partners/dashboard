@@ -1,0 +1,4 @@
+Arguments: node,/usr/local/lib/node_modules/scripted/node_modules/serv/static-server.js,8000,/var/www/html/dashboard
+Serving files from /var/www/html/dashboard at 127.0.0.1:8000
+LiveReload server listening on port 35729.
+Shutting down...
