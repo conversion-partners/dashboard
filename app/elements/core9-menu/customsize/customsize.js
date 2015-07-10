@@ -21,7 +21,7 @@ var height = Math.max( body.scrollHeight, body.offsetHeight,
 			// HTML markup implementation, overlap mode
 			$('#menu').multilevelpushmenu({
 				menu : arrMenu,
-				menuWidth : 200, // '450px', '30em', '25%' will also work
+				menuWidth : 220, // '450px', '30em', '25%' will also work
 				menuHeight : height
 			});
 
