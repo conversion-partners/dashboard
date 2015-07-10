@@ -3,7 +3,9 @@ if (typeof Core9 === 'undefined') {
 };
 
 Core9.file = {
-
+  init = {
+    
+  },
   create = function(){
 
   },
@@ -29,7 +31,10 @@ Core9.file = {
 
   },
   permissions = function(){
-    
+
+  },
+  versions = function(){
+
   }
 
 }
