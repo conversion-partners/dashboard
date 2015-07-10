@@ -7,9 +7,9 @@
   "description" : "testing stuff",
   "license" : "MIT",
   "id" : "panel-nide",
-  "z-index" : 999,
+  "z-index" : 99,
   "class" : "fullbleed",
   "type" : "iframe",
-  "url" : "/",
+  "url" : "http://localhost:9090/",
   "button" : false
 }

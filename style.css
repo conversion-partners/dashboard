@@ -15,6 +15,10 @@
   z-index: -1;
 }
 
+#panel-nide > iframe {
+    margin-left: 40px;
+}
+
 .panel {
   position: fixed;
   width: 100%;
@@ -88,6 +92,5 @@ core9-filemanager {
 .panelbutton > .close {
 	float: left;
 	background-color: red;
-	
-}
 
+}
