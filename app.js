@@ -9,7 +9,7 @@ app.all('/api/file/:file', function (req, res) {
 app.use('/dashboard', express.static('.'));
 
 app.use('*', function (req, res) {
-  res.redirect('/dashboard');
+  res.redirect('/dashboard/');
 });
 
 

@@ -22,6 +22,13 @@ gulp.task('shorthand3', shell.task([
   '/usr/bin/node '+__dirname+'/app.js'
 ]));
 
+///var/www/dashboard/data/accounts/easydrain$ /usr/bin/node ../../../node_modules/nide/main.js init
+
+
+gulp.task('shorthand4', shell.task([
+  "cd" + __dirname+'/data/accounts/easydrain; /usr/bin/node '+__dirname+'/node_modules/nide/main.js init --no-browser'
+]));
+
 gulp.task( 'server:start', function() {
     server.listen( options, livereload.listen );
 });
@@ -40,6 +47,6 @@ gulp.task( 'default', ['shorthand2','shorthand', 'server:start' ], function() {
 });
 **/
 
-gulp.task( 'default', ['shorthand3','shorthand', 'shorthand2' ], function() {
+gulp.task( 'default', ['shorthand4','shorthand3','shorthand', 'shorthand2' ], function() {
 
 });
