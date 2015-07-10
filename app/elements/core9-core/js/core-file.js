@@ -3,8 +3,8 @@ if (typeof Core9 === 'undefined') {
 };
 
 Core9.file = {
-  init = {
-    
+  config = {
+    backend : 
   },
   create = function(){
 
