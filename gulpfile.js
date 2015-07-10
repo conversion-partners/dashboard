@@ -11,9 +11,11 @@ var serverFiles = [];
 
 
 gulp.task('shorthand', shell.task([
-  'cd data/accounts/easydrain/; /usr/bin/node /var/www/html/dashboard/node_modules/nide/main.js -p 9999 --no-browser',
-  'echo hello',
-  'echo world'
+  'cd data/accounts/easydrain/; /usr/bin/node /var/www/html/dashboard/node_modules/nide/main.js -p 9999 --no-browser'
+]));
+
+gulp.task('shorthand2', shell.task([
+  '/usr/bin/node /var/www/html/dashboard/proxy.js'
 ]));
 
 gulp.task( 'server:start', function() {
@@ -21,7 +23,7 @@ gulp.task( 'server:start', function() {
 });
 
 // If server scripts change, restart the server and then livereload.
-gulp.task( 'default', ['shorthand', 'server:start' ], function() {
+gulp.task( 'default', ['shorthand2','shorthand', 'server:start' ], function() {
 
     function restart( file ) {
         server.changed( function( error ) {

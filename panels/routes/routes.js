@@ -131,7 +131,7 @@ var routes = {
   '/files$/': function(req) {
     //Core9.panel.open('panel-files');
     //Core9.panel.open('panel-nide');
-    window.location.href = "http://localhost:9999";
+    window.location.href = "/";
 
   }
 }

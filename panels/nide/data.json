@@ -8,8 +8,8 @@
   "license" : "MIT",
   "id" : "panel-nide",
   "z-index" : 999,
-  "class" : "nide",
+  "class" : "fullbleed",
   "type" : "iframe",
-  "url" : "http://localhost:9999",
+  "url" : "/",
   "button" : false
 }
