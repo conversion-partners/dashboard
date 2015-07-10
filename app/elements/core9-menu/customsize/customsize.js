@@ -3,7 +3,7 @@ var arrMenu = [ {
 	id : 'menuID',
 	icon : 'fa fa-reorder',
 	items : [  {
-		name : 'Credits',
+		name : 'Theme editor',
 		link : '/dashboard/home'
 	} ]
 } ];
@@ -41,7 +41,7 @@ var height = Math.max( body.scrollHeight, body.offsetHeight,
 				}catch(e){
 					//console.log(e);
 				}
-				
+
 				$('#menu').multilevelpushmenu('additems', items, $addTo, 0);
 
 				$('a').on('click',postClick);
@@ -49,7 +49,7 @@ var height = Math.max( body.scrollHeight, body.offsetHeight,
 			}
 			$('a').on('click',postClick);
 			$('.fa-reorder').on('click',postClick);
-			
+
 
 			var removeItemsFromMenu = function(title) {
 				var item = $('#menu').multilevelpushmenu('finditemsbyname',
