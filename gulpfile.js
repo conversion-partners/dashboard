@@ -11,15 +11,15 @@ var serverFiles = [];
 
 
 gulp.task('shorthand', shell.task([
-  'cd data/accounts/easydrain/; /usr/bin/node /var/www/html/dashboard/node_modules/nide/main.js -p 9999 --no-browser'
+  'cd data/accounts/easydrain/; /usr/bin/node '+__dirname+'/node_modules/nide/main.js -p 9999 --no-browser'
 ]));
 
 gulp.task('shorthand2', shell.task([
-  '/usr/bin/node /var/www/html/dashboard/proxy.js'
+  '/usr/bin/node '+__dirname+'/proxy.js'
 ]));
 
 gulp.task('shorthand3', shell.task([
-  '/usr/bin/node /var/www/html/dashboard/app.js'
+  '/usr/bin/node '+__dirname+'/app.js'
 ]));
 
 gulp.task( 'server:start', function() {
