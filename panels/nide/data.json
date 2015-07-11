@@ -11,5 +11,14 @@
   "class" : "fullbleed",
   "type" : "iframe",
   "url" : "http://localhost:9090/",
-  "button" : false
+  "button" : false,
+  "menu" : {
+      "action" : "addItems",
+      "findmenusbytitle" : "All Categories",
+      "addItems" : [ {
+      "name" : "Files",
+      "icon" : "fa fa-phone-square",
+      "link" : "/dashboard/files"
+    } ]
+  }
 }

@@ -128,6 +128,12 @@ var routes = {
       });
 
   },
+  '/media$/': function(req) {
+    //Core9.panel.open('panel-files');
+    //Core9.panel.open('panel-nide');
+    //window.location.href = "/";
+
+  },
   '/files$/': function(req) {
     //Core9.panel.open('panel-files');
     Core9.panel.open('panel-nide');

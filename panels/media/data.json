@@ -16,9 +16,9 @@
       "action" : "addItems",
       "findmenusbytitle" : "All Categories",
       "addItems" : [ {
-      "name" : "Files",
+      "name" : "Media",
       "icon" : "fa fa-phone-square",
-      "link" : "/dashboard/files"
+      "link" : "/dashboard/media"
     } ]
   }
 }
