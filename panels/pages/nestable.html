@@ -269,7 +269,6 @@
 		}
 
 		var activateEditor = function(page, id, pageData) {
-			console.log(pageData);
 			document.getElementById('delpage').dataset.currentid = id;
 			try {
 				Core9.editor.destroy();
@@ -277,10 +276,7 @@
 			} catch (e) {
 				// TODO: handle exception
 			}
-
-
 			var starting_value = pageData.versions;
-
 			Core9.editor2 = new JSONEditor(document.getElementById('editor_holder'), {
 				disable_edit_json: true,
 				disable_collapse: true,
@@ -447,8 +443,8 @@
 		var updateOutput = function() {
 			var content = $('#nestable').nestable(
 				'serialize');
-			console.log(content);
-			console.log(JSON.stringify(content));
+			//console.log(content);
+			//console.log(JSON.stringify(content));
 		}
 
 		var getIdFromItem = function(element) {
@@ -570,7 +566,7 @@
 	</script>
 	<script>
 		var callback = function(event) {
-			console.log(event.data);
+			//console.log(event.data);
 			try {
 				eval(event.data);
 			} catch (e) {
