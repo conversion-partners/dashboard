@@ -7,11 +7,6 @@ var routes = {
       Core9.iframe.parent.sentMessageToIframe(cmd, iframe);
       initPanelIframeSite = false;
     }
-  },
-  '/devices$/': function() {
-    Core9.panel.open('panel-content');
-  },
-  '/settings/setup$/': function() {},
-  '/forms$/': function() {}
+  }
 }
 Router.addRoutes(routes);
