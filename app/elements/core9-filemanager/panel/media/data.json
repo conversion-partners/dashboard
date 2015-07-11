@@ -1,23 +1,23 @@
 {
-  "name": "media",
+  "name": "files",
   "version": "0.0.0",
   "authors": [
     "jessec <robertjessecooke@gmail.com>"
   ],
   "description" : "testing stuff",
   "license" : "MIT",
-  "id" : "panel-media",
-  "z-index" : 6,
-  "class" : "nocolour",
+  "id" : "panel-content",
+  "z-index" : 1,
+  "class" : "",
   "type" : "div",
-  "url" : "/dashboard/panels/media/files.html",
+  "url" : "/dashboard/panels/files/list.html",
   "button" : true,
   "menu" : {
       "action" : "addItems",
       "findmenusbytitle" : "All Categories",
       "addItems" : [ {
       "name" : "Media",
-      "icon" : "",
+      "icon" : "fa fa-phone-square",
       "link" : "/dashboard/media"
     } ]
   }
