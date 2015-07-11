@@ -1,75 +1,79 @@
-var arrMenu = [ {
-	title : 'All Categories',
-	id : 'menuID',
-	icon : 'fa fa-reorder',
-	items : [  {
-		name : 'Theme editor',
-		link : '/dashboard/home'
-	} ]
-} ];
+var arrMenu = [{
+  title: 'All Categories',
+  id: 'menuID',
+  icon: 'fa fa-reorder',
+  items: [{
+    name: 'Page editor',
+    link: '/dashboard/page/editor'
+  }, {
+    name: 'Theme editor',
+    link: '/dashboard/theme/editor'
+  }]
+}];
 
 $(document).ready(
-		function() {
+  function() {
 
 
-var body = document.body,
-    html = document.documentElement;
+    var body = document.body,
+      html = document.documentElement;
 
-var height = Math.max( body.scrollHeight, body.offsetHeight,
-                       html.clientHeight, html.scrollHeight, html.offsetHeight );
+    var height = Math.max(body.scrollHeight, body.offsetHeight,
+      html.clientHeight, html.scrollHeight, html.offsetHeight);
 
-			// HTML markup implementation, overlap mode
-			$('#menu').multilevelpushmenu({
-				menu : arrMenu,
-				menuWidth : 220, // '450px', '30em', '25%' will also work
-				menuHeight : height
-			});
+    // HTML markup implementation, overlap mode
+    $('#menu').multilevelpushmenu({
+      menu: arrMenu,
+      menuWidth: 220, // '450px', '30em', '25%' will also work
+      menuHeight: height
+    });
 
-			var postClick = function() {
-				Core9.iframe.child.sentMessageToParent(
-						{ action : "menuClick",
-						  href : this.href,
-						  data : this.textContent });
-			}
-			var addItemsToMenu = function(title, items) {
-				//console.log('adding to menu : ..');
-				$('a').unbind('click',postClick);
-				var $addTo = null;
-				try{
-					$addTo = $('#menu').multilevelpushmenu('findmenusbytitle',
-					title).first();
-				}catch(e){
-					//console.log(e);
-				}
+    var postClick = function() {
+      Core9.iframe.child.sentMessageToParent({
+        action: "menuClick",
+        href: this.href,
+        data: this.textContent
+      });
+    }
+    var addItemsToMenu = function(title, items) {
+      //console.log('adding to menu : ..');
+      $('a').unbind('click', postClick);
+      var $addTo = null;
+      try {
+        $addTo = $('#menu').multilevelpushmenu('findmenusbytitle',
+          title).first();
+      } catch (e) {
+        //console.log(e);
+      }
 
-				$('#menu').multilevelpushmenu('additems', items, $addTo, 0);
+      $('#menu').multilevelpushmenu('additems', items, $addTo, 0);
 
-				$('a').on('click',postClick);
+      $('a').on('click', postClick);
 
-			}
-			$('a').on('click',postClick);
-			$('.fa-reorder').on('click',postClick);
-
-
-			var removeItemsFromMenu = function(title) {
-				var item = $('#menu').multilevelpushmenu('finditemsbyname',
-						title);
-				$('#menu').multilevelpushmenu('removeitems', item);
-			}
+    }
+    $('a').on('click', postClick);
+    $('.fa-reorder').on('click', postClick);
 
 
-			var callback = function(event) {
-				if(typeof event.data === 'undefined' || typeof event.data.action === 'undefined')return;
-				if (event.data.action == 'addItems') {
-					addItemsToMenu(event.data.findmenusbytitle,
-							event.data.addItems);
+    var removeItemsFromMenu = function(title) {
+      var item = $('#menu').multilevelpushmenu('finditemsbyname',
+        title);
+      $('#menu').multilevelpushmenu('removeitems', item);
+    }
 
-				}
-			}
 
-			Core9.iframe.child.listenToPostMessages(callback);
+    var callback = function(event) {
+      if (typeof event.data === 'undefined' || typeof event.data.action === 'undefined') return;
+      if (event.data.action == 'addItems') {
+        addItemsToMenu(event.data.findmenusbytitle,
+          event.data.addItems);
 
-		});
+      }
+    }
+
+    Core9.iframe.child.listenToPostMessages(callback);
+
+  });
 
 
 // to make menu draggable
