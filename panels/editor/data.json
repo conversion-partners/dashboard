@@ -1,5 +1,5 @@
 {
-  "name": "grid",
+  "name": "editor",
   "version": "0.0.0",
   "authors": [
     "jessec <robertjessecooke@gmail.com>"
@@ -10,7 +10,7 @@
   "z-index" : -1,
   "class" : "fullbleed",
   "type" : "iframe",
-  "url" : "/dashboard/panels/grid/grid-example.html",
+  "url" : "/dashboard/panels/editor/editor.html",
   "button" : true,
   "menu" : {
       "action" : "addItems",
