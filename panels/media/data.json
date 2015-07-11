@@ -11,7 +11,7 @@
   "class" : "nocolour",
   "type" : "div",
   "url" : "/dashboard/panels/media/files.html",
-  "button" : true,
+  "button" : false,
   "menu" : {
       "action" : "addItems",
       "findmenusbytitle" : "All Categories",

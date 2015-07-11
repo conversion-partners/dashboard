@@ -11,5 +11,5 @@
   "class" : "fullbleed",
   "type" : "iframe",
   "url" : "/dashboard/panels/login/index.html",
-  "button" : true
+  "button" : false
 }

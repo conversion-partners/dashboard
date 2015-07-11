@@ -11,5 +11,5 @@
   "class" : "",
   "type" : "div",
   "url" : "/dashboard/panels/forms/form.html",
-  "button" : true
+  "button" : false
 }

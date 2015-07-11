@@ -11,7 +11,7 @@
   "class" : "fullbleed",
   "type" : "iframe",
   "url" : "/dashboard/panels/editor/editor.html",
-  "button" : true,
+  "button" : false,
   "menu" : {
       "action" : "addItems",
       "findmenusbytitle" : "All Categories",
