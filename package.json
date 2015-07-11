@@ -25,7 +25,7 @@
     "express": "~4.13.0",
     "nide": "~0.2.0",
     "gulp-shell": "~0.4.2",
-    "http-proxy": "~1.11.1",
-    "redbird": "~0.4.7"
+    "redbird": "~0.4.7",
+    "http-proxy": "~1.11.1"
   }
 }
