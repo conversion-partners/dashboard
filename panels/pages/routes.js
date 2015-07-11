@@ -1,10 +1,18 @@
 var pageRoutes = {
   '/pages$/': function(req) {
     var init = function(modules) {
+
+      console.log("pages modules");
+      console.log(modules);
+
       var theme = Core9.system.unwrapModule(modules[0]);
+      theme.setAccount(store.get('account'));
+      console.log(theme);
       var callback = function(data) {
-        var themes = data[0].themes;
         if (initPanelpages) {
+          console.log("pages data");
+          console.log(data);
+          var themes = data[0].themes;
           Core9.iframe.parent.sentMessageToIframe('initNestable([],' + JSON.stringify(themes) + ');', Core9.panel.getIframeById('panel-pages'));
           initPanelpages = false;
         }
@@ -12,6 +20,8 @@ var pageRoutes = {
       theme.get(callback);
       Core9.panel.open('panel-pages');
     }
+
+
     Core9.system.multiImport(['app/elements/core9-core/js/core-theme'])
       .then(function(modules) {
         init(modules);
