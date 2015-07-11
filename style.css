@@ -32,13 +32,7 @@
     overflow-x: hidden;
 }
 
-.panelbutton {
-  float: right;
-  width: 40px;
-  height: 20px;
-  background-color: #ddd;
-  margin-right: -20px;
-}
+
 
 #panel-iframe-menu, iframe.menu {
   border: 0;
@@ -80,6 +74,14 @@ core9-filemanager {
   position: relative;
 }
 
+.panelbutton {
+  float: right;
+  width: 40px;
+  height: 20px;
+  _background-color: #ddd;
+  margin-right: -20px;
+}
+
 .panelbutton > .open, .panelbutton > .close {
 	height:20px;
 	width:5px;
@@ -87,10 +89,10 @@ core9-filemanager {
 
 .panelbutton > .open {
 	float: left;
-	background-color: red;
+	_background-color: red;
 }
 .panelbutton > .close {
 	float: left;
-	background-color: red;
+	_background-color: red;
 
 }
