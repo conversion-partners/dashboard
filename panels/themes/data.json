@@ -17,11 +17,11 @@
 			"findmenusbytitle" : "All Categories",
 			"addItems" : [ {
 			"name" : "Themes",
-			"icon" : "fa fa-phone-square",
+			"icon" : "",
 			"link" : "/dashboard/themes",
 			"items" : [ {
 				"title" : "Themes",
-				"icon" : "fa fa-phone-square",
+				"icon" : "",
 				"items" : [  ]
 			} ]
 		} ]

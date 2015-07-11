@@ -17,7 +17,7 @@
 			"findmenusbytitle" : "All Categories",
 			"addItems" : [ {
 			"name" : "Pages",
-			"icon" : "fa fa-phone-square",
+			"icon" : "",
 			"link" : "/dashboard/pages"
 		} ]
 	}
