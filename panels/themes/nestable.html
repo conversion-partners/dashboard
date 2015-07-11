@@ -48,9 +48,12 @@
 <body>
 
 	<div id="choose-theme">
-		<div id="choose-theme-template-page"></div>
-		<div id="choose-theme-select"></div>
-		<button id="edit-selected-theme">edit</button>
+		<div id="theme-modal">
+			<div id="exit-modal" style="float:right;">x</div>
+			<div id="choose-theme-template-page"></div>
+			<select class="choose-theme-select"></select>
+			<button id="edit-selected-theme">edit</button>
+		</div>
 	</div>
 
 
@@ -225,12 +228,18 @@
 			});
 		}
 
+		function changeSelect2Data(className, dataCategory) {
+			$("." + className).select2({
+				data: dataCategory
+			});
+		}
+
 		$(document)
 			.ready(
 				function() {
 
 					$('#edit-selected-theme').on('click', function() {
-						var dropdown = $('#theme-select-dropdown').val();
+						var dropdown = $('.choose-theme-select').val();
 						console.log(dropdown);
 						var account = store.get('account');
 						var page = $('#choose-theme-template-page').html();
@@ -238,36 +247,25 @@
 						template = template.toLowerCase();
 						store.set('template', template);
 						console.log(store.get('template'));
-
 						history.pushState(null, null, "/dashboard/theme/edit");
 						postClick("/dashboard/theme/edit");
 					});
 
+					$('#exit-modal').on('click', function() {
+						$('#choose-theme').toggle();
+					});
 
 					$('#editpage').on('click', function() {
-
 						$('#choose-theme').toggle();
-
-						console.log(Core9.editor.getValue());
-
-						var select = document.createElement("select");
-						select.setAttribute("id", "theme-select-dropdown");
 						var versions = Core9.editor.getValue();
+						var activeVersions = [];
 						for (var i = 0; i < versions.length; i++) {
 							var status = versions[i].status;
 							if (status == 'active') {
-								var op = new Option();
-								op.value = versions[i].title;
-								op.text = versions[i].title;
-								select.options.add(op);
+								activeVersions.push(versions[i].title);
 							}
-
 						}
-
-
-
-						$('#choose-theme-select').append(select);
-
+						changeSelect2Data("choose-theme-select", activeVersions);
 					});
 
 
@@ -326,11 +324,7 @@
 			console.log(JSON.stringify(content));
 		}
 
-		function changeSelect2Data(className, dataCategory) {
-			$("." + className).select2({
-				data: dataCategory
-			});
-		}
+
 
 		function arrayContains(needle, arrhaystack) {
 			return (arrhaystack.indexOf(needle) > -1);
