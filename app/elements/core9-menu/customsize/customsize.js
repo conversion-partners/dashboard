@@ -2,13 +2,14 @@ var arrMenu = [{
   title: 'All Categories',
   id: 'menuID',
   icon: 'fa fa-reorder',
-  items: [{
-    name: 'Page editor',
-    link: '/dashboard/page/editor'
-  }, {
-    name: 'Theme editor',
-    link: '/dashboard/theme/editor'
-  }]
+  items: [
+    /**
+    {
+    name: 'Editor',
+    link: '/dashboard/editor'
+    }
+    **/
+  ]
 }];
 
 $(document).ready(

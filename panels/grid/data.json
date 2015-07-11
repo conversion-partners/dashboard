@@ -11,5 +11,14 @@
   "class" : "fullbleed",
   "type" : "iframe",
   "url" : "/dashboard/panels/grid/grid-example.html",
-  "button" : true
+  "button" : true,
+  "menu" : {
+      "action" : "addItems",
+      "findmenusbytitle" : "All Categories",
+      "addItems" : [ {
+      "name" : "Editor",
+      "icon" : "",
+      "link" : "/dashboard/editor"
+    } ]
+  }
 }
