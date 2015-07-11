@@ -128,15 +128,8 @@ var routes = {
       });
 
   },
-  '/media$/': function(req) {
-    Core9.panel.open('panel-media');
-  },
   '/files$/': function(req) {
     Core9.panel.open('panel-nide');
   }
 }
-Router.addRoutes(routes).listen();
-var routes = {
-  'default': function() {}
-}
-Router.addRoutes(routes).listen();
+Router.addRoutes(routes);

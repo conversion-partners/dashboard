@@ -90,12 +90,17 @@ Core9.panel = {
 		var lastItem = Core9.panel.__listOfPanels[Core9.panel.__listOfPanels.length - 1];
 		if (panel == lastItem) {
 			Core9.panel.__resolve('all panels loaded');
+			var defaultRoutes = {
+			  'default': function() {}
+			}
+			Router.addRoutes(defaultRoutes).listen();
 		}
 	},
 	__setPanelJson : function(panel) {
 		Core9.ajax('GET', '/dashboard/panels/' + panel + '/routes.js', null,
 				function(data) {
 					eval(data.responseText);
+					console.log('adding routes for ' + panel);
 				});
 		Core9.ajax('GET', '/dashboard/panels/' + panel + '/data.json', null,
 				function(data) {
