@@ -1,10 +1,10 @@
 var sentJsToTemplate = function(data, iframe) {
   var xhr = new XMLHttpRequest();
   xhr.onload = function() {
-    console.log(this.responseText);
+    //console.log(this.responseText);
     var script = "var data = " + JSON.stringify(data) + ";";
     script = script + this.responseText;
-    console.log(script);
+    //console.log(script);
     Core9.iframe.parent.sentMessageToIframe(script, iframe);
   }
   xhr.open("GET", "/dashboard/app/elements/core9-core/js/core-blocks.js");
