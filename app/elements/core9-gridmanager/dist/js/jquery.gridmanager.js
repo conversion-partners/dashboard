@@ -807,7 +807,7 @@
                     type: "POST",
                     url:  gm.options.remoteURL,
                     data: {
-                      content: document.documentElement.outerHTML, //canvas.html()
+                      content: canvas.html(), //document.documentElement.outerHTML,
                       template: store.get('template'),
                       account: store.get('account')
                     }

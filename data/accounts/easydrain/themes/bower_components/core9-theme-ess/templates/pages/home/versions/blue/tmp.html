@@ -1,56 +1,62 @@
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
-	<meta charset="utf-8">
-	<title>TinyMCE Version - Gridmanager Development</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-</head>
-
-<body>
-
-	<div class="container">
-		<div id="mycanvas"><div id="gm-controls" class="clearfix"><div class="row"><div class="col-md-12"><div id="gm-addnew" class="btn-group pull-left" style="display: none;"><a title="Add Row -12" class="btn  btn-xs  btn-primary add-12"><span class="fa fa-plus-circle"></span> -12</a><a title="Add Row -6-6" class="btn  btn-xs  btn-primary add-6-6"><span class="fa fa-plus-circle"></span> -6-6</a><a title="Add Row -4-4-4" class="btn  btn-xs  btn-primary add-4-4-4"><span class="fa fa-plus-circle"></span> -4-4-4</a><a title="Add Row -3-3-3-3" class="btn  btn-xs  btn-primary add-3-3-3-3"><span class="fa fa-plus-circle"></span> -3-3-3-3</a><a title="Add Row -2-2-2-2-2-2" class="btn  btn-xs  btn-primary add-2-2-2-2-2-2"><span class="fa fa-plus-circle"></span> -2-2-2-2-2-2</a><a title="Add Row -2-8-2" class="btn  btn-xs  btn-primary add-2-8-2"><span class="fa fa-plus-circle"></span> -2-8-2</a><a title="Add Row -4-8" class="btn  btn-xs  btn-primary add-4-8"><span class="fa fa-plus-circle"></span> -4-8</a><a title="Add Row -8-4" class="btn  btn-xs  btn-primary add-8-4"><span class="fa fa-plus-circle"></span> -8-4</a></div><div class="btn-group pull-right open"><button title="Edit Source Code" type="button" class="btn btn-xs btn-primary gm-edit-mode" disabled><span class="fa fa-code"></span></button><button title="Preview" type="button" class="btn btn-xs btn-primary gm-preview btn-danger"><span class="fa fa-eye"></span></button>     <div class="dropdown pull-left gm-layout-mode"><button type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown"><span class="fa fa-desktop" title="Desktop"></span></button> <ul class="dropdown-menu" role="menu"><li><a data-width="auto" title="Desktop"><span class="fa fa-desktop"></span> Desktop</a></li><li><a title="Tablet" data-width="768"><span class="fa fa-tablet"></span> Tablet</a></li><li><a title="Phone" data-width="640"><span class="fa fa-mobile-phone"></span> Phone</a></li></ul></div>    <button type="button" class="btn  btn-xs  btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button><ul class="dropdown-menu" role="menu"><li><a title="Save" href="#" class="gm-save"><span class="fa fa-save"></span> Save</a></li><li><a title="Reset Grid" href="#" class="gm-resetgrid"><span class="fa fa-trash-o"></span> Reset</a></li></ul></div></div></div></div><div id="gm-canvas" class="ui-sortable">
-
+<div id="gm-canvas" class="ui-sortable">
+	<div class="row">
+		<div class="column col-md-4 col-sm-4 col-xs-4"></div>
+		<div class="column col-md-4 col-sm-4 col-xs-4">
 			<div class="row">
-				<div class="column col-md-12 col-xs-12 col-sm-12"><!--gm-editable-region--><p>
-						<img alt="" src="http://placekitten.com/1600/300" class="img-responsive">
-					</p><!--/gm-editable-region--></div>
+				<div class="column col-sm-6 col-xs-6 col-md-12">
+					<!--gm-editable-region-->
+					<!--/gm-editable-region-->
+					<!--gm-editable-region-->
+					<!--/gm-editable-region-->
+				</div>
 			</div>
-			<div class="row">
-				<div class="column col-md-6 col-xs-6 col-sm-6"><!--gm-editable-region--><!--/gm-editable-region--><!--gm-editable-region--><!--/gm-editable-region--></div>
-				<div class="column col-md-6 col-xs-6 col-sm-6"><!--gm-editable-region--><!--/gm-editable-region--></div>
-			</div>
-			<div class="row">
-				<div class="column col-md-4 col-xs-4 col-sm-4"><!--gm-editable-region--><!--/gm-editable-region--><!--gm-editable-region--><!--/gm-editable-region--></div>
-				<div class="column col-md-4 col-xs-4 col-sm-4"><!--gm-editable-region--><!--/gm-editable-region--></div>
-				<div class="column col-md-4 col-xs-4 col-sm-4"><!--gm-editable-region--><p>Vivamus faucibus nibh ut aliquam dignissim. Nunc tempus velit sit amet eleifend tempor. Aliquam vel tortor euismod, viverra urna tempus, scelerisque ipsum. Pellentesque at mauris non tortor elementum pretium. Integer rutrum libero at facilisis interdum.
-						Praesent lobortis elit erat, quis elementum justo rhoncus eu. Ut eu dui lectus. Duis faucibus eu augue ut placerat.</p><!--/gm-editable-region--></div>
-			</div>
-			<div class="row">
-				<div class="column col-md-3 col-xs-3 col-sm-3"><!--gm-editable-region--><!--/gm-editable-region--><!--gm-editable-region--><!--/gm-editable-region--></div>
-				<div class="column col-md-3 col-xs-3 col-sm-3"><!--gm-editable-region--><!--/gm-editable-region--></div>
-				<div class="column col-md-3 col-xs-3 col-sm-3"><!--gm-editable-region--><p>
-						<img src="https://placeimg.com/200/300/any" class="img-responsive">
-					</p>
-					<p>Vivamus faucibus nibh ut aliquam dignissim. Nunc tempus velit sit amet eleifend tempor. Aliquam vel tortor euismod, viverra urna tempus, scelerisque ipsum. Pellentesque at mauris non tortor elementum pretium. Integer rutrum libero at facilisis interdum.
-						Praesent lobortis elit erat, quis elementum justo rhoncus eu. Ut eu dui lectus. Duis faucibus eu augue ut placerat.</p><!--/gm-editable-region--></div>
-				<div class="column col-md-3 col-xs-3 col-sm-3"><!--gm-editable-region--><p>
-						<img src="https://placeimg.com/200/300/any" class="img-responsive">
-					</p>
-					<p>Vivamus faucibus nibh ut aliquam dignissim. Nunc tempus velit sit amet eleifend tempor. Aliquam vel tortor euismod, viverra urna tempus, scelerisque ipsum. Pellentesque at mauris non tortor elementum pretium. Integer rutrum libero at facilisis interdum.
-						Praesent lobortis elit erat, quis elementum justo rhoncus eu. Ut eu dui lectus. Duis faucibus eu augue ut placerat.</p><!--/gm-editable-region--></div>
-			</div>
-			<div class="row">
-				<div class="column col-md-2 col-xs-2 col-sm-2"><!--gm-editable-region--><!--/gm-editable-region--></div>
-				<div class="column col-md-2 col-xs-2 col-sm-2"><!--gm-editable-region--><p>&#xA0;Ut eu dui lectus. Duis faucibus eu augue ut placerat.</p><!--/gm-editable-region--></div>
-				<div class="column col-md-2 col-xs-2 col-sm-2"><!--gm-editable-region--><p>&#xA0;Ut eu dui lectus. Duis faucibus eu augue ut placerat.</p><!--/gm-editable-region--></div>
-				<div class="column col-md-2 col-xs-2 col-sm-2"><!--gm-editable-region--><p>&#xA0;Ut eu dui lectus. Duis faucibus eu augue ut placerat.</p><!--/gm-editable-region--></div>
-				<div class="column col-md-2 col-xs-2 col-sm-2"><!--gm-editable-region--><p>&#xA0;Ut eu dui lectus. Duis faucibus eu augue ut placerat.</p><!--/gm-editable-region--></div>
-				<div class="column col-md-2 col-xs-2 col-sm-2"><!--gm-editable-region--><p>&#xA0;Ut eu dui lectus. Duis faucibus eu augue ut placerat.</p><!--/gm-editable-region--></div>
-			</div>
-
-		</div></div>
+		</div>
+		<div class="column col-md-4 col-sm-4 col-xs-4"></div>
 	</div>
-
-
-
-</body></html>
+	<div class="row">
+		<div class="column col-md-4 col-sm-4 col-xs-4">
+			<!--gm-editable-region-->
+			<!--/gm-editable-region-->
+			<!--gm-editable-region-->
+			<!--/gm-editable-region-->
+		</div>
+		<div class="column col-md-4 col-sm-4 col-xs-4">
+			<!--gm-editable-region-->
+			<!--/gm-editable-region-->
+		</div>
+		<div class="column col-md-4 col-sm-4 col-xs-4"></div>
+	</div>
+	<div class="row">
+		<div class="column col-md-4 col-sm-4 col-xs-4">
+			<!--gm-editable-region-->
+			<!--/gm-editable-region-->
+			<!--gm-editable-region-->
+			<!--/gm-editable-region-->
+		</div>
+		<div class="column col-md-4 col-sm-4 col-xs-4">
+			<!--gm-editable-region-->
+			<!--/gm-editable-region-->
+		</div>
+		<div class="column col-md-4 col-sm-4 col-xs-4"></div>
+	</div>
+	<div class="row">
+		<div class="column col-md-4 col-sm-4 col-xs-4">
+			<!--gm-editable-region-->
+			<!--/gm-editable-region-->
+		</div>
+		<div class="column col-md-4 col-sm-4 col-xs-4"></div>
+		<div class="column col-md-4 col-sm-4 col-xs-4"></div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 col-xs-6 col-sm-6 column">
+			<!--gm-editable-region-->
+			<p>Content</p>
+			<!--/gm-editable-region-->
+		</div>
+		<div class="col-md-6 col-xs-6 col-sm-6 column">
+			<!--gm-editable-region-->
+			<p>Content</p>
+			<!--/gm-editable-region-->
+		</div>
+	</div>
+</div>
