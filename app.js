@@ -29,6 +29,7 @@ app.post('/api/file/:action', function (req, res) {
   $('#js-gridmanager').remove();
   $('#js-child').remove();
   $('#js-blocks').remove();
+  $('#js-boot').remove();
 
 /**
 loadCss("css-bootstrap","/dashboard/app/elements/core9-gridmanager/demo/css/bootstrap.css");

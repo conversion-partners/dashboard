@@ -21,7 +21,7 @@ var themeRoutes = {
       var html = Core9.xmlToString(this.responseXML);
       Core9.panel.open('panel-iframe-site');
       var iframe = Core9.panel.getIframeById('panel-iframe-site');
-      Core9.iframe.write(iframe, html);
+      Core9.iframe.write(iframe, html, true);
       var cmd = 'window.gm = jQuery("#mycanvas").gridmanager().data("gridmanager");$(".gm-preview").trigger("click");';
       setTimeout(function() {
         Core9.iframe.parent.sentMessageToIframe(cmd, iframe);

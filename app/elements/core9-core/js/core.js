@@ -52,7 +52,10 @@ Core9.ajax = function(method, url, data, callback) {
 }
 
 Core9.iframe = {
-	write : function(iframe, content) {
+	write : function(iframe, content, grid) {
+		if(grid){
+				content = content.replace('</body>','<script id="js-boot" src="/dashboard/app/elements/core9-gridmanager/boot.min.js"></script></body>');	
+		}
 		iframe.contentWindow.document.open();
 		iframe.contentWindow.document.write(content);
 		iframe.contentWindow.document.close();
