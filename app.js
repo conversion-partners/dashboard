@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var multer = require('multer');
 var cheerio = require('cheerio');
+var fs = require('fs');
 var app = express();
 
 app.use(bodyParser.json()); // for parsing application/json
@@ -13,7 +14,7 @@ app.use(multer()); // for parsing multipart/form-data
 app.post('/api/file/:action', function (req, res) {
   //console.log(req);
 
-  //console.log('body: ' + JSON.stringify(req.body));
+
 
   $ = cheerio.load(req.body.content);
   $('.core9-block').remove();
@@ -31,6 +32,7 @@ app.post('/api/file/:action', function (req, res) {
   $('#js-child').remove();
   $('#js-blocks').remove();
   $('#js-boot').remove();
+  $('#gm-controls').remove();
 
 /**
 loadCss("css-bootstrap","/dashboard/app/elements/core9-gridmanager/demo/css/bootstrap.css");
@@ -52,10 +54,18 @@ loadjscssfile("js-blocks", "/dashboard/app/elements/core9-core/js/core-blocks.js
 **/
 
 
+fs.writeFile(".." + req.body.template, $.html(), function(err) {
+    if(err) {
+        return console.log(err);
+    }
 
-  console.log($.html());
-    //res.json(req.body);
+    console.log("The file was saved!");
+});
 
+
+  //console.log($.html());
+  console.log(__dirname);
+  console.log(req.body.template);
   res.send(req.originalUrl);
 });
 
