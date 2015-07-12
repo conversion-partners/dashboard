@@ -16,6 +16,7 @@ app.post('/api/file/:action', function (req, res) {
   //console.log('body: ' + JSON.stringify(req.body));
 
   $ = cheerio.load(req.body.content);
+  $('.core9-block').remove();
   $('#css-bootstrap').remove();
   $('#css-gridmanager').remove();
   $('#css-demo').remove();
