@@ -252,7 +252,7 @@
      */
     gm.addCSS = function(myStylesLocation) {
       if (myStylesLocation !== '') {
-        $('<link rel="stylesheet" href="' + myStylesLocation + '">').appendTo("head");
+        $('<link id="css-fontawsome" rel="stylesheet" href="' + myStylesLocation + '">').appendTo("head");
       }
     };
 
