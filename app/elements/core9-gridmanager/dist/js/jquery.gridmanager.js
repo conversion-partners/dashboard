@@ -803,12 +803,30 @@
      */
     gm.saveremote = function() {
       var canvas = gm.$el.find("#" + gm.options.canvasId);
-      /*            $.ajax({
+      $.ajax({
                     type: "POST",
                     url:  gm.options.remoteURL,
-                    data: {content: canvas.html()}
-                  });*/
+                    data: {
+                      content: document.documentElement.outerHTML //canvas.html()
+                    }
+                  });
 
+/**
+                  fieldname - Field name specified in the form
+                  originalname - Name of the file on the user's computer
+                  name - Renamed file name
+                  encoding - Encoding type of the file
+                  mimetype - Mime type of the file
+                  path - Location of the uploaded file
+                  extension - Extension of the file
+                  size - Size of the file in bytes
+                  truncated - If the file was truncated due to size limitation
+                  buffer - Raw data (is null unless the inMemory option is true)
+
+**/
+
+      /**
+      // for gridfs restheart
       var blob = new Blob([canvas.html()]);
 
       var vFD = new FormData();
@@ -830,6 +848,7 @@
           alert('Thanks for your comment!');
         }
       });
+      **/
       gm.log("Save Function Called");
     };
 
@@ -1378,7 +1397,7 @@
 
     // URL to save to
     //remoteURL: "/api/file/save",
-    remoteURL: "http://localhost:3000/api/file/save",
+    remoteURL: "http://localhost:9090/api/file/save",
 
     // Custom CSS to load
     cssInclude: "/dashboard/bower_components/fontawesome/css/font-awesome.min.css",

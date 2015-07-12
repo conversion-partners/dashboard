@@ -1,10 +1,28 @@
 var express = require('express');
+var bodyParser = require('body-parser');
+var multer = require('multer');
 var app = express();
 
-app.all('/api/file/:action', function (req, res) {
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(multer()); // for parsing multipart/form-data
+
+
+
+app.post('/api/file/:action', function (req, res) {
   console.log(req);
+
+  console.log('body: ' + JSON.stringify(req.body));
+
+  console.log(req.body);
+    //res.json(req.body);
+
   res.send(req.originalUrl);
 });
+
+
+
+
 
 app.use('/dashboard', express.static('.'));
 

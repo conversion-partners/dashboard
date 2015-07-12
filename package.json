@@ -26,6 +26,8 @@
     "nide": "~0.2.0",
     "gulp-shell": "~0.4.2",
     "redbird": "~0.4.7",
-    "http-proxy": "~1.11.1"
+    "http-proxy": "~1.11.1",
+    "multer": "~0.1.8",
+    "body-parser": "~1.13.2"
   }
 }
