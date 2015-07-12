@@ -39,7 +39,7 @@ Core9.blocks.insertBlock = function(progress, block, columnDiv, callback) {
 
 Core9.blocks.init = function() {
   var data = {
-    template: "/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/templates/pages/home/versions/blue/index.html"
+    template:  store.get('template') //"/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/templates/pages/home/versions/blue/index.html"
   };
   var dataJson = Core9.blocks.__getDataJsonFromTemplate(data.template);
   Core9.blocks.__getJSON(dataJson, function(json) {
