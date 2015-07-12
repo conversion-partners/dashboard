@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 
-app.all('/api/file/:file', function (req, res) {
+app.all('/api/file/:action', function (req, res) {
   console.log(req);
   res.send(req.originalUrl);
 });

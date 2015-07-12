@@ -1377,7 +1377,8 @@
     autoEdit: true,
 
     // URL to save to
-    remoteURL: "/api/file/save",
+    //remoteURL: "/api/file/save",
+    remoteURL: "http://localhost:3000/api/file/save",
 
     // Custom CSS to load
     cssInclude: "/dashboard/bower_components/fontawesome/css/font-awesome.min.css",
