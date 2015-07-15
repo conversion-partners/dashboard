@@ -58,6 +58,7 @@ Core9.blocks.init = function() {
             "nrcolumns": nrColumns,
             "column": column
           }
+          console.log(blocks);
           var block = blocks[row][column];
           if (block) {
             Core9.blocks.insertBlock(progress, block, columnDiv, function(progress, block, columnDiv) {
