@@ -81,15 +81,6 @@ Core9.blocks.init = function() {
 
       }
     }
-
-    //window.gm.init();
-
-    setTimeout(function() {
-      //$('.gm-preview').trigger('click');
-      //window.gm = jQuery("#mycanvas").gridmanager().data('gridmanager');
-    }, 3000);
-
-
   });
 
 
