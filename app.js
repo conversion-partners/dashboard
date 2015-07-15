@@ -15,6 +15,28 @@ app.post('/api/file/:action', function(req, res) {
 
   $ = cheerio.load(req.body.content);
 
+
+  $('.row').each(function(){
+    //console.log(this);
+    var columns = this.children;
+    for (var i = 0; i < columns.length; i++) {
+        var column = columns[i];
+        console.log("column :");
+        console.log(column);
+        console.log("classes :");
+        try {
+          console.log(column.attribs.class);
+        } catch (e) {
+
+        }
+
+    }
+
+  });
+
+
+
+
   $('.core9-block').remove();
 
   // removes comments
