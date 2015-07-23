@@ -3,4 +3,4 @@
 
 git add --all . -f  
 git commit -m "cc"  
-git push  origin HEAD:master
+git push  origin HEAD:gh-pages
