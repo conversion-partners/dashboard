@@ -3,4 +3,4 @@
 
 git add --all . -f  
 git commit -m "cc"  
-git push -u origin master
+git push  origin master
