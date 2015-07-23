@@ -49,12 +49,8 @@ app.post('/api/file/:action', function(req, res) {
 
 app.use('/dashboard/', express.static('.'));
 
-//app.use('/*', function(req, res) {
-  //res.redirect('/dashboard/');
-//});
-
-app.use(function(req, res, next) {
-  res.status(404).send('Sorry cant find that!');
+app.use('/*', function(req, res) {
+  res.redirect('/dashboard/');
 });
 
 var server = app.listen(3000, function() {
