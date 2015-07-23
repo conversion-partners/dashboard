@@ -12,12 +12,8 @@ app.use(bodyParser.urlencoded({
 app.use(multer()); // for parsing multipart/form-data
 
 app.post('/api/file/:action', function(req, res) {
-
   $ = cheerio.load(req.body.content);
-
-
   $('.row').each(function(){
-    //console.log(this);
     var columns = this.children;
     for (var i = 0; i < columns.length; i++) {
         var column = columns[i];
@@ -27,34 +23,23 @@ app.post('/api/file/:action', function(req, res) {
         try {
           console.log(column.attribs.class);
         } catch (e) {
-
         }
-
     }
-
   });
-
-
-
 
   $('.core9-block').remove();
 
-  // removes comments
-  $('*').contents().each(function() {
+  $('*').contents().each(function() {// removes comments
     if (this.nodeType == 8) {
       $(this).remove()
     }
   });
-
-
   fs.writeFile(".." + req.body.template, $.html(), function(err) {
     if (err) {
       return console.log(err);
     }
-
     console.log("The file was saved!");
   });
-
   console.log(__dirname);
   console.log(req.body.template);
   res.send(req.originalUrl);
@@ -62,9 +47,7 @@ app.post('/api/file/:action', function(req, res) {
 
 
 
-
-
-app.use('/dashboard', express.static('.'));
+app.use('/dashboard/', express.static('.'));
 
 app.use('*', function(req, res) {
   res.redirect('/dashboard/');
@@ -72,10 +55,7 @@ app.use('*', function(req, res) {
 
 
 var server = app.listen(3000, function() {
-
   var host = server.address().address;
   var port = server.address().port;
-
   console.log('Example app listening at http://%s:%s', host, port);
-
 });
