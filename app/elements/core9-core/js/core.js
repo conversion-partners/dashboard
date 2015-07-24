@@ -54,7 +54,7 @@ Core9.ajax = function(method, url, data, callback) {
 Core9.iframe = {
 	write : function(iframe, content, grid) {
 		if(grid){
-				content = content.replace('</body>','<script id="js-boot" src="/dashboard/app/elements/core9-gridmanager/boot.min.js"></script></body>');	
+				content = content.replace('</body>','<script id="js-boot" src="/dashboard/app/elements/core9-gridmanager/boot.min.js"></script></body>');
 		}
 		iframe.contentWindow.document.open();
 		iframe.contentWindow.document.write(content);
@@ -103,7 +103,7 @@ Core9.panel = {
 		Core9.ajax('GET', '/dashboard/panels/' + panel + '/routes.js', null,
 				function(data) {
 					eval(data.responseText);
-					console.log('adding routes for ' + panel);
+					//console.log('adding routes for ' + panel);
 				});
 		Core9.ajax('GET', '/dashboard/panels/' + panel + '/data.json', null,
 				function(data) {
