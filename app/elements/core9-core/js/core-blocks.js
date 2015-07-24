@@ -6,7 +6,9 @@ if (typeof Core9 === 'undefined') {
 
 Core9.blocks = function() {}
 Core9.blocks.save = function(data){
-  console.log(data);
+  var url = data.url;
+  var html = Core9.blocks.convertStringToHtml(data.data.content);
+  console.log(html);
 }
 Core9.blocks.__getDir = function(path) {
   return path.substring(0, path.lastIndexOf("/") + 1);
