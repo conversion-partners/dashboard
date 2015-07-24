@@ -803,7 +803,16 @@
      */
     gm.saveremote = function() {
       var canvas = gm.$el.find("#" + gm.options.canvasId);
-      console.log(Core9);
+      Core9.blocks.save(
+        {
+          url:  gm.options.remoteURL,
+          data: {
+            content: canvas.html(), //document.documentElement.outerHTML,
+            template: store.get('template'),
+            account: store.get('account')
+          }
+        }
+      );
       $.ajax({
                     type: "POST",
                     url:  gm.options.remoteURL,

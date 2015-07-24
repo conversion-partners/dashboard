@@ -24,15 +24,15 @@ var themeRoutes = {
       var ajax = new XMLHttpRequest();
       ajax.onload = function() {
 
-        console.log('header :');
-        console.log(this.responseXML);
+        //console.log('header :');
+        //console.log(this.responseXML);
 
         var doc = this.responseXML;
 
         var html = Core9.xmlToString(that.responseXML);
 
-        console.log('html :');
-        console.log(html);
+        //console.log('html :');
+        //console.log(html);
 
         doc.getElementsByTagName("body")[0].innerHTML = '<div id="gm-canvas" class="ui-sortable">' + html + '</div>';
 
@@ -70,14 +70,14 @@ var themeRoutes = {
     xhr.send();
   },
   '/themes/.*/blocks/.*/add$/': function(req) {
-    console.log('add block');
-    console.log(window.location);
+    //console.log('add block');
+    //console.log(window.location);
   },
   '/themes$/': function() {
     var init = function(modules) {
       var theme = Core9.system.unwrapModule(modules[0]);
       theme.setAccount(store.get('account'));
-      console.log(theme);
+      //console.log(theme);
       var callback = function(data) {
         var themes = data[0].themes;
         if (initPanelThemes) {
