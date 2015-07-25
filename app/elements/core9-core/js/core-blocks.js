@@ -21,8 +21,8 @@ Core9.blocks.save = function(data) {
     console.log('row : ' + i);
     var row = rows[i];
     console.log(row);
-    for (var n = 0; n < row.length; n++) {
-      var child = rowsChildren[n];
+    for (var n = 0; n < row.children.length; n++) {
+      var child = row.children[n];
       if (Core9.blocks.hasClass(child, 'column')) {
         console.log('column : ' + n);
         console.log(child);
