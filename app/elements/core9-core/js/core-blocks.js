@@ -26,6 +26,17 @@ Core9.blocks.save = function(data) {
       if (Core9.blocks.hasClass(child, 'column')) {
         console.log('column : ' + n);
         console.log(child);
+        var nestedChildren = child.children;
+        for (var r = 0; r < nestedChildren.length; r++) {
+          var grandChild = nestedChildren[r];
+          if (!Core9.blocks.hasClass(grandChild, 'row')) {
+            console.log('column children: ' + r);
+            console.log(grandChild);
+          }
+
+        }
+
+
       }
     }
 
