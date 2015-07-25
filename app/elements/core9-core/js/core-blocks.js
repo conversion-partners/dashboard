@@ -5,7 +5,7 @@ if (typeof Core9 === 'undefined') {
 
 
 Core9.blocks = function() {}
-Core9.blocks.save = function(data){
+Core9.blocks.save = function(data) {
   var url = data.url;
   var html = Core9.blocks.convertStringToWrappedDom(data.data.content);
 
@@ -14,16 +14,29 @@ Core9.blocks.save = function(data){
   console.log(html);
   console.log(rows);
 
+  for (var i = 0; i < rows.length; i++) {
+    var columns = rows[i].querySelectorAll('.column');
+    console.log(columns);
+    for (var i = 0; i < columns.length; i++) {
+      var columnChildren = columns[i].children;
+      console.log(columnChildren);
+      //for (var i = 0; i < columnChildren.length; i++) {
+      //  var child = columnChildren[i];
+      //  console.log(child);
+      //}
+    }
+  }
+
 
   $.ajax({
-                type: "POST",
-                url:  url + 'save',
-                data: {
-                  content: data.data.content,
-                  file: data.data.template,
-                  account: data.data.account
-                }
-              });
+    type: "POST",
+    url: url + 'save',
+    data: {
+      content: data.data.content,
+      file: data.data.template,
+      account: data.data.account
+    }
+  });
 
 
 }
@@ -49,7 +62,7 @@ Core9.blocks.emptyElement = function(node) {
     node.removeChild(node.firstChild);
   }
 }
-Core9.blocks.convertStringToWrappedDom = function(string){
+Core9.blocks.convertStringToWrappedDom = function(string) {
   var d = document.createElement('div');
   d.innerHTML = string;
   return d;
@@ -66,7 +79,7 @@ Core9.blocks.insertBlock = function(progress, block, columnDiv, callback) {
 
 Core9.blocks.init = function() {
   var data = {
-    template:  store.get('template') //"/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/templates/pages/home/versions/blue/index.html"
+    template: store.get('template') //"/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/templates/pages/home/versions/blue/index.html"
   };
   var dataJson = Core9.blocks.__getDataJsonFromTemplate(data.template);
   Core9.blocks.__getJSON(dataJson, function(json) {
@@ -80,12 +93,12 @@ Core9.blocks.init = function() {
         var columnDiv = columns[column];
         try {
           var progress = {
-            "nrrows": nrRows,
-            "row": row,
-            "nrcolumns": nrColumns,
-            "column": column
-          }
-          //console.log(blocks);
+              "nrrows": nrRows,
+              "row": row,
+              "nrcolumns": nrColumns,
+              "column": column
+            }
+            //console.log(blocks);
           var block = blocks[row][column];
           if (block) {
             Core9.blocks.insertBlock(progress, block, columnDiv, function(progress, block, columnDiv) {
