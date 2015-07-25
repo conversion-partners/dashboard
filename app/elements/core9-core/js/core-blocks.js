@@ -30,13 +30,11 @@ Core9.blocks.save = function(data) {
         for (var r = 0; r < nestedChildren.length; r++) {
           var grandChild = nestedChildren[r];
           if (!Core9.blocks.hasClass(grandChild, 'row')) {
-            console.log('column children: ' + r);
-            console.log(grandChild);
+            //console.log('column children: ' + r);
+            //console.log(grandChild);
             if (Core9.blocks.hasClass(grandChild, 'core9-block')) {
               console.log('core9-block : ' + r);
               console.log(grandChild);
-
-
             }else{
               //native content
               console.log('native-block : ' + r);
