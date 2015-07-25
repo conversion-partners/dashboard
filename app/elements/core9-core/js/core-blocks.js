@@ -5,6 +5,9 @@ if (typeof Core9 === 'undefined') {
 
 
 Core9.blocks = function() {}
+Core9.blocks.hasClass = function(element, classname) {
+  return (' ' + element.className + ' ').indexOf(' ' + classname + ' ') > -1;
+}
 Core9.blocks.save = function(data) {
   var url = data.url;
   var html = Core9.blocks.convertStringToWrappedDom(data.data.content);
@@ -15,8 +18,17 @@ Core9.blocks.save = function(data) {
   console.log(rows);
 
   for (var i = 0; i < rows.length; i++) {
-    var rowsChildren = rows[i].children;
-    console.log(rowsChildren);
+    console.log('row : ' + i);
+    var row = rows[i];
+    console.log(row);
+    for (var n = 0; n < row.length; n++) {
+      var child = rowsChildren[n];
+      if (Core9.blocks.hasClass(child, 'column')) {
+        console.log('column : ' + n);
+        console.log(child);
+      }
+    }
+
   }
 
 
