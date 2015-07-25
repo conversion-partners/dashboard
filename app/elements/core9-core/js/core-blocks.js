@@ -14,6 +14,18 @@ Core9.blocks.save = function(data){
   console.log(html);
   console.log(rows);
 
+
+  $.ajax({
+                type: "POST",
+                url:  url,
+                data: {
+                  content: data.data.content, 
+                  template: data.data.template,
+                  account: data.data.account
+                }
+              });
+
+
 }
 Core9.blocks.__getDir = function(path) {
   return path.substring(0, path.lastIndexOf("/") + 1);

@@ -813,6 +813,9 @@
           }
         }
       );
+
+      /**
+
       $.ajax({
                     type: "POST",
                     url:  gm.options.remoteURL,
@@ -822,7 +825,7 @@
                       account: store.get('account')
                     }
                   });
-
+**/
 /**
                   fieldname - Field name specified in the form
                   originalname - Name of the file on the user's computer
