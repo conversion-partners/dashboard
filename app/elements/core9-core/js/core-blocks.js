@@ -15,16 +15,8 @@ Core9.blocks.save = function(data) {
   console.log(rows);
 
   for (var i = 0; i < rows.length; i++) {
-    var columns = rows[i].querySelectorAll('.column');
-    console.log(columns);
-    for (var i = 0; i < columns.length; i++) {
-      var columnChildren = columns[i].children;
-      console.log(columnChildren);
-      //for (var i = 0; i < columnChildren.length; i++) {
-      //  var child = columnChildren[i];
-      //  console.log(child);
-      //}
-    }
+    var rowsChildren = rows[i].children;
+    console.log(rowsChildren);
   }
 
 
