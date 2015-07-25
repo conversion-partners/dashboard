@@ -13,7 +13,7 @@ app.use(multer()); // for parsing multipart/form-data
 
 app.post('/api/io/:action', function(req, res) {
 
-  switch (action) {
+  switch (req.params.action) {
     case 'save':
       fs.writeFile(".." + req.body.file, req.body.content, function(err) {
         if (err) {
