@@ -32,6 +32,17 @@ Core9.blocks.save = function(data) {
           if (!Core9.blocks.hasClass(grandChild, 'row')) {
             console.log('column children: ' + r);
             console.log(grandChild);
+            if (Core9.blocks.hasClass(grandChild, 'core9-block')) {
+              console.log('core9-block : ' + r);
+              console.log(grandChild);
+
+
+            }else{
+              //native content
+              console.log('native-block : ' + r);
+              console.log(grandChild);
+            }
+
           }
 
         }
