@@ -7,8 +7,13 @@ if (typeof Core9 === 'undefined') {
 Core9.blocks = function() {}
 Core9.blocks.save = function(data){
   var url = data.url;
-  var html = Core9.blocks.convertStringToHtml(data.data.content);
+  var html = Core9.blocks.convertStringToWrappedDom(data.data.content);
+
+  var rows = html.querySelectorAll('.row');
+
   console.log(html);
+  console.log(rows);
+
 }
 Core9.blocks.__getDir = function(path) {
   return path.substring(0, path.lastIndexOf("/") + 1);
@@ -31,6 +36,11 @@ Core9.blocks.emptyElement = function(node) {
   while (node.firstChild) {
     node.removeChild(node.firstChild);
   }
+}
+Core9.blocks.convertStringToWrappedDom = function(string){
+  var d = document.createElement('div');
+  d.innerHTML = string;
+  return d;
 }
 Core9.blocks.convertStringToHtml = function(string) {
   var d = document.createElement('div');

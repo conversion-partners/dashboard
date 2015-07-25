@@ -19,7 +19,9 @@ gulp.task('shorthand2', shell.task([
 ]));
 
 gulp.task('shorthand3', shell.task([
-  '/usr/bin/node '+__dirname+'/app.js'
+	 
+ '/usr/local/bin/node-debug '+__dirname+'/app.js'
+ //'/usr/bin/node '+__dirname+'/app.js'
 ]));
 
 ///var/www/dashboard/data/accounts/easydrain$ /usr/bin/node ../../../node_modules/nide/main.js init

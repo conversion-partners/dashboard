@@ -11,6 +11,23 @@ app.use(bodyParser.urlencoded({
 })); // for parsing application/x-www-form-urlencoded
 app.use(multer()); // for parsing multipart/form-data
 
+app.post('/api/io/:action', function(req, res) {
+/*
+  switch(expression) {
+    case n:
+        code block
+        break;
+    case n:
+        code block
+        break;
+    default:
+        default code block
+      }
+*/
+console.log(req);
+});
+
+
 app.post('/api/file/:action', function(req, res) {
   $ = cheerio.load(req.body.content);
   $('.row').each(function(){
