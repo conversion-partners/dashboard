@@ -12,41 +12,43 @@ app.use(bodyParser.urlencoded({
 app.use(multer()); // for parsing multipart/form-data
 
 app.post('/api/io/:action', function(req, res) {
-/*
-  switch(expression) {
-    case n:
-        code block
-        break;
-    case n:
-        code block
-        break;
+
+  switch (action) {
+    case 'save':
+      fs.writeFile(".." + req.body.file, req.body.content, function(err) {
+        if (err) {
+          return console.log(err);
+        }
+        console.log("The file was saved!");
+      });
+      break;
     default:
-        default code block
-      }
-*/
-console.log(req);
+      console.log(req);
+  }
+
+
+
 });
 
 
 app.post('/api/file/:action', function(req, res) {
   $ = cheerio.load(req.body.content);
-  $('.row').each(function(){
+  $('.row').each(function() {
     var columns = this.children;
     for (var i = 0; i < columns.length; i++) {
-        var column = columns[i];
-        console.log("column :");
-        console.log(column);
-        console.log("classes :");
-        try {
-          console.log(column.attribs.class);
-        } catch (e) {
-        }
+      var column = columns[i];
+      console.log("column :");
+      console.log(column);
+      console.log("classes :");
+      try {
+        console.log(column.attribs.class);
+      } catch (e) {}
     }
   });
 
   $('.core9-block').remove();
 
-  $('*').contents().each(function() {// removes comments
+  $('*').contents().each(function() { // removes comments
     if (this.nodeType == 8) {
       $(this).remove()
     }

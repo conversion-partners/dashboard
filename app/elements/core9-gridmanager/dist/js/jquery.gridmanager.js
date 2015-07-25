@@ -1412,7 +1412,7 @@
 
     // URL to save to
     //remoteURL: "/api/file/save",
-    remoteURL: "http://localhost:9090/api/file/save",
+    remoteURL: "http://localhost:9090/api/io/",
 
     // Custom CSS to load
     cssInclude: "/dashboard/bower_components/fontawesome/css/font-awesome.min.css",

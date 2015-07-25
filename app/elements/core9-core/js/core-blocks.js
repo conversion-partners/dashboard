@@ -17,10 +17,10 @@ Core9.blocks.save = function(data){
 
   $.ajax({
                 type: "POST",
-                url:  url,
+                url:  url + 'save',
                 data: {
-                  content: data.data.content, 
-                  template: data.data.template,
+                  content: data.data.content,
+                  file: data.data.template,
                   account: data.data.account
                 }
               });
