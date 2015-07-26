@@ -66,25 +66,29 @@ Core9.blocks.loop = function(action, rows, db) {
 
           console.log('query : ');
           console.log(block);
+          console.log(grandChild);
+
 
           if(action == 'init'){
             var result = blocks.find(block);
             console.log('result : ');
             console.log(result);
+            if(result){
+              var container = grandChild.children[block.position];
+              Core9.blocks.insertBlock(container, result[0].block);
+            }
           }
 
-
           if (!Core9.blocks.hasClass(grandChild, 'row')) {
-
-            if (Core9.blocks.hasClass(grandChild, 'core9-block')) {
+            if (Core9.blocks.hasClass(grandChild, 'core9-block') && action == 'save') {
               block.block = grandChild.dataset.type;
-              if (action == 'save') {
                 db.push(block);
-              }
             } else {
               // native block
             }
           }
+
+
         }
       }
     }
