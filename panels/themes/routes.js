@@ -30,8 +30,15 @@ var themeRoutes = {
     xhr.send();
   },
   '/themes/.*/blocks/.*/add$/': function(req) {
-    //console.log('add block');
-    //console.log(window.location);
+    console.log('add block');
+    console.log(window.location);
+    var parts = location.pathname.split('/');
+    var theme = parts[3];
+    var block = parts[5];
+    var iframe = Core9.panel.getIframeById('panel-iframe-site');
+    var cmd = 'console.log("hi");Core9.blocks.addBlock("'+block+'");';
+    Core9.iframe.parent.sentMessageToIframe(cmd, iframe);
+
   },
   '/themes$/': function() {
     var init = function(modules) {

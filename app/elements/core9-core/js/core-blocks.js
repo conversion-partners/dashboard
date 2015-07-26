@@ -5,6 +5,19 @@ Core9.blocks = function() {}
 Core9.blocks.hasClass = function(element, classname) {
   return (' ' + element.className + ' ').indexOf(' ' + classname + ' ') > -1;
 }
+
+Core9.blocks.addBlock = function(block){
+    var div = document.createElement("div");
+    div = Core9.blocks.insertBlock(div, block);
+    try {
+      var delElem = document.querySelector('.gm-editing-selected .gm-content');
+      delElem.parentNode.removeChild(delElem);
+    } catch (e) {
+      console.log(e);
+    }
+    gm.appendHTMLSelectedCols(div.innerHTML);
+}
+
 Core9.blocks.insertBlock = function(div, block) {
   if (typeof div === 'undefined') return;
   var html = "<div class='core9-block' data-type='" + block + "'>" + block + "</div>";
@@ -13,6 +26,7 @@ Core9.blocks.insertBlock = function(div, block) {
   div.appendChild(Core9.blocks.convertStringToHtml(html));
   var c = document.createComment("/gm-editable-region");
   div.appendChild(c);
+  return div;
 }
 Core9.blocks.init = function() {
   console.log('running init');
