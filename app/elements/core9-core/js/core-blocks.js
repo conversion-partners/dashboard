@@ -11,32 +11,19 @@ Core9.blocks.hasClass = function(element, classname) {
 Core9.blocks.save = function(data) {
   var url = data.url;
   var html = Core9.blocks.convertStringToWrappedDom(data.data.content);
-
   var rows = html.querySelectorAll('.row');
-
-  console.log(html);
-  console.log(rows);
-
   var db = [];
 
   for (var i = 0; i < rows.length; i++) {
-    console.log('row : ' + i);
     var row = rows[i];
-    console.log(row);
     for (var n = 0; n < row.children.length; n++) {
       var child = row.children[n];
       if (Core9.blocks.hasClass(child, 'column')) {
-        console.log('column : ' + n);
-        console.log(child);
         var nestedChildren = child.children;
         for (var r = 0; r < nestedChildren.length; r++) {
           var grandChild = nestedChildren[r];
           if (!Core9.blocks.hasClass(grandChild, 'row')) {
-            console.log('position: ' + r);
-            //console.log(grandChild);
             if (Core9.blocks.hasClass(grandChild, 'core9-block')) {
-              console.log('core9-block : ');
-              console.log(grandChild);
               var block = {};
               block.row = i;
               block.column = n;
@@ -44,9 +31,7 @@ Core9.blocks.save = function(data) {
               block.block = grandChild.dataset.type;
               db.push(block);
             }else{
-              //native content
-              console.log('native-block : ');
-              console.log(grandChild);
+              // native block
             }
           }
         }
@@ -66,12 +51,21 @@ Core9.blocks.save = function(data) {
     }
   });
 
-
+  function removeElementsByClass(doc, className){
+      var elements = doc.getElementsByClassName(className);
+      while(elements.length > 0){
+          elements[0].previousSibling.parentNode.removeChild(elements[0].previousSibling);
+          elements[0].nextSibling.parentNode.removeChild(elements[0].nextSibling);
+          elements[0].parentNode.removeChild(elements[0]);
+      }
+      return doc;
+  }
+  
   $.ajax({
     type: "POST",
     url: url + 'save',
     data: {
-      content: data.data.content,
+      content: removeElementsByClass(html, "core9-block"),
       file: data.data.template,
       account: data.data.account
     }
