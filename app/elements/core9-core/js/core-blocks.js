@@ -54,18 +54,29 @@ Core9.blocks.save = function(data) {
   function removeElementsByClass(doc, className){
       var elements = doc.getElementsByClassName(className);
       while(elements.length > 0){
+
+
+
+          console.log(elements[0].previousSibling);
+          console.log(elements[0].nextSibling);
+
           elements[0].previousSibling.parentNode.removeChild(elements[0].previousSibling);
           elements[0].nextSibling.parentNode.removeChild(elements[0].nextSibling);
+
           elements[0].parentNode.removeChild(elements[0]);
       }
       return doc;
   }
-  
+
+  var tpl = removeElementsByClass(html, "core9-block").innerHTML;
+
+  console.log(tpl.innerHTML);
+
   $.ajax({
     type: "POST",
     url: url + 'save',
     data: {
-      content: removeElementsByClass(html, "core9-block"),
+      content: removeElementsByClass(html, "core9-block").innerHTML,
       file: data.data.template,
       account: data.data.account
     }
