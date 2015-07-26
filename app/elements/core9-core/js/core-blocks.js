@@ -9,7 +9,7 @@ Core9.blocks.hasClass = function(element, classname) {
   return (' ' + element.className + ' ').indexOf(' ' + classname + ' ') > -1;
 }
 
-Core9.blocks.loop = function(action, rows, db){
+Core9.blocks.loop = function(action, rows, db) {
 
   for (var i = 0; i < rows.length; i++) {
     var row = rows[i];
@@ -27,7 +27,7 @@ Core9.blocks.loop = function(action, rows, db){
               block.position = r;
               block.block = grandChild.dataset.type;
               db.push(block);
-            }else{
+            } else {
               // native block
             }
           }
@@ -54,19 +54,19 @@ Core9.blocks.save = function(data) {
     url: url + 'save',
     data: {
       content: JSON.stringify(db),
-      file: data.data.template.replace('index.html','data.json'),
+      file: data.data.template.replace('index.html', 'data.json'),
       account: data.data.account
     }
   });
 
-  function removeElementsByClass(doc, className){
-      var elements = doc.getElementsByClassName(className);
-      while(elements.length > 0){
-          elements[0].previousSibling.parentNode.removeChild(elements[0].previousSibling);
-          elements[0].nextSibling.parentNode.removeChild(elements[0].nextSibling);
-          elements[0].parentNode.removeChild(elements[0]);
-      }
-      return doc;
+  function removeElementsByClass(doc, className) {
+    var elements = doc.getElementsByClassName(className);
+    while (elements.length > 0) {
+      elements[0].previousSibling.parentNode.removeChild(elements[0].previousSibling);
+      elements[0].nextSibling.parentNode.removeChild(elements[0].nextSibling);
+      elements[0].parentNode.removeChild(elements[0]);
+    }
+    return doc;
   }
 
   $.ajax({
@@ -119,6 +119,15 @@ Core9.blocks.insertBlock = function(progress, block, columnDiv, callback) {
 }
 
 Core9.blocks.init = function() {
+  function insert() {
+    var html = "<div class='core9-block' data-type='" + block[i].block + "'>" + block[i].block + "</div>";
+    var c = document.createComment("gm-editable-region");
+    columnDiv.appendChild(c);
+    columnDiv.appendChild(Core9.blocks.convertStringToHtml(html));
+    var c = document.createComment("/gm-editable-region");
+    columnDiv.appendChild(c);
+  }
+
   var data = {
     template: store.get('template') //"/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/templates/pages/home/versions/blue/index.html"
   };
@@ -126,6 +135,25 @@ Core9.blocks.init = function() {
   Core9.blocks.__getJSON(dataJson, function(json) {
     var blocks = json.blocks;
     var rows = document.getElementsByClassName('row');
+
+
+  });
+
+
+
+}
+
+
+Core9.blocks.init_org = function() {
+  var data = {
+    template: store.get('template') //"/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/templates/pages/home/versions/blue/index.html"
+  };
+  var dataJson = Core9.blocks.__getDataJsonFromTemplate(data.template);
+  Core9.blocks.__getJSON(dataJson, function(json) {
+    var blocks = json.blocks;
+    var rows = document.getElementsByClassName('row');
+
+
     var nrRows = rows.length;
     for (var row = 0; row < nrRows; row++) {
       var columns = rows[row].getElementsByClassName("column");
@@ -163,6 +191,9 @@ Core9.blocks.init = function() {
 
       }
     }
+
+
+
   });
 
 
