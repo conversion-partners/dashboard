@@ -3,6 +3,8 @@
 var themeRoutes = {
   '/theme/edit$/': function() {
     var template = store.get('template');
+    var theme = store.get('theme');
+    var account = store.get('account');
     var xhr = new XMLHttpRequest();
     xhr.onload = function() {
       var that = this;
@@ -21,7 +23,7 @@ var themeRoutes = {
         }, 1000); // smarter needs to be handled in sendMessage to iframe
         initPanelIframeSite = false;
       }
-      ajax.open("GET", template.replace('index.html', 'header.html'));
+      ajax.open("GET", '/dashboard/data/accounts/'+account+'/themes/bower_components/'+theme+'/templates/pages/header.html');
       ajax.responseType = "document";
       ajax.send();
     }

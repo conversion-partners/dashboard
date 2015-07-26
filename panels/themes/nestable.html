@@ -243,9 +243,11 @@
 						console.log(dropdown);
 						var account = store.get('account');
 						var page = $('#choose-theme-template-page').html();
-						var template = '/dashboard/data/accounts/' + account + '/themes/bower_components/' + $(".template-data").val() + '/templates/pages/' + page + '/versions/' + dropdown + '/index.html'
+						var theme = $(".template-data").val();
+						var template = '/dashboard/data/accounts/' + account + '/themes/bower_components/' + theme + '/templates/pages/' + page + '/versions/' + dropdown + '/index.html'
 						template = template.toLowerCase();
 						store.set('template', template);
+						store.set('theme', theme);
 						console.log(store.get('template'));
 						history.pushState(null, null, "/dashboard/theme/edit");
 						postClick("/dashboard/theme/edit");
