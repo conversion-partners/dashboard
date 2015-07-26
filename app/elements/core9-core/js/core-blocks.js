@@ -8,11 +8,8 @@ Core9.blocks = function() {}
 Core9.blocks.hasClass = function(element, classname) {
   return (' ' + element.className + ' ').indexOf(' ' + classname + ' ') > -1;
 }
-Core9.blocks.save = function(data) {
-  var url = data.url;
-  var html = Core9.blocks.convertStringToWrappedDom(data.data.content);
-  var rows = html.querySelectorAll('.row');
-  var db = [];
+
+Core9.blocks.loop = function(action, rows, db){
 
   for (var i = 0; i < rows.length; i++) {
     var row = rows[i];
@@ -38,6 +35,17 @@ Core9.blocks.save = function(data) {
       }
     }
   }
+  return db;
+}
+
+Core9.blocks.save = function(data) {
+  var url = data.url;
+  var html = Core9.blocks.convertStringToWrappedDom(data.data.content);
+  var rows = html.querySelectorAll('.row');
+  var db = [];
+
+  db = Core9.blocks.loop('save', rows, db);
+
   console.log('database : ');
   console.log(db);
 
