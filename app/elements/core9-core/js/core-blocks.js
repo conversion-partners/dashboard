@@ -29,47 +29,24 @@ Core9.blocks.init = function() {
   };
   var dataJson = Core9.blocks.__getDataJsonFromTemplate(data.template);
   Core9.blocks.__getJSON(dataJson, function(json) {
-    var rows = document.getElementsByClassName('row');
+    var blocks = document.getElementsByClassName('core9-block');
     var db = json;
-    console.log(rows);
-    Core9.blocks.loop('init', rows, db);
+    Core9.blocks.loopBlocks(blocks);
   });
 
 }
 
 
-Core9.blocks.loop = function(action, rows, db) {
-  var dbLoki = new loki('blocks');
-  var blocks = dbLoki.addCollection('blocks')
-  if (action == 'init') {
-    for (var i = 0; i < db.length; i++) {
-      blocks.insert(db[i]);
-    }
+Core9.blocks.loopBlocks = function(blocks) {
+
+
+  for (var i = 0; i < blocks.length; i++) {
+    var block = blocks[i];
+
+    console.log(block);
+
   }
 
-  for (var rownr = 0; rownr < rows.length; rownr++) {
-    var row = rows[rownr];
-    for (var columnnr = 0; columnnr < row.children.length; columnnr++) {
-      var child = row.children[columnnr];
-      if (Core9.blocks.hasClass(child, 'column')) {
-        var nestedChildren = child.children;
-        for (var columnposition = 0; columnposition < nestedChildren.length; columnposition++) {
-          var grandChild = nestedChildren[columnposition];
-
-          if (!Core9.blocks.hasClass(grandChild, 'row')) {
-            if (Core9.blocks.hasClass(grandChild, 'core9-block')) {
-              
-            } else {
-              // native block
-            }
-          }
-
-
-        }
-      }
-    }
-  }
-  return db;
 }
 
 Core9.blocks.save = function(data) {
@@ -81,20 +58,20 @@ Core9.blocks.save = function(data) {
 
   function emptyElementsByClass(doc, className) {
     var elements = doc.getElementsByClassName(className);
-    while (elements.length > 0) {
-      //elements[0].previousSibling.parentNode.removeChild(elements[0].previousSibling);
-      //elements[0].nextSibling.parentNode.removeChild(elements[0].nextSibling);
-      //elements[0].parentNode.removeChild(elements[0]);
-      Core9.blocks.emptyElement(elements[0]);
+    for (var i = 0; i < elements.length; i++) {
+      Core9.blocks.emptyElement(elements[i]);
     }
     return doc;
   }
+
+  var content = emptyElementsByClass(html, "core9-block").innerHTML;
+  console.log(content);
 
   $.ajax({
     type: "POST",
     url: url + 'save',
     data: {
-      content: emptyElementsByClass(html, "core9-block").innerHTML,
+      content: content,
       file: data.data.template,
       account: data.data.account
     }
@@ -134,10 +111,5 @@ Core9.blocks.convertStringToHtml = function(string) {
   d.innerHTML = string;
   return d.firstChild;
 }
-
-
-
-
-
 
 Core9.blocks.init();
