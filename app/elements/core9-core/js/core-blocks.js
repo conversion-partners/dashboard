@@ -17,6 +17,8 @@ Core9.blocks.save = function(data) {
   console.log(html);
   console.log(rows);
 
+  var db = [];
+
   for (var i = 0; i < rows.length; i++) {
     console.log('row : ' + i);
     var row = rows[i];
@@ -30,27 +32,29 @@ Core9.blocks.save = function(data) {
         for (var r = 0; r < nestedChildren.length; r++) {
           var grandChild = nestedChildren[r];
           if (!Core9.blocks.hasClass(grandChild, 'row')) {
-            //console.log('column children: ' + r);
+            console.log('position: ' + r);
             //console.log(grandChild);
             if (Core9.blocks.hasClass(grandChild, 'core9-block')) {
-              console.log('core9-block : ' + r);
+              console.log('core9-block : ');
               console.log(grandChild);
+              var block = {};
+              block.row = i;
+              block.column = n;
+              block.position = r;
+              block.block = grandChild.dataset.type;
+              db.push(block);
             }else{
               //native content
-              console.log('native-block : ' + r);
+              console.log('native-block : ');
               console.log(grandChild);
             }
-
           }
-
         }
-
-
       }
     }
-
   }
-
+  console.log('database : ');
+  console.log(db);
 
   $.ajax({
     type: "POST",
