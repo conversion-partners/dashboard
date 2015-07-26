@@ -10,6 +10,7 @@ Core9.blocks.hasClass = function(element, classname) {
 }
 
 Core9.blocks.insertBlock = function(div, block) {
+  if (typeof div === 'undefined') return;
   var html = "<div class='core9-block' data-type='" + block + "'>" + block + "</div>";
   var c = document.createComment("gm-editable-region");
   div.appendChild(c);
@@ -21,6 +22,7 @@ Core9.blocks.insertBlock = function(div, block) {
 
 Core9.blocks.init = function() {
 
+  console.log('running init');
 
   var data = {
     template: store.get('template') //"/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/templates/pages/home/versions/blue/index.html"
@@ -29,9 +31,7 @@ Core9.blocks.init = function() {
   Core9.blocks.__getJSON(dataJson, function(json) {
     var rows = document.getElementsByClassName('row');
     var db = json;
-
     console.log(rows);
-
     Core9.blocks.loop('init', rows, db);
   });
 
@@ -46,48 +46,19 @@ Core9.blocks.loop = function(action, rows, db) {
       blocks.insert(db[i]);
     }
   }
-  var i = 0;
-  if (action == 'init') {
-    i = 1;
-  }
-  for (i; i < rows.length; i++) {
-    var row = rows[i];
-    for (var n = 0; n < row.children.length; n++) {
-      var child = row.children[n];
+
+  for (var rownr = 0; rownr < rows.length; rownr++) {
+    var row = rows[rownr];
+    for (var columnnr = 0; columnnr < row.children.length; columnnr++) {
+      var child = row.children[columnnr];
       if (Core9.blocks.hasClass(child, 'column')) {
         var nestedChildren = child.children;
-        for (var r = 0; r < nestedChildren.length; r++) {
-          var grandChild = nestedChildren[r];
-
-          var block = {};
-          block.row = i;
-          block.column = n;
-          block.position = r;
-
-          console.log('query : ');
-          console.log(block);
-          console.log(grandChild);
-
-
-          if(action == 'init'){
-            var result = blocks.find(block);
-            console.log('result : ');
-            console.log(result);
-            if(result){
-              try {
-                var container = grandChild.children[block.position];
-                Core9.blocks.insertBlock(container, result[0].block);
-              } catch (e) {
-
-              }
-
-            }
-          }
+        for (var columnposition = 0; columnposition < nestedChildren.length; columnposition++) {
+          var grandChild = nestedChildren[columnposition];
 
           if (!Core9.blocks.hasClass(grandChild, 'row')) {
-            if (Core9.blocks.hasClass(grandChild, 'core9-block') && action == 'save') {
-              block.block = grandChild.dataset.type;
-                db.push(block);
+            if (Core9.blocks.hasClass(grandChild, 'core9-block')) {
+              
             } else {
               // native block
             }
@@ -107,27 +78,14 @@ Core9.blocks.save = function(data) {
   var rows = html.querySelectorAll('.row');
   var db = [];
 
-  db = Core9.blocks.loop('save', rows, db);
 
-  console.log('database : ');
-  console.log(db);
-
-  $.ajax({
-    type: "POST",
-    url: url + 'save',
-    data: {
-      content: JSON.stringify(db),
-      file: data.data.template.replace('index.html', 'data.json'),
-      account: data.data.account
-    }
-  });
-
-  function removeElementsByClass(doc, className) {
+  function emptyElementsByClass(doc, className) {
     var elements = doc.getElementsByClassName(className);
     while (elements.length > 0) {
-      elements[0].previousSibling.parentNode.removeChild(elements[0].previousSibling);
-      elements[0].nextSibling.parentNode.removeChild(elements[0].nextSibling);
-      elements[0].parentNode.removeChild(elements[0]);
+      //elements[0].previousSibling.parentNode.removeChild(elements[0].previousSibling);
+      //elements[0].nextSibling.parentNode.removeChild(elements[0].nextSibling);
+      //elements[0].parentNode.removeChild(elements[0]);
+      Core9.blocks.emptyElement(elements[0]);
     }
     return doc;
   }
@@ -136,7 +94,7 @@ Core9.blocks.save = function(data) {
     type: "POST",
     url: url + 'save',
     data: {
-      content: removeElementsByClass(html, "core9-block").innerHTML,
+      content: emptyElementsByClass(html, "core9-block").innerHTML,
       file: data.data.template,
       account: data.data.account
     }
