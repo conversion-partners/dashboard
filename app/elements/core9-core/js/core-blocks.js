@@ -74,8 +74,13 @@ Core9.blocks.loop = function(action, rows, db) {
             console.log('result : ');
             console.log(result);
             if(result){
-              var container = grandChild.children[block.position];
-              Core9.blocks.insertBlock(container, result[0].block);
+              try {
+                var container = grandChild.children[block.position];
+                Core9.blocks.insertBlock(container, result[0].block);
+              } catch (e) {
+
+              }
+
             }
           }
 
