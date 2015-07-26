@@ -42,9 +42,8 @@ Core9.blocks.loopBlocks = function(blocks) {
 
   for (var i = 0; i < blocks.length; i++) {
     var block = blocks[i];
-
     console.log(block);
-
+    block.appendChild(document.createTextNode(block.dataset.type));
   }
 
 }
