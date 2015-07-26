@@ -60,6 +60,17 @@ Core9.blocks.save = function(data) {
     type: "POST",
     url: url + 'save',
     data: {
+      content: JSON.stringify(db),
+      file: data.data.template.replace('index.html','data.json'),
+      account: data.data.account
+    }
+  });
+
+
+  $.ajax({
+    type: "POST",
+    url: url + 'save',
+    data: {
       content: data.data.content,
       file: data.data.template,
       account: data.data.account
