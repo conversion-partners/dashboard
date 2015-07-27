@@ -1,16 +1,5 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>
-<html lang="en" class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>
-<html lang="en" class="lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>
-<html lang="en" class="lt-ie9"> <![endif]-->
-<!--[if IE 9]>
-<html lang="en" class="ie9"> <![endif]-->
-<!--[if gt IE 9]><!-->
 <html lang="en">
-<!--<![endif]-->
-
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
@@ -19,7 +8,6 @@
 	<link rel="stylesheet" href="/dashboard/bower_components/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/dashboard/bower_components/nestable2/jquery.nestable.css">
 	<link rel="stylesheet" href="/dashboard/panels/themes/style.css">
-
 	<script src="/dashboard/bower_components/store-js/store.min.js"></script>
 	<script src="/dashboard/bower_components/lokijs/build/lokijs.min.js"></script>
 	<script type="text/javascript" src="/dashboard/app/elements/core9-core/js/iframe/child.js"></script>
@@ -36,8 +24,6 @@
 			}
 			return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 		}
-	</script>
-	<script>
 		var THEMEDATA = null;
 		var pageInit = true;
 		var DB = new loki();
@@ -47,7 +33,6 @@
 </head>
 
 <body>
-
 	<div id="choose-theme">
 		<div id="theme-modal">
 			<div id="exit-modal" style="float:right;">x</div>
@@ -56,10 +41,7 @@
 			<button id="edit-selected-theme">edit</button>
 		</div>
 	</div>
-
-
 	<div id="content" class="cf nestable-lists">
-
 		<div style="width: 100%;" class="btn-group" role="group" aria-label="" style="width: 500px; left: 195px; top: -34px;">
 			<h1 style="margin-top: 10px; font-size: 16px;">Templates</h1>
 			<ul id="navlist">
@@ -79,12 +61,7 @@
 					<a href="#" class="btn btn-primary" role="button">New Theme</a>
 				</li>-->
 			</ul>
-
-
 		</div>
-
-
-
 		<div id="menuitemcontent">
 			<div class="btn-group" role="group" aria-label="" style="width: 500px;">
 				<!--<button type="button" class="btn btn-default">Preview</button>-->
@@ -92,28 +69,15 @@
 				<button id="newpage" type="button" class="btn btn-default">New</button>
 				<button id="delpage" type="button" class="btn btn-default">Delete</button>
 			</div>
-
-
-
-
-
 			<div id='editor_holder2'></div>
 			<button id='submit'>Save</button>
 			<button id='restore'>Restore</button>
 			<span id='valid_indicator'></span>
-
 		</div>
 		<div id="nestablecontainer">
 			<div class="dd" id="nestable"></div>
 		</div>
-
-
 	</div>
-
-
-	<script>
-
-	</script>
 	<script>
 		var callback = function(event) {
 			try {
@@ -123,5 +87,4 @@
 		Core9.iframe.child.listenToPostMessages(callback);
 	</script>
 </body>
-
 </html>
