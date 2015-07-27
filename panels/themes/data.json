@@ -4,26 +4,30 @@
   "authors": [
     "jessec <robertjessecooke@gmail.com>"
   ],
-  "description" : "testing stuff",
-  "license" : "MIT",
-  "id" : "panel-themes",
-  "z-index" : 10,
-  "class" : "fullbleed",
-  "type" : "iframe",
-  "url" : "/dashboard/panels/themes/nestable.html",
-  "button" : false,
-  "menu" : {
-			"action" : "addItems",
-			"findmenusbytitle" : "All Categories",
-			"addItems" : [ {
-			"name" : "Themes",
-			"icon" : "",
-			"link" : "/dashboard/themes",
-			"items" : [ {
-				"title" : "Themes",
-				"icon" : "",
-				"items" : [  ]
-			} ]
-		} ]
-	}
+  "description": "testing stuff",
+  "license": "MIT",
+  "id": "panel-themes",
+  "z-index": 10,
+  "class": "fullbleed",
+  "type": "iframe",
+  "url": "/dashboard/panels/themes/nestable.html",
+  "button": false,
+  "menu": {
+    "action": "addItems",
+    "findmenusbytitle": "All Categories",
+    "addItems": [{
+      "name": "Themes",
+      "icon": "",
+      "link": "/dashboard/themes",
+      "items": [{
+        "title": "Themes",
+        "icon": "",
+        "items": []
+      }]
+    },{
+      "name": "Templates",
+      "icon": "",
+      "link": "/dashboard/themes"
+    }]
+  }
 }
