@@ -2,27 +2,58 @@ if (typeof Core9 === 'undefined') {
   Core9 = {}
 };
 Core9.editor = {};
-
+/**
 var starting_value = [{
   title: "new title",
   percentage: 100,
   status: "active"
 }];
-
+**/
 var getArray = function(nr) {
   return Array.apply(null, {
     length: nr
   }).map(Number.call, Number)
 }
 
+var updateOutput = function() {
+  var content = $('#nestable').nestable(
+    'serialize');
+  //console.log(content);
+  //console.log(JSON.stringify(content));
+}
+
+var getIdFromItem = function(element) {
+  while (element.parentNode) {
+    element = element.parentNode;
+    if (element.tagName == 'LI') {
+      return element.dataset.id;
+    }
+  }
+}
+
+function changeSelect2Data(className, dataCategory) {
+  $("." + className).select2({
+    data: dataCategory
+  });
+}
+
+function arrayContains(needle, arrhaystack) {
+  return (arrhaystack.indexOf(needle) > -1);
+}
+
+function isEmpty(str) {
+  return (!str || 0 === str.length);
+}
+
+
+
+
 var activateEditor = function(page, id, pageData) {
   document.getElementById('delpage').dataset.currentid = id;
   try {
     Core9.editor.destroy();
     Core9.editor2.destroy();
-  } catch (e) {
-    // TODO: handle exception
-  }
+  } catch (e) {}
   var starting_value = pageData.versions;
   Core9.editor2 = new JSONEditor(document.getElementById('editor_holder'), {
     disable_edit_json: true,
@@ -36,7 +67,7 @@ var activateEditor = function(page, id, pageData) {
       properties: {
         url: {
           type: "string",
-          default : pageData.url
+          default: pageData.url
         }
       }
     }
@@ -184,36 +215,6 @@ $(document)
 
 
     });
-
-var updateOutput = function() {
-  var content = $('#nestable').nestable(
-    'serialize');
-  //console.log(content);
-  //console.log(JSON.stringify(content));
-}
-
-var getIdFromItem = function(element) {
-  while (element.parentNode) {
-    element = element.parentNode;
-    if (element.tagName == 'LI') {
-      return element.dataset.id;
-    }
-  }
-}
-
-function changeSelect2Data(className, dataCategory) {
-  $("." + className).select2({
-    data: dataCategory
-  });
-}
-
-function arrayContains(needle, arrhaystack) {
-  return (arrhaystack.indexOf(needle) > -1);
-}
-
-function isEmpty(str) {
-  return (!str || 0 === str.length);
-}
 
 var initTemplateSelectBoxes = function(themeData) {
 
