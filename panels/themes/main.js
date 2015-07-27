@@ -2,33 +2,61 @@ if (typeof Core9 === 'undefined') {
   Core9 = {}
 };
 Core9.editor = {};
-
+/**
 var starting_value = [{
   title: "new title",
   percentage: 100,
   status: "active"
 }];
-
+**/
 var getArray = function(nr) {
   return Array.apply(null, {
     length: nr
   }).map(Number.call, Number)
 }
+var postClick = function(url) {
+  Core9.iframe.child.sentMessageToParent({
+    action: "menuClick",
+    href: url,
+    data: ""
+  });
+}
+
+function changeSelect2Data(className, dataCategory) {
+  $("." + className).select2({
+    data: dataCategory
+  });
+}
+var getIdFromItem = function(element) {
+  while (element.parentNode) {
+    element = element.parentNode;
+    if (element.tagName == 'LI') {
+      return element.dataset.id;
+    }
+  }
+}
+var updateOutput = function() {
+  var content = $('#nestable').nestable(
+    'serialize');
+  console.log(content);
+  console.log(JSON.stringify(content));
+}
+
+function arrayContains(needle, arrhaystack) {
+  return (arrhaystack.indexOf(needle) > -1);
+}
+
+function isEmpty(str) {
+  return (!str || 0 === str.length);
+}
 
 var activateEditor = function(page, id, pageData) {
-  console.log(pageData);
   document.getElementById('delpage').dataset.currentid = id;
   try {
     Core9.editor.destroy();
-  } catch (e) {
-    // TODO: handle exception
-  }
-
+  } catch (e) {}
   var starting_value = pageData.versions;
-
   $('#choose-theme-template-page').html(page);
-
-
   Core9.editor = new JSONEditor(document
     .getElementById('editor_holder2'), {
       ajax: true,
@@ -62,12 +90,9 @@ var activateEditor = function(page, id, pageData) {
         }
       }
     });
-
   Core9.editor.on('change', function() {
     var errors = Core9.editor.validate();
-
     var indicator = document.getElementById('valid_indicator');
-
     if (errors.length) {
       indicator.style.color = 'red';
       indicator.textContent = "not valid";
@@ -107,24 +132,11 @@ var getSelectBoxEntries = function(page) {
   return dbEntries.findObjects(query);
 }
 
-var postClick = function(url) {
-  Core9.iframe.child.sentMessageToParent({
-    action: "menuClick",
-    href: url,
-    data: ""
-  });
-}
 
-function changeSelect2Data(className, dataCategory) {
-  $("." + className).select2({
-    data: dataCategory
-  });
-}
 
 $(document)
   .ready(
     function() {
-
       console.log('init nestable..');
 
       $('#edit-selected-theme').on('click', function() {
@@ -159,10 +171,7 @@ $(document)
         changeSelect2Data("choose-theme-select", activeVersions);
       });
 
-
-
       $('#refresh-templates').on('click', function() {
-
         var entries = getSelectBoxEntries();
         var data = [];
         for (i = 0; i < entries.length; i++) {
@@ -199,31 +208,7 @@ $(document)
     });
 
 
-var getIdFromItem = function(element) {
-  while (element.parentNode) {
-    element = element.parentNode;
-    if (element.tagName == 'LI') {
-      return element.dataset.id;
-    }
-  }
-}
 
-var updateOutput = function() {
-  var content = $('#nestable').nestable(
-    'serialize');
-  console.log(content);
-  console.log(JSON.stringify(content));
-}
-
-
-
-function arrayContains(needle, arrhaystack) {
-  return (arrhaystack.indexOf(needle) > -1);
-}
-
-function isEmpty(str) {
-  return (!str || 0 === str.length);
-}
 
 var initTemplateSelectBoxes = function(themeData) {
 
