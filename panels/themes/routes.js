@@ -58,12 +58,12 @@ var themeRoutes = {
             // this is where the theme blocks get added to the menu
             Core9.iframe.parent.sentMessageToIframe(insert, document.getElementsByClassName('menu')[1]);
           });
-          //Core9.iframe.parent.sentMessageToIframe('initNestable([],' + JSON.stringify(themes) + ');', Core9.panel.getIframeById('panel-themes'));
+          Core9.iframe.parent.sentMessageToIframe('initNestable([],' + JSON.stringify(themes) + ');', Core9.panel.getIframeById('panel-themes'));
           initPanelThemes = false;
         }
       }
       // for now no blocks in the menu
-      //theme.get(callback);
+      theme.get(callback);
       Core9.panel.open('panel-themes');
     }
     Core9.system.multiImport(['app/elements/core9-core/js/core-theme'])
