@@ -233,26 +233,30 @@ var initTemplateSelectBoxes = function(themeData) {
   }
 
   var p1 = $.get('/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/data/templates.json', function(data) {
-    var templates = new loki.Collection('templates');
-    templates.insert(data);
-    //console.log(templates.data);
+    for (var i = 0; i < data.length; i++) {
+      data[i].template = "core9-theme-ess";
+    }
+    return data;
   });
   var p2 = $.get('/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-example/data/templates.json', function(data) {
-    var pages = new loki.Collection('pages');
-    pages.insert(data);
-    //console.log(pages.data);
+    for (var i = 0; i < data.length; i++) {
+      data[i].template = "core9-theme-example";
+    }
+    return data;
   });
 
+  var templates = new loki.Collection('templates');
   // Promise example
-  Promise.settle([p1,p2]).then(function(results){
-    results.forEach(function(result){
-       if(result.isFulfilled()){
-           // access result.value()
-           console.log(result.value());
-       } else {
-           // access result.reason()
-       }
+  Promise.settle([p1, p2]).then(function(results) {
+    results.forEach(function(result) {
+      if (result.isFulfilled()) {
+        templates.insert(result.value());
+        console.log(result.value());
+      } else {
+        // access result.reason()
+      }
     });
+    console.log(templates.data);
   });
   //
 
