@@ -212,6 +212,8 @@ $(document)
 
 var initTemplateSelectBoxes = function(themeData) {
 
+  console.log(themeData);
+
   var templateData = {
     data: [""]
   }
