@@ -46,7 +46,6 @@ var themeRoutes = {
     var init = function(modules) {
       var theme = Core9.system.unwrapModule(modules[0]);
       theme.setAccount(store.get('account'));
-      //console.log(theme);
       var callback = function(data) {
         var themes = data[0].themes;
         if (initPanelThemes) {
