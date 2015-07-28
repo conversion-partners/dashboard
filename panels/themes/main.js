@@ -232,18 +232,28 @@ var initTemplateSelectBoxes = function(themeData) {
     }
   }
 
-  $.get('/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/data/templates.json', function(data) {
+  var p1 = $.get('/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/data/templates.json', function(data) {
     var templates = new loki.Collection('templates');
     templates.insert(data);
-    console.log(templates.data);
+    //console.log(templates.data);
+  });
+  var p2 = $.get('/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-example/data/templates.json', function(data) {
+    var pages = new loki.Collection('pages');
+    pages.insert(data);
+    //console.log(pages.data);
   });
 
   // Promise example
-  var __async = function(iterable, callback) {
-    Promise.all(iterable).then(values => {
-        callback(values);
-      });
-  }
+  Promise.settle([p1,p2]).then(function(results){
+    results.forEach(function(result){
+       if(result.isFulfilled()){
+           // access result.value()
+           console.log(result.value());
+       } else {
+           // access result.reason()
+       }
+    });
+  });
   //
 
   console.log(dbEntries.data);
