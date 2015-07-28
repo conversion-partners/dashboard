@@ -238,7 +238,13 @@ var initTemplateSelectBoxes = function(themeData) {
     console.log(templates.data);
   });
 
-
+  // Promise example
+  var __async = function(iterable, callback) {
+    Promise.all(iterable).then(values => {
+        callback(values);
+      });
+  }
+  //
 
   console.log(dbEntries.data);
 
