@@ -141,7 +141,6 @@ $(document)
 
       $('#edit-selected-theme').on('click', function() {
         var dropdown = $('.choose-theme-select').val();
-        console.log(dropdown);
         var account = store.get('account');
         var page = $('#choose-theme-template-page').html();
         var theme = $(".template-data").val();
@@ -149,7 +148,6 @@ $(document)
         template = template.toLowerCase();
         store.set('template', template);
         store.set('theme', theme);
-        console.log(store.get('template'));
         history.pushState(null, null, "/dashboard/theme/edit");
         postClick("/dashboard/theme/edit");
       });
