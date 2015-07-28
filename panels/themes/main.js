@@ -232,7 +232,15 @@ var initTemplateSelectBoxes = function(themeData) {
     }
   }
 
+  $.get('/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/data/templates.json', function(data) {
+    var templates = new loki.Collection('templates');
+    templates.insert(data);
+    console.log(templates.data);
+  });
 
+
+
+  console.log(dbEntries.data);
 
   $(".template-data").on("change", function() {
     $(".language-data").select2("destroy");
