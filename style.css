@@ -18,17 +18,17 @@
 #panel-nide > iframe {
     margin-left: 40px;
 }
-
+/*
 #panel-iframe-site > iframe {
   margin-left: 40px;
   width: calc(100% - 40px) !important;
 }
-
+*/
 .panel {
   position: fixed;
   width: 100%;
   height: 101%;
-  background-color: rgb(54, 65, 76);
+  background-color: #fff; /*rgb(54, 65, 76);*/
   transition: width 500ms ease;
   -moz-transition: width 500ms ease;
   -ms-transition: width 500ms ease;
@@ -47,10 +47,10 @@
   left: 0;
   right: 0;
   bottom: 0;
-  width: 260px;
+  width: 240px;
   height: 100%;
   z-index: 999;
-  background-color: transparent;/* #336ca6; */
+  background-color:rgb(51, 108, 166); /*transparent; #336ca6; */
   position: fixed;
 }
 iframe.menu {

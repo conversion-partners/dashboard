@@ -31,6 +31,9 @@ Core9.iframe.parent = {
 					}
 
 				}
+				setTimeout(function(){
+					Core9.panel.setPanelWidth();
+				}, 500);
 
 			}
 		}, false);

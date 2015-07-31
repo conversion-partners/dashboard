@@ -261,8 +261,18 @@ Core9.panel = {
 		}
 	},
 	setPanelWidth : function(){
-		var width = document.querySelector('#panel-iframe-menu').offsetWidth;
-		console.log(width);
+		var menuWidth = document.querySelector('#panel-iframe-menu').offsetWidth;
+		var w = window.innerWidth;
+		var panel = document.querySelector('.core9-selected > iframe');
+		if(panel){
+
+			var margL = panel.style.marginLeft;
+			console.log(margL);
+			console.log(menuWidth);
+
+			panel.style.width = (w - menuWidth) + "px";
+			panel.style.marginLeft = menuWidth + "px";
+		}
 	},
 	open : function(openPanel) {
 		this.close();

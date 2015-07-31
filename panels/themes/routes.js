@@ -20,7 +20,13 @@ var themeRoutes = {
         setTimeout(function() {
           var cmd = 'window.gm = jQuery("#gm-canvas").gridmanager().data("gridmanager");$(".gm-preview").trigger("click");';
           Core9.iframe.parent.sentMessageToIframe(cmd, iframe);
+
         }, 1000); // smarter needs to be handled in sendMessage to iframe
+        /*
+        setTimeout(function(){
+          Core9.panel.setPanelWidth();
+        }, 2000);
+        */
         initPanelIframeSite = false;
       }
       ajax.open("GET", '/dashboard/data/accounts/'+account+'/themes/bower_components/'+theme+'/templates/pages/header.html');
