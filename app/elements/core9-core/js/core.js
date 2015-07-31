@@ -255,18 +255,22 @@ Core9.panel = {
 		for ( var i = 0; i < Core9.panellist.length; i++) {
 			var panel = Core9.panel.__registry[Core9.panellist[i]];
 			if (panel.id) {
-				document.querySelector(
-						'#' + panel.id + ' > div.panelbutton > div.close')
-						.click();
+				document.querySelector('#' + panel.id).classList.remove("core9-selected");
+			  document.querySelector('#' + panel.id + ' > div.panelbutton > div.close').click();
 			}
 		}
 	},
+	setPanelWidth : function(){
+		var width = document.querySelector('#panel-iframe-menu').offsetWidth;
+		console.log(width);
+	},
 	open : function(openPanel) {
 		this.close();
-		var panel = document.querySelector('#' + openPanel
-				+ ' > div.panelbutton > div.open');
+		var panel = document.querySelector('#' + openPanel + ' > div.panelbutton > div.open');
 		if (panel) {
+			document.querySelector('#' + openPanel).className = document.querySelector('#' + openPanel).className + " core9-selected";
 			panel.click();
+			this.setPanelWidth();
 		}
 
 	},
