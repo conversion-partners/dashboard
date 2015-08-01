@@ -79,6 +79,7 @@ Core9.template = {
       return Core9.deDupeArray(array);
     }
     Core9.template.themes = Core9.data.templates.mapReduce(mapFun, reduceFun);
+    Core9.template.themes.splice(0, 0, " "); // add first empty option
     //console.log(templates);
 
     // call save after data ready
@@ -383,8 +384,6 @@ var initTemplateSelectBoxes = function(themeData) {
 initStarted = false;
 var init = function(jsonStr, themeData) {
   if (!initStarted) {
-    console.log(jsonStr);
-    console.log(themeData);
     initNestable([], themeData);
     initStarted = true;
   }
