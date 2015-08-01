@@ -1,17 +1,84 @@
 [{
+  "template": "core9-theme-example",
   "language": "",
   "country": "",
-  "page": "Home page"
+  "page": "Home",
+  "versions": [{
+    "title": "blue",
+    "status": "active"
+  }, {
+    "title": "page",
+    "status": "pauzed"
+  }, {
+    "title": "page",
+    "status": "pauzed"
+  }]
 }, {
+  "template": "core9-theme-example",
+  "language": "",
+  "country": "",
+  "page": "Contact page",
+  "versions": [{
+      "title": "page",
+      "status": "active"
+    }, {
+      "title": "page",
+      "status": "pauzed"
+    }, {
+      "title": "page",
+      "status": "pauzed"
+    }
+
+  ]
+}, {
+  "template": "core9-theme-example",
   "language": "nl",
   "country": "",
-  "page": "Home page"
+  "page": "Home page",
+  "versions": [{
+      "title": "page",
+      "status": "active"
+    }, {
+      "title": "page",
+      "status": "pauzed"
+    }, {
+      "title": "page",
+      "status": "pauzed"
+    }
+
+  ]
 }, {
+  "template": "core9-theme-example",
   "language": "de",
   "country": "",
-  "page": "Home page"
+  "page": "Home page",
+  "versions": [{
+      "title": "page",
+      "status": "active"
+    }, {
+      "title": "page",
+      "status": "pauzed"
+    }, {
+      "title": "page",
+      "status": "pauzed"
+    }
+
+  ]
 }, {
+  "template": "core9-theme-example",
   "language": "nl",
   "country": "BE",
-  "page": "Home page"
+  "page": "Home page",
+  "versions": [{
+      "title": "page",
+      "status": "active"
+    }, {
+      "title": "page",
+      "status": "pauzed"
+    }, {
+      "title": "page",
+      "status": "pauzed"
+    }
+
+  ]
 }]
