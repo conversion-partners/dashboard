@@ -51,6 +51,13 @@ function isEmpty(str) {
 }
 
 var activateEditor = function(page, id, pageData) {
+
+  console.log('activate editor data : ');
+  console.log(page);
+  console.log(id);
+  console.log(pageData);
+
+
   document.getElementById('delpage').dataset.currentid = id;
   try {
     Core9.editor.destroy();
@@ -129,7 +136,10 @@ var getSelectBoxEntries = function(page) {
   if (page) {
     query.page = page;
   }
-  return dbEntries.findObjects(query);
+  var result = dbEntries.findObjects(query);
+  console.log('page data result : ');
+  console.log(result);
+  return result;
 }
 
 
@@ -192,8 +202,31 @@ $(document)
             "id": guid(),
             "page": "New Page"
           });
+          console.log('adding new template');
           console.log(json);
           initNestable(JSON.stringify(json));
+          // insert versions in THEME DATA
+          console.log('template data : ');
+
+
+
+          var theme = $(".template-data").val();
+          var language = $(".language-data").val();
+          var country = $(".country-data").val();
+          if (country == null) {
+            country = ""
+          }
+          var templateData = {
+            "template": theme,
+            "language": language,
+            "country": country,
+            "page": "New Page",
+            "versions" : [{"status":"active","title":"New Page"}]
+          }
+
+          THEMEDATA[theme].data.templates[theme].entries.push(templateData);
+          dbEntries.insert(templateData);
+          console.log(THEMEDATA[theme].data.templates[theme].entries);
         });
 
       $('#delpage')
