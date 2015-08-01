@@ -2,7 +2,8 @@ if (typeof Core9 === 'undefined') {
   Core9 = {}
 };
 Core9.template = {
-  account : store.get('account'),
+  collection: new loki.Collection('templates'),
+  account: store.get('account'),
   init: function() {
     this.get();
   },
@@ -17,14 +18,13 @@ Core9.template = {
   },
   get: function() {
 
-    Core9.template.j('/dashboard/data/accounts/'+Core9.template.account+'/themes/bower.json').then(function(data) {
+    Core9.template.j('/dashboard/data/accounts/' + Core9.template.account + '/themes/bower.json').then(function(data) {
       var json = JSON.parse(data.currentTarget.response);
       var themes = json.dependencies;
       var themeData = [];
       Object.keys(themes).forEach(function(key) {
-        console.log(key);
-        themeData.push(Core9.template.j('/dashboard/data/accounts/'+Core9.template.account+'/themes/bower_components/'+key+'/data/templates.json'));
-        themeData.push(Core9.template.j('/dashboard/data/accounts/'+Core9.template.account+'/themes/bower_components/'+key+'/data/blocks.json'));
+        themeData.push(Core9.template.j('/dashboard/data/accounts/' + Core9.template.account + '/themes/bower_components/' + key + '/data/templates.json'));
+        themeData.push(Core9.template.j('/dashboard/data/accounts/' + Core9.template.account + '/themes/bower_components/' + key + '/data/blocks.json'));
       });
 
       Promise.settle(themeData).then(function(results) {
@@ -38,39 +38,8 @@ Core9.template = {
           }
         });
       });
-
-      console.log(json);
+      
     });
-
-    /*
-        var p1 = $.get('/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/data/templates.json', function(data) {
-          for (var i = 0; i < data.length; i++) {
-            data[i].template = "core9-theme-ess";
-          }
-          return data;
-        });
-        var p2 = $.get('/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-example/data/templates.json', function(data) {
-          for (var i = 0; i < data.length; i++) {
-            data[i].template = "core9-theme-example";
-          }
-          return data;
-        });
-    */
-    var templates = new loki.Collection('templates');
-    /*
-    //Promise.settle([p1, p2]).then(function(results) {
-    Promise.settle([bower, themePromisse]).then(function(results) {
-      results.forEach(function(result) {
-        if (result.isFulfilled()) {
-          console.log('promise :');
-          console.log(result.value());
-          //templates.insert(result.value());
-        } else {
-          // access result.reason()
-        }
-      });
-    });
-    */
 
 
 
