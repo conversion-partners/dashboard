@@ -5,9 +5,9 @@ Core9.template = {
   collection: new loki.Collection('templates'),
   account: store.get('account'),
   init: function() {
-    this.get();
+    this.dataInit();
   },
-  get: function() {
+  dataInit: function() {
 
     Core9.j('/dashboard/data/accounts/' + Core9.template.account + '/themes/bower.json').then(function(data) {
       var json = JSON.parse(data.currentTarget.response);
