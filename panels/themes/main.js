@@ -2,57 +2,86 @@ if (typeof Core9 === 'undefined') {
   Core9 = {}
 };
 Core9.template = {
+  account : store.get('account'),
   init: function() {
     this.get();
   },
+  j: function(url) {
+    return new Promise(function(resolve, reject) {
+      var xhr = new XMLHttpRequest;
+      xhr.addEventListener("error", reject);
+      xhr.addEventListener("load", resolve);
+      xhr.open("GET", url);
+      xhr.send(null);
+    });
+  },
   get: function() {
 
-    var bower = $.get('/dashboard/data/accounts/easydrain/themes/bower.json', function(data) {
-      return data;
-    });
-
-
-
-    var themePromisse = function(data) {
-      var themes = [];
-      new Promise(function(resolve) {
-        res = resolve;
+    Core9.template.j('/dashboard/data/accounts/'+Core9.template.account+'/themes/bower.json').then(function(data) {
+      var json = JSON.parse(data.currentTarget.response);
+      var themes = json.dependencies;
+      var themeData = [];
+      Object.keys(themes).forEach(function(key) {
+        console.log(key);
+        themeData.push(Core9.template.j('/dashboard/data/accounts/'+Core9.template.account+'/themes/bower_components/'+key+'/data/templates.json'));
+        themeData.push(Core9.template.j('/dashboard/data/accounts/'+Core9.template.account+'/themes/bower_components/'+key+'/data/blocks.json'));
       });
-      // res is guaranteed to be set
-      return res;
-    }
 
+      Promise.settle(themeData).then(function(results) {
+        results.forEach(function(result) {
+          if (result.isFulfilled()) {
+            console.log('promise result :');
+            console.log(JSON.parse(result.value().currentTarget.response));
+            //templates.insert(result.value());
+          } else {
+            // access result.reason()
+          }
+        });
+      });
 
-
-    var p1 = $.get('/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/data/templates.json', function(data) {
-      for (var i = 0; i < data.length; i++) {
-        data[i].template = "core9-theme-ess";
-      }
-      return data;
-    });
-    var p2 = $.get('/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-example/data/templates.json', function(data) {
-      for (var i = 0; i < data.length; i++) {
-        data[i].template = "core9-theme-example";
-      }
-      return data;
+      console.log(json);
     });
 
+    /*
+        var p1 = $.get('/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/data/templates.json', function(data) {
+          for (var i = 0; i < data.length; i++) {
+            data[i].template = "core9-theme-ess";
+          }
+          return data;
+        });
+        var p2 = $.get('/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-example/data/templates.json', function(data) {
+          for (var i = 0; i < data.length; i++) {
+            data[i].template = "core9-theme-example";
+          }
+          return data;
+        });
+    */
     var templates = new loki.Collection('templates');
-    // Promise example
-    Promise.settle([p1, p2]).then(function(results) {
+    /*
+    //Promise.settle([p1, p2]).then(function(results) {
+    Promise.settle([bower, themePromisse]).then(function(results) {
       results.forEach(function(result) {
         if (result.isFulfilled()) {
-          templates.insert(result.value());
+          console.log('promise :');
+          console.log(result.value());
+          //templates.insert(result.value());
         } else {
           // access result.reason()
         }
       });
     });
+    */
+
+
+
   },
   save: function() {
 
   }
 };
+
+Core9.template.init();
+
 Core9.editor = {};
 /**
 var starting_value = [{
