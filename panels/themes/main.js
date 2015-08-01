@@ -9,6 +9,7 @@ Core9.data = {
 }
 
 Core9.template = {
+  themes : [],
   account: store.get('account'),
   init: function() {
     this.dataInit();
@@ -77,8 +78,8 @@ Core9.template = {
     var reduceFun = function(array) {
       return Core9.deDupeArray(array);
     }
-    var templates = Core9.data.templates.mapReduce(mapFun, reduceFun);
-    console.log(templates);
+    Core9.template.themes = Core9.data.templates.mapReduce(mapFun, reduceFun);
+    //console.log(templates);
 
     // call save after data ready
     Core9.template.save();
@@ -216,7 +217,7 @@ var getSelectBoxEntries = function(page) {
   if (page) {
     query.page = page;
   }
-  var result = dbEntries.findObjects(query);
+  var result = Core9.data.templates.findObjects(query);
   return result;
 }
 
@@ -299,7 +300,7 @@ $(document)
           }
 
           THEMEDATA[theme].data.templates[theme].entries.push(templateData);
-          dbEntries.insert(templateData);
+          Core9.data.templates.insert(templateData);
         });
 
       $('#delpage')
@@ -320,7 +321,7 @@ var initTemplateSelectBoxes = function(themeData) {
   var templateData = {
     data: [""]
   }
-
+/*
   for (var key in themeData) {
     if (themeData.hasOwnProperty(key)) {
       templateData.data.push(key);
@@ -328,20 +329,22 @@ var initTemplateSelectBoxes = function(themeData) {
         var entries = themeData[key].data.templates[key].entries;
         for (i = 0; i < entries.length; i++) {
           entries[i]["template"] = key;
-          dbEntries.insert(entries[i]);
+          var entry = entries[i];
+          console.log(entry);
+          dbEntries.insert(entry);
         }
       } catch (e) {}
 
     }
   }
 
-
+*/
 
   $(".template-data").on("change", function() {
     $(".language-data").select2("destroy");
     $(".language-data").html("<option><option>");
     var data = [];
-    var entries = dbEntries.find({
+    var entries = Core9.data.templates.find({
       "template": $(this).val()
     });
     for (i = 0; i < entries.length; i++) {
@@ -357,7 +360,7 @@ var initTemplateSelectBoxes = function(themeData) {
     $(".country-data").select2("destroy");
     $(".country-data").html("<option><option>");
     var data = [];
-    var entries = dbEntries.find({
+    var entries = Core9.data.templates.find({
       "template": $(".template-data").val(),
       "language": $(this).val()
     });
@@ -370,15 +373,19 @@ var initTemplateSelectBoxes = function(themeData) {
     changeSelect2Data("country-data", data);
   });
 
-  changeSelect2Data("template-data", templateData["data"]);
+  changeSelect2Data("template-data", Core9.template.themes);
   changeSelect2Data("language-data", []);
   changeSelect2Data("country-data", []);
 
 }
+
+
 initStarted = false;
 var init = function(jsonStr, themeData) {
   if (!initStarted) {
-    initNestable(jsonStr, themeData);
+    console.log(jsonStr);
+    console.log(themeData);
+    initNestable([], themeData);
     initStarted = true;
   }
 
@@ -386,10 +393,9 @@ var init = function(jsonStr, themeData) {
 
 var initNestable = function(jsonStr, themeData) {
   console.log('init nestable..');
-  if (themeData != null && pageInit) {
+  if (themeData != null) {
     THEMEDATA = themeData;
     initTemplateSelectBoxes(themeData);
-    pageInit = false;
   }
 
   var container = document
