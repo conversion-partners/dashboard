@@ -72,13 +72,14 @@ Core9.template = {
     console.log('block : ');
     console.log(Core9.data.blocks.data);
 
-    var mapFun = function(obj){
-      return obj.age;
+    var mapFun = function(obj) {
+      return obj.template;
     }
-    var reduceFun = function(){}
-
+    var reduceFun = function(array) {
+      return Core9.deDupeArray(array);
+    }
     var templates = Core9.data.templates.mapReduce(mapFun, reduceFun);
-
+    console.log(templates);
 
     // call save after data ready
     Core9.template.save();
