@@ -136,7 +136,7 @@ var getSelectBoxEntries = function(page) {
 $(document)
   .ready(
     function() {
-      console.log('init nestable..');
+
 
       $('#edit-selected-theme').on('click', function() {
         var dropdown = $('.choose-theme-select').val();
@@ -312,6 +312,7 @@ var initTemplateSelectBoxes = function(themeData) {
 }
 
 var initNestable = function(jsonStr, themeData) {
+  console.log('init nestable..');
   if (themeData != null && pageInit) {
     THEMEDATA = themeData;
     initTemplateSelectBoxes(themeData);
