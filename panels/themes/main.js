@@ -7,24 +7,15 @@ Core9.template = {
   init: function() {
     this.get();
   },
-  j: function(url) {
-    return new Promise(function(resolve, reject) {
-      var xhr = new XMLHttpRequest;
-      xhr.addEventListener("error", reject);
-      xhr.addEventListener("load", resolve);
-      xhr.open("GET", url);
-      xhr.send(null);
-    });
-  },
   get: function() {
 
-    Core9.template.j('/dashboard/data/accounts/' + Core9.template.account + '/themes/bower.json').then(function(data) {
+    Core9.j('/dashboard/data/accounts/' + Core9.template.account + '/themes/bower.json').then(function(data) {
       var json = JSON.parse(data.currentTarget.response);
       var themes = json.dependencies;
       var themeData = [];
       Object.keys(themes).forEach(function(key) {
-        themeData.push(Core9.template.j('/dashboard/data/accounts/' + Core9.template.account + '/themes/bower_components/' + key + '/data/templates.json'));
-        themeData.push(Core9.template.j('/dashboard/data/accounts/' + Core9.template.account + '/themes/bower_components/' + key + '/data/blocks.json'));
+        themeData.push(Core9.j('/dashboard/data/accounts/' + Core9.template.account + '/themes/bower_components/' + key + '/data/templates.json'));
+        themeData.push(Core9.j('/dashboard/data/accounts/' + Core9.template.account + '/themes/bower_components/' + key + '/data/blocks.json'));
       });
 
       Promise.settle(themeData).then(function(results) {
@@ -37,12 +28,18 @@ Core9.template = {
             // access result.reason()
           }
         });
+        Core9.template.dataReady();
       });
-      
+
     });
 
 
 
+  },
+  dataReady : function(){
+
+    // call save after data ready
+    Core9.template.save();
   },
   save: function() {
 

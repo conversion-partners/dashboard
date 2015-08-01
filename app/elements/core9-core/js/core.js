@@ -39,7 +39,15 @@ Core9.guid = function() {
 }
 
 Core9.iframeLoadedEvent = new Event('iframeLoadedEvent');
-
+Core9.j = function(url) {
+    return new Promise(function(resolve, reject) {
+      var xhr = new XMLHttpRequest;
+      xhr.addEventListener("error", reject);
+      xhr.addEventListener("load", resolve);
+      xhr.open("GET", url);
+      xhr.send(null);
+    });
+  }
 Core9.ajax = function(method, url, data, callback) {
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
