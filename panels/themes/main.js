@@ -192,6 +192,7 @@ $(document)
             "id": guid(),
             "page": "New Page"
           });
+          console.log(json);
           initNestable(JSON.stringify(json));
         });
 

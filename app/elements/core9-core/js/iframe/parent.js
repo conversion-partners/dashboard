@@ -19,7 +19,7 @@ Core9.iframe.parent = {
 				if (typeof e.data.href !== 'undefined') {
 					history.pushState(null, null, e.data.href);
 				} else {
-					console.log(e.data);
+					//console.log(e.data);
 					var iframe = document.getElementById('panel-iframe-menu');
 
 					if (iframe.clientWidth > 239) {
