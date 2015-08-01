@@ -2,10 +2,28 @@ if (typeof Core9 === 'undefined') {
   Core9 = {}
 };
 Core9.template = {
-  init : function(){
+  init: function() {
     this.get();
   },
-  get : function(){
+  get: function() {
+
+    var bower = $.get('/dashboard/data/accounts/easydrain/themes/bower.json', function(data) {
+      return data;
+    });
+
+
+
+    var themePromisse = function(data) {
+      var themes = [];
+      new Promise(function(resolve) {
+        res = resolve;
+      });
+      // res is guaranteed to be set
+      return res;
+    }
+
+
+
     var p1 = $.get('/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/data/templates.json', function(data) {
       for (var i = 0; i < data.length; i++) {
         data[i].template = "core9-theme-ess";
@@ -31,7 +49,7 @@ Core9.template = {
       });
     });
   },
-  save : function(){
+  save: function() {
 
   }
 };
@@ -275,8 +293,7 @@ var initTemplateSelectBoxes = function(themeData) {
           entries[i]["template"] = key;
           dbEntries.insert(entries[i]);
         }
-      } catch (e) {
-      }
+      } catch (e) {}
 
     }
   }
