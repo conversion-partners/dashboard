@@ -38,8 +38,6 @@ var getIdFromItem = function(element) {
 var updateOutput = function() {
   var content = $('#nestable').nestable(
     'serialize');
-  console.log(content);
-  console.log(JSON.stringify(content));
 }
 
 function arrayContains(needle, arrhaystack) {
@@ -51,13 +49,6 @@ function isEmpty(str) {
 }
 
 var activateEditor = function(page, id, pageData) {
-
-  console.log('activate editor data : ');
-  console.log(page);
-  console.log(id);
-  console.log(pageData);
-
-
   document.getElementById('delpage').dataset.currentid = id;
   try {
     Core9.editor.destroy();
@@ -137,8 +128,6 @@ var getSelectBoxEntries = function(page) {
     query.page = page;
   }
   var result = dbEntries.findObjects(query);
-  console.log('page data result : ');
-  console.log(result);
   return result;
 }
 
@@ -202,14 +191,7 @@ $(document)
             "id": guid(),
             "page": "New Page"
           });
-          console.log('adding new template');
-          console.log(json);
           initNestable(JSON.stringify(json));
-          // insert versions in THEME DATA
-          console.log('template data : ');
-
-
-
           var theme = $(".template-data").val();
           var language = $(".language-data").val();
           var country = $(".country-data").val();
@@ -221,12 +203,14 @@ $(document)
             "language": language,
             "country": country,
             "page": "New Page",
-            "versions" : [{"status":"active","title":"New Page"}]
+            "versions": [{
+              "status": "active",
+              "title": "New Page"
+            }]
           }
 
           THEMEDATA[theme].data.templates[theme].entries.push(templateData);
           dbEntries.insert(templateData);
-          console.log(THEMEDATA[theme].data.templates[theme].entries);
         });
 
       $('#delpage')
@@ -244,8 +228,6 @@ $(document)
 
 var initTemplateSelectBoxes = function(themeData) {
 
-  console.log(themeData);
-
   var templateData = {
     data: [""]
   }
@@ -260,7 +242,6 @@ var initTemplateSelectBoxes = function(themeData) {
           dbEntries.insert(entries[i]);
         }
       } catch (e) {
-        //console.log(e);
       }
 
     }
@@ -285,16 +266,11 @@ var initTemplateSelectBoxes = function(themeData) {
     results.forEach(function(result) {
       if (result.isFulfilled()) {
         templates.insert(result.value());
-        console.log(result.value());
       } else {
         // access result.reason()
       }
     });
-    console.log(templates.data);
   });
-  //
-
-  console.log(dbEntries.data);
 
   $(".template-data").on("change", function() {
     $(".language-data").select2("destroy");
