@@ -1,6 +1,40 @@
 if (typeof Core9 === 'undefined') {
   Core9 = {}
 };
+Core9.template = {
+  init : function(){
+    this.get();
+  },
+  get : function(){
+    var p1 = $.get('/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/data/templates.json', function(data) {
+      for (var i = 0; i < data.length; i++) {
+        data[i].template = "core9-theme-ess";
+      }
+      return data;
+    });
+    var p2 = $.get('/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-example/data/templates.json', function(data) {
+      for (var i = 0; i < data.length; i++) {
+        data[i].template = "core9-theme-example";
+      }
+      return data;
+    });
+
+    var templates = new loki.Collection('templates');
+    // Promise example
+    Promise.settle([p1, p2]).then(function(results) {
+      results.forEach(function(result) {
+        if (result.isFulfilled()) {
+          templates.insert(result.value());
+        } else {
+          // access result.reason()
+        }
+      });
+    });
+  },
+  save : function(){
+
+  }
+};
 Core9.editor = {};
 /**
 var starting_value = [{
@@ -247,30 +281,7 @@ var initTemplateSelectBoxes = function(themeData) {
     }
   }
 
-  var p1 = $.get('/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/data/templates.json', function(data) {
-    for (var i = 0; i < data.length; i++) {
-      data[i].template = "core9-theme-ess";
-    }
-    return data;
-  });
-  var p2 = $.get('/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-example/data/templates.json', function(data) {
-    for (var i = 0; i < data.length; i++) {
-      data[i].template = "core9-theme-example";
-    }
-    return data;
-  });
 
-  var templates = new loki.Collection('templates');
-  // Promise example
-  Promise.settle([p1, p2]).then(function(results) {
-    results.forEach(function(result) {
-      if (result.isFulfilled()) {
-        templates.insert(result.value());
-      } else {
-        // access result.reason()
-      }
-    });
-  });
 
   $(".template-data").on("change", function() {
     $(".language-data").select2("destroy");
