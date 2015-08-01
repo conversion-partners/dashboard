@@ -32,7 +32,6 @@ Core9.template = {
       allData.push(Core9.template.dataCollect(Core9.data.blocks, blockData));
       allData.push(Core9.template.dataCollect(Core9.data.pages, pageData));
 
-
       Promise.settle(allData).then(function(results) {
         var len = 0;
         results.forEach(function(result) {
@@ -64,14 +63,14 @@ Core9.template = {
     });
   },
   dataReady: function() {
-
+    /*
     console.log('template : ');
     console.log(Core9.data.templates.data);
     console.log('page : ');
     console.log(Core9.data.pages.data);
     console.log('block : ');
     console.log(Core9.data.blocks.data);
-
+    */
     var mapFun = function(obj) {
       return obj.template;
     }
@@ -377,8 +376,8 @@ var initTemplateSelectBoxes = function(themeData) {
 
 }
 initStarted = false;
-var init = function(jsonStr, themeData){
-  if(!initStarted){
+var init = function(jsonStr, themeData) {
+  if (!initStarted) {
     initNestable(jsonStr, themeData);
     initStarted = true;
   }
