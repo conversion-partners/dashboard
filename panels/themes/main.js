@@ -1,8 +1,14 @@
 if (typeof Core9 === 'undefined') {
   Core9 = {}
 };
+
+Core9.data = {
+  "templates": new loki.Collection('templates'),
+  "pages": new loki.Collection('pages'),
+  "blocks": new loki.Collection('blocks')
+}
+
 Core9.template = {
-  collection: new loki.Collection('templates'),
   account: store.get('account'),
   init: function() {
     this.dataInit();
@@ -13,30 +19,58 @@ Core9.template = {
       var json = JSON.parse(data.currentTarget.response);
       var themes = json.dependencies;
       var themeData = [];
+      var blockData = [];
+      var pageData = [];
       Object.keys(themes).forEach(function(key) {
         themeData.push(Core9.j('/dashboard/data/accounts/' + Core9.template.account + '/themes/bower_components/' + key + '/data/templates.json'));
-        themeData.push(Core9.j('/dashboard/data/accounts/' + Core9.template.account + '/themes/bower_components/' + key + '/data/blocks.json'));
+        blockData.push(Core9.j('/dashboard/data/accounts/' + Core9.template.account + '/themes/bower_components/' + key + '/data/blocks.json'));
+        pageData.push(Core9.j('/dashboard/data/accounts/' + Core9.template.account + '/sites/sites.json'));
       });
 
-      Promise.settle(themeData).then(function(results) {
+      var allData = [];
+      allData.push(Core9.template.dataCollect(Core9.data.templates, themeData));
+      allData.push(Core9.template.dataCollect(Core9.data.blocks, blockData));
+      allData.push(Core9.template.dataCollect(Core9.data.pages, pageData));
+
+
+      Promise.settle(allData).then(function(results) {
+        var len = 0;
         results.forEach(function(result) {
           if (result.isFulfilled()) {
-            console.log('promise result :');
-            console.log(JSON.parse(result.value().currentTarget.response));
-            //templates.insert(result.value());
+            len++;
           } else {
-            // access result.reason()
+            console.log(result.reason());
           }
         });
-        Core9.template.dataReady();
+        if (len == allData.length) {
+          Core9.template.dataReady();
+        } else {
+          //raise exeption
+        }
       });
 
     });
 
-
-
   },
-  dataReady : function(){
+  dataCollect: function(collection, data) {
+    return Promise.settle(data).then(function(results) {
+      results.forEach(function(result) {
+        if (result.isFulfilled()) {
+          collection.insert(JSON.parse(result.value().currentTarget.response));
+        } else {
+          console.log(result.reason());
+        }
+      });
+    });
+  },
+  dataReady: function() {
+
+    console.log('template : ');
+    console.log(Core9.data.templates.data);
+    console.log('page : ');
+    console.log(Core9.data.pages.data);
+    console.log('block : ');
+    console.log(Core9.data.blocks.data);
 
     // call save after data ready
     Core9.template.save();
