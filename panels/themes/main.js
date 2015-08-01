@@ -376,6 +376,14 @@ var initTemplateSelectBoxes = function(themeData) {
   changeSelect2Data("country-data", []);
 
 }
+initStarted = false;
+var init = function(jsonStr, themeData){
+  if(!initStarted){
+    initNestable(jsonStr, themeData);
+    initStarted = true;
+  }
+
+}
 
 var initNestable = function(jsonStr, themeData) {
   console.log('init nestable..');
