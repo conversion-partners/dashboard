@@ -1,16 +1,3 @@
-function getArray(nr) {
-  return Array.apply(null, {
-    length: nr
-  }).map(Number.call, Number)
-}
-
-function postClick(url) {
-  Core9.iframe.child.sentMessageToParent({
-    action: "menuClick",
-    href: url,
-    data: ""
-  });
-}
 
 function changeSelect2Data(className, dataCategory) {
   $("." + className).select2({
@@ -32,13 +19,7 @@ function updateOutput() {
     'serialize');
 }
 
-function arrayContains(needle, arrhaystack) {
-  return (arrhaystack.indexOf(needle) > -1);
-}
 
-function isEmpty(str) {
-  return (!str || 0 === str.length);
-}
 
 function getSelectBoxEntries(page) {
   var template = $(".template-data").val();
