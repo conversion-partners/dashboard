@@ -4,12 +4,22 @@ if (typeof Core9 === 'undefined') {
 
 Core9.editor = {};
 
-var getArray = function(nr) {
+initStarted = false;
+
+function init() {
+  if (!initStarted) {
+    initNestable([]);
+    initStarted = true;
+  }
+}
+
+function getArray(nr) {
   return Array.apply(null, {
     length: nr
   }).map(Number.call, Number)
 }
-var postClick = function(url) {
+
+function postClick(url) {
   Core9.iframe.child.sentMessageToParent({
     action: "menuClick",
     href: url,
@@ -43,6 +53,25 @@ function arrayContains(needle, arrhaystack) {
 
 function isEmpty(str) {
   return (!str || 0 === str.length);
+}
+
+function getSelectBoxEntries(page) {
+  var template = $(".template-data").val();
+  var language = $(".language-data").val();
+  var country = $(".country-data").val();
+  if (country == null) {
+    country = ""
+  }
+  var query = {
+    "template": template,
+    "language": language,
+    "country": country
+  }
+  if (page) {
+    query.page = page;
+  }
+  var result = Core9.data.templates.findObjects(query);
+  return result;
 }
 
 function activateEditor(page, id, pageData) {
@@ -111,24 +140,95 @@ function activateEditor(page, id, pageData) {
 
 }
 
-var getSelectBoxEntries = function(page) {
-  var template = $(".template-data").val();
-  var language = $(".language-data").val();
-  var country = $(".country-data").val();
-  if (country == null) {
-    country = ""
+function initTemplateSelectBoxes() {
+
+  var templateData = {
+    data: [""]
   }
-  var query = {
-    "template": template,
-    "language": language,
-    "country": country
-  }
-  if (page) {
-    query.page = page;
-  }
-  var result = Core9.data.templates.findObjects(query);
-  return result;
+
+  $(".template-data").on("change", function() {
+    $(".language-data").select2("destroy");
+    $(".language-data").html("<option><option>");
+    var data = [];
+    var entries = Core9.data.templates.find({
+      "template": $(this).val()
+    });
+    for (i = 0; i < entries.length; i++) {
+      var lang = entries[i]['language'];
+      if (!arrayContains(lang, data) && !isEmpty(lang)) {
+        data.push(lang);
+      }
+    }
+    changeSelect2Data("language-data", data);
+  });
+
+  $(".language-data").on("change", function() {
+    $(".country-data").select2("destroy");
+    $(".country-data").html("<option><option>");
+    var data = [];
+    var entries = Core9.data.templates.find({
+      "template": $(".template-data").val(),
+      "language": $(this).val()
+    });
+    for (i = 0; i < entries.length; i++) {
+      var country = entries[i]['country'];
+      if (!arrayContains(country, data) && !isEmpty(country)) {
+        data.push(country);
+      }
+    }
+    changeSelect2Data("country-data", data);
+  });
+
+  changeSelect2Data("template-data", Core9.template.themes);
+  changeSelect2Data("language-data", []);
+  changeSelect2Data("country-data", []);
+
 }
+
+
+function initNestable(jsonStr) {
+  console.log('init nestable..');
+
+  initTemplateSelectBoxes();
+
+  var container = document
+    .getElementById('nestablecontainer');
+  while (container.firstChild)
+    container.removeChild(container.firstChild);
+  var div = document.createElement('div');
+  div.id = 'nestable';
+  div.className = 'dd';
+  container.appendChild(div);
+
+  $('#nestable')
+    .nestable({
+      group: 1,
+      maxDepth: 20,
+      json: jsonStr,
+      contentCallback: function(
+        item) {
+        var content = item.page || '' ? item.page : item.id;
+        content += '<div class="dd-handle dd3-handle">Drag</div>';
+        return content;
+      },
+      callback: function(l, e) {
+        var element = $(e[0])
+          .find(
+            '.dd-content')[0].childNodes[0];
+        var page = element.textContent;
+        activateEditor(
+          page,
+          getIdFromItem(element),
+          getSelectBoxEntries(page)[0] // get only one sorry
+        );
+      }
+    }).on('change', updateOutput);
+}
+
+
+
+
+
 
 
 
@@ -219,100 +319,3 @@ $(document)
               .remove();
           });
     });
-
-
-
-
-var initTemplateSelectBoxes = function() {
-
-  var templateData = {
-    data: [""]
-  }
-
-  $(".template-data").on("change", function() {
-    $(".language-data").select2("destroy");
-    $(".language-data").html("<option><option>");
-    var data = [];
-    var entries = Core9.data.templates.find({
-      "template": $(this).val()
-    });
-    for (i = 0; i < entries.length; i++) {
-      var lang = entries[i]['language'];
-      if (!arrayContains(lang, data) && !isEmpty(lang)) {
-        data.push(lang);
-      }
-    }
-    changeSelect2Data("language-data", data);
-  });
-
-  $(".language-data").on("change", function() {
-    $(".country-data").select2("destroy");
-    $(".country-data").html("<option><option>");
-    var data = [];
-    var entries = Core9.data.templates.find({
-      "template": $(".template-data").val(),
-      "language": $(this).val()
-    });
-    for (i = 0; i < entries.length; i++) {
-      var country = entries[i]['country'];
-      if (!arrayContains(country, data) && !isEmpty(country)) {
-        data.push(country);
-      }
-    }
-    changeSelect2Data("country-data", data);
-  });
-
-  changeSelect2Data("template-data", Core9.template.themes);
-  changeSelect2Data("language-data", []);
-  changeSelect2Data("country-data", []);
-
-}
-
-
-initStarted = false;
-var init = function() {
-  if (!initStarted) {
-    initNestable([]);
-    initStarted = true;
-  }
-
-}
-
-var initNestable = function(jsonStr) {
-  console.log('init nestable..');
-
-  initTemplateSelectBoxes();
-
-  var container = document
-    .getElementById('nestablecontainer');
-  while (container.firstChild)
-    container.removeChild(container.firstChild);
-  var div = document.createElement('div');
-  div.id = 'nestable';
-  div.className = 'dd';
-  container.appendChild(div);
-
-  $('#nestable')
-    .nestable({
-      group: 1,
-      maxDepth: 20,
-      json: jsonStr,
-      contentCallback: function(
-        item) {
-        var content = item.page || '' ? item.page : item.id;
-        content += '<div class="dd-handle dd3-handle">Drag</div>';
-        return content;
-      },
-      callback: function(l, e) {
-        var element = $(e[0])
-          .find(
-            '.dd-content')[0].childNodes[0];
-        var page = element.textContent;
-        activateEditor(
-          page,
-          getIdFromItem(element),
-          getSelectBoxEntries(page)[0] // get only one sorry
-        );
-      }
-    }).on('change', updateOutput);
-}
