@@ -256,6 +256,8 @@ var activateEditor = function(page, id, pageData) {
   document.getElementById('submit').addEventListener('click',
     function() {
       console.log(Core9.editor.getValue());
+
+      Core9.template.save();
     });
 
   document.getElementById('restore').addEventListener('click',
