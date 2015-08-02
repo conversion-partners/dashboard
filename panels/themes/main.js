@@ -96,7 +96,7 @@ Core9.template = {
     //Core9.template.showData();
     Core9.template.themes = Core9.template.getThemes();
     Core9.template.themes.splice(0, 0, " "); // add first empty option
-    Core9.template.save();
+    //Core9.template.save();
   },
   save: function() {
 
