@@ -1,3 +1,7 @@
+/**
+* Nestable Extras
+*/
+
 @media only screen and (min-width: 700px) {
   .dd {
     float: left;
@@ -7,13 +11,14 @@
     margin-left: 2%;
   }
 }
+
 .dd-hover>.dd-handle {
   background: #f5f5f5 !important;
 }
+
 .dd-handle {
   padding-left: 20px;
 }
-
 /**
 * Nestable Draggable Handles
 */
@@ -21,10 +26,12 @@
 .dd-content {
   padding-left: 30px;
 }
+
 .dd-item>button {
   left: 30px;
   margin-right: -5px;
 }
+
 .dd3-content {
   display: block;
   height: 30px;
@@ -41,16 +48,20 @@
   box-sizing: border-box;
   -moz-box-sizing: border-box;
 }
+
 .dd3-content:hover {
   color: #2ea8e5;
   background: #fff;
 }
+
 .dd-dragel>.dd3-item>.dd3-content {
   margin: 0;
 }
+
 .dd3-item>button {
   margin-left: 30px;
 }
+
 .dd3-handle {
   position: absolute;
   margin: 0;
@@ -69,6 +80,7 @@
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
+
 .dd3-handle:before {
   content: '≡';
   display: block;
@@ -82,73 +94,62 @@
   font-size: 20px;
   font-weight: normal;
 }
+
 .dd3-handle:hover {
   background: #ddd;
 }
-
 /** table example **/
-
-
 /** content **/
 
 #content {
   margin-left: 249px;
   position: relative;
 }
+
 #nestable {
   margin-right: 50px;
   width: 500px;
 }
+
 #menuitemcontent {
   background-color: #fff;
   position: absolute;
   width: 438px;
   min-height: 500px;
   left: 550px;
-top: 48px;
+  top: 50px;
 }
-
 /** select2 **/
 
-.select2-container, .form-group>.select2-container--default {
+.select2-container,
+.form-group>.select2-container--default {
   width: 100% !important;
 }
+
 #navlist {
   margin-left: -40px;
   margin-top: 20px;
 }
+
 #navlist li {
   _display: inline;
   display: inline-block;
   list-style-type: none;
   padding-right: 20px;
 }
+
 .table>tbody>tr>td {
   padding: 5px;
 }
+
 body {
   overflow-x: hidden;
 }
+
 #editor_holder2>div>h3>span {
   display: block;
 }
+
 #editor_holder2>div>h3>div {
   margin-left: 0px !important;
-}
-#choose-theme {
-  width: 100%;
-  height: 100vh;
-  background-color: #fff;
-  position: fixed;
-  z-index: 99;
-  display: none;
-}
-#theme-modal {
-  position: absolute;
-  left:350px;
-  top:100px;
-  width:350px;
-  height: 100px;
-  box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.75);
-
 }
