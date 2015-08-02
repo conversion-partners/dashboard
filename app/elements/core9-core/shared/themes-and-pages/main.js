@@ -44,7 +44,7 @@ $(document)
       });
 
       $('#refresh-templates').on('click', function() {
-        var entries = getSelectBoxEntries();
+        var entries = getSelectBoxEntries(TYPEOFPAGE);
         var data = [];
         for (i = 0; i < entries.length; i++) {
           var item = {
@@ -73,17 +73,20 @@ $(document)
           if (country == null) {
             country = ""
           }
-          var templateData = {
-            "template": theme,
-            "language": language,
-            "country": country,
-            "page": "New Page",
-            "versions": [{
-              "status": "active",
-              "title": "New Page"
-            }]
+          if(TYPEOFPAGE == 'templates'){
+            var templateData = {
+              "template": theme,
+              "language": language,
+              "country": country,
+              "page": "New Page",
+              "versions": [{
+                "status": "active",
+                "title": "New Page"
+              }]
+            }
+            Core9.data[TYPEOFPAGE].insert(templateData);
           }
-          Core9.data.templates.insert(templateData);
+
         });
 
       $('#delpage')
