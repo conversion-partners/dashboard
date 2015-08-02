@@ -4,14 +4,7 @@ if (typeof Core9 === 'undefined') {
 
 Core9.editor = {};
 
-initStarted = false;
 
-function init() {
-  if (!initStarted) {
-    initNestable([]);
-    initStarted = true;
-  }
-}
 
 
 
