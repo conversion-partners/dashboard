@@ -37,7 +37,7 @@ var themeRoutes = {
     var theme = parts[3];
     var block = parts[5];
     var iframe = Core9.panel.getIframeById('panel-iframe-site');
-    var cmd = 'console.log("hi");Core9.blocks.addBlock("' + block + '");';
+    var cmd = 'Core9.blocks.addBlock("' + block + '");';
     Core9.iframe.parent.sentMessageToIframe(cmd, iframe);
 
   },
@@ -61,7 +61,7 @@ var themeRoutes = {
                 // this is where the theme blocks get added to the menu
               Core9.iframe.parent.sentMessageToIframe(insert, document.getElementsByClassName('menu')[1]);
             });
-            Core9.iframe.parent.sentMessageToIframe('init([],' + JSON.stringify(themes) + ');', Core9.panel.getIframeById('panel-themes'));
+            Core9.iframe.parent.sentMessageToIframe('init();', Core9.panel.getIframeById('panel-themes'));
             initPanelThemes = false;
           }
         }

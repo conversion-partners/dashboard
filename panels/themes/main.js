@@ -371,8 +371,6 @@ $(document)
               "title": "New Page"
             }]
           }
-
-          THEMEDATA[theme].data.templates[theme].entries.push(templateData);
           Core9.data.templates.insert(templateData);
         });
 
@@ -389,29 +387,11 @@ $(document)
 
 
 
-var initTemplateSelectBoxes = function(themeData) {
+var initTemplateSelectBoxes = function() {
 
   var templateData = {
       data: [""]
     }
-    /*
-      for (var key in themeData) {
-        if (themeData.hasOwnProperty(key)) {
-          templateData.data.push(key);
-          try {
-            var entries = themeData[key].data.templates[key].entries;
-            for (i = 0; i < entries.length; i++) {
-              entries[i]["template"] = key;
-              var entry = entries[i];
-              console.log(entry);
-              dbEntries.insert(entry);
-            }
-          } catch (e) {}
-
-        }
-      }
-
-    */
 
   $(".template-data").on("change", function() {
     $(".language-data").select2("destroy");
@@ -454,20 +434,18 @@ var initTemplateSelectBoxes = function(themeData) {
 
 
 initStarted = false;
-var init = function(jsonStr, themeData) {
+var init = function() {
   if (!initStarted) {
-    initNestable([], themeData);
+    initNestable([]);
     initStarted = true;
   }
 
 }
 
-var initNestable = function(jsonStr, themeData) {
+var initNestable = function(jsonStr) {
   console.log('init nestable..');
-  if (themeData != null) {
-    THEMEDATA = themeData;
-    initTemplateSelectBoxes(themeData);
-  }
+
+    initTemplateSelectBoxes();
 
   var container = document
     .getElementById('nestablecontainer');
