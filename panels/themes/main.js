@@ -124,7 +124,7 @@ Core9.template = {
       type: "POST",
       url:"http://localhost:9090/api/io/" + "save",
       data: {
-        content: data,
+        content: JSON.stringify(data),
         file: url,
         account: Core9.template.account
       }
