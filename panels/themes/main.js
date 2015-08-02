@@ -58,11 +58,26 @@ Core9.template = {
     });
 
   },
+
+  cleanJsonCollection : function(json){
+
+    for (var i = 0; i < json.length; i++) {
+      var obj = json[i];
+      delete obj.$loki;
+      delete obj.meta;
+    }
+
+    return json;
+  },
+
   dataCollect: function(collection, data) {
     return Promise.settle(data).then(function(results) {
       results.forEach(function(result) {
         if (result.isFulfilled()) {
-          collection.insert(JSON.parse(result.value().currentTarget.response));
+          var json = JSON.parse(result.value().currentTarget.response);
+          json = Core9.template.cleanJsonCollection(json);
+          //console.log(json);
+          collection.insert(json);
         } else {
           console.log(result.reason());
         }
@@ -112,13 +127,13 @@ Core9.template = {
       if (type == 'blocks') {
         Core9.template.saveBlockData(theme, data);
       }
-      console.log(theme, type);
-      console.log(data);
+      //console.log(theme, type);
+      //console.log(data);
     }
   },
   saveTemplateData: function(theme, data) {
     var url = Core9.template.paths.template.format(Core9.template.account, theme);
-    console.log(url);
+    //console.log(url);
 
     $.ajax({
       type: "POST",
@@ -133,7 +148,7 @@ Core9.template = {
   },
   saveBlockData: function(theme, data) {
     var url = Core9.template.paths.blocks.format(Core9.template.account, theme);
-    console.log(url);
+    //console.log(url);
   }
 };
 
