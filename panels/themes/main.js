@@ -9,7 +9,7 @@ Core9.data = {
 }
 
 Core9.template = {
-  themes : [],
+  themes: [],
   account: store.get('account'),
   init: function() {
     this.dataInit();
@@ -63,29 +63,58 @@ Core9.template = {
       });
     });
   },
-  dataReady: function() {
-    /*
+  showData: function() {
     console.log('template : ');
     console.log(Core9.data.templates.data);
     console.log('page : ');
     console.log(Core9.data.pages.data);
     console.log('block : ');
     console.log(Core9.data.blocks.data);
-    */
+  },
+  dataReady: function() {
+    //Core9.template.showData();
+    Core9.template.themes = Core9.template.getThemes();
+    Core9.template.themes.splice(0, 0, " "); // add first empty option
+    Core9.template.save();
+  },
+  save: function() {
+
+    Core9.template.saveData('template', Core9.data.templates);
+    Core9.template.saveData('blocks', Core9.data.blocks);
+    Core9.data.pages
+
+  },
+  getThemes: function() {
     var mapFun = function(obj) {
       return obj.template;
     }
     var reduceFun = function(array) {
       return Core9.deDupeArray(array);
     }
-    Core9.template.themes = Core9.data.templates.mapReduce(mapFun, reduceFun);
-    Core9.template.themes.splice(0, 0, " "); // add first empty option
-    //console.log(templates);
-
-    // call save after data ready
-    Core9.template.save();
+    return Core9.data.templates.mapReduce(mapFun, reduceFun);
   },
-  save: function() {
+  saveData: function(type, collection) {
+    var themes = Core9.template.getThemes();
+    for (var i = 0; i < themes.length; i++) {
+      var theme = themes[i];
+      var data = collection.find({
+        "template": theme
+      });
+      if (type == 'template') {
+        Core9.template.saveTemplateData(theme, data);
+      }
+      if (type == 'blocks') {
+        Core9.template.saveBlockData(theme, data);
+      }
+      console.log(theme, type);
+      console.log(data);
+    }
+  },
+  saveTemplateData: function(theme, data) {
+    var url = 
+    console.log(url);
+  },
+  saveBlockData: function(theme, data) {
 
   }
 };
@@ -320,26 +349,26 @@ $(document)
 var initTemplateSelectBoxes = function(themeData) {
 
   var templateData = {
-    data: [""]
-  }
-/*
-  for (var key in themeData) {
-    if (themeData.hasOwnProperty(key)) {
-      templateData.data.push(key);
-      try {
-        var entries = themeData[key].data.templates[key].entries;
-        for (i = 0; i < entries.length; i++) {
-          entries[i]["template"] = key;
-          var entry = entries[i];
-          console.log(entry);
-          dbEntries.insert(entry);
-        }
-      } catch (e) {}
-
+      data: [""]
     }
-  }
+    /*
+      for (var key in themeData) {
+        if (themeData.hasOwnProperty(key)) {
+          templateData.data.push(key);
+          try {
+            var entries = themeData[key].data.templates[key].entries;
+            for (i = 0; i < entries.length; i++) {
+              entries[i]["template"] = key;
+              var entry = entries[i];
+              console.log(entry);
+              dbEntries.insert(entry);
+            }
+          } catch (e) {}
 
-*/
+        }
+      }
+
+    */
 
   $(".template-data").on("change", function() {
     $(".language-data").select2("destroy");
