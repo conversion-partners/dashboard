@@ -31,7 +31,7 @@ var themeRoutes = {
     xhr.send();
   },
 
-  '/themes$' : function(req){
+  '/themes$': function(req) {
     var init = function(modules) {
       var theme = Core9.system.unwrapModule(modules[0]);
       theme.setAccount(store.get('account'));
@@ -44,24 +44,19 @@ var themeRoutes = {
                   "findmenusbytitle": "Themes",
                   "addItems": [themes[key].data.menu]
                 }
-                // this is where the theme blocks get added to the menu
               Core9.iframe.parent.sentMessageToIframe(insert, document.getElementsByClassName('menu')[1]);
             });
-
             initPanelThemes = false;
           }
         }
         // for now no blocks in the menu
       theme.get(callback);
-
     }
-
     Core9.system.multiImport(['app/elements/core9-core/js/core-theme'])
       .then(function(modules) {
         init(modules);
       });
   },
-
   '/themes/.*/blocks/.*/add$/': function(req) {
     console.log('add block');
     console.log(window.location);
@@ -71,25 +66,10 @@ var themeRoutes = {
     var iframe = Core9.panel.getIframeById('panel-iframe-site');
     var cmd = 'Core9.blocks.addBlock("' + block + '");';
     Core9.iframe.parent.sentMessageToIframe(cmd, iframe);
-
   },
   '/templates$/': function() {
-    /**
-     *  start /templates$/
-     **/
-
-
-
-
-      Core9.panel.open('panel-themes');
-      Core9.iframe.parent.sentMessageToIframe('init();', Core9.panel.getIframeById('panel-themes'));
-
-
-
-    /**
-     *   end /templates$/
-     **/
-
+    Core9.panel.open('panel-themes');
+    Core9.iframe.parent.sentMessageToIframe('init();', Core9.panel.getIframeById('panel-themes'));
   }
 }
 Router.addRoutes(themeRoutes);
