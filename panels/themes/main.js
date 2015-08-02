@@ -9,6 +9,12 @@ Core9.data = {
 }
 
 Core9.template = {
+  paths : {
+    "template" : "/dashboard/data/accounts/{0}/themes/bower_components/{1}/data/templates.json",
+    "blocks" : "/dashboard/data/accounts/{0}/themes/bower_components/{1}/data/blocks.json",
+    "pages" : "/dashboard/data/accounts/{0}/sites/sites.json",
+    "bower" : "/dashboard/data/accounts/{0}/themes/bower.json"
+  },
   themes: [],
   account: store.get('account'),
   init: function() {
@@ -16,16 +22,16 @@ Core9.template = {
   },
   dataInit: function() {
 
-    Core9.j('/dashboard/data/accounts/' + Core9.template.account + '/themes/bower.json').then(function(data) {
+    Core9.j(Core9.template.paths.bower.format(Core9.template.account)).then(function(data) {
       var json = JSON.parse(data.currentTarget.response);
       var themes = json.dependencies;
       var themeData = [];
       var blockData = [];
       var pageData = [];
       Object.keys(themes).forEach(function(key) {
-        themeData.push(Core9.j('/dashboard/data/accounts/' + Core9.template.account + '/themes/bower_components/' + key + '/data/templates.json'));
-        blockData.push(Core9.j('/dashboard/data/accounts/' + Core9.template.account + '/themes/bower_components/' + key + '/data/blocks.json'));
-        pageData.push(Core9.j('/dashboard/data/accounts/' + Core9.template.account + '/sites/sites.json'));
+        themeData.push(Core9.j( Core9.template.paths.template.format(Core9.template.account, key)));
+        blockData.push(Core9.j(Core9.template.paths.blocks.format(Core9.template.account, key)));
+        pageData.push(Core9.j(Core9.template.paths.pages.format(Core9.template.account)));
       });
 
       var allData = [];
@@ -111,7 +117,7 @@ Core9.template = {
     }
   },
   saveTemplateData: function(theme, data) {
-    var url = 
+    var url = Core9.template.paths.template.format(Core9.template.account, theme);
     console.log(url);
   },
   saveBlockData: function(theme, data) {
