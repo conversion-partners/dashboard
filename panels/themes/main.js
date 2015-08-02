@@ -9,11 +9,11 @@ Core9.data = {
 }
 
 Core9.template = {
-  paths : {
-    "template" : "/dashboard/data/accounts/{0}/themes/bower_components/{1}/data/templates.json",
-    "blocks" : "/dashboard/data/accounts/{0}/themes/bower_components/{1}/data/blocks.json",
-    "pages" : "/dashboard/data/accounts/{0}/sites/sites.json",
-    "bower" : "/dashboard/data/accounts/{0}/themes/bower.json"
+  paths: {
+    "template": "/dashboard/data/accounts/{0}/themes/bower_components/{1}/data/templates.json",
+    "blocks": "/dashboard/data/accounts/{0}/themes/bower_components/{1}/data/blocks.json",
+    "pages": "/dashboard/data/accounts/{0}/sites/sites.json",
+    "bower": "/dashboard/data/accounts/{0}/themes/bower.json"
   },
   themes: [],
   account: store.get('account'),
@@ -29,7 +29,7 @@ Core9.template = {
       var blockData = [];
       var pageData = [];
       Object.keys(themes).forEach(function(key) {
-        themeData.push(Core9.j( Core9.template.paths.template.format(Core9.template.account, key)));
+        themeData.push(Core9.j(Core9.template.paths.template.format(Core9.template.account, key)));
         blockData.push(Core9.j(Core9.template.paths.blocks.format(Core9.template.account, key)));
         pageData.push(Core9.j(Core9.template.paths.pages.format(Core9.template.account)));
       });
@@ -59,7 +59,7 @@ Core9.template = {
 
   },
 
-  cleanJsonCollection : function(json){
+  cleanJsonCollection: function(json) {
 
     for (var i = 0; i < json.length; i++) {
       var obj = json[i];
@@ -137,7 +137,7 @@ Core9.template = {
 
     $.ajax({
       type: "POST",
-      url:"http://localhost:9090/api/io/" + "save",
+      url: "http://localhost:9090/api/io/" + "save",
       data: {
         content: JSON.stringify(data),
         file: url,
@@ -148,7 +148,15 @@ Core9.template = {
   },
   saveBlockData: function(theme, data) {
     var url = Core9.template.paths.blocks.format(Core9.template.account, theme);
-    //console.log(url);
+    $.ajax({
+      type: "POST",
+      url: "http://localhost:9090/api/io/" + "save",
+      data: {
+        content: JSON.stringify(data),
+        file: url,
+        account: Core9.template.account
+      }
+    });
   }
 };
 
