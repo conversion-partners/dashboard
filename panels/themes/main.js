@@ -119,6 +119,17 @@ Core9.template = {
   saveTemplateData: function(theme, data) {
     var url = Core9.template.paths.template.format(Core9.template.account, theme);
     console.log(url);
+
+    $.ajax({
+      type: "POST",
+      url:"http://localhost:9090/api/io/" + "save",
+      data: {
+        content: data,
+        file: url,
+        account: Core9.template.account
+      }
+    });
+
   },
   saveBlockData: function(theme, data) {
     var url = Core9.template.paths.blocks.format(Core9.template.account, theme);
