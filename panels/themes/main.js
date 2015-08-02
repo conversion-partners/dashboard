@@ -121,7 +121,8 @@ Core9.template = {
     console.log(url);
   },
   saveBlockData: function(theme, data) {
-
+    var url = Core9.template.paths.blocks.format(Core9.template.account, theme);
+    console.log(url);
   }
 };
 
