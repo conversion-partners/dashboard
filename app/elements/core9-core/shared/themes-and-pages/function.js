@@ -1,4 +1,3 @@
-
 function changeSelect2Data(className, dataCategory) {
   $("." + className).select2({
     data: dataCategory
@@ -37,11 +36,7 @@ function getSelectBoxEntries(type, page) {
   if (page) {
     query.page = page;
   }
-
-
-
-  //var result = Core9.data.templates.findObjects(query);
-    var result = Core9.data[type].findObjects(query);
+  var result = Core9.data[type].findObjects(query);
   return result;
 }
 
