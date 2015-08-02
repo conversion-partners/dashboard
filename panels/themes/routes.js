@@ -30,6 +30,38 @@ var themeRoutes = {
     xhr.responseType = "document";
     xhr.send();
   },
+
+  '/themes$' : function(req){
+    var init = function(modules) {
+      var theme = Core9.system.unwrapModule(modules[0]);
+      theme.setAccount(store.get('account'));
+      var callback = function(data) {
+          var themes = data[0].themes;
+          if (initPanelThemes) {
+            Object.keys(themes).forEach(function(key) {
+              var insert = {
+                  "action": "addItems",
+                  "findmenusbytitle": "Themes",
+                  "addItems": [themes[key].data.menu]
+                }
+                // this is where the theme blocks get added to the menu
+              Core9.iframe.parent.sentMessageToIframe(insert, document.getElementsByClassName('menu')[1]);
+            });
+
+            initPanelThemes = false;
+          }
+        }
+        // for now no blocks in the menu
+      theme.get(callback);
+
+    }
+
+    Core9.system.multiImport(['app/elements/core9-core/js/core-theme'])
+      .then(function(modules) {
+        init(modules);
+      });
+  },
+
   '/themes/.*/blocks/.*/add$/': function(req) {
     console.log('add block');
     console.log(window.location);
@@ -46,37 +78,13 @@ var themeRoutes = {
      *  start /templates$/
      **/
 
-    var init = function(modules) {
-      var theme = Core9.system.unwrapModule(modules[0]);
-      theme.setAccount(store.get('account'));
-      var callback = function(data) {
-          var themes = data[0].themes;
-          if (initPanelThemes) {
-            Object.keys(themes).forEach(function(key) {
-              var insert = {
-                  "action": "addItems",
-                  "findmenusbytitle": "Themes",
-                  "addItems": [themes[key].data.menu]
-                }
-                // this is where the theme blocks get added to the menu
-              Core9.iframe.parent.sentMessageToIframe(insert, document.getElementsByClassName('menu')[1]);
-            });
-            Core9.iframe.parent.sentMessageToIframe('init();', Core9.panel.getIframeById('panel-themes'));
-            initPanelThemes = false;
-          }
-        }
-        // for now no blocks in the menu
-      theme.get(callback);
+
+
+
       Core9.panel.open('panel-themes');
-    }
+      Core9.iframe.parent.sentMessageToIframe('init();', Core9.panel.getIframeById('panel-themes'));
 
 
-
-
-    Core9.system.multiImport(['app/elements/core9-core/js/core-theme'])
-      .then(function(modules) {
-        init(modules);
-      });
 
     /**
      *   end /templates$/

@@ -2,7 +2,6 @@ if (typeof Core9 === 'undefined') {
   Core9 = {}
 };
 
-
 Core9.editor = {};
 
 var getArray = function(nr) {
@@ -23,7 +22,8 @@ function changeSelect2Data(className, dataCategory) {
     data: dataCategory
   });
 }
-var getIdFromItem = function(element) {
+
+function getIdFromItem(element) {
   while (element.parentNode) {
     element = element.parentNode;
     if (element.tagName == 'LI') {
@@ -31,7 +31,8 @@ var getIdFromItem = function(element) {
     }
   }
 }
-var updateOutput = function() {
+
+function updateOutput() {
   var content = $('#nestable').nestable(
     'serialize');
 }
@@ -44,7 +45,7 @@ function isEmpty(str) {
   return (!str || 0 === str.length);
 }
 
-var activateEditor = function(page, id, pageData) {
+function activateEditor(page, id, pageData) {
   document.getElementById('delpage').dataset.currentid = id;
   try {
     Core9.editor.destroy();
@@ -225,8 +226,8 @@ $(document)
 var initTemplateSelectBoxes = function() {
 
   var templateData = {
-      data: [""]
-    }
+    data: [""]
+  }
 
   $(".template-data").on("change", function() {
     $(".language-data").select2("destroy");
@@ -280,7 +281,7 @@ var init = function() {
 var initNestable = function(jsonStr) {
   console.log('init nestable..');
 
-    initTemplateSelectBoxes();
+  initTemplateSelectBoxes();
 
   var container = document
     .getElementById('nestablecontainer');
