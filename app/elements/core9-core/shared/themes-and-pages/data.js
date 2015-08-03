@@ -16,6 +16,7 @@ Core9.template = {
     "bower": "/dashboard/data/accounts/{0}/themes/bower.json"
   },
   themes: [],
+  sites: [],
   account: store.get('account'),
   init: function() {
     this.dataInit();
@@ -94,8 +95,10 @@ Core9.template = {
   },
   dataReady: function() {
     //Core9.template.showData();
-    Core9.template.themes = Core9.template.getThemes();
+    Core9.template.themes = Core9.template.getThemesOrSites('templates', Core9.data.templates);
     Core9.template.themes.splice(0, 0, " "); // add first empty option
+    Core9.template.sites = Core9.template.getThemesOrSites('sites', Core9.data.pages);
+    Core9.template.sites.splice(0, 0, " "); // add first empty option
     //Core9.template.save();
   },
   save: function() {
@@ -105,17 +108,22 @@ Core9.template = {
     Core9.data.pages
 
   },
-  getThemes: function() {
+  getThemesOrSites: function(type, collection) {
     var mapFun = function(obj) {
-      return obj.template;
+    	if(type == 'templates'){
+    	      return obj.template;
+    	}
+    	if(type == 'sites'){
+    	      return obj.domain;
+    	}
     }
     var reduceFun = function(array) {
       return Core9.deDupeArray(array);
     }
-    return Core9.data.templates.mapReduce(mapFun, reduceFun);
+    return collection.mapReduce(mapFun, reduceFun);
   },
   saveData: function(type, collection) {
-    var themes = Core9.template.getThemes();
+    var themes = Core9.template.getThemesOrSites(type, collection);
     for (var i = 0; i < themes.length; i++) {
       var theme = themes[i];
       var data = collection.find({
