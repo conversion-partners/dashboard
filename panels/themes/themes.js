@@ -16,7 +16,7 @@ function init() {
 function initNestable(jsonStr) {
   console.log('init nestable..');
 
-  initTemplateSelectBoxes(Core9.data.templates, Core9.template.themes);
+  initTemplateSelectBoxes(Core9.template.themes);
 
   var container = document
     .getElementById('nestablecontainer');

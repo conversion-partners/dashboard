@@ -13,7 +13,7 @@ function init() {
 function initNestable(jsonStr) {
   console.log('init nestable..');
 
-  initTemplateSelectBoxes(Core9.data.pages, Core9.template.sites);
+  initTemplateSelectBoxes(Core9.template.pages);
 
   var container = document
     .getElementById('nestablecontainer');
@@ -43,7 +43,7 @@ function initNestable(jsonStr) {
         activateEditor(
           page,
           getIdFromItem(element),
-          getSelectBoxEntries('templates',page)[0] // get only one sorry
+          getSelectBoxEntries('pages',page)[0] // get only one sorry
         );
       }
     }).on('change', updateOutput);

@@ -48,7 +48,7 @@ function getSelectBoxEntries(type, page) {
 
 
 
-function initTemplateSelectBoxes(collection, themeOrSiteCollection) {
+function initTemplateSelectBoxes(themeOrSiteCollection) {
 
   var templateData = {
     data: [""]
@@ -58,9 +58,16 @@ function initTemplateSelectBoxes(collection, themeOrSiteCollection) {
     $(".language-data").select2("destroy");
     $(".language-data").html("<option><option>");
     var data = [];
-    var entries = Core9.data.templates.find({
-      "template": $(this).val()
-    });
+    
+    var query = {};
+    if(TYPEOFPAGE == 'pages'){
+    	query.domain = $(this).val();
+    }
+    if(TYPEOFPAGE == 'templates'){
+    	query.template = $(this).val();
+    }
+    
+    var entries = Core9.data[TYPEOFPAGE].find(query);
     for (i = 0; i < entries.length; i++) {
       var lang = entries[i]['language'];
       if (!arrayContains(lang, data) && !isEmpty(lang)) {
@@ -74,10 +81,17 @@ function initTemplateSelectBoxes(collection, themeOrSiteCollection) {
     $(".country-data").select2("destroy");
     $(".country-data").html("<option><option>");
     var data = [];
-    var entries = collection.find({
-      "template": $(".template-data").val(),
-      "language": $(this).val()
-    });
+    
+    var query = {};
+    if(TYPEOFPAGE == 'pages'){
+    	query.domain = $(".template-data").val();
+    }
+    if(TYPEOFPAGE == 'templates'){
+    	query.template = $(".template-data").val();
+    }
+    query.language = $(this).val();
+    
+    var entries = Core9.data[TYPEOFPAGE].find(query);
     for (i = 0; i < entries.length; i++) {
       var country = entries[i]['country'];
       if (!arrayContains(country, data) && !isEmpty(country)) {

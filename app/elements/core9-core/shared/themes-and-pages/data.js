@@ -16,7 +16,7 @@ Core9.template = {
     "bower": "/dashboard/data/accounts/{0}/themes/bower.json"
   },
   themes: [],
-  sites: [],
+  pages: [],
   account: store.get('account'),
   init: function() {
     this.dataInit();
@@ -97,8 +97,8 @@ Core9.template = {
     //Core9.template.showData();
     Core9.template.themes = Core9.template.getThemesOrSites('templates', Core9.data.templates);
     Core9.template.themes.splice(0, 0, " "); // add first empty option
-    Core9.template.sites = Core9.template.getThemesOrSites('sites', Core9.data.pages);
-    Core9.template.sites.splice(0, 0, " "); // add first empty option
+    Core9.template.pages = Core9.template.getThemesOrSites('pages', Core9.data.pages);
+    Core9.template.pages.splice(0, 0, " "); // add first empty option
     //Core9.template.save();
   },
   save: function() {
@@ -113,7 +113,7 @@ Core9.template = {
     	if(type == 'templates'){
     	      return obj.template;
     	}
-    	if(type == 'sites'){
+    	if(type == 'pages'){
     	      return obj.domain;
     	}
     }
