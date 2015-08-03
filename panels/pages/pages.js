@@ -54,7 +54,7 @@ var activateEditor = function(page, id, pageData) {
     Core9.editor.destroy();
     Core9.editor2.destroy();
   } catch (e) {}
-  var starting_value = pageData.versions;
+
   Core9.editor2 = new JSONEditor(document.getElementById('editor_holder'), {
     disable_edit_json: true,
     disable_collapse: true,
@@ -72,6 +72,8 @@ var activateEditor = function(page, id, pageData) {
       }
     }
   });
+
+var starting_value = pageData.versions;
 
   Core9.editor = new JSONEditor(document
     .getElementById('editor_holder2'), {

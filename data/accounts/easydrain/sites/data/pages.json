@@ -1,8 +1,8 @@
 [
     {
         "domain": "easydrain.nl",
-        "language": "",
-        "country": "",
+        "language": "nl",
+        "country": "nl",
         "page": "Home page page",
         "url": "/index.html",
         "versions": [
