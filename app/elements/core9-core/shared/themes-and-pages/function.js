@@ -29,13 +29,19 @@ function getSelectBoxEntries(type, page) {
     country = ""
   }
   var query = {
-    "template": template,
     "language": language,
     "country": country
   }
-  if (page) {
-    query.page = page;
+  if(type == 'templates'){
+    query.template = template;
+    if (page) {
+      query.page = page;
+    }
   }
+  if(type == 'pages'){
+    query.domain = template;
+  }
+
   var result = Core9.data[type].findObjects(query);
   return result;
 }
