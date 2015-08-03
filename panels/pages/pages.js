@@ -43,19 +43,36 @@ function initNestable(jsonStr) {
         activateEditor(
           page,
           getIdFromItem(element),
-          getSelectBoxEntries('pages',page)[0] // get only one sorry
+          getSelectBoxEntries('pages', page)[0] // get only one sorry
         );
       }
     }).on('change', updateOutput);
 }
-
-function activateEditor(page, id, pageData) {
+var activateEditor = function(page, id, pageData) {
   document.getElementById('delpage').dataset.currentid = id;
   try {
     Core9.editor.destroy();
+    Core9.editor2.destroy();
   } catch (e) {}
   var starting_value = pageData.versions;
-  $('#choose-theme-template-page').html(page);
+  Core9.editor2 = new JSONEditor(document.getElementById('editor_holder'), {
+    disable_edit_json: true,
+    disable_collapse: true,
+    disable_properties: true,
+    format: 'grid',
+    theme: 'bootstrap3',
+    schema: {
+      type: "object",
+      title: page,
+      properties: {
+        url: {
+          type: "string",
+          default: pageData.url
+        }
+      }
+    }
+  });
+
   Core9.editor = new JSONEditor(document
     .getElementById('editor_holder2'), {
       ajax: true,
@@ -75,11 +92,36 @@ function activateEditor(page, id, pageData) {
           title: "Version",
           headerTemplate: "{{i}} - {{self.title}}",
           type: "object",
-          id: "templateid",
+          id: "person",
           properties: {
             "title": {
               "type": "string",
+              "description": "Page title",
               "minLength": 4
+            },
+            "theme": {
+              type: "string",
+              enum: ["shunsine", "clean", "fluid"]
+            },
+            "language": {
+              type: "string",
+              enum: []
+            },
+            "country": {
+              type: "string",
+              enum: []
+            },
+            "percentage": {
+              type: "integer",
+              enum: getArray(101)
+            },
+            "startdate": {
+              "type": "string",
+              "format": "date"
+            },
+            "enddate": {
+              "type": "string",
+              "format": "date"
             },
             "status": {
               "type": "string",
@@ -89,9 +131,12 @@ function activateEditor(page, id, pageData) {
         }
       }
     });
+
   Core9.editor.on('change', function() {
     var errors = Core9.editor.validate();
+
     var indicator = document.getElementById('valid_indicator');
+
     if (errors.length) {
       indicator.style.color = 'red';
       indicator.textContent = "not valid";
@@ -104,8 +149,6 @@ function activateEditor(page, id, pageData) {
   document.getElementById('submit').addEventListener('click',
     function() {
       console.log(Core9.editor.getValue());
-
-      Core9.template.save();
     });
 
   document.getElementById('restore').addEventListener('click',
