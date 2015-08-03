@@ -39,7 +39,7 @@ function getSelectBoxEntries(type, page) {
     }
   }
   if(type == 'pages'){
-    query.domain = template;
+    query.domain  = template;
   }
 
   var result = Core9.data[type].findObjects(query);
