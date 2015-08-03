@@ -7,7 +7,7 @@
         "url": "/index.html",
         "versions": [
             {
-                "title": "page",
+                "title": "page 1",
                 "theme": "core9-theme-ess",
                 "language": "",
                 "country": "",
@@ -17,7 +17,7 @@
                 "status": "active"
             },
             {
-                "title": "page",
+                "title": "page 2",
                 "theme": "core9-theme-ess",
                 "language": "",
                 "country": "",
@@ -27,7 +27,7 @@
                 "status": "active"
             },
             {
-                "title": "page",
+                "title": "page 3",
                 "theme": "core9-theme-ess",
                 "language": "",
                 "country": "",
