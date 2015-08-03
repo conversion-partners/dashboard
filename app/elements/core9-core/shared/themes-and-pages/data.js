@@ -103,7 +103,7 @@ Core9.template = {
   },
   save: function() {
 
-    Core9.template.saveData('template', Core9.data.templates);
+    Core9.template.saveData('templates', Core9.data.templates);
     Core9.template.saveData('blocks', Core9.data.blocks);
     Core9.data.pages
 
@@ -129,7 +129,7 @@ Core9.template = {
       var data = collection.find({
         "template": theme
       });
-      if (type == 'template') {
+      if (type == 'templates') {
         Core9.template.saveTemplateData(theme, data);
       }
       if (type == 'blocks') {
@@ -141,7 +141,7 @@ Core9.template = {
   },
   saveTemplateData: function(theme, data) {
     var url = Core9.template.paths.template.format(Core9.template.account, theme);
-    //console.log(url);
+    console.log(url);
 
     $.ajax({
       type: "POST",
@@ -156,6 +156,7 @@ Core9.template = {
   },
   saveBlockData: function(theme, data) {
     var url = Core9.template.paths.blocks.format(Core9.template.account, theme);
+    console.log(url);
     $.ajax({
       type: "POST",
       url: "http://localhost:9090/api/io/" + "save",
