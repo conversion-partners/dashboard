@@ -12,7 +12,7 @@ Core9.template = {
   paths: {
     "template": "/dashboard/data/accounts/{0}/themes/bower_components/{1}/data/templates.json",
     "blocks": "/dashboard/data/accounts/{0}/themes/bower_components/{1}/data/blocks.json",
-    "pages": "/dashboard/data/accounts/{0}/sites/sites.json",
+    "pages": "/dashboard/data/accounts/{0}/sites/data/pages.json",
     "bower": "/dashboard/data/accounts/{0}/themes/bower.json"
   },
   themes: [],
