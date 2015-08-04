@@ -15,7 +15,7 @@ Core9.template = {
     "pages": "/dashboard/data/accounts/{0}/sites/data/pages.json",
     "bower": "/dashboard/data/accounts/{0}/themes/bower.json"
   },
-  themes: [],
+  templates: [],
   pages: [],
   account: store.get('account'),
   init: function() {

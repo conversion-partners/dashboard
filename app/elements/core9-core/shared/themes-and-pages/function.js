@@ -46,7 +46,44 @@ function getSelectBoxEntries(type, page) {
   return result;
 }
 
+function initNestable(jsonStr) {
+  console.log('init nestable..');
 
+  initTemplateSelectBoxes(Core9.template[TYPEOFPAGE]);
+
+  var container = document
+    .getElementById('nestablecontainer');
+  while (container.firstChild)
+    container.removeChild(container.firstChild);
+  var div = document.createElement('div');
+  div.id = 'nestable';
+  div.className = 'dd';
+  container.appendChild(div);
+
+  $('#nestable')
+    .nestable({
+      group: 1,
+      maxDepth: 20,
+      json: jsonStr,
+      contentCallback: function(
+        item) {
+        var content = item.page || '' ? item.page : item.id;
+        content += '<div class="dd-handle dd3-handle">Drag</div>';
+        return content;
+      },
+      callback: function(l, e) {
+        var element = $(e[0])
+          .find(
+            '.dd-content')[0].childNodes[0];
+        var page = element.textContent;
+        activateEditor(
+          page,
+          getIdFromItem(element),
+          getSelectBoxEntries(TYPEOFPAGE, page)[0] // get only one sorry
+        );
+      }
+    }).on('change', updateOutput);
+}
 
 function initTemplateSelectBoxes(themeOrSiteCollection) {
 
@@ -58,7 +95,7 @@ function initTemplateSelectBoxes(themeOrSiteCollection) {
     $(".language-data").select2("destroy");
     $(".language-data").html("<option><option>");
     var data = [];
-    
+
     var query = {};
     if(TYPEOFPAGE == 'pages'){
     	query.domain = $(this).val();
@@ -66,7 +103,7 @@ function initTemplateSelectBoxes(themeOrSiteCollection) {
     if(TYPEOFPAGE == 'templates'){
     	query.template = $(this).val();
     }
-    
+
     var entries = Core9.data[TYPEOFPAGE].find(query);
     for (i = 0; i < entries.length; i++) {
       var lang = entries[i]['language'];
@@ -81,7 +118,7 @@ function initTemplateSelectBoxes(themeOrSiteCollection) {
     $(".country-data").select2("destroy");
     $(".country-data").html("<option><option>");
     var data = [];
-    
+
     var query = {};
     if(TYPEOFPAGE == 'pages'){
     	query.domain = $(".template-data").val();
@@ -90,7 +127,7 @@ function initTemplateSelectBoxes(themeOrSiteCollection) {
     	query.template = $(".template-data").val();
     }
     query.language = $(this).val();
-    
+
     var entries = Core9.data[TYPEOFPAGE].find(query);
     for (i = 0; i < entries.length; i++) {
       var country = entries[i]['country'];
