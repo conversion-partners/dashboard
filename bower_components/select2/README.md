@@ -87,6 +87,7 @@ The license is available within the repository in the [LICENSE][license] file.
 [django-select2]: https://github.com/applegrew/django-select2
 [documentation]: https://select2.github.io/
 [documentation-folder]: https://github.com/select2/select2/tree/master/docs
+[freenode]: https://freenode.net/
 [jsdelivr]: http://www.jsdelivr.com/#!select2
 [license]: LICENSE.md
 [meteor-select2]: https://github.com/nate-strauser/meteor-select2
@@ -97,6 +98,7 @@ The license is available within the repository in the [LICENSE][license] file.
 [symfony-select2]: https://github.com/19Gerhard85/sfSelect2WidgetsPlugin
 [symfony2-select2]: https://github.com/avocode/FormExtensions
 [travis-ci-image]: https://travis-ci.org/select2/select2.svg?branch=master
+[travis-ci-status]: https://travis-ci.org/select2/select2
 [wicket]: http://wicket.apache.org
 [wicket-select2]: https://github.com/ivaynberg/wicket-select2
 [yii-select2]: https://github.com/tonybolzan/yii-select2
