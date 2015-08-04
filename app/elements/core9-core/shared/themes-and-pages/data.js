@@ -94,7 +94,7 @@ Core9.template = {
     console.log(Core9.data.blocks.data);
   },
   dataReady: function() {
-    Core9.template.showData();
+    //Core9.template.showData();
     Core9.template.templates = Core9.template.getThemesOrSites('templates', Core9.data.templates);
     Core9.template.templates.splice(0, 0, " "); // add first empty option
     Core9.template.pages = Core9.template.getThemesOrSites('pages', Core9.data.pages);
