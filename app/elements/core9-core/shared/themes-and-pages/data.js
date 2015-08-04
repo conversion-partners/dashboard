@@ -9,7 +9,7 @@ Core9.data = {
   language: [],
   countries: [],
   versions: [],
-  pageData: {
+  page: {
     page: "",
     id: "",
     pageData: {}

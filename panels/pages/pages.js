@@ -3,9 +3,9 @@ TYPEOFPAGE = 'pages';
 
 
 function setPageVersions(version, selectBox, value) {
-  console.log(Core9.data.pageData.pageData.versions);
-  Core9.data.pageData.pageData.versions[version][selectBox] = value;
-  console.log(Core9.data.pageData.pageData.versions);
+  console.log(Core9.data.page.pageData.versions);
+  Core9.data.page.pageData.versions[version][selectBox] = value;
+  console.log(Core9.data.page.pageData.versions);
 }
 
 function watchEditor() {
@@ -22,7 +22,7 @@ function watchEditor() {
           var selectBox = match[2];
           console.log(' updating version : ' + version + ' and selectbox : ' + selectBox + ' with value : ' + value);
           console.log(match);
-
+          setPageVersions(version, selectBox, value);
         }
       } catch (e) {}
     }, 900);
@@ -36,9 +36,9 @@ function watchEditor() {
 
 var activateEditor = function(page, id, pageData) {
 
-  Core9.data.pageData.page = page;
-  Core9.data.pageData.id = id;
-  Core9.data.pageData.pageData = pageData;
+  Core9.data.page.page = page;
+  Core9.data.page.id = id;
+  Core9.data.page.pageData = pageData;
 
   document.getElementById('delpage').dataset.currentid = id;
   try {
