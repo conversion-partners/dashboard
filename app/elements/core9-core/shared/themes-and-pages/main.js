@@ -110,7 +110,7 @@ $(document)
 
 
             var delButton = $('#delpage');
-            var page = $('li[data-id="' + delButton.dataset.currentid + '"]');
+            var page = $('li[data-id="' + delButton.data('currentid') + '"]');
             var lokiId = $(page).data('$loki');
             var pageName = $(page).data('page');
             console.log(pageName);
@@ -135,7 +135,7 @@ $(document)
                 Core9.data[TYPEOFPAGE].remove(lokiId);
               }
               $(
-                  'li[data-id="' + delButton.dataset.currentid + '"]')
+                  'li[data-id="' + delButton.data('currentid') + '"]')
                 .remove();
 
               try {
