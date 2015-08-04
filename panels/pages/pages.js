@@ -93,14 +93,18 @@ var activateEditor = function(page, id, pageData) {
       }
     });
 
+  Core9.data.versions = {};
 
   var callback = function(record) {
-    try {
-      var selector = record.target.firstChild.firstChild.getAttribute('aria-labelledby');
-      console.log(selector);
-    } catch (e) {}
-    console.log();
-    console.log(record.target.firstChild.textContent);
+    setTimeout(function(){
+      try {
+        var selector = record.target.firstChild.firstChild.getAttribute('aria-labelledby');
+        if(selector.match(/select2-root\[\d*\]\[(theme|language|country|percentage)\]/)){
+          console.log(selector);
+        }
+        console.log(record.target.firstChild.textContent);
+      } catch (e) {}
+    }, 900);
   }
 
   watch(['[id^="select2-root[0][theme]"]', '[id^="select2-root[1][theme]"]', '[id^="select2-root[2][theme]"]'], callback);
