@@ -1,14 +1,6 @@
-initStarted = false;
+
+
 TYPEOFPAGE = 'pages';
-
-function init() {
-  if (!initStarted) {
-    initNestable([]);
-    initStarted = true;
-  }
-}
-
-
 
 
 

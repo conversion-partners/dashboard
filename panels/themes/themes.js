@@ -1,13 +1,7 @@
-initStarted = false;
+
 
 TYPEOFPAGE = 'templates';
 
-function init() {
-  if (!initStarted) {
-    initNestable([]);
-    initStarted = true;
-  }
-}
 
 function activateEditor(page, id, pageData) {
   document.getElementById('delpage').dataset.currentid = id;
