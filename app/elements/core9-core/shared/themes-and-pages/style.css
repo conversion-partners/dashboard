@@ -88,13 +88,14 @@
 .loki-id {
   visibility: hidden;
 }
+
 /** table example **/
 
 
 /** content **/
 
 #content {
-  margin-left: 249px;
+  margin-left: 25px;
   position: relative;
 }
 #nestable {
@@ -107,7 +108,7 @@
   width: 438px;
   min-height: 500px;
   left: 550px;
-top: 48px;
+  top: 48px;
 }
 
 /** select2 **/
@@ -132,10 +133,20 @@ body {
   overflow-x: hidden;
 }
 #editor_holder2>div>h3>span {
-  display: block;
+  display: none;
 }
 #editor_holder2>div>h3>div {
   margin-left: 0px !important;
+}
+#editor_holder2 > div > div.rows > div.col-md-10 > div:nth-child(1) > h3 > span {
+  margin-bottom: 15px;
+  display: block;
+  margin-top: -15px;
+}
+#editor_holder > div > div.rows > div.col-md-10 > div:nth-child(1) > h3 > span {
+  margin-bottom: 15px;
+  display: block;
+  margin-top: -15px;
 }
 #choose-theme {
   width: 100%;
@@ -147,10 +158,9 @@ body {
 }
 #theme-modal {
   position: absolute;
-  left:350px;
-  top:100px;
-  width:350px;
+  left: 350px;
+  top: 100px;
+  width: 350px;
   height: 100px;
-  box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.75);
-
+  box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.75);
 }
