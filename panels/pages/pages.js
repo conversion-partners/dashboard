@@ -26,21 +26,10 @@ var activateEditor = function(page, id, pageData) {
   });
 
   var starting_value = pageData.versions;
-  //
-  // var starting_value2 = [];
-  // for (var i = 0; i < starting_value.length; i++) {
-  //   var version = starting_value[i];
-  //   delete version.theme;
-  // //  version.temm = "shunsine";
-  //   starting_value2.push(version);
-  // }
-
-
 
 
   Core9.editor = new JSONEditor(document
     .getElementById('editor_holder2'), {
-      enhanced_ui: 'selectize',
       ajax: true,
       disable_edit_json: true,
       disable_collapse: true,
@@ -64,38 +53,38 @@ var activateEditor = function(page, id, pageData) {
               type: "string",
               minLength: 3
             },
-             theme: {
-               type: "string",
-               enum: ["shunsine", "clean", "fluid", "core9-theme-ess"]
+            theme: {
+              type: "string",
+              enum: ["shunsine", "clean", "fluid", "core9-theme-ess"]
+            },
+            language: {
+              type: "string",
+              enum: []
+            },
+            country: {
+              type: "string",
+              enum: []
+            },
+            template: {
+              type: "string",
+              enum: []
+            },
+            percentage: {
+              type: "integer",
+              enum: getArray(101)
+            },
+            startdate: {
+              type: "string",
+              format: "date"
+            },
+            enddate: {
+              type: "string",
+              format: "date"
+            },
+            status: {
+              type: "string",
+              enum: ["active", "pauzed"]
             }
-            // language: {
-            //   type: "string",
-            //   enum: []
-            // },
-            // country: {
-            //   type: "string",
-            //   enum: []
-            // },
-            // template: {
-            //   type: "string",
-            //   enum: []
-            // },
-            // percentage: {
-            //   type: "integer",
-            //   enum: getArray(101)
-            // },
-            // startdate: {
-            //   type: "string",
-            //   format: "date"
-            // },
-            // enddate: {
-            //   type: "string",
-            //   format: "date"
-            // },
-            // status: {
-            //   type: "string",
-            //   enum: ["active", "pauzed"]
-            // }
           }
         }
       }
