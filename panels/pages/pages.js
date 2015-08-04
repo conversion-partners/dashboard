@@ -101,7 +101,14 @@ var activateEditor = function(page, id, pageData) {
         var selector = record.target.firstChild.firstChild.getAttribute('aria-labelledby');
         if (selector.match(/select2-root\[\d*\]\[(theme|language|country|percentage)\]/)) {
           console.log(selector);
-          console.log(record.target.firstChild.textContent);
+          var value = record.target.firstChild.textContent;
+          var myRegexp = /select2-root\[(\d*)\]\[(theme|language|country|percentage)\]/g;
+          var match = myRegexp.exec(selector);
+          var version = match[1];
+          var selectBox = match[2];
+          console.log(' updating version : '+version+ ' and selectbox : ' + selectBox + ' with value : ' + value);
+          console.log(match);
+
         }
       } catch (e) {}
     }, 900);
