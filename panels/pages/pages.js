@@ -64,7 +64,7 @@ var activateEditor = function(page, id, pageData) {
             },
             theme: {
               type: "string",
-              enum: ["shunsine", "clean", "fluid", "core9themeess"]
+              enum: ["shunsine", "clean", "fluid", "core9-theme-ess"]
             },
             language: {
               type: "string",
@@ -112,8 +112,6 @@ var activateEditor = function(page, id, pageData) {
       indicator.style.color = 'green';
       indicator.textContent = "valid";
     }
-
-    console.log(Core9.editor.getValue());
   });
 
   document.getElementById('submit2').addEventListener('click',

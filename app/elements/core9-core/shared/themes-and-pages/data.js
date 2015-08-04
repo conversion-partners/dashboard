@@ -32,8 +32,8 @@ Core9.template = {
       Object.keys(themes).forEach(function(key) {
         themeData.push(Core9.j(Core9.template.paths.template.format(Core9.template.account, key)));
         blockData.push(Core9.j(Core9.template.paths.blocks.format(Core9.template.account, key)));
-        pageData.push(Core9.j(Core9.template.paths.pages.format(Core9.template.account)));
       });
+      pageData.push(Core9.j(Core9.template.paths.pages.format(Core9.template.account)));
 
       var allData = [];
       allData.push(Core9.template.dataCollect(Core9.data.templates, themeData));
@@ -94,7 +94,7 @@ Core9.template = {
     console.log(Core9.data.blocks.data);
   },
   dataReady: function() {
-    //Core9.template.showData();
+    Core9.template.showData();
     Core9.template.templates = Core9.template.getThemesOrSites('templates', Core9.data.templates);
     Core9.template.templates.splice(0, 0, " "); // add first empty option
     Core9.template.pages = Core9.template.getThemesOrSites('pages', Core9.data.pages);
