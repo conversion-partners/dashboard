@@ -55,12 +55,24 @@ $(document)
         for (i = 0; i < entries.length; i++) {
           var item = {
             "id": guid(),
+            "$loki" : entries[i].$loki,
             "page": entries[i].page
           }
           data.push(item);
         }
         initNestable(JSON.stringify(data));
       });
+
+      function getSelectBoxValues(){
+        var data = {};
+        data.theme = $(".template-data").val();
+        data.language = $(".language-data").val();
+        data.country = $(".country-data").val();
+        if (data.country == null) {
+          data.country = ""
+        }
+        return data;
+      }
 
       $('#newpage').on(
         'click',
@@ -73,17 +85,12 @@ $(document)
             "page": "New Page"
           });
           initNestable(JSON.stringify(json));
-          var theme = $(".template-data").val();
-          var language = $(".language-data").val();
-          var country = $(".country-data").val();
-          if (country == null) {
-            country = ""
-          }
+          var data = getSelectBoxValues();
           if(TYPEOFPAGE == 'templates'){
             var templateData = {
-              "template": theme,
-              "language": language,
-              "country": country,
+              "template": data.theme,
+              "language": data.language,
+              "country": data.country,
               "page": "New Page",
               "versions": [{
                 "status": "active",
@@ -99,8 +106,46 @@ $(document)
         .on(
           'click',
           function() {
-            $(
-                'li[data-id="' + this.dataset.currentid + '"]')
-              .remove();
+
+
+
+              var page = $('li[data-id="' + this.dataset.currentid + '"]');
+              var lokiId =  $(page).data('$loki');
+              var pageName = $(page).data('page');
+              console.log(pageName);
+            var data = getSelectBoxValues();
+            if(TYPEOFPAGE == 'templates'){
+              var templateData = {
+                "template": data.theme,
+                "language": data.language,
+                "country": data.country,
+                "page": pageName
+              }
+              if(typeof lokiId == 'undefined'){
+                var res = Core9.data[TYPEOFPAGE].findObjects(templateData);
+                if(res.length > 0){
+                  for (var i = 0; i < res.length; i++) {
+                    var entry = res[i];
+                    Core9.data[TYPEOFPAGE].remove(entry.$loki);
+                  }
+                }
+                console.log(res);
+              }else{
+                Core9.data[TYPEOFPAGE].remove(lokiId);
+              }
+              $(
+                  'li[data-id="' + this.dataset.currentid + '"]')
+                .remove();
+
+                try {
+                  Core9.editor.destroy();
+                } catch (e) {}
+            }
+
+
+
+
+
+
           });
     });

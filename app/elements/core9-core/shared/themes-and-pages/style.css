@@ -85,7 +85,9 @@
 .dd3-handle:hover {
   background: #ddd;
 }
-
+.loki-id {
+  visibility: hidden;
+}
 /** table example **/
 
 

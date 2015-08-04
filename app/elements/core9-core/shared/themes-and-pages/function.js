@@ -68,7 +68,7 @@ function initNestable(jsonStr) {
       contentCallback: function(
         item) {
         var content = item.page || '' ? item.page : item.id;
-        content += '<div class="dd-handle dd3-handle">Drag</div>';
+        content += '<div class="dd-handle dd3-handle">Drag</div><div class="loki-id">' + item.$loki + '</div>';
         return content;
       },
       callback: function(l, e) {
