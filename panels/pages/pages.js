@@ -1,11 +1,4 @@
-
-
 TYPEOFPAGE = 'pages';
-
-
-
-
-
 
 var activateEditor = function(page, id, pageData) {
   document.getElementById('delpage').dataset.currentid = id;
@@ -32,7 +25,7 @@ var activateEditor = function(page, id, pageData) {
     }
   });
 
-var starting_value = pageData.versions;
+  var starting_value = pageData.versions;
 
   Core9.editor = new JSONEditor(document
     .getElementById('editor_holder2'), {

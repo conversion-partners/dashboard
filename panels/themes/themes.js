@@ -1,7 +1,4 @@
-
-
 TYPEOFPAGE = 'templates';
-
 
 function activateEditor(page, id, pageData) {
   document.getElementById('delpage').dataset.currentid = id;
