@@ -113,6 +113,10 @@ var starting_value = pageData.versions;
               type: "string",
               enum: []
             },
+            template: {
+              type: "string",
+              enum: []
+            },
             percentage: {
               type: "integer",
               enum: getArray(101)
