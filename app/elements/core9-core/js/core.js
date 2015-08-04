@@ -27,6 +27,13 @@ function watchItem(elem, callback) {
   mutationObserver.observe(document.body, whatToObserve);
 }
 
+function watch(list, callback) {
+  for (var i = 0; i < list.length; i++) {
+    var selector = list[i];
+    watchItem(document.querySelector(selector), callback);
+  }
+}
+
 // First, checks if it isn't implemented yet.
 if (!String.prototype.format) {
   String.prototype.format = function() {

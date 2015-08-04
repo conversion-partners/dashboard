@@ -96,12 +96,7 @@ var activateEditor = function(page, id, pageData) {
 
 
 
-  function watch(list, callback){
-    for (var i = 0; i < list.length; i++) {
-      var selector = list[i];
-      watchItem(document.querySelector(selector), callback);
-    }
-  }
+
 
   var callback = function(record) {
     try {
