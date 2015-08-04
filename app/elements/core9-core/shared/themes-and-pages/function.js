@@ -18,7 +18,32 @@ function updateOutput() {
     'serialize');
 }
 
-
+function getCurrentPageId() {
+  var delButton = $('#delpage');
+  var page = $('li[data-id="' + delButton.data('currentid') + '"]');
+  var lokiId = $(page).data('$loki');
+  var pageName = $(page).data('page');
+  console.log(pageName);
+  var data = getSelectBoxValues();
+  if (TYPEOFPAGE == 'templates') {
+    var templateData = {
+      "template": data.theme,
+      "language": data.language,
+      "country": data.country,
+      "page": pageName
+    }
+    if (typeof lokiId == 'undefined') {
+      var res = Core9.data[TYPEOFPAGE].findObjects(templateData);
+      if (res.length > 0) {
+        for (var i = 0; i < res.length; i++) {
+          return res[i].$loki; // sorry just one at a time
+        }
+      }
+    } else {
+      return lokiId;
+    }
+  }
+}
 
 function getSelectBoxEntries(type, page) {
 
@@ -32,14 +57,14 @@ function getSelectBoxEntries(type, page) {
     "language": language,
     "country": country
   }
-  if(type == 'templates'){
+  if (type == 'templates') {
     query.template = template;
     if (page) {
       query.page = page;
     }
   }
-  if(type == 'pages'){
-    query.domain  = template;
+  if (type == 'pages') {
+    query.domain = template;
   }
 
   var result = Core9.data[type].findObjects(query);
@@ -97,11 +122,11 @@ function initTemplateSelectBoxes(themeOrSiteCollection) {
     var data = [];
 
     var query = {};
-    if(TYPEOFPAGE == 'pages'){
-    	query.domain = $(this).val();
+    if (TYPEOFPAGE == 'pages') {
+      query.domain = $(this).val();
     }
-    if(TYPEOFPAGE == 'templates'){
-    	query.template = $(this).val();
+    if (TYPEOFPAGE == 'templates') {
+      query.template = $(this).val();
     }
 
     var entries = Core9.data[TYPEOFPAGE].find(query);
@@ -120,11 +145,11 @@ function initTemplateSelectBoxes(themeOrSiteCollection) {
     var data = [];
 
     var query = {};
-    if(TYPEOFPAGE == 'pages'){
-    	query.domain = $(".template-data").val();
+    if (TYPEOFPAGE == 'pages') {
+      query.domain = $(".template-data").val();
     }
-    if(TYPEOFPAGE == 'templates'){
-    	query.template = $(".template-data").val();
+    if (TYPEOFPAGE == 'templates') {
+      query.template = $(".template-data").val();
     }
     query.language = $(this).val();
 
