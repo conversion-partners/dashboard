@@ -1,7 +1,6 @@
 TYPEOFPAGE = 'pages';
 
-Core9.data.language = ["en", "de", "nl"];
-Core9.data.countries = ["UK", "NL", "DE"];
+
 
 var activateEditor = function(page, id, pageData) {
   document.getElementById('delpage').dataset.currentid = id;
@@ -94,31 +93,7 @@ var activateEditor = function(page, id, pageData) {
       }
     });
 
-  Core9.data.versions = {};
 
-  var callback = function(record) {
-    setTimeout(function() {
-      try {
-        var selector = record.target.firstChild.firstChild.getAttribute('aria-labelledby');
-        if (selector.match(/select2-root\[\d*\]\[(theme|language|country|percentage)\]/)) {
-          console.log(selector);
-          var value = record.target.firstChild.textContent;
-          var myRegexp = /select2-root\[(\d*)\]\[(theme|language|country|percentage)\]/g;
-          var match = myRegexp.exec(selector);
-          var version = match[1];
-          var selectBox = match[2];
-          console.log(' updating version : '+version+ ' and selectbox : ' + selectBox + ' with value : ' + value);
-          console.log(match);
-
-        }
-      } catch (e) {}
-    }, 900);
-  }
-
-  watch(['[id^="select2-root[0][theme]"]', '[id^="select2-root[1][theme]"]', '[id^="select2-root[2][theme]"]'], callback);
-  watch(['[id^="select2-root[0][language]"]', '[id^="select2-root[1][language]"]', '[id^="select2-root[2][language]"]'], callback);
-  watch(['[id^="select2-root[0][country]"]', '[id^="select2-root[1][country]"]', '[id^="select2-root[2][country]"]'], callback);
-  watch(['[id^="select2-root[0][percentage]"]', '[id^="select2-root[1][percentage]"]', '[id^="select2-root[2][percentage]"]'], callback);
 
 
   Core9.editor.on('change', function() {
@@ -147,3 +122,30 @@ var activateEditor = function(page, id, pageData) {
     });
 
 }
+
+
+Core9.data.versions = {};
+
+var callback = function(record) {
+  setTimeout(function() {
+    try {
+      var selector = record.target.firstChild.firstChild.getAttribute('aria-labelledby');
+      if (selector.match(/select2-root\[\d*\]\[(theme|language|country|percentage)\]/)) {
+        console.log(selector);
+        var value = record.target.firstChild.textContent;
+        var myRegexp = /select2-root\[(\d*)\]\[(theme|language|country|percentage)\]/g;
+        var match = myRegexp.exec(selector);
+        var version = match[1];
+        var selectBox = match[2];
+        console.log(' updating version : '+version+ ' and selectbox : ' + selectBox + ' with value : ' + value);
+        console.log(match);
+
+      }
+    } catch (e) {}
+  }, 900);
+}
+
+watch(['[id^="select2-root[0][theme]"]', '[id^="select2-root[1][theme]"]', '[id^="select2-root[2][theme]"]'], callback);
+watch(['[id^="select2-root[0][language]"]', '[id^="select2-root[1][language]"]', '[id^="select2-root[2][language]"]'], callback);
+watch(['[id^="select2-root[0][country]"]', '[id^="select2-root[1][country]"]', '[id^="select2-root[2][country]"]'], callback);
+watch(['[id^="select2-root[0][percentage]"]', '[id^="select2-root[1][percentage]"]', '[id^="select2-root[2][percentage]"]'], callback);

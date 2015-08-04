@@ -17,6 +17,8 @@ Core9.template = {
   },
   templates: [],
   pages: [],
+  language = [];
+  countries = [];
   account: store.get('account'),
   init: function() {
     this.dataInit();
