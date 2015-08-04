@@ -1,9 +1,14 @@
 TYPEOFPAGE = 'pages';
 
 
+Core9.data.tmp = {};
 
 function setPageVersions(version, selectBox, value) {
-  Core9.data.page.pageData.versions[version][selectBox] = value;
+  if(Core9.data.tmp != value){
+    Core9.data.page.pageData.versions[version][selectBox] = value;
+    activateEditor(Core9.data.page.page, Core9.data.page.id, Core9.data.page.pageData);
+    Core9.data.tmp = value;
+  }
 }
 
 function watchEditor() {
