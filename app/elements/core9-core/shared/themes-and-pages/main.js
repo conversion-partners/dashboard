@@ -5,6 +5,7 @@ if (typeof Core9 === 'undefined') {
 Core9.editor = {};
 
 initStarted = false;
+
 function init() {
   if (!initStarted) {
     initNestable([]);
@@ -55,7 +56,7 @@ $(document)
         for (i = 0; i < entries.length; i++) {
           var item = {
             "id": guid(),
-            "$loki" : entries[i].$loki,
+            "$loki": entries[i].$loki,
             "page": entries[i].page
           }
           data.push(item);
@@ -63,7 +64,7 @@ $(document)
         initNestable(JSON.stringify(data));
       });
 
-      function getSelectBoxValues(){
+      function getSelectBoxValues() {
         var data = {};
         data.theme = $(".template-data").val();
         data.language = $(".language-data").val();
@@ -86,7 +87,7 @@ $(document)
           });
           initNestable(JSON.stringify(json));
           var data = getSelectBoxValues();
-          if(TYPEOFPAGE == 'templates'){
+          if (TYPEOFPAGE == 'templates') {
             var templateData = {
               "template": data.theme,
               "language": data.language,
@@ -108,38 +109,38 @@ $(document)
           function() {
 
 
-
-              var page = $('li[data-id="' + this.dataset.currentid + '"]');
-              var lokiId =  $(page).data('$loki');
-              var pageName = $(page).data('page');
-              console.log(pageName);
+            var delButton = $('#delpage');
+            var page = $('li[data-id="' + delButton.dataset.currentid + '"]');
+            var lokiId = $(page).data('$loki');
+            var pageName = $(page).data('page');
+            console.log(pageName);
             var data = getSelectBoxValues();
-            if(TYPEOFPAGE == 'templates'){
+            if (TYPEOFPAGE == 'templates') {
               var templateData = {
                 "template": data.theme,
                 "language": data.language,
                 "country": data.country,
                 "page": pageName
               }
-              if(typeof lokiId == 'undefined'){
+              if (typeof lokiId == 'undefined') {
                 var res = Core9.data[TYPEOFPAGE].findObjects(templateData);
-                if(res.length > 0){
+                if (res.length > 0) {
                   for (var i = 0; i < res.length; i++) {
                     var entry = res[i];
                     Core9.data[TYPEOFPAGE].remove(entry.$loki);
                   }
                 }
                 console.log(res);
-              }else{
+              } else {
                 Core9.data[TYPEOFPAGE].remove(lokiId);
               }
               $(
-                  'li[data-id="' + this.dataset.currentid + '"]')
+                  'li[data-id="' + delButton.dataset.currentid + '"]')
                 .remove();
 
-                try {
-                  Core9.editor.destroy();
-                } catch (e) {}
+              try {
+                Core9.editor.destroy();
+              } catch (e) {}
             }
 
 
