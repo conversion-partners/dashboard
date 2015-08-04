@@ -26,7 +26,7 @@ function activateEditor(page, id, pageData) {
           title: "Version",
           headerTemplate: "{{i}} - {{self.title}}",
           type: "object",
-          id: "templateid",
+          id: id,
           properties: {
             "title": {
               "type": "string",
@@ -54,7 +54,8 @@ function activateEditor(page, id, pageData) {
 
   document.getElementById('submit').addEventListener('click',
     function() {
-      console.log(Core9.editor.getValue());
+      var data = Core9.editor.getValue();
+      console.log(data);
 
       Core9.template.save();
     });
