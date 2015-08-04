@@ -37,7 +37,7 @@ var activateEditor = function(page, id, pageData) {
   Core9.data.pageData.page = page;
   Core9.data.pageData.id = id;
   Core9.data.pageData.pageData = pageData;
-  
+
   document.getElementById('delpage').dataset.currentid = id;
   try {
     Core9.editor.destroy();
