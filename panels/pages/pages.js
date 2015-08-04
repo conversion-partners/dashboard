@@ -36,8 +36,8 @@ var activateEditor = function(page, id, pageData) {
       format: 'grid',
       theme: 'bootstrap3',
       startval: starting_value,
-      no_additional_properties: true,
-      required_by_default: true,
+      no_additional_properties: false,
+      required_by_default: false,
       schema: {
         type: "array",
         title: page,
@@ -51,7 +51,7 @@ var activateEditor = function(page, id, pageData) {
             title: {
               type: "string",
               description: "Page title",
-              minLength: 4
+              minLength: 3
             },
             theme: {
               type: "string",
@@ -91,6 +91,7 @@ var activateEditor = function(page, id, pageData) {
     });
 
   Core9.editor.on('change', function() {
+
     var errors = Core9.editor.validate();
 
     var indicator = document.getElementById('valid_indicator');
@@ -104,12 +105,12 @@ var activateEditor = function(page, id, pageData) {
     }
   });
 
-  document.getElementById('submit').addEventListener('click',
+  document.getElementById('submit2').addEventListener('click',
     function() {
       console.log(Core9.editor.getValue());
     });
 
-  document.getElementById('restore').addEventListener('click',
+  document.getElementById('restore2').addEventListener('click',
     function() {
       Core9.editor.setValue(starting_value);
     });
