@@ -1,11 +1,35 @@
 TYPEOFPAGE = 'pages';
 
+var reduceFun = function(array) {
+  return Core9.deDupeArray(array);
+}
+
+function getCountryOptions() {
+  var mapFun = function(obj) {
+    return obj.country;
+  }
+  return Core9.data.templates.mapReduce(mapFun, reduceFun);
+}
+
+function getLanguageOptions() {
+  var mapFun = function(obj) {
+    return obj.language;
+  }
+  return Core9.data.templates.mapReduce(mapFun, reduceFun);
+}
 
 Core9.data.tmp = {};
 
 function setPageVersions(version, selectBox, value) {
-  if(Core9.data.tmp != value){
+  if (Core9.data.tmp != value) {
     Core9.data.page.pageData.versions[version][selectBox] = value;
+    console.log(selectBox);
+    if (selectBox == "theme") {
+      Core9.data.language = getLanguageOptions();
+    }
+    if (selectBox == "language") {
+      Core9.data.countries = getCountryOptions();
+    }
     activateEditor(Core9.data.page.page, Core9.data.page.id, Core9.data.page.pageData);
     Core9.data.tmp = value;
   }
@@ -28,7 +52,7 @@ function watchEditor() {
           setPageVersions(version, selectBox, value);
         }
       } catch (e) {}
-    },1100);
+    }, 1100);
   }
 
   watch(['[id^="select2-root[0][theme]"]', '[id^="select2-root[1][theme]"]', '[id^="select2-root[2][theme]"]'], callback);
