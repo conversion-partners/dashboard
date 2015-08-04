@@ -26,6 +26,16 @@ var activateEditor = function(page, id, pageData) {
   });
 
   var starting_value = pageData.versions;
+  //
+  // var starting_value2 = [];
+  // for (var i = 0; i < starting_value.length; i++) {
+  //   var version = starting_value[i];
+  //   delete version.theme;
+  // //  version.temm = "shunsine";
+  //   starting_value2.push(version);
+  // }
+
+
 
   Core9.editor = new JSONEditor(document
     .getElementById('editor_holder2'), {
@@ -50,12 +60,11 @@ var activateEditor = function(page, id, pageData) {
           properties: {
             title: {
               type: "string",
-              description: "Page title",
               minLength: 3
             },
             theme: {
               type: "string",
-              enum: ["shunsine", "clean", "fluid", "core9-theme-ess"]
+              enum: ["shunsine", "clean", "fluid", "core9themeess"]
             },
             language: {
               type: "string",
@@ -103,6 +112,8 @@ var activateEditor = function(page, id, pageData) {
       indicator.style.color = 'green';
       indicator.textContent = "valid";
     }
+
+    console.log(Core9.editor.getValue());
   });
 
   document.getElementById('submit2').addEventListener('click',
