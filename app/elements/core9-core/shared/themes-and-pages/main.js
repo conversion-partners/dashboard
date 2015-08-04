@@ -69,12 +69,19 @@ $(document)
       $('#newpage').on(
         'click',
         function() {
+
+          var pageName = prompt("Please enter template name", "New Template");
+
+          if (pageName == null) {
+            pageName = "New Template " + guid();
+          }
+
           var content = $('#nestable').nestable(
             'serialize');
           var json = content; //JSON.parse(jsonStr);
           json.unshift({
             "id": guid(),
-            "page": "New Page"
+            "page": pageName
           });
           initNestable(JSON.stringify(json));
           var data = getSelectBoxValues();
@@ -83,7 +90,7 @@ $(document)
               "template": data.theme,
               "language": data.language,
               "country": data.country,
-              "page": "New Page",
+              "page": pageName,
               "versions": [{
                 "status": "active",
                 "title": "New Page"

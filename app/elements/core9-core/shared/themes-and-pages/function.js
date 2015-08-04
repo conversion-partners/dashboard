@@ -39,6 +39,9 @@ function getCurrentPageId() {
   var page = $('li[data-id="' + delButton.data('currentid') + '"]');
   var lokiId = $(page).data('$loki');
   var pageName = $(page).data('page');
+  if(typeof pageName == 'undefined'){
+    pageName = $('#editor_holder2 > div > h3 > span').text();
+  }
   console.log(pageName);
   var data = getSelectBoxValues();
   if (TYPEOFPAGE == 'templates') {
