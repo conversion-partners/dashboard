@@ -129,8 +129,6 @@ var activateEditor = function(page, id, pageData) {
 
   document.getElementById('submit2').addEventListener('click',
     function() {
-      // get ids on partial document.querySelector('[id^="select2-root[0][theme]"]').id;
-      console.log(document.querySelector('[id^="select2-root[0][theme]"]').id);
       console.log(Core9.editor.getValue());
     });
 
