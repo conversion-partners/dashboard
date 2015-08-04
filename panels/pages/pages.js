@@ -29,6 +29,8 @@ var activateEditor = function(page, id, pageData) {
 
   var language = ["en", "de", "nl"];
 
+  var countries = ["UK", "NL", "DE"];
+
   Core9.editor = new JSONEditor(document
     .getElementById('editor_holder2'), {
       ajax: true,
@@ -64,7 +66,7 @@ var activateEditor = function(page, id, pageData) {
             },
             country: {
               type: "string",
-              enum: []
+              enum: countries
             },
             template: {
               type: "string",
@@ -92,24 +94,19 @@ var activateEditor = function(page, id, pageData) {
     });
 
 
-
-
-
-
-
-
   var callback = function(record) {
     try {
       var selector = record.target.firstChild.firstChild.getAttribute('aria-labelledby');
       console.log(selector);
-    } catch (e) {
-
-    }
+    } catch (e) {}
     console.log();
     console.log(record.target.firstChild.textContent);
   }
 
-  watch(['[id^="select2-root[0][theme]"]','[id^="select2-root[1][theme]"]','[id^="select2-root[2][theme]"]'], callback);
+  watch(['[id^="select2-root[0][theme]"]', '[id^="select2-root[1][theme]"]', '[id^="select2-root[2][theme]"]'], callback);
+  watch(['[id^="select2-root[0][language]"]', '[id^="select2-root[1][language]"]', '[id^="select2-root[2][language]"]'], callback);
+  watch(['[id^="select2-root[0][country]"]', '[id^="select2-root[1][country]"]', '[id^="select2-root[2][country]"]'], callback);
+  watch(['[id^="select2-root[0][percentage]"]', '[id^="select2-root[1][percentage]"]', '[id^="select2-root[2][percentage]"]'], callback);
 
 
   Core9.editor.on('change', function() {
