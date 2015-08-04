@@ -96,13 +96,13 @@ var activateEditor = function(page, id, pageData) {
   Core9.data.versions = {};
 
   var callback = function(record) {
-    setTimeout(function(){
+    setTimeout(function() {
       try {
         var selector = record.target.firstChild.firstChild.getAttribute('aria-labelledby');
-        if(selector.match(/select2-root\[\d*\]\[(theme|language|country|percentage)\]/)){
+        if (selector.match(/select2-root\[\d*\]\[(theme|language|country|percentage)\]/)) {
           console.log(selector);
+          console.log(record.target.firstChild.textContent);
         }
-        console.log(record.target.firstChild.textContent);
       } catch (e) {}
     }, 900);
   }
