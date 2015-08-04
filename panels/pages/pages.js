@@ -2,7 +2,42 @@ TYPEOFPAGE = 'pages';
 
 
 
+function setPageVersions(version, selectBox, value) {
+  //Core9.data.versions
+}
+
+function watchEditor() {
+  var callback = function(record) {
+    setTimeout(function() {
+      try {
+        var selector = record.target.firstChild.firstChild.getAttribute('aria-labelledby');
+        if (selector.match(/select2-root\[\d*\]\[(theme|language|country|percentage)\]/)) {
+          console.log(selector);
+          var value = record.target.firstChild.textContent;
+          var myRegexp = /select2-root\[(\d*)\]\[(theme|language|country|percentage)\]/g;
+          var match = myRegexp.exec(selector);
+          var version = match[1];
+          var selectBox = match[2];
+          console.log(' updating version : ' + version + ' and selectbox : ' + selectBox + ' with value : ' + value);
+          console.log(match);
+
+        }
+      } catch (e) {}
+    }, 900);
+  }
+
+  watch(['[id^="select2-root[0][theme]"]', '[id^="select2-root[1][theme]"]', '[id^="select2-root[2][theme]"]'], callback);
+  watch(['[id^="select2-root[0][language]"]', '[id^="select2-root[1][language]"]', '[id^="select2-root[2][language]"]'], callback);
+  watch(['[id^="select2-root[0][country]"]', '[id^="select2-root[1][country]"]', '[id^="select2-root[2][country]"]'], callback);
+  watch(['[id^="select2-root[0][percentage]"]', '[id^="select2-root[1][percentage]"]', '[id^="select2-root[2][percentage]"]'], callback);
+}
+
 var activateEditor = function(page, id, pageData) {
+
+  Core9.data.pageData.page = page;
+  Core9.data.pageData.id = id;
+  Core9.data.pageData.pageData = pageData;
+  
   document.getElementById('delpage').dataset.currentid = id;
   try {
     Core9.editor.destroy();
@@ -97,11 +132,8 @@ var activateEditor = function(page, id, pageData) {
 
 
   Core9.editor.on('change', function() {
-
     var errors = Core9.editor.validate();
-
     var indicator = document.getElementById('valid_indicator');
-
     if (errors.length) {
       indicator.style.color = 'red';
       indicator.textContent = "not valid";
@@ -121,31 +153,5 @@ var activateEditor = function(page, id, pageData) {
       Core9.editor.setValue(starting_value);
     });
 
+  watchEditor();
 }
-
-
-Core9.data.versions = {};
-
-var callback = function(record) {
-  setTimeout(function() {
-    try {
-      var selector = record.target.firstChild.firstChild.getAttribute('aria-labelledby');
-      if (selector.match(/select2-root\[\d*\]\[(theme|language|country|percentage)\]/)) {
-        console.log(selector);
-        var value = record.target.firstChild.textContent;
-        var myRegexp = /select2-root\[(\d*)\]\[(theme|language|country|percentage)\]/g;
-        var match = myRegexp.exec(selector);
-        var version = match[1];
-        var selectBox = match[2];
-        console.log(' updating version : '+version+ ' and selectbox : ' + selectBox + ' with value : ' + value);
-        console.log(match);
-
-      }
-    } catch (e) {}
-  }, 900);
-}
-
-watch(['[id^="select2-root[0][theme]"]', '[id^="select2-root[1][theme]"]', '[id^="select2-root[2][theme]"]'], callback);
-watch(['[id^="select2-root[0][language]"]', '[id^="select2-root[1][language]"]', '[id^="select2-root[2][language]"]'], callback);
-watch(['[id^="select2-root[0][country]"]', '[id^="select2-root[1][country]"]', '[id^="select2-root[2][country]"]'], callback);
-watch(['[id^="select2-root[0][percentage]"]', '[id^="select2-root[1][percentage]"]', '[id^="select2-root[2][percentage]"]'], callback);

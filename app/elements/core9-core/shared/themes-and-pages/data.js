@@ -5,7 +5,15 @@ if (typeof Core9 === 'undefined') {
 Core9.data = {
   "templates": new loki.Collection('templates'),
   "pages": new loki.Collection('pages'),
-  "blocks": new loki.Collection('blocks')
+  "blocks": new loki.Collection('blocks'),
+  language: [],
+  countries: [],
+  versions: [],
+  pageData: {
+    page: "",
+    id: "",
+    pageData: {}
+  }
 }
 
 Core9.template = {
@@ -17,8 +25,6 @@ Core9.template = {
   },
   templates: [],
   pages: [],
-  language = [];
-  countries = [];
   account: store.get('account'),
   init: function() {
     this.dataInit();
@@ -112,12 +118,12 @@ Core9.template = {
   },
   getThemesOrSites: function(type, collection) {
     var mapFun = function(obj) {
-    	if(type == 'templates'){
-    	      return obj.template;
-    	}
-    	if(type == 'pages'){
-    	      return obj.domain;
-    	}
+      if (type == 'templates') {
+        return obj.template;
+      }
+      if (type == 'pages') {
+        return obj.domain;
+      }
     }
     var reduceFun = function(array) {
       return Core9.deDupeArray(array);
