@@ -27,6 +27,7 @@ var activateEditor = function(page, id, pageData) {
 
   var starting_value = pageData.versions;
 
+  var language = ["en","de","nl"];
 
   Core9.editor = new JSONEditor(document
     .getElementById('editor_holder2'), {
@@ -59,7 +60,7 @@ var activateEditor = function(page, id, pageData) {
             },
             language: {
               type: "string",
-              enum: []
+              enum: language
             },
             country: {
               type: "string",
@@ -107,6 +108,8 @@ var activateEditor = function(page, id, pageData) {
 
   document.getElementById('submit2').addEventListener('click',
     function() {
+      // get ids on partial document.querySelector('[id^="select2-root[0][theme]"]').id;
+      console.log(document.querySelector('[id^="select2-root[0][theme]"]').id);
       console.log(Core9.editor.getValue());
     });
 
