@@ -64,16 +64,7 @@ $(document)
         initNestable(JSON.stringify(data));
       });
 
-      function getSelectBoxValues() {
-        var data = {};
-        data.theme = $(".template-data").val();
-        data.language = $(".language-data").val();
-        data.country = $(".country-data").val();
-        if (data.country == null) {
-          data.country = ""
-        }
-        return data;
-      }
+
 
       $('#newpage').on(
         'click',

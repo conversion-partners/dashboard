@@ -18,6 +18,17 @@ function updateOutput() {
     'serialize');
 }
 
+function getSelectBoxValues() {
+  var data = {};
+  data.theme = $(".template-data").val();
+  data.language = $(".language-data").val();
+  data.country = $(".country-data").val();
+  if (data.country == null) {
+    data.country = ""
+  }
+  return data;
+}
+
 function getCurrentPageId() {
   var delButton = $('#delpage');
   var page = $('li[data-id="' + delButton.data('currentid') + '"]');
