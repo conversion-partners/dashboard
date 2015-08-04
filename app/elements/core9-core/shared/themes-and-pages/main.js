@@ -70,10 +70,9 @@ $(document)
         'click',
         function() {
 
-          var pageName = prompt("Please enter template name", "New Template");
-
-          if (pageName == null) {
-            pageName = "New Template " + guid();
+          var pageName = null;
+          while (pageName == null) {
+            pageName = prompt("Please enter template name", "New Template");
           }
 
           var content = $('#nestable').nestable(
