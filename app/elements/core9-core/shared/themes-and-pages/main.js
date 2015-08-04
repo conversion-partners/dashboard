@@ -103,50 +103,41 @@ $(document)
 
         });
 
+      function getCurrentPageId() {
+        var delButton = $('#delpage');
+        var page = $('li[data-id="' + delButton.data('currentid') + '"]');
+        var lokiId = $(page).data('$loki');
+        var pageName = $(page).data('page');
+        console.log(pageName);
+        var data = getSelectBoxValues();
+        if (TYPEOFPAGE == 'templates') {
+          var templateData = {
+            "template": data.theme,
+            "language": data.language,
+            "country": data.country,
+            "page": pageName
+          }
+          if (typeof lokiId == 'undefined') {
+            var res = Core9.data[TYPEOFPAGE].findObjects(templateData);
+            if (res.length > 0) {
+              for (var i = 0; i < res.length; i++) {
+                return res[i].$loki; // sorry just one at a time
+              }
+            }
+          } else {
+            return lokiId;
+          }
+        }
+      }
       $('#delpage')
         .on(
           'click',
           function() {
-
-
-            var delButton = $('#delpage');
-            var page = $('li[data-id="' + delButton.data('currentid') + '"]');
-            var lokiId = $(page).data('$loki');
-            var pageName = $(page).data('page');
-            console.log(pageName);
-            var data = getSelectBoxValues();
-            if (TYPEOFPAGE == 'templates') {
-              var templateData = {
-                "template": data.theme,
-                "language": data.language,
-                "country": data.country,
-                "page": pageName
-              }
-              if (typeof lokiId == 'undefined') {
-                var res = Core9.data[TYPEOFPAGE].findObjects(templateData);
-                if (res.length > 0) {
-                  for (var i = 0; i < res.length; i++) {
-                    var entry = res[i];
-                    Core9.data[TYPEOFPAGE].remove(entry.$loki);
-                  }
-                }
-                console.log(res);
-              } else {
-                Core9.data[TYPEOFPAGE].remove(lokiId);
-              }
-              $(
-                  'li[data-id="' + delButton.data('currentid') + '"]')
-                .remove();
-
-              try {
-                Core9.editor.destroy();
-              } catch (e) {}
-            }
-
-
-
-
-
-
+            var lokiId = getCurrentPageId();
+            Core9.data[TYPEOFPAGE].remove(lokiId);
+            $('li[data-id="' + $('#delpage').data('currentid') + '"]').remove();
+            try {
+              Core9.editor.destroy();
+            } catch (e) {}
           });
     });
