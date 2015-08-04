@@ -31,7 +31,7 @@ function watchItem(elem, callback) {
           Core9.mutex = mutationRecord;
         }
 
-      }, 1);
+      }, 100);
     });
   });
   mutationObserver.observe(document.body, whatToObserve);

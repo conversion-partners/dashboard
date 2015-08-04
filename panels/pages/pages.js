@@ -18,12 +18,15 @@ function getLanguageOptions() {
   return Core9.data.templates.mapReduce(mapFun, reduceFun);
 }
 
+function setActiveTab(tab) {
+  $('#editor_holder2 > div > div.rows > div.tabs.list-group.col-md-2 > a.list-group-item').eq(tab)[0].click();
+}
+
 Core9.data.tmp = {};
 
 function setPageVersions(version, selectBox, value) {
   if (Core9.data.tmp != value) {
     Core9.data.page.pageData.versions[version][selectBox] = value;
-    console.log(selectBox);
     if (selectBox == "theme") {
       Core9.data.language = getLanguageOptions();
     }
@@ -31,6 +34,7 @@ function setPageVersions(version, selectBox, value) {
       Core9.data.countries = getCountryOptions();
     }
     activateEditor(Core9.data.page.page, Core9.data.page.id, Core9.data.page.pageData);
+    setActiveTab(version);
     Core9.data.tmp = value;
   }
 }
