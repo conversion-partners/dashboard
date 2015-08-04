@@ -37,8 +37,10 @@ var activateEditor = function(page, id, pageData) {
 
 
 
+
   Core9.editor = new JSONEditor(document
     .getElementById('editor_holder2'), {
+      enhanced_ui: 'selectize',
       ajax: true,
       disable_edit_json: true,
       disable_collapse: true,
