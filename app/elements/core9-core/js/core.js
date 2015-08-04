@@ -1,3 +1,6 @@
+Core9 = {}
+Core9.mutex = {};
+
 function watchItem(elem, callback) {
   var whatToObserve = {
     childList: true,
@@ -8,20 +11,27 @@ function watchItem(elem, callback) {
   };
   var mutationObserver = new MutationObserver(function(mutationRecords) {
     $.each(mutationRecords, function(index, mutationRecord) {
-      if (mutationRecord.type === 'childList') {
-        if (mutationRecord.addedNodes.length > 0) {
-          //DOM node added, do something
-          callback(mutationRecord);
-        } else if (mutationRecord.removedNodes.length > 0) {
-          //DOM node removed, do something
-          callback(mutationRecord);
+      setTimeout(function() {
+
+        if (Core9.mutex != mutationRecord) {
+          if (mutationRecord.type === 'childList') {
+            if (mutationRecord.addedNodes.length > 0) {
+              //DOM node added, do something
+              callback(mutationRecord);
+            } else if (mutationRecord.removedNodes.length > 0) {
+              //DOM node removed, do something
+              callback(mutationRecord);
+            }
+          } else if (mutationRecord.type === 'attributes') {
+            if (mutationRecord.attributeName === 'class') {
+              //class changed, do something
+              callback(mutationRecord);
+            }
+          }
+          Core9.mutex = mutationRecord;
         }
-      } else if (mutationRecord.type === 'attributes') {
-        if (mutationRecord.attributeName === 'class') {
-          //class changed, do something
-          callback(mutationRecord);
-        }
-      }
+
+      }, 1900);
     });
   });
   mutationObserver.observe(document.body, whatToObserve);
@@ -75,7 +85,7 @@ function isEmpty(str) {
 }
 
 
-Core9 = {}
+
 
 Core9.workspace = {
   cleanWorkspace: function() {

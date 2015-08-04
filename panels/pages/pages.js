@@ -17,18 +17,18 @@ function watchEditor() {
       try {
         var selector = record.target.firstChild.firstChild.getAttribute('aria-labelledby');
         if (selector.match(/select2-root\[\d*\]\[(theme|language|country|percentage)\]/)) {
-          console.log(selector);
+          //console.log(selector);
           var value = record.target.firstChild.textContent;
           var myRegexp = /select2-root\[(\d*)\]\[(theme|language|country|percentage)\]/g;
           var match = myRegexp.exec(selector);
           var version = match[1];
           var selectBox = match[2];
-          console.log(' updating version : ' + version + ' and selectbox : ' + selectBox + ' with value : ' + value);
-          console.log(match);
+          //console.log(' updating version : ' + version + ' and selectbox : ' + selectBox + ' with value : ' + value);
+          //console.log(match);
           setPageVersions(version, selectBox, value);
         }
       } catch (e) {}
-    }, 900);
+    },1100);
   }
 
   watch(['[id^="select2-root[0][theme]"]', '[id^="select2-root[1][theme]"]', '[id^="select2-root[2][theme]"]'], callback);
