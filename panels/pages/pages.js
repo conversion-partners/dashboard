@@ -62,38 +62,38 @@ var activateEditor = function(page, id, pageData) {
               type: "string",
               minLength: 3
             },
-            theme: {
-              type: "string",
-              enum: ["shunsine", "clean", "fluid", "core9-theme-ess"]
-            },
-            language: {
-              type: "string",
-              enum: []
-            },
-            country: {
-              type: "string",
-              enum: []
-            },
-            template: {
-              type: "string",
-              enum: []
-            },
-            percentage: {
-              type: "integer",
-              enum: getArray(101)
-            },
-            startdate: {
-              type: "string",
-              format: "date"
-            },
-            enddate: {
-              type: "string",
-              format: "date"
-            },
-            status: {
-              type: "string",
-              enum: ["active", "pauzed"]
+             theme: {
+               type: "string",
+               enum: ["shunsine", "clean", "fluid", "core9-theme-ess"]
             }
+            // language: {
+            //   type: "string",
+            //   enum: []
+            // },
+            // country: {
+            //   type: "string",
+            //   enum: []
+            // },
+            // template: {
+            //   type: "string",
+            //   enum: []
+            // },
+            // percentage: {
+            //   type: "integer",
+            //   enum: getArray(101)
+            // },
+            // startdate: {
+            //   type: "string",
+            //   format: "date"
+            // },
+            // enddate: {
+            //   type: "string",
+            //   format: "date"
+            // },
+            // status: {
+            //   type: "string",
+            //   enum: ["active", "pauzed"]
+            // }
           }
         }
       }
