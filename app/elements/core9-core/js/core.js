@@ -1,12 +1,38 @@
+function watchItem(elem, callback) {
+  var whatToObserve = {
+    childList: true,
+    attributes: true,
+    subtree: true,
+    attributeOldValue: true,
+    attributeFilter: ['class', 'style']
+  };
+  var mutationObserver = new MutationObserver(function(mutationRecords) {
+    $.each(mutationRecords, function(index, mutationRecord) {
+      if (mutationRecord.type === 'childList') {
+        if (mutationRecord.addedNodes.length > 0) {
+          //DOM node added, do something
+          callback(mutationRecord);
+        } else if (mutationRecord.removedNodes.length > 0) {
+          //DOM node removed, do something
+          callback(mutationRecord);
+        }
+      } else if (mutationRecord.type === 'attributes') {
+        if (mutationRecord.attributeName === 'class') {
+          //class changed, do something
+          callback(mutationRecord);
+        }
+      }
+    });
+  });
+  mutationObserver.observe(document.body, whatToObserve);
+}
+
 // First, checks if it isn't implemented yet.
 if (!String.prototype.format) {
   String.prototype.format = function() {
     var args = arguments;
     return this.replace(/{(\d+)}/g, function(match, number) {
-      return typeof args[number] != 'undefined'
-        ? args[number]
-        : match
-      ;
+      return typeof args[number] != 'undefined' ? args[number] : match;
     });
   };
 }
@@ -42,8 +68,7 @@ function isEmpty(str) {
 }
 
 
-Core9 = {
-}
+Core9 = {}
 
 Core9.workspace = {
   cleanWorkspace: function() {

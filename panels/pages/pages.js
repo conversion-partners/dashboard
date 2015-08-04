@@ -27,7 +27,7 @@ var activateEditor = function(page, id, pageData) {
 
   var starting_value = pageData.versions;
 
-  var language = ["en","de","nl"];
+  var language = ["en", "de", "nl"];
 
   Core9.editor = new JSONEditor(document
     .getElementById('editor_holder2'), {
@@ -56,7 +56,7 @@ var activateEditor = function(page, id, pageData) {
             },
             theme: {
               type: "string",
-              enum: ["shunsine", "clean", "fluid", "core9-theme-ess"]
+              enum: Core9.template.templates
             },
             language: {
               type: "string",
@@ -90,6 +90,32 @@ var activateEditor = function(page, id, pageData) {
         }
       }
     });
+
+
+
+
+
+
+  function watch(list, callback){
+    for (var i = 0; i < list.length; i++) {
+      var selector = list[i];
+      watchItem(document.querySelector(selector), callback);
+    }
+  }
+
+  var callback = function(record) {
+    try {
+      var selector = record.target.firstChild.firstChild.getAttribute('aria-labelledby');
+      console.log(selector);
+    } catch (e) {
+
+    }
+    console.log();
+    console.log(record.target.firstChild.textContent);
+  }
+
+  watch(['[id^="select2-root[0][theme]"]','[id^="select2-root[1][theme]"]','[id^="select2-root[2][theme]"]'], callback);
+
 
   Core9.editor.on('change', function() {
 
