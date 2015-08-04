@@ -96,38 +96,38 @@ var starting_value = pageData.versions;
           type: "object",
           id: "person",
           properties: {
-            "title": {
-              "type": "string",
-              "description": "Page title",
-              "minLength": 4
-            },
-            "theme": {
+            title: {
               type: "string",
-              enum: ["shunsine", "clean", "fluid"]
+              description: "Page title",
+              minLength: 4
             },
-            "language": {
+            theme: {
               type: "string",
-              enum: []
+              enum: ["shunsine", "clean", "fluid", "core9-theme-ess"]
             },
-            "country": {
+            language: {
               type: "string",
               enum: []
             },
-            "percentage": {
+            country: {
+              type: "string",
+              enum: []
+            },
+            percentage: {
               type: "integer",
               enum: getArray(101)
             },
-            "startdate": {
-              "type": "string",
-              "format": "date"
+            startdate: {
+              type: "string",
+              format: "date"
             },
-            "enddate": {
-              "type": "string",
-              "format": "date"
+            enddate: {
+              type: "string",
+              format: "date"
             },
-            "status": {
-              "type": "string",
-              "enum": ["active", "pauzed"]
+            status: {
+              type: "string",
+              enum: ["active", "pauzed"]
             }
           }
         }
