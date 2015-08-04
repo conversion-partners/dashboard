@@ -29,6 +29,11 @@ function getSelectBoxValues() {
   return data;
 }
 
+function getCurrentPage(){
+  var id = getCurrentPageId();
+  return Core9.data[TYPEOFPAGE].get(id);
+}
+
 function getCurrentPageId() {
   var delButton = $('#delpage');
   var page = $('li[data-id="' + delButton.data('currentid') + '"]');
