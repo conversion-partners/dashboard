@@ -3,9 +3,7 @@ TYPEOFPAGE = 'pages';
 
 
 function setPageVersions(version, selectBox, value) {
-  console.log(Core9.data.page.pageData.versions);
   Core9.data.page.pageData.versions[version][selectBox] = value;
-  console.log(Core9.data.page.pageData.versions);
 }
 
 function watchEditor() {
