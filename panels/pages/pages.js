@@ -1,5 +1,8 @@
 TYPEOFPAGE = 'pages';
 
+Core9.data.language = ["en", "de", "nl"];
+Core9.data.countries = ["UK", "NL", "DE"];
+
 var activateEditor = function(page, id, pageData) {
   document.getElementById('delpage').dataset.currentid = id;
   try {
@@ -27,9 +30,7 @@ var activateEditor = function(page, id, pageData) {
 
   var starting_value = pageData.versions;
 
-  var language = ["en", "de", "nl"];
 
-  var countries = ["UK", "NL", "DE"];
 
   Core9.editor = new JSONEditor(document
     .getElementById('editor_holder2'), {
@@ -62,11 +63,11 @@ var activateEditor = function(page, id, pageData) {
             },
             language: {
               type: "string",
-              enum: language
+              enum: Core9.data.language
             },
             country: {
               type: "string",
-              enum: countries
+              enum: Core9.data.countries
             },
             template: {
               type: "string",
