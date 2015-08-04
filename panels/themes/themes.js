@@ -9,49 +9,6 @@ function init() {
   }
 }
 
-
-
-
-
-function initNestable(jsonStr) {
-  console.log('init nestable..');
-
-  initTemplateSelectBoxes(Core9.template.themes);
-
-  var container = document
-    .getElementById('nestablecontainer');
-  while (container.firstChild)
-    container.removeChild(container.firstChild);
-  var div = document.createElement('div');
-  div.id = 'nestable';
-  div.className = 'dd';
-  container.appendChild(div);
-
-  $('#nestable')
-    .nestable({
-      group: 1,
-      maxDepth: 20,
-      json: jsonStr,
-      contentCallback: function(
-        item) {
-        var content = item.page || '' ? item.page : item.id;
-        content += '<div class="dd-handle dd3-handle">Drag</div>';
-        return content;
-      },
-      callback: function(l, e) {
-        var element = $(e[0])
-          .find(
-            '.dd-content')[0].childNodes[0];
-        var page = element.textContent;
-        activateEditor(
-          page,
-          getIdFromItem(element),
-          getSelectBoxEntries('templates',page)[0] // get only one sorry
-        );
-      }
-    }).on('change', updateOutput);
-}
-
 function activateEditor(page, id, pageData) {
   document.getElementById('delpage').dataset.currentid = id;
   try {
