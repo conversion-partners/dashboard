@@ -23,7 +23,7 @@ function activateEditor() {
       required_by_default: true,
       schema: {
         type: "array",
-        title: getSelectedPage(),
+        title: pageData.page,
         format: "tabs",
         items: {
           title: "Version",
