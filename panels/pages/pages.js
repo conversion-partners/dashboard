@@ -18,6 +18,30 @@ function getLanguageOptions() {
   return Core9.data.templates.mapReduce(mapFun, reduceFun);
 }
 
+function getTemplateVersion() {
+  var pageVersion = getActiveTab();
+  var pageData = Core9.data.page.pageData;//.versions[pageVersion];
+  var query = {
+    "template": pageData.template,
+    "language": pageData.language,
+    "country": pageData.country,
+    "page": Core9.data.page.page
+  }
+  var result = Core9.data.templates.findObjects(query);
+  //
+  return ['test'];
+}
+
+function getActiveTab() {
+  var tabs = $('#editor_holder2 > div > div.rows > div.tabs.list-group.col-md-2 > a.list-group-item');
+  for (var i = 0; i < tabs.length; i++) {
+    var tab = tabs[i];
+    if ($(tab).hasClass(active)) {
+      return i;
+    }
+  }
+}
+
 function setActiveTab(tab) {
   $('#editor_holder2 > div > div.rows > div.tabs.list-group.col-md-2 > a.list-group-item').eq(tab)[0].click();
 }
@@ -33,6 +57,9 @@ function setPageVersions(version, selectBox, value) {
     }
     if (selectBox == "language") {
       Core9.data.countries = getCountryOptions();
+    }
+    if (selectBox == "country") {
+      Core9.data.templateVersion = getTemplateVersion();
     }
     activateEditor(Core9.data.page.page, Core9.data.page.id, Core9.data.page.pageData);
     setActiveTab(version);
@@ -63,7 +90,7 @@ function watchEditor() {
   watch(['[id^="select2-root[0][percentage]"]', '[id^="select2-root[1][percentage]"]', '[id^="select2-root[2][percentage]"]'], callback);
 }
 
-function toLowerCase(data){
+function toLowerCase(data) {
   var arr = [];
   for (var i = 0; i < data.length; i++) {
     var item = data[i].toLowerCase();
@@ -76,6 +103,7 @@ var activateEditor = function(page, id, pageData) {
 
   Core9.data.language = getLanguageOptions();
   Core9.data.countries = getCountryOptions();
+  Core9.data.templateVersion = getTemplateVersion();
 
   Core9.data.page.page = page;
   Core9.data.page.id = id;
@@ -148,7 +176,12 @@ var activateEditor = function(page, id, pageData) {
             },
             template: {
               type: "string",
-              enum: []
+              enum: Core9.data.templateVersion
+            },
+            version: {
+              type: "string",
+              enum: ["blue","xmas"],
+              default : "blue"
             },
             percentage: {
               type: "integer",

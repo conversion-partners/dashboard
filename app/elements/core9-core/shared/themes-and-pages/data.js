@@ -11,6 +11,7 @@ Core9.data = {
   "blocks": new loki.Collection('blocks'),
   language: [],
   countries: [],
+  templateNames: [],
   versions: [],
   page: {
     page: "",
