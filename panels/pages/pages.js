@@ -174,12 +174,10 @@ var activateEditor = function () {
   }
   // select boxes
   function watchVersion(version) {
-
     $('[data-schemapath="root.0.language"]').find('select').prop('disabled', 'disabled');
     $('[data-schemapath="root.0.country"]').find('select').prop('disabled', 'disabled');
     $('[data-schemapath="root.0.template"]').find('select').prop('disabled', 'disabled');
     $('[data-schemapath="root.0.version"]').find('select').prop('disabled', 'disabled');
-
     Core9.editor.watch('root.' + version + '.theme', function () {
       var language = Core9.editor.getEditor('root.' + version + '.language');
       if(language) {
@@ -191,15 +189,21 @@ var activateEditor = function () {
           language.setValue($(this).val());
         });
         $(select).empty();
-        var optionStr = '<option value=""></option>';
-        for (var i = 0; i < languageOptions.length; i++) {
+        var optionStr = "";
+        var emptyOption = false;
+        for(var i = 0; i < languageOptions.length; i++) {
           var option = languageOptions[i];
-          if(!isEmpty(option)){
-            optionStr = optionStr.concat('<option value="'+option+'">'+option+'</option>');
+          if(!isEmpty(option)) {
+            optionStr = optionStr.concat('<option value="' + option + '">' + option + '</option>');
+          } else {
+            emptyOption = true;
           }
         }
+        if(emptyOption){
+          optionStr = '<option value=""></option>'.concat(optionStr);
+        }
         $(select).append(optionStr);
-          $('[data-schemapath="root.0.language"]').find('select').prop('disabled', false);
+        $('[data-schemapath="root.0.language"]').find('select').prop('disabled', false);
       }
     });
     Core9.editor.watch('root.' + version + '.language', function () {
