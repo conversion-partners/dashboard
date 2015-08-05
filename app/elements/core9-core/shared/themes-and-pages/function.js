@@ -46,7 +46,6 @@ function getCurrentPageId() {
   if (typeof pageName == 'undefined') {
     pageName = $('#editor_holder2 > div > h3 > span').text();
   }
-  console.log(pageName);
   var data = getSelectBoxValues();
   if (TYPEOFPAGE == 'templates') {
     var templateData = {
@@ -101,8 +100,9 @@ function setActiveTab(tab) {
   $('#editor_holder2 > div > div.rows > div.tabs.list-group.col-md-2 > a.list-group-item').eq(tab)[0].click();
 }
 
-function getSelectBoxEntries(page) {
+function getSelectBoxEntries() {
 
+  var page = getSelectedPage();
   var template = $(".template-data").val();
   var language = $(".language-data").val();
   var country = $(".country-data").val();
@@ -160,7 +160,7 @@ function initNestable(jsonStr) {
         setTimeout(function() {
           $('#editor_holder2 > div > h3 > span').html(page);
         }, 30);
-        activateEditor(getSelectBoxEntries(page)[0]);
+        activateEditor(getSelectBoxEntries()[0]);
       }
     }).on('change', updateOutput);
 }

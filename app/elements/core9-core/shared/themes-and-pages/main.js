@@ -51,7 +51,7 @@ $(document)
       });
 
       $('#refresh-templates').on('click', function() {
-        var entries = getSelectBoxEntries(TYPEOFPAGE);
+        var entries = getSelectBoxEntries();
         var data = [];
         for (i = 0; i < entries.length; i++) {
           var item = {
