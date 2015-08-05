@@ -4,16 +4,18 @@ var reduceFun = function (array) {
   return Core9.deDupeArray(array);
 }
 
-function getCountryOptions() {
+function getCountryOptions(theme) {
   var mapFun = function (obj) {
     return obj.country;
   }
   return Core9.data.templates.mapReduce(mapFun, reduceFun);
 }
 
-function getLanguageOptions() {
+function getLanguageOptions(theme) {
   var mapFun = function (obj) {
-    return obj.language;
+    if (theme = obj.template) {
+      return obj.language;
+    }
   }
   return Core9.data.templates.mapReduce(mapFun, reduceFun);
 }
@@ -52,10 +54,6 @@ function getTemplateVersion() {
   //
   return ['test'];
 }
-
-
-
-
 
 
 var activateEditor = function () {
@@ -125,11 +123,11 @@ var activateEditor = function () {
             },
             language: {
               type: "string",
-              enum: ["", "nl", "de"]
+              enum: getLanguageOptions()
             },
             country: {
               type: "string",
-              enum: ["", "nl", "de"]
+              enum: getCountryOptions()
             },
             template: {
               type: "string",
@@ -175,44 +173,56 @@ var activateEditor = function () {
     }
   });
 
+  function save() {
+    var page = getCurrentPage();
+    console.log(page);
+    var url = Core9.editor2.getValue()
+      .url;
+    console.log(url);
+    page.url = url;
+    var versions = Core9.editor.getValue();
+    page.versions = [];
+    page.versions = versions;
+    console.log(versions);
+    Core9.data[TYPEOFPAGE].update(page);
+    Core9.template.save();
+  }
+
   // select boxes
 
-  Core9.editor.watch('root.0.theme', function () {
-    console.log('watching theme ...');
-    var language = Core9.editor.getEditor('root.0.language');
-    if (language) {
-      language.setValue(" ");
-      console.log(language.getValue());
-    }
-  });
 
-  Core9.editor.watch('root.0.language', function () {
-    console.log('watching language ...');
-    var country = Core9.editor.getEditor('root.0.country');
-    if (country) {
-      country.setValue(" ");
-      console.log(country.getValue());
-    }
-  });
+  function watchVersion(version) {
+    Core9.editor.watch('root.' + version + '.theme', function () {
+      var language = Core9.editor.getEditor('root.' + version + '.language');
+      if (language) {
+        language.setValue(getLanguageOptions(Core9.editor.getEditor('root.' + version + '.theme')
+          .getValue()));
+      }
+    });
+    Core9.editor.watch('root.' + version + '.language', function () {
+      var country = Core9.editor.getEditor('root.' + version + '.country');
+      if (country) {
+        country.setValue(" ");
+      }
+    });
+    Core9.editor.watch('root.' + version + '.country', function () {
+      var template = Core9.editor.getEditor('root.' + version + '.template');
+      if (template) {
+        template.setValue(" ");
+      }
+    });
+    Core9.editor.watch('root.' + version + '.template', function () {
+      var templateVersion = Core9.editor.getEditor('root.' + version + '.version');
+      if (templateVersion) {
+        templateVersion.setValue(" ");
+      }
+    });
+  }
 
-  Core9.editor.watch('root.0.country', function () {
-    console.log('watching country ...');
-    var template = Core9.editor.getEditor('root.0.template');
-    if (template) {
-      template.setValue(" ");
-      console.log(template.getValue());
-    }
-  });
-
-
-  Core9.editor.watch('root.0.template', function () {
-    console.log('watching template ...');
-    var version = Core9.editor.getEditor('root.0.version');
-    if (version) {
-      version.setValue(" ");
-      console.log(version.getValue());
-    }
-  });
+  watchVersion(0);
+  watchVersion(1);
+  watchVersion(2);
+  watchVersion(3);
 
 
 
@@ -221,18 +231,7 @@ var activateEditor = function () {
   document.getElementById('submit2')
     .addEventListener('click',
       function () {
-        var page = getCurrentPage();
-        console.log(page);
-        var url = Core9.editor2.getValue()
-          .url;
-        console.log(url);
-        page.url = url;
-        var versions = Core9.editor.getValue();
-        page.versions = [];
-        page.versions = versions;
-        console.log(versions);
-        Core9.data[TYPEOFPAGE].update(page);
-        Core9.template.save();
+        save();
       });
 
   document.getElementById('restore2')
