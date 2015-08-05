@@ -18,16 +18,16 @@ function getLanguageOptions() {
   return Core9.data.templates.mapReduce(mapFun, reduceFun);
 }
 
-function getTemplateName() {
+function getTemplateName(pageData) {
   var pageVersion = getActiveTab();
-  var version = Core9.data.page.pageData.versions[pageVersion];
+  //var version = pageData;//Core9.data.page.pageData.versions[pageVersion];
 
   var templateNames = [];
 
   var query = {
-    "page": version.template,
-    "language": version.language,
-    "country": $('#editor_holder2 > div > div.rows > div.col-md-10 > div:nth-child(1) > div.well.well-sm > div > div > div:nth-child(4) > div > div.form-group > select').val()
+    "page": pageData.version.versions[pageVersion].template,
+    "language": "", //version.language,
+    "country": "" //$('#editor_holder2 > div > div.rows > div.col-md-10 > div:nth-child(1) > div.well.well-sm > div > div > div:nth-child(4) > div > div.form-group > select').val()
   }
   var result = Core9.data.templates.findObjects(query);
   for (var i = 0; i < result.length; i++) {
@@ -127,7 +127,7 @@ var activateEditor = function(page, id, pageData) {
 
   Core9.data.language = getLanguageOptions();
   Core9.data.countries = getCountryOptions();
-  //Core9.data.templateName = getTemplateName();
+  //Core9.data.templateName = getTemplateName(pageData);
   //Core9.data.templateVersion = getTemplateVersion();
 
 
@@ -194,19 +194,19 @@ var activateEditor = function(page, id, pageData) {
             },
             language: {
               type: "string",
-              enum: Core9.data.language
+              enum: []//Core9.data.language
             },
             country: {
               type: "string",
-              enum: Core9.data.countries
+              enum: []//Core9.data.countries
             },
             template: {
               type: "string",
-              enum: ["test","test2"]//Core9.data.templateName
+              enum: ["", "test", "test2"] //Core9.data.templateName
             },
             version: {
               type: "string",
-              enum: ["test","test2"]//Core9.data.templateVersion
+              enum: ["", "test", "test2"] //Core9.data.templateVersion
             },
             percentage: {
               type: "integer",
@@ -244,9 +244,21 @@ var activateEditor = function(page, id, pageData) {
     }
   });
 
-  Core9.editor.watch('root.0.country',function() {
+  Core9.editor.watch('root.0.country', function() {
     console.log('watching country ...');
     Core9.data.templateName = getTemplateName();
+
+    var country = Core9.editor.getEditor('root.0.country');
+
+    if (country) {
+      var val = country.getValue();
+      console.log(val);
+      country.setValue(val);
+      console.log(country.getValue());
+    }
+
+
+    activateEditor(Core9.data.page.page, Core9.data.page.id, Core9.data.page.pageData);
   });
 
 
