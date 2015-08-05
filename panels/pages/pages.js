@@ -194,19 +194,19 @@ var activateEditor = function(page, id, pageData) {
             },
             language: {
               type: "string",
-              enum: []//Core9.data.language
+              enum: Core9.data.language
             },
             country: {
               type: "string",
-              enum: []//Core9.data.countries
+              enum: ["", "nl", "de"]  //Core9.data.countries
             },
             template: {
               type: "string",
-              enum: ["", "test", "test2"] //Core9.data.templateName
+              enum: ["", "nl", "de"] //Core9.data.templateName
             },
             version: {
               type: "string",
-              enum: ["", "test", "test2"] //Core9.data.templateVersion
+              enum: ["", "nl", "de"] //Core9.data.templateVersion
             },
             percentage: {
               type: "integer",
@@ -244,21 +244,42 @@ var activateEditor = function(page, id, pageData) {
     }
   });
 
-  Core9.editor.watch('root.0.country', function() {
-    console.log('watching country ...');
-    Core9.data.templateName = getTemplateName();
 
+  Core9.editor.watch('root.0.theme', function() {
+    console.log('watching theme ...');
+    var language = Core9.editor.getEditor('root.0.language');
+    if (language) {
+      language.setValue(" ");
+      console.log(language.getValue());
+    }
+  });
+
+  Core9.editor.watch('root.0.language', function() {
+    console.log('watching language ...');
     var country = Core9.editor.getEditor('root.0.country');
-
     if (country) {
-      var val = country.getValue();
-      console.log(val);
-      country.setValue(val);
+      country.setValue(" ");
       console.log(country.getValue());
     }
+  });
+
+  Core9.editor.watch('root.0.country', function() {
+    console.log('watching country ...');
+    var template = Core9.editor.getEditor('root.0.template');
+    if (template) {
+      template.setValue(" ");
+      console.log(template.getValue());
+    }
+  });
 
 
-    activateEditor(Core9.data.page.page, Core9.data.page.id, Core9.data.page.pageData);
+  Core9.editor.watch('root.0.template', function() {
+    console.log('watching template ...');
+    var version = Core9.editor.getEditor('root.0.version');
+    if (version) {
+      version.setValue(" ");
+      console.log(version.getValue());
+    }
   });
 
 
