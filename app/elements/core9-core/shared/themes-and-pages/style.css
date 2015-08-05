@@ -132,21 +132,19 @@
 body {
   overflow-x: hidden;
 }
-#editor_holder2>div>h3>span {
-  display: none;
+#editor_holder2 > div > h3 > div:nth-child(3) {
+  margin-left: -10px !important;
+  display: inline-block !important;
 }
-#editor_holder2>div>h3>div {
-  margin-left: 0px !important;
-}
-#editor_holder2 > div > div.rows > div.col-md-10 > div:nth-child(1) > h3 > span {
+#editor_holder2>div > h3 > span {
   margin-bottom: 15px;
   display: block;
-  margin-top: -15px;
+margin-top: 0px;
 }
-#editor_holder > div > div.rows > div.col-md-10 > div:nth-child(1) > h3 > span {
-  margin-bottom: 15px;
-  display: block;
-  margin-top: -15px;
+#editor_holder > div > h3 > span {
+  margin-bottom: -15px;
+    display: none;
+    margin-top: 0px;
 }
 #choose-theme {
   width: 100%;

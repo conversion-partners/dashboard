@@ -84,17 +84,17 @@ function setPageVersions(version, selectBox, value) {
       console.log('country selected : ');
       // fck json editor select2 bug!!!
     }
-    activateEditor(Core9.data.page.page, Core9.data.page.pageData);
+    activateEditor(Core9.data.page.pageData);
     setActiveTab(version);
     Core9.data.tmp = value;
   }
 }
 
 
-var activateEditor = function(page, pageData) {
+
+var activateEditor = function(pageData) {
 
   var starting_value = pageData.versions;
-  Core9.data.page.page = page;
   Core9.data.page.pageData = pageData;
 
 
@@ -111,7 +111,7 @@ var activateEditor = function(page, pageData) {
     theme: 'bootstrap3',
     schema: {
       type: "object",
-      title: page,
+      title: getSelectedPage(),
       properties: {
         url: {
           type: "string",
@@ -136,7 +136,6 @@ var activateEditor = function(page, pageData) {
       required_by_default: false,
       schema: {
         type: "array",
-        title: page,
         format: "tabs",
         items: {
           title: "Version",

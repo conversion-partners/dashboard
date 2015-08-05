@@ -30,6 +30,10 @@ function getSelectBoxValues() {
   return data;
 }
 
+function getSelectedPage(){
+    return $('li[data-id="' + $('#delpage').data('currentid') + '"]').data('page');
+}
+
 function getCurrentPage(){
   var id = getCurrentPageId();
   return Core9.data[TYPEOFPAGE].get(id);
@@ -140,10 +144,8 @@ function initNestable(jsonStr) {
             '.dd-content')[0].childNodes[0];
         var page = element.textContent;
         document.getElementById('delpage').dataset.currentid = getIdFromItem(element);
-        activateEditor(
-          page,
-          getSelectBoxEntries(TYPEOFPAGE, page)[0] // get only one sorry
-        );
+        setTimeout(function(){ $('#editor_holder2 > div > h3 > span').html(page);}, 30);
+        activateEditor(getSelectBoxEntries(TYPEOFPAGE, page)[0]);
       }
     }).on('change', updateOutput);
 }

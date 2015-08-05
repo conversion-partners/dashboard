@@ -1,12 +1,11 @@
 TYPEOFPAGE = 'templates';
 
-function activateEditor(page, pageData) {
-
+function activateEditor(pageData) {
   try {
     Core9.editor.destroy();
   } catch (e) {}
   var starting_value = pageData.versions;
-  $('#choose-theme-template-page').html(page);
+  $('#choose-theme-template-page').html(getSelectedPage());
   Core9.editor = new JSONEditor(document
     .getElementById('editor_holder2'), {
       ajax: true,
@@ -20,7 +19,7 @@ function activateEditor(page, pageData) {
       required_by_default: true,
       schema: {
         type: "array",
-        title: page,
+        title: getSelectedPage(),
         format: "tabs",
         items: {
           title: "Version",

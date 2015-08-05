@@ -119,7 +119,9 @@ $(document)
             }
             Core9.data[TYPEOFPAGE].insert(pageData);
           }
-
+          try {
+            Core9.template.save();
+          } catch (e) {}
         });
 
 
@@ -132,7 +134,11 @@ $(document)
             $('li[data-id="' + $('#delpage').data('currentid') + '"]').remove();
             try {
               Core9.editor.destroy();
+            } catch (e) {}
+            try {
               Core9.editor2.destroy();
+            } catch (e) {}
+            try {
               Core9.template.save();
             } catch (e) {}
           });
