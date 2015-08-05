@@ -30,42 +30,6 @@ app.post('/api/io/:action', function(req, res) {
 
 });
 
-
-app.post('/api/file/:action', function(req, res) {
-  $ = cheerio.load(req.body.content);
-  $('.row').each(function() {
-    var columns = this.children;
-    for (var i = 0; i < columns.length; i++) {
-      var column = columns[i];
-      console.log("column :");
-      console.log(column);
-      console.log("classes :");
-      try {
-        console.log(column.attribs.class);
-      } catch (e) {}
-    }
-  });
-
-  $('.core9-block').remove();
-
-  $('*').contents().each(function() { // removes comments
-    if (this.nodeType == 8) {
-      $(this).remove()
-    }
-  });
-  fs.writeFile(".." + req.body.template, $.html(), function(err) {
-    if (err) {
-      return console.log(err);
-    }
-    console.log("The file was saved!");
-  });
-  console.log(__dirname);
-  console.log(req.body.template);
-  res.send(req.originalUrl);
-});
-
-
-
 app.use('/dashboard/', express.static('.'));
 
 app.use('/*', function(req, res) {
