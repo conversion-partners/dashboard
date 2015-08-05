@@ -91,19 +91,9 @@ function setPageVersions(version, selectBox, value) {
 }
 
 
-
-function toLowerCase(data) {
-  var arr = [];
-  for (var i = 0; i < data.length; i++) {
-    var item = data[i].toLowerCase();
-    arr.push(item);
-  }
-  return arr;
-}
-
 var activateEditor = function(page, id, pageData) {
 
-
+  var starting_value = pageData.versions;
   Core9.data.page.page = page;
   Core9.data.page.id = id;
   Core9.data.page.pageData = pageData;
@@ -131,8 +121,6 @@ var activateEditor = function(page, id, pageData) {
       }
     }
   });
-
-  var starting_value = pageData.versions;
 
 
 
@@ -217,6 +205,7 @@ var activateEditor = function(page, id, pageData) {
     }
   });
 
+  // select boxes
 
   Core9.editor.watch('root.0.theme', function() {
     console.log('watching theme ...');
@@ -255,6 +244,9 @@ var activateEditor = function(page, id, pageData) {
     }
   });
 
+
+
+  // select boxes
 
   document.getElementById('submit2').addEventListener('click',
     function() {
