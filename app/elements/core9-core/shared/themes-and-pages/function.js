@@ -139,9 +139,9 @@ function initNestable(jsonStr) {
           .find(
             '.dd-content')[0].childNodes[0];
         var page = element.textContent;
+        document.getElementById('delpage').dataset.currentid = getIdFromItem(element);
         activateEditor(
           page,
-          getIdFromItem(element),
           getSelectBoxEntries(TYPEOFPAGE, page)[0] // get only one sorry
         );
       }

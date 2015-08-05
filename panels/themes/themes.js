@@ -1,7 +1,7 @@
 TYPEOFPAGE = 'templates';
 
-function activateEditor(page, id, pageData) {
-  document.getElementById('delpage').dataset.currentid = id;
+function activateEditor(page, pageData) {
+
   try {
     Core9.editor.destroy();
   } catch (e) {}
@@ -26,7 +26,7 @@ function activateEditor(page, id, pageData) {
           title: "Version",
           headerTemplate: "{{i}} - {{self.title}}",
           type: "object",
-          id: id,
+          id: "id",
           properties: {
             "title": {
               "type": "string",

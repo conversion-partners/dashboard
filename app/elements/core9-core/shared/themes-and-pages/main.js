@@ -78,8 +78,10 @@ $(document)
           var content = $('#nestable').nestable(
             'serialize');
           var json = content; //JSON.parse(jsonStr);
+          var id = guid();
+          document.getElementById('delpage').dataset.currentid = id;
           json.unshift({
-            "id": guid(),
+            "id": id,
             "page": pageName
           });
           initNestable(JSON.stringify(json));
