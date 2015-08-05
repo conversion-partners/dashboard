@@ -130,6 +130,8 @@ $(document)
             $('li[data-id="' + $('#delpage').data('currentid') + '"]').remove();
             try {
               Core9.editor.destroy();
+              Core9.editor2.destroy();
+              Core9.template.save();
             } catch (e) {}
           });
     });
