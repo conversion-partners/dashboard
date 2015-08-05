@@ -1,48 +1,4 @@
 Core9 = {}
-Core9.mutex = {};
-
-function watchItem(elem, callback) {
-  var whatToObserve = {
-    childList: true,
-    attributes: true,
-    subtree: true,
-    attributeOldValue: true,
-    attributeFilter: ['class', 'style']
-  };
-  var mutationObserver = new MutationObserver(function(mutationRecords) {
-    $.each(mutationRecords, function(index, mutationRecord) {
-      setTimeout(function() {
-
-        if (Core9.mutex != mutationRecord) {
-          if (mutationRecord.type === 'childList') {
-            if (mutationRecord.addedNodes.length > 0) {
-              //DOM node added, do something
-              callback(mutationRecord);
-            } else if (mutationRecord.removedNodes.length > 0) {
-              //DOM node removed, do something
-              callback(mutationRecord);
-            }
-          } else if (mutationRecord.type === 'attributes') {
-            if (mutationRecord.attributeName === 'class') {
-              //class changed, do something
-              callback(mutationRecord);
-            }
-          }
-          Core9.mutex = mutationRecord;
-        }
-
-      }, 100);
-    });
-  });
-  mutationObserver.observe(document.body, whatToObserve);
-}
-
-function watch(list, callback) {
-  for (var i = 0; i < list.length; i++) {
-    var selector = list[i];
-    watchItem(document.querySelector(selector), callback);
-  }
-}
 
 // First, checks if it isn't implemented yet.
 if (!String.prototype.format) {

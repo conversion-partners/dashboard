@@ -90,29 +90,7 @@ function setPageVersions(version, selectBox, value) {
   }
 }
 
-function watchEditor() {
-  var callback = function(record) {
-    setTimeout(function() {
-      try {
-        var selector = record.target.firstChild.firstChild.getAttribute('aria-labelledby');
-        if (selector.match(/select2-root\[\d*\]\[(theme|language|country|percentage)\]/)) {
-          var value = record.target.firstChild.textContent;
-          var myRegexp = /select2-root\[(\d*)\]\[(theme|language|country|percentage)\]/g;
-          var match = myRegexp.exec(selector);
-          var version = match[1];
-          var selectBox = match[2];
-          setPageVersions(version, selectBox, value);
-        }
-      } catch (e) {}
-    }, 1100);
-  }
 
-  watch(['[id^="select2-root[0][theme]"]', '[id^="select2-root[1][theme]"]', '[id^="select2-root[2][theme]"]'], callback);
-  watch(['[id^="select2-root[0][language]"]', '[id^="select2-root[1][language]"]', '[id^="select2-root[2][language]"]'], callback);
-  watch(['[id^="select2-root[0][country]"]', '[id^="select2-root[1][country]"]', '[id^="select2-root[2][country]"]'], callback);
-  watch(['[id^="root[0][country]"]', '[id^="root[1][country]"]', '[id^="root[2][country]"]'], callback);
-  watch(['[id^="select2-root[0][percentage]"]', '[id^="select2-root[1][percentage]"]', '[id^="select2-root[2][percentage]"]'], callback);
-}
 
 function toLowerCase(data) {
   var arr = [];
@@ -124,11 +102,6 @@ function toLowerCase(data) {
 }
 
 var activateEditor = function(page, id, pageData) {
-
-  Core9.data.language = getLanguageOptions();
-  Core9.data.countries = getCountryOptions();
-  //Core9.data.templateName = getTemplateName(pageData);
-  //Core9.data.templateVersion = getTemplateVersion();
 
 
   Core9.data.page.page = page;
@@ -194,19 +167,19 @@ var activateEditor = function(page, id, pageData) {
             },
             language: {
               type: "string",
-              enum: Core9.data.language
+              enum: ["", "nl", "de"]
             },
             country: {
               type: "string",
-              enum: ["", "nl", "de"]  //Core9.data.countries
+              enum: ["", "nl", "de"]
             },
             template: {
               type: "string",
-              enum: ["", "nl", "de"] //Core9.data.templateName
+              enum: ["", "nl", "de"]
             },
             version: {
               type: "string",
-              enum: ["", "nl", "de"] //Core9.data.templateVersion
+              enum: ["", "nl", "de"]
             },
             percentage: {
               type: "integer",
@@ -303,5 +276,5 @@ var activateEditor = function(page, id, pageData) {
       Core9.editor.setValue(starting_value);
     });
 
-  watchEditor();
+
 }
