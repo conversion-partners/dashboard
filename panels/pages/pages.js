@@ -204,7 +204,15 @@ var activateEditor = function () {
         language.setValue(" ");
         var languageOptions = getLanguageOptions(Core9.editor.getEditor('root.' + version + '.theme')
           .getValue());
-        Core9.data.languageOptions = languageOptions;
+
+        var select = $('[data-schemapath="root.0.language"]')
+          .find('select');
+
+
+
+          $(select).append('<option value="volvo">Volvo</option><option value="audi">Audi</option>');
+
+
       }
     });
     Core9.editor.watch('root.' + version + '.language', function () {
