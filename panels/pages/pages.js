@@ -55,33 +55,12 @@ function getTemplateVersion() {
 
 
 
-Core9.data.tmp = {};
-
-function setPageVersions(version, selectBox, value) {
-  if (Core9.data.tmp != value) {
-    Core9.data.page.pageData.versions[version][selectBox] = value;
-    Core9.data.language = getLanguageOptions();
-    if (selectBox == "theme") {
-      Core9.data.countries = [];
-    }
-    if (selectBox == "language") {
-      Core9.data.countries = getCountryOptions();
-    }
-    if (selectBox == "country") {
-      console.log('country selected : ');
-      // fck json editor select2 bug!!!
-    }
-    activateEditor(Core9.data.page.pageData);
-    setActiveTab(version);
-    Core9.data.tmp = value;
-  }
-}
 
 
 
 var activateEditor = function (pageData) {
   var starting_value = pageData.versions;
-  Core9.data.page.pageData = pageData;
+
   console.log('init Editor');
   console.log(pageData);
 

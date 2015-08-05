@@ -101,7 +101,7 @@ function setActiveTab(tab) {
   $('#editor_holder2 > div > div.rows > div.tabs.list-group.col-md-2 > a.list-group-item').eq(tab)[0].click();
 }
 
-function getSelectBoxEntries(type, page) {
+function getSelectBoxEntries(page) {
 
   var template = $(".template-data").val();
   var language = $(".language-data").val();
@@ -113,17 +113,17 @@ function getSelectBoxEntries(type, page) {
     "language": language,
     "country": country
   }
-  if (type == 'templates') {
+  if (TYPEOFPAGE == 'templates') {
     query.template = template;
     if (page) {
       query.page = page;
     }
   }
-  if (type == 'pages') {
+  if (TYPEOFPAGE == 'pages') {
     query.domain = template;
   }
 
-  var result = Core9.data[type].findObjects(query);
+  var result = Core9.data[TYPEOFPAGE].findObjects(query);
   return result;
 }
 
@@ -160,7 +160,7 @@ function initNestable(jsonStr) {
         setTimeout(function() {
           $('#editor_holder2 > div > h3 > span').html(page);
         }, 30);
-        activateEditor(getSelectBoxEntries(TYPEOFPAGE, page)[0]);
+        activateEditor(getSelectBoxEntries(page)[0]);
       }
     }).on('change', updateOutput);
 }
