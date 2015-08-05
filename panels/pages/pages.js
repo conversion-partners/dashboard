@@ -184,6 +184,7 @@ var activateEditor = function () {
           console.log($(this).val());
           language.setValue($(this).val());
         });
+        $(select).empty();
         $(select).append('<option value="volvo">Volvo</option><option value="audi">Audi</option>');
       }
     });
