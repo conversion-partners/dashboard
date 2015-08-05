@@ -58,7 +58,10 @@ function getTemplateVersion() {
 
 
 
-var activateEditor = function (pageData) {
+var activateEditor = function () {
+
+  var pageData = getSelectBoxEntries();
+
   var starting_value = pageData.versions;
 
   console.log('init Editor');

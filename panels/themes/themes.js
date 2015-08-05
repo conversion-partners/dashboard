@@ -1,11 +1,15 @@
 TYPEOFPAGE = 'templates';
 
-function activateEditor(pageData) {
+function activateEditor() {
+
+  var pageData = getSelectBoxEntries()[0];
+  var starting_value = pageData.versions;
+
   try {
     Core9.editor.destroy();
   } catch (e) {}
-  var starting_value = pageData.versions;
-  $('#choose-theme-template-page').html(getSelectedPage());
+  $('#choose-theme-template-page')
+    .html(getSelectedPage());
   Core9.editor = new JSONEditor(document
     .getElementById('editor_holder2'), {
       ajax: true,
@@ -39,7 +43,7 @@ function activateEditor(pageData) {
         }
       }
     });
-  Core9.editor.on('change', function() {
+  Core9.editor.on('change', function () {
     var errors = Core9.editor.validate();
     var indicator = document.getElementById('valid_indicator');
     if (errors.length) {
@@ -51,22 +55,24 @@ function activateEditor(pageData) {
     }
   });
 
-  document.getElementById('submit').addEventListener('click',
-    function() {
-      var page = getCurrentPage();
-      page.versions = [];
-      var versions = Core9.editor.getValue();
-      for (var i = 0; i < versions.length; i++) {
-        var version = versions[i];
-        page.versions.push(version);
-      }
-      Core9.data[TYPEOFPAGE].update(page);
-      Core9.template.save();
-    });
+  document.getElementById('submit')
+    .addEventListener('click',
+      function () {
+        var page = getCurrentPage();
+        page.versions = [];
+        var versions = Core9.editor.getValue();
+        for (var i = 0; i < versions.length; i++) {
+          var version = versions[i];
+          page.versions.push(version);
+        }
+        Core9.data[TYPEOFPAGE].update(page);
+        Core9.template.save();
+      });
 
-  document.getElementById('restore').addEventListener('click',
-    function() {
-      Core9.editor.setValue(starting_value);
-    });
+  document.getElementById('restore')
+    .addEventListener('click',
+      function () {
+        Core9.editor.setValue(starting_value);
+      });
 
 }

@@ -9,6 +9,7 @@ Core9.data = {
   "templates": new loki.Collection('templates'),
   "pages": new loki.Collection('pages'),
   "blocks": new loki.Collection('blocks'),
+  "currentid" : {},
   language: [],
   countries: [],
   templateNames: [],

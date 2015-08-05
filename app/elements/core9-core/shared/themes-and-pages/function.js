@@ -30,7 +30,7 @@ function getSelectBoxValues() {
 }
 
 function getSelectedPage() {
-  return $('li[data-id="' + $('#delpage').data('currentid') + '"]').data('page');
+  return $('li[data-id="' + Core9.data.currentid + '"]').data('page');
 }
 
 function getCurrentPage() {
@@ -40,7 +40,7 @@ function getCurrentPage() {
 
 function getCurrentPageId() {
   var delButton = $('#delpage');
-  var page = $('li[data-id="' + delButton.data('currentid') + '"]');
+  var page = $('li[data-id="' + Core9.data.currentid + '"]');
   var lokiId = $(page).data('$loki');
   var pageName = $(page).data('page');
   if (typeof pageName == 'undefined') {
@@ -156,11 +156,10 @@ function initNestable(jsonStr) {
           .find(
             '.dd-content')[0].childNodes[0];
         var page = element.textContent;
-        document.getElementById('delpage').dataset.currentid = getIdFromItem(element);
-        setTimeout(function() {
-          $('#editor_holder2 > div > h3 > span').html(page);
-        }, 30);
-        activateEditor(getSelectBoxEntries()[0]);
+        var id = getIdFromItem(element);
+        Core9.data.currentid = id;
+        document.getElementById('delpage').dataset.currentid = id;
+        activateEditor();
       }
     }).on('change', updateOutput);
 }

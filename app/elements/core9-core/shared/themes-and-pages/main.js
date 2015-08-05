@@ -79,6 +79,7 @@ $(document)
             'serialize');
           var json = content; //JSON.parse(jsonStr);
           var id = guid();
+          Core9.data.currentid = id;
           document.getElementById('delpage').dataset.currentid = id;
           json.unshift({
             "id": id,
@@ -131,7 +132,7 @@ $(document)
           function() {
             var lokiId = getCurrentPageId();
             Core9.data[TYPEOFPAGE].remove(lokiId);
-            $('li[data-id="' + $('#delpage').data('currentid') + '"]').remove();
+            $('li[data-id="' + Core9.data.currentid + '"]').remove();
             try {
               Core9.editor.destroy();
             } catch (e) {}
