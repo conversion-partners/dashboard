@@ -20,20 +20,21 @@ function getLanguageOptions() {
 
 function getTemplateName() {
   var pageVersion = getActiveTab();
-  var versions = Core9.data.page.pageData.versions[pageVersion];
+  var version = Core9.data.page.pageData.versions[pageVersion];
 
   var templateNames = [];
 
   var query = {
-    "template": versions[pageVersion].template,
-    "language": versions[pageVersion].language,
-    "country": versions[pageVersion].country
+    "page": version.template,
+    "language": version.language,
+    "country": $('#editor_holder2 > div > div.rows > div.col-md-10 > div:nth-child(1) > div.well.well-sm > div > div > div:nth-child(4) > div > div.form-group > select').val()
   }
   var result = Core9.data.templates.findObjects(query);
   for (var i = 0; i < result.length; i++) {
     var template = result[i];
     templateNames.push(template.page);
   }
+  templateNames.push(" ");
   //
   return templateNames;
 }
@@ -56,7 +57,7 @@ function getActiveTab() {
   var tabs = $('#editor_holder2 > div > div.rows > div.tabs.list-group.col-md-2 > a.list-group-item');
   for (var i = 0; i < tabs.length; i++) {
     var tab = tabs[i];
-    if ($(tab).hasClass(active)) {
+    if ($(tab).hasClass("active")) {
       return i;
     }
   }
@@ -80,7 +81,8 @@ function setPageVersions(version, selectBox, value) {
       Core9.data.countries = getCountryOptions();
     }
     if (selectBox == "country") {
-      Core9.data.templateVersion = getTemplateVersion();
+      console.log('country selected : ');
+      // fck json editor select2 bug!!!
     }
     activateEditor(Core9.data.page.page, Core9.data.page.id, Core9.data.page.pageData);
     setActiveTab(version);
@@ -108,6 +110,7 @@ function watchEditor() {
   watch(['[id^="select2-root[0][theme]"]', '[id^="select2-root[1][theme]"]', '[id^="select2-root[2][theme]"]'], callback);
   watch(['[id^="select2-root[0][language]"]', '[id^="select2-root[1][language]"]', '[id^="select2-root[2][language]"]'], callback);
   watch(['[id^="select2-root[0][country]"]', '[id^="select2-root[1][country]"]', '[id^="select2-root[2][country]"]'], callback);
+  watch(['[id^="root[0][country]"]', '[id^="root[1][country]"]', '[id^="root[2][country]"]'], callback);
   watch(['[id^="select2-root[0][percentage]"]', '[id^="select2-root[1][percentage]"]', '[id^="select2-root[2][percentage]"]'], callback);
 }
 
@@ -199,11 +202,11 @@ var activateEditor = function(page, id, pageData) {
             },
             template: {
               type: "string",
-              enum: Core9.data.templateName
+              enum: ["test","test2"]//Core9.data.templateName
             },
             version: {
               type: "string",
-              enum: Core9.data.templateVersion
+              enum: ["test","test2"]//Core9.data.templateVersion
             },
             percentage: {
               type: "integer",
@@ -240,6 +243,12 @@ var activateEditor = function(page, id, pageData) {
       indicator.textContent = "valid";
     }
   });
+
+  Core9.editor.watch('root.0.country',function() {
+    console.log('watching country ...');
+    Core9.data.templateName = getTemplateName();
+  });
+
 
   document.getElementById('submit2').addEventListener('click',
     function() {
