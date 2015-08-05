@@ -113,7 +113,7 @@ Core9.template = {
 
     Core9.template.saveData('templates', Core9.data.templates);
     Core9.template.saveData('blocks', Core9.data.blocks);
-    Core9.data.pages
+    Core9.template.savePageData('pages', Core9.data.pages);
 
   },
   getThemesOrSites: function(type, collection) {
@@ -129,6 +129,23 @@ Core9.template = {
       return Core9.deDupeArray(array);
     }
     return collection.mapReduce(mapFun, reduceFun);
+  },
+  savePageData: function(type, collection) {
+
+    var url = Core9.template.paths.pages.format(Core9.template.account);
+    console.log(url);
+
+    $.ajax({
+      type: "POST",
+      url: "http://localhost:9090/api/io/" + "save",
+      data: {
+        content: JSON.stringify(collection.data),
+        file: url,
+        account: Core9.template.account
+      }
+    });
+
+
   },
   saveData: function(type, collection) {
     var themes = Core9.template.getThemesOrSites(type, collection);
