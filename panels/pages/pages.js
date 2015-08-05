@@ -1,18 +1,18 @@
 TYPEOFPAGE = 'pages';
 
-var reduceFun = function(array) {
+var reduceFun = function (array) {
   return Core9.deDupeArray(array);
 }
 
 function getCountryOptions() {
-  var mapFun = function(obj) {
+  var mapFun = function (obj) {
     return obj.country;
   }
   return Core9.data.templates.mapReduce(mapFun, reduceFun);
 }
 
 function getLanguageOptions() {
-  var mapFun = function(obj) {
+  var mapFun = function (obj) {
     return obj.language;
   }
   return Core9.data.templates.mapReduce(mapFun, reduceFun);
@@ -79,7 +79,7 @@ function setPageVersions(version, selectBox, value) {
 
 
 
-var activateEditor = function(pageData) {
+var activateEditor = function (pageData) {
   var starting_value = pageData.versions;
   Core9.data.page.pageData = pageData;
   console.log('init Editor');
@@ -180,7 +180,7 @@ var activateEditor = function(pageData) {
 
 
 
-  Core9.editor.on('change', function() {
+  Core9.editor.on('change', function () {
     var errors = Core9.editor.validate();
     var indicator = document.getElementById('valid_indicator');
     if (errors.length) {
@@ -194,7 +194,7 @@ var activateEditor = function(pageData) {
 
   // select boxes
 
-  Core9.editor.watch('root.0.theme', function() {
+  Core9.editor.watch('root.0.theme', function () {
     console.log('watching theme ...');
     var language = Core9.editor.getEditor('root.0.language');
     if (language) {
@@ -203,7 +203,7 @@ var activateEditor = function(pageData) {
     }
   });
 
-  Core9.editor.watch('root.0.language', function() {
+  Core9.editor.watch('root.0.language', function () {
     console.log('watching language ...');
     var country = Core9.editor.getEditor('root.0.country');
     if (country) {
@@ -212,7 +212,7 @@ var activateEditor = function(pageData) {
     }
   });
 
-  Core9.editor.watch('root.0.country', function() {
+  Core9.editor.watch('root.0.country', function () {
     console.log('watching country ...');
     var template = Core9.editor.getEditor('root.0.template');
     if (template) {
@@ -222,7 +222,7 @@ var activateEditor = function(pageData) {
   });
 
 
-  Core9.editor.watch('root.0.template', function() {
+  Core9.editor.watch('root.0.template', function () {
     console.log('watching template ...');
     var version = Core9.editor.getEditor('root.0.version');
     if (version) {
@@ -235,25 +235,28 @@ var activateEditor = function(pageData) {
 
   // select boxes
 
-  document.getElementById('submit2').addEventListener('click',
-    function() {
-      var page = getCurrentPage();
-      console.log(page);
-      var url = Core9.editor2.getValue().url;
-      console.log(url);
-      page.url = url;
-      var versions = Core9.editor.getValue();
-      page.versions = [];
-      page.versions = versions;
-      console.log(versions);
-      Core9.data[TYPEOFPAGE].update(page);
-      Core9.template.save();
-    });
+  document.getElementById('submit2')
+    .addEventListener('click',
+      function () {
+        var page = getCurrentPage();
+        console.log(page);
+        var url = Core9.editor2.getValue()
+          .url;
+        console.log(url);
+        page.url = url;
+        var versions = Core9.editor.getValue();
+        page.versions = [];
+        page.versions = versions;
+        console.log(versions);
+        Core9.data[TYPEOFPAGE].update(page);
+        Core9.template.save();
+      });
 
-  document.getElementById('restore2').addEventListener('click',
-    function() {
-      Core9.editor.setValue(starting_value);
-    });
+  document.getElementById('restore2')
+    .addEventListener('click',
+      function () {
+        Core9.editor.setValue(starting_value);
+      });
 
 
 }

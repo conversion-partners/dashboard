@@ -88,6 +88,7 @@ $(document)
           var data = getSelectBoxValues();
           if (TYPEOFPAGE == 'templates') {
             var templateData = {
+              "id": id,
               "template": data.theme,
               "language": data.language,
               "country": data.country,
@@ -101,6 +102,7 @@ $(document)
           }
           if (TYPEOFPAGE == 'pages') {
             var pageData = {
+              "id": id,
               "domain": data.theme,
               "language": data.language,
               "country": data.country,
