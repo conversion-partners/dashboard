@@ -1,4 +1,3 @@
-
 function changeSelect2Data(className, dataCategory) {
   $("." + className).select2({
     data: dataCategory
@@ -30,11 +29,11 @@ function getSelectBoxValues() {
   return data;
 }
 
-function getSelectedPage(){
-    return $('li[data-id="' + $('#delpage').data('currentid') + '"]').data('page');
+function getSelectedPage() {
+  return $('li[data-id="' + $('#delpage').data('currentid') + '"]').data('page');
 }
 
-function getCurrentPage(){
+function getCurrentPage() {
   var id = getCurrentPageId();
   return Core9.data[TYPEOFPAGE].get(id);
 }
@@ -44,7 +43,7 @@ function getCurrentPageId() {
   var page = $('li[data-id="' + delButton.data('currentid') + '"]');
   var lokiId = $(page).data('$loki');
   var pageName = $(page).data('page');
-  if(typeof pageName == 'undefined'){
+  if (typeof pageName == 'undefined') {
     pageName = $('#editor_holder2 > div > h3 > span').text();
   }
   console.log(pageName);
@@ -67,7 +66,7 @@ function getCurrentPageId() {
       return lokiId;
     }
   }
-  if(TYPEOFPAGE == 'pages'){
+  if (TYPEOFPAGE == 'pages') {
     var pageData = {
       "domain": data.theme,
       "language": data.language,
@@ -115,13 +114,12 @@ function getSelectBoxEntries(type, page) {
 
 function initNestable(jsonStr) {
   console.log('init nestable..');
-
-  initTemplateSelectBoxes(Core9.template[TYPEOFPAGE]);
-
+  initTemplateSelectBoxes();
   var container = document
     .getElementById('nestablecontainer');
-  while (container.firstChild)
+  while (container.firstChild) {
     container.removeChild(container.firstChild);
+  }
   var div = document.createElement('div');
   div.id = 'nestable';
   div.className = 'dd';
@@ -144,13 +142,15 @@ function initNestable(jsonStr) {
             '.dd-content')[0].childNodes[0];
         var page = element.textContent;
         document.getElementById('delpage').dataset.currentid = getIdFromItem(element);
-        setTimeout(function(){ $('#editor_holder2 > div > h3 > span').html(page);}, 30);
+        setTimeout(function() {
+          $('#editor_holder2 > div > h3 > span').html(page);
+        }, 30);
         activateEditor(getSelectBoxEntries(TYPEOFPAGE, page)[0]);
       }
     }).on('change', updateOutput);
 }
 
-function initTemplateSelectBoxes(themeOrSiteCollection) {
+function initTemplateSelectBoxes() {
 
   var templateData = {
     data: [""]
@@ -203,7 +203,7 @@ function initTemplateSelectBoxes(themeOrSiteCollection) {
     changeSelect2Data("country-data", data);
   });
 
-  changeSelect2Data("template-data", themeOrSiteCollection);
+  changeSelect2Data("template-data", Core9.template[TYPEOFPAGE]);
   changeSelect2Data("language-data", []);
   changeSelect2Data("country-data", []);
 

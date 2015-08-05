@@ -93,10 +93,8 @@ function setPageVersions(version, selectBox, value) {
 
 
 var activateEditor = function(pageData) {
-
   var starting_value = pageData.versions;
   Core9.data.page.pageData = pageData;
-
   console.log('init Editor');
   console.log(pageData);
 
