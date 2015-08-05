@@ -53,20 +53,7 @@ function getTemplateVersion() {
   return ['test'];
 }
 
-function getActiveTab() {
-  var tabs = $('#editor_holder2 > div > div.rows > div.tabs.list-group.col-md-2 > a.list-group-item');
-  for (var i = 0; i < tabs.length; i++) {
-    var tab = tabs[i];
-    if ($(tab).hasClass("active")) {
-      return i;
-    }
-  }
-  return 0;
-}
 
-function setActiveTab(tab) {
-  $('#editor_holder2 > div > div.rows > div.tabs.list-group.col-md-2 > a.list-group-item').eq(tab)[0].click();
-}
 
 Core9.data.tmp = {};
 
