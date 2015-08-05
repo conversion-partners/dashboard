@@ -63,6 +63,24 @@ function getCurrentPageId() {
       return lokiId;
     }
   }
+  if(TYPEOFPAGE == 'pages'){
+    var pageData = {
+      "domain": data.theme,
+      "language": data.language,
+      "country": data.country,
+      "page": pageName
+    }
+    if (typeof lokiId == 'undefined') {
+      var res = Core9.data[TYPEOFPAGE].findObjects(pageData);
+      if (res.length > 0) {
+        for (var i = 0; i < res.length; i++) {
+          return res[i].$loki; // sorry just one at a time
+        }
+      }
+    } else {
+      return lokiId;
+    }
+  }
 }
 
 function getSelectBoxEntries(type, page) {

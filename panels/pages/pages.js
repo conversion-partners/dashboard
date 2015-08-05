@@ -176,7 +176,17 @@ var activateEditor = function(page, id, pageData) {
 
   document.getElementById('submit2').addEventListener('click',
     function() {
-      console.log(Core9.editor.getValue());
+      var page = getCurrentPage();
+      console.log(page);
+      var url = Core9.editor2.getValue().url;
+      console.log(url);
+      page.url = url;
+      var versions = Core9.editor.getValue();
+      page.versions = [];
+      page.versions = versions;
+      console.log(versions);
+      Core9.data[TYPEOFPAGE].update(page);
+      Core9.template.save();
     });
 
   document.getElementById('restore2').addEventListener('click',
