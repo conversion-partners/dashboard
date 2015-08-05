@@ -204,18 +204,22 @@ var activateEditor = function () {
         language.setValue(" ");
         var languageOptions = getLanguageOptions(Core9.editor.getEditor('root.' + version + '.theme')
           .getValue());
-
         var select = $('[data-schemapath="root.0.language"]')
           .find('select');
 
+          $(select).on('change',function(){
+            console.log($(this).val());
+          });
 
-
-          $(select).append('<option value="volvo">Volvo</option><option value="audi">Audi</option>');
-
-
+        $(select)
+          .append('<option value="volvo">Volvo</option><option value="audi">Audi</option>');
       }
     });
     Core9.editor.watch('root.' + version + '.language', function () {
+      var language = Core9.editor.getEditor('root.' + version + '.language');
+      if (language) {
+        console.log(language.getValue());
+      }
       var country = Core9.editor.getEditor('root.' + version + '.country');
       if (country) {
         country.setValue(" ");
