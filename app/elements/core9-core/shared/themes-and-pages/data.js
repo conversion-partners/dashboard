@@ -2,6 +2,9 @@ if (typeof Core9 === 'undefined') {
   Core9 = {}
 };
 
+
+
+
 Core9.data = {
   "templates": new loki.Collection('templates'),
   "pages": new loki.Collection('pages'),

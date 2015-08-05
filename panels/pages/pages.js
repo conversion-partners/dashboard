@@ -27,8 +27,8 @@ Core9.data.tmp = {};
 function setPageVersions(version, selectBox, value) {
   if (Core9.data.tmp != value) {
     Core9.data.page.pageData.versions[version][selectBox] = value;
+    Core9.data.language = getLanguageOptions();
     if (selectBox == "theme") {
-      Core9.data.language = getLanguageOptions();
       Core9.data.countries = [];
     }
     if (selectBox == "language") {
