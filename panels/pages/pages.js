@@ -178,11 +178,11 @@ var activateEditor = function () {
       var language = Core9.editor.getEditor('root.' + version + '.language');
       if(language) {
         console.log('setting language');
-        language.setValue(" ");
         var languageOptions = getLanguageOptions(Core9.editor.getEditor('root.' + version + '.theme').getValue());
         var select = $('[data-schemapath="root.0.language"]').find('select');
         $(select).on('change', function () {
           console.log($(this).val());
+          language.setValue($(this).val());
         });
         $(select).append('<option value="volvo">Volvo</option><option value="audi">Audi</option>');
       }
