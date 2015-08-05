@@ -97,6 +97,26 @@ $(document)
             }
             Core9.data[TYPEOFPAGE].insert(templateData);
           }
+          if (TYPEOFPAGE == 'pages') {
+            var pageData = {
+              "domain": data.theme,
+              "language": data.language,
+              "country": data.country,
+              "page": pageName,
+              "url": $('#editor_holder > div > div.well.well-sm > div > div > div > div > div.form-group > input').val(),
+              "versions": [{
+                "title": "page 1",
+                "theme": "",
+                "language": "",
+                "country": "",
+                "percentage": 100,
+                "startdate": "",
+                "enddate": "",
+                "status": "active"
+              }]
+            }
+            Core9.data[TYPEOFPAGE].insert(pageData);
+          }
 
         });
 

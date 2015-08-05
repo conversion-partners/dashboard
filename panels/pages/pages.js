@@ -63,7 +63,19 @@ function watchEditor() {
   watch(['[id^="select2-root[0][percentage]"]', '[id^="select2-root[1][percentage]"]', '[id^="select2-root[2][percentage]"]'], callback);
 }
 
+function toLowerCase(data){
+  var arr = [];
+  for (var i = 0; i < data.length; i++) {
+    var item = data[i].toLowerCase();
+    arr.push(item);
+  }
+  return arr;
+}
+
 var activateEditor = function(page, id, pageData) {
+
+  Core9.data.language = getLanguageOptions();
+  Core9.data.countries = getCountryOptions();
 
   Core9.data.page.page = page;
   Core9.data.page.id = id;
