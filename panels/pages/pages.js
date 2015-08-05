@@ -18,9 +18,29 @@ function getLanguageOptions() {
   return Core9.data.templates.mapReduce(mapFun, reduceFun);
 }
 
+function getTemplateName() {
+  var pageVersion = getActiveTab();
+  var versions = Core9.data.page.pageData.versions[pageVersion];
+
+  var templateNames = [];
+
+  var query = {
+    "template": versions[pageVersion].template,
+    "language": versions[pageVersion].language,
+    "country": versions[pageVersion].country
+  }
+  var result = Core9.data.templates.findObjects(query);
+  for (var i = 0; i < result.length; i++) {
+    var template = result[i];
+    templateNames.push(template.page);
+  }
+  //
+  return templateNames;
+}
+
 function getTemplateVersion() {
   var pageVersion = getActiveTab();
-  var pageData = Core9.data.page.pageData;//.versions[pageVersion];
+  var pageData = Core9.data.page.pageData; //.versions[pageVersion];
   var query = {
     "template": pageData.template,
     "language": pageData.language,
@@ -40,6 +60,7 @@ function getActiveTab() {
       return i;
     }
   }
+  return 0;
 }
 
 function setActiveTab(tab) {
@@ -103,7 +124,9 @@ var activateEditor = function(page, id, pageData) {
 
   Core9.data.language = getLanguageOptions();
   Core9.data.countries = getCountryOptions();
-  Core9.data.templateVersion = getTemplateVersion();
+  //Core9.data.templateName = getTemplateName();
+  //Core9.data.templateVersion = getTemplateVersion();
+
 
   Core9.data.page.page = page;
   Core9.data.page.id = id;
@@ -176,12 +199,11 @@ var activateEditor = function(page, id, pageData) {
             },
             template: {
               type: "string",
-              enum: Core9.data.templateVersion
+              enum: Core9.data.templateName
             },
             version: {
               type: "string",
-              enum: ["blue","xmas"],
-              default : "blue"
+              enum: Core9.data.templateVersion
             },
             percentage: {
               type: "integer",
