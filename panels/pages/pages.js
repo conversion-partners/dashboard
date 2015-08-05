@@ -60,7 +60,7 @@ function getTemplateVersion() {
 
 var activateEditor = function () {
 
-  var pageData = getSelectBoxEntries();
+  var pageData = getSelectBoxEntries()[0];
 
   var starting_value = pageData.versions;
 
@@ -82,7 +82,7 @@ var activateEditor = function () {
     theme: 'bootstrap3',
     schema: {
       type: "object",
-      title: getSelectedPage(),
+      title: pageData.page,
       properties: {
         url: {
           type: "string",
@@ -107,6 +107,7 @@ var activateEditor = function () {
       required_by_default: false,
       schema: {
         type: "array",
+        title: pageData.page,
         format: "tabs",
         items: {
           title: "Version",
