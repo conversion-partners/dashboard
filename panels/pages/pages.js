@@ -97,10 +97,14 @@ var activateEditor = function(pageData) {
   var starting_value = pageData.versions;
   Core9.data.page.pageData = pageData;
 
+  console.log('init Editor');
+  console.log(pageData);
 
   try {
-    Core9.editor.destroy();
     Core9.editor2.destroy();
+  } catch (e) {}
+  try {
+    Core9.editor.destroy();
   } catch (e) {}
 
   Core9.editor2 = new JSONEditor(document.getElementById('editor_holder'), {
