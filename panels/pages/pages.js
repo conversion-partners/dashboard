@@ -185,7 +185,14 @@ var activateEditor = function () {
           language.setValue($(this).val());
         });
         $(select).empty();
-        $(select).append('<option value="volvo">Volvo</option><option value="audi">Audi</option>');
+        var optionStr = '<option value=""></option>';
+        for (var i = 0; i < languageOptions.length; i++) {
+          var option = languageOptions[i];
+          if(!isEmpty(option)){
+            optionStr = optionStr.concat('<option value="'+option+'">'+option+'</option>');
+          }
+        }
+        $(select).append(optionStr);
       }
     });
     Core9.editor.watch('root.' + version + '.language', function () {
