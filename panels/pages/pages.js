@@ -13,11 +13,16 @@ function getCountryOptions(theme) {
 
 function getLanguageOptions(theme) {
   var mapFun = function (obj) {
-    if (theme = obj.template) {
+
+    if (typeof theme == 'undefined') {
+      return obj.language;
+    }
+    if (theme == obj.template) {
       return obj.language;
     }
   }
-  return Core9.data.templates.mapReduce(mapFun, reduceFun);
+  var result = Core9.data.templates.mapReduce(mapFun, reduceFun);
+  return result;
 }
 
 function getTemplateName(pageData) {
@@ -123,7 +128,7 @@ var activateEditor = function () {
             },
             language: {
               type: "string",
-              enum: getLanguageOptions()
+              enum: Core9.data.languageOptions
             },
             country: {
               type: "string",
@@ -195,8 +200,11 @@ var activateEditor = function () {
     Core9.editor.watch('root.' + version + '.theme', function () {
       var language = Core9.editor.getEditor('root.' + version + '.language');
       if (language) {
-        language.setValue(getLanguageOptions(Core9.editor.getEditor('root.' + version + '.theme')
-          .getValue()));
+        console.log('setting language');
+        language.setValue(" ");
+        var languageOptions = getLanguageOptions(Core9.editor.getEditor('root.' + version + '.theme')
+          .getValue());
+        Core9.data.languageOptions = languageOptions;
       }
     });
     Core9.editor.watch('root.' + version + '.language', function () {

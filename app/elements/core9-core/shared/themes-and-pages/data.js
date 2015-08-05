@@ -3,23 +3,17 @@ if (typeof Core9 === 'undefined') {
 };
 
 
+Core9.data = {};
+Core9.data.templates = new loki.Collection('templates');
+Core9.data.pages = new loki.Collection('pages');
+Core9.data.blocks = new loki.Collection('blocks');
+Core9.data.currentid = {};
+Core9.data.languageOptions = [];
+Core9.data.countryOptions = [];
+Core9.data.templateOptions = [];
+Core9.data.versionOptions = [];
+Core9.data.pageData = [];
 
-
-Core9.data = {
-  "templates": new loki.Collection('templates'),
-  "pages": new loki.Collection('pages'),
-  "blocks": new loki.Collection('blocks'),
-  "currentid" : {},
-  language: [],
-  countries: [],
-  templateNames: [],
-  versions: [],
-  page: {
-    page: "",
-    id: "",
-    pageData: {}
-  }
-}
 
 Core9.template = {
   paths: {
@@ -31,49 +25,52 @@ Core9.template = {
   templates: [],
   pages: [],
   account: store.get('account'),
-  init: function() {
+  init: function () {
     this.dataInit();
   },
-  dataInit: function() {
+  dataInit: function () {
 
-    Core9.j(Core9.template.paths.bower.format(Core9.template.account)).then(function(data) {
-      var json = JSON.parse(data.currentTarget.response);
-      var themes = json.dependencies;
-      var themeData = [];
-      var blockData = [];
-      var pageData = [];
-      Object.keys(themes).forEach(function(key) {
-        themeData.push(Core9.j(Core9.template.paths.template.format(Core9.template.account, key)));
-        blockData.push(Core9.j(Core9.template.paths.blocks.format(Core9.template.account, key)));
+    Core9.j(Core9.template.paths.bower.format(Core9.template.account))
+      .then(function (data) {
+        var json = JSON.parse(data.currentTarget.response);
+        var themes = json.dependencies;
+        var themeData = [];
+        var blockData = [];
+        var pageData = [];
+        Object.keys(themes)
+          .forEach(function (key) {
+            themeData.push(Core9.j(Core9.template.paths.template.format(Core9.template.account, key)));
+            blockData.push(Core9.j(Core9.template.paths.blocks.format(Core9.template.account, key)));
+          });
+        pageData.push(Core9.j(Core9.template.paths.pages.format(Core9.template.account)));
+
+        var allData = [];
+        allData.push(Core9.template.dataCollect(Core9.data.templates, themeData));
+        allData.push(Core9.template.dataCollect(Core9.data.blocks, blockData));
+        allData.push(Core9.template.dataCollect(Core9.data.pages, pageData));
+
+        Promise.settle(allData)
+          .then(function (results) {
+            var len = 0;
+            results.forEach(function (result) {
+              if (result.isFulfilled()) {
+                len++;
+              } else {
+                console.log(result.reason());
+              }
+            });
+            if (len == allData.length) {
+              Core9.template.dataReady();
+            } else {
+              //raise exeption
+            }
+          });
+
       });
-      pageData.push(Core9.j(Core9.template.paths.pages.format(Core9.template.account)));
-
-      var allData = [];
-      allData.push(Core9.template.dataCollect(Core9.data.templates, themeData));
-      allData.push(Core9.template.dataCollect(Core9.data.blocks, blockData));
-      allData.push(Core9.template.dataCollect(Core9.data.pages, pageData));
-
-      Promise.settle(allData).then(function(results) {
-        var len = 0;
-        results.forEach(function(result) {
-          if (result.isFulfilled()) {
-            len++;
-          } else {
-            console.log(result.reason());
-          }
-        });
-        if (len == allData.length) {
-          Core9.template.dataReady();
-        } else {
-          //raise exeption
-        }
-      });
-
-    });
 
   },
 
-  cleanJsonCollection: function(json) {
+  cleanJsonCollection: function (json) {
 
     for (var i = 0; i < json.length; i++) {
       var obj = json[i];
@@ -84,21 +81,23 @@ Core9.template = {
     return json;
   },
 
-  dataCollect: function(collection, data) {
-    return Promise.settle(data).then(function(results) {
-      results.forEach(function(result) {
-        if (result.isFulfilled()) {
-          var json = JSON.parse(result.value().currentTarget.response);
-          json = Core9.template.cleanJsonCollection(json);
-          //console.log(json);
-          collection.insert(json);
-        } else {
-          console.log(result.reason());
-        }
+  dataCollect: function (collection, data) {
+    return Promise.settle(data)
+      .then(function (results) {
+        results.forEach(function (result) {
+          if (result.isFulfilled()) {
+            var json = JSON.parse(result.value()
+              .currentTarget.response);
+            json = Core9.template.cleanJsonCollection(json);
+            //console.log(json);
+            collection.insert(json);
+          } else {
+            console.log(result.reason());
+          }
+        });
       });
-    });
   },
-  showData: function() {
+  showData: function () {
     console.log('template : ');
     console.log(Core9.data.templates.data);
     console.log('page : ');
@@ -106,7 +105,7 @@ Core9.template = {
     console.log('block : ');
     console.log(Core9.data.blocks.data);
   },
-  dataReady: function() {
+  dataReady: function () {
     //Core9.template.showData();
     Core9.template.templates = Core9.template.getThemesOrSites('templates', Core9.data.templates);
     Core9.template.templates.splice(0, 0, " "); // add first empty option
@@ -114,15 +113,15 @@ Core9.template = {
     Core9.template.pages.splice(0, 0, " "); // add first empty option
     //Core9.template.save();
   },
-  save: function() {
+  save: function () {
 
     Core9.template.saveData('templates', Core9.data.templates);
     Core9.template.saveData('blocks', Core9.data.blocks);
     Core9.template.savePageData('pages', Core9.data.pages);
 
   },
-  getThemesOrSites: function(type, collection) {
-    var mapFun = function(obj) {
+  getThemesOrSites: function (type, collection) {
+    var mapFun = function (obj) {
       if (type == 'templates') {
         return obj.template;
       }
@@ -130,12 +129,12 @@ Core9.template = {
         return obj.domain;
       }
     }
-    var reduceFun = function(array) {
+    var reduceFun = function (array) {
       return Core9.deDupeArray(array);
     }
     return collection.mapReduce(mapFun, reduceFun);
   },
-  savePageData: function(type, collection) {
+  savePageData: function (type, collection) {
 
     var url = Core9.template.paths.pages.format(Core9.template.account);
     console.log(url);
@@ -152,7 +151,7 @@ Core9.template = {
 
 
   },
-  saveData: function(type, collection) {
+  saveData: function (type, collection) {
     var themes = Core9.template.getThemesOrSites(type, collection);
     for (var i = 0; i < themes.length; i++) {
       var theme = themes[i];
@@ -169,7 +168,7 @@ Core9.template = {
       //console.log(data);
     }
   },
-  saveTemplateData: function(theme, data) {
+  saveTemplateData: function (theme, data) {
     var url = Core9.template.paths.template.format(Core9.template.account, theme);
     console.log(url);
 
@@ -184,7 +183,7 @@ Core9.template = {
     });
 
   },
-  saveBlockData: function(theme, data) {
+  saveBlockData: function (theme, data) {
     var url = Core9.template.paths.blocks.format(Core9.template.account, theme);
     console.log(url);
     $.ajax({

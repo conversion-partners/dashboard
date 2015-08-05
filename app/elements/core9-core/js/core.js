@@ -2,9 +2,9 @@ Core9 = {}
 
 // First, checks if it isn't implemented yet.
 if (!String.prototype.format) {
-  String.prototype.format = function() {
+  String.prototype.format = function () {
     var args = arguments;
-    return this.replace(/{(\d+)}/g, function(match, number) {
+    return this.replace(/{(\d+)}/g, function (match, number) {
       return typeof args[number] != 'undefined' ? args[number] : match;
     });
   };
@@ -12,7 +12,8 @@ if (!String.prototype.format) {
 
 function guid() {
   function s4() {
-    return Math.floor((1 + Math.random()) * 0x10000).toString(16)
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
       .substring(1);
   }
   return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
@@ -20,8 +21,9 @@ function guid() {
 
 function getArray(nr) {
   return Array.apply(null, {
-    length: nr
-  }).map(Number.call, Number)
+      length: nr
+    })
+    .map(Number.call, Number)
 }
 
 function postClick(url) {
@@ -44,7 +46,7 @@ function isEmpty(str) {
 
 
 Core9.workspace = {
-  cleanWorkspace: function() {
+  cleanWorkspace: function () {
     while (Core9.workspace.firstChild) {
       try {
         Core9.workspace.removeChild(Core9.workspace.firstChild);
@@ -56,7 +58,7 @@ Core9.workspace = {
   }
 };
 
-Core9.xmlToString = function(xmlData) {
+Core9.xmlToString = function (xmlData) {
 
   var xmlString;
   //IE
@@ -65,22 +67,24 @@ Core9.xmlToString = function(xmlData) {
   }
   // code for Mozilla, Firefox, Opera, etc.
   else {
-    xmlString = (new XMLSerializer()).serializeToString(xmlData);
+    xmlString = (new XMLSerializer())
+      .serializeToString(xmlData);
   }
   return xmlString;
 };
 
-Core9.guid = function() {
+Core9.guid = function () {
   function s4() {
-    return Math.floor((1 + Math.random()) * 0x10000).toString(16)
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
       .substring(1);
   }
   return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
 Core9.iframeLoadedEvent = new Event('iframeLoadedEvent');
-Core9.j = function(url) {
-  return new Promise(function(resolve, reject) {
+Core9.j = function (url) {
+  return new Promise(function (resolve, reject) {
     var xhr = new XMLHttpRequest;
     xhr.addEventListener("error", reject);
     xhr.addEventListener("load", resolve);
@@ -89,19 +93,20 @@ Core9.j = function(url) {
   });
 }
 
-Core9.deDupeArray = function(a) {
+Core9.deDupeArray = function (a) {
   var temp = {};
   for (var i = 0; i < a.length; i++)
     temp[a[i]] = true;
   var r = [];
   for (var k in temp)
-    r.push(k);
+    if (k != 'undefined')
+      r.push(k);
   return r;
 }
 
-Core9.ajax = function(method, url, data, callback) {
+Core9.ajax = function (method, url, data, callback) {
   var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function() {
+  xhr.onreadystatechange = function () {
     if (xhr.readyState == 4) {
       callback(xhr);
     }
@@ -111,7 +116,7 @@ Core9.ajax = function(method, url, data, callback) {
 }
 
 Core9.iframe = {
-  write: function(iframe, content, grid) {
+  write: function (iframe, content, grid) {
     if (grid) {
       content = content.replace('</body>', '<script id="js-boot" src="/dashboard/app/elements/core9-gridmanager/boot.min.js"></script></body>');
     }
@@ -119,7 +124,7 @@ Core9.iframe = {
     iframe.contentWindow.document.write(content);
     iframe.contentWindow.document.close();
   },
-  getContent: function(iframe) {
+  getContent: function (iframe) {
     var document = iframe.contentDocument;
     var serializer = new XMLSerializer();
     var content = serializer.serializeToString(document);
@@ -127,7 +132,7 @@ Core9.iframe = {
 }
 
 Core9.system = {
-  unwrapModule: function(mod) {
+  unwrapModule: function (mod) {
     for (key in mod) {
       if (mod.hasOwnProperty(key)) {
         var value = mod[key];
@@ -135,8 +140,8 @@ Core9.system = {
       }
     }
   },
-  multiImport: function(modules) {
-    return Promise.all(modules.map(function(m) {
+  multiImport: function (modules) {
+    return Promise.all(modules.map(function (m) {
 
       return System.import(m)
     }))
@@ -147,30 +152,31 @@ Core9.panel = {
   __listOfPanels: {},
   __registry: {},
   __resolve: {},
-  __setRegistry: function(panel, json) {
+  __setRegistry: function (panel, json) {
     Core9.panel.__registry[panel] = json;
     var lastItem = Core9.panel.__listOfPanels[Core9.panel.__listOfPanels.length - 1];
     if (panel == lastItem) {
       Core9.panel.__resolve('all panels loaded');
       var defaultRoutes = {
-        'default': function() {}
+        'default': function () {}
       }
-      Router.addRoutes(defaultRoutes).listen();
+      Router.addRoutes(defaultRoutes)
+        .listen();
     }
   },
-  __setPanelJson: function(panel) {
+  __setPanelJson: function (panel) {
     Core9.ajax('GET', '/dashboard/panels/' + panel + '/routes.js', null,
-      function(data) {
+      function (data) {
         eval(data.responseText);
         //console.log('adding routes for ' + panel);
       });
     Core9.ajax('GET', '/dashboard/panels/' + panel + '/data.json', null,
-      function(data) {
+      function (data) {
         Core9.panel.__setRegistry(panel, JSON
           .parse(data.responseText));
       });
   },
-  add: function(listOfPanels, resolve) {
+  add: function (listOfPanels, resolve) {
     if (listOfPanels.length == 0)
       return;
     Core9.panel.__resolve = resolve;
@@ -179,20 +185,20 @@ Core9.panel = {
       Core9.panel.__setPanelJson(listOfPanels[i]);
     }
   },
-  get: function() {
+  get: function () {
     return Core9.panel.__registry;
   },
-  __activatePanelButton: function(panel, button) {
+  __activatePanelButton: function (panel, button) {
     // now close open
 
     button.getElementsByClassName("open")[0].addEventListener('click',
-      function() {
+      function () {
         panel.style.width = '100%';
         panel.childNodes[1].style.width = "100%";
       }, false);
 
     button.getElementsByClassName("close")[0].addEventListener('click',
-      function() {
+      function () {
         try {
           panel.style.width = '0px'
           panel.childNodes[1].style.width = "0px";
@@ -207,7 +213,7 @@ Core9.panel = {
      */
     return button;
   },
-  __createPanelButton: function() {
+  __createPanelButton: function () {
     var panelButton = document.createElement('div');
     var openButton = document.createElement('div');
     var closeButton = document.createElement('div');
@@ -222,7 +228,7 @@ Core9.panel = {
     panelButton.className = "panelbutton";
     return panelButton;
   },
-  __createPanel: function(id, zIndex, classes, content, button) {
+  __createPanel: function (id, zIndex, classes, content, button) {
     var panel = document.createElement('div');
     panel.setAttribute('id', id);
     panel.style.zIndex = zIndex.toString();
@@ -237,12 +243,12 @@ Core9.panel = {
   },
 
   iframe: {
-    create: function(id, zIndex, classes, content, button) {
+    create: function (id, zIndex, classes, content, button) {
       var panel = Core9.panel.__createPanel(id, zIndex, classes, content,
         button);
       var guid = Core9.guid();
       var content;
-      Core9.ajax('GET', content, null, function(data) {
+      Core9.ajax('GET', content, null, function (data) {
 
         var iframe = document.createElement('iframe');
         iframe.setAttribute('id', id + '-' + guid);
@@ -250,7 +256,7 @@ Core9.panel = {
         document.body.appendChild(iframe);
         Core9.iframe.write(iframe, data.responseText);
         iframeWindow = iframe.contentWindow || iframe.contentDocument.parentWindow;
-        iframeWindow.onload = function() {
+        iframeWindow.onload = function () {
           Core9.iframeLoadedEvent.detail = {
             id: guid,
             classes: classes
@@ -266,7 +272,7 @@ Core9.panel = {
         content = data.responseText;
       });
       // Fixme too hacky!!
-      setTimeout(function() {
+      setTimeout(function () {
         var iframe = document.getElementById(id + '-' + guid);
         panel.appendChild(iframe);
         Core9.iframe.write(iframe, content);
@@ -275,11 +281,11 @@ Core9.panel = {
     }
   },
   div: {
-    create: function(id, zIndex, classes, content, button) {
+    create: function (id, zIndex, classes, content, button) {
       var panel = Core9.panel.__createPanel(id, zIndex, classes, content,
         button);
 
-      Core9.ajax('GET', content, null, function(data) {
+      Core9.ajax('GET', content, null, function (data) {
         var guid = Core9.guid();
         var div = document.createElement('div');
         div.innerHTML = data.responseText.replace('evalscript',
@@ -299,24 +305,27 @@ Core9.panel = {
     }
   },
 
-  create: function(id, zIndex, classes, type, content, button) {
+  create: function (id, zIndex, classes, type, content, button) {
     return Core9.panel[type]['create']
       (id, zIndex, classes, content, button);
   },
-  remove: function(id) {},
-  update: function(id, classes, content) {},
-  get: function(id) {},
-  close: function() {
+  remove: function (id) {},
+  update: function (id, classes, content) {},
+  get: function (id) {},
+  close: function () {
     for (var i = 0; i < Core9.panellist.length; i++) {
       var panel = Core9.panel.__registry[Core9.panellist[i]];
       if (panel.id) {
-        document.querySelector('#' + panel.id).classList.remove("core9-selected");
-        document.querySelector('#' + panel.id + ' > div.panelbutton > div.close').click();
+        document.querySelector('#' + panel.id)
+          .classList.remove("core9-selected");
+        document.querySelector('#' + panel.id + ' > div.panelbutton > div.close')
+          .click();
       }
     }
   },
-  setPanelWidth: function() {
-    var menuWidth = document.querySelector('#panel-iframe-menu').offsetWidth;
+  setPanelWidth: function () {
+    var menuWidth = document.querySelector('#panel-iframe-menu')
+      .offsetWidth;
     var w = window.innerWidth;
     var panel = document.querySelector('.core9-selected > iframe');
     if (panel) {
@@ -325,18 +334,21 @@ Core9.panel = {
       panel.style.marginLeft = menuWidth + "px";
     }
   },
-  open: function(openPanel) {
+  open: function (openPanel) {
     this.close();
     var panel = document.querySelector('#' + openPanel + ' > div.panelbutton > div.open');
     if (panel) {
-      document.querySelector('#' + openPanel).className = document.querySelector('#' + openPanel).className + " core9-selected";
+      document.querySelector('#' + openPanel)
+        .className = document.querySelector('#' + openPanel)
+        .className + " core9-selected";
       panel.click();
       this.setPanelWidth();
     }
 
   },
-  getIframeById: function(id) {
-    return document.getElementById(id).childNodes[1];
+  getIframeById: function (id) {
+    return document.getElementById(id)
+      .childNodes[1];
   }
 
 }
