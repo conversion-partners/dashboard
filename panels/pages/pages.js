@@ -58,8 +58,6 @@ function getTemplateVersion() {
 var activateEditor = function() {
   var pageData = getSelectBoxEntries()[0];
   var starting_value = pageData.versions;
-  console.log('init Editor');
-  console.log(pageData);
   try {
     Core9.editor2.destroy();
   } catch (e) {}
@@ -161,20 +159,21 @@ var activateEditor = function() {
 
   function save() {
     var page = getCurrentPage();
-    console.log(page);
     var url = Core9.editor2.getValue().url;
-    console.log(url);
     page.url = url;
     var versions = Core9.editor.getValue();
     page.versions = [];
     page.versions = versions;
-    console.log(versions);
     Core9.data[TYPEOFPAGE].update(page);
     Core9.template.save();
   }
 
 
   function getOptions(options) {
+    //returns false by one empty option
+    if (options.length == 1 && isEmpty(options[0])) {
+      return false;
+    }
     var optionStr = "";
     var emptyOption = false;
     for (var i = 0; i < options.length; i++) {
@@ -191,8 +190,48 @@ var activateEditor = function() {
     return optionStr;
   }
 
+  function queryTemplates(types) {
+    var mapFun = function(obj) {
+
+    }
+    var result = Core9.data.templates.mapReduce(mapFun, reduceFun);
+    return result;
+  }
+
+
+  function checkNextOptions(session, forType) {
+    var result = Core9.data.templates.findObjects(session);
+    var arr = [];
+    for (var i = 0; i < result.length; i++) {
+      var item = result[i];
+      arr.push(item[forType]);
+    }
+    var options = Core9.deDupeArray(arr);
+    if (options.length == 1 && isEmpty(options[0])) {
+      return false;
+    }
+    return options;
+  }
+
+
+  function setCountrySelect(version, next) {
+    if (next) {
+      var options = getOptions(next);
+      var countrySelect = $('[data-schemapath="root.' + version + '.country"]').find('select');
+      $(countrySelect).empty().append(options).prop('disabled', false);
+    } else {
+      // skip and let country disabled
+    }
+  }
+
   // select boxes
   function watchVersion(version) {
+
+    var session = {
+      template: "",
+      language: ""
+    };
+
     $('[data-schemapath="root.' + version + '.language"]').find('select').prop('disabled', 'disabled');
     $('[data-schemapath="root.' + version + '.country"]').find('select').prop('disabled', 'disabled');
     $('[data-schemapath="root.' + version + '.template"]').find('select').prop('disabled', 'disabled');
@@ -201,14 +240,29 @@ var activateEditor = function() {
     Core9.editor.watch('root.' + version + '.theme', function() {
       var language = Core9.editor.getEditor('root.' + version + '.language');
       if (language) {
-        var select = $('[data-schemapath="root.' + version + '.language"]').find('select');
-        $(select).on('change', function() {
-          language.setValue($(this).val());
+        var languageSelect = $('[data-schemapath="root.' + version + '.language"]').find('select');
+        $(languageSelect).on('change', function() {
+          session.language = $(this).val();
+          language.setValue(session.language);
+          var next = checkNextOptions(session, 'country');
+          console.log('country options : ', next);
+          setCountrySelect(version, next);
         });
-        $(select).empty().append(getOptions(getLanguageOptions(Core9.editor.getEditor('root.' + version + '.theme').getValue()))).prop('disabled', false);
+        session.template = Core9.editor.getEditor('root.' + version + '.theme').getValue();
+        var options = getOptions(getLanguageOptions(session.template));
+        if (options) {
+          $(languageSelect).empty().append(options).prop('disabled', false);
+        } else {
+          $(languageSelect).empty().prop('disabled', 'disabled');
+        }
       }
+
+
+
+
     });
 
+    /*
     Core9.editor.watch('root.' + version + '.language', function() {
       var language = Core9.editor.getEditor('root.' + version + '.language');
       if (language) {
@@ -231,6 +285,7 @@ var activateEditor = function() {
         templateVersion.setValue(" ");
       }
     });
+    */
   }
   watchVersion(0);
   watchVersion(1);
