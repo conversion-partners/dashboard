@@ -205,13 +205,14 @@ var activateEditor = function() {
 
   function getTemplateVersionNames(session) {
     var versionNames = [];
-    var result = Core9.data.templates.findObjects(session);
-    for (var i = 0; i < result.length; i++) {
-      var version = result[i];
+    var result = Core9.data.templates.findObjects(session)[0]; // can only be one template left otherwise something went wrong
+
+    for (var i = 0; i < result.versions.length; i++) {
+      var version = result.versions[i];
       console.log(version);
-      //if (!isEmpty(template.page)) {
-      //versionNames.push(template.page);
-      //}
+      if (!isEmpty(version.title) && version.status != 'pauzed') {
+        versionNames.push(version.title);
+      }
     }
     return versionNames;
   }
@@ -239,8 +240,8 @@ var activateEditor = function() {
     if (templateNames) {
       $(templateSelect).empty().append(options).prop('disabled', false);
       console.log(templateNames);
-      if(templateNames.length == 1){
-        session.template = templateNames[0];
+      if (templateNames.length == 1) {
+        session.page = templateNames[0];
         var versionNames = getTemplateVersionNames(session);
         setVersionSelect(version, session, versionNames);
       }
@@ -251,8 +252,8 @@ var activateEditor = function() {
     }
 
     $(templateSelect).on('change', function() {
-      session.template = $(this).val();
-      console.log('template is ' + session.template);
+      session.page = $(this).val();
+      console.log('template is ' + session.page);
       var versionNames = getTemplateVersionNames(session);
       console.log(versionNames);
       setVersionSelect(version, session, versionNames);
@@ -308,6 +309,9 @@ var activateEditor = function() {
     disableSelectBoxesForVersion(version);
 
     Core9.editor.watch('root.' + version + '.theme', function() {
+
+      session.template = $('[data-schemapath="root.' + version + '.theme"]').find('select').val();
+
       var language = Core9.editor.getEditor('root.' + version + '.language');
       if (language) {
         var languageSelect = $('[data-schemapath="root.' + version + '.language"]').find('select');
