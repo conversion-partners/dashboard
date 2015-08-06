@@ -23,24 +23,7 @@ function getLanguageOptions(theme) {
   return result;
 }
 
-function getTemplateName(pageData) {
-  var pageVersion = getActiveTab();
-  //var version = pageData;//Core9.data.page.pageData.versions[pageVersion];
-  var templateNames = [];
-  var query = {
-    "page": pageData.version.versions[pageVersion].template,
-    "language": "", //version.language,
-    "country": "" //$('#editor_holder2 > div > div.rows > div.col-md-10 > div:nth-child(1) > div.well.well-sm > div > div > div:nth-child(4) > div > div.form-group > select').val()
-  }
-  var result = Core9.data.templates.findObjects(query);
-  for (var i = 0; i < result.length; i++) {
-    var template = result[i];
-    templateNames.push(template.page);
-  }
-  templateNames.push(" ");
-  //
-  return templateNames;
-}
+
 
 function getTemplateVersion() {
   var pageVersion = getActiveTab();
@@ -190,6 +173,7 @@ var activateEditor = function() {
     return optionStr;
   }
 
+
   function checkNextOptions(session, forType) {
     var result = Core9.data.templates.findObjects(session);
     var arr = [];
@@ -208,6 +192,21 @@ var activateEditor = function() {
     console.log(session);
   }
 
+
+  function getTemplateNames(version, session) {
+    var templateNames = [];
+    var result = Core9.data.templates.findObjects(session);
+    for (var i = 0; i < result.length; i++) {
+      var template = result[i];
+      if (!isEmpty(template.page)) {
+        templateNames.push(template.page);
+      }
+    }
+    return templateNames;
+  }
+
+
+
   function setCountrySelect(version, session, next) {
     console.log('selection country ....');
     var options = getOptions(next);
@@ -225,6 +224,9 @@ var activateEditor = function() {
     $(countrySelect).on('change', function() {
       session.country = $(this).val();
       console.log('country is ' + session.country);
+      var templateNames = getTemplateNames(version, session);
+      console.log('template options : ');
+      console.log(templateNames);
     });
 
 
