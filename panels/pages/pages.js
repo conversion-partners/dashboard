@@ -190,15 +190,6 @@ var activateEditor = function() {
     return optionStr;
   }
 
-  function queryTemplates(types) {
-    var mapFun = function(obj) {
-
-    }
-    var result = Core9.data.templates.mapReduce(mapFun, reduceFun);
-    return result;
-  }
-
-
   function checkNextOptions(session, forType) {
     var result = Core9.data.templates.findObjects(session);
     var arr = [];
@@ -213,29 +204,52 @@ var activateEditor = function() {
     return options;
   }
 
+  function showTemplateOptions(version, session) {
+    console.log(session);
+  }
 
-  function setCountrySelect(version, next) {
+  function setCountrySelect(version, session, next) {
+    console.log('selection country ....');
+    var options = getOptions(next);
+    var countrySelect = $('[data-schemapath="root.' + version + '.country"]').find('select');
     if (next) {
-      var options = getOptions(next);
-      var countrySelect = $('[data-schemapath="root.' + version + '.country"]').find('select');
       $(countrySelect).empty().append(options).prop('disabled', false);
     } else {
       // skip and let country disabled
+      console.log('sorry no country options trying templates..');
+      $('[data-schemapath="root.' + version + '.country"]').find('select').empty().prop('disabled', 'disabled');
     }
+
+    session.country = "";
+
+    $(countrySelect).on('change', function() {
+      session.country = $(this).val();
+      console.log('country is ' + session.country);
+    });
+
+
+
+    console.log('country', session);
+
+    showTemplateOptions(version, session);
   }
+
+  function disableSelectBoxesForVersion(version) {
+    $('[data-schemapath="root.' + version + '.language"]').find('select').empty().prop('disabled', 'disabled');
+    $('[data-schemapath="root.' + version + '.country"]').find('select').empty().prop('disabled', 'disabled');
+    $('[data-schemapath="root.' + version + '.template"]').find('select').empty().prop('disabled', 'disabled');
+    $('[data-schemapath="root.' + version + '.version"]').find('select').empty().prop('disabled', 'disabled');
+  }
+
 
   // select boxes
   function watchVersion(version) {
-
     var session = {
       template: "",
       language: ""
     };
 
-    $('[data-schemapath="root.' + version + '.language"]').find('select').prop('disabled', 'disabled');
-    $('[data-schemapath="root.' + version + '.country"]').find('select').prop('disabled', 'disabled');
-    $('[data-schemapath="root.' + version + '.template"]').find('select').prop('disabled', 'disabled');
-    $('[data-schemapath="root.' + version + '.version"]').find('select').prop('disabled', 'disabled');
+    disableSelectBoxesForVersion(version);
 
     Core9.editor.watch('root.' + version + '.theme', function() {
       var language = Core9.editor.getEditor('root.' + version + '.language');
@@ -246,15 +260,21 @@ var activateEditor = function() {
           language.setValue(session.language);
           var next = checkNextOptions(session, 'country');
           console.log('country options : ', next);
-          setCountrySelect(version, next);
+          delete session.country;
+          setCountrySelect(version, session, next);
         });
         session.template = Core9.editor.getEditor('root.' + version + '.theme').getValue();
         var options = getOptions(getLanguageOptions(session.template));
         if (options) {
           $(languageSelect).empty().append(options).prop('disabled', false);
         } else {
-          $(languageSelect).empty().prop('disabled', 'disabled');
+          disableSelectBoxesForVersion(version);
         }
+      } else {
+        var next = checkNextOptions(session, 'country');
+        console.log('country options : ', next);
+        delete session.country;
+        setCountrySelect(version, session, next);
       }
 
 
