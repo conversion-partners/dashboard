@@ -203,6 +203,18 @@ var activateEditor = function() {
     return templateNames;
   }
 
+  function getTemplateVersionNames(session) {
+    var versionNames = [];
+    var result = Core9.data.templates.findObjects(session);
+    for (var i = 0; i < result.length; i++) {
+      var template = result[i];
+      if (!isEmpty(template.page)) {
+        versionNames.push(template.page);
+      }
+    }
+    return versionNames;
+  }
+
   function setTemplateSelect(version, session, templateNames) {
     var options = getOptions(templateNames);
     var templateSelect = $('[data-schemapath="root.' + version + '.template"]').find('select');
@@ -217,6 +229,7 @@ var activateEditor = function() {
       session.template = $(this).val();
       console.log('template is ' + session.template);
       var versionNames = getTemplateVersionNames(session);
+      console.log(versionNames);
     });
 
   }
