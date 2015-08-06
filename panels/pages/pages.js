@@ -207,15 +207,33 @@ var activateEditor = function() {
     var versionNames = [];
     var result = Core9.data.templates.findObjects(session);
     for (var i = 0; i < result.length; i++) {
-      var template = result[i];
-      if (!isEmpty(template.page)) {
-        versionNames.push(template.page);
-      }
+      var version = result[i];
+      console.log(version);
+      //if (!isEmpty(template.page)) {
+      //versionNames.push(template.page);
+      //}
     }
     return versionNames;
   }
 
+
+
+  function setVersionSelect(version, session, versionNames) {
+
+    var options = getOptions(versionNames);
+    var versionSelect = $('[data-schemapath="root.' + version + '.version"]').find('select');
+    if (versionNames) {
+      $(versionSelect).empty().append(options).prop('disabled', false);
+    } else {
+      console.log('sorry no versions found..');
+      $('[data-schemapath="root.' + version + '.version"]').find('select').empty().prop('disabled', 'disabled');
+    }
+
+
+  }
+
   function setTemplateSelect(version, session, templateNames) {
+
     var options = getOptions(templateNames);
     var templateSelect = $('[data-schemapath="root.' + version + '.template"]').find('select');
     if (templateNames) {
@@ -230,7 +248,10 @@ var activateEditor = function() {
       console.log('template is ' + session.template);
       var versionNames = getTemplateVersionNames(session);
       console.log(versionNames);
+      setVersionSelect(version, session, versionNames);
     });
+
+    //setTemplateVersions();
 
   }
 
@@ -256,7 +277,10 @@ var activateEditor = function() {
       console.log(templateNames);
       setTemplateSelect(version, session, templateNames);
     });
-    console.log('country', session);
+
+
+
+
   }
 
   function disableSelectBoxesForVersion(version) {
