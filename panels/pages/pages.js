@@ -188,9 +188,7 @@ var activateEditor = function() {
     return options;
   }
 
-  function showTemplateOptions(version, session) {
-    console.log(session);
-  }
+
 
 
   function getTemplateNames(session) {
@@ -205,7 +203,23 @@ var activateEditor = function() {
     return templateNames;
   }
 
+  function setTemplateSelect(version, session, templateNames) {
+    var options = getOptions(templateNames);
+    var templateSelect = $('[data-schemapath="root.' + version + '.template"]').find('select');
+    if (templateNames) {
+      $(templateSelect).empty().append(options).prop('disabled', false);
+    } else {
+      console.log('sorry no template options..');
+      $('[data-schemapath="root.' + version + '.template"]').find('select').empty().prop('disabled', 'disabled');
+    }
 
+    $(templateSelect).on('change', function() {
+      session.template = $(this).val();
+      console.log('template is ' + session.template);
+      var versionNames = getTemplateVersionNames(session);
+    });
+
+  }
 
   function setCountrySelect(version, session, next) {
     console.log('selection country ....');
@@ -227,13 +241,9 @@ var activateEditor = function() {
       var templateNames = getTemplateNames(session);
       console.log('template options : ');
       console.log(templateNames);
+      setTemplateSelect(version, session, templateNames);
     });
-
-
-
     console.log('country', session);
-
-    showTemplateOptions(version, session);
   }
 
   function disableSelectBoxesForVersion(version) {
@@ -278,36 +288,8 @@ var activateEditor = function() {
         delete session.country;
         setCountrySelect(version, session, next);
       }
-
-
-
-
     });
 
-    /*
-    Core9.editor.watch('root.' + version + '.language', function() {
-      var language = Core9.editor.getEditor('root.' + version + '.language');
-      if (language) {
-        console.log(language.getValue());
-      }
-      var country = Core9.editor.getEditor('root.' + version + '.country');
-      if (country) {
-        country.setValue(" ");
-      }
-    });
-    Core9.editor.watch('root.' + version + '.country', function() {
-      var template = Core9.editor.getEditor('root.' + version + '.template');
-      if (template) {
-        template.setValue(" ");
-      }
-    });
-    Core9.editor.watch('root.' + version + '.template', function() {
-      var templateVersion = Core9.editor.getEditor('root.' + version + '.version');
-      if (templateVersion) {
-        templateVersion.setValue(" ");
-      }
-    });
-    */
   }
   watchVersion(0);
   watchVersion(1);
