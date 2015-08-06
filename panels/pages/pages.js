@@ -238,6 +238,13 @@ var activateEditor = function() {
     var templateSelect = $('[data-schemapath="root.' + version + '.template"]').find('select');
     if (templateNames) {
       $(templateSelect).empty().append(options).prop('disabled', false);
+      console.log(templateNames);
+      if(templateNames.length == 1){
+        session.template = templateNames[0];
+        var versionNames = getTemplateVersionNames(session);
+        setVersionSelect(version, session, versionNames);
+      }
+
     } else {
       console.log('sorry no template options..');
       $('[data-schemapath="root.' + version + '.template"]').find('select').empty().prop('disabled', 'disabled');
