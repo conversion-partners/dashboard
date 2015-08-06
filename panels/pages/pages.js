@@ -193,7 +193,7 @@ var activateEditor = function() {
   }
 
 
-  function getTemplateNames(version, session) {
+  function getTemplateNames(session) {
     var templateNames = [];
     var result = Core9.data.templates.findObjects(session);
     for (var i = 0; i < result.length; i++) {
@@ -224,7 +224,7 @@ var activateEditor = function() {
     $(countrySelect).on('change', function() {
       session.country = $(this).val();
       console.log('country is ' + session.country);
-      var templateNames = getTemplateNames(version, session);
+      var templateNames = getTemplateNames(session);
       console.log('template options : ');
       console.log(templateNames);
     });
