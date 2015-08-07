@@ -343,7 +343,9 @@ var activateEditor = function () {
 }
 
 function showNewPageForm() {
-  //
+  try {
+    Core9.editor3.destroy();
+  } catch (e) {}
   Core9.editor3 = new JSONEditor(document.getElementById('new-page-form'), {
     ajax: true,
     disable_edit_json: true,
@@ -361,9 +363,12 @@ function showNewPageForm() {
           type: "string",
           minLength: 3
         },
+        newdomain: {
+          type: "string"
+        },
         domain: {
           type: "string",
-          enum: []
+          enum: Core9.template.pages
         },
         language: {
           type: "string",
@@ -378,17 +383,6 @@ function showNewPageForm() {
   });
 
 
-
-  var domainSelect = $('[data-schemapath="root.domain"]').find('select');
-  if(domainSelect) {
-    var options = "";
-    var domains = Core9.template.pages;
-    for (var i = 0; i < domains.length; i++) {
-      options += '<option value="'+domains[i]+'">'+domains[i]+'</option>';
-    }
-    $(domainSelect).append(options);
-  }
-
   var languageSelect = $('[data-schemapath="root.language"]').find('select');
   if(languageSelect) {
     $(languageSelect).append(document.getElementById('language-options').innerHTML);
@@ -397,6 +391,13 @@ function showNewPageForm() {
   if(countrySelect) {
     $(countrySelect).append(document.getElementById('country-options').innerHTML);
   }
+
+  $('#save-new-page').on('click',function(){
+    var data = Core9.editor3.getValue();
+    data.country = $('[data-schemapath="root.country"]').find('select').val();
+    data.language = $('[data-schemapath="root.language"]').find('select').val();
+    console.log(data);
+  });
 }
 $(document).ready(function () {
   $('#newpages').on('click', function () {
