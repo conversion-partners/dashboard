@@ -377,15 +377,15 @@ function showNewPageForm() {
     }
   });
 
-
-  var country = editor.getEditor('root.country');
-
-// `getEditor` will return null if the path is invalid
-if(country) {
-  country.setValue("John Smith");
-
-}
-
+  //language-options
+  var languageSelect = $('[data-schemapath="root.language"]').find('select');
+  if(languageSelect) {
+    $(languageSelect).append(document.getElementById('language-options').innerHTML);
+  }
+  var countrySelect = $('[data-schemapath="root.country"]').find('select');
+  if(countrySelect) {
+    $(countrySelect).append(document.getElementById('country-options').innerHTML);
+  }
 }
 $(document).ready(function () {
   $('#newpages').on('click', function () {
