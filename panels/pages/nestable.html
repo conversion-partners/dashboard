@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 	<title>Pages</title>
-	<link href="/dashboard/bower_components/magnific-popup/dist/magnific-popup.css">
 	<link rel="stylesheet" href="/dashboard/bower_components/select2/dist/css/select2.min.css">
 	<link rel="stylesheet" href="/dashboard/bower_components/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/dashboard/bower_components/nestable2/jquery.nestable.css">
@@ -18,7 +18,6 @@
 	<script src="/dashboard/bower_components/nestable2/jquery.nestable.js"></script>
 	<script src="/dashboard/bower_components/select2/dist/js/select2.full.min.js"></script>
 	<script src="/dashboard/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="/dashboard/bower_components/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
 	<!--
 	<script src="/dashboard/bower_components/json-editor/dist/jsoneditor.min.js"></script>
 -->
@@ -28,9 +27,49 @@
 	<script src="/dashboard/app/elements/core9-core/shared/themes-and-pages/function.js"></script>
 	<script src="/dashboard/app/elements/core9-core/shared/themes-and-pages/main.js"></script>
 	<script src="/dashboard/panels/pages/pages.js"></script>
+	<style>
+		#myModal {
+			margin-left: -60%;
+		}
+
+		#new-page-form {
+			margin-top: -40px;
+			margin-bottom: 35px;
+		}
+
+		#new-page-form > div > h3 > span {
+			display: none;
+		}
+	</style>
 </head>
 
 <body>
+
+
+
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">New page</h4>
+				</div>
+				<div class="modal-body">
+					<div id="new-page-form"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 	<div id="choose-theme">
 		<div id="theme-modal">
 			<div id="exit-modal" style="float:right;">x</div>
@@ -64,7 +103,7 @@
 			<div class="btn-group" role="group" aria-label="" style="width: 500px;">
 				<!--<button type="button" class="btn btn-default">Preview</button>-->
 				<button id="editpage" type="button" class="btn btn-default">Edit</button>
-				<button id="newpages" href="/dashboard/panels/pages/new-page.html" type="button" class="btn btn-default">New</button>
+				<button id="newpages" class="btn btn-default" type="button">New</button>
 				<button id="delpage" type="button" class="btn btn-default">Delete</button>
 			</div>
 			<div style="width: 425px;  margin-top: -35px;" id='editor_holder'></div>
@@ -89,4 +128,5 @@
 		Core9.iframe.child.listenToPostMessages(callback);
 	</script>
 </body>
+
 </html>

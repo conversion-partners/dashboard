@@ -341,8 +341,45 @@ var activateEditor = function () {
     Core9.editor.setValue(starting_value);
   });
 }
+
+function showNewPageForm() {
+  //
+  Core9.editor3 = new JSONEditor(document.getElementById('new-page-form'), {
+    ajax: true,
+    disable_edit_json: true,
+    disable_collapse: true,
+    disable_properties: true,
+    format: 'grid',
+    theme: 'bootstrap3',
+    no_additional_properties: false,
+    required_by_default: false,
+    schema: {
+      type: "object",
+      title: "New page",
+      properties: {
+        title: {
+          type: "string",
+          minLength: 3
+        },
+        domain: {
+          type: "string",
+          enum: []
+        },
+        language: {
+          type: "string",
+          enum: []
+        },
+        country: {
+          type: "string",
+          enum: []
+        }
+      }
+    }
+  });
+}
 $(document).ready(function () {
-
-
-
+  $('#newpages').on('click', function () {
+    $("#myModal").modal();
+    showNewPageForm();
+  });
 });
