@@ -76,3 +76,78 @@ function activateEditor() {
       });
 
 }
+
+
+
+/*
+  new template
+*/
+
+
+
+
+
+function showNewTemplateForm() {
+  try {
+    Core9.editor3.destroy();
+  } catch (e) {}
+  Core9.editor3 = new JSONEditor(document.getElementById('new-template-form'), {
+    ajax: true,
+    disable_edit_json: true,
+    disable_collapse: true,
+    disable_properties: true,
+    format: 'grid',
+    theme: 'bootstrap3',
+    no_additional_properties: false,
+    required_by_default: false,
+    schema: {
+      type: "object",
+      title: "New template",
+      properties: {
+        title: {
+          type: "string",
+          minLength: 3
+        },
+        newtheme: {
+          type: "string"
+        },
+        theme: {
+          type: "string",
+          enum: Core9.template.templates
+        },
+        language: {
+          type: "string",
+          enum: []
+        },
+        country: {
+          type: "string",
+          enum: []
+        }
+      }
+    }
+  });
+
+
+  var languageSelect = $('[data-schemapath="root.language"]').find('select');
+  if(languageSelect) {
+    $(languageSelect).append(document.getElementById('language-options').innerHTML);
+  }
+  var countrySelect = $('[data-schemapath="root.country"]').find('select');
+  if(countrySelect) {
+    $(countrySelect).append(document.getElementById('country-options').innerHTML);
+  }
+
+  $('#save-new-template').on('click',function(){
+    var data = Core9.editor3.getValue();
+    data.country = $('[data-schemapath="root.country"]').find('select').val();
+    data.theme = $('[data-schemapath="root.theme"]').find('select').val();
+    data.language = $('[data-schemapath="root.language"]').find('select').val();
+    console.log(data);
+  });
+}
+$(document).ready(function () {
+  $('#newtemplates').on('click', function () {
+    $("#myModal").modal();
+    showNewTemplateForm();
+  });
+});
