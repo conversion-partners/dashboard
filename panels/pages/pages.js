@@ -92,19 +92,19 @@ var activateEditor = function () {
           },
           language: {
             type: "string",
-            enum: Core9.data.languageOptions
+            enum: []
           },
           country: {
             type: "string",
-            enum: getCountryOptions()
+            enum: []
           },
           template: {
             type: "string",
-            enum: ["", "nl", "de"]
+            enum: []
           },
           version: {
             type: "string",
-            enum: ["", "nl", "de"]
+            enum: []
           },
           percentage: {
             type: "integer",
@@ -138,13 +138,34 @@ var activateEditor = function () {
     }
   });
 
+  function ifUndefined(versions, i, val){
+    try {
+      if(typeof versions[i][val] == 'undefined'){
+        return "";
+      }
+    } catch (e) {
+      return "";
+    }
+    return versions[i][val];
+  }
+
   function save() {
     var page = getCurrentPage();
     var url = Core9.editor2.getValue().url;
     page.url = url;
     var versions = Core9.editor.getValue();
     page.versions = [];
-    page.versions = versions;
+    for(var i = 0; i < versions.length; i++) {
+      page.versions[i] = {};
+      page.versions[i].title = ifUndefined(versions, i, 'title');
+      page.versions[i].theme = ifUndefined(versions, i, 'theme');
+      page.versions[i].language = ifUndefined(versions, i, 'language');
+      page.versions[i].country = ifUndefined(versions, i, 'country');
+      page.versions[i].percentage = ifUndefined(versions, i, 'percentage');
+      page.versions[i].startdate = ifUndefined(versions, i, 'startdate');
+      page.versions[i].enddate = ifUndefined(versions, i, 'enddate');
+      page.versions[i].status = ifUndefined(versions, i, 'status');
+    }
     Core9.data[TYPEOFPAGE].update(page);
     Core9.template.save();
   }
