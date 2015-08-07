@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 	<title>Pages</title>
+	<link href="/dashboard/bower_components/magnific-popup/dist/magnific-popup.css">
 	<link rel="stylesheet" href="/dashboard/bower_components/select2/dist/css/select2.min.css">
 	<link rel="stylesheet" href="/dashboard/bower_components/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/dashboard/bower_components/nestable2/jquery.nestable.css">
@@ -17,6 +18,7 @@
 	<script src="/dashboard/bower_components/nestable2/jquery.nestable.js"></script>
 	<script src="/dashboard/bower_components/select2/dist/js/select2.full.min.js"></script>
 	<script src="/dashboard/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="/dashboard/bower_components/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
 	<!--
 	<script src="/dashboard/bower_components/json-editor/dist/jsoneditor.min.js"></script>
 -->
@@ -29,16 +31,6 @@
 </head>
 
 <body>
-	<div id="new-pages">
-		<div id="modal">
-			<div id="exit-modal" style="float:right;">x</div>
-			<div id="choose-theme-template-page"></div>
-			<select class="choose-theme-select"></select>
-			<button id="edit-selected-theme">edit</button>
-		</div>
-	</div>
-
-
 	<div id="choose-theme">
 		<div id="theme-modal">
 			<div id="exit-modal" style="float:right;">x</div>
@@ -47,8 +39,6 @@
 			<button id="edit-selected-theme">edit</button>
 		</div>
 	</div>
-
-
 	<div id="content" class="cf nestable-lists">
 		<div style="width: 100%;" class="btn-group" role="group" aria-label="" style="width: 500px; left: 195px; top: -34px;">
 			<h1 style="margin-top: 10px; font-size: 16px;">Pages</h1>
@@ -74,7 +64,7 @@
 			<div class="btn-group" role="group" aria-label="" style="width: 500px;">
 				<!--<button type="button" class="btn btn-default">Preview</button>-->
 				<button id="editpage" type="button" class="btn btn-default">Edit</button>
-				<button id="newpage" type="button" class="btn btn-default">New</button>
+				<button id="newpages" href="/dashboard/panels/pages/new-page.html" type="button" class="btn btn-default">New</button>
 				<button id="delpage" type="button" class="btn btn-default">Delete</button>
 			</div>
 			<div style="width: 425px;  margin-top: -35px;" id='editor_holder'></div>

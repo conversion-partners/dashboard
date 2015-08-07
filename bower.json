@@ -34,8 +34,7 @@
     "select2": "~4.0.0",
     "lokijs": "~1.3.4",
     "fontawesome": "~4.3.0",
-    "bluebird": "~2.9.34",
-    "easyModal.js": "*"
+    "bluebird": "~2.9.34"
   },
   "resolutions": {
     "polymer": "^0.9.0",

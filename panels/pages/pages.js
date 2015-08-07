@@ -138,12 +138,12 @@ var activateEditor = function () {
     }
   });
 
-  function ifUndefined(versions, i, val){
+  function ifUndefined(versions, i, val) {
     try {
-      if(typeof versions[i][val] == 'undefined'){
+      if(typeof versions[i][val] == 'undefined') {
         return "";
       }
-    } catch (e) {
+    } catch(e) {
       return "";
     }
     return versions[i][val];
@@ -341,3 +341,8 @@ var activateEditor = function () {
     Core9.editor.setValue(starting_value);
   });
 }
+$(document).ready(function () {
+
+
+
+});
