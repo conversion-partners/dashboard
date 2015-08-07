@@ -377,7 +377,18 @@ function showNewPageForm() {
     }
   });
 
-  //language-options
+
+
+  var domainSelect = $('[data-schemapath="root.domain"]').find('select');
+  if(domainSelect) {
+    var options = "";
+    var domains = Core9.template.pages;
+    for (var i = 0; i < domains.length; i++) {
+      options += '<option value="'+domains[i]+'">'+domains[i]+'</option>';
+    }
+    $(domainSelect).append(options);
+  }
+
   var languageSelect = $('[data-schemapath="root.language"]').find('select');
   if(languageSelect) {
     $(languageSelect).append(document.getElementById('language-options').innerHTML);
