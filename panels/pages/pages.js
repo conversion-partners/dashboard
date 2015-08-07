@@ -376,6 +376,16 @@ function showNewPageForm() {
       }
     }
   });
+
+
+  var country = editor.getEditor('root.country');
+
+// `getEditor` will return null if the path is invalid
+if(country) {
+  country.setValue("John Smith");
+
+}
+
 }
 $(document).ready(function () {
   $('#newpages').on('click', function () {
