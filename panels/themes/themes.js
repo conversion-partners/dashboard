@@ -19,7 +19,7 @@ function activateEditor() {
     required_by_default: true,
     schema: {
       type: "array",
-      title: pageData.page,
+      title: pageData.template,
       format: "tabs",
       items: {
         title: "Version",
