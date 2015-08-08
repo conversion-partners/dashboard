@@ -8,6 +8,9 @@ Core9.select = {
   setSession: function(session) {
     Core9.select.__session = session;
   },
+  getSession: function() {
+    return Core9.select.__session;
+  },
   getThemeNames: function() {
     var mapFun = function(obj) {
       return obj.template;

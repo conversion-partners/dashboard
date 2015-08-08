@@ -159,16 +159,7 @@ var activateEditor = function () {
     return optionStr;
   }
 
-  function setVersionSelect(version, session, versionNames) {
-    var options = getOptions(versionNames);
-    var versionSelect = $('[data-schemapath="root.' + version + '.version"]').find('select');
-    if(versionNames) {
-      $(versionSelect).empty().append(options).prop('disabled', false);
-    } else {
-      console.log('sorry no versions found..');
-      $('[data-schemapath="root.' + version + '.version"]').find('select').empty().prop('disabled', 'disabled');
-    }
-  }
+
 
   function disableSelectBoxesForVersion(version) {
     $('[data-schemapath="root.' + version + '.language"]').find('select').empty().prop('disabled', 'disabled');
@@ -177,62 +168,66 @@ var activateEditor = function () {
     $('[data-schemapath="root.' + version + '.version"]').find('select').empty().prop('disabled', 'disabled');
   }
 
-  function setTemplateSelectBox(){
-    console.log('need to set template select box');
-  }
-
-  function setSelectBox(type, version, data) {
+  function setSelectBox(type, version, data, callback) {
+    var session = Core9.select.getSession();
     var options = getOptions(data);
     var select = $('[data-schemapath="root.' + version + '.' + type + '"]').find('select');
-    if(select) {
-      if(options){
-        $(select).empty().append(options).prop('disabled', false);
-      }else{
-          //$(select).empty().prop('disabled', false); // empty select box ???
-          setTemplateSelectBox();
-      }
+    if(options > 1) {
+      $(select).empty().append(options).prop('disabled', false);
     } else {
-      alert('oeps some thing went wrong : error-12');
+      if(options == 0){
+        session[type] = "";
+      }else{
+        session[type] = data[0];
+        $(select).empty().append(options).prop('disabled', false);
+      }
     }
+    Core9.select.setSession(session);
+    callback();
+  }
+
+  function finishedSelection(){
+    var session = Core9.select.getSession();
+    console.log(session);
+    console.log("good choice");
+  }
+
+  function setVersionSelectBox() {
+    var session = Core9.select.getSession();
+    console.log(session);
+    console.log('setting version box');
+    setSelectBox('version', session.version, Core9.select.getVersionNames(), finishedSelection);
+  }
+
+  function setTemplateSelectBox() {
+    var session = Core9.select.getSession();
+    console.log(session);
+    console.log('setting template box');
+    setSelectBox('template', session.version, Core9.select.getTemplateNames(), setVersionSelectBox);
+  }
+
+  function setCountrySelectBox() {
+    var session = Core9.select.getSession();
+    console.log(session);
+    console.log('setting country box');
+    setSelectBox('country', session.version, Core9.select.getCountryNames(), setTemplateSelectBox);
   }
 
   function watchVersion(version) {
     disableSelectBoxesForVersion(version);
     Core9.editor.watch('root.' + version + '.theme', function () {
       disableSelectBoxesForVersion(version);
-      var session = {};
+      var session = {
+        version: version
+      };
       session.theme = $('[data-schemapath="root.' + version + '.theme"]').find('select').val();
-      if(isEmpty(session.theme)){
+      if(isEmpty(session.theme)) {
         alert('please make a choice');
         return;
       }
       Core9.select.setSession(session);
       var languageNames = Core9.select.getLanguageNames();
-
-      if(languageNames.length == 0) {
-        // go and try next box
-        session.language = "";
-        Core9.select.setSession(session);
-        var countryNames = Core9.select.getCountryNames();
-        setSelectBox('country', version, countryNames);
-      } else if(languageNames.length == 1) {
-        setSelectBox('language', version, languageNames);
-        // and  go and try next box based on value
-        session.language = languageNames;
-        Core9.select.setSession(session);
-        var countryNames = Core9.select.getCountryNames();
-        setSelectBox('country', version, countryNames);
-      } else {
-        setSelectBox('language', version, languageNames);
-        // and wait for country selection
-        Core9.editor.watch('root.' + version + '.country ', function () {
-          console.log('changed country',this);
-        });
-      }
-
-
-
-
+      setSelectBox('language', version, Core9.select.getLanguageNames(), setCountrySelectBox);
     });
   }
   watchVersion(0);
