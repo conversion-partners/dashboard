@@ -139,8 +139,8 @@ function showNewTemplateForm() {
   });
   var themeSelect = $('[data-schemapath="root.theme"]').find('select');
   if(themeSelect) {
-    for(var i = 0, options = ""; i < Core9.template.templates.length; i++) {
-      $(themeSelect).append('<option value="' + Core9.template.templates[i] + '">' + Core9.template.templates[i] + '</option>');
+    for(var i = 0, options = ""; i < Core9.template.themes.length; i++) {
+      $(themeSelect).append('<option value="' + Core9.template.themes[i] + '">' + Core9.template.themes[i] + '</option>');
     }
   }
   var languageSelect = $('[data-schemapath="root.language"]').find('select');

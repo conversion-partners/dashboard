@@ -56,7 +56,7 @@ var activateEditor = function () {
           },
           theme: {
             type: "string",
-            enum: Core9.template.templates
+            enum: Core9.template.themes
           },
           language: {
             type: "string",

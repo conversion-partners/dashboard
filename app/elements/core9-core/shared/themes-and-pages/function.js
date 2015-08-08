@@ -171,6 +171,8 @@ function initTemplateSelectBoxes() {
   var templateData = {
     data: [""]
   }
+
+
   $(".template-data").on("change", function () {
     $(".language-data").select2("destroy");
     $(".language-data").html("<option><option>");
@@ -191,6 +193,9 @@ function initTemplateSelectBoxes() {
     }
     changeSelect2Data("language-data", data);
   });
+
+
+
   $(".language-data").on("change", function () {
     $(".country-data").select2("destroy");
     $(".country-data").html("<option><option>");
@@ -212,7 +217,7 @@ function initTemplateSelectBoxes() {
     }
     changeSelect2Data("country-data", data);
   });
-  changeSelect2Data("template-data", Core9.template[TYPEOFPAGE]);
+  changeSelect2Data("template-data", Core9.template.themes);
   changeSelect2Data("language-data", []);
   changeSelect2Data("country-data", []);
 }

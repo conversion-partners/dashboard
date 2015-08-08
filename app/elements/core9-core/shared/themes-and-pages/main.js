@@ -7,7 +7,7 @@ initStarted = false;
 function init() {
   if(!initStarted) {
     initNestable([]);
-    initStarted = true;
+    //initStarted = true;
   }
 }
 $(document).ready(function () {
