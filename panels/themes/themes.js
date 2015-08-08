@@ -1,4 +1,4 @@
-TYPEOFPAGE = 'templates';
+TYPEOFPAGE = 'themes';
 
 function activateEditor() {
   var pageData = getSelectBoxEntries()[0];
@@ -78,7 +78,7 @@ function saveTheme(data) {
     "template": pageName
   });
   initNestable(JSON.stringify(json));
-  if(TYPEOFPAGE == 'templates') {
+  if(TYPEOFPAGE == 'themes') {
     var templateData = {
       "theme": data.theme,
       "language": data.language,

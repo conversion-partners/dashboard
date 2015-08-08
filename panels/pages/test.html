@@ -110,7 +110,7 @@
     }
 
     Core9.select = {
-      collection: Core9.data.templates,
+      collection: Core9.data.themes,
       __session: {},
       setSession: function(session) {
         Core9.select.__session = session;
@@ -119,7 +119,7 @@
         var mapFun = function(obj) {
           return obj.template;
         }
-        return Core9.data.templates.mapReduce(mapFun, reduceFun);
+        return Core9.data.themes.mapReduce(mapFun, reduceFun);
       },
       getLanguageNames: function() {
         var mapFun = function(obj) {
@@ -127,7 +127,7 @@
             return obj.language;
           }
         }
-        return Core9.data.templates.mapReduce(mapFun, reduceFun);
+        return Core9.data.themes.mapReduce(mapFun, reduceFun);
       },
       getCountryNames: function() {
         var mapFun = function(obj) {
@@ -135,7 +135,7 @@
             return obj.country;
           }
         }
-        return Core9.data.templates.mapReduce(mapFun, reduceFun);
+        return Core9.data.themes.mapReduce(mapFun, reduceFun);
       },
       getTemplateNames: function() {
         var mapFun = function(obj) {
@@ -143,7 +143,7 @@
             return obj.page;
           }
         }
-        return Core9.data.templates.mapReduce(mapFun, reduceFun);
+        return Core9.data.themes.mapReduce(mapFun, reduceFun);
       },
       getVersionNames: function() {
         var mapFun = function(obj) {
@@ -158,7 +158,7 @@
             return name;
           }
         }
-        return Core9.data.templates.mapReduce(mapFun, reduceFun);
+        return Core9.data.themes.mapReduce(mapFun, reduceFun);
       }
     }
 

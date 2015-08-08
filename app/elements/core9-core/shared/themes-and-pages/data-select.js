@@ -3,7 +3,7 @@ var reduceFun = function (array) {
 }
 
 Core9.select = {
-  collection: Core9.data.templates,
+  collection: Core9.data.themes,
   __session: {},
   setSession: function(session) {
     Core9.select.__session = session;
@@ -12,7 +12,7 @@ Core9.select = {
     var mapFun = function(obj) {
       return obj.template;
     }
-    return Core9.data.templates.mapReduce(mapFun, reduceFun);
+    return Core9.data.themes.mapReduce(mapFun, reduceFun);
   },
   getLanguageNames: function() {
     var mapFun = function(obj) {
@@ -20,7 +20,7 @@ Core9.select = {
         return obj.language;
       }
     }
-    return Core9.data.templates.mapReduce(mapFun, reduceFun);
+    return Core9.data.themes.mapReduce(mapFun, reduceFun);
   },
   getCountryNames: function() {
     var mapFun = function(obj) {
@@ -28,7 +28,7 @@ Core9.select = {
         return obj.country;
       }
     }
-    return Core9.data.templates.mapReduce(mapFun, reduceFun);
+    return Core9.data.themes.mapReduce(mapFun, reduceFun);
   },
   getTemplateNames: function() {
     var mapFun = function(obj) {
@@ -36,7 +36,7 @@ Core9.select = {
         return obj.template;
       }
     }
-    return Core9.data.templates.mapReduce(mapFun, reduceFun);
+    return Core9.data.themes.mapReduce(mapFun, reduceFun);
   },
   getVersionNames: function() {
     var mapFun = function(obj) {
@@ -51,6 +51,6 @@ Core9.select = {
         return name;
       }
     }
-    return Core9.data.templates.mapReduce(mapFun, reduceFun);
+    return Core9.data.themes.mapReduce(mapFun, reduceFun);
   }
 }

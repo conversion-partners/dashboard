@@ -55,7 +55,7 @@ function getCurrentPageId() {
     pageName = $('#editor_holder2 > div > h3 > span').text();
   }
   var data = getSelectBoxValues();
-  if(TYPEOFPAGE == 'templates') {
+  if(TYPEOFPAGE == 'themes') {
     var templateData = {
       "theme": data.theme,
       "language": data.language,
@@ -126,7 +126,7 @@ function getSelectBoxEntries() {
   if(page) {
     query.page = page;
   }
-  if(TYPEOFPAGE == 'templates') {
+  if(TYPEOFPAGE == 'themes') {
     query.theme = template;
   }
   if(TYPEOFPAGE == 'pages') {
@@ -181,7 +181,7 @@ function initTemplateSelectBoxes() {
     if(TYPEOFPAGE == 'pages') {
       query.domain = $(this).val();
     }
-    if(TYPEOFPAGE == 'templates') {
+    if(TYPEOFPAGE == 'themes') {
       query.theme = $(this).val();
     }
     var entries = Core9.data[TYPEOFPAGE].find(query);
@@ -204,7 +204,7 @@ function initTemplateSelectBoxes() {
     if(TYPEOFPAGE == 'pages') {
       query.domain = $(".template-data").val();
     }
-    if(TYPEOFPAGE == 'templates') {
+    if(TYPEOFPAGE == 'themes') {
       query.theme = $(".template-data").val();
     }
     query.language = $(this).val();

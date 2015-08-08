@@ -4,7 +4,7 @@ if (typeof Core9 === 'undefined') {
 
 
 Core9.data = {};
-Core9.data.templates = new loki.Collection('templates');
+Core9.data.themes = new loki.Collection('themes');
 Core9.data.pages = new loki.Collection('pages');
 Core9.data.blocks = new loki.Collection('blocks');
 Core9.data.currentid = {};
@@ -45,7 +45,7 @@ Core9.template = {
         pageData.push(Core9.j(Core9.template.paths.pages.format(Core9.template.account)));
 
         var allData = [];
-        allData.push(Core9.template.dataCollect(Core9.data.templates, themeData));
+        allData.push(Core9.template.dataCollect(Core9.data.themes, themeData));
         allData.push(Core9.template.dataCollect(Core9.data.blocks, blockData));
         allData.push(Core9.template.dataCollect(Core9.data.pages, pageData));
 
@@ -99,7 +99,7 @@ Core9.template = {
   },
   showData: function () {
     console.log('template : ');
-    console.log(Core9.data.templates.data);
+    console.log(Core9.data.themes.data);
     console.log('page : ');
     console.log(Core9.data.pages.data);
     console.log('block : ');
@@ -107,7 +107,7 @@ Core9.template = {
   },
   dataReady: function () {
     //Core9.template.showData();
-    Core9.template.themes = Core9.template.getThemesOrSites('templates', Core9.data.templates);
+    Core9.template.themes = Core9.template.getThemesOrSites('themes', Core9.data.themes);
     Core9.template.themes.splice(0, 0, " "); // add first empty option
     Core9.template.pages = Core9.template.getThemesOrSites('pages', Core9.data.pages);
     Core9.template.pages.splice(0, 0, " "); // add first empty option
@@ -119,15 +119,15 @@ Core9.template = {
   },
   save: function () {
 
-    Core9.template.saveData('templates', Core9.data.templates);
+    Core9.template.saveData('themes', Core9.data.themes);
     Core9.template.saveData('blocks', Core9.data.blocks);
     Core9.template.savePageData('pages', Core9.data.pages);
 
   },
   getThemesOrSites: function (type, collection) {
     var mapFun = function (obj) {
-      if (type == 'templates') {
-        return obj.template;
+      if (type == 'themes') {
+        return obj.theme;
       }
       if (type == 'pages') {
         return obj.domain;
@@ -162,14 +162,12 @@ Core9.template = {
       var data = collection.find({
         "template": theme
       });
-      if (type == 'templates') {
+      if (type == 'themes') {
         Core9.template.saveTemplateData(theme, data);
       }
       if (type == 'blocks') {
         Core9.template.saveBlockData(theme, data);
       }
-      //console.log(theme, type);
-      //console.log(data);
     }
   },
   saveTemplateData: function (theme, data) {
