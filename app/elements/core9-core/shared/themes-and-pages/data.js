@@ -22,6 +22,7 @@ Core9.template = {
     "pages": "/dashboard/data/accounts/{0}/sites/data/pages.json",
     "bower": "/dashboard/data/accounts/{0}/themes/bower.json"
   },
+  installedThemes : [],
   templates: [],
   pages: [],
   account: store.get('account'),
@@ -39,6 +40,7 @@ Core9.template = {
         var pageData = [];
         Object.keys(themes)
           .forEach(function (key) {
+            Core9.template.installedThemes.push(key);
             themeData.push(Core9.j(Core9.template.paths.template.format(Core9.template.account, key)));
             blockData.push(Core9.j(Core9.template.paths.blocks.format(Core9.template.account, key)));
           });
@@ -160,17 +162,17 @@ Core9.template = {
     for (var i = 0; i < themes.length; i++) {
       var theme = themes[i];
       var data = collection.find({
-        "template": theme
+        "theme": theme
       });
       if (type == 'themes') {
-        Core9.template.saveTemplateData(theme, data);
+        Core9.template.saveThemeData(theme, data);
       }
       if (type == 'blocks') {
         Core9.template.saveBlockData(theme, data);
       }
     }
   },
-  saveTemplateData: function (theme, data) {
+  saveThemeData: function (theme, data) {
     var url = Core9.template.paths.template.format(Core9.template.account, theme);
     console.log(url);
 

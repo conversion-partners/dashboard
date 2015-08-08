@@ -132,6 +132,13 @@ function getSelectBoxEntries() {
   if(TYPEOFPAGE == 'pages') {
     query.domain = template;
   }
+  if(isEmpty(query.theme)){
+    try {
+      Core9.template.save();
+    } catch(e) {}
+    alert("please reload page");
+    return;
+  }
   var result = Core9.data[TYPEOFPAGE].findObjects(query);
   return result;
 }
@@ -152,13 +159,20 @@ function initNestable(jsonStr) {
     maxDepth: 20,
     json: jsonStr,
     contentCallback: function (item) {
-      var content = item.page || '' ? item.page : item.id;
+      var title = "";
+      if(TYPEOFPAGE == 'themes'){
+        title = item.template;
+      }
+      if(TYPEOFPAGE == 'pages'){
+        title = item.page;
+      }
+      var content = title || '' ? title : item.id;
       content += '<div class="dd-handle dd3-handle">Drag</div><div class="loki-id">' + item.$loki + '</div>';
       return content;
     },
     callback: function (l, e) {
       var element = $(e[0]).find('.dd-content')[0].childNodes[0];
-      var page = element.textContent;
+      //var page = element.textContent;
       var id = getIdFromItem(element);
       Core9.data.currentid = id;
       document.getElementById('delpage').dataset.currentid = id;

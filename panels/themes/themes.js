@@ -73,10 +73,18 @@ function saveTheme(data) {
   var id = guid();
   Core9.data.currentid = id;
   document.getElementById('delpage').dataset.currentid = id;
-  json.unshift({
-    "id": id,
-    "template": pageName
-  });
+  if(json.length != 0){
+    json.unshift({
+      "id": id,
+      "template": pageName
+    });
+  }else{
+    json.push({
+      "id": id,
+      "template": pageName
+    });
+  }
+
   initNestable(JSON.stringify(json));
   if(TYPEOFPAGE == 'themes') {
     var templateData = {
@@ -124,7 +132,7 @@ function showNewTemplateForm() {
         // },
         theme: {
           type: "string",
-          enum: []
+          enum: Core9.template.installedThemes
         },
         language: {
           type: "string",
