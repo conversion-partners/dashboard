@@ -66,29 +66,24 @@ function activateEditor() {
   });
 }
 
-
 function saveTheme(data) {
-
   var pageName = data.title;
-
-  var content = $('#nestable').nestable(
-    'serialize');
+  var content = $('#nestable').nestable('serialize');
   var json = content; //JSON.parse(jsonStr);
   var id = guid();
   Core9.data.currentid = id;
   document.getElementById('delpage').dataset.currentid = id;
   json.unshift({
     "id": id,
-    "page": pageName
+    "template": pageName
   });
   initNestable(JSON.stringify(json));
-
-  if (TYPEOFPAGE == 'templates') {
+  if(TYPEOFPAGE == 'templates') {
     var templateData = {
-      "template": data.theme,
+      "theme": data.theme,
       "language": data.language,
       "country": data.country,
-      "page": pageName,
+      "template": pageName,
       "versions": [{
         "status": "active",
         "title": "New Page"
@@ -96,10 +91,9 @@ function saveTheme(data) {
     }
     Core9.data[TYPEOFPAGE].insert(templateData);
   }
-
   try {
     Core9.template.save();
-  } catch (e) {}
+  } catch(e) {}
 }
 /*
   new template
