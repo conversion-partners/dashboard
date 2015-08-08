@@ -38,6 +38,73 @@
       console.log(expected);
     }
 
+    function testGetLanguageNames() {
+      var session = {};
+      session.template = "core9-theme-example";
+      Core9.select.setSession(session);
+      var res = Core9.select.getLanguageNames();
+      var expected = ["nl", "de", "en", ""];
+      if (res.length == expected.length) {
+        console.log('test ok');
+      } else {
+        console.log('test failed');
+      }
+      console.log(res);
+      console.log(expected);
+    }
+
+    function testGetCountryNames() {
+      var session = {};
+      session.template = "core9-theme-example";
+      session.language = "de";
+      Core9.select.setSession(session);
+      var res = Core9.select.getCountryNames();
+      var expected = ["", "de"];
+      if (res.length == expected.length) {
+        console.log('test ok');
+      } else {
+        console.log('test failed');
+      }
+      console.log(res);
+      console.log(expected);
+    }
+
+
+    function testGetTemplateNames() {
+      var session = {};
+      session.template = "core9-theme-example";
+      session.language = "de";
+      session.country = "de"
+      Core9.select.setSession(session);
+      var res = Core9.select.getTemplateNames();
+      var expected = ["Home page"];
+      if (res.length == expected.length) {
+        console.log('test ok');
+      } else {
+        console.log('test failed');
+      }
+      console.log(res);
+      console.log(expected);
+    }
+
+    function testGetVersionNames() {
+      var session = {};
+      session.template = "core9-theme-example";
+      session.language = "de";
+      session.country = "de";
+      session.page = "Home page";
+      Core9.select.setSession(session);
+      var res = Core9.select.getVersionNames();
+      var expected = ["page"];
+      if (res[0] == expected[0]) {
+        console.log('test ok');
+      } else {
+        console.log('test failed');
+      }
+      console.log(res);
+      console.log(expected);
+    }
+
     Core9.select = {
       collection: Core9.data.templates,
       __session: {},
@@ -52,38 +119,51 @@
       },
       getLanguageNames: function() {
         var mapFun = function(obj) {
-          if (__session.template == obj.template) {
+          if (Core9.select.__session.template == obj.template) {
             return obj.language;
+          }
+        }
+        return Core9.data.templates.mapReduce(mapFun, reduceFun);
+      },
+      getCountryNames: function() {
+        var mapFun = function(obj) {
+          if (Core9.select.__session.template == obj.template && Core9.select.__session.language == obj.language) {
+            return obj.country;
+          }
+        }
+        return Core9.data.templates.mapReduce(mapFun, reduceFun);
+      },
+      getTemplateNames: function() {
+        var mapFun = function(obj) {
+          if (Core9.select.__session.template == obj.template && Core9.select.__session.language == obj.language && Core9.select.__session.country == obj.country) {
+            return obj.page;
+          }
+        }
+        return Core9.data.templates.mapReduce(mapFun, reduceFun);
+      },
+      getVersionNames: function() {
+        var mapFun = function(obj) {
+          if (Core9.select.__session.template == obj.template && Core9.select.__session.language == obj.language && Core9.select.__session.country == obj.country && Core9.select.__session.page == obj.page) {
+            var name = [];
+            for (var i = 0; i < obj.versions.length; i++) {
+              var version = obj.versions[i];
+              if (version.status == "active") {
+                name.push(version.title);
+              }
+            }
+            return name;
           }
         }
         return Core9.data.templates.mapReduce(mapFun, reduceFun);
       }
     }
 
-
-
-
-
-    function testGetLanguageNames() {
-      var session = {};
-      session.template = "core9-theme-example ";
-      Core9.select.setSession(session);
-      var res = Core9.select.getLanguageNames();
-      // var expected = ["core9-theme-ess", "core9-theme-example"];
-      // if (res.length == expected.length) {
-      //   console.log('test ok');
-      // }else{
-      //   console.log('test failed');
-      // }
-      // console.log(res);
-      // console.log(expected);
-    }
-
-
     document.body.addEventListener('dataready', function() {
       testGetThemeNames();
       testGetLanguageNames();
-
+      testGetCountryNames();
+      testGetTemplateNames();
+      testGetVersionNames()
     });
   </script>
 </body>
