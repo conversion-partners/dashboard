@@ -57,10 +57,10 @@ function getCurrentPageId() {
   var data = getSelectBoxValues();
   if(TYPEOFPAGE == 'templates') {
     var templateData = {
-      "template": data.theme,
+      "theme": data.theme,
       "language": data.language,
       "country": data.country,
-      "page": pageName
+      "template": pageName
     }
     if(typeof lokiId == 'undefined') {
       var res = Core9.data[TYPEOFPAGE].findObjects(templateData);
@@ -127,7 +127,7 @@ function getSelectBoxEntries() {
     query.page = page;
   }
   if(TYPEOFPAGE == 'templates') {
-    query.template = template;
+    query.theme = template;
   }
   if(TYPEOFPAGE == 'pages') {
     query.domain = template;
@@ -180,7 +180,7 @@ function initTemplateSelectBoxes() {
       query.domain = $(this).val();
     }
     if(TYPEOFPAGE == 'templates') {
-      query.template = $(this).val();
+      query.theme = $(this).val();
     }
     var entries = Core9.data[TYPEOFPAGE].find(query);
     for(i = 0; i < entries.length; i++) {
@@ -200,7 +200,7 @@ function initTemplateSelectBoxes() {
       query.domain = $(".template-data").val();
     }
     if(TYPEOFPAGE == 'templates') {
-      query.template = $(".template-data").val();
+      query.theme = $(".template-data").val();
     }
     query.language = $(this).val();
     var entries = Core9.data[TYPEOFPAGE].find(query);
