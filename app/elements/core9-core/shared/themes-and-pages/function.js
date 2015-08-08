@@ -128,7 +128,7 @@ function getSelectBoxEntries() {
   }
   if(TYPEOFPAGE == 'themes') {
     query.theme = template;
-    if(isEmpty(query.theme)){
+    if(isEmpty(query.theme)) {
       try {
         Core9.template.save();
       } catch(e) {}
@@ -139,7 +139,6 @@ function getSelectBoxEntries() {
   if(TYPEOFPAGE == 'pages') {
     query.domain = template;
   }
-
   var result = Core9.data[TYPEOFPAGE].findObjects(query);
   return result;
 }
@@ -161,10 +160,10 @@ function initNestable(jsonStr) {
     json: jsonStr,
     contentCallback: function (item) {
       var title = "";
-      if(TYPEOFPAGE == 'themes'){
+      if(TYPEOFPAGE == 'themes') {
         title = item.template;
       }
-      if(TYPEOFPAGE == 'pages'){
+      if(TYPEOFPAGE == 'pages') {
         title = item.page;
       }
       var content = title || '' ? title : item.id;
@@ -186,8 +185,6 @@ function initTemplateSelectBoxes() {
   var templateData = {
     data: [""]
   }
-
-
   $(".template-data").on("change", function () {
     $(".language-data").select2("destroy");
     $(".language-data").html("<option><option>");
@@ -208,9 +205,6 @@ function initTemplateSelectBoxes() {
     }
     changeSelect2Data("language-data", data);
   });
-
-
-
   $(".language-data").on("change", function () {
     $(".country-data").select2("destroy");
     $(".country-data").html("<option><option>");
@@ -232,7 +226,7 @@ function initTemplateSelectBoxes() {
     }
     changeSelect2Data("country-data", data);
   });
-  changeSelect2Data("template-data", Core9.template.themes);
+  changeSelect2Data("template-data", Core9.template[TYPEOFPAGE]);
   changeSelect2Data("language-data", []);
   changeSelect2Data("country-data", []);
 }
