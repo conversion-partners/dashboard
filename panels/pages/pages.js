@@ -189,7 +189,11 @@ var activateEditor = function () {
   function watchVersion(version) {
     disableSelectBoxesForVersion(version);
     Core9.editor.watch('root.' + version + '.theme', function () {
+      var session = {};
       session.template = $('[data-schemapath="root.' + version + '.theme"]').find('select').val();
+
+      
+
     });
   }
   watchVersion(0);
