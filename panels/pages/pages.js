@@ -106,15 +106,26 @@ var activateEditor = function () {
     }
   });
 
-  function ifUndefined(versions, i, val) {
+  function ifUndefined(versions, i, val, overide) {
+    var result = "";
     try {
       if(typeof versions[i][val] == 'undefined') {
-        return "";
+        result = "";
       }
     } catch(e) {
-      return "";
+      result =  "";
     }
-    return versions[i][val];
+
+    if(overide) {
+      result = overide;
+    }
+    else if(versions[i][val]) {
+      result = versions[i][val];
+    }
+    if(typeof result == 'undefined'){
+      result = "";
+    }
+    return result;
   }
 
   function save() {
@@ -127,8 +138,10 @@ var activateEditor = function () {
       page.versions[i] = {};
       page.versions[i].title = ifUndefined(versions, i, 'title');
       page.versions[i].theme = ifUndefined(versions, i, 'theme');
-      page.versions[i].language = ifUndefined(versions, i, 'language');
-      page.versions[i].country = ifUndefined(versions, i, 'country');
+      page.versions[i].language = ifUndefined(versions, i, 'language', $('[data-schemapath="root.' + i + '.language"]').find('select').val());
+      page.versions[i].country = ifUndefined(versions, i, 'country', $('[data-schemapath="root.' + i + '.country"]').find('select').val());
+      page.versions[i].template = ifUndefined(versions, i, 'template', $('[data-schemapath="root.' + i + '.template"]').find('select').val());
+      page.versions[i].version = ifUndefined(versions, i, 'version', $('[data-schemapath="root.' + i + '.version"]').find('select').val());
       page.versions[i].percentage = ifUndefined(versions, i, 'percentage');
       page.versions[i].startdate = ifUndefined(versions, i, 'startdate');
       page.versions[i].enddate = ifUndefined(versions, i, 'enddate');
@@ -159,8 +172,6 @@ var activateEditor = function () {
     return optionStr;
   }
 
-
-
   function disableSelectBoxesForVersion(version) {
     $('[data-schemapath="root.' + version + '.language"]').find('select').empty().prop('disabled', 'disabled');
     $('[data-schemapath="root.' + version + '.country"]').find('select').empty().prop('disabled', 'disabled');
@@ -175,9 +186,9 @@ var activateEditor = function () {
     if(options > 1) {
       $(select).empty().append(options).prop('disabled', false);
     } else {
-      if(options == 0){
+      if(options == 0) {
         session[type] = "";
-      }else{
+      } else {
         session[type] = data[0];
         $(select).empty().append(options).prop('disabled', false);
       }
@@ -186,7 +197,7 @@ var activateEditor = function () {
     callback();
   }
 
-  function finishedSelection(){
+  function finishedSelection() {
     var session = Core9.select.getSession();
     console.log(session);
     console.log("good choice");

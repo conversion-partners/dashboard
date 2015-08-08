@@ -54,6 +54,9 @@ Core9.select = {
         return name;
       }
     }
+    var reduceFun = function(obj){
+      return obj[0];
+    }
     return Core9.data.themes.mapReduce(mapFun, reduceFun);
   }
 }
