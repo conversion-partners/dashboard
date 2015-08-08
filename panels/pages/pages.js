@@ -191,9 +191,9 @@ var activateEditor = function () {
     Core9.editor.watch('root.' + version + '.theme', function () {
       var session = {};
       session.template = $('[data-schemapath="root.' + version + '.theme"]').find('select').val();
-
-      
-
+      Core9.select.setSession(session);
+      var res = Core9.select.getLanguageNames();
+      console.log(res);
     });
   }
   watchVersion(0);

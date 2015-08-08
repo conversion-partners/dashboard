@@ -1,3 +1,7 @@
+var reduceFun = function (array) {
+  return Core9.deDupeArray(array);
+}
+
 Core9.select = {
   collection: Core9.data.templates,
   __session: {},
