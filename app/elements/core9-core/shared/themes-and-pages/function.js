@@ -29,7 +29,12 @@ function getSelectBoxValues() {
 }
 
 function getSelectedPageId() {
-  return $('li[data-id="' + Core9.data.currentid + '"]').data('page');
+  if(TYPEOFPAGE == 'themes') {
+      return $('li[data-id="' + Core9.data.currentid + '"]').data('template');
+  }
+  if(TYPEOFPAGE == 'pages') {
+    return $('li[data-id="' + Core9.data.currentid + '"]').data('page');
+  }
 }
 
 function getCurrentPage() {
@@ -123,11 +128,12 @@ function getSelectBoxEntries() {
     "language": language,
     "country": country
   }
-  if(page) {
-    query.page = page;
-  }
+
   if(TYPEOFPAGE == 'themes') {
     query.theme = template;
+    if(page) {
+      query.template = page;
+    }
     if(isEmpty(query.theme)) {
       try {
         Core9.template.save();
@@ -137,6 +143,9 @@ function getSelectBoxEntries() {
     }
   }
   if(TYPEOFPAGE == 'pages') {
+    if(page) {
+      query.page = page;
+    }
     query.domain = template;
   }
   var result = Core9.data[TYPEOFPAGE].findObjects(query);
