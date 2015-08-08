@@ -24,9 +24,19 @@
 
 <body>
   <script>
-    console.log(Core9.data.templates.data);
-
-    var session = {}
+    function testGetThemeNames() {
+      var session = {};
+      Core9.select.setSession(session);
+      var res = Core9.select.getThemeNames();
+      var expected = ["core9-theme-ess", "core9-theme-example"];
+      if (res.length == expected.length) {
+        console.log('test ok');
+      } else {
+        console.log('test failed');
+      }
+      console.log(res);
+      console.log(expected);
+    }
 
     Core9.select = {
       collection: Core9.data.templates,
@@ -39,15 +49,41 @@
           return obj.template;
         }
         return Core9.data.templates.mapReduce(mapFun, reduceFun);
+      },
+      getLanguageNames: function() {
+        var mapFun = function(obj) {
+          if (__session.template == obj.template) {
+            return obj.language;
+          }
+        }
+        return Core9.data.templates.mapReduce(mapFun, reduceFun);
       }
     }
 
 
 
-    document.body.addEventListener('dataready', function() {
+
+
+    function testGetLanguageNames() {
+      var session = {};
+      session.template = "core9-theme-example ";
       Core9.select.setSession(session);
-      var res = Core9.select.getThemeNames();
-      console.log(res);
+      var res = Core9.select.getLanguageNames();
+      // var expected = ["core9-theme-ess", "core9-theme-example"];
+      // if (res.length == expected.length) {
+      //   console.log('test ok');
+      // }else{
+      //   console.log('test failed');
+      // }
+      // console.log(res);
+      // console.log(expected);
+    }
+
+
+    document.body.addEventListener('dataready', function() {
+      testGetThemeNames();
+      testGetLanguageNames();
+
     });
   </script>
 </body>
