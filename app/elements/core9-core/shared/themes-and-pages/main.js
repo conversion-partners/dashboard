@@ -66,64 +66,7 @@ $(document)
 
 
 
-      $('#newpage').on(
-        'click',
-        function() {
 
-          var pageName = null;
-          while (pageName == null) {
-            pageName = prompt("Please enter template name", "New Template");
-          }
-
-          var content = $('#nestable').nestable(
-            'serialize');
-          var json = content; //JSON.parse(jsonStr);
-          var id = guid();
-          Core9.data.currentid = id;
-          document.getElementById('delpage').dataset.currentid = id;
-          json.unshift({
-            "id": id,
-            "page": pageName
-          });
-          initNestable(JSON.stringify(json));
-          var data = getSelectBoxValues();
-          if (TYPEOFPAGE == 'templates') {
-            var templateData = {
-              "template": data.theme,
-              "language": data.language,
-              "country": data.country,
-              "page": pageName,
-              "versions": [{
-                "status": "active",
-                "title": "New Page"
-              }]
-            }
-            Core9.data[TYPEOFPAGE].insert(templateData);
-          }
-          if (TYPEOFPAGE == 'pages') {
-            var pageData = {
-              "domain": data.theme,
-              "language": data.language,
-              "country": data.country,
-              "page": pageName,
-              "url": $('#editor_holder > div > div.well.well-sm > div > div > div > div > div.form-group > input').val(),
-              "versions": [{
-                "title": "page 1",
-                "theme": "",
-                "language": "",
-                "country": "",
-                "percentage": 100,
-                "startdate": "",
-                "enddate": "",
-                "status": "active"
-              }]
-            }
-            Core9.data[TYPEOFPAGE].insert(pageData);
-          }
-          try {
-            Core9.template.save();
-          } catch (e) {}
-        });
 
 
       $('#delpage')
