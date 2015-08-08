@@ -39,7 +39,7 @@ function arrayContains(needle, arrhaystack) {
 }
 
 function isEmpty(str) {
-  return (!str || 0 === str.length);
+  return (!str.trim() || 0 === str.trim().length);
 }
 
 
