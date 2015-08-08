@@ -128,17 +128,18 @@ function getSelectBoxEntries() {
   }
   if(TYPEOFPAGE == 'themes') {
     query.theme = template;
+    if(isEmpty(query.theme)){
+      try {
+        Core9.template.save();
+      } catch(e) {}
+      alert("please reload page");
+      return;
+    }
   }
   if(TYPEOFPAGE == 'pages') {
     query.domain = template;
   }
-  if(isEmpty(query.theme)){
-    try {
-      Core9.template.save();
-    } catch(e) {}
-    alert("please reload page");
-    return;
-  }
+
   var result = Core9.data[TYPEOFPAGE].findObjects(query);
   return result;
 }
