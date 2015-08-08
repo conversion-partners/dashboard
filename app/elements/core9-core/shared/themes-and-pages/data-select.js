@@ -24,7 +24,7 @@ Core9.select = {
   },
   getCountryNames: function() {
     var mapFun = function(obj) {
-      if (Core9.select.__session.template == obj.template && Core9.select.__session.language == obj.language) {
+      if (Core9.select.__session.theme == obj.theme && Core9.select.__session.language == obj.language) {
         return obj.country;
       }
     }
@@ -32,15 +32,15 @@ Core9.select = {
   },
   getTemplateNames: function() {
     var mapFun = function(obj) {
-      if (Core9.select.__session.template == obj.template && Core9.select.__session.language == obj.language && Core9.select.__session.country == obj.country) {
-        return obj.page;
+      if (Core9.select.__session.theme == obj.theme && Core9.select.__session.language == obj.language && Core9.select.__session.country == obj.country) {
+        return obj.template;
       }
     }
     return Core9.data.templates.mapReduce(mapFun, reduceFun);
   },
   getVersionNames: function() {
     var mapFun = function(obj) {
-      if (Core9.select.__session.template == obj.template && Core9.select.__session.language == obj.language && Core9.select.__session.country == obj.country && Core9.select.__session.page == obj.page) {
+      if (Core9.select.__session.theme == obj.theme && Core9.select.__session.language == obj.language && Core9.select.__session.country == obj.country && Core9.select.__session.template == obj.template) {
         var name = [];
         for (var i = 0; i < obj.versions.length; i++) {
           var version = obj.versions[i];
