@@ -16,7 +16,7 @@ Core9.select = {
   },
   getLanguageNames: function() {
     var mapFun = function(obj) {
-      if (Core9.select.__session.template == obj.template) {
+      if (Core9.select.__session.theme == obj.theme) {
         return obj.language;
       }
     }

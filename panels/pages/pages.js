@@ -1,14 +1,12 @@
 TYPEOFPAGE = 'pages';
-
 var activateEditor = function () {
   var pageData = getCurrentPage();
   var starting_value = {};
   try {
     starting_value = pageData.versions;
-  } catch (e) {
+  } catch(e) {
     alert("Please reload page");
   }
-
   try {
     Core9.editor2.destroy();
   } catch(e) {}
@@ -161,9 +159,6 @@ var activateEditor = function () {
     return optionStr;
   }
 
-
-
-
   function setVersionSelect(version, session, versionNames) {
     var options = getOptions(versionNames);
     var versionSelect = $('[data-schemapath="root.' + version + '.version"]').find('select');
@@ -175,10 +170,6 @@ var activateEditor = function () {
     }
   }
 
-
-
-
-
   function disableSelectBoxesForVersion(version) {
     $('[data-schemapath="root.' + version + '.language"]').find('select').empty().prop('disabled', 'disabled');
     $('[data-schemapath="root.' + version + '.country"]').find('select').empty().prop('disabled', 'disabled');
@@ -186,21 +177,68 @@ var activateEditor = function () {
     $('[data-schemapath="root.' + version + '.version"]').find('select').empty().prop('disabled', 'disabled');
   }
 
+  function setTemplateSelectBox(){
+    console.log('need to set template select box');
+  }
+
+  function setSelectBox(type, version, data) {
+    var options = getOptions(data);
+    var select = $('[data-schemapath="root.' + version + '.' + type + '"]').find('select');
+    if(select) {
+      if(options){
+        $(select).empty().append(options).prop('disabled', false);
+      }else{
+          //$(select).empty().prop('disabled', false); // empty select box ???
+          setTemplateSelectBox();
+      }
+    } else {
+      alert('oeps some thing went wrong : error-12');
+    }
+  }
+
   function watchVersion(version) {
     disableSelectBoxesForVersion(version);
     Core9.editor.watch('root.' + version + '.theme', function () {
+      disableSelectBoxesForVersion(version);
       var session = {};
-      session.template = $('[data-schemapath="root.' + version + '.theme"]').find('select').val();
+      session.theme = $('[data-schemapath="root.' + version + '.theme"]').find('select').val();
+      if(isEmpty(session.theme)){
+        alert('please make a choice');
+        return;
+      }
       Core9.select.setSession(session);
-      var res = Core9.select.getLanguageNames();
-      console.log(res);
+      var languageNames = Core9.select.getLanguageNames();
+
+      if(languageNames.length == 0) {
+        // go and try next box
+        session.language = "";
+        Core9.select.setSession(session);
+        var countryNames = Core9.select.getCountryNames();
+        setSelectBox('country', version, countryNames);
+      } else if(languageNames.length == 1) {
+        setSelectBox('language', version, languageNames);
+        // and  go and try next box based on value
+        session.language = languageNames;
+        Core9.select.setSession(session);
+        var countryNames = Core9.select.getCountryNames();
+        setSelectBox('country', version, countryNames);
+      } else {
+        setSelectBox('language', version, languageNames);
+        // and wait for country selection
+        Core9.editor.watch('root.' + version + '.country ', function () {
+          console.log('changed country',this);
+        });
+      }
+
+
+
+
     });
   }
   watchVersion(0);
   watchVersion(1);
   watchVersion(2);
   watchVersion(3);
-
   document.getElementById('submit2').addEventListener('click', function () {
     save();
   });
@@ -220,7 +258,6 @@ function savePage(data) {
     "page": pageName
   });
   initNestable(JSON.stringify(json));
-
   var pageData = {
     "domain": data.domain,
     "language": data.language,
@@ -232,8 +269,8 @@ function savePage(data) {
       "theme": "",
       "language": "",
       "country": "",
-      "template":"",
-      "version":"",
+      "template": "",
+      "version": "",
       "percentage": 100,
       "startdate": "",
       "enddate": "",
@@ -299,9 +336,9 @@ function showNewPageForm() {
     data.domain = $('[data-schemapath="root.domain"]').find('select').val();
     if(isEmpty(data.domain) && !isEmpty(data.newdomain)) {
       data.domain = data.newdomain;
-    } else if (!isEmpty(data.domain)) {
+    } else if(!isEmpty(data.domain)) {
       // use data.domain
-    }else {
+    } else {
       alert("No domain filled in");
       return;
     }
