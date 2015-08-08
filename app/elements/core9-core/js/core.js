@@ -10,6 +10,10 @@ if (!String.prototype.format) {
   };
 }
 
+var reduceFun = function (array) {
+  return Core9.deDupeArray(array);
+}
+
 function guid() {
   function s4() {
     return Math.floor((1 + Math.random()) * 0x10000)

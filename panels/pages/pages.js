@@ -56,23 +56,23 @@ var activateEditor = function () {
           },
           theme: {
             type: "string",
-            enum: Core9.template.themes
+            enum: Core9.template.installedThemes
           },
           language: {
             type: "string",
-            enum: []
+            enum: Core9.template.allLanguages
           },
           country: {
             type: "string",
-            enum: []
+            enum: Core9.template.allCountries
           },
           template: {
             type: "string",
-            enum: []
+            enum: Core9.template.allTemplates
           },
           version: {
             type: "string",
-            enum: []
+            enum: Core9.template.allVersions
           },
           percentage: {
             type: "integer",
@@ -225,7 +225,7 @@ var activateEditor = function () {
   }
 
   function watchVersion(version) {
-    disableSelectBoxesForVersion(version);
+    //disableSelectBoxesForVersion(version);
     Core9.editor.watch('root.' + version + '.theme', function () {
       disableSelectBoxesForVersion(version);
       var session = {
@@ -242,9 +242,9 @@ var activateEditor = function () {
     });
   }
   watchVersion(0);
-  watchVersion(1);
-  watchVersion(2);
-  watchVersion(3);
+  //watchVersion(1);
+  //watchVersion(2);
+  //watchVersion(3);
   document.getElementById('submit2').addEventListener('click', function () {
     save();
   });
