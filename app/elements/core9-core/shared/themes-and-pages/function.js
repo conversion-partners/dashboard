@@ -34,7 +34,7 @@ function getSelectBoxValues() {
   return data;
 }
 
-function getSelectedPage() {
+function getSelectedPageId() {
   return $('li[data-id="' + Core9.data.currentid + '"]')
     .data('page');
 }
@@ -113,7 +113,7 @@ function setActiveTab(tab) {
 
 function getSelectBoxEntries() {
 
-  var page = getSelectedPage();
+  var page = getSelectedPageId();
   var template = $(".template-data")
     .val();
   var language = $(".language-data")

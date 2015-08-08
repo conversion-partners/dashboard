@@ -6,7 +6,7 @@ function activateEditor() {
   try {
     Core9.editor.destroy();
   } catch(e) {}
-  $('#choose-theme-template-page').html(getSelectedPage());
+  $('#choose-theme-template-page').html(getSelectedPageId());
   Core9.editor = new JSONEditor(document.getElementById('editor_holder2'), {
     ajax: true,
     disable_edit_json: true,
