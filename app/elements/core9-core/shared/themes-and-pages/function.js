@@ -41,7 +41,12 @@ function getSelectedPageId() {
 
 function getCurrentPage() {
   var id = getCurrentPageId();
-  return Core9.data[TYPEOFPAGE].get(id);
+  if(typeof id == 'undefined'){
+    alert('oeps please reload the page.');
+  }else{
+    return Core9.data[TYPEOFPAGE].get(id);
+  }
+
 }
 
 function getCurrentPageId() {

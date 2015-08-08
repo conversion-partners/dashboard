@@ -1,7 +1,7 @@
 TYPEOFPAGE = 'pages';
 
 var activateEditor = function () {
-  var pageData = getSelectBoxEntries()[0];
+  var pageData = getCurrentPage();
   var starting_value = {};
   try {
     starting_value = pageData.versions;
@@ -216,6 +216,7 @@ function savePage(data) {
     "page": pageName
   });
   initNestable(JSON.stringify(json));
+
   var pageData = {
     "domain": data.domain,
     "language": data.language,
@@ -227,6 +228,8 @@ function savePage(data) {
       "theme": "",
       "language": "",
       "country": "",
+      "template":"",
+      "version":"",
       "percentage": 100,
       "startdate": "",
       "enddate": "",
@@ -292,7 +295,9 @@ function showNewPageForm() {
     data.domain = $('[data-schemapath="root.domain"]').find('select').val();
     if(isEmpty(data.domain) && !isEmpty(data.newdomain)) {
       data.domain = data.newdomain;
-    } else {
+    } else if (!isEmpty(data.domain)) {
+      // use data.domain
+    }else {
       alert("No domain filled in");
       return;
     }
