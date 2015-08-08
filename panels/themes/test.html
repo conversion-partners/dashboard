@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <title>Themes</title>
+  <script src="/dashboard/bower_components/bluebird/js/browser/bluebird.min.js"></script>
+  <script src="/dashboard/bower_components/store-js/store.min.js"></script>
+  <script>
+    store.set('username', 'test');
+    store.set('account', 'test');
+    var reduceFun = function(array) {
+      return Core9.deDupeArray(array);
+    }
+  </script>
+  <script src="/dashboard/bower_components/lokijs/build/lokijs.min.js"></script>
+  <script src="/dashboard/app/elements/core9-core/js/core.js"></script>
+  <script src="/dashboard/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="/dashboard/app/elements/core9-core/shared/themes-and-pages/data.js"></script>
+  <script src="/dashboard/app/elements/core9-core/shared/themes-and-pages/function.js"></script>
+  <script src="/dashboard/app/elements/core9-core/shared/themes-and-pages/main.js"></script>
+</head>
+
+<body>
+  <script>
+    console.log(Core9.data.templates.data);
+
+    var session = {}
+
+    Core9.select = {
+      collection: Core9.data.templates,
+      __session: {},
+      setSession: function(session) {
+        Core9.select.__session = session;
+      },
+      getThemeNames: function() {
+        var mapFun = function(obj) {
+          return obj.template;
+        }
+        return Core9.data.templates.mapReduce(mapFun, reduceFun);
+      }
+    }
+
+
+
+    document.body.addEventListener('dataready', function() {
+      Core9.select.setSession(session);
+      var res = Core9.select.getThemeNames();
+      console.log(res);
+    });
+  </script>
+</body>
+
+</html>

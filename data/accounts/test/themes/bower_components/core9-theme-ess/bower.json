@@ -1,0 +1,23 @@
+{
+  "name": "core9-theme-ess",
+  "version": "0.0.1",
+  "homepage": "https://github.com/conversion-partners/core9-theme-ess",
+  "authors": [
+    "trimm <robertjessecooke@gmail.com>"
+  ],
+  "description": "test app",
+  "main": "core9-theme-ess.json",
+  "keywords": [
+    "core9",
+    "dashboard",
+    "apps"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

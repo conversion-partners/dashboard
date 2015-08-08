@@ -1,0 +1,11 @@
+{
+  "name": "",
+  "description": "",
+  "version": "0.1.0",
+  "author": "",
+  "dependencies": {
+    "passport": "~0.2.2",
+    "passport-facebook": "~2.0.0"
+  },
+  "devDependencies": {}
+}

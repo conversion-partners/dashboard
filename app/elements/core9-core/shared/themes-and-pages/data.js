@@ -112,6 +112,10 @@ Core9.template = {
     Core9.template.pages = Core9.template.getThemesOrSites('pages', Core9.data.pages);
     Core9.template.pages.splice(0, 0, " "); // add first empty option
     //Core9.template.save();
+
+    var event = new Event('dataready');  // (*)
+    document.body.dispatchEvent(event);
+
   },
   save: function () {
 
