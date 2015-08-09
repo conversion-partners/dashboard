@@ -1,0 +1,5 @@
+
+.core9-block:hover {
+   border: 1px solid red;
+   _border-color: purple;
+}
