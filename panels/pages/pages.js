@@ -234,7 +234,7 @@ var activateEditor = function () {
     var session = Core9.select.getSession();
     console.log(session);
     console.log('setting language box');
-    setSelectBox('language', version, Core9.select.getLanguageNames(), setCountrySelectBox);
+    setSelectBox('language', session.version, Core9.select.getLanguageNames(), setCountrySelectBox);
   }
 
   function watchVersion(version) {
