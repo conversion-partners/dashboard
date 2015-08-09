@@ -122,9 +122,9 @@ Core9.ajax = function (method, url, data, callback) {
 Core9.iframe = {
   write: function (iframe, content, grid) {
     // if grid == false then page edit mode
-    if (grid) {
+    if (grid && grid != "pagemode") { //FIXME what a mess
       content = content.replace('</body>', '<script id="js-boot" src="/dashboard/app/elements/core9-gridmanager/boot.min.js"></script></body>');
-    }else{
+    }else if(grid == "pagemode"){
       content = content.replace('</body>', '<script id="js-boot" src="/dashboard/app/elements/core9-gridmanager/boot-page-edit.min.js"></script></body>');
     }
     iframe.contentWindow.document.open();
