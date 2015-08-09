@@ -53,7 +53,16 @@ Core9.select = {
       }
     }
     var reduceFun = function(obj){
-      return obj[obj.length - 1]; // FIXME why is this???
+      var res = obj[obj.length - 1]; // FIXME why is this???
+
+      for (var i = 0; i < obj.length; i++) {
+        var arr = obj[i];
+        if(typeof arr != 'undefined'){
+          return arr;
+        }
+      }
+
+      return res;
     }
     return Core9.data.themes.mapReduce(mapFun, reduceFun);
   }
