@@ -261,7 +261,7 @@ Core9.panel = {
         iframe.setAttribute('id', id + '-' + guid);
         iframe.className = "iframe " + classes;
         document.body.appendChild(iframe);
-        Core9.iframe.write(iframe, data.responseText);
+        Core9.iframe.write(iframe, data.responseText, false);
         iframeWindow = iframe.contentWindow || iframe.contentDocument.parentWindow;
         iframeWindow.onload = function () {
           Core9.iframeLoadedEvent.detail = {
@@ -282,7 +282,7 @@ Core9.panel = {
       setTimeout(function () {
         var iframe = document.getElementById(id + '-' + guid);
         panel.appendChild(iframe);
-        Core9.iframe.write(iframe, content);
+        Core9.iframe.write(iframe, content, false);
       }, 1000);
       return panel;
     }
