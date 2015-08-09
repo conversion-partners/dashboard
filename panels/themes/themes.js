@@ -73,18 +73,17 @@ function saveTheme(data) {
   var id = guid();
   Core9.data.currentid = id;
   document.getElementById('delpage').dataset.currentid = id;
-  if(json.length != 0){
+  if(json.length != 0) {
     json.unshift({
       "id": id,
       "template": pageName
     });
-  }else{
+  } else {
     json.push({
       "id": id,
       "template": pageName
     });
   }
-
   initNestable(JSON.stringify(json));
   if(TYPEOFPAGE == 'themes') {
     var templateData = {
@@ -172,5 +171,30 @@ $(document).ready(function () {
   $('#newtemplates').on('click', function () {
     $("#myModal").modal();
     showNewTemplateForm();
+  });
+  $('#edittemplate').on('click', function () {
+    $('#theme-selector').modal();
+    $('#choose-theme').toggle();
+    var versions = Core9.editor.getValue();
+    var activeVersions = [];
+    for(var i = 0; i < versions.length; i++) {
+      var status = versions[i].status;
+      if(status == 'active') {
+        activeVersions.push(versions[i].title);
+      }
+    }
+    changeSelect2Data("choose-theme-select", activeVersions);
+  });
+  $('#edit-selected-theme').on('click', function () {
+    var dropdown = $('.choose-theme-select').val();
+    var account = store.get('account');
+    var page = $('#choose-theme-template-page').html();
+    var theme = $(".template-data").val();
+    var template = '/dashboard/data/accounts/' + account + '/themes/bower_components/' + theme + '/templates/pages/' + page + '/versions/' + dropdown + '/index.html'
+    template = template.toLowerCase();
+    store.set('template', template);
+    store.set('theme', theme);
+    history.pushState(null, null, "/dashboard/theme/edit");
+    postClick("/dashboard/theme/edit");
   });
 });

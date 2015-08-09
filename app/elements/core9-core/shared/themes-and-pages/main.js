@@ -11,33 +11,11 @@ function init() {
   }
 }
 $(document).ready(function () {
-  $('#edit-selected-theme').on('click', function () {
-    var dropdown = $('.choose-theme-select').val();
-    var account = store.get('account');
-    var page = $('#choose-theme-template-page').html();
-    var theme = $(".template-data").val();
-    var template = '/dashboard/data/accounts/' + account + '/themes/bower_components/' + theme + '/templates/pages/' + page + '/versions/' + dropdown + '/index.html'
-    template = template.toLowerCase();
-    store.set('template', template);
-    store.set('theme', theme);
-    history.pushState(null, null, "/dashboard/theme/edit");
-    postClick("/dashboard/theme/edit");
-  });
+
   $('#exit-modal').on('click', function () {
     $('#choose-theme').toggle();
   });
-  $('#editpage').on('click', function () {
-    $('#choose-theme').toggle();
-    var versions = Core9.editor.getValue();
-    var activeVersions = [];
-    for(var i = 0; i < versions.length; i++) {
-      var status = versions[i].status;
-      if(status == 'active') {
-        activeVersions.push(versions[i].title);
-      }
-    }
-    changeSelect2Data("choose-theme-select", activeVersions);
-  });
+
 
   $('#refresh-templates').on('click', function () {
 
