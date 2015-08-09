@@ -113,16 +113,14 @@ var activateEditor = function () {
         result = "";
       }
     } catch(e) {
-      result =  "";
+      result = "";
     }
-
     if(overide) {
       result = overide;
-    }
-    else if(versions[i][val]) {
+    } else if(versions[i][val]) {
       result = versions[i][val];
     }
-    if(typeof result == 'undefined'){
+    if(typeof result == 'undefined') {
       result = "";
     }
     return result;
@@ -153,7 +151,7 @@ var activateEditor = function () {
 
   function getOptions(options) {
     //returns false by one empty option
-    if(typeof options == 'undefined' ||( options.length == 1 && isEmpty(options[0]) ) ) {
+    if(typeof options == 'undefined' || (options.length == 1 && isEmpty(options[0]))) {
       return false;
     }
     var optionStr = "";
@@ -224,8 +222,14 @@ var activateEditor = function () {
     setSelectBox('country', session.version, Core9.select.getCountryNames(), setTemplateSelectBox);
   }
 
+  function setLanguageSelectBox() {
+    var session = Core9.select.getSession();
+    console.log(session);
+    console.log('setting language box');
+    setSelectBox('language', version, Core9.select.getLanguageNames(), setCountrySelectBox);
+  }
+
   function watchVersion(version) {
-    //disableSelectBoxesForVersion(version);
     Core9.editor.watch('root.' + version + '.theme', function () {
       disableSelectBoxesForVersion(version);
       var session = {
@@ -237,14 +241,13 @@ var activateEditor = function () {
         return;
       }
       Core9.select.setSession(session);
-      var languageNames = Core9.select.getLanguageNames();
-      setSelectBox('language', version, Core9.select.getLanguageNames(), setCountrySelectBox);
+      setLanguageSelectBox();
     });
   }
   watchVersion(0);
-  //watchVersion(1);
-  //watchVersion(2);
-  //watchVersion(3);
+  watchVersion(1);
+  watchVersion(2);
+  watchVersion(3);
   document.getElementById('submit2').addEventListener('click', function () {
     save();
   });
