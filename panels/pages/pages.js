@@ -199,8 +199,6 @@ var activateEditor = function () {
           var session = Core9.select.getSession();
           var val = $('[data-schemapath="root.' + version + '.' + type + '"]').find('select').val();
           session[type] = val;
-          console.log(session);
-          console.log('changing '+type+' box with val ' + val);
           Core9.select.setSession(session);
           callback();
         });
@@ -224,37 +222,27 @@ var activateEditor = function () {
 
   function finishedSelection() {
     var session = Core9.select.getSession();
-    console.log(session);
-    console.log("good choice");
   }
 
   function setVersionSelectBox() {
     var session = Core9.select.getSession();
-    console.log(session);
-    console.log('setting version box');
     setSelectBox('version', session.vers, Core9.select.getVersionNames(), finishedSelection);
   }
 
   function setTemplateSelectBox() {
     var session = Core9.select.getSession();
-    console.log(session);
-    console.log('setting template box');
     resetSession(['version']);
     setSelectBox('template', session.vers, Core9.select.getTemplateNames(), setVersionSelectBox);
   }
 
   function setCountrySelectBox() {
     var session = Core9.select.getSession();
-    console.log(session);
-    console.log('setting country box');
     resetSession(['template','version']);
     setSelectBox('country', session.vers, Core9.select.getCountryNames(), setTemplateSelectBox);
   }
 
   function setLanguageSelectBox() {
     var session = Core9.select.getSession();
-    console.log(session);
-    console.log('setting language box');
     resetSession(['country','template','version']);
     $('[data-schemapath="root.' + session.vers + '.country"]').find('select').empty().prop('disabled', 'disabled');
     $('[data-schemapath="root.' + session.vers + '.template"]').find('select').empty().prop('disabled', 'disabled');

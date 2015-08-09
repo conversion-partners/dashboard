@@ -1,6 +1,5 @@
 var pageRoutes = {
   '/page/edit$/': function() {
-    console.log('exec /theme/edit/ path');
     var template = store.get('template');
     var page = store.get('page');
     var theme = store.get('theme');
