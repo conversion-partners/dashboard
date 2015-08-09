@@ -7,7 +7,7 @@
   "description" : "testing stuff",
   "license" : "MIT",
   "id" : "panel-iframe-menu",
-  "z-index" : 999,
+  "z-index" : 1001,
   "class" : "menu",
   "type" : "iframe",
   "url" : "/dashboard/app/elements/core9-menu/customsize/customsize.html",

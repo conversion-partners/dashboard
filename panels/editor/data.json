@@ -7,7 +7,7 @@
   "description" : "testing stuff",
   "license" : "MIT",
   "id" : "panel-iframe-site",
-  "z-index" : -1,
+  "z-index" : 55,
   "class" : "fullbleed",
   "type" : "iframe",
   "url" : "/dashboard/panels/editor/editor.html",
