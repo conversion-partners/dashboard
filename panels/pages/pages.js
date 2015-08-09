@@ -181,26 +181,33 @@ var activateEditor = function () {
     var session = Core9.select.getSession();
     var options = getOptions(data);
     var select = $('[data-schemapath="root.' + version + '.' + type + '"]').find('select');
-    if(options > 1) {
-      $(select).empty().append(options).prop('disabled', false);
-      // watch and update session
-      Core9.editor.watch('root.' + version + '.'+ type, function () {
-        session[type] = $('[data-schemapath="root.' + version + '.'+type+'"]').find('select').val();
+    if(typeof data != 'undefined') {
+      if(data.length > 1) {
+        $(select).empty().append(options).prop('disabled', false);
+        // watch and update session
+        Core9.editor.watch('root.' + version + '.' + type, function () {
+          session[type] = $('[data-schemapath="root.' + version + '.' + type + '"]').find('select').val();
+          console.log(session);
+          console.log('setting '+type+' box');
+          Core9.select.setSession(session);
+          callback();
+        });
+      } else {
+        if(data.length == 0) {
+          session[type] = "";
+        } else {
+          session[type] = data[0];
+        }
+        // no options can be made so lets go to the next box
+        $(select).empty().append(options).prop('disabled', false);
         Core9.select.setSession(session);
         callback();
-      });
-    } else {
-      if(options == 0) {
-        session[type] = "";
-      } else {
-        session[type] = data[0];
-        $(select).empty().append(options).prop('disabled', false);
       }
-      // no options can be made so lets go to the next box
+    } else {
+      session[type] = "";
       Core9.select.setSession(session);
       callback();
     }
-
   }
 
   function finishedSelection() {
