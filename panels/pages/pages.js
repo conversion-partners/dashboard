@@ -153,7 +153,7 @@ var activateEditor = function () {
 
   function getOptions(options) {
     //returns false by one empty option
-    if(options.length == 1 && isEmpty(options[0])) {
+    if(typeof options == 'undefined' ||( options.length == 1 && isEmpty(options[0]) ) ) {
       return false;
     }
     var optionStr = "";
