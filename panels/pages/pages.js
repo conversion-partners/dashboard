@@ -94,6 +94,13 @@ var activateEditor = function () {
       }
     }
   });
+  //FIXME disable title edit for first 6 versions
+  var versionArr = [0, 1, 2, 3, 4, 5];
+  for(var i = 0; i < versionArr.length; i++) {
+    try {
+      Core9.editor.getEditor('root.' + i + '.title').disable();
+    } catch(e) {}
+  }
   Core9.editor.on('change', function () {
     var errors = Core9.editor.validate();
     var indicator = document.getElementById('valid_indicator');
