@@ -411,14 +411,31 @@ $(document).ready(function () {
     }
     changeSelect2Data("choose-theme-select", activeVersions);
   });
+  function fromEmptyToNull(val){
+    if(isEmpty(val)){
+      return "null";
+    }
+    return val;
+  }
   $('#edit-selected-theme').on('click', function () {
     var dropdown = $('.choose-theme-select').val();
     var account = store.get('account');
-    var page = $('#choose-theme-template-page').html();
-    var theme = $(".template-data").val();
-    var template = '/dashboard/data/accounts/' + account + '/themes/bower_components/' + theme + '/templates/pages/' + page + '/versions/' + dropdown + '/index.html'
-    template = template.toLowerCase();
-    store.set('template', template);
+    var version = getActiveTab();
+    var url = $('[data-schemapath="root.url"]').find('input').val();
+    var theme = $('[data-schemapath="root.'+version+'.theme"]').find('select').val();
+    var template = $('[data-schemapath="root.'+version+'.template"]').find('select').val();
+    var pageName = getSelectedPageId();
+    var pageVersionName = $('[data-schemapath="root.'+version+'.title"]').find('input').val();
+    var page = getCurrentPage();
+    var pageLanguage = fromEmptyToNull(page.language);
+    var pageCountry = fromEmptyToNull(page.country);
+    var domain = $(".template-data").val();
+    var domainDirectory = domain + "_"+pageLanguage+"-"+pageCountry;
+    var pageFile = '/dashboard/data/accounts/' + account + '/sites/' + domainDirectory + '/pages/' + pageName + '/versions/' + pageVersionName + '/index.html';
+    var templateFile = '/dashboard/data/accounts/' + account + '/themes/bower_components/' + theme + '/templates/pages/' + template + '/versions/' + dropdown + '/index.html';
+    templateFile = templateFile.toLowerCase();
+    store.set('page', pageFile);
+    store.set('template', templateFile);
     store.set('theme', theme);
     history.pushState(null, null, "/dashboard/page/edit");
     postClick("/dashboard/page/edit");
