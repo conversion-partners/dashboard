@@ -183,6 +183,12 @@ var activateEditor = function () {
     var select = $('[data-schemapath="root.' + version + '.' + type + '"]').find('select');
     if(options > 1) {
       $(select).empty().append(options).prop('disabled', false);
+      // watch and update session
+      Core9.editor.watch('root.' + version + '.'+ type, function () {
+        session[type] = $('[data-schemapath="root.' + version + '.'+type+'"]').find('select').val();
+        Core9.select.setSession(session);
+        callback();
+      });
     } else {
       if(options == 0) {
         session[type] = "";
@@ -190,9 +196,11 @@ var activateEditor = function () {
         session[type] = data[0];
         $(select).empty().append(options).prop('disabled', false);
       }
+      // no options can be made so lets go to the next box
+      Core9.select.setSession(session);
+      callback();
     }
-    Core9.select.setSession(session);
-    callback();
+
   }
 
   function finishedSelection() {
