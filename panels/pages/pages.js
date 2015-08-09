@@ -185,10 +185,15 @@ var activateEditor = function () {
       if(data.length > 1) {
         $(select).empty().append(options).prop('disabled', false);
         // watch and update session
+        session[type] = $('[data-schemapath="root.' + version + '.' + type + '"]').find('select').val();
+        Core9.select.setSession(session);
+
         Core9.editor.watch('root.' + version + '.' + type, function () {
-          session[type] = $('[data-schemapath="root.' + version + '.' + type + '"]').find('select').val();
+          var session = Core9.select.getSession();
+          var val = $('[data-schemapath="root.' + version + '.' + type + '"]').find('select').val();
+          session[type] = val;
           console.log(session);
-          console.log('changing '+type+' box');
+          console.log('changing '+type+' box with val ' + val);
           Core9.select.setSession(session);
           callback();
         });
@@ -227,7 +232,7 @@ var activateEditor = function () {
     var session = Core9.select.getSession();
     console.log(session);
     console.log('setting template box');
-    resetSession([]);
+    resetSession(['version']);
     setSelectBox('template', session.vers, Core9.select.getTemplateNames(), setVersionSelectBox);
   }
 
@@ -235,7 +240,7 @@ var activateEditor = function () {
     var session = Core9.select.getSession();
     console.log(session);
     console.log('setting country box');
-    resetSession(['template']);
+    resetSession(['template','version']);
     setSelectBox('country', session.vers, Core9.select.getCountryNames(), setTemplateSelectBox);
   }
 
@@ -243,7 +248,7 @@ var activateEditor = function () {
     var session = Core9.select.getSession();
     console.log(session);
     console.log('setting language box');
-    resetSession(['country','template']);
+    resetSession(['country','template','version']);
     $('[data-schemapath="root.' + session.vers + '.country"]').find('select').empty().prop('disabled', 'disabled');
     $('[data-schemapath="root.' + session.vers + '.template"]').find('select').empty().prop('disabled', 'disabled');
     $('[data-schemapath="root.' + session.vers + '.version"]').find('select').empty().prop('disabled', 'disabled');
@@ -262,7 +267,8 @@ var activateEditor = function () {
     Core9.editor.watch('root.' + version + '.theme', function () {
       disableSelectBoxesForVersion(version);
       var session = {
-        vers: version
+        vers: version,
+        language : ""
       };
       session.theme = $('[data-schemapath="root.' + version + '.theme"]').find('select').val();
       if(isEmpty(session.theme)) {

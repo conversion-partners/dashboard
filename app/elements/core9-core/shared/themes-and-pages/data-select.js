@@ -53,7 +53,7 @@ Core9.select = {
       }
     }
     var reduceFun = function(obj){
-      return obj[0];
+      return obj[obj.length - 1]; // FIXME why is this???
     }
     return Core9.data.themes.mapReduce(mapFun, reduceFun);
   }
