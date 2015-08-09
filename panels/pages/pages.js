@@ -188,7 +188,7 @@ var activateEditor = function () {
         Core9.editor.watch('root.' + version + '.' + type, function () {
           session[type] = $('[data-schemapath="root.' + version + '.' + type + '"]').find('select').val();
           console.log(session);
-          console.log('setting '+type+' box');
+          console.log('changing '+type+' box');
           Core9.select.setSession(session);
           callback();
         });
@@ -220,35 +220,49 @@ var activateEditor = function () {
     var session = Core9.select.getSession();
     console.log(session);
     console.log('setting version box');
-    setSelectBox('version', session.version, Core9.select.getVersionNames(), finishedSelection);
+    setSelectBox('version', session.vers, Core9.select.getVersionNames(), finishedSelection);
   }
 
   function setTemplateSelectBox() {
     var session = Core9.select.getSession();
     console.log(session);
     console.log('setting template box');
-    setSelectBox('template', session.version, Core9.select.getTemplateNames(), setVersionSelectBox);
+    resetSession([]);
+    setSelectBox('template', session.vers, Core9.select.getTemplateNames(), setVersionSelectBox);
   }
 
   function setCountrySelectBox() {
     var session = Core9.select.getSession();
     console.log(session);
     console.log('setting country box');
-    setSelectBox('country', session.version, Core9.select.getCountryNames(), setTemplateSelectBox);
+    resetSession(['template']);
+    setSelectBox('country', session.vers, Core9.select.getCountryNames(), setTemplateSelectBox);
   }
 
   function setLanguageSelectBox() {
     var session = Core9.select.getSession();
     console.log(session);
     console.log('setting language box');
-    setSelectBox('language', session.version, Core9.select.getLanguageNames(), setCountrySelectBox);
+    resetSession(['country','template']);
+    $('[data-schemapath="root.' + session.vers + '.country"]').find('select').empty().prop('disabled', 'disabled');
+    $('[data-schemapath="root.' + session.vers + '.template"]').find('select').empty().prop('disabled', 'disabled');
+    $('[data-schemapath="root.' + session.vers + '.version"]').find('select').empty().prop('disabled', 'disabled');
+    setSelectBox('language', session.vers, Core9.select.getLanguageNames(), setCountrySelectBox);
+  }
+
+  function resetSession(arr){
+    var session = Core9.select.getSession();
+    for (var i = 0; i < arr.length; i++) {
+       session[arr[i]] = "";
+    }
+    Core9.select.setSession(session);
   }
 
   function watchVersion(version) {
     Core9.editor.watch('root.' + version + '.theme', function () {
       disableSelectBoxesForVersion(version);
       var session = {
-        version: version
+        vers: version
       };
       session.theme = $('[data-schemapath="root.' + version + '.theme"]').find('select').val();
       if(isEmpty(session.theme)) {

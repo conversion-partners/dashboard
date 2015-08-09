@@ -1,1 +1,34 @@
-[{"theme":"core9-theme-ess","language":"NL","country":"NL","template":"contact","versions":[{"status":"active","title":"New Page"}],"meta":{"revision":0,"created":1439112935530,"version":0},"$loki":2},{"theme":"core9-theme-ess","language":"","country":"","template":"home","versions":[{"title":"blue","status":"active"},{"title":"redish","status":"active"}],"meta":{"revision":0,"created":1439112873852,"version":0},"$loki":1}]
+[{
+  "theme": "core9-theme-ess",
+  "language": "NL",
+  "country": "NL",
+  "template": "contact",
+  "versions": [{
+    "status": "active",
+    "title": "New Page"
+  }],
+  "meta": {
+    "revision": 0,
+    "created": 1439112935530,
+    "version": 0
+  },
+  "$loki": 2
+}, {
+  "theme": "core9-theme-ess",
+  "language": "",
+  "country": "",
+  "template": "home",
+  "versions": [{
+    "title": "blue",
+    "status": "active"
+  }, {
+    "title": "redish",
+    "status": "active"
+  }],
+  "meta": {
+    "revision": 0,
+    "created": 1439112873852,
+    "version": 0
+  },
+  "$loki": 1
+}]
