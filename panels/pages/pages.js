@@ -420,8 +420,8 @@ $(document).ready(function () {
     template = template.toLowerCase();
     store.set('template', template);
     store.set('theme', theme);
-    history.pushState(null, null, "/dashboard/theme/edit");
-    postClick("/dashboard/theme/edit");
+    history.pushState(null, null, "/dashboard/page/edit");
+    postClick("/dashboard/page/edit");
   });
 
 
