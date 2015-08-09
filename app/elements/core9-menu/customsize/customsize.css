@@ -1,12 +1,16 @@
 body {
 	margin: 0;
 	padding: 0;
-	background: transparent;
+	background: #336ca6 !important;
 	width:600px;
 	position:fixed;
 	font-size: 0.7em;
 }
 
+a {
+	text-decoration: none !important;
+	  font-size: 18px !important;
+}
 
 #menu {
 	position: absolute;
