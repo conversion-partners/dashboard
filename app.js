@@ -26,6 +26,8 @@ app.post('/api/io/:action', function (req, res) {
 });
 app.use('/dashboard/data/accounts/:account/themes/bower_components/:theme/templates/pages/:page/versions/:version/index.html', function (req, res) {
   console.log(this);
+  var p = req.param;
+  var defaultGridFile = '/dashboard/data/accounts/' + p.account + '/themes/bower_components/' + p.theme + '/templates/pages/default-grid.html';
   var file = '..' + req.originalUrl;
   var contentType = mime.lookup(file);
   // FIXME errorhandling
@@ -34,16 +36,20 @@ app.use('/dashboard/data/accounts/:account/themes/bower_components/:theme/templa
   });
   fs.readFile(file, 'utf8', function (err, data) {
     if(err) {
-      // create new theme file
+      fs.readFile(defaultGridFile, 'utf8', function (err, data) {
+        if(err) {
+          return console.log(err);
+        } else {
+          res.write(data);
+        }
+      });
       return console.log(err);
+    } else {
+      res.write(data);
     }
-    console.log(data);
-    res.write(data);
     res.end();
   });
 });
-
-
 app.use('/dashboard/', express.static('.'));
 app.use('/*', function (req, res) {
   res.redirect('/dashboard/');
