@@ -4,6 +4,7 @@ var multer = require('multer');
 var cheerio = require('cheerio');
 var fs = require('fs');
 var app = express();
+var mime = require('mime');
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({
@@ -24,6 +25,22 @@ app.post('/api/io/:action', function(req, res) {
     default:
       console.log(req);
   }
+});
+
+
+app.use('/dashboard/data/accounts/:account/themes/bower_components/:theme/templates/pages/:page/versions/:version/index.html', function(req, res) {
+
+  console.log(this);
+
+res.writeHead(200, {"Content-Type": "text/css"});
+
+fs.readFile(".." + req.originalUrl, 'utf8', function (err,data) {
+  if (err) {
+    return console.log(err);
+  }
+  console.log(data);
+});
+
 });
 
 app.use('/dashboard/', express.static('.'));
