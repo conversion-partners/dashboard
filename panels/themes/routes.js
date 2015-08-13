@@ -30,8 +30,18 @@ var themeRoutes = {
     xhr.responseType = "document";
     xhr.send();
   },
-
+  '/themes/.*/blocks/.*/add$': function(req) {
+    console.log('add block');
+    console.log(window.location);
+    var parts = location.pathname.split('/');
+    var theme = parts[3];
+    var block = parts[5];
+    var iframe = Core9.panel.getIframeById('panel-iframe-site');
+    var cmd = 'Core9.blocks.addBlock("' + block + '");';
+    Core9.iframe.parent.sentMessageToIframe(cmd, iframe);
+  },
   '/themes$': function(req) {
+    console.log('themes');
     var init = function(modules) {
       var theme = Core9.system.unwrapModule(modules[0]);
       theme.setAccount(store.get('account'));
@@ -56,16 +66,6 @@ var themeRoutes = {
       .then(function(modules) {
         init(modules);
       });
-  },
-  '/themes/.*/blocks/.*/add$/': function(req) {
-    console.log('add block');
-    console.log(window.location);
-    var parts = location.pathname.split('/');
-    var theme = parts[3];
-    var block = parts[5];
-    var iframe = Core9.panel.getIframeById('panel-iframe-site');
-    var cmd = 'Core9.blocks.addBlock("' + block + '");';
-    Core9.iframe.parent.sentMessageToIframe(cmd, iframe);
   },
   '/templates$/': function() {
     Core9.panel.open('panel-themes');
