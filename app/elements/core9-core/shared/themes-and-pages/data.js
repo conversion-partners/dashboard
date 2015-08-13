@@ -154,7 +154,7 @@ Core9.template = {
     console.log(url);
     $.ajax({
       type: "POST",
-      url: "http://localhost:9090/api/io/" + "save",
+      url: "/api/io/" + "save",
       data: {
         content: JSON.stringify(collection.data),
         file: url,
@@ -182,7 +182,7 @@ Core9.template = {
     console.log(url);
     $.ajax({
       type: "POST",
-      url: "http://localhost:9090/api/io/" + "save",
+      url: "/api/io/" + "save",
       data: {
         content: JSON.stringify(data),
         file: url,
@@ -195,7 +195,7 @@ Core9.template = {
     console.log(url);
     $.ajax({
       type: "POST",
-      url: "http://localhost:9090/api/io/" + "save",
+      url: "/api/io/" + "save",
       data: {
         content: JSON.stringify(data),
         file: url,
