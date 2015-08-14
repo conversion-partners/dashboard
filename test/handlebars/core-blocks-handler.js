@@ -20,10 +20,11 @@ Core9.blocks.handler = {
     theme : {}
   },
   paths: {
-    blocks: "/dashboard/test/handlebars/blocks/",
-    bower: "/dashboard/test/handlebars/blocks/bower.json",
-    template: "/dashboard/test/handlebars/blocks/usermessage/tpl/index.html",
-    defaultData: "/dashboard/test/handlebars/blocks/usermessage/data/usermessage-testid.json"
+    blocks: "/dashboard/data/accounts/{0}/blocks/",
+    bower: "/dashboard/data/accounts/{0}/blocks/bower.json",
+    template: "/dashboard/data/accounts/{0}/blocks/{1}/tpl/index.html",
+    defaultData: "/dashboard/data/accounts/{0}/blocks/{1}/data/{2}.json",
+    userData: "/dashboard/test/handlebars/blocks/usermessage/data/usermessage-testid.json"
   }
 }
 Core9.blocks.handler.__registry = {
