@@ -36,7 +36,7 @@ Core9.blocks.handler.filRegistry = function () {
       reject(Error("It broke"));
     }
   });
-}
+} 
 Core9.blocks.handler.deDupeArray = function (a) {
   var temp = {};
   for (var i = 0; i < a.length; i++)
