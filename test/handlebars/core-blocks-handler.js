@@ -13,7 +13,7 @@ if(typeof Core9 === 'undefined') {
 if(typeof Core9.blocks === 'undefined') {
   Core9.blocks = {}
 };
-Core9.blocks.handler = function () {}
+Core9.blocks.handler = {}
 Core9.blocks.handler = {
   paths: {
     "blocks": "/dashboard/test/handlebars/blocks/"
