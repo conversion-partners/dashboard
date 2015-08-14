@@ -83,6 +83,9 @@ Core9.blocks.handler.getBlockData = function (block) {
   promiseList.push(Core9.blocks.handler.getDefaultBlockData(block));
   promiseList.push(Core9.blocks.handler.getFormSteps(block));
   Promise.all(promiseList).then(function (values) {
+    console.log('values for block ' + block.type + ' id : ' + block.id)
+    // we can trust the order of the results
+    // http://stackoverflow.com/questions/28066429/promise-all-order-of-resolved-values
     console.log(values);
   });
 }
