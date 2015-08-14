@@ -15,9 +15,15 @@ if(typeof Core9.blocks === 'undefined') {
 };
 Core9.blocks.handler = {}
 Core9.blocks.handler = {
+  config: {
+    account : {},
+    theme : {}
+  },
   paths: {
     blocks: "/dashboard/test/handlebars/blocks/",
-    bower: "/dashboard/test/handlebars/blocks/bower.json"
+    bower: "/dashboard/test/handlebars/blocks/bower.json",
+    template: "/dashboard/test/handlebars/blocks/usermessage/tpl/index.html",
+    defaultData: "/dashboard/test/handlebars/blocks/usermessage/data/usermessage-testid.json"
   }
 }
 Core9.blocks.handler.__registry = {
@@ -64,7 +70,7 @@ Core9.blocks.handler.deDupeArray = function (a) {
 Core9.blocks.handler.getTemplateHtml = function (block) {
   return new Promise(function (resolve, reject) {
     // for each block type get templates
-    Core9.blocks.handler.j('/dashboard/test/handlebars/blocks/usermessage/tpl/index.html');
+    Core9.blocks.handler.j();
     if(true) {
       resolve("Stuff worked!");
     } else {
@@ -75,7 +81,7 @@ Core9.blocks.handler.getTemplateHtml = function (block) {
 Core9.blocks.handler.getFormSteps = function (block) {
   return new Promise(function (resolve, reject) {
     // for each block type get templates
-    Core9.blocks.handler.j('/dashboard/test/handlebars/blocks/usermessage/steps/steps.json');
+    Core9.blocks.handler.j();
     if(true) {
       resolve("Stuff worked!");
     } else {
@@ -86,7 +92,7 @@ Core9.blocks.handler.getFormSteps = function (block) {
 Core9.blocks.handler.getJsonData = function (block) {
   return new Promise(function (resolve, reject) {
     // for each block id get default and user data
-    Core9.blocks.handler.j('/dashboard/test/handlebars/blocks/usermessage/data/usermessage-testid.json');
+    Core9.blocks.handler.j();
     if(true) {
       resolve("Stuff worked!");
     } else {
@@ -145,7 +151,9 @@ Core9.blocks.handler.triggerBlockDataReady = function () {
 Core9.blocks.handler.getBlocks = function () {
   return document.querySelectorAll(".core9-block");
 }
-Core9.blocks.handler.init = function () {
+Core9.blocks.handler.init = function (account, theme) {
+  Core9.blocks.handler.config.account = account;
+  Core9.blocks.handler.config.theme = theme;
   Core9.blocks.handler.getData();
 }
 Core9.blocks.handler.init(session.account, session.theme);
