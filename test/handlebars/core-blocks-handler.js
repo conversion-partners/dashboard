@@ -16,7 +16,8 @@ if(typeof Core9.blocks === 'undefined') {
 Core9.blocks.handler = {}
 Core9.blocks.handler = {
   paths: {
-    blocks: "/dashboard/test/handlebars/blocks/"
+    blocks: "/dashboard/test/handlebars/blocks/",
+    bower: "/dashboard/test/handlebars/blocks/bower.json"
   }
 }
 Core9.blocks.handler.__registry = {
