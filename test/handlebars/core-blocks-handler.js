@@ -19,13 +19,17 @@ Core9.blocks.handler = {
     "blocks": "/dashboard/test/handlebars/blocks/"
   }
 }
+Core9.blocks.handler.__meta = {}
 Core9.blocks.handler.__registry = {}
 Core9.blocks.handler.filRegistry = function () {
   return new Promise(function (resolve, reject) {
     var blocks = Core9.blocks.handler.getBlocks();
+    var typesArray, idArray  = [];
     Core9.blocks.handler.__registry.blocks = [];
     for(var i = 0; i < blocks.length; i++) {
       var block = blocks[i];
+      idArray.push(block.dataset.id);
+      typesArray.push(block.dataset.type);
       Core9.blocks.handler.__registry.blocks.push({
         "id": block.dataset.id,
         "type": block.dataset.type,
@@ -37,7 +41,9 @@ Core9.blocks.handler.filRegistry = function () {
       });
     }
     if(blocks.length == Core9.blocks.handler.__registry.blocks.length) {
-      resolve(Core9.blocks.handler.__registry.blocks);
+      Core9.blocks.handler.__registry.__meta.blockIds = idArray;
+      Core9.blocks.handler.__registry.__meta.uniqueBlocks = Core9.blocks.handler.deDupeArray(typesArray);
+      resolve(Core9.blocks.handler.__registry);
     } else {
       reject(Error("It broke"));
     }
