@@ -7,8 +7,8 @@
 </head>
 <body>
 
-
-<div class="core9-block" data-type="sdfas" data-id="testid">sdfas</div>
+<div class="core9-block" data-type="sdfas" data-id="testid1"></div>
+<div class="core9-block" data-type="sdfas" data-id="testid2"></div>
 
 <script id="entrytemplate" type="text/x-handlebars-template">
 <div class="post">
@@ -54,7 +54,8 @@
 
     var block = template(context);
 		console.log(block);
-    document.querySelector("[data-id=testid]").innerHTML = block;
+    document.querySelector("[data-id=testid1]").innerHTML = block;
+    //document.querySelector("[data-id=testid2]").innerHTML = block;
 	</script>
 
 
