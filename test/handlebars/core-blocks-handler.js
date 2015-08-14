@@ -21,10 +21,9 @@ Core9.blocks.handler = {
 }
 Core9.blocks.handler.getData = function () {
   Core9.blocks.handler.filRegistry().then(function (result) {
-    console.log(result);
     return Core9.blocks.handler.getTemplateHtml(result);
-  }, function (err) {
-    console.log(err);
+  }).then(function (result) {
+    console.log(result);
   });
 }
 Core9.blocks.handler.j = function (url) {
@@ -72,7 +71,6 @@ Core9.blocks.handler.getJsonData = function () {}
 Core9.blocks.handler.getTemplateHtml = function (listOfBlocks) {
   return Core9.blocks.handler.j('/dashboard/test/handlebars/blocks/usermessage/tpl/index.html');
 }
-
 Core9.blocks.handler.init = function () {
   Core9.blocks.handler.getData();
 }
