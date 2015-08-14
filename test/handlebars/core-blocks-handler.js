@@ -31,7 +31,8 @@ Core9.blocks.handler.filRegistry = function () {
         "type": block.dataset.type,
         "$blockref": block,
         "loadedHTML": {},
-        "loadedDATA": {} 
+        "loadedDATA": {},
+        "loadedSTEPS":{} 
       });
     }
     if(blocks.length == Core9.blocks.handler.__registry.blocks.length) {
