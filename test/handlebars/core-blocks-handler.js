@@ -30,7 +30,8 @@ Core9.blocks.handler = {
 Core9.blocks.handler.__registry = {
   blockIds: [],
   uniqueBlocks: [],
-  blocks: []
+  blocks: [],
+  availableBlocks: []
 }
 Core9.blocks.handler.filRegistry = function () {
   return new Promise(function (resolve, reject) {
@@ -67,6 +68,9 @@ Core9.blocks.handler.deDupeArray = function (a) {
   for(var k in temp)
     if(k != 'undefined') r.push(k);
   return r;
+}
+Core9.blocks.handler.getBowerData = function () {
+  return Core9.blocks.handler.j(Core9.blocks.handler.paths.bower.format(Core9.blocks.handler.config.account));
 }
 Core9.blocks.handler.getTemplateHtml = function (block) {
   return new Promise(function (resolve, reject) {
@@ -126,6 +130,15 @@ Core9.blocks.handler.getData = function () {
     for(var i = 0; i < Core9.blocks.handler.__registry.blocks.length; i++) {
       Core9.blocks.handler.getBlockData(Core9.blocks.handler.__registry.blocks[i]);
     }
+  }, function (err) {
+    console.log(err);
+  });
+  Core9.blocks.handler.getBowerData().then(function (result) {
+      var json = JSON.parse(result.currentTarget.response);
+      var blocks = json.dependencies;
+      Object.keys(blocks).forEach(function (key) {
+        Core9.blocks.handler.__registry.availableBlocks.push(key);
+      });
   }, function (err) {
     console.log(err);
   });
