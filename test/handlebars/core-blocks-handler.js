@@ -19,19 +19,20 @@ Core9.blocks.handler = {
     "blocks": "/dashboard/test/handlebars/blocks/"
   }
 }
-Core9.blocks.handler.__registry = []
+Core9.blocks.handler.__registry = {}
 Core9.blocks.handler.filRegistry = function () {
   return new Promise(function (resolve, reject) {
     var blocks = Core9.blocks.handler.getBlocks();
+    Core9.blocks.handler.__registry.blocks = [];
     for(var i = 0; i < blocks.length; i++) {
       var block = blocks[i];
-      Core9.blocks.handler.__registry.push({
+      Core9.blocks.handler.__registry.blocks.push({
         "id": block.dataset.id,
         "type": block.dataset.type
       });
     }
-    if(blocks.length == Core9.blocks.handler.__registry.length) {
-      resolve(Core9.blocks.handler.__registry);
+    if(blocks.length == Core9.blocks.handler.__registry.blocks.length) {
+      resolve(Core9.blocks.handler.__registry.blocks);
     } else {
       reject(Error("It broke"));
     }
@@ -45,6 +46,15 @@ Core9.blocks.handler.deDupeArray = function (a) {
     if(k != 'undefined') r.push(k);
   return r;
 }
+Core9.blocks.handler.getFormSteps = function () {
+  return Core9.blocks.handler.j('/dashboard/test/handlebars/blocks/usermessage/steps/steps.json');
+}
+Core9.blocks.handler.getJsonData = function () {
+  return Core9.blocks.handler.j('/dashboard/test/handlebars/blocks/usermessage/data/usermessage-testid.json');
+}
+Core9.blocks.handler.getTemplateHtml = function () {
+  return Core9.blocks.handler.j('/dashboard/test/handlebars/blocks/usermessage/tpl/index.html');
+}
 Core9.blocks.handler.getData = function () {
   Core9.blocks.handler.filRegistry().then(function (result) {
     var promiseList = [];
@@ -54,6 +64,8 @@ Core9.blocks.handler.getData = function () {
     Promise.all(promiseList).then(function (values) {
       console.log(values);
     });
+  }, function (err) {
+    console.log(err);
   });
 }
 Core9.blocks.handler.j = function (url) {
@@ -77,15 +89,6 @@ Core9.blocks.handler.triggerBlockDataReady = function () {
 }
 Core9.blocks.handler.getBlocks = function () {
   return document.querySelectorAll(".core9-block");
-}
-Core9.blocks.handler.getFormSteps = function () {
-  return Core9.blocks.handler.j('/dashboard/test/handlebars/blocks/usermessage/steps/steps.json');
-}
-Core9.blocks.handler.getJsonData = function () {
-  return Core9.blocks.handler.j('/dashboard/test/handlebars/blocks/usermessage/data/usermessage-testid.json');
-}
-Core9.blocks.handler.getTemplateHtml = function () {
-  return Core9.blocks.handler.j('/dashboard/test/handlebars/blocks/usermessage/tpl/index.html');
 }
 Core9.blocks.handler.init = function () {
   Core9.blocks.handler.getData();
