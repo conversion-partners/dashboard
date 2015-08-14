@@ -21,8 +21,15 @@ Core9.blocks.handler = {
 }
 Core9.blocks.handler.getData = function () {
   Core9.blocks.handler.filRegistry().then(function (result) {
-    return Core9.blocks.handler.getTemplateHtml(result);
+    return Core9.blocks.handler.getTemplateHtml();
   }).then(function (result) {
+    console.log(result);
+    return Core9.blocks.handler.getJsonData();
+  }).then(function (result) {
+    console.log(result);
+    return Core9.blocks.handler.getFormSteps();
+  }).then(function (result) {
+    console.log('done');
     console.log(result);
   });
 }
@@ -66,9 +73,13 @@ Core9.blocks.handler.triggerBlockDataReady = function () {
 Core9.blocks.handler.getBlocks = function () {
   return document.querySelectorAll(".core9-block");
 }
-Core9.blocks.handler.getFormSteps = function () {}
-Core9.blocks.handler.getJsonData = function () {}
-Core9.blocks.handler.getTemplateHtml = function (listOfBlocks) {
+Core9.blocks.handler.getFormSteps = function () {
+  return Core9.blocks.handler.j('/dashboard/test/handlebars/blocks/usermessage/steps/steps.json');
+}
+Core9.blocks.handler.getJsonData = function () {
+  return Core9.blocks.handler.j('/dashboard/test/handlebars/blocks/usermessage/data/usermessage-testid.json');
+}
+Core9.blocks.handler.getTemplateHtml = function () {
   return Core9.blocks.handler.j('/dashboard/test/handlebars/blocks/usermessage/tpl/index.html');
 }
 Core9.blocks.handler.init = function () {
