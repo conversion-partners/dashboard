@@ -28,7 +28,10 @@ Core9.blocks.handler.filRegistry = function () {
       var block = blocks[i];
       Core9.blocks.handler.__registry.blocks.push({
         "id": block.dataset.id,
-        "type": block.dataset.type
+        "type": block.dataset.type,
+        "$blockref": block,
+        "loadedHTML": {},
+        "loadedDATA": {} 
       });
     }
     if(blocks.length == Core9.blocks.handler.__registry.blocks.length) {
