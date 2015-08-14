@@ -8,6 +8,15 @@ Core9.blocks.handler = function() {}
 Core9.blocks.handler.getBlocks = function (){
       return document.querySelectorAll(".core9-block");
 }
+Core9.blocks.handler.getFormSteps = function(){
+
+}
+Core9.blocks.handler.getJsonData = function(){
+
+}
+Core9.blocks.handler.getTemplateHtml = function(){
+
+}
 Core9.blocks.handler.getData = function(){
 
 }

@@ -10,7 +10,7 @@
 <div class="core9-block" data-type="sdfas" data-id="testid1"></div>
 <div class="core9-block" data-type="sdfas" data-id="testid2"></div>
 
-<script id="entrytemplate" type="text/x-handlebars-template">
+<script id="init" type="text/x-handlebars-template">
 <div class="post">
   {{> userMessage tagName="h1" }}
   <h1>Comments</h1>
@@ -33,7 +33,7 @@
 				.getElementById("usermessage").innerText);
 
 		var template = Handlebars.compile(document
-				.getElementById("entrytemplate").innerText);
+				.getElementById("init").innerText);
 
 		var context = {
 			"author" : {
