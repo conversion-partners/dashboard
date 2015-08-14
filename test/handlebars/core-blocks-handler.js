@@ -148,4 +148,4 @@ Core9.blocks.handler.getBlocks = function () {
 Core9.blocks.handler.init = function () {
   Core9.blocks.handler.getData();
 }
-Core9.blocks.handler.init(account, theme);
+Core9.blocks.handler.init(session.account, session.theme);
