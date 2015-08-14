@@ -16,8 +16,8 @@ if(typeof Core9.blocks === 'undefined') {
 Core9.blocks.handler = {}
 Core9.blocks.handler = {
   config: {
-    account : {},
-    theme : {}
+    account: {},
+    theme: {}
   },
   paths: {
     blocks: "/dashboard/data/accounts/{0}/blocks/",
@@ -69,13 +69,22 @@ Core9.blocks.handler.getTemplateHtml = function (block) {
   return Core9.blocks.handler.j(Core9.blocks.handler.paths.template.format(Core9.blocks.handler.config.account, block.type));
 }
 Core9.blocks.handler.getFormSteps = function (block) {
-    return Core9.blocks.handler.j(Core9.blocks.handler.paths.formSteps.format(Core9.blocks.handler.config.account, block.type));
+  return Core9.blocks.handler.j(Core9.blocks.handler.paths.formSteps.format(Core9.blocks.handler.config.account, block.type));
 }
 Core9.blocks.handler.getDefaultBlockData = function (block) {
   return Core9.blocks.handler.j(Core9.blocks.handler.paths.defaultBlockData.format(Core9.blocks.handler.config.account, block.type));
 }
 Core9.blocks.handler.userDataById = function (block, page, version, id) {
   return Core9.blocks.handler.j(Core9.blocks.handler.paths.userDataById.format(Core9.blocks.handler.config.account, page, version, id));
+}
+Core9.blocks.handler.setTemplateHtml = function (block, data) {
+  Core9.blocks.handler.__registry.blocks[block.id].loadedHTML = data.currentTarget.response;
+}
+Core9.blocks.handler.setDefaultBlockData = function (block, data) {
+  Core9.blocks.handler.__registry.blocks[block.id].loadedDEFAULTDATA =  JSON.parse(data.currentTarget.response);
+}
+Core9.blocks.handler.setFormSteps = function (block, data) {
+  Core9.blocks.handler.__registry.blocks[block.id].loadedSTEPS = JSON.parse(data.currentTarget.response);;
 }
 Core9.blocks.handler.getBlockData = function (block) {
   var promiseList = [];
@@ -84,9 +93,12 @@ Core9.blocks.handler.getBlockData = function (block) {
   promiseList.push(Core9.blocks.handler.getFormSteps(block));
   Promise.all(promiseList).then(function (values) {
     console.log('values for block ' + block.type + ' id : ' + block.id)
-    // we can trust the order of the results
-    // http://stackoverflow.com/questions/28066429/promise-all-order-of-resolved-values
+      // we can trust the order of the results
+      // http://stackoverflow.com/questions/28066429/promise-all-order-of-resolved-values
     console.log(values);
+    Core9.blocks.handler.setTemplateHtml(block, values[0]);
+    Core9.blocks.handler.setDefaultBlockData(block, values[1]);
+    Core9.blocks.handler.setFormSteps(block, values[2]);
   });
 }
 Core9.blocks.handler.getData = function () {
@@ -101,11 +113,11 @@ Core9.blocks.handler.getData = function () {
     console.log(err);
   });
   Core9.blocks.handler.getBowerData().then(function (result) {
-      var json = JSON.parse(result.currentTarget.response);
-      var blocks = json.dependencies;
-      Object.keys(blocks).forEach(function (key) {
-        Core9.blocks.handler.__registry.availableBlocks.push(key);
-      });
+    var json = JSON.parse(result.currentTarget.response);
+    var blocks = json.dependencies;
+    Object.keys(blocks).forEach(function (key) {
+      Core9.blocks.handler.__registry.availableBlocks.push(key);
+    });
   }, function (err) {
     console.log(err);
   });
