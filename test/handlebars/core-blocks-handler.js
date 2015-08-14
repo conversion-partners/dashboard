@@ -19,6 +19,34 @@ Core9.blocks.handler = {
     "blocks": "/dashboard/test/handlebars/blocks/"
   }
 }
+Core9.blocks.handler.__registry = []
+Core9.blocks.handler.filRegistry = function () {
+  return new Promise(function (resolve, reject) {
+    var blocks = Core9.blocks.handler.getBlocks();
+    for(var i = 0; i < blocks.length; i++) {
+      var block = blocks[i];
+      Core9.blocks.handler.__registry.push({
+        "id": block.dataset.id,
+        "type": block.dataset.type
+      });
+    }
+    if(blocks.length == Core9.blocks.handler.__registry.length) {
+      resolve(Core9.blocks.handler.__registry);
+    } else {
+      reject(Error("It broke"));
+    }
+  });
+}
+Core9.blocks.handler.deDupeArray = function (a) {
+  var temp = {};
+  for (var i = 0; i < a.length; i++)
+    temp[a[i]] = true;
+  var r = [];
+  for (var k in temp)
+    if (k != 'undefined')
+      r.push(k);
+  return r;
+}
 Core9.blocks.handler.getData = function () {
   Core9.blocks.handler.filRegistry().then(function (result) {
     return Core9.blocks.handler.getTemplateHtml();
@@ -40,24 +68,6 @@ Core9.blocks.handler.j = function (url) {
     xhr.addEventListener("load", resolve);
     xhr.open("GET", url);
     xhr.send(null);
-  });
-}
-Core9.blocks.handler.__registry = []
-Core9.blocks.handler.filRegistry = function () {
-  return new Promise(function (resolve, reject) {
-    var blocks = Core9.blocks.handler.getBlocks();
-    for(var i = 0; i < blocks.length; i++) {
-      var block = blocks[i];
-      Core9.blocks.handler.__registry.push({
-        "id": block.dataset.id,
-        "type": block.dataset.type
-      });
-    }
-    if(blocks.length == Core9.blocks.handler.__registry.length) {
-      resolve(Core9.blocks.handler.__registry);
-    } else {
-      reject(Error("It broke"));
-    }
   });
 }
 Core9.blocks.handler.Handlebars = function () {
