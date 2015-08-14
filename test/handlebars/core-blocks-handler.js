@@ -31,8 +31,9 @@ Core9.blocks.handler.filRegistry = function () {
         "type": block.dataset.type,
         "$blockref": block,
         "loadedHTML": {},
-        "loadedDATA": {},
-        "loadedSTEPS":{} 
+        "loadedDEFAULTDATA": {},
+        "loadedUSERDATA": {},
+        "loadedSTEPS": {}
       });
     }
     if(blocks.length == Core9.blocks.handler.__registry.blocks.length) {
@@ -51,13 +52,34 @@ Core9.blocks.handler.deDupeArray = function (a) {
   return r;
 }
 Core9.blocks.handler.getFormSteps = function () {
-  return Core9.blocks.handler.j('/dashboard/test/handlebars/blocks/usermessage/steps/steps.json');
+  return new Promise(function (resolve, reject) {
+    Core9.blocks.handler.j('/dashboard/test/handlebars/blocks/usermessage/steps/steps.json');
+    if(true) {
+      resolve("Stuff worked!");
+    } else {
+      reject(Error("It broke"));
+    }
+  });
 }
 Core9.blocks.handler.getJsonData = function () {
-  return Core9.blocks.handler.j('/dashboard/test/handlebars/blocks/usermessage/data/usermessage-testid.json');
+  return new Promise(function (resolve, reject) {
+    Core9.blocks.handler.j('/dashboard/test/handlebars/blocks/usermessage/data/usermessage-testid.json');
+    if(true) {
+      resolve("Stuff worked!");
+    } else {
+      reject(Error("It broke"));
+    }
+  });
 }
 Core9.blocks.handler.getTemplateHtml = function () {
-  return Core9.blocks.handler.j('/dashboard/test/handlebars/blocks/usermessage/tpl/index.html');
+  return new Promise(function (resolve, reject) {
+    Core9.blocks.handler.j('/dashboard/test/handlebars/blocks/usermessage/tpl/index.html');
+    if(true) {
+      resolve("Stuff worked!");
+    } else {
+      reject(Error("It broke"));
+    }
+  });
 }
 Core9.blocks.handler.getData = function () {
   Core9.blocks.handler.filRegistry().then(function (result) {
