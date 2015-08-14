@@ -22,9 +22,9 @@ Core9.blocks.handler = {
   paths: {
     blocks: "/dashboard/data/accounts/{0}/blocks/",
     bower: "/dashboard/data/accounts/{0}/blocks/bower.json",
-    template: "/dashboard/data/accounts/{0}/blocks/{1}/tpl/index.html",
-    formSteps: "/dashboard/data/accounts/{0}/blocks/{1}/steps/steps.json",
-    defaultBlockData: "/dashboard/data/accounts/{0}/blocks/{1}/data/{2}.json",
+    template: "/dashboard/data/accounts/{0}/blocks/bower_components/{1}/tpl/index.html",
+    formSteps: "/dashboard/data/accounts/{0}/blocks/bower_components/{1}/steps/steps.json",
+    defaultBlockData: "/dashboard/data/accounts/{0}/blocks/bower_components/{1}/data/default.json",
     userDataById: "/dashboard/data/accounts/{0}/sites/pages/{1}/versions/{2}/data/{3}.json"
   }
 }
@@ -62,14 +62,6 @@ Core9.blocks.handler.filRegistry = function () {
     }
   });
 }
-Core9.blocks.handler.deDupeArray = function (a) {
-  var temp = {};
-  for(var i = 0; i < a.length; i++) temp[a[i]] = true;
-  var r = [];
-  for(var k in temp)
-    if(k != 'undefined') r.push(k);
-  return r;
-}
 Core9.blocks.handler.getBowerData = function () {
   return Core9.blocks.handler.j(Core9.blocks.handler.paths.bower.format(Core9.blocks.handler.config.account));
 }
@@ -85,21 +77,10 @@ Core9.blocks.handler.getDefaultBlockData = function (block) {
 Core9.blocks.handler.userDataById = function (block, page, version, id) {
   return Core9.blocks.handler.j(Core9.blocks.handler.paths.userDataById.format(Core9.blocks.handler.config.account, page, version, id));
 }
-Core9.blocks.handler.getBlockById = function (id) {
-  var blocks = Core9.blocks.handler.__registry.blocks;
-  for(var i = 0; i < blocks.length; i++) {
-    var block = null;
-    if(blocks[i].id == id) {
-      block = blocks[i];
-      break;
-    }
-    return block;
-  }
-}
 Core9.blocks.handler.getBlockData = function (block) {
   var promiseList = [];
   promiseList.push(Core9.blocks.handler.getTemplateHtml(block));
-  promiseList.push(Core9.blocks.handler.getJsonData(block));
+  promiseList.push(Core9.blocks.handler.getDefaultBlockData(block));
   promiseList.push(Core9.blocks.handler.getFormSteps(block));
   Promise.all(promiseList).then(function (values) {
     console.log(values);
@@ -125,6 +106,7 @@ Core9.blocks.handler.getData = function () {
   });
 }
 Core9.blocks.handler.j = function (url) {
+  console.log('url : ' + url);
   return new Promise(function (resolve, reject) {
     var xhr = new XMLHttpRequest;
     xhr.addEventListener("error", reject);
@@ -133,11 +115,30 @@ Core9.blocks.handler.j = function (url) {
     xhr.send(null);
   });
 }
+Core9.blocks.handler.getBlockById = function (id) {
+  var blocks = Core9.blocks.handler.__registry.blocks;
+  for(var i = 0; i < blocks.length; i++) {
+    var block = null;
+    if(blocks[i].id == id) {
+      block = blocks[i];
+      break;
+    }
+    return block;
+  }
+}
 Core9.blocks.handler.Handlebars = function () {
   if(typeof Handlebars == 'undefined') {
     alert('no handlebars found');
   }
   return Handlebars;
+}
+Core9.blocks.handler.deDupeArray = function (a) {
+  var temp = {};
+  for(var i = 0; i < a.length; i++) temp[a[i]] = true;
+  var r = [];
+  for(var k in temp)
+    if(k != 'undefined') r.push(k);
+  return r;
 }
 Core9.blocks.handler.triggerBlockDataReady = function () {
   var event = new Event('blockdataready');
