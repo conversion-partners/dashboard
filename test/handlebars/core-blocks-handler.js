@@ -31,7 +31,7 @@ Core9.blocks.handler = {
 Core9.blocks.handler.__registry = {
   blockIds: [],
   uniqueBlocks: [],
-  blocks: [],
+  blocks: {},
   availableBlocks: []
 }
 Core9.blocks.handler.filRegistry = function () {
@@ -43,7 +43,7 @@ Core9.blocks.handler.filRegistry = function () {
       var block = blocks[i];
       idArray.push(block.dataset.id);
       typesArray.push(block.dataset.type);
-      Core9.blocks.handler.__registry.blocks.push({
+      Core9.blocks.handler.__registry.blocks[block.dataset.id] = {
         "id": block.dataset.id,
         "type": block.dataset.type,
         "$blockref": block,
@@ -51,9 +51,9 @@ Core9.blocks.handler.filRegistry = function () {
         "loadedDEFAULTDATA": {},
         "loadedUSERDATA": {},
         "loadedSTEPS": {}
-      });
+      };
     }
-    if(blocks.length == Core9.blocks.handler.__registry.blocks.length) {
+    if(blocks.length == Object.keys(Core9.blocks.handler.__registry.blocks).length) {
       Core9.blocks.handler.__registry.blockIds = idArray;
       Core9.blocks.handler.__registry.uniqueBlocks = Core9.blocks.handler.deDupeArray(typesArray);
       resolve(Core9.blocks.handler.__registry);
@@ -92,8 +92,10 @@ Core9.blocks.handler.getBlockData = function (block) {
 Core9.blocks.handler.getData = function () {
   // carefull not chained
   Core9.blocks.handler.filRegistry().then(function () {
-    for(var i = 0; i < Core9.blocks.handler.__registry.blocks.length; i++) {
-      Core9.blocks.handler.getBlockData(Core9.blocks.handler.__registry.blocks[i]);
+    for(var i = 0; i < Core9.blocks.handler.__registry.blockIds.length; i++) {
+      var id = Core9.blocks.handler.__registry.blockIds[i];
+      var block = Core9.blocks.handler.getBlockById(id);
+      Core9.blocks.handler.getBlockData(block);
     }
   }, function (err) {
     console.log(err);
@@ -119,15 +121,7 @@ Core9.blocks.handler.j = function (url) {
   });
 }
 Core9.blocks.handler.getBlockById = function (id) {
-  var blocks = Core9.blocks.handler.__registry.blocks;
-  for(var i = 0; i < blocks.length; i++) {
-    var block = null;
-    if(blocks[i].id == id) {
-      block = blocks[i];
-      break;
-    }
-    return block;
-  }
+  return Core9.blocks.handler.__registry.blocks[id];
 }
 Core9.blocks.handler.Handlebars = function () {
   if(typeof Handlebars == 'undefined') {
