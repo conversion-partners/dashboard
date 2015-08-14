@@ -60,7 +60,7 @@ Core9.blocks.handler.deDupeArray = function (a) {
     if(k != 'undefined') r.push(k);
   return r;
 }
-Core9.blocks.handler.getTemplateHtml = function () {
+Core9.blocks.handler.getTemplateHtml = function (block) {
   return new Promise(function (resolve, reject) {
     // for each block type get templates
     Core9.blocks.handler.j('/dashboard/test/handlebars/blocks/usermessage/tpl/index.html');
@@ -71,7 +71,7 @@ Core9.blocks.handler.getTemplateHtml = function () {
     }
   });
 }
-Core9.blocks.handler.getFormSteps = function () {
+Core9.blocks.handler.getFormSteps = function (block) {
   return new Promise(function (resolve, reject) {
     // for each block type get templates
     Core9.blocks.handler.j('/dashboard/test/handlebars/blocks/usermessage/steps/steps.json');
@@ -82,7 +82,7 @@ Core9.blocks.handler.getFormSteps = function () {
     }
   });
 }
-Core9.blocks.handler.getJsonData = function () {
+Core9.blocks.handler.getJsonData = function (block) {
   return new Promise(function (resolve, reject) {
     // for each block id get default and user data
     Core9.blocks.handler.j('/dashboard/test/handlebars/blocks/usermessage/data/usermessage-testid.json');
@@ -93,15 +93,31 @@ Core9.blocks.handler.getJsonData = function () {
     }
   });
 }
+Core9.blocks.handler.getBlockById = function (id) {
+  var blocks = Core9.blocks.handler.__registry.blocks;
+  for(var i = 0; i < blocks.length; i++) {
+    var block = null;
+    if(blocks[i].id == id) {
+      block = blocks[i];
+      break;
+    }
+    return block;
+  }
+}
+Core9.blocks.handler.getBlockData = function (block) {
+  var promiseList = [];
+  promiseList.push(Core9.blocks.handler.getTemplateHtml(block));
+  promiseList.push(Core9.blocks.handler.getJsonData(block));
+  promiseList.push(Core9.blocks.handler.getFormSteps(block));
+  Promise.all(promiseList).then(function (values) {
+    console.log(values);
+  });
+}
 Core9.blocks.handler.getData = function () {
-  Core9.blocks.handler.filRegistry().then(function (result) {
-    var promiseList = [];
-    promiseList.push(Core9.blocks.handler.getTemplateHtml());
-    promiseList.push(Core9.blocks.handler.getJsonData());
-    promiseList.push(Core9.blocks.handler.getFormSteps());
-    Promise.all(promiseList).then(function (values) {
-      console.log(values);
-    });
+  Core9.blocks.handler.filRegistry().then(function () {
+    for(var i = 0; i < Core9.blocks.handler.__registry.blocks.length; i++) {
+      Core9.blocks.handler.getBlockData(Core9.blocks.handler.__registry.blocks[i]);
+    }
   }, function (err) {
     console.log(err);
   });
@@ -131,4 +147,4 @@ Core9.blocks.handler.getBlocks = function () {
 Core9.blocks.handler.init = function () {
   Core9.blocks.handler.getData();
 }
-Core9.blocks.handler.init();
+Core9.blocks.handler.init(account, theme);
