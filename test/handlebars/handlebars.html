@@ -1,66 +1,69 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="/dashboard/bower_components/handlebars/handlebars.min.js"></script>
+  <meta charset="UTF-8">
+  <title>Insert title here</title>
+  <script src="/dashboard/bower_components/handlebars/handlebars.min.js"></script>
 </head>
+
 <body>
 
-<div class="core9-block" data-type="sdfas" data-id="testid1"></div>
-<div class="core9-block" data-type="sdfas" data-id="testid2"></div>
+  <div class="core9-block" data-type="sdfas" data-id="testid1"></div>
+  <div class="core9-block" data-type="sdfas" data-id="testid2"></div>
 
-<script id="init" type="text/x-handlebars-template">
-<div class="post">
-  {{> userMessage tagName="h1" }}
-  <h1>Comments</h1>
-  {{#each comments}}
-    {{> userMessage tagName="h2" }}
-  {{/each}}
-</div>
-</script>
+  <script id="init" type="text/x-handlebars-template">
+    <div class="post">
+      {{> userMessage tagName="h1" }}
+      <h1>Comments</h1>
+      {{#each comments}} {{> userMessage tagName="h2" }} {{/each}}
+    </div>
+  </script>
 
-<script id="usermessage" type="text/x-handlebars-template">
+  <script id="usermessage" type="text/x-handlebars-template">
     <{{tagName}}>By {{author.firstName}} {{author.lastName}}</{{tagName}}>
-        <div class="body">{{body}}</div>
-</script>
+    <div class="body">{{body}}</div>
+  </script>
 
 
 
 
-<script>
-		Handlebars.registerPartial('userMessage', document
-				.getElementById("usermessage").innerText);
+  <script>
+    Handlebars.registerPartial('userMessage', document
+      .getElementById("usermessage").innerText);
 
-		var template = Handlebars.compile(document
-				.getElementById("init").innerText);
+    var template = Handlebars.compile(document
+      .getElementById("init").innerText);
 
-		var context = {
-			"author" : {
-				"firstName" : "Alan",
-				"lastName" : "Johnson"
-			},
-			"body" : "I Love Handlebars",
-			"comments" : [ {
-				"author" : {
-					"firstName" : "Yehuda",
-					"lastName" : "Katz"
-				},
-				"body" : "Me too!"
-			} ]
-		};
+    var context = {
+      "author": {
+        "firstName": "Alan",
+        "lastName": "Johnson"
+      },
+      "body": "I Love Handlebars",
+      "comments": [{
+        "author": {
+          "firstName": "Yehuda",
+          "lastName": "Katz"
+        },
+        "body": "Me too!"
+      }]
+    };
 
 
-
+    document.body.addEventListener('blockdataready', function(e) {
+      console.log('blockdataready');
+    }, false);
 
 
 
     var block = template(context);
-		console.log(block);
+    console.log(block);
     document.querySelector("[data-id=testid1]").innerHTML = block;
     //document.querySelector("[data-id=testid2]").innerHTML = block;
-	</script>
+  </script>
 
   <script src="core-blocks-handler.js"></script>
 </body>
+
 </html>
