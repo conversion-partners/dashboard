@@ -24,7 +24,7 @@ Core9.blocks.handler = {
     bower: "/dashboard/data/accounts/{0}/blocks/bower.json",
     template: "/dashboard/data/accounts/{0}/blocks/{1}/tpl/index.html",
     defaultData: "/dashboard/data/accounts/{0}/blocks/{1}/data/{2}.json",
-    userData: "/dashboard/data/accounts/{0}/sites/{1}/"
+    userData: "/dashboard/data/accounts/{0}/sites/pages/{1}/versions/{2}/data/{3}.json"
   }
 }
 Core9.blocks.handler.__registry = {
