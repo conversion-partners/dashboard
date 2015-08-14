@@ -16,23 +16,28 @@ if(typeof Core9.blocks === 'undefined') {
 Core9.blocks.handler = {}
 Core9.blocks.handler = {
   paths: {
-    "blocks": "/dashboard/test/handlebars/blocks/"
+    blocks: "/dashboard/test/handlebars/blocks/"
   }
 }
-Core9.blocks.handler.__meta = {}
-Core9.blocks.handler.__registry = {}
+Core9.blocks.handler.__registry = {
+  blockIds : [],
+  uniqueBlocks : [],
+  blocks : []
+}
 Core9.blocks.handler.filRegistry = function () {
   return new Promise(function (resolve, reject) {
     var blocks = Core9.blocks.handler.getBlocks();
-    var typesArray, idArray  = [];
-    Core9.blocks.handler.__registry.blocks = [];
+    var typesArray = [];
+    var idArray  = [];
     for(var i = 0; i < blocks.length; i++) {
       var block = blocks[i];
-      idArray.push(block.dataset.id);
-      typesArray.push(block.dataset.type);
+      var id = block.dataset.id;
+      var type = block.dataset.type;
+      idArray.push(id);
+      typesArray.push(type);
       Core9.blocks.handler.__registry.blocks.push({
-        "id": block.dataset.id,
-        "type": block.dataset.type,
+        "id": id,
+        "type": type,
         "$blockref": block,
         "loadedHTML": {},
         "loadedDEFAULTDATA": {},
@@ -41,8 +46,8 @@ Core9.blocks.handler.filRegistry = function () {
       });
     }
     if(blocks.length == Core9.blocks.handler.__registry.blocks.length) {
-      Core9.blocks.handler.__registry.__meta.blockIds = idArray;
-      Core9.blocks.handler.__registry.__meta.uniqueBlocks = Core9.blocks.handler.deDupeArray(typesArray);
+      Core9.blocks.handler.__registry.blockIds = idArray;
+      Core9.blocks.handler.__registry.uniqueBlocks = Core9.blocks.handler.deDupeArray(typesArray);
       resolve(Core9.blocks.handler.__registry);
     } else {
       reject(Error("It broke"));
