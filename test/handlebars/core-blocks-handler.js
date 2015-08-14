@@ -23,8 +23,9 @@ Core9.blocks.handler = {
     blocks: "/dashboard/data/accounts/{0}/blocks/",
     bower: "/dashboard/data/accounts/{0}/blocks/bower.json",
     template: "/dashboard/data/accounts/{0}/blocks/{1}/tpl/index.html",
-    defaultData: "/dashboard/data/accounts/{0}/blocks/{1}/data/{2}.json",
-    userData: "/dashboard/data/accounts/{0}/sites/pages/{1}/versions/{2}/data/{3}.json"
+    formSteps: "/dashboard/data/accounts/{0}/blocks/{1}/steps/steps.json",
+    defaultBlockData: "/dashboard/data/accounts/{0}/blocks/{1}/data/{2}.json",
+    userDataById: "/dashboard/data/accounts/{0}/sites/pages/{1}/versions/{2}/data/{3}.json"
   }
 }
 Core9.blocks.handler.__registry = {
@@ -73,37 +74,16 @@ Core9.blocks.handler.getBowerData = function () {
   return Core9.blocks.handler.j(Core9.blocks.handler.paths.bower.format(Core9.blocks.handler.config.account));
 }
 Core9.blocks.handler.getTemplateHtml = function (block) {
-  return new Promise(function (resolve, reject) {
-    // for each block type get templates
-    Core9.blocks.handler.j();
-    if(true) {
-      resolve("Stuff worked!");
-    } else {
-      reject(Error("It broke"));
-    }
-  });
+  return Core9.blocks.handler.j(Core9.blocks.handler.paths.template.format(Core9.blocks.handler.config.account, block.type));
 }
 Core9.blocks.handler.getFormSteps = function (block) {
-  return new Promise(function (resolve, reject) {
-    // for each block type get templates
-    Core9.blocks.handler.j();
-    if(true) {
-      resolve("Stuff worked!");
-    } else {
-      reject(Error("It broke"));
-    }
-  });
+    return Core9.blocks.handler.j(Core9.blocks.handler.paths.formSteps.format(Core9.blocks.handler.config.account, block.type));
 }
-Core9.blocks.handler.getJsonData = function (block) {
-  return new Promise(function (resolve, reject) {
-    // for each block id get default and user data
-    Core9.blocks.handler.j();
-    if(true) {
-      resolve("Stuff worked!");
-    } else {
-      reject(Error("It broke"));
-    }
-  });
+Core9.blocks.handler.getDefaultBlockData = function (block) {
+  return Core9.blocks.handler.j(Core9.blocks.handler.paths.defaultBlockData.format(Core9.blocks.handler.config.account, block.type));
+}
+Core9.blocks.handler.userDataById = function (block, page, version, id) {
+  return Core9.blocks.handler.j(Core9.blocks.handler.paths.userDataById.format(Core9.blocks.handler.config.account, page, version, id));
 }
 Core9.blocks.handler.getBlockById = function (id) {
   var blocks = Core9.blocks.handler.__registry.blocks;
