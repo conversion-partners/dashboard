@@ -20,24 +20,22 @@ Core9.blocks.handler = {
   }
 }
 Core9.blocks.handler.__registry = {
-  blockIds : [],
-  uniqueBlocks : [],
-  blocks : []
+  blockIds: [],
+  uniqueBlocks: [],
+  blocks: []
 }
 Core9.blocks.handler.filRegistry = function () {
   return new Promise(function (resolve, reject) {
     var blocks = Core9.blocks.handler.getBlocks();
     var typesArray = [];
-    var idArray  = [];
+    var idArray = [];
     for(var i = 0; i < blocks.length; i++) {
       var block = blocks[i];
-      var id = block.dataset.id;
-      var type = block.dataset.type;
-      idArray.push(id);
-      typesArray.push(type);
+      idArray.push(block.dataset.id);
+      typesArray.push(block.dataset.type);
       Core9.blocks.handler.__registry.blocks.push({
-        "id": id,
-        "type": type,
+        "id": block.dataset.id,
+        "type": block.dataset.type,
         "$blockref": block,
         "loadedHTML": {},
         "loadedDEFAULTDATA": {},
@@ -62,8 +60,20 @@ Core9.blocks.handler.deDupeArray = function (a) {
     if(k != 'undefined') r.push(k);
   return r;
 }
+Core9.blocks.handler.getTemplateHtml = function () {
+  return new Promise(function (resolve, reject) {
+    // for each block type get templates
+    Core9.blocks.handler.j('/dashboard/test/handlebars/blocks/usermessage/tpl/index.html');
+    if(true) {
+      resolve("Stuff worked!");
+    } else {
+      reject(Error("It broke"));
+    }
+  });
+}
 Core9.blocks.handler.getFormSteps = function () {
   return new Promise(function (resolve, reject) {
+    // for each block type get templates
     Core9.blocks.handler.j('/dashboard/test/handlebars/blocks/usermessage/steps/steps.json');
     if(true) {
       resolve("Stuff worked!");
@@ -74,17 +84,8 @@ Core9.blocks.handler.getFormSteps = function () {
 }
 Core9.blocks.handler.getJsonData = function () {
   return new Promise(function (resolve, reject) {
+    // for each block id get default and user data
     Core9.blocks.handler.j('/dashboard/test/handlebars/blocks/usermessage/data/usermessage-testid.json');
-    if(true) {
-      resolve("Stuff worked!");
-    } else {
-      reject(Error("It broke"));
-    }
-  });
-}
-Core9.blocks.handler.getTemplateHtml = function () {
-  return new Promise(function (resolve, reject) {
-    Core9.blocks.handler.j('/dashboard/test/handlebars/blocks/usermessage/tpl/index.html');
     if(true) {
       resolve("Stuff worked!");
     } else {
