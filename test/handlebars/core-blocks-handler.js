@@ -126,6 +126,7 @@ Core9.blocks.handler.getBlockData = function (block) {
   });
 }
 Core9.blocks.handler.getData = function () {
+  // carefull not chained
   Core9.blocks.handler.filRegistry().then(function () {
     for(var i = 0; i < Core9.blocks.handler.__registry.blocks.length; i++) {
       Core9.blocks.handler.getBlockData(Core9.blocks.handler.__registry.blocks[i]);
