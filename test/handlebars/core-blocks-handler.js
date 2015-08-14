@@ -36,29 +36,24 @@ Core9.blocks.handler.filRegistry = function () {
       reject(Error("It broke"));
     }
   });
-} 
+}
 Core9.blocks.handler.deDupeArray = function (a) {
   var temp = {};
-  for (var i = 0; i < a.length; i++)
-    temp[a[i]] = true;
+  for(var i = 0; i < a.length; i++) temp[a[i]] = true;
   var r = [];
-  for (var k in temp)
-    if (k != 'undefined')
-      r.push(k);
+  for(var k in temp)
+    if(k != 'undefined') r.push(k);
   return r;
 }
 Core9.blocks.handler.getData = function () {
   Core9.blocks.handler.filRegistry().then(function (result) {
-    return Core9.blocks.handler.getTemplateHtml();
-  }).then(function (result) {
-    console.log(result);
-    return Core9.blocks.handler.getJsonData();
-  }).then(function (result) {
-    console.log(result);
-    return Core9.blocks.handler.getFormSteps();
-  }).then(function (result) {
-    console.log('done');
-    console.log(result);
+    var promiseList = [];
+    promiseList.push(Core9.blocks.handler.getTemplateHtml());
+    promiseList.push(Core9.blocks.handler.getJsonData());
+    promiseList.push(Core9.blocks.handler.getFormSteps());
+    Promise.all(promiseList).then(function (values) {
+      console.log(values);
+    });
   });
 }
 Core9.blocks.handler.j = function (url) {
