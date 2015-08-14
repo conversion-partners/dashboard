@@ -7,7 +7,10 @@
 </head>
 <body>
 
-<script id="entry-template" type="text/x-handlebars-template">
+
+<div class="core9-block" data-type="sdfas" data-id="testid">sdfas</div>
+
+<script id="entrytemplate" type="text/x-handlebars-template">
 <div class="post">
   {{> userMessage tagName="h1" }}
   <h1>Comments</h1>
@@ -17,34 +20,41 @@
 </div>
 </script>
 
-<script id="user-message" type="text/x-handlebars-template">
+<script id="usermessage" type="text/x-handlebars-template">
     <{{tagName}}>By {{author.firstName}} {{author.lastName}}</{{tagName}}>
         <div class="body">{{body}}</div>
 </script>
 
+
+
+
 <script>
 		Handlebars.registerPartial('userMessage', document
-				.getElementById("user-message").innerText);
+				.getElementById("usermessage").innerText);
 
 		var template = Handlebars.compile(document
-				.getElementById("entry-template").innerText);
+				.getElementById("entrytemplate").innerText);
 
 		var context = {
-			author : {
-				firstName : "Alan",
-				lastName : "Johnson"
+			"author" : {
+				"firstName" : "Alan",
+				"lastName" : "Johnson"
 			},
-			body : "I Love Handlebars",
-			comments : [ {
-				author : {
-					firstName : "Yehuda",
-					lastName : "Katz"
+			"body" : "I Love Handlebars",
+			"comments" : [ {
+				"author" : {
+					"firstName" : "Yehuda",
+					"lastName" : "Katz"
 				},
-				body : "Me too!"
+				"body" : "Me too!"
 			} ]
 		};
 
-		console.log(template(context));
+
+
+    var block = template(context);
+		console.log(block);
+    document.querySelector("[data-id=testid]").innerHTML = block;
 	</script>
 
 
