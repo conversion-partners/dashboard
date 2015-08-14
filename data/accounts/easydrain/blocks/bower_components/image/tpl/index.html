@@ -4,10 +4,24 @@
 <head>
   <meta charset="UTF-8">
   <title>Insert title here</title>
+  <style>
+    .core9-block {
+      width: 270px;
+      height: 150px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin: -75px 0 0 -135px;
+      border: 1px solid #ddd;
+    }
+  </style>
   <script src="/dashboard/bower_components/handlebars/handlebars.min.js"></script>
 </head>
 
 <body>
+
+
+  <div class="core9-block" data-type="image" data-id="testid1"></div>
 
   <script id="init" type="text/x-handlebars-template">
     <div class="post">
@@ -21,6 +35,36 @@
     <{{tagName}}>By {{author.firstName}} {{author.lastName}}</{{tagName}}>
     <div class="body">{{body}}</div>
   </script>
+
+
+
+  <script>
+    Handlebars.registerPartial('userMessage', document
+      .getElementById("usermessage").innerText);
+
+    var template = Handlebars.compile(document
+      .getElementById("init").innerText);
+
+    var context = {
+      "author": {
+        "firstName": "Alan",
+        "lastName": "Johnson"
+      },
+      "body": "I Love Handlebars",
+      "comments": [{
+        "author": {
+          "firstName": "Yehuda",
+          "lastName": "Katz"
+        },
+        "body": "Me too!"
+      }]
+    };
+
+
+    var block = template(context);
+    document.querySelector("[data-id=testid1]").innerHTML = block;
+  </script>
+
 
 </body>
 
