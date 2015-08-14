@@ -66,7 +66,7 @@ Core9.blocks.handler.getBowerData = function () {
   return Core9.blocks.handler.j(Core9.blocks.handler.paths.bower.format(Core9.blocks.handler.config.account));
 }
 Core9.blocks.handler.getTemplateHtml = function (block) {
-  return Core9.blocks.handler.j(Core9.blocks.handler.paths.template.format(Core9.blocks.handler.config.account, block.type));
+  return Core9.blocks.handler.j(Core9.blocks.handler.paths.template.format(Core9.blocks.handler.config.account, block.type), "document");
 }
 Core9.blocks.handler.getFormSteps = function (block) {
   return Core9.blocks.handler.j(Core9.blocks.handler.paths.formSteps.format(Core9.blocks.handler.config.account, block.type));
@@ -79,9 +79,18 @@ Core9.blocks.handler.userDataById = function (block, page, version, id) {
 }
 Core9.blocks.handler.setTemplateHtml = function (block, data) {
   Core9.blocks.handler.__registry.blocks[block.id].loadedHTML = data.currentTarget.response;
+  Core9.blocks.handler.createHandleBarTemplate(block);
+}
+Core9.blocks.handler.createHandleBarTemplate = function (block) {
+  var html = Core9.blocks.handler.__registry.blocks[block.id].loadedHTML;
+  console.log(html);
+  var head = html.querySelector('head');
+  console.log(head);
+  var body = html.querySelector('body');
+  console.log(body);
 }
 Core9.blocks.handler.setDefaultBlockData = function (block, data) {
-  Core9.blocks.handler.__registry.blocks[block.id].loadedDEFAULTDATA =  JSON.parse(data.currentTarget.response);
+  Core9.blocks.handler.__registry.blocks[block.id].loadedDEFAULTDATA = JSON.parse(data.currentTarget.response);
 }
 Core9.blocks.handler.setFormSteps = function (block, data) {
   Core9.blocks.handler.__registry.blocks[block.id].loadedSTEPS = JSON.parse(data.currentTarget.response);;
@@ -122,13 +131,16 @@ Core9.blocks.handler.getData = function () {
     console.log(err);
   });
 }
-Core9.blocks.handler.j = function (url) {
+Core9.blocks.handler.j = function (url, responseType) {
   console.log('url : ' + url);
   return new Promise(function (resolve, reject) {
     var xhr = new XMLHttpRequest;
     xhr.addEventListener("error", reject);
     xhr.addEventListener("load", resolve);
     xhr.open("GET", url);
+    if(responseType) {
+      xhr.responseType = "document";
+    }
     xhr.send(null);
   });
 }

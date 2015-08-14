@@ -4,6 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <title>Insert title here</title>
+  <style type="text/css">
+    body {
+      background-color: #fff;
+    }
+  </style>
   <script src="/dashboard/bower_components/handlebars/handlebars.min.js"></script>
   <script>
     var session = {
@@ -18,7 +23,7 @@
   <div class="core9-block" data-type="image" data-id="testid1"></div>
   <div class="core9-block" data-type="image" data-id="testid2"></div>
 
-  <script id="init" type="text/x-handlebars-template">
+  <script class="template" id="init" type="text/x-handlebars-template">
     <div class="post">
       {{> userMessage tagName="h1" }}
       <h1>Comments</h1>
