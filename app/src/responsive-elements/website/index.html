@@ -11,7 +11,7 @@
 	<script data-role="demo" src="/dashboard/app/src/responsive-elements/responsive-elements.js"></script>
 	<script data-role="demo" src="/dashboard/bower_components/handlebars/handlebars.min.js"></script>
 
-	<style data-style="type" data-theme="" type="text/css">
+	<style data-role="block" data-style="type" data-theme="" type="text/css">
 		[data-type="image"] {
 			border: 1px solid #ccc;
 			padding: 20px;
@@ -83,13 +83,13 @@
 	<div id="demo">
 		<img class="hint" src="/dashboard/app/src/responsive-elements/website/media/img/hint.png">
 		<div id="resizable">
-			<div class="core9-block" data-type="image" data-respond data-id="testid1"></div>
+			<div data-role="block" class="core9-block" data-type="image" data-respond data-id="testid1"></div>
 			<div class="slider-handle ui-resizable-handle ui-resizable-e"></div>
 		</div>
 	</div>
 
 
-	<script class="template-init" id="init" type="text/x-handlebars-template">
+	<script data-role="block"  class="template-init" id="init" type="text/x-handlebars-template">
 		<div class="post">
 			{{> usermessage tagName="h1" }}
 			<h1>Comments</h1>
@@ -97,12 +97,12 @@
 		</div>
 	</script>
 
-	<script class="template-partial" id="usermessage" type="text/x-handlebars-template">
+	<script data-role="block" class="template-partial" id="usermessage" type="text/x-handlebars-template">
 		<{{tagName}}>By {{author.firstName}} {{author.lastName}}</{{tagName}}>
 		<div class="body">{{body}}</div>
 	</script>
 
-	<script>
+	<script data-role="block" data-type="content/default-data">
 		var context = {
 			"author": {
 				"firstName": "Alan",

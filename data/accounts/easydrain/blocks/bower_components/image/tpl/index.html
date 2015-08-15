@@ -2,123 +2,133 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>core9-block-image</title>
 
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-  <script src="/dashboard/bower_components/responsive-elements/responsive-elements.js"></script>
-  <script src="/dashboard/bower_components/handlebars/handlebars.min.js"></script>
+	<link data-role="demo" rel="stylesheet" type="text/css" href="/dashboard/app/src/responsive-elements/website/media/style.css">
+	<script data-role="demo" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script data-role="demo" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+	<script data-role="demo" src="/dashboard/app/src/responsive-elements/responsive-elements.js"></script>
+	<script data-role="demo" src="/dashboard/bower_components/handlebars/handlebars.min.js"></script>
 
-  <style type="text/css">
-  .quote {border:1px solid #ccc; padding:20px; float:left;}
-  .quote * {margin:0; padding:0}
-  .quote .words {font-style:italic; font-family:serif; font-size:18px; line-height:1.3;}
-  .quote .author {font-family:sans-serif; font-size:12px; margin-top:10px; color:#999}
-  .quote .author-context,
-  .quote .author-photo,
-  .quote .author-thumb
-  {display:none;}
-  .quote.gt250 .author-context {font-family:sans-serif; color:#aaa}
-  .quote.lt150 .words {font-size:14px; word-spacing:-1px; line-height:1.2}
-  .quote.lt150 .author {font-size:11px; margin-top:5px}
-  .quote.gt250 .words {font-size:22px}
-  .quote.gt250 .author {margin-top:20px}
-  .quote.gt250 .author-context {display:block; font-size:10px;}
-  .quote.gt250 .author-thumb {display:block; width:40px; float:left; margin:20px 10px 0 0;}
-  .quote.gt450 .words {font-size:26px;}
-  .quote.gt450 .author {font-size:16px}
-  .quote.gt450 .author-context {display:block; font-size:12px;}
-  .quote.gt450 .author-thumb {display:none;}
-  .quote.gt450 .author-photo {display:block; width:170px; float:right; margin-left:20px}
-</style>
+	<style data-role="block" data-style="type" data-theme="" type="text/css">
+		[data-type="image"] {
+			border: 1px solid #ccc;
+			padding: 20px;
+			float: left;
+		}
 
+		[data-type="image"] * {
+			margin: 0;
+			padding: 0
+		}
 
+		[data-type="image"] {
+			font-style: italic;
+			font-family: serif;
+			font-size: 18px;
+			line-height: 1.3;
+		}
 
+		[data-type="image"] {
+			font-family: sans-serif;
+			font-size: 12px;
+			margin-top: 10px;
+			color: #999
+		}
+
+		[data-type="image"].gt250 {
+			font-family: sans-serif;
+			color: #aaa
+		}
+
+		[data-type="image"].lt150 {
+			font-size: 14px;
+			word-spacing: -1px;
+			line-height: 1.2
+		}
+
+		[data-type="image"].lt150 {
+			font-size: 11px;
+			margin-top: 5px
+		}
+
+		[data-type="image"].lt150 {
+			background: blue
+		}
+	</style>
+
+	<script data-role="demo">
+		// demo slider
+		$(function() {
+			$("#resizable").resizable({
+				minWidth: 150,
+				maxWidth: 840,
+				grid: [10, 0],
+				start: function() {
+					$('.hint').fadeOut();
+				},
+				resize: function() {
+					$('.live-classes').text(
+						$('[data-type="image"]').attr('class').replace('core9-block', '')
+					);
+				}
+			});
+		});
+	</script>
 </head>
 
 <body>
 
-  <!-- <div class="quote" data-respond>
-    <div class="core9-block" data-type="image" data-id="testid1"></div>
-  </div> -->
-
-
-  <div id="demo">
+	<div id="demo">
+		<img class="hint" src="/dashboard/app/src/responsive-elements/website/media/img/hint.png">
 		<div id="resizable">
-			<div class="quote" data-respond="start: 100px; end: 900px; interval: 50px;">
-				<img class="author-photo" src="http://kumailht.com/responsive-elements/media/img/tommy.jpg">
-				<p class="words">Design must reflect the practical and aesthetic in business but above all... good design must primarily serve people.</p>
-				<img class="author-thumb" src="http://kumailht.com/responsive-elements/media/img/tommy.jpg">
-				<p class="author">Thomas J. Watson</p>
-				<p class="author-context">Chairman and CEO of International Business Machines</p>
-			</div>
+			<div data-role="block" class="core9-block" data-type="image" data-respond data-id="testid1"></div>
 			<div class="slider-handle ui-resizable-handle ui-resizable-e"></div>
 		</div>
 	</div>
 
 
+	<script data-role="block"  class="template-init" id="init" type="text/x-handlebars-template">
+		<div class="post">
+			{{> usermessage tagName="h1" }}
+			<h1>Comments</h1>
+			{{#each comments}} {{> usermessage tagName="h2" }} {{/each}}
+		</div>
+	</script>
+
+	<script data-role="block" class="template-partial" id="usermessage" type="text/x-handlebars-template">
+		<{{tagName}}>By {{author.firstName}} {{author.lastName}}</{{tagName}}>
+		<div class="body">{{body}}</div>
+	</script>
+
+	<script data-role="block" data-type="content/default-data">
+		var context = {
+			"author": {
+				"firstName": "Alan",
+				"lastName": "Johnson"
+			},
+			"body": "I Love Handlebars",
+			"comments": [{
+				"author": {
+					"firstName": "Yehuda",
+					"lastName": "Katz"
+				},
+				"body": "Me too!"
+			}]
+		};
+	</script>
+
+	<script data-role="demo">
+		Handlebars.registerPartial('usermessage', document
+			.getElementById("usermessage").innerText);
+		var template = Handlebars.compile(document
+			.getElementById("init").innerText);
+		var block = template(context);
+		document.querySelector("[data-id=testid1]").innerHTML = block;
+	</script>
 
 
-  <script id="init" type="text/x-handlebars-template">
-    <div class="post">
-      {{> userMessage tagName="h1" }}
-      <h1>Comments</h1>
-      {{#each comments}} {{> userMessage tagName="h2" }} {{/each}}
-    </div>
-  </script>
-
-  <script id="usermessage" type="text/x-handlebars-template">
-    <{{tagName}}>By {{author.firstName}} {{author.lastName}}</{{tagName}}>
-    <div class="body">{{body}}</div>
-  </script>
-
-
-
-  <script>
-    Handlebars.registerPartial('userMessage', document
-      .getElementById("usermessage").innerText);
-
-    var template = Handlebars.compile(document
-      .getElementById("init").innerText);
-
-    var context = {
-      "author": {
-        "firstName": "Alan",
-        "lastName": "Johnson"
-      },
-      "body": "I Love Handlebars",
-      "comments": [{
-        "author": {
-          "firstName": "Yehuda",
-          "lastName": "Katz"
-        },
-        "body": "Me too!"
-      }]
-    };
-
-
-    var block = template(context);
-    //document.querySelector("[data-id=testid1]").innerHTML = block;
-  </script>
-
-  <script type="text/javascript">
-    // demo slider
-    $(function() {
-      $("#resizable").resizable({
-        minWidth: 150,
-        maxWidth: 840,
-        grid: [10, 0],
-        start: function() {
-          $('.hint').fadeOut();
-        },
-        resize: function() {
-          $('.live-classes').text(
-            $('.quote').attr('class').replace('quote', '')
-          );
-        }
-      });
-    });
-  </script>
 </body>
 
 </html>
