@@ -2,7 +2,7 @@
 <html>
 
 
-  <script data-role="block" class="template-init" id="init" type="text/x-handlebars-template">
+  <script data-role="block" id="init" type="text/x-handlebars-template">
     <div class="post">
       {{> usermessage tagName="h1" }}
       <h1>Comments</h1>
@@ -10,7 +10,7 @@
     </div>
   </script>
 
-  <script data-role="block" class="template-partial" id="usermessage" type="text/x-handlebars-template">
+  <script data-role="block" id="usermessage" type="text/x-handlebars-template">
     <{{tagName}}>By {{author.firstName}} {{author.lastName}}</{{tagName}}>
     <div class="body">{{body}}</div>
   </script>

@@ -22,7 +22,7 @@ Core9.blocks.handler = {
   paths: {
     blocks: "/dashboard/data/accounts/{0}/blocks/",
     bower: "/dashboard/data/accounts/{0}/blocks/bower.json",
-    template: "/dashboard/data/accounts/{0}/blocks/bower_components/{1}/tpl/index.html",
+    template: "/dashboard/data/accounts/{0}/blocks/bower_components/{1}/tpl/hbs/templates.html",
     formSteps: "/dashboard/data/accounts/{0}/blocks/bower_components/{1}/forms/frontend/steps/steps.json",
     defaultBlockData: "/dashboard/data/accounts/{0}/blocks/bower_components/{1}/forms/frontend/data/default.json",
     userDataById: "/dashboard/data/accounts/{0}/sites/pages/{1}/versions/{2}/data/{3}.json"
@@ -84,12 +84,44 @@ Core9.blocks.handler.setTemplateHtml = function (block, data) {
 Core9.blocks.handler.createHandleBarTemplate = function (block) {
   var html = Core9.blocks.handler.__registry.blocks[block.id].loadedHTML;
   console.log(html);
-  var head = html.querySelector('head');
-  console.log(head);
-  var body = html.querySelector('body');
-  console.log(body);
   var elements = html.querySelectorAll('[data-role="block"]');
   console.log(elements);
+  var init = {};
+  for (var i = 0; i < elements.length; i++) {
+    var tpl = elements[i];
+    if(tpl.id == 'init'){
+      init = tpl;
+    }else{
+        console.log(tpl.id);
+        console.log(tpl.innerText);
+        Handlebars.registerPartial(tpl.id, tpl.innerText);
+    }
+  }
+  console.log(init);
+  var template = Handlebars.compile(init.innerText);
+
+  Core9.blocks.handler.__registry.blocks[block.id].$blockref.innerHTML = "";
+
+  var step1 = {
+    "author": {
+      "firstName": "Alan",
+      "lastName": "Johnson"
+    },
+    "body": "I Love Handlebars",
+    "comments": [{
+      "author": {
+        "firstName": "Yehuda",
+        "lastName": "Katz"
+      },
+      "body": "Me too!"
+    }]
+  };
+
+  var content = template(step1);
+
+  Core9.blocks.handler.__registry.blocks[block.id].$blockref.innerHTML = content;
+
+
 }
 Core9.blocks.handler.setDefaultBlockData = function (block, data) {
   Core9.blocks.handler.__registry.blocks[block.id].loadedDEFAULTDATA = JSON.parse(data.currentTarget.response);
