@@ -15,9 +15,9 @@
           "title": "Headers",
           "icon": "",
           "items": [{
-            "name": "Full menu",
+            "name": "Image",
             "icon": "",
-            "link": "/dashboard/themes/core9-theme-ess/blocks/full-menu/add"
+            "link": "/dashboard/themes/core9-theme-ess/blocks/image/add"
           }, {
             "name": "Minimal menu",
             "icon": "",

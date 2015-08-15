@@ -30,11 +30,7 @@ Core9.blocks.getUniqueId = function () {
   var id = Core9.blocks.guid();
   var unique = true;
   for(var i = 0; i < blocks.length; i++) {
-    var block = blocks[i];
-    if(typeof block.id == 'undefined'){
-      block.id = Core9.blocks.getUniqueId();
-    }
-    if(block.id == id){
+    if(blocks[i].id == id){
       unique = false;
     }
   }
