@@ -182,4 +182,10 @@ Core9.blocks.handler.init = function (account, theme) {
   Core9.blocks.handler.config.theme = theme;
   Core9.blocks.handler.getData();
 }
+if(typeof session == 'undefined'){
+  var session = {
+    account: store.get('account'),
+    theme: store.get('theme')
+  }
+}
 Core9.blocks.handler.init(session.account, session.theme);
