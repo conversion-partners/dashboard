@@ -83,45 +83,20 @@ Core9.blocks.handler.setTemplateHtml = function (block, data) {
 }
 Core9.blocks.handler.createHandleBarTemplate = function (block) {
   var html = Core9.blocks.handler.__registry.blocks[block.id].loadedHTML;
-  console.log(html);
   var elements = html.querySelectorAll('[data-role="block"]');
-  console.log(elements);
   var init = {};
-  for (var i = 0; i < elements.length; i++) {
+  for(var i = 0; i < elements.length; i++) {
     var tpl = elements[i];
-    if(tpl.id == 'init'){
+    if(tpl.id == 'init') {
       init = tpl;
-    }else{
-        console.log(tpl.id);
-        console.log(tpl.innerText);
-        Handlebars.registerPartial(tpl.id, tpl.innerText);
+    } else {
+      Handlebars.registerPartial(tpl.id, tpl.innerText);
     }
   }
-  console.log(init);
   var template = Handlebars.compile(init.innerText);
-
   Core9.blocks.handler.__registry.blocks[block.id].$blockref.innerHTML = "";
-
-  var step1 = {
-    "author": {
-      "firstName": "Alan",
-      "lastName": "Johnson"
-    },
-    "body": "I Love Handlebars",
-    "comments": [{
-      "author": {
-        "firstName": "Yehuda",
-        "lastName": "Katz"
-      },
-      "body": "Me too!"
-    }]
-  };
-
-  var content = template(step1);
-
+  var content = template(Core9.blocks.handler.__registry.blocks[block.id].loadedDEFAULTDATA);
   Core9.blocks.handler.__registry.blocks[block.id].$blockref.innerHTML = content;
-
-
 }
 Core9.blocks.handler.setDefaultBlockData = function (block, data) {
   Core9.blocks.handler.__registry.blocks[block.id].loadedDEFAULTDATA = JSON.parse(data.currentTarget.response);
@@ -131,16 +106,16 @@ Core9.blocks.handler.setFormSteps = function (block, data) {
 }
 Core9.blocks.handler.getBlockData = function (block) {
   var promiseList = [];
-  promiseList.push(Core9.blocks.handler.getTemplateHtml(block));
   promiseList.push(Core9.blocks.handler.getDefaultBlockData(block));
+  promiseList.push(Core9.blocks.handler.getTemplateHtml(block));
   //promiseList.push(Core9.blocks.handler.getFormSteps(block));
   Promise.all(promiseList).then(function (values) {
-    console.log('values for block ' + block.type + ' id : ' + block.id)
+    //console.log('values for block ' + block.type + ' id : ' + block.id)
       // we can trust the order of the results
       // http://stackoverflow.com/questions/28066429/promise-all-order-of-resolved-values
-    console.log(values);
-    Core9.blocks.handler.setTemplateHtml(block, values[0]);
-    Core9.blocks.handler.setDefaultBlockData(block, values[1]);
+    //console.log(values);
+    Core9.blocks.handler.setDefaultBlockData(block, values[0]);
+    Core9.blocks.handler.setTemplateHtml(block, values[1]);
     //Core9.blocks.handler.setFormSteps(block, values[2]);
   });
 }
