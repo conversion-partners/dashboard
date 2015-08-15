@@ -23,8 +23,8 @@ Core9.blocks.handler = {
     blocks: "/dashboard/data/accounts/{0}/blocks/",
     bower: "/dashboard/data/accounts/{0}/blocks/bower.json",
     template: "/dashboard/data/accounts/{0}/blocks/bower_components/{1}/tpl/index.html",
-    formSteps: "/dashboard/data/accounts/{0}/blocks/bower_components/{1}/steps/steps.json",
-    defaultBlockData: "/dashboard/data/accounts/{0}/blocks/bower_components/{1}/data/default.json",
+    formSteps: "/dashboard/data/accounts/{0}/blocks/bower_components/{1}/forms/frontend/steps/steps.json",
+    defaultBlockData: "/dashboard/data/accounts/{0}/blocks/bower_components/{1}/forms/frontend/data/default.json",
     userDataById: "/dashboard/data/accounts/{0}/sites/pages/{1}/versions/{2}/data/{3}.json"
   }
 }
@@ -88,6 +88,8 @@ Core9.blocks.handler.createHandleBarTemplate = function (block) {
   console.log(head);
   var body = html.querySelector('body');
   console.log(body);
+  var elements = html.querySelectorAll('[data-role="block"]');
+  console.log(elements);
 }
 Core9.blocks.handler.setDefaultBlockData = function (block, data) {
   Core9.blocks.handler.__registry.blocks[block.id].loadedDEFAULTDATA = JSON.parse(data.currentTarget.response);
@@ -98,16 +100,16 @@ Core9.blocks.handler.setFormSteps = function (block, data) {
 Core9.blocks.handler.getBlockData = function (block) {
   var promiseList = [];
   promiseList.push(Core9.blocks.handler.getTemplateHtml(block));
-  promiseList.push(Core9.blocks.handler.getDefaultBlockData(block));
-  promiseList.push(Core9.blocks.handler.getFormSteps(block));
+  //promiseList.push(Core9.blocks.handler.getDefaultBlockData(block));
+  //promiseList.push(Core9.blocks.handler.getFormSteps(block));
   Promise.all(promiseList).then(function (values) {
     console.log('values for block ' + block.type + ' id : ' + block.id)
       // we can trust the order of the results
       // http://stackoverflow.com/questions/28066429/promise-all-order-of-resolved-values
     console.log(values);
     Core9.blocks.handler.setTemplateHtml(block, values[0]);
-    Core9.blocks.handler.setDefaultBlockData(block, values[1]);
-    Core9.blocks.handler.setFormSteps(block, values[2]);
+    //Core9.blocks.handler.setDefaultBlockData(block, values[1]);
+    //Core9.blocks.handler.setFormSteps(block, values[2]);
   });
 }
 Core9.blocks.handler.getData = function () {
