@@ -132,7 +132,7 @@ Core9.blocks.handler.setFormSteps = function (block, data) {
 Core9.blocks.handler.getBlockData = function (block) {
   var promiseList = [];
   promiseList.push(Core9.blocks.handler.getTemplateHtml(block));
-  //promiseList.push(Core9.blocks.handler.getDefaultBlockData(block));
+  promiseList.push(Core9.blocks.handler.getDefaultBlockData(block));
   //promiseList.push(Core9.blocks.handler.getFormSteps(block));
   Promise.all(promiseList).then(function (values) {
     console.log('values for block ' + block.type + ' id : ' + block.id)
@@ -140,7 +140,7 @@ Core9.blocks.handler.getBlockData = function (block) {
       // http://stackoverflow.com/questions/28066429/promise-all-order-of-resolved-values
     console.log(values);
     Core9.blocks.handler.setTemplateHtml(block, values[0]);
-    //Core9.blocks.handler.setDefaultBlockData(block, values[1]);
+    Core9.blocks.handler.setDefaultBlockData(block, values[1]);
     //Core9.blocks.handler.setFormSteps(block, values[2]);
   });
 }
