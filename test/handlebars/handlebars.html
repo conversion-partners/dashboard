@@ -71,7 +71,7 @@
 
 
 
-  	<div id="demo">
+  	<!-- <div id="demo">
   		<img class="hint" src="/dashboard/app/src/responsive-elements/website/media/img/hint.png">
   		<div id="resizable">
   			<div class="quote" data-respond="start: 100px; end: 900px; interval: 50px;">
@@ -83,11 +83,24 @@
   			</div>
   			<div class="slider-handle ui-resizable-handle ui-resizable-e"></div>
   		</div>
-  	</div>
+  	</div> -->
+
+    <div id="demo">
+     <img class="hint" src="/dashboard/app/src/responsive-elements/website/media/img/hint.png">
+     <div id="resizable">
+       <div class="core9-block" data-type="image" data-respond="start: 100px; end: 900px; interval: 50px;" data-id="testid1"></div>
+       <!-- <div class="quote" data-respond="start: 100px; end: 900px; interval: 50px;">
+         <img class="author-photo" src="/dashboard/app/src/responsive-elements/website/media/img/tommy.jpg">
+         <p class="words">Design must reflect the practical and aesthetic in business but above all... good design must primarily serve people.</p>
+         <img class="author-thumb" src="/dashboard/app/src/responsive-elements/website/media/img/tommy.jpg">
+         <p class="author">Thomas J. Watson</p>
+         <p class="author-context">Chairman and CEO of International Business Machines</p>
+       </div> -->
+       <div class="slider-handle ui-resizable-handle ui-resizable-e"></div>
+     </div>
+   </div>
 
 
-
-  <div class="core9-block" data-type="image" data-id="testid1"></div>
   <div class="core9-block" data-type="image" data-id="testid2"></div>
 
   <script class="template" id="init" type="text/x-handlebars-template">
@@ -137,7 +150,7 @@
 
     var block = template(context);
     //console.log(block);
-    //document.querySelector("[data-id=testid1]").innerHTML = block;
+    document.querySelector("[data-id=testid1]").innerHTML = block;
     //document.querySelector("[data-id=testid2]").innerHTML = block;
   </script>
 
