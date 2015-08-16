@@ -125,7 +125,7 @@ Core9.iframe = {
     if (grid && grid != "pagemode") { //FIXME what a mess
       content = content.replace('</body>', '<script id="js-boot" src="/dashboard/app/elements/core9-gridmanager/boot.min.js"></script></body>');
     }else if(grid == "pagemode"){
-      content = content.replace('</body>', '<script id="js-boot" src="/dashboard/app/elements/core9-gridmanager/boot-page-edit.min.js"></script></body>');
+      content = content.replace('</body>', '<script id="js-boot" src="/dashboard/app/elements/core9-gridmanager/boot-page-edit.min.js"></script><script id="js-boot-handler" src="/dashboard/app/elements/core9-core/js/core-blocks-handler.js"></script></body>');
     }
     iframe.contentWindow.document.open();
     iframe.contentWindow.document.write(content);
