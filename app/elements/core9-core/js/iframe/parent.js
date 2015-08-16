@@ -13,9 +13,6 @@ Core9.iframe.parent = {
       //console.log(e);
       if(e.data.action == "showPageForm") {
         document.getElementById('page-form').click();
-        $("#myModal").draggable({
-          handle: ".modal-header"
-        });
       }
       if(e.data.action == 'menuClick') {
         if(typeof e.data.href !== 'undefined') {

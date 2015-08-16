@@ -35,8 +35,7 @@
     "lokijs": "~1.3.4",
     "fontawesome": "~4.3.0",
     "bluebird": "~2.9.34",
-    "responsive-elements": "~1.0.1",
-    "jquery-ui": "~1.11.4"
+    "responsive-elements": "~1.0.1"
   },
   "resolutions": {
     "polymer": "^0.9.0",
