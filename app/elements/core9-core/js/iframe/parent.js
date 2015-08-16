@@ -15,7 +15,7 @@ Core9.iframe.parent = {
         document.getElementById('page-form').click();
         setTimeout(function () {
           Core9.iframe.parent.sentMessageToIframe(e.data, document.querySelector('#iframe-form-holder'));
-        }, 1000);
+        }, 100);
       }
       if(e.data.action == 'menuClick') {
         if(typeof e.data.href !== 'undefined') {
