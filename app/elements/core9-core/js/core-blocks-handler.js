@@ -35,6 +35,18 @@ Core9.blocks.handler.__registry = {
   blocks: {},
   availableBlocks: []
 }
+Core9.blocks.handler.events = function () {
+  Core9.blocks.handler.events.onhover();
+}
+Core9.blocks.handler.events.onhover = function () {
+  var blocks = Core9.blocks.handler.getBlocks();
+  for(var i = 0; i < blocks.length; i++) {
+    blocks[i].addEventListener('contextmenu', function (e) {
+      alert("You've tried to open context menu");
+      e.preventDefault();
+    }, false);
+  }
+}
 Core9.blocks.handler.filRegistry = function () {
   return new Promise(function (resolve, reject) {
     var blocks = Core9.blocks.handler.getBlocks();
@@ -186,11 +198,14 @@ Core9.blocks.handler.init = function (account, theme) {
   Core9.blocks.handler.config.account = account;
   Core9.blocks.handler.config.theme = theme;
   Core9.blocks.handler.getData();
+  Core9.blocks.handler.events();
 }
-if(typeof session == 'undefined') {
-  var session = {
-    account: store.get('account'),
-    theme: store.get('theme')
+setTimeout(function () {
+  if(typeof session == 'undefined') {
+    var session = {
+      account: store.get('account'),
+      theme: store.get('theme')
+    }
   }
-}
-Core9.blocks.handler.init(session.account, session.theme);
+  Core9.blocks.handler.init(session.account, session.theme);
+}, 1000);
