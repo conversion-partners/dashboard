@@ -17,7 +17,8 @@ Core9.blocks.handler = {}
 Core9.blocks.handler = {
   config: {
     account: {},
-    theme: {}
+    theme: {},
+    page: "page"
   },
   paths: {
     blocks: "/dashboard/data/accounts/{0}/blocks/",
@@ -111,8 +112,8 @@ Core9.blocks.handler.getBlockData = function (block) {
   //promiseList.push(Core9.blocks.handler.getFormSteps(block));
   Promise.all(promiseList).then(function (values) {
     //console.log('values for block ' + block.type + ' id : ' + block.id)
-      // we can trust the order of the results
-      // http://stackoverflow.com/questions/28066429/promise-all-order-of-resolved-values
+    // we can trust the order of the results
+    // http://stackoverflow.com/questions/28066429/promise-all-order-of-resolved-values
     //console.log(values);
     Core9.blocks.handler.setDefaultBlockData(block, values[0]);
     Core9.blocks.handler.setTemplateHtml(block, values[1]);
@@ -178,11 +179,14 @@ Core9.blocks.handler.getBlocks = function () {
   return document.querySelectorAll(".core9-block");
 }
 Core9.blocks.handler.init = function (account, theme) {
+  if(jQuery.fn.gridmanager) {
+    Core9.blocks.handler.config.page = "theme";
+  }
   Core9.blocks.handler.config.account = account;
   Core9.blocks.handler.config.theme = theme;
   Core9.blocks.handler.getData();
 }
-if(typeof session == 'undefined'){
+if(typeof session == 'undefined') {
   var session = {
     account: store.get('account'),
     theme: store.get('theme')
