@@ -427,9 +427,11 @@ $(document).ready(function () {
     var domain = $(".template-data").val();
     var domainDirectory = domain + "_"+pageLanguage+"-"+pageCountry;
     var pageFile = '/dashboard/data/accounts/' + account + '/sites/' + domainDirectory + '/pages/' + pageName + '/versions/' + pageVersionName + '/index.html';
+    var pageDataDirectory = '/dashboard/data/accounts/' + account + '/sites/' + domainDirectory + '/pages/' + pageName + '/versions/' + pageVersionName + '/data/';
     var templateFile = '/dashboard/data/accounts/' + account + '/themes/bower_components/' + theme + '/templates/pages/' + template + '/versions/' + dropdown + '/index.html';
     templateFile = templateFile.toLowerCase();
     store.set('page', pageFile);
+    store.set('page-data-directory', pageDataDirectory);
     store.set('template', templateFile);
     store.set('theme', theme);
     history.pushState(null, null, "/dashboard/page/edit");
