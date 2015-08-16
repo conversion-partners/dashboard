@@ -17,8 +17,7 @@ Core9.blocks.forms = {}
 Core9.blocks.forms = {
   config: {
     account: {},
-    theme: {},
-    page: "page"
+    theme: {}
   },
   paths: {
     blocks: "/dashboard/data/accounts/{0}/blocks/",
@@ -32,16 +31,38 @@ Core9.blocks.forms = {
 Core9.blocks.forms.__registry = {
   blocks: {}
 }
+Core9.blocks.forms.loadForm = function () {
+  document.querySelector('#form-holder');
+  Core9.editor = new JSONEditor(document.getElementById('new-template-form'), {
+    ajax: true,
+    disable_edit_json: true,
+    disable_collapse: true,
+    disable_properties: true,
+    format: 'grid',
+    theme: 'bootstrap3',
+    no_additional_properties: false,
+    required_by_default: false,
+    schema: {
+      type: "object",
+      title: "New template",
+      properties: {
+        "title": {
+          "type": "string",
+          "minLength": 3
+        },
+        "content": {
+          "type": "string",
+          "format": "html",
+          "options": {
+            "wysiwyg": true
+          }
+        }
+      }
+    }
+  });
+}
 Core9.blocks.forms.init = function (account, theme) {
   Core9.blocks.forms.config.account = account;
   Core9.blocks.forms.config.theme = theme;
+  Core9.blocks.forms.loadForm();
 }
-setTimeout(function () {
-  if(typeof session == 'undefined') {
-    var session = {
-      account: store.get('account'),
-      theme: store.get('theme')
-    }
-  }
-  Core9.blocks.forms.init(session.account, session.theme);
-}, 1000);
