@@ -1,6 +1,10 @@
 [
 	{
-		"label": "Stap 1",
-		"file": "step1.js"
+		"label": "Author",
+		"file": "author.js"
+	},
+	{
+		"label": "Comments",
+		"file": "comments.js"
 	}
 ]
