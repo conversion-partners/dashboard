@@ -50,7 +50,9 @@ Core9.blocks.handler.events.onhover = function () {
           account: Core9.blocks.handler.config.account,
           theme: Core9.blocks.handler.config.theme,
           page: store.get('page'),
-          pageDataDirectory: store.get('page-data-directory')
+          pageDataDirectory: store.get('page-data-directory'),
+          defaultData : Core9.blocks.handler.__registry.blocks[e.currentTarget.dataset.id].loadedDEFAULTDATA,
+          userData : Core9.blocks.handler.__registry.blocks[e.currentTarget.dataset.id].loadedUSERDATA
         },
         action: 'showPageForm',
         message: 'You tried to open context menu says parent'
@@ -100,8 +102,11 @@ Core9.blocks.handler.getFormSteps = function (block) {
 Core9.blocks.handler.getDefaultBlockData = function (block) {
   return Core9.blocks.handler.j(Core9.blocks.handler.paths.defaultBlockData.format(Core9.blocks.handler.config.account, block.type));
 }
-Core9.blocks.handler.userDataById = function (block, page, version, id) {
-  return Core9.blocks.handler.j(Core9.blocks.handler.paths.userDataById.format(Core9.blocks.handler.config.account, page, version, id));
+Core9.blocks.handler.userDataById = function (block) {
+  //page-data-directory = "/dashboard/data/accounts/easydrain/sites/easydrain.nl_null-null/pages/test/versions/blue/data/"
+  return Core9.blocks.handler.j(store.get('page-data-directory') + block.id + '.json'));
+  //return Core9.blocks.handler.j(Core9.blocks.handler.paths.userDataById.format(Core9.blocks.handler.config.account, page, version, block.id));
+
 }
 Core9.blocks.handler.setTemplateHtml = function (block, data) {
   Core9.blocks.handler.__registry.blocks[block.id].loadedHTML = data.currentTarget.response;
@@ -128,12 +133,16 @@ Core9.blocks.handler.setDefaultBlockData = function (block, data) {
   Core9.blocks.handler.__registry.blocks[block.id].loadedDEFAULTDATA = JSON.parse(data.currentTarget.response);
 }
 Core9.blocks.handler.setFormSteps = function (block, data) {
-  Core9.blocks.handler.__registry.blocks[block.id].loadedSTEPS = JSON.parse(data.currentTarget.response);;
+  Core9.blocks.handler.__registry.blocks[block.id].loadedSTEPS = JSON.parse(data.currentTarget.response);
+}
+Core9.blocks.handler.setUserDataById = function(block, data){
+  Core9.blocks.handler.__registry.blocks[block.id].loadedUSERDATA = JSON.parse(data.currentTarget.response);
 }
 Core9.blocks.handler.getBlockData = function (block) {
   var promiseList = [];
   promiseList.push(Core9.blocks.handler.getDefaultBlockData(block));
   promiseList.push(Core9.blocks.handler.getTemplateHtml(block));
+  promiseList.push(Core9.blocks.handler.userDataById(block));
   //promiseList.push(Core9.blocks.handler.getFormSteps(block));
   Promise.all(promiseList).then(function (values) {
     //console.log('values for block ' + block.type + ' id : ' + block.id)
@@ -142,6 +151,7 @@ Core9.blocks.handler.getBlockData = function (block) {
     //console.log(values);
     Core9.blocks.handler.setDefaultBlockData(block, values[0]);
     Core9.blocks.handler.setTemplateHtml(block, values[1]);
+    Core9.blocks.handler.setUserDataById(block, values[2]);
     //Core9.blocks.handler.setFormSteps(block, values[2]);
   });
 }

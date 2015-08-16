@@ -31,6 +31,9 @@ Core9.blocks.forms = {
 Core9.blocks.forms.__registry = {
   blocks: {}
 }
+Core9.blocks.forms.getData = function(){
+  
+}
 Core9.blocks.forms.loadForm = function () {
   Core9.editor = new JSONEditor(document.querySelector('#form-holder'), {
     ajax: true,
@@ -62,5 +65,5 @@ Core9.blocks.forms.loadForm = function () {
 Core9.blocks.forms.init = function (account, theme) {
   Core9.blocks.forms.config.account = account;
   Core9.blocks.forms.config.theme = theme;
-  //Core9.blocks.forms.loadForm();
+  Core9.blocks.forms.getData();
 }
