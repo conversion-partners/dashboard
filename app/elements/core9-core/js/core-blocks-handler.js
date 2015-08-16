@@ -50,7 +50,7 @@ Core9.blocks.handler.events.onhover = function () {
           account : Core9.blocks.handler.config.account,
           theme : Core9.blocks.handler.config.theme,
           page : store.get('page'),
-          version : ""
+          pageDataDirectory : store.get('page-data-directory')
         },
         action: 'showPageForm',
         message: 'You tried to open context menu says parent'
