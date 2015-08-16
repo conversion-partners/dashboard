@@ -30,7 +30,8 @@ Core9.blocks.forms = {
   }
 }
 Core9.blocks.forms.__registry = {
-  blocks: {}
+  blocks: {},
+  data : {}
 }
 Core9.blocks.forms.getData = function (formData) {
   console.log('formdata : ');
@@ -103,6 +104,7 @@ Core9.blocks.forms.setSelectBox = function (formData) {
   }
 }
 Core9.blocks.forms.init = function (data) {
+  Core9.blocks.forms.__registry.data = data;
   Core9.blocks.forms.setSelectBox(data.block.formData);
   Core9.blocks.forms.config.account = data.account;
   Core9.blocks.forms.config.theme = data.theme;
