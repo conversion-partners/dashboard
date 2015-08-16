@@ -24,6 +24,7 @@ Core9.blocks.forms = {
     bower: "/dashboard/data/accounts/{0}/blocks/bower.json",
     template: "/dashboard/data/accounts/{0}/blocks/bower_components/{1}/tpl/hbs/templates.html",
     formSteps: "/dashboard/data/accounts/{0}/blocks/bower_components/{1}/forms/frontend/steps/steps.json",
+    formDirectory: "/dashboard/data/accounts/{0}/blocks/bower_components/{1}/forms/frontend/steps/",
     defaultBlockData: "/dashboard/data/accounts/{0}/blocks/bower_components/{1}/forms/frontend/data/default.json",
     userDataById: "/dashboard/data/accounts/{0}/sites/pages/{1}/versions/{2}/data/{3}.json"
   }
@@ -32,7 +33,7 @@ Core9.blocks.forms.__registry = {
   blocks: {}
 }
 Core9.blocks.forms.getData = function(){
-  
+  Core9.blocks.forms.loadForm();
 }
 Core9.blocks.forms.loadForm = function () {
   Core9.editor = new JSONEditor(document.querySelector('#form-holder'), {
@@ -62,8 +63,8 @@ Core9.blocks.forms.loadForm = function () {
     }
   });
 }
-Core9.blocks.forms.init = function (account, theme) {
-  Core9.blocks.forms.config.account = account;
-  Core9.blocks.forms.config.theme = theme;
+Core9.blocks.forms.init = function (data) {
+  Core9.blocks.forms.config.account = data.account;
+  Core9.blocks.forms.config.theme = data.theme;
   Core9.blocks.forms.getData();
 }

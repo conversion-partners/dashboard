@@ -41,32 +41,32 @@
 
 	<script>
 		// Initialize the editor with a JSON schema
-		editor = new JSONEditor(document.querySelector('#form-holder'), {
-			ajax: true,
-			disable_edit_json: true,
-			disable_collapse: true,
-			disable_properties: true,
-			format: 'grid',
-			theme: 'bootstrap3',
-			no_additional_properties: false,
-			required_by_default: false,
-			schema: {
-				type: "object",
-				title: " ",
-				properties: {
-					title: {
-						type: "string"
-					},
-					body: {
-						type: "string",
-						format: "html",
-						options: {
-							wysiwyg: true
-						}
-					}
-				}
-			}
-		});
+		// editor = new JSONEditor(document.querySelector('#form-holder'), {
+		// 	ajax: true,
+		// 	disable_edit_json: true,
+		// 	disable_collapse: true,
+		// 	disable_properties: true,
+		// 	format: 'grid',
+		// 	theme: 'bootstrap3',
+		// 	no_additional_properties: false,
+		// 	required_by_default: false,
+		// 	schema: {
+		// 		type: "object",
+		// 		title: " ",
+		// 		properties: {
+		// 			title: {
+		// 				type: "string"
+		// 			},
+		// 			body: {
+		// 				type: "string",
+		// 				format: "html",
+		// 				options: {
+		// 					wysiwyg: true
+		// 				}
+		// 			}
+		// 		}
+		// 	}
+		// });
 
 		// Hook up the submit button to log to the console
 		document.getElementById('submit').addEventListener('click', function() {
@@ -74,21 +74,18 @@
 			console.log(editor.getValue());
 		});
 	</script>
-	<script>
-		if (typeof session == 'undefined') {
-			var session = {
-				account: store.get('account'),
-				theme: store.get('theme')
-			}
-		}
-		Core9.blocks.forms.init(session.account, session.theme);
-	</script>
+
 
 	<script>
 		var callback = function(event) {
 			console.log(event);
+
+			if(event.data.action == "showPageForm"){
+				Core9.blocks.forms.init(event.data);
+			}
+
 			try {
-				eval(event.data);
+				//eval(event.data);
 			} catch (e) {}
 		}
 		Core9.iframe.child.listenToPostMessages(callback);
