@@ -11,15 +11,19 @@
 	<script type="text/javascript" src="/dashboard/bower_components/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="/dashboard/app/src/sceeditor/minified/jquery.sceditor.min.js"></script>
 
+	<script src="/dashboard/app/elements/core9-core/js/iframe/child.js"></script>
+	<script src="/dashboard/app/elements/core9-core/js/core-blocks-forms.js"></script>
 	<style>
 		body {
 			_max-width: 595px;
 			overflow-x: hidden;
 		}
+
 		#form-container {
 			width: 550px;
 			margin: 0 auto;
 		}
+
 		.sceditor-container {
 			width: 100% !important;
 		}
@@ -69,6 +73,26 @@
 			console.log(editor.getValue());
 		});
 	</script>
+	<script>
+		if (typeof session == 'undefined') {
+			var session = {
+				account: store.get('account'),
+				theme: store.get('theme')
+			}
+		}
+		Core9.blocks.forms.init(session.account, session.theme);
+	</script>
+
+	<script>
+		var callback = function(event) {
+			console.log(event);
+			try {
+				eval(event.data);
+			} catch (e) {}
+		}
+		Core9.iframe.child.listenToPostMessages(callback);
+	</script>
+
 </body>
 
 </html>
