@@ -179,7 +179,8 @@ Core9.blocks.handler.getBlocks = function () {
   return document.querySelectorAll(".core9-block");
 }
 Core9.blocks.handler.init = function (account, theme) {
-  if(jQuery.fn.gridmanager) {
+  if(document.querySelector('#gm-canvas')) {
+    console.log('gridmanager exists');
     Core9.blocks.handler.config.page = "theme";
   }
   Core9.blocks.handler.config.account = account;
