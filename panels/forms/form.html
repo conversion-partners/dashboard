@@ -11,12 +11,10 @@
 	<script src="/dashboard/bower_components/json-editor/dist/jsoneditor.min.js"></script>
 	<script type="text/javascript" src="/dashboard/bower_components/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="/dashboard/app/src/sceeditor/minified/jquery.sceditor.min.js"></script>
-
 	<script src="/dashboard/app/elements/core9-core/js/iframe/child.js"></script>
 	<script src="/dashboard/app/elements/core9-core/js/core-blocks-forms.js"></script>
 	<style>
 		body {
-			_max-width: 595px;
 			overflow-x: hidden;
 		}
 
@@ -29,7 +27,6 @@
 			width: 100% !important;
 		}
 	</style>
-
 </head>
 
 <body>
@@ -38,56 +35,18 @@
 		<select id="form-select" onchange="Core9.blocks.forms.getData(this)"></select>
 		<div id='form-holder'></div>
 	</div>
-	<button class="btn btn-default" id='submit'>Submit (console.log)</button>
+	<button class="btn btn-default" id='save'>Save</button>
+	<button class="btn btn-default" id='submit'>Submit</button>
 
-	<script>
-		// Initialize the editor with a JSON schema
-		// editor = new JSONEditor(document.querySelector('#form-holder'), {
-		// 	ajax: true,
-		// 	disable_edit_json: true,
-		// 	disable_collapse: true,
-		// 	disable_properties: true,
-		// 	format: 'grid',
-		// 	theme: 'bootstrap3',
-		// 	no_additional_properties: false,
-		// 	required_by_default: false,
-		// 	schema: {
-		// 		type: "object",
-		// 		title: " ",
-		// 		properties: {
-		// 			title: {
-		// 				type: "string"
-		// 			},
-		// 			body: {
-		// 				type: "string",
-		// 				format: "html",
-		// 				options: {
-		// 					wysiwyg: true
-		// 				}
-		// 			}
-		// 		}
-		// 	}
-		// });
 
-		// Hook up the submit button to log to the console
-		document.getElementById('submit').addEventListener('click', function() {
-			// Get the value from the editor
-			console.log(editor.getValue());
-		});
-	</script>
 
 
 	<script>
 		var callback = function(event) {
 			console.log(event);
-
-			if(event.data.action == "showPageForm"){
+			if (event.data.action == "showPageForm") {
 				Core9.blocks.forms.init(event.data);
 			}
-
-			try {
-				//eval(event.data);
-			} catch (e) {}
 		}
 		Core9.iframe.child.listenToPostMessages(callback);
 	</script>

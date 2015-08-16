@@ -73,6 +73,17 @@ Core9.blocks.forms.loadForm = function (schema, data) {
     startval: data,
     schema: schema
   });
+
+  function onSave() {
+    Core9.blocks.forms.saveForm(Core9.editor.getValue());
+  }
+  // Hook up the submit button to log to the console
+  var saveButton = document.getElementById('submit');
+  saveButton.removeEventListener('click', onSave, false);
+  saveButton.addEventListener('click', onSave, false);
+}
+Core9.blocks.forms.saveForm = function (data) {
+  console.log(data);
 }
 Core9.blocks.forms.setSelectBox = function (formData) {
   var newSelect = document.querySelector('#form-select');
