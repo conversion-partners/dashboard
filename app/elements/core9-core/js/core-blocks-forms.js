@@ -34,7 +34,9 @@ Core9.blocks.forms.__registry = {
 }
 Core9.blocks.forms.getData = function (formData) {
   console.log('formdata : ');
-  console.log(formData);
+  if(typeof formData != 'undefined') {
+    console.log(formData.value);
+  }
   var schema = {
     type: "object",
     title: " ",
@@ -87,6 +89,7 @@ Core9.blocks.forms.saveForm = function (data) {
 }
 Core9.blocks.forms.setSelectBox = function (formData) {
   var newSelect = document.querySelector('#form-select');
+  newSelect.innerHTML = "";
   var opt = document.createElement("option");
   opt.value = "";
   opt.innerHTML = "";
