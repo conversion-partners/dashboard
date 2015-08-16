@@ -33,10 +33,16 @@ Core9.blocks.forms.__registry = {
   blocks: {},
   data : {}
 }
+
+Core9.blocks.forms.getDataAndSchema = function(formFile){
+
+}
+
 Core9.blocks.forms.getData = function (formData) {
   console.log('formdata : ');
   if(typeof formData != 'undefined') {
     console.log(formData.value);
+    var dataAndSchema = Core9.blocks.forms.getDataAndSchema(formData.value);
   }
   var schema = {
     type: "object",
