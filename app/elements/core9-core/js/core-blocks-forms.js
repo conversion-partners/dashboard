@@ -32,8 +32,7 @@ Core9.blocks.forms.__registry = {
   blocks: {}
 }
 Core9.blocks.forms.loadForm = function () {
-  document.querySelector('#form-holder');
-  Core9.editor = new JSONEditor(document.getElementById('new-template-form'), {
+  Core9.editor = new JSONEditor(document.querySelector('#form-holder'), {
     ajax: true,
     disable_edit_json: true,
     disable_collapse: true,
@@ -44,17 +43,16 @@ Core9.blocks.forms.loadForm = function () {
     required_by_default: false,
     schema: {
       type: "object",
-      title: "New template",
+      title: "Blog Post",
       properties: {
-        "title": {
-          "type": "string",
-          "minLength": 3
+        title: {
+          type: "string"
         },
-        "content": {
-          "type": "string",
-          "format": "html",
-          "options": {
-            "wysiwyg": true
+        body: {
+          type: "string",
+          format: "html",
+          options: {
+            wysiwyg: true
           }
         }
       }
@@ -64,5 +62,5 @@ Core9.blocks.forms.loadForm = function () {
 Core9.blocks.forms.init = function (account, theme) {
   Core9.blocks.forms.config.account = account;
   Core9.blocks.forms.config.theme = theme;
-  Core9.blocks.forms.loadForm();
+  //Core9.blocks.forms.loadForm();
 }
