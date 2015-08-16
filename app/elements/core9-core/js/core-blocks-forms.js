@@ -32,10 +32,35 @@ Core9.blocks.forms = {
 Core9.blocks.forms.__registry = {
   blocks: {}
 }
-Core9.blocks.forms.getData = function(){
-  Core9.blocks.forms.loadForm();
+Core9.blocks.forms.getData = function (formData) {
+  console.log('formdata : ');
+  console.log(formData);
+  var schema = {
+    type: "object",
+    title: " ",
+    properties: {
+      title: {
+        type: "string"
+      },
+      body: {
+        type: "string",
+        format: "html",
+        options: {
+          wysiwyg: true
+        }
+      }
+    }
+  }
+  var data = {
+    "title": "test",
+    "body": "hi"
+  };
+  Core9.blocks.forms.loadForm(schema, data);
 }
-Core9.blocks.forms.loadForm = function () {
+Core9.blocks.forms.loadForm = function (schema, data) {
+  try {
+    Core9.editor.destroy();
+  } catch(e) {}
   Core9.editor = new JSONEditor(document.querySelector('#form-holder'), {
     ajax: true,
     disable_edit_json: true,
@@ -45,25 +70,26 @@ Core9.blocks.forms.loadForm = function () {
     theme: 'bootstrap3',
     no_additional_properties: false,
     required_by_default: false,
-    schema: {
-      type: "object",
-      title: "Blog Post",
-      properties: {
-        title: {
-          type: "string"
-        },
-        body: {
-          type: "string",
-          format: "html",
-          options: {
-            wysiwyg: true
-          }
-        }
-      }
-    }
+    startval: data,
+    schema: schema
   });
 }
+Core9.blocks.forms.setSelectBox = function (formData) {
+  var newSelect = document.querySelector('#form-select');
+  var opt = document.createElement("option");
+  opt.value = "";
+  opt.innerHTML = "";
+  newSelect.appendChild(opt);
+  for(var i = 0; i < formData.length; i++) {
+    var elem = formData[i];
+    var opt = document.createElement("option");
+    opt.value = elem.file;
+    opt.innerHTML = elem.label;
+    newSelect.appendChild(opt);
+  }
+}
 Core9.blocks.forms.init = function (data) {
+  Core9.blocks.forms.setSelectBox(data.block.formData);
   Core9.blocks.forms.config.account = data.account;
   Core9.blocks.forms.config.theme = data.theme;
   Core9.blocks.forms.getData();
