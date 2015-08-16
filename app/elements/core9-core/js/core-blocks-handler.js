@@ -42,7 +42,20 @@ Core9.blocks.handler.events.onhover = function () {
   var blocks = Core9.blocks.handler.getBlocks();
   for(var i = 0; i < blocks.length; i++) {
     blocks[i].addEventListener('contextmenu', function (e) {
-      alert("You've tried to open context menu");
+      console.log("You've tried to open context menu");
+      var message = {
+        block: {
+          id: e.currentTarget.dataset.id ,
+          type : e.currentTarget.dataset.type,
+          account : Core9.blocks.handler.config.account,
+          theme : Core9.blocks.handler.config.theme,
+          page : store.get('page'),
+          version : ""
+        },
+        action: 'showPageForm',
+        message: 'You tried to open context menu says parent'
+      }
+      Core9.iframe.child.sentMessageToParent(message);
       e.preventDefault();
     }, false);
   }
