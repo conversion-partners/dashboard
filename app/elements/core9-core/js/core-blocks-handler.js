@@ -45,12 +45,12 @@ Core9.blocks.handler.events.onhover = function () {
       console.log("You've tried to open context menu");
       var message = {
         block: {
-          id: e.currentTarget.dataset.id ,
-          type : e.currentTarget.dataset.type,
-          account : Core9.blocks.handler.config.account,
-          theme : Core9.blocks.handler.config.theme,
-          page : store.get('page'),
-          pageDataDirectory : store.get('page-data-directory')
+          id: e.currentTarget.dataset.id,
+          type: e.currentTarget.dataset.type,
+          account: Core9.blocks.handler.config.account,
+          theme: Core9.blocks.handler.config.theme,
+          page: store.get('page'),
+          pageDataDirectory: store.get('page-data-directory')
         },
         action: 'showPageForm',
         message: 'You tried to open context menu says parent'

@@ -11,7 +11,7 @@
 	<script src="/dashboard/bower_components/store-js/store.min.js"></script>
 	<script src="/dashboard/app/elements/core9-core/js/core.js"></script>
 
-
+	<script src="/dashboard/app/elements/core9-core/js/core-blocks-forms.js"></script>
 
 	<script src="/dashboard/app/elements/core9-core/js/iframe/parent.js"></script>
 
@@ -75,74 +75,85 @@
 					<h4 class="modal-title">Modal Header</h4>
 				</div>
 				<div class="modal-body">
-					<p>Some text in the modal.</p>
+					<div>
+						<select>
+							<option value="volvo">Volvo</option>
+							<option value="step1">step1</option>
+							<option value="step2">step2</option>
+							<option value="step3">step3</option>
+						</select>
+					</div>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<div id="form-container" style="width:100%;background:#ddd;overflow-x: hidden;overflow-y: auto;max-height:500px;">
+					<div id="form-holder">
+						</di>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
 				</div>
+
 			</div>
-
 		</div>
-	</div>
-	<!-- modal test -->
+		<!-- modal test -->
 
 
-	<script>
-		// load menu in iframe needs to be in shadow root
-		document.body
-			.appendChild(Core9.panel
-				.create(
-					'panel-iframe-menu',
-					999,
-					'menu',
-					'iframe',
-					'/dashboard/app/elements/core9-menu/customsize/customsize.html',
-					false));
+		<script>
+			// load menu in iframe needs to be in shadow root
+			document.body
+				.appendChild(Core9.panel
+					.create(
+						'panel-iframe-menu',
+						999,
+						'menu',
+						'iframe',
+						'/dashboard/app/elements/core9-menu/customsize/customsize.html',
+						false));
 
-		setTimeout(function() {
-			p.then(function(msg) {
-				Object.keys(Core9.panel.__registry).forEach(function(key) {
-					var panel = Core9.panel.__registry[key];
-					if (panel.url) {
-						document.body.appendChild(Core9.panel.create(panel.id, panel['z-index'],
-							panel.class, panel.type, panel.url,
-							true));
-						Core9.iframe.parent.sentMessageToIframe(Core9.panel.__registry[key].menu, document.getElementsByClassName('menu')[1]);
-					}
+			setTimeout(function() {
+				p.then(function(msg) {
+					Object.keys(Core9.panel.__registry).forEach(function(key) {
+						var panel = Core9.panel.__registry[key];
+						if (panel.url) {
+							document.body.appendChild(Core9.panel.create(panel.id, panel['z-index'],
+								panel.class, panel.type, panel.url,
+								true));
+							Core9.iframe.parent.sentMessageToIframe(Core9.panel.__registry[key].menu, document.getElementsByClassName('menu')[1]);
+						}
+					});
+					setTimeout(function() {
+						//document.getElementById('panel-iframe-menu').style.display = "none";
+						//Core9.panel.open('panel-login');
+					}, 1000);
+					document.getElementsByClassName('menu')[1].style.visibility = "visible";
 				});
-				setTimeout(function() {
-					//document.getElementById('panel-iframe-menu').style.display = "none";
-					//Core9.panel.open('panel-login');
-				}, 1000);
-				document.getElementsByClassName('menu')[1].style.visibility = "visible";
-			});
 
-		}, 1500); // big fat hack needs a callback from on iframe loaded
-	</script>
-	<script>
-		//window.onload = addListeners();
+			}, 1500); // big fat hack needs a callback from on iframe loaded
+		</script>
+		<script>
+			//window.onload = addListeners();
 
-		function addListeners() {
-			document.getElementById('myModal').addEventListener('mousedown', mouseDown, false);
-			window.addEventListener('mouseup', mouseUp, false);
+			function addListeners() {
+				document.getElementById('myModal').addEventListener('mousedown', mouseDown, false);
+				window.addEventListener('mouseup', mouseUp, false);
 
-		}
+			}
 
-		function mouseUp() {
-			window.removeEventListener('mousemove', divMove, true);
-		}
+			function mouseUp() {
+				window.removeEventListener('mousemove', divMove, true);
+			}
 
-		function mouseDown(e) {
-			window.addEventListener('mousemove', divMove, true);
-		}
+			function mouseDown(e) {
+				window.addEventListener('mousemove', divMove, true);
+			}
 
-		function divMove(e) {
-			var div = document.getElementById('myModal');
-			div.style.position = 'absolute';
-			div.style.top = e.clientY + 'px';
-			div.style.left = e.clientX + 'px';
-		}
-	</script>
+			function divMove(e) {
+				var div = document.getElementById('myModal');
+				div.style.position = 'absolute';
+				div.style.top = e.clientY + 'px';
+				div.style.left = e.clientX + 'px';
+			}
+		</script>
 </body>
 
 </html>

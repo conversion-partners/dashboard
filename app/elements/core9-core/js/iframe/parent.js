@@ -13,6 +13,15 @@ Core9.iframe.parent = {
       //console.log(e);
       if(e.data.action == "showPageForm") {
         document.getElementById('page-form').click();
+				setTimeout(function () {
+				  if(typeof session == 'undefined') {
+				    var session = {
+				      account: store.get('account'),
+				      theme: store.get('theme')
+				    }
+				  }
+				  Core9.blocks.forms.init(session.account, session.theme);
+				}, 1000);
       }
       if(e.data.action == 'menuClick') {
         if(typeof e.data.href !== 'undefined') {
