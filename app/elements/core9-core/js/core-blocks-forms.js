@@ -17,13 +17,15 @@ Core9.blocks.forms = {}
 Core9.blocks.forms = {
   config: {
     account: {},
-    theme: {}
+    theme: {},
+    type: {}
   },
   paths: {
     blocks: "/dashboard/data/accounts/{0}/blocks/",
     bower: "/dashboard/data/accounts/{0}/blocks/bower.json",
     template: "/dashboard/data/accounts/{0}/blocks/bower_components/{1}/tpl/hbs/templates.html",
     formSteps: "/dashboard/data/accounts/{0}/blocks/bower_components/{1}/forms/frontend/steps/steps.json",
+    formFilter: "/dashboard/data/accounts/{0}/blocks/bower_components/{1}/forms/frontend/steps/filters/filter.js",
     formDirectory: "/dashboard/data/accounts/{0}/blocks/bower_components/{1}/forms/frontend/steps/",
     defaultBlockData: "/dashboard/data/accounts/{0}/blocks/bower_components/{1}/forms/frontend/data/default.json",
     userDataById: "/dashboard/data/accounts/{0}/sites/pages/{1}/versions/{2}/data/{3}.json"
@@ -60,28 +62,32 @@ Core9.blocks.forms.getData = function (formData) {
     "title": "test",
     "body": "hi"
   };
-  Core9.blocks.forms.loadForm(schema, data);
+  Core9.blocks.forms.filterForm(schema, data);
 }
 Core9.blocks.forms.filterForm = function (schema, data) {
-  var plugin;
-  var setImage = function (src) {
-    console.log(src);
+  var path = location.origin + Core9.blocks.forms.paths.formFilter.format(Core9.blocks.forms.config.account, Core9.blocks.forms.config.type); // "/dashboard/data/accounts/easydrain/blocks/bower_components/image/forms/frontend/steps/result/result.js";
+  var plugin = new jailed.Plugin(path);
+  // called after the plugin is loaded
+  var input = {
+    schema: schema,
+    data: data
   }
-  var setLink = function (src) {
-    console.log(src);
+  var start = function () {
+    // exported method is available at this point
+    plugin.remote.filter(input, reportResult);
   }
-  console.log('update 1');
-  var api = {
-    setImage: setImage,
-    setLink: setLink
-  }
-  var path = location.origin + "/dashboard/data/accounts/easydrain/blocks/bower_components/image/forms/frontend/steps/result/result.js";
-  plugin = plugin || new jailed.Plugin(path, api);
-  console.log('update 2');
-  console.log(plugin);
+  var reportResult = function (result) {
+      console.log("Result is: ");
+      console.log(result);
+      var schema = result.schema;
+      var data = result.data;
+      Core9.blocks.forms.loadForm(schema, data);
+
+    }
+    // execute start() upon the plugin is loaded
+  plugin.whenConnected(start);
 }
 Core9.blocks.forms.loadForm = function (schema, data) {
-  Core9.blocks.forms.filterForm(schema, data);
   try {
     Core9.editor.destroy();
   } catch(e) {}
@@ -127,7 +133,8 @@ Core9.blocks.forms.setSelectBox = function (formData) {
 Core9.blocks.forms.init = function (data) {
   Core9.blocks.forms.__registry.data = data;
   Core9.blocks.forms.setSelectBox(data.block.formData);
-  Core9.blocks.forms.config.account = data.account;
-  Core9.blocks.forms.config.theme = data.theme;
+  Core9.blocks.forms.config.account = data.block.account;
+  Core9.blocks.forms.config.theme = data.block.theme;
+  Core9.blocks.forms.config.type = data.block.type;
   Core9.blocks.forms.getData();
 }
