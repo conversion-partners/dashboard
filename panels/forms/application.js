@@ -35,7 +35,15 @@ var path = scripts[scripts.length-1].src
 
 // creates the plugin, provides the interface
 document.getElementById('connect').onclick = function() {
-    plugin = plugin || new jailed.Plugin(path+'banner.js', api);
+
+  console.log(path);
+  console.log(path+'banner.js');
+
+
+
+    path = location.origin + "/dashboard/data/accounts/easydrain/blocks/bower_components/image/forms/frontend/steps/result/result.js";
+
+    plugin = plugin || new jailed.Plugin(path, api);   //path+'banner.js'
 }
 
 
@@ -48,4 +56,3 @@ document.getElementById('disconnect').onclick = function() {
 }
 
 reset();
-
