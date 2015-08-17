@@ -82,12 +82,12 @@ Core9.blocks.forms.filterForm = function(schema, data) {
       setImage: setImage,
       setLink: setLink
     }
-    var path = "/dashboard/data/accounts/easydrain/blocks/bower_components/image/forms/frontend/steps/result/result.js";
+    var path = location.origin + "/dashboard/data/accounts/easydrain/blocks/bower_components/image/forms/frontend/steps/result/result.js";
     plugin = plugin || new jailed.Plugin(path, api);
     console.log('update 2');
     console.log(plugin);
   }
-  //setInterval(update, 2000);
+  setInterval(update, 2000);
 
 }
 
