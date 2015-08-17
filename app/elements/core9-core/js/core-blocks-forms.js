@@ -127,7 +127,7 @@ Core9.blocks.forms.saveForm = function (script, data) {
   }
   var start = function () {
     // exported method is available at this point
-    plugin.remote.filter(input, reportResult);
+    plugin.remote.save(input, reportResult);
   }
   var reportResult = function (result) {
       console.log("Result is: ");
