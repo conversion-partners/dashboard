@@ -40,7 +40,7 @@ Core9.blocks.forms.getData = function (formData) {
   console.log('formdata : ');
   if(typeof formData == 'undefined') {
     return;
-  }else{
+  } else {
     var script = formData.value;
     console.log(script);
     var dataAndSchema = Core9.blocks.forms.getDataAndSchema(script);
@@ -85,7 +85,6 @@ Core9.blocks.forms.filterForm = function (schema, data) {
       var schema = result.schema;
       var data = result.data;
       Core9.blocks.forms.loadForm(schema, data);
-
     }
     // execute start() upon the plugin is loaded
   plugin.whenConnected(start);
@@ -116,8 +115,6 @@ Core9.blocks.forms.loadForm = function (schema, data) {
   saveButton.addEventListener('click', onSave, false);
 }
 Core9.blocks.forms.saveForm = function (script, data) {
-
-
   var path = location.origin + Core9.blocks.forms.paths.formFilter.format(Core9.blocks.forms.config.account, Core9.blocks.forms.config.type) + 'save.js';
   var plugin = new jailed.Plugin(path);
   // called after the plugin is loaded
@@ -134,16 +131,14 @@ Core9.blocks.forms.saveForm = function (script, data) {
       console.log(result);
       var schema = result.schema;
       var data = result.data;
-      if(result.action == 'submit'){
+      if(result.action == 'submit') {
         Core9.blocks.forms.saveData(schema, data);
-      }else{
+      } else {
         // add to registry and processed next form
       }
-
     }
     // execute start() upon the plugin is loaded
   plugin.whenConnected(start);
-
   console.log(data);
 }
 Core9.blocks.forms.setSelectBox = function (formData) {
