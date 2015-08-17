@@ -38,10 +38,11 @@ Core9.blocks.forms.__registry = {
 Core9.blocks.forms.getDataAndSchema = function (formFile) {}
 Core9.blocks.forms.getData = function (formData) {
   console.log('formdata : ');
+  var script;
   if(typeof formData == 'undefined') {
     return;
   } else {
-    var script = formData.value;
+    script = formData.value;
     console.log(script);
     var dataAndSchema = Core9.blocks.forms.getDataAndSchema(script);
   }
@@ -65,9 +66,9 @@ Core9.blocks.forms.getData = function (formData) {
     "title": "test",
     "body": "hi"
   };
-  Core9.blocks.forms.filterForm(schema, data);
+  Core9.blocks.forms.filterForm(script, schema, data);
 }
-Core9.blocks.forms.filterForm = function (schema, data) {
+Core9.blocks.forms.filterForm = function (script, schema, data) {
   var path = location.origin + Core9.blocks.forms.paths.formFilter.format(Core9.blocks.forms.config.account, Core9.blocks.forms.config.type) + 'form-data-organizer.js';
   var plugin = new jailed.Plugin(path);
   // called after the plugin is loaded
@@ -84,12 +85,12 @@ Core9.blocks.forms.filterForm = function (schema, data) {
       console.log(result);
       var schema = result.schema;
       var data = result.data;
-      Core9.blocks.forms.loadForm(schema, data);
+      Core9.blocks.forms.loadForm(script, schema, data);
     }
     // execute start() upon the plugin is loaded
   plugin.whenConnected(start);
 }
-Core9.blocks.forms.loadForm = function (schema, data) {
+Core9.blocks.forms.loadForm = function (script, schema, data) {
   try {
     Core9.editor.destroy();
   } catch(e) {}
@@ -107,14 +108,14 @@ Core9.blocks.forms.loadForm = function (schema, data) {
   });
 
   function onSave() {
-    Core9.blocks.forms.saveForm(script, Core9.editor.getValue());
+    Core9.blocks.forms.saveForm(script, schema, Core9.editor.getValue());
   }
   // Hook up the submit button to log to the console
   var saveButton = document.getElementById('submit');
   saveButton.removeEventListener('click', onSave, false);
   saveButton.addEventListener('click', onSave, false);
 }
-Core9.blocks.forms.saveForm = function (script, data) {
+Core9.blocks.forms.saveForm = function (script, schema, data) {
   var path = location.origin + Core9.blocks.forms.paths.formFilter.format(Core9.blocks.forms.config.account, Core9.blocks.forms.config.type) + 'save.js';
   var plugin = new jailed.Plugin(path);
   // called after the plugin is loaded
