@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="/dashboard/bower_components/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/dashboard/app/src/sceeditor/minified/jquery.sceditor.default.min.css" type="text/css" media="all" />
 	<link rel="stylesheet" href="/dashboard/app/src/sceeditor/minified/themes/default.min.css">
+	<script src="/dashboard/bower_components/jailed/lib/jailed.js"></script>
 	<script src="/dashboard/bower_components/store-js/store.min.js"></script>
 	<script src="/dashboard/bower_components/json-editor/dist/jsoneditor.min.js"></script>
 	<script type="text/javascript" src="/dashboard/bower_components/jquery/dist/jquery.min.js"></script>
@@ -50,6 +51,38 @@
 		}
 		Core9.iframe.child.listenToPostMessages(callback);
 	</script>
+
+
+<script>
+
+
+var update = function() {
+	var plugin;
+	var setImage = function(src) {
+		console.log(src);
+	}
+	var setLink = function(src) {
+		console.log(src);
+	}
+	var reset = function() {
+	    plugin = null;
+	    setImage('empty.png');
+	    setLink('#');
+	}
+	console.log('update 1');
+	var api = {
+		setImage: setImage,
+		setLink: setLink
+	}
+	var path = "/dashboard/data/accounts/easydrain/blocks/bower_components/image/forms/frontend/steps/result/result.js";
+	plugin = plugin || new jailed.Plugin(path, api);
+	console.log('update 2');
+	console.log(plugin);
+}
+//setInterval(update, 2000);
+
+</script>
+
 
 </body>
 
