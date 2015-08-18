@@ -2,6 +2,8 @@
 var api = {
     save: function(input, cb) {
         // result reported to the callback
+        console.log('from save.js');
+        console.log(input);
         cb(input);
     }
 }

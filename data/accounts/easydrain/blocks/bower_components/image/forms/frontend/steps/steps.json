@@ -1,10 +1,10 @@
 [
 	{
 		"label": "Author",
-		"file": "author.js"
+		"file": "author.json"
 	},
 	{
 		"label": "Comments",
-		"file": "comments.js"
+		"file": "comments.json"
 	}
 ]
