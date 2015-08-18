@@ -1,23 +1,9 @@
 {
-  "type": "object",
-  "title": "Author",
-  "properties": {
-    "firstname": {
-      "type": "string",
-      "title": "First name",
-      "propertyOrder": 1
+  "comments": [{
+    "author": {
+      "firstName": "Yehuda",
+      "lastName": "Katz"
     },
-    "lastname": {
-      "type": "string",
-      "title": "Last name",
-      "propertyOrder": 2
-    },
-    "body": {
-      "type": "string",
-      "format": "html",
-      "options": {
-        "wysiwyg": true
-      }
-    }
-  }
+    "body": "Me too!"
+  }]
 }
