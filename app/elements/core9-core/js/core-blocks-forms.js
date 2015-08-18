@@ -53,9 +53,9 @@ Core9.blocks.forms.getData = function(formData) {
       "title": {
         "type": "string"
       },
-      "location": {
-        "$ref": location.origin + "/dashboard/data/accounts/easydrain/blocks/bower_components/image/forms/frontend/steps/author.json"
-      },
+      // "location": {
+      //   "$ref": location.origin + "/dashboard/data/accounts/easydrain/blocks/bower_components/image/forms/frontend/steps/author.json"
+      // },
       "body": {
         "type": "string",
         "format": "html",
@@ -106,9 +106,12 @@ Core9.blocks.forms.loadForm = function(script, schema, data) {
     theme: 'bootstrap3',
     no_additional_properties: false,
     required_by_default: false,
-    startval: data,
+    //startval: data,
     schema: schema
+      //schema: schema
   });
+
+  // location.origin + "/dashboard/data/accounts/easydrain/blocks/bower_components/image/forms/frontend/steps/author.json"
 
   function onSave() {
     Core9.blocks.forms.saveForm(script, schema, Core9.editor.getValue());

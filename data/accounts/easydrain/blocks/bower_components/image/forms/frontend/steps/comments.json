@@ -1,7 +1,9 @@
-"comments": [{
-  "author": {
-    "firstName": "Yehuda",
-    "lastName": "Katz"
-  },
-  "body": "Me too!"
-}]
+{
+  "comments": [{
+    "author": {
+      "firstName": "Yehuda",
+      "lastName": "Katz"
+    },
+    "body": "Me too!"
+  }]
+}
