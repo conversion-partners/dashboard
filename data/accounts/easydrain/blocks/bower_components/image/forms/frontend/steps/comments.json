@@ -1,9 +1,23 @@
 {
-  "comments": [{
-    "author": {
-      "firstName": "Yehuda",
-      "lastName": "Katz"
+  "type": "object",
+  "title": "Author",
+  "properties": {
+    "firstname": {
+      "type": "string",
+      "title": "First name",
+      "propertyOrder": 1
     },
-    "body": "Me too!"
-  }]
+    "lastname": {
+      "type": "string",
+      "title": "Last name",
+      "propertyOrder": 2
+    },
+    "body": {
+      "type": "string",
+      "format": "html",
+      "options": {
+        "wysiwyg": true
+      }
+    }
+  }
 }

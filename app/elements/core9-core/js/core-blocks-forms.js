@@ -46,29 +46,10 @@ Core9.blocks.forms.getData = function(formData) {
     console.log(script);
     var dataAndSchema = Core9.blocks.forms.getDataAndSchema(script);
   }
-  var schema = {
-    "type": "object",
-    "title": " ",
-    "properties": {
-      "title": {
-        "type": "string"
-      },
-      // "location": {
-      //   "$ref": location.origin + "/dashboard/data/accounts/easydrain/blocks/bower_components/image/forms/frontend/steps/author.json"
-      // },
-      "body": {
-        "type": "string",
-        "format": "html",
-        "options": {
-          "wysiwyg": true
-        }
-      }
-    }
-  }
-  var data = {
-    "title": "test",
-    "body": "hi"
-  };
+
+  var schema = Core9.blocks.forms.__registry.data.block.formData[script];
+
+  var data = {};
   Core9.blocks.forms.filterForm(script, schema, data);
 }
 Core9.blocks.forms.filterForm = function(script, schema, data) {
