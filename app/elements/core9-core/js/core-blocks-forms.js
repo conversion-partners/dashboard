@@ -149,19 +149,23 @@ Core9.blocks.forms.saveForm = function(script, schema, data) {
   console.log(data);
 }
 Core9.blocks.forms.setSelectBox = function(formData) {
+
   var newSelect = document.querySelector('#form-select');
   newSelect.innerHTML = "";
   var opt = document.createElement("option");
   opt.value = "";
   opt.innerHTML = "";
   newSelect.appendChild(opt);
-  for (var i = 0; i < formData.length; i++) {
-    var elem = formData[i];
-    var opt = document.createElement("option");
-    opt.value = elem.file;
-    opt.innerHTML = elem.label;
-    newSelect.appendChild(opt);
+
+  for (var key in formData) {
+    if (formData.hasOwnProperty(key)) {
+      var opt = document.createElement("option");
+      opt.value = key;
+      opt.innerHTML = key.replace('.json','');
+      newSelect.appendChild(opt);
+    }
   }
+
 }
 Core9.blocks.forms.init = function(data) {
   Core9.blocks.forms.__registry.data = data;
