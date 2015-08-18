@@ -158,14 +158,16 @@ Core9.blocks.handler.setFormSteps = function(block, data) {
       var value = values[i];
       var file = stepList[i];
       console.log(file);
-      //newResult[file] =
-      var val = value.currentTarget.response; //;
-      console.log(JSON.parse(val));
+      try {
+        newResult[file] = JSON.parse(value.currentTarget.response);
+      } catch (e) {
+        newResult[file] = JSON.parse('{"error":"invalid json"}');
+      }
     }
     console.log(newResult);
+    Core9.blocks.handler.__registry.blocks[block.id].loadedSTEPS = newResult;
   });
 
-  Core9.blocks.handler.__registry.blocks[block.id].loadedSTEPS = steps;
 }
 Core9.blocks.handler.setUserDataById = function(block, data) {
   Core9.blocks.handler.__registry.blocks[block.id].loadedUSERDATA = JSON.parse(data.currentTarget.response);
