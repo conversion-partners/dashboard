@@ -147,16 +147,18 @@ Core9.blocks.handler.setDefaultBlockData = function(block, data) {
 Core9.blocks.handler.setFormSteps = function(block, data) {
   var steps = JSON.parse(data.currentTarget.response);
   var stepList = [];
+  var fileList = [];
   for (var i = 0; i < steps.length; i++) {
     var step = steps[i];
     stepList.push(Core9.blocks.handler.j(Core9.blocks.handler.paths.formStepsDirectory.format(Core9.blocks.handler.config.account, block.type) + step.file));
+    fileList.push(step.file);
   }
   var newResult = {};
   Promise.all(stepList).then(function(values) {
     console.log('values for block ' + block.type + ' id : ' + block.id)
     for (var i = 0; i < values.length; i++) {
       var value = values[i];
-      var file = stepList[i];
+      var file = steps[i].file;
       console.log(file);
       try {
         newResult[file] = JSON.parse(value.currentTarget.response);
