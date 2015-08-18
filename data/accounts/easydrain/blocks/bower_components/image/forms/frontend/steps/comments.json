@@ -1,9 +1,22 @@
 {
-  "comments": [{
-    "author": {
-      "firstName": "Yehuda",
-      "lastName": "Katz"
-    },
-    "body": "Me too!"
-  }]
+  "type": "array",
+  "format": "grid",
+  "items": {
+    "type": "object",
+    "properties": {
+      "firstname": {
+        "type": "string"
+      },
+      "lastname": {
+        "type": "string"
+      },
+      "body": {
+        "type": "string",
+        "format": "html",
+        "options": {
+          "wysiwyg": true
+        }
+      }
+    }
+  }
 }
