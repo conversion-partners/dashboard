@@ -1,4 +1,21 @@
 // provides the method to square a number
+
+
+
+var steps = {
+  "comments.json" : "",
+  "author.json" : ""
+}
+
+function getUserOrDefaultData(input){
+  // check data
+  return input.data.userData;
+}
+
+function setCorrectData(input){
+  var data = getUserOrDefaultData(input);
+}
+
 var api = {
     save: function(input, cb) {
         // result reported to the callback
