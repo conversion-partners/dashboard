@@ -94,8 +94,6 @@ Core9.blocks.forms.filterForm = function (script, schema, data) {
     plugin.remote.filter(input, reportResult);
   }
   var reportResult = function (result) {
-    console.log("Result is: ");
-    console.log(result);
     var schema = result.schema;
     var data = Core9.blocks.forms.getUserOrDefaultData(result);
     result.formData = {};
@@ -129,19 +127,7 @@ Core9.blocks.forms.filterForm = function (script, schema, data) {
   plugin.whenConnected(start);
 }
 Core9.blocks.forms.loadForm = function (script, schema, data) {
-  console.log('setting form data with : ');
-  console.log(data.formData[script]);
   var starting_value = data.formData[script];
-  console.log(JSON.stringify(starting_value))
-  if(script == "comments.jsonss") {
-    console.log(starting_value);
-    starting_value = [{
-      body: "<p>sdaasdfasdf</p>",
-      firstname: "asdfasd",
-      lastname: "asdf"
-    }];
-    console.log(starting_value);
-  }
   if(typeof Core9.editor === 'undefined') {
     Core9.editor = {}
   };
