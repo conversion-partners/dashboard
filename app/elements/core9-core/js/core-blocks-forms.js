@@ -166,7 +166,6 @@ Core9.blocks.forms.loadForm = function (script, schema, data) {
   submitButton.addEventListener('click', onSubmit, false);
 }
 
-
 function setValue(path, val, obj) {
   var fields = path.split('.');
   var result = obj;
@@ -212,14 +211,24 @@ Core9.blocks.forms.saveFormDataToUserRegistry = function (result) {
   result.data.data.userData = oldUserData;
   Core9.blocks.forms.__registry.data.block.userData = oldUserData;
 }
-
 Core9.blocks.forms.saveData = function (result) {
   console.log(result);
-  var data =   result.data.data.userData;
+  var data = result.data.data.userData;
   var block = Core9.blocks.forms.__registry.data.block;
-  
+  var file = block.pageDataDirectory + block.id + '.json';
+  var url = '/api/io/save';
+  var content = data;
+  console.log(file);
+  $.ajax({
+    type: "POST",
+    url: url,
+    data: {
+      content: content,
+      file: file,
+      account: Core9.blocks.forms.config.account
+    }
+  });
 }
-
 Core9.blocks.forms.saveForm = function (script, schema, data, formData) {
   var path = location.origin + Core9.blocks.forms.paths.formFilter.format(Core9.blocks.forms.config.account, Core9.blocks.forms.config.type) + 'save.js';
   var plugin = new jailed.Plugin(path);
