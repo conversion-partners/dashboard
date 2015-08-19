@@ -183,10 +183,10 @@ Core9.blocks.forms.saveForm = function (script, schema, data, formData) {
   var reportResult = function (result) {
     console.log("Result is: ");
     console.log(result);
-    if(result.action == 'submit') {
+    if(result.data.action == 'submit') {
       // submit to backend
       Core9.blocks.forms.saveData(result);
-    } else if(result.action == 'save') {
+    } else if(result.data.action == 'save') {
       // save form to registry and processed next form
       // set to registry userdata
       Core9.blocks.forms.saveFormDataToUserRegistry(result);
