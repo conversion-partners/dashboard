@@ -146,10 +146,13 @@ Core9.blocks.forms.loadForm = function (script, schema, data) {
   });
   // location.origin + "/dashboard/data/accounts/easydrain/blocks/bower_components/image/forms/frontend/steps/author.json"
   function onSave() {
+    var script = $('#form-select').val();
     data.action = "save";
     Core9.blocks.forms.saveForm(script, schema, data, Core9.editor.getValue());
   }
-  function onSubmit(){
+
+  function onSubmit() {
+    var script = $('#form-select').val();
     data.action = "submit";
     Core9.blocks.forms.saveForm(script, schema, data, Core9.editor.getValue());
   }
@@ -163,15 +166,51 @@ Core9.blocks.forms.loadForm = function (script, schema, data) {
   submitButton.addEventListener('click', onSubmit, false);
 }
 Core9.blocks.forms.saveData = function (result) {}
+
+function setValue(path, val, obj) {
+  var fields = path.split('.');
+  var result = obj;
+  for(var i = 0, n = fields.length; i < n && result !== undefined; i++) {
+    var field = fields[i];
+    if(i === n - 1) {
+      result[field] = val;
+    } else {
+      if(typeof result[field] === 'undefined' || !(typeof result[field] === 'object')) {
+        result[field] = {};
+      }
+      result = result[field];
+    }
+  }
+}
 Core9.blocks.forms.saveFormDataToUserRegistry = function (result) {
   console.log('save to user registry');
   console.log(result);
-  var userData = result.data.data.userData;
+  var oldUserData = result.data.data.userData;
+  var newUserData = result.formData;
+  if(typeof newUserData != "string" && !isArray(newUserData)) {
+    for(var key in newUserData) {
+      if(newUserData.hasOwnProperty(key)) {
+        //oldUserData[key] = newUserData[key];
+        var k = key;
+        var newValue = newUserData[key];
+        var oldVal = Object.resolve(key, oldUserData);
+        setValue(key, newValue, oldUserData);
+        console.log(oldVal);
+      }
+    }
+  } else {
+    for(var i = 0; i < newUserData.length; i++) {
+      var item = newUserData[i];
+      console.log(item);
+    }
+  }
+  result.data.data.userData = oldUserData;
+  Core9.blocks.forms.__registry.data.block.userData = oldUserData;
+  console.log(oldUserData);
   // for items in form update userdata
   //for (var i = 0; i < array.length; i++) {
-    //array[i]
+  //array[i]
   //}
-
 }
 Core9.blocks.forms.saveForm = function (script, schema, data, formData) {
   var path = location.origin + Core9.blocks.forms.paths.formFilter.format(Core9.blocks.forms.config.account, Core9.blocks.forms.config.type) + 'save.js';
