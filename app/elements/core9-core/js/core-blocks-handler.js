@@ -43,7 +43,6 @@ Core9.blocks.handler.events.onhover = function() {
   var blocks = Core9.blocks.handler.getBlocks();
   for (var i = 0; i < blocks.length; i++) {
     blocks[i].addEventListener('contextmenu', function(e) {
-      console.log("You've tried to open context menu");
       var message = {
         block: {
           id: e.currentTarget.dataset.id,
@@ -131,7 +130,6 @@ Core9.blocks.handler.createHandleBarTemplate = function(block) {
   var defaultData = Core9.blocks.handler.__registry.blocks[block.id].loadedDEFAULTDATA;
   var userData = Core9.blocks.handler.__registry.blocks[block.id].loadedUSERDATA;
   var len = Object.keys(userData).length;
-  console.log('userdata length : ' + len);
   var content = {};
   // FIXME do some error handling here!!!!!!!
   if (len == 0) {
@@ -155,18 +153,15 @@ Core9.blocks.handler.setFormSteps = function(block, data) {
   }
   var newResult = {};
   Promise.all(stepList).then(function(values) {
-    console.log('values for block ' + block.type + ' id : ' + block.id)
     for (var i = 0; i < values.length; i++) {
       var value = values[i];
       var file = steps[i].file;
-      console.log(file);
       try {
         newResult[file] = JSON.parse(value.currentTarget.response);
       } catch (e) {
         newResult[file] = JSON.parse('{"error":"invalid json"}');
       }
     }
-    console.log(newResult);
     Core9.blocks.handler.__registry.blocks[block.id].loadedSTEPS = newResult;
   });
 
@@ -251,7 +246,6 @@ Core9.blocks.handler.getBlocks = function() {
 }
 Core9.blocks.handler.init = function(account, theme) {
   if (document.querySelector('#gm-canvas')) {
-    console.log('gridmanager exists');
     Core9.blocks.handler.config.page = "theme";
   }
   Core9.blocks.handler.config.account = account;

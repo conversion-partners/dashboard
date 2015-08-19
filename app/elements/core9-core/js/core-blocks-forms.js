@@ -36,13 +36,11 @@ Core9.blocks.forms.__registry = {
   data: {}
 }
 Core9.blocks.forms.getData = function(formData) {
-  console.log('formdata : ');
   var script;
   if (typeof formData == 'undefined') {
     return;
   } else {
     script = formData.value;
-    console.log(script);
   }
   var schema = Core9.blocks.forms.__registry.data.block.formData[script];
   var data = {};
@@ -60,7 +58,6 @@ Core9.blocks.forms.filterForm = function(script, schema, data) {
     data: data
   }
   var start = function() {
-    // exported method is available at this point
     plugin.remote.filter(input, reportResult);
   }
   var reportResult = function(result) {
@@ -70,7 +67,6 @@ Core9.blocks.forms.filterForm = function(script, schema, data) {
       var data = result.data;
       Core9.blocks.forms.loadForm(script, schema, data);
     }
-    // execute start() upon the plugin is loaded
   plugin.whenConnected(start);
 }
 Core9.blocks.forms.loadForm = function(script, schema, data) {
