@@ -22,6 +22,19 @@ if(!Object.byString) {
     return o;
   }
 }
+if(!Object.resolve) {
+  Object.resolve = function (path, obj, safe) {
+    return path.split('.').reduce(function (prev, curr) {
+      return !safe ? prev[curr] : (prev ? prev[curr] : undefined)
+    }, obj || self)
+  }
+}
+var isArray = function (val) {
+  if(Object.prototype.toString.call(val) === '[object Array]') {
+    return true;
+  }
+  return false;
+}
 if(typeof Core9 === 'undefined') {
   Core9 = {}
 };
@@ -89,18 +102,25 @@ Core9.blocks.forms.filterForm = function (script, schema, data) {
     // then get data accociated with script
     var items = result.stepData[script];
     var obj = {};
-    for(var i = 0; i < items.length; i++) {
+    var len = items.length;
+    for(var i = 0; i < len; i++) {
       var item = items[i];
-      var scriptData = Object.byString(data, item);
+      //var scriptData = Object.byString(data, item);
+      var scriptData = Object.resolve(item, data);
       var type = typeof scriptData;
-      if(type != "string") {
+      if(type != "string" && !isArray(scriptData)) {
         for(var key in scriptData) {
           if(scriptData.hasOwnProperty(key)) {
             obj[key] = scriptData[key];
           }
         }
       } else {
-        obj[item] = scriptData;
+        // this sucks
+        if(len == 1) {
+          obj = scriptData;
+        } else {
+          obj[item] = scriptData;
+        }
       }
     }
     result.formData[script] = obj;
@@ -113,13 +133,13 @@ Core9.blocks.forms.loadForm = function (script, schema, data) {
   console.log(data.formData[script]);
   var starting_value = data.formData[script];
   console.log(JSON.stringify(starting_value))
-  if(script == "comments.json") {
+  if(script == "comments.jsonss") {
     console.log(starting_value);
-    starting_value = {
+    starting_value = [{
       body: "<p>sdaasdfasdf</p>",
       firstname: "asdfasd",
       lastname: "asdf"
-    }
+    }];
     console.log(starting_value);
   }
   if(typeof Core9.editor === 'undefined') {
@@ -143,7 +163,7 @@ Core9.blocks.forms.loadForm = function (script, schema, data) {
   function onSave() {
     Core9.blocks.forms.saveForm(script, schema, Core9.editor.getValue());
   }
-  //                   $('label').next('select').hide();
+  $('label').next('select').hide();
   // Hook up the submit button to log to the console
   var saveButton = document.getElementById('submit');
   saveButton.removeEventListener('click', onSave, false);
