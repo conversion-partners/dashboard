@@ -1,7 +1,11 @@
-if(typeof Core9 === 'undefined') {
+if (typeof Core9 === 'undefined') {
   Core9 = {}
 };
-Core9.blocks = function () {}
+"use strict";
+if (typeof Core9.blocks === 'undefined') {
+  Core9.blocks = {}
+};
+
 Core9.blocks.hasClass = function (element, classname) {
   return(' ' + element.className + ' ').indexOf(' ' + classname + ' ') > -1;
 }
