@@ -166,6 +166,12 @@ Core9.blocks.forms.saveData = function (result) {}
 Core9.blocks.forms.saveFormDataToUserRegistry = function (result) {
   console.log('save to user registry');
   console.log(result);
+  var userData = result.data.data.userData;
+  // for items in form update userdata
+  //for (var i = 0; i < array.length; i++) {
+    //array[i]
+  //}
+
 }
 Core9.blocks.forms.saveForm = function (script, schema, data, formData) {
   var path = location.origin + Core9.blocks.forms.paths.formFilter.format(Core9.blocks.forms.config.account, Core9.blocks.forms.config.type) + 'save.js';
