@@ -165,7 +165,7 @@ Core9.blocks.forms.loadForm = function (script, schema, data) {
   submitButton.removeEventListener('click', onSubmit, false);
   submitButton.addEventListener('click', onSubmit, false);
 }
-Core9.blocks.forms.saveData = function (result) {}
+
 
 function setValue(path, val, obj) {
   var fields = path.split('.');
@@ -211,12 +211,15 @@ Core9.blocks.forms.saveFormDataToUserRegistry = function (result) {
   }
   result.data.data.userData = oldUserData;
   Core9.blocks.forms.__registry.data.block.userData = oldUserData;
-  console.log(oldUserData);
-  // for items in form update userdata
-  //for (var i = 0; i < array.length; i++) {
-  //array[i]
-  //}
 }
+
+Core9.blocks.forms.saveData = function (result) {
+  console.log(result);
+  var data =   result.data.data.userData;
+  var block = Core9.blocks.forms.__registry.data.block;
+  
+}
+
 Core9.blocks.forms.saveForm = function (script, schema, data, formData) {
   var path = location.origin + Core9.blocks.forms.paths.formFilter.format(Core9.blocks.forms.config.account, Core9.blocks.forms.config.type) + 'save.js';
   var plugin = new jailed.Plugin(path);
@@ -235,6 +238,7 @@ Core9.blocks.forms.saveForm = function (script, schema, data, formData) {
     console.log(result);
     if(result.data.action == 'submit') {
       // submit to backend
+      Core9.blocks.forms.saveFormDataToUserRegistry(result);
       Core9.blocks.forms.saveData(result);
     } else if(result.data.action == 'save') {
       // save form to registry and processed next form
