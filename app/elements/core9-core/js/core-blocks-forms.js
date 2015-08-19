@@ -120,7 +120,7 @@ Core9.blocks.forms.loadForm = function (script, schema, data) {
     ajax: true,
     startval: starting_value,
     disable_edit_json: true,
-    disable_collapse: true, // needs to be a user setting
+    disable_collapse: false, // needs to be a user setting
     disable_properties: true,
     format: 'grid',
     theme: 'bootstrap3',
