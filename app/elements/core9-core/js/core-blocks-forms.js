@@ -103,7 +103,6 @@ Core9.blocks.forms.filterForm = function (script, schema, data) {
     var len = items.length;
     for(var i = 0; i < len; i++) {
       var item = items[i];
-      //var scriptData = Object.byString(data, item);
       var scriptData = Object.resolve(item, data);
       var type = typeof scriptData;
       if(type != "string" && !isArray(scriptData)) {
@@ -147,41 +146,53 @@ Core9.blocks.forms.loadForm = function (script, schema, data) {
   });
   // location.origin + "/dashboard/data/accounts/easydrain/blocks/bower_components/image/forms/frontend/steps/author.json"
   function onSave() {
-    Core9.blocks.forms.saveForm(script, schema, Core9.editor.getValue());
+    data.action = "save";
+    Core9.blocks.forms.saveForm(script, schema, data, Core9.editor.getValue());
+  }
+  function onSubmit(){
+    data.action = "submit";
+    Core9.blocks.forms.saveForm(script, schema, data, Core9.editor.getValue());
   }
   $('label').next('select').hide();
   // Hook up the submit button to log to the console
-  var saveButton = document.getElementById('submit');
+  var saveButton = document.getElementById('save');
+  var submitButton = document.getElementById('submit');
   saveButton.removeEventListener('click', onSave, false);
   saveButton.addEventListener('click', onSave, false);
+  submitButton.removeEventListener('click', onSubmit, false);
+  submitButton.addEventListener('click', onSubmit, false);
 }
-Core9.blocks.forms.saveForm = function (script, schema, data) {
+Core9.blocks.forms.saveData = function (result) {}
+Core9.blocks.forms.saveFormDataToUserRegistry = function (result) {
+  console.log('save to user registry');
+  console.log(result);
+}
+Core9.blocks.forms.saveForm = function (script, schema, data, formData) {
   var path = location.origin + Core9.blocks.forms.paths.formFilter.format(Core9.blocks.forms.config.account, Core9.blocks.forms.config.type) + 'save.js';
   var plugin = new jailed.Plugin(path);
-  // called after the plugin is loaded
   var input = {
+    script: script,
     schema: schema,
-    data: data
+    data: data,
+    formData: formData
   }
   var start = function () {
     // exported method is available at this point
     plugin.remote.save(input, reportResult);
   }
   var reportResult = function (result) {
-      console.log("Result is: ");
-      console.log(result);
-      var schema = result.schema;
-      var data = result.data;
-      if(result.action == 'submit') {
-        Core9.blocks.forms.saveData(schema, data);
-      } else {
-        // add to registry and processed next form
-      }
+    console.log("Result is: ");
+    console.log(result);
+    if(result.action == 'submit') {
+      // submit to backend
+      Core9.blocks.forms.saveData(result);
+    } else if(result.action == 'save') {
+      // save form to registry and processed next form
+      // set to registry userdata
+      Core9.blocks.forms.saveFormDataToUserRegistry(result);
     }
-    // execute start() upon the plugin is loaded
+  }
   plugin.whenConnected(start);
-  console.log('saving data');
-  console.log(data);
 }
 Core9.blocks.forms.setSelectBox = function (formData) {
   var newSelect = document.querySelector('#form-select');
