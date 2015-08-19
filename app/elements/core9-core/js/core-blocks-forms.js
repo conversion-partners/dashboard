@@ -119,9 +119,9 @@ Core9.blocks.forms.loadForm = function (script, schema, data) {
   Core9.editor = new JSONEditor(document.querySelector('#form-holder'), {
     ajax: true,
     startval: starting_value,
-    disable_edit_json: true,
-    disable_collapse: false, // needs to be a user setting
-    disable_properties: true,
+    //disable_edit_json: true,
+    //disable_collapse: true, // needs to be a user setting
+    //disable_properties: true,
     format: 'grid',
     theme: 'bootstrap3',
     //required_by_default: false,
@@ -132,7 +132,7 @@ Core9.blocks.forms.loadForm = function (script, schema, data) {
   function onSave() {
     Core9.blocks.forms.saveForm(script, schema, Core9.editor.getValue());
   }
-  $('label').next('select').hide();
+  //                   $('label').next('select').hide();
   // Hook up the submit button to log to the console
   var saveButton = document.getElementById('submit');
   saveButton.removeEventListener('click', onSave, false);
