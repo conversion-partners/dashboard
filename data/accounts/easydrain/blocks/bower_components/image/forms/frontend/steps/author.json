@@ -5,16 +5,19 @@
     "firstname": {
       "type": "string",
       "title": "First name",
+      "default": "test",
       "propertyOrder": 1
     },
     "lastname": {
       "type": "string",
       "title": "Last name",
+      "default": "test",
       "propertyOrder": 2
     },
     "body": {
       "type": "string",
       "format": "html",
+      "default": "test",
       "options": {
         "wysiwyg": true
       }

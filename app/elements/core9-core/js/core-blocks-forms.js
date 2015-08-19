@@ -112,19 +112,19 @@ Core9.blocks.forms.loadForm = function (script, schema, data) {
   console.log('setting form data with : ');
   console.log(data.formData[script]);
   var starting_value = data.formData[script];
+  console.log(JSON.stringify(starting_value))
   try {
     Core9.editor.destroy();
   } catch(e) {}
   Core9.editor = new JSONEditor(document.querySelector('#form-holder'), {
     ajax: true,
+    startval: starting_value,
     disable_edit_json: true,
-    disable_collapse: true,
+    disable_collapse: true, // needs to be a user setting
     disable_properties: true,
     format: 'grid',
     theme: 'bootstrap3',
-    no_additional_properties: false,
-    required_by_default: false,
-    startval: starting_value,
+    //required_by_default: false,
     schema: schema
       //schema: schema
   });
@@ -132,6 +132,7 @@ Core9.blocks.forms.loadForm = function (script, schema, data) {
   function onSave() {
     Core9.blocks.forms.saveForm(script, schema, Core9.editor.getValue());
   }
+  $('label').next('select').hide();
   // Hook up the submit button to log to the console
   var saveButton = document.getElementById('submit');
   saveButton.removeEventListener('click', onSave, false);
