@@ -92,10 +92,15 @@ Core9.blocks.forms.filterForm = function (script, schema, data) {
     for(var i = 0; i < items.length; i++) {
       var item = items[i];
       var scriptData = Object.byString(data, item);
-      for(var key in scriptData) {
-        if(scriptData.hasOwnProperty(key)) {
-          obj[key] = scriptData[key];
+      var type = typeof scriptData;
+      if(type != "string") {
+        for(var key in scriptData) {
+          if(scriptData.hasOwnProperty(key)) {
+            obj[key] = scriptData[key];
+          }
         }
+      } else {
+        obj[item] = scriptData;
       }
     }
     result.formData[script] = obj;
@@ -106,6 +111,7 @@ Core9.blocks.forms.filterForm = function (script, schema, data) {
 Core9.blocks.forms.loadForm = function (script, schema, data) {
   console.log('setting form data with : ');
   console.log(data.formData[script]);
+  var starting_value = data.formData[script];
   try {
     Core9.editor.destroy();
   } catch(e) {}
@@ -118,7 +124,7 @@ Core9.blocks.forms.loadForm = function (script, schema, data) {
     theme: 'bootstrap3',
     no_additional_properties: false,
     required_by_default: false,
-    //startval: data,
+    startval: starting_value,
     schema: schema
       //schema: schema
   });
