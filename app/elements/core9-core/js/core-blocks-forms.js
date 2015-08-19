@@ -190,8 +190,6 @@ Core9.blocks.forms.saveFormDataToUserRegistry = function (result) {
   if(typeof newUserData != "string" && !isArray(newUserData)) {
     for(var key in newUserData) {
       if(newUserData.hasOwnProperty(key)) {
-        //oldUserData[key] = newUserData[key];
-        var k = key;
         var newValue = newUserData[key];
         var oldVal = Object.resolve(key, oldUserData);
         setValue(key, newValue, oldUserData);
@@ -200,8 +198,15 @@ Core9.blocks.forms.saveFormDataToUserRegistry = function (result) {
     }
   } else {
     for(var i = 0; i < newUserData.length; i++) {
-      var item = newUserData[i];
-      console.log(item);
+      var newValue = newUserData[i];
+      //var oldVal = Object.resolve(key, oldUserData);
+      var script = result.script;
+      var keys = result.data.stepData[script];
+      for(var i = 0; i < keys.length; i++) {
+        var key = keys[i];
+        oldUserData[key][i] = newValue;
+        console.log(oldUserData);
+      }
     }
   }
   result.data.data.userData = oldUserData;
