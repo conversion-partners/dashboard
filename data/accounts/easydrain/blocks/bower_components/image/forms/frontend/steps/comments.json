@@ -5,14 +5,17 @@
     "type": "object",
     "properties": {
       "firstname": {
-        "type": "string"
+        "type": "string",
+        "propertyOrder": 1
       },
       "lastname": {
-        "type": "string"
+        "type": "string",
+        "propertyOrder": 2
       },
       "body": {
         "type": "string",
         "format": "html",
+        "propertyOrder": 3,
         "options": {
           "wysiwyg": true
         }

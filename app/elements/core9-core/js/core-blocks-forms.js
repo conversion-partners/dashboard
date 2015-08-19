@@ -113,20 +113,22 @@ Core9.blocks.forms.loadForm = function (script, schema, data) {
   console.log(data.formData[script]);
   var starting_value = data.formData[script];
   console.log(JSON.stringify(starting_value))
+  if(typeof Core9.editor === 'undefined') {
+    Core9.editor = {}
+  };
   try {
     Core9.editor.destroy();
+    Core9.editor = {};
   } catch(e) {}
   Core9.editor = new JSONEditor(document.querySelector('#form-holder'), {
     ajax: true,
     startval: starting_value,
-    //disable_edit_json: true,
-    //disable_collapse: true, // needs to be a user setting
-    //disable_properties: true,
+    disable_edit_json: true,
+    disable_collapse: false, // needs to be a user setting
+    disable_properties: true,
     format: 'grid',
     theme: 'bootstrap3',
-    //required_by_default: false,
     schema: schema
-      //schema: schema
   });
   // location.origin + "/dashboard/data/accounts/easydrain/blocks/bower_components/image/forms/frontend/steps/author.json"
   function onSave() {
