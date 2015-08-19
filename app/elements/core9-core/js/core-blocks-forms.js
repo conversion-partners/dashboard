@@ -39,11 +39,10 @@ if(typeof Core9 === 'undefined') {
   Core9 = {}
 };
 "use strict";
-if(typeof Core9.blocks === 'undefined') {
+if(typeof Core9.forms === 'undefined') {
   Core9.blocks = {}
 };
-Core9.blocks.forms = {}
-Core9.blocks.forms = {
+Core9.forms = {
   config: {
     account: {},
     theme: {},
@@ -60,29 +59,29 @@ Core9.blocks.forms = {
     userDataById: "/dashboard/data/accounts/{0}/sites/pages/{1}/versions/{2}/data/{3}.json"
   }
 }
-Core9.blocks.forms.__registry = {
+Core9.forms.__registry = {
   blocks: {},
   data: {}
 }
-Core9.blocks.forms.getData = function (formData) {
+Core9.forms.getData = function (formData) {
   var script;
   if(typeof formData == 'undefined') {
     return;
   } else {
     script = formData.value;
   }
-  var schema = Core9.blocks.forms.__registry.data.block.formData[script];
+  var schema = Core9.forms.__registry.data.block.formData[script];
   var data = {};
-  data.userData = Core9.blocks.forms.__registry.data.block.userData;
-  data.defaultData = Core9.blocks.forms.__registry.data.block.defaultData;
-  Core9.blocks.forms.filterForm(script, schema, data);
+  data.userData = Core9.forms.__registry.data.block.userData;
+  data.defaultData = Core9.forms.__registry.data.block.defaultData;
+  Core9.forms.filterForm(script, schema, data);
 }
-Core9.blocks.forms.getUserOrDefaultData = function (result) {
+Core9.forms.getUserOrDefaultData = function (result) {
   // check user or default data
   return result.data.userData;
 }
-Core9.blocks.forms.filterForm = function (script, schema, data) {
-  var path = location.origin + Core9.blocks.forms.paths.formFilter.format(Core9.blocks.forms.config.account, Core9.blocks.forms.config.type) + 'form-data-organizer.js';
+Core9.forms.filterForm = function (script, schema, data) {
+  var path = location.origin + Core9.forms.paths.formFilter.format(Core9.forms.config.account, Core9.forms.config.type) + 'form-data-organizer.js';
   var plugin = new jailed.Plugin(path);
   // called after the plugin is loaded
   var input = {
@@ -95,7 +94,7 @@ Core9.blocks.forms.filterForm = function (script, schema, data) {
   }
   var reportResult = function (result) {
     var schema = result.schema;
-    var data = Core9.blocks.forms.getUserOrDefaultData(result);
+    var data = Core9.forms.getUserOrDefaultData(result);
     result.formData = {};
     // then get data accociated with script
     var items = result.stepData[script];
@@ -121,11 +120,11 @@ Core9.blocks.forms.filterForm = function (script, schema, data) {
       }
     }
     result.formData[script] = obj;
-    Core9.blocks.forms.loadForm(script, schema, result);
+    Core9.forms.loadForm(script, schema, result);
   }
   plugin.whenConnected(start);
 }
-Core9.blocks.forms.loadForm = function (script, schema, data) {
+Core9.forms.loadForm = function (script, schema, data) {
   var starting_value = data.formData[script];
   if(typeof Core9.editor === 'undefined') {
     Core9.editor = {}
@@ -148,13 +147,13 @@ Core9.blocks.forms.loadForm = function (script, schema, data) {
   function onSave() {
     var script = $('#form-select').val();
     data.action = "save";
-    Core9.blocks.forms.saveForm(script, schema, data, Core9.editor.getValue());
+    Core9.forms.saveForm(script, schema, data, Core9.editor.getValue());
   }
 
   function onSubmit() {
     var script = $('#form-select').val();
     data.action = "submit";
-    Core9.blocks.forms.saveForm(script, schema, data, Core9.editor.getValue());
+    Core9.forms.saveForm(script, schema, data, Core9.editor.getValue());
   }
   $('label').next('select').hide();
   // Hook up the submit button to log to the console
@@ -181,7 +180,7 @@ function setValue(path, val, obj) {
     }
   }
 }
-Core9.blocks.forms.saveFormDataToUserRegistry = function (result) {
+Core9.forms.saveFormDataToUserRegistry = function (result) {
   console.log('save to user registry');
   console.log(result);
   var oldUserData = result.data.data.userData;
@@ -209,12 +208,12 @@ Core9.blocks.forms.saveFormDataToUserRegistry = function (result) {
     }
   }
   result.data.data.userData = oldUserData;
-  Core9.blocks.forms.__registry.data.block.userData = oldUserData;
+  Core9.forms.__registry.data.block.userData = oldUserData;
 }
-Core9.blocks.forms.saveData = function (result) {
+Core9.forms.saveData = function (result) {
   console.log(result);
   var data = result.data.data.userData;
-  var block = Core9.blocks.forms.__registry.data.block;
+  var block = Core9.forms.__registry.data.block;
   var file = block.pageDataDirectory + block.id + '.json';
   var url = '/api/io/save';
   var content = JSON.stringify(data);
@@ -225,12 +224,12 @@ Core9.blocks.forms.saveData = function (result) {
     data: {
       content: content,
       file: file,
-      account: Core9.blocks.forms.config.account
+      account: Core9.forms.config.account
     }
   });
 }
-Core9.blocks.forms.saveForm = function (script, schema, data, formData) {
-  var path = location.origin + Core9.blocks.forms.paths.formFilter.format(Core9.blocks.forms.config.account, Core9.blocks.forms.config.type) + 'save.js';
+Core9.forms.saveForm = function (script, schema, data, formData) {
+  var path = location.origin + Core9.forms.paths.formFilter.format(Core9.forms.config.account, Core9.forms.config.type) + 'save.js';
   var plugin = new jailed.Plugin(path);
   var input = {
     script: script,
@@ -247,17 +246,17 @@ Core9.blocks.forms.saveForm = function (script, schema, data, formData) {
     console.log(result);
     if(result.data.action == 'submit') {
       // submit to backend
-      Core9.blocks.forms.saveFormDataToUserRegistry(result);
-      Core9.blocks.forms.saveData(result);
+      Core9.forms.saveFormDataToUserRegistry(result);
+      Core9.forms.saveData(result);
     } else if(result.data.action == 'save') {
       // save form to registry and processed next form
       // set to registry userdata
-      Core9.blocks.forms.saveFormDataToUserRegistry(result);
+      Core9.forms.saveFormDataToUserRegistry(result);
     }
   }
   plugin.whenConnected(start);
 }
-Core9.blocks.forms.setSelectBox = function (formData) {
+Core9.forms.setSelectBox = function (formData) {
   var newSelect = document.querySelector('#form-select');
   newSelect.innerHTML = "";
   var opt = document.createElement("option");
@@ -273,11 +272,11 @@ Core9.blocks.forms.setSelectBox = function (formData) {
     }
   }
 }
-Core9.blocks.forms.init = function (data) {
-  Core9.blocks.forms.__registry.data = data;
-  Core9.blocks.forms.setSelectBox(data.block.formData);
-  Core9.blocks.forms.config.account = data.block.account;
-  Core9.blocks.forms.config.theme = data.block.theme;
-  Core9.blocks.forms.config.type = data.block.type;
-  Core9.blocks.forms.getData();
+Core9.forms.init = function (data) {
+  Core9.forms.__registry.data = data;
+  Core9.forms.setSelectBox(data.block.formData);
+  Core9.forms.config.account = data.block.account;
+  Core9.forms.config.theme = data.block.theme;
+  Core9.forms.config.type = data.block.type;
+  Core9.forms.getData();
 }
