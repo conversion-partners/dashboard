@@ -113,6 +113,15 @@ Core9.blocks.forms.loadForm = function (script, schema, data) {
   console.log(data.formData[script]);
   var starting_value = data.formData[script];
   console.log(JSON.stringify(starting_value))
+  if(script == "comments.json") {
+    console.log(starting_value);
+    starting_value = {
+      body: "<p>sdaasdfasdf</p>",
+      firstname: "asdfasd",
+      lastname: "asdf"
+    }
+    console.log(starting_value);
+  }
   if(typeof Core9.editor === 'undefined') {
     Core9.editor = {}
   };
@@ -165,6 +174,7 @@ Core9.blocks.forms.saveForm = function (script, schema, data) {
     }
     // execute start() upon the plugin is loaded
   plugin.whenConnected(start);
+  console.log('saving data');
   console.log(data);
 }
 Core9.blocks.forms.setSelectBox = function (formData) {
