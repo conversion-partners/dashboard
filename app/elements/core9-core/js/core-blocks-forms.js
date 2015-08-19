@@ -64,7 +64,7 @@ Core9.blocks.forms.getData = function (formData) {
   data.defaultData = Core9.blocks.forms.__registry.data.block.defaultData;
   Core9.blocks.forms.filterForm(script, schema, data);
 }
-Core9.blocks.forms.getUserOrDefaultData = function(result){
+Core9.blocks.forms.getUserOrDefaultData = function (result) {
   // check user or default data
   return result.data.userData;
 }
@@ -85,14 +85,20 @@ Core9.blocks.forms.filterForm = function (script, schema, data) {
     console.log(result);
     var schema = result.schema;
     var data = Core9.blocks.forms.getUserOrDefaultData(result);
-
-    // then get data accociated with script
-
-    var scriptData = Object.byString(data, result.stepData[script]);
-
     result.formData = {};
-    result.formData[script] = scriptData;
-
+    // then get data accociated with script
+    var items = result.stepData[script];
+    var obj = {};
+    for(var i = 0; i < items.length; i++) {
+      var item = items[i];
+      var scriptData = Object.byString(data, item);
+      for(var key in scriptData) {
+        if(scriptData.hasOwnProperty(key)) {
+          obj[key] = scriptData[key];
+        }
+      }
+    }
+    result.formData[script] = obj;
     Core9.blocks.forms.loadForm(script, schema, result);
   }
   plugin.whenConnected(start);
