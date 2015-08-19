@@ -64,6 +64,10 @@ Core9.blocks.forms.getData = function (formData) {
   data.defaultData = Core9.blocks.forms.__registry.data.block.defaultData;
   Core9.blocks.forms.filterForm(script, schema, data);
 }
+Core9.blocks.forms.getUserOrDefaultData = function(result){
+  // check user or default data
+  return result.data.userData;
+}
 Core9.blocks.forms.filterForm = function (script, schema, data) {
   var path = location.origin + Core9.blocks.forms.paths.formFilter.format(Core9.blocks.forms.config.account, Core9.blocks.forms.config.type) + 'form-data-organizer.js';
   var plugin = new jailed.Plugin(path);
@@ -80,12 +84,22 @@ Core9.blocks.forms.filterForm = function (script, schema, data) {
     console.log("Result is: ");
     console.log(result);
     var schema = result.schema;
-    var data = result.data;
-    Core9.blocks.forms.loadForm(script, schema, data);
+    var data = Core9.blocks.forms.getUserOrDefaultData(result);
+
+    // then get data accociated with script
+
+    var scriptData = Object.byString(data, result.stepData[script]);
+
+    result.formData = {};
+    result.formData[script] = scriptData;
+
+    Core9.blocks.forms.loadForm(script, schema, result);
   }
   plugin.whenConnected(start);
 }
 Core9.blocks.forms.loadForm = function (script, schema, data) {
+  console.log('setting form data with : ');
+  console.log(data.formData[script]);
   try {
     Core9.editor.destroy();
   } catch(e) {}

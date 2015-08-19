@@ -1,8 +1,15 @@
-// provides the method to square a number
+
+var stepData = {
+  "comments.json" : ["comments"],
+  "author.json" : ["author", "body"]
+}
+
+
+
 var api = {
     filter: function(input, cb) {
-        // result reported to the callback
         console.log('from form-data-organizer.js');
+        input.stepData = stepData;
         console.log(input);
         cb(input);
     }
