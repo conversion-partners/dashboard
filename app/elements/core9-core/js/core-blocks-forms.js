@@ -35,7 +35,6 @@ Core9.blocks.forms.__registry = {
   blocks: {},
   data: {}
 }
-Core9.blocks.forms.getDataAndSchema = function(formFile) {}
 Core9.blocks.forms.getData = function(formData) {
   console.log('formdata : ');
   var script;
@@ -44,12 +43,11 @@ Core9.blocks.forms.getData = function(formData) {
   } else {
     script = formData.value;
     console.log(script);
-    var dataAndSchema = Core9.blocks.forms.getDataAndSchema(script);
   }
-
   var schema = Core9.blocks.forms.__registry.data.block.formData[script];
-
   var data = {};
+  data.userData = Core9.blocks.forms.__registry.data.block.userData;
+  data.defaultData = Core9.blocks.forms.__registry.data.block.defaultData;
   Core9.blocks.forms.filterForm(script, schema, data);
 }
 Core9.blocks.forms.filterForm = function(script, schema, data) {
@@ -57,6 +55,7 @@ Core9.blocks.forms.filterForm = function(script, schema, data) {
   var plugin = new jailed.Plugin(path);
   // called after the plugin is loaded
   var input = {
+    script : script,
     schema: schema,
     data: data
   }
