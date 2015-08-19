@@ -217,7 +217,7 @@ Core9.blocks.forms.saveData = function (result) {
   var block = Core9.blocks.forms.__registry.data.block;
   var file = block.pageDataDirectory + block.id + '.json';
   var url = '/api/io/save';
-  var content = data;
+  var content = JSON.stringify(data);
   console.log(file);
   $.ajax({
     type: "POST",

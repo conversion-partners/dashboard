@@ -1,14 +1,1 @@
-{
-	  "author": {
-	    "firstName": "Alan test",
-	    "lastName": "Johnson"
-	  },
-	  "body": "I Love Handlebars",
-	  "comments": [{
-	    "author": {
-	      "firstName": "Yehuda",
-	      "lastName": "Katz"
-	    },
-	    "body": "Me too!"
-	  }]
-}
+{"author":{"firstName":"Alan","lastName":"Johnson"},"body":"I Love Handlebars ddddd","comments":[{"body":"Me too! dddd","author":{"firstName":"Yehuda","lastName":"Katz"}}]}
