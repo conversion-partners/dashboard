@@ -18,7 +18,7 @@
     "tests"
   ],
   "dependencies": {
-    "header": "*",
+    "gallery": "*",
     "image": "*"
   }
 }
