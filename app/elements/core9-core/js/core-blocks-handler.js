@@ -170,7 +170,7 @@ Core9.blocks.handler.setUserDataById = function(block, data) {
   try {
       Core9.blocks.handler.__registry.blocks[block.id].loadedUSERDATA = JSON.parse(data.currentTarget.response);
   } catch (e) {
-      Core9.blocks.handler.__registry.blocks[block.id].loadedUSERDATA = Core9.blocks.handler.__registry.blocks[block.id].loadedUSERDATA;
+      Core9.blocks.handler.__registry.blocks[block.id].loadedUSERDATA = Core9.blocks.handler.__registry.blocks[block.id].loadedDEFAULTDATA;
   }
 
 }
