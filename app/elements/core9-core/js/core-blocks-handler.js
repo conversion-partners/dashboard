@@ -193,6 +193,12 @@ Core9.blocks.handler.setTemplateCss = function (block, data) {
       Core9.blocks.handler.__registry.blocks[block.id].loadedCSS[link.dataset.theme] = link;
     }
   }
+  // if theme if(){  }
+  // always add block css
+  $('head').append(Core9.blocks.handler.__registry.blocks[block.id].loadedCSS.block);
+  try {
+    $('head').append(Core9.blocks.handler.__registry.blocks[block.id].loadedCSS[Core9.blocks.handler.config.account.theme]);
+  } catch(e) {}
 }
 Core9.blocks.handler.getBlockData = function (block) {
   var promiseList = [];
