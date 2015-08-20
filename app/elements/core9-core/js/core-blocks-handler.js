@@ -6,6 +6,10 @@ if(!String.prototype.format) {
     });
   };
 }
+
+function isEmpty(str) {
+  return(!str.trim() || 0 === str.trim().length);
+}
 if(typeof Core9 === 'undefined') {
   Core9 = {}
 };
@@ -177,12 +181,19 @@ Core9.blocks.handler.setUserDataById = function (block, data) {
     Core9.blocks.handler.__registry.blocks[block.id].loadedUSERDATA = Core9.blocks.handler.__registry.blocks[block.id].loadedDEFAULTDATA;
   }
 }
-
 Core9.blocks.handler.setTemplateCss = function (block, data) {
-  var demoHtml = JSON.parse(data.currentTarget.response);
-  Core9.blocks.handler.__registry.blocks[block.id].loadedCSS = {};
+  var html = data.currentTarget.response;
+  var styleLinks = html.querySelectorAll('link[data-theme], link[data-role="block"]');
+  Core9.blocks.handler.__registry.blocks[block.id].loadedCSS = {}
+  for(var i = 0; i < styleLinks.length; i++) {
+    var link = styleLinks[i];
+    if(link.dataset.theme == "block") {
+      Core9.blocks.handler.__registry.blocks[block.id].loadedCSS.block = link;
+    } else {
+      Core9.blocks.handler.__registry.blocks[block.id].loadedCSS[link.dataset.theme] = link;
+    }
+  }
 }
-
 Core9.blocks.handler.getBlockData = function (block) {
   var promiseList = [];
   promiseList.push(Core9.blocks.handler.getDefaultBlockData(block));
