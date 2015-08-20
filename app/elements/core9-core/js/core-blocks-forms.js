@@ -49,7 +49,7 @@ Core9.forms = {
     type: {}
   },
   paths: {
-    blocks: "/dashboard/data/accounts/{0}/blocks/",
+    blocks: "/dashboard/data/accounts/{0}/blocks/bower_components/",
     bower: "/dashboard/data/accounts/{0}/blocks/bower.json",
     template: "/dashboard/data/accounts/{0}/blocks/bower_components/{1}/tpl/hbs/templates.html",
     formSteps: "/dashboard/data/accounts/{0}/blocks/bower_components/{1}/forms/frontend/steps/config/steps.json",
