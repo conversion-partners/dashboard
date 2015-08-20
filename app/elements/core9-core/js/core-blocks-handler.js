@@ -167,7 +167,12 @@ Core9.blocks.handler.setFormSteps = function(block, data) {
 
 }
 Core9.blocks.handler.setUserDataById = function(block, data) {
-  Core9.blocks.handler.__registry.blocks[block.id].loadedUSERDATA = JSON.parse(data.currentTarget.response);
+  try {
+      Core9.blocks.handler.__registry.blocks[block.id].loadedUSERDATA = JSON.parse(data.currentTarget.response);
+  } catch (e) {
+      Core9.blocks.handler.__registry.blocks[block.id].loadedUSERDATA = Core9.blocks.handler.__registry.blocks[block.id].loadedUSERDATA;
+  }
+
 }
 Core9.blocks.handler.getBlockData = function(block) {
   var promiseList = [];
