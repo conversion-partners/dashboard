@@ -2,14 +2,7 @@ var arrMenu = [{
   title: 'All Categories',
   id: 'menuID',
   icon: 'fa fa-reorder',
-  items: [
-    /**
-    {
-    name: 'Editor',
-    link: '/dashboard/editor'
-    }
-    **/
-  ]
+  items: []
 }];
 
 $(document).ready(
@@ -75,21 +68,3 @@ $(document).ready(
     Core9.iframe.child.listenToPostMessages(callback);
 
   });
-
-
-// to make menu draggable
-
-/* 		var menu = document.getElementById('panel-iframe-menu');
-var dragHandler = document.createElement('div');
-dragHandler.setAttribute('id', 'draghandler');
-dragHandler.addEventListener('dblclick', function (e) {
-	  var iframe = document.getElementsByClassName('menu')[1];
-	  var state = iframe.style.display;
-	  if(state == 'block'){
-		  iframe.style.display = 'none';
-	  }else{
-		  iframe.style.display = 'block';
-	  }
-});
-menu.appendChild(dragHandler);
-	DragDrop.bind(menu); */

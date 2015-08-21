@@ -30,6 +30,9 @@ app.post('/api/io/:action', function (req, res) {
   default:
     console.log(req);
   }
+
+  res.sendStatus(200);
+
 });
 app.use('/dashboard/data/accounts/:account/themes/bower_components/:theme/templates/pages/:page/versions/:version/index.html', function (req, res) {
   console.log(this);

@@ -284,8 +284,12 @@ Core9.blocks.handler.init = function (account, theme) {
   if(document.querySelector('#gm-canvas')) {
     Core9.blocks.handler.config.page = "theme";
   }
-  Core9.blocks.handler.config.account = account;
-  Core9.blocks.handler.config.theme = theme;
+  if(typeof account == 'undefined' && typeof theme == 'undefined'){
+    account: store.get('account');
+    theme: store.get('theme');
+  }
+  Core9.blocks.handler.config.account =  store.get('account');
+  Core9.blocks.handler.config.theme = store.get('theme');
   Core9.blocks.handler.getData();
   Core9.blocks.handler.events();
 }

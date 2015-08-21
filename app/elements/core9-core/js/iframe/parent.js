@@ -11,11 +11,17 @@ Core9.iframe.parent = {
     var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
     eventer(messageEvent, function (e) {
       //console.log(e);
+
       if(e.data.action == "showPageForm") {
         document.getElementById('page-form').click();
         setTimeout(function () {
           Core9.iframe.parent.sentMessageToIframe(e.data, document.querySelector('#iframe-form-holder'));
         }, 100);
+      }
+      if(e.data.action == "resetPageEditor") {
+        var iframe = Core9.panel.getIframeById('panel-iframe-site');
+        var cmd = 'Core9.blocks.handler.init();';
+        Core9.iframe.parent.sentMessageToIframe(cmd, iframe);
       }
       if(e.data.action == 'menuClick') {
         if(typeof e.data.href !== 'undefined') {
