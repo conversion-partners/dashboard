@@ -183,6 +183,7 @@ function setValue(path, val, obj) {
 Core9.forms.saveFormDataToUserRegistry = function(result) {
   console.log('save to user registry');
   console.log(result);
+  var script = result.script;
   var oldUserData = result.data.data.userData;
   var newUserData = result.formData;
   if (typeof newUserData != "string" && !isArray(newUserData)) {
@@ -199,7 +200,7 @@ Core9.forms.saveFormDataToUserRegistry = function(result) {
     for (var i = 0; i < newUserData.length; i++) {
       var newValue = newUserData[i];
       //var oldVal = Object.resolve(key, oldUserData);
-      var script = result.script;
+
       var keys = result.data.stepData[script];
       var key = keys[0];
       oldUserData[key][i] = newValue;
