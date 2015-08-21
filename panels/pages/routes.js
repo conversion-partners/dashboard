@@ -38,6 +38,7 @@ var pageRoutes = {
     xhr.send();
   },
   '/pages$/': function(req) {
+    console.log('test');
     Core9.panel.open('panel-pages');
     Core9.iframe.parent.sentMessageToIframe('init();', Core9.panel.getIframeById('panel-pages'));
   },
