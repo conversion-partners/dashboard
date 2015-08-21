@@ -200,6 +200,8 @@ Core9.forms.saveFormDataToUserRegistry = function (result) {
       //var oldVal = Object.resolve(key, oldUserData);
       var script = result.script;
       var keys = result.data.stepData[script];
+      // rolls over keys this is not correct
+      //FIXME!!!
       for(var i = 0; i < keys.length; i++) {
         var key = keys[i];
         oldUserData[key][i] = newValue;
