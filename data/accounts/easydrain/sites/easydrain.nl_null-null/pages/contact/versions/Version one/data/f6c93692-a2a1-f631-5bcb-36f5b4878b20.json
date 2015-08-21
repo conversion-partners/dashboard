@@ -1,8 +1,6 @@
 {
-  "author": {
-    "firstName": "Carol",
-    "lastName": "Tesla"
-  },
+  "firstName": "Carol",
+  "lastName": "Tesla",
   "body": "Renee",
   "comments": [{
     "firstName": "Yehuda",

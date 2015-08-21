@@ -1,9 +1,7 @@
 {
-  "author": {
-    "firstName": "Alan",
-    "lastName": "Johnson"
-  },
-  "body": "I Love Handlebars",
+  "firstName": "Carol",
+  "lastName": "Tesla",
+  "body": "Renee",
   "comments": [{
     "firstName": "Yehuda",
     "lastName": "Katz",
