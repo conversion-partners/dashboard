@@ -337,7 +337,7 @@ function showNewPageForm() {
     required_by_default: false,
     schema: {
       type: "object",
-      title: "New page",
+      title: "New-page",
       properties: {
         title: {
           type: "string",

@@ -1,6 +1,9 @@
 var pageRoutes = {
   '/page/edit$/': function() {
+    console.log('edit page');
     var template = store.get('template');
+    console.log('using template : ');
+    console.log(template);
     var page = store.get('page');
     var theme = store.get('theme');
     var account = store.get('account');
@@ -38,7 +41,6 @@ var pageRoutes = {
     xhr.send();
   },
   '/pages$/': function(req) {
-    console.log('test');
     Core9.panel.open('panel-pages');
     Core9.iframe.parent.sentMessageToIframe('init();', Core9.panel.getIframeById('panel-pages'));
   },

@@ -278,7 +278,10 @@ Core9.blocks.handler.triggerBlockDataReady = function() {
   document.body.dispatchEvent(event);
 }
 Core9.blocks.handler.getBlocks = function() {
-  return document.querySelectorAll(".core9-block");
+  var blocks = document.querySelectorAll(".core9-block");
+  console.log('all blocks : ');
+  console.log(blocks);
+  return blocks;
 }
 var RUNNED_INIT = false;
 Core9.blocks.handler.init = function(account, theme) {

@@ -100,7 +100,7 @@ function saveTheme(data) {
       "template": pageName,
       "versions": [{
         "status": "active",
-        "title": "New Page"
+        "title": "New-Page"
       }]
     }
     Core9.data[TYPEOFPAGE].insert(templateData);
