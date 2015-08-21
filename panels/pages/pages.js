@@ -304,7 +304,7 @@ function savePage(data) {
     "page": pageName,
     "url": "",
     "versions": [{
-      "title": "Version one",
+      "title": "version-one",
       "theme": "",
       "language": "",
       "country": "",
