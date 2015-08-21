@@ -1,1 +1,16 @@
-{"author":{"firstName":"Carol","lastName":"Tesla"},"body":"Renee","comments":[{"body":"Me too! dddd","author":{"firstName":"Yehuda","lastName":"Katz"}},{"firstname":"first`","lastname":"last","body":"<p>body</p>"}]}
+{
+  "author": {
+    "firstName": "Carol",
+    "lastName": "Tesla"
+  },
+  "body": "Renee",
+  "comments": [{
+    "firstName": "Yehuda",
+    "lastName": "Katz",
+    "body": "Me too!"
+  }, {
+    "firstName": "Yehuda",
+    "lastName": "Katz",
+    "body": "Me too!"
+  }]
+}
