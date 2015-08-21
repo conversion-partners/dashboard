@@ -35,6 +35,9 @@ var isArray = function(val) {
   }
   return false;
 }
+function isEmpty(str) {
+  return (!str.trim() || 0 === str.trim().length);
+}
 if (typeof Core9 === 'undefined') {
   Core9 = {}
 };
@@ -146,12 +149,20 @@ Core9.forms.loadForm = function(script, schema, data) {
   // location.origin + "/dashboard/data/accounts/easydrain/blocks/bower_components/image/forms/frontend/steps/author.json"
   function onSave() {
     var script = $('#form-select').val();
+    if(isEmpty(script)){
+      alert('Please select a form');
+      return;
+    }
     data.action = "save";
     Core9.forms.saveForm(script, schema, data, Core9.editor.getValue());
   }
 
   function onSubmit() {
     var script = $('#form-select').val();
+    if(isEmpty(script)){
+      alert('Please select a form');
+      return;
+    }
     data.action = "submit";
     Core9.forms.saveForm(script, schema, data, Core9.editor.getValue());
   }
