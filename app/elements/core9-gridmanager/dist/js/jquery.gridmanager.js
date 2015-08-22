@@ -714,13 +714,12 @@
     gm.saveremote = function () {
       var canvas = gm.$el.find("#" + gm.options.canvasId);
       var content = document.body; //.innerHTML;
-      var templates = content.getElementsByClassName('core9-template');
-      for(var i = 0; i < templates.length; i++) {
-        var template = jQuery(templates[i]);
-        var parent = template.parent().parent();
-        parent.after(template);
-        parent.remove();
-      }
+      var editor = jQuery(content).find('#mycanvas');
+      jQuery(editor).after(canvas);
+      jQuery(editor).remove();
+      var html = content.innerHTML.replace('gm-canvas', 'mycanvas');
+      html = html.replace('class="ui-sortable"', 'class="ui-sortable core9-canvas"');
+      //console.log(html);
       Core9.blocks.save({
         url: gm.options.remoteURL,
         data: {
@@ -729,7 +728,6 @@
           account: store.get('account')
         }
       });
-
       gm.log("Save Function Called");
     };
     /*------------------------------------------ ROWS ---------------------------------------*/

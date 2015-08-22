@@ -61,7 +61,10 @@ var themeRoutes = {
         var iframe = Core9.panel.getIframeById('panel-iframe-site');
         Core9.iframe.write(iframe, docString, true);
         setTimeout(function () {
-          var cmd = 'window.gm = jQuery("#mycanvas").gridmanager().data("gridmanager");$(".gm-preview").trigger("click");';
+
+          var t = '$("#gm-canvas").append(document.getElementsByClassName("core9-template")[0].children); $(".core9-template").remove();';
+
+          var cmd = 'window.gm = jQuery("#mycanvas").gridmanager().data("gridmanager");$(".gm-preview").trigger("click");' + t;
           Core9.iframe.parent.sentMessageToIframe(cmd, iframe);
         }, 1000); // smarter needs to be handled in sendMessage to iframe
         initPanelIframeSite = false;
