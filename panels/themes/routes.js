@@ -11,9 +11,16 @@ var themeRoutes = {
       var that = this;
       var ajax = new XMLHttpRequest();
       ajax.onload = function () {
+
+        //FIXME this needs to be configurable!!!!!!!!!!!!
+
         var doc = this.responseXML;
         var html = Core9.xmlToString(that.responseXML);
-        doc.getElementsByTagName("body")[0].innerHTML = '<div id="gm-canvas" class="ui-sortable">' + html + '</div>';
+
+        // with wrapper and no wrapper
+        //doc.getElementsByTagName("body")[0].innerHTML = '<div id="gm-canvas" class="ui-sortable">' + html + '</div>';
+        doc.getElementsByTagName("body")[0].innerHTML = html;
+
         var docString = Core9.xmlToString(doc);
         Core9.panel.open('panel-iframe-site');
         var iframe = Core9.panel.getIframeById('panel-iframe-site');
