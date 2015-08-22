@@ -819,7 +819,7 @@
         {
           url:  gm.options.remoteURL,
           data: {
-            content: document.documentElement.outerHTML, //canvas.html(), //
+            content: document.body.innerHTML, // document.documentElement.outerHTML, //canvas.html(), //
             template: store.get('template'),
             account: store.get('account')
           }
