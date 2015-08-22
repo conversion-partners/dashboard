@@ -8,10 +8,14 @@
       console.log('Scrolled');
     });
   });
+
+  /*
   $(document).on('click', '.yamm .dropdown-menu', function (e) {
     e.stopPropagation()
-  })
-  $(document).on('click', '.dropdown-toggle', function (e) {
+  });
+
+
+  $(document).on('click', 'li.dropdown > .dropdown-toggle', function (e) {
     console.log('menu clicked');
     var menuLen = $('ul.nav > li.open').size();
     if(menuLen == 0) {
@@ -23,5 +27,7 @@
       $('body').addClass('noscroll');
     }
     e.stopPropagation()
-  })
+  });
+*/
+
 })(jQuery);
