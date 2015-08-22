@@ -719,6 +719,7 @@
       jQuery(editor).remove();
       var html = content.innerHTML.replace('id="gm-canvas"', '');
       html = html.replace('class="ui-sortable"', 'class="core9-template"');
+      html = html.replace('<script id="js-boot" src="/dashboard/app/elements/core9-gridmanager/boot.min.js"></script>','');
       //console.log(html);
       Core9.blocks.save({
         url: gm.options.remoteURL,
