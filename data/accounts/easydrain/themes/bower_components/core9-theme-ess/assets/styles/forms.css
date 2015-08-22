@@ -1,0 +1,9 @@
+/** Colors **/
+.input-lg, .form-horizontal .form-group-lg .form-control, .input-group-lg > .form-control, .input-group-lg > .input-group-addon, .input-group-lg > .input-group-btn > .btn .form-control {
+  font-size: 16px;
+  border-radius: 0;
+  border: 0; }
+
+.form-control.filled {
+  background-color: #f2f0f1;
+  box-shadow: 0 0 0; }

@@ -36,7 +36,8 @@
     "fontawesome": "~4.3.0",
     "bluebird": "~2.9.34",
     "responsive-elements": "~1.0.1",
-    "jailed": "~0.2.0"
+    "jailed": "~0.2.0",
+    "bootstrap-sass-official": "~3.3.5"
   },
   "resolutions": {
     "polymer": "^0.9.0",
