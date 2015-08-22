@@ -717,8 +717,8 @@
       var editor = jQuery(content).find('#mycanvas');
       jQuery(editor).after(canvas);
       jQuery(editor).remove();
-      var html = content.innerHTML.replace('gm-canvas', 'mycanvas');
-      html = html.replace('class="ui-sortable"', 'class="ui-sortable core9-canvas"');
+      var html = content.innerHTML.replace('id="gm-canvas"', '');
+      html = html.replace('class="ui-sortable"', 'class="core9-template"');
       //console.log(html);
       Core9.blocks.save({
         url: gm.options.remoteURL,
