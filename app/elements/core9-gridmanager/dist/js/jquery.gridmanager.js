@@ -723,7 +723,7 @@
       Core9.blocks.save({
         url: gm.options.remoteURL,
         data: {
-          content: content.innerHTML, // document.documentElement.outerHTML, //canvas.html(), //
+          content: html, // document.documentElement.outerHTML, //canvas.html(), //
           template: store.get('template'),
           account: store.get('account')
         }
