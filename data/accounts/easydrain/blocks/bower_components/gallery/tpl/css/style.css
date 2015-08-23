@@ -1,5 +1,5 @@
 [data-type="gallery"] {
-  border: 0px solid #ccc;
+  border: 1px solid transparent;
   padding: 20px;
   float: left;
 }
