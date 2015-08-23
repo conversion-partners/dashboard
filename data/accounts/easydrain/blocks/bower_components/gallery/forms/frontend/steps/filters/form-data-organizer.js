@@ -1,6 +1,6 @@
 var stepData = {
-  "comments.json": ["comments"],
-  "author.json": ["firstname", "lastname", "body"]
+  "src.json": ["src"],
+  "description.json": ["title", "description"]
 }
 var api = {
   filter: function (input, cb) {

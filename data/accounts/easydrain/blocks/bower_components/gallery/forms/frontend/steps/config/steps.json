@@ -1,10 +1,10 @@
 [
 	{
-		"label": "Author",
-		"file": "author.json"
+		"label": "Description",
+		"file": "description.json"
 	},
 	{
-		"label": "Comments",
-		"file": "comments.json"
+		"label": "Sources",
+		"file": "src.json"
 	}
 ]
