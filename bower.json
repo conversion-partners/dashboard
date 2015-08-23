@@ -1,18 +1,10 @@
 {
   "name": "core9-components",
   "version": "0.0.0",
-  "authors": [
-    "jessec <robertjessecooke@gmail.com>"
-  ],
+  "authors": ["jessec <robertjessecooke@gmail.com>"],
   "description": "testing stuff",
   "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
+  "ignore": ["**/.*", "node_modules", "bower_components", "test", "tests"],
   "dependencies": {
     "polymer": "Polymer/polymer#^0.9.0",
     "es6-shim": "~0.31.2",
