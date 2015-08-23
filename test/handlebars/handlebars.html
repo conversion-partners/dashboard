@@ -7,21 +7,61 @@
   <link rel="stylesheet" type="text/css" href="/dashboard/app/src/responsive-elements/website/media/style.css">
 
 
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="/dashboard/app/src/responsive-elements/responsive-elements.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="/dashboard/app/src/responsive-elements/responsive-elements.js"></script>
 
   <style type="text/css">
-		#testid1 {border:1px solid #ccc; padding:20px; float:left; max-width: 100%;}
-		#testid1 * {margin:0; padding:0}
-		#testid1  {font-style:italic; font-family:serif; font-size:18px; line-height:1.3;}
-		#testid1  {font-family:sans-serif; font-size:12px; margin-top:10px; color:#999}
-		#testid1.gt250  {font-family:sans-serif; color:#aaa}
-		#testid1.lt150  {font-size:14px; word-spacing:-1px; line-height:1.2}
-		#testid1.lt150  {font-size:11px; margin-top:5px}
-		#testid1.lt150 {background: blue}
-    #testid1.gt350 {  width: 400px;}
-	</style>
+    #testid1 {
+      border: 1px solid #ccc;
+      padding: 20px;
+      float: left;
+      max-width: 100%;
+    }
+
+    #testid1 * {
+      margin: 0;
+      padding: 0
+    }
+
+    #testid1 {
+      font-style: italic;
+      font-family: serif;
+      font-size: 18px;
+      line-height: 1.3;
+    }
+
+    #testid1 {
+      font-family: sans-serif;
+      font-size: 12px;
+      margin-top: 10px;
+      color: #999
+    }
+
+    #testid1.gt250 {
+      font-family: sans-serif;
+      color: #aaa
+    }
+
+    #testid1.lt150 {
+      font-size: 14px;
+      word-spacing: -1px;
+      line-height: 1.2
+    }
+
+    #testid1.lt150 {
+      font-size: 11px;
+      margin-top: 5px
+    }
+
+    #testid1.lt150 {
+      background: blue
+    }
+
+    #testid1.gt350 {
+      width: 400px;
+    }
+  </style>
 
   <script type="text/javascript">
     // demo slider
@@ -58,13 +98,13 @@
 
 
 
-    <div id="demo">
-     <img class="hint" src="/dashboard/app/src/responsive-elements/website/media/img/hint.png">
-     <div id="resizable">
-       <div class="core9-block" id="testid1" data-type="image" data-respond="start: 100px; end: 900px; interval: 50px;" data-id="testid1"></div>
-       <div class="slider-handle ui-resizable-handle ui-resizable-e"></div>
-     </div>
-   </div>
+  <div id="demo">
+    <img class="hint" src="/dashboard/app/src/responsive-elements/website/media/img/hint.png">
+    <div id="resizable">
+      <div class="core9-block" id="testid1" data-type="image" data-respond="start: 100px; end: 900px; interval: 50px;" data-id="testid1"></div>
+      <div class="slider-handle ui-resizable-handle ui-resizable-e"></div>
+    </div>
+  </div>
 
 
   <div class="core9-block" data-type="image" data-id="testid2"></div>
@@ -78,7 +118,7 @@
   </script>
 
   <script id="usermessage" type="text/x-handlebars-template">
-    <{{tagName}}>By {{author.firstName}} {{author.lastName}}</{{tagName}}>
+    <{{tagName}}>By {{firstName}} {{lastName}}</{{tagName}}>
     <div class="body">{{body}}</div>
   </script>
 
@@ -99,11 +139,13 @@
       },
       "body": "I Love Handlebars",
       "comments": [{
-        "author": {
-          "firstName": "Yehuda",
-          "lastName": "Katz"
-        },
+        "firstName": "Yehuda",
+        "lastName": "Katz",
         "body": "Me too!"
+      },{
+        "firstName": "Yeasdfhuda",
+        "lastName": "Katasdfz",
+        "body": "Me toasdfo!"
       }]
     };
 
