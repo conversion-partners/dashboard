@@ -3,15 +3,13 @@
 
 
 <script data-role="block" id="init" type="text/x-handlebars-template">
-  <div class="widget imagegallery">
+  <div class="gallery">
     <h2>{{title}}</h2>
     <hr />
     <p>{{description}}</p>
-    <div class="imagegallery-horizontal">
-      <ul>
-        {{#each src}} {{> images }} {{/each}}
-      </ul>
-    </div>
+    <ul>
+      {{#each src}} {{> images }} {{/each}}
+    </ul>
   </div>
 </script>
 
