@@ -118,7 +118,7 @@
   </script>
 
   <script id="usermessage" type="text/x-handlebars-template">
-    <{{tagName}}>By {{firstName}} {{lastName}}</{{tagName}}>
+    <{{tagName}}>By {{firstname}} {{lastname}}</{{tagName}}>
     <div class="body">{{body}}</div>
   </script>
 
@@ -133,19 +133,25 @@
       .getElementById("init").innerText);
 
     var context = {
-      "author": {
-        "firstName": "Alan",
-        "lastName": "Johnson"
-      },
-      "body": "I Love Handlebars",
+      "firstName": "Carol",
+      "lastName": "Tesla",
+      "body": "<iframe width=\"560\" height=\"315\" src=\"http://www.youtube.com/embed/ey-JQMiza7o?wmode=opaque\" data-youtube-id=\"ey-JQMiza7o\" frameborder=\"0\" allowfullscreen=\"\"></iframe>",
       "comments": [{
-        "firstName": "Yehuda",
-        "lastName": "Katz",
-        "body": "Me too!"
-      },{
-        "firstName": "Yeasdfhuda",
-        "lastName": "Katasdfz",
-        "body": "Me toasdfo!"
+        "body": "Me too!",
+        "firstname": "Hero",
+        "lastname": "Mattisse"
+      }, {
+        "body": "Me tasdfoo!",
+        "firstname": "Robin",
+        "lastname": "Ashley"
+      }, {
+        "firstname": "Edsdafwin",
+        "lastname": "Rudsdfolf",
+        "body": "<p>test</p>"
+      }, {
+        "firstname": "Edwin",
+        "lastname": "Rudolf",
+        "body": "<p>test</p>"
       }]
     };
 
