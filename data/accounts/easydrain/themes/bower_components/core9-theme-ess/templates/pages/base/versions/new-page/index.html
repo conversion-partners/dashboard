@@ -212,7 +212,44 @@
 
 	</div>
 </div>
+<style>
+	#container-lifted {
+		margin-top: -99px;
+		margin-bottom: 100px;
+		border: 0;
+		border-top: 1px solid #716E6E;
+		width: 1138px;
+		margin-left: -553px;
+		left: 50%;
+		display: block;
+		position: relative;
+	}
 
+	.widget.jumbotron {
+		border-bottom: 1px solid #000;
+	}
+
+	#left-lifted-border {
+		float: left;
+		height: 36px;
+		width: 3px;
+		border-left: 1px solid #000;
+		margin-left: -15px;
+		margin-top: -4px;
+		margin-bottom: -40px;
+		position: absolute;
+	}
+
+	#right-lifted-border {
+		float: right;
+		height: 68px;
+		width: 3px;
+		border-right: 1px solid #000;
+		margin-right: -15px;
+		margin-top: -36px;
+		margin-bottom: -50px;
+	}
+</style>
 <!-- end container -->
 <!-- jumbotron -->
 
@@ -229,8 +266,11 @@
 
 <!-- end jumbotron -->
 
+<hr id="container-lifted">
 <!-- lifted container -->
 <div class="container lifted">
+	<div id="left-lifted-border"></div>
+	<div id="right-lifted-border"></div>
 	<div class="core9-template">
 		<div class="row">
 
