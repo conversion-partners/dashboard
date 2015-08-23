@@ -2,18 +2,24 @@
 <html>
 
 
-  <script data-role="block" id="init" type="text/x-handlebars-template">
-    <div class="post">
-      {{> usermessage tagName="h1" }}
-      <h1>Comments</h1>
-      {{#each comments}} {{> usermessage tagName="h2" }} {{/each}}
+<script data-role="block" id="init" type="text/x-handlebars-template">
+  <div class="widget imagegallery">
+    <h2>{{title}}</h2>
+    <hr />
+    <p>{{description}}</p>
+    <div class="imagegallery-horizontal">
+      <ul>
+        {{#each src}} {{> images }} {{/each}}
+      </ul>
     </div>
-  </script>
+  </div>
+</script>
 
-  <script data-role="block" id="usermessage" type="text/x-handlebars-template">
-    <{{tagName}}>By {{author.firstName}} {{author.lastName}}</{{tagName}}>
-    <div class="body">{{body}}</div>
-  </script>
+<script data-role="block" id="images" type="text/x-handlebars-template">
+  <li>
+    <img src="{{src}}" />
+  </li>
+</script>
 
 
 </html>
