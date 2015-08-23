@@ -1,5 +1,5 @@
 [data-type="gallery"] {
-  border: 1px solid #ccc;
+  border: 0px solid #ccc;
   padding: 20px;
   float: left;
 }
@@ -19,7 +19,7 @@
   padding-right: 20px;
 }
 [data-type="gallery"] ul > li > img {
-  max-width: 270px;
+  max-width: 255px;
 }
 [data-type="gallery"].gt250 {
   font-family: sans-serif;
