@@ -5,17 +5,19 @@
 <script data-role="block" id="init" type="text/x-handlebars-template">
 
   <div class="collectiongallery">
-    <h2>Easy Drain Collection</h2>
-    <hr /> {{#each articles}} {{> article }} {{/each}}
+    <h2>{{title}}</h2><hr />
+    {{description}} <br />
+    {{#each articles}} {{> article }} {{/each}}
   </div>
 
 </script>
 
 <script data-role="block" id="article" type="text/x-handlebars-template">
 
-  <article class="collectiongallery-item">
-    <h3>MODULO</h3>
-    <p class="subtitle">The original</p>
+  <article>
+    <div>
+    <h3>{{title}}</h3>
+    <p class="subtitle">{{subtitle}}</p>
     <dl>
       <dt>Dimensions</dt>
       <dd>500 - 1200 mm</dd>
@@ -25,6 +27,7 @@
       <dd>A B C D
         <br /> E F G H</dd>
     </dl>
+  </div>
     <img src="{{url}}" />
   </article>
 

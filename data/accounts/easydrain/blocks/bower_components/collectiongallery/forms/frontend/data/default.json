@@ -1,13 +1,21 @@
 {
-  "title": "Carol",
+  "title": "Easydrain collections",
   "description": "Tesla",
-  "src": [{
-    "url": "/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/assets/images/gallery-item-1.jpg"
+  "articles": [{
+    "title": "Modulo",
+    "subtitle": "The Original",
+    "url": "/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/assets/images/category-collectiongallery-1.jpg"
   },{
-    "url": "/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/assets/images/gallery-item-1.jpg"
+    "title": "Modulo",
+    "subtitle": "The Original",
+    "url": "/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/assets/images/category-collectiongallery-1.jpg"
   },{
-    "url": "/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/assets/images/gallery-item-1.jpg"
+    "title": "Modulo",
+    "subtitle": "The Original",
+    "url": "/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/assets/images/category-collectiongallery-1.jpg"
   },{
-    "url": "/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/assets/images/gallery-item-1.jpg"
+    "title": "Modulo",
+    "subtitle": "The Original",
+    "url": "/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/assets/images/category-collectiongallery-1.jpg"
   }]
 }
