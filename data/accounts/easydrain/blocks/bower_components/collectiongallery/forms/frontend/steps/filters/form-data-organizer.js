@@ -1,5 +1,5 @@
 var stepData = {
-  "src.json": ["src"],
+  "article.json": ["articles"],
   "description.json": ["title", "description"]
 }
 var api = {
