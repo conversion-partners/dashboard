@@ -4,7 +4,7 @@
 		"file": "description.json"
 	},
 	{
-		"label": "Sources",
-		"file": "src.json"
+		"label": "Articles",
+		"file": "article.json"
 	}
 ]
