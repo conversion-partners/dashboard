@@ -1,39 +1,39 @@
-[data-type="gallery"] {
+[data-type="collectiongallery"] {
   border: 1px solid transparent;
   padding: 20px;
   float: left;
 }
-[data-type="gallery"] * {
+[data-type="collectiongallery"] * {
   margin: 0;
   padding: 0
 }
-[data-type="gallery"].gallery {
+[data-type="collectiongallery"].collectiongallery {
   width: 100%;
 }
-[data-type="gallery"] ul {
+[data-type="collectiongallery"] ul {
   list-style: none;
 }
-[data-type="gallery"] ul > li {
+[data-type="collectiongallery"] ul > li {
   display: inline;
   list-style-type: none;
   padding-right: 20px;
 }
-[data-type="gallery"] ul > li > img {
+[data-type="collectiongallery"] ul > li > img {
   max-width: 255px;
 }
-[data-type="gallery"].gt250 {
+[data-type="collectiongallery"].gt250 {
   font-family: sans-serif;
   color: #aaa
 }
-[data-type="gallery"].lt150 {
+[data-type="collectiongallery"].lt150 {
   font-size: 14px;
   word-spacing: -1px;
   line-height: 1.2
 }
-[data-type="gallery"].lt150 {
+[data-type="collectiongallery"].lt150 {
   font-size: 11px;
   margin-top: 5px
 }
-[data-type="gallery"].lt150 {
+[data-type="collectiongallery"].lt150 {
   _background: blue
 }
