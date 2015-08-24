@@ -1,3 +1,19 @@
+[data-type="collectiongallery"] article > div > h3 {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+}
+[data-type="collectiongallery"] article > div > p {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+}
+[data-type="collectiongallery"] article > div > dl {}
+[data-type="collectiongallery"] article > div > dl > dd {
+  margin-top: 0px !important;
+}
+[data-type="collectiongallery"] article > div > dl > dt {
+  margin-top: 0px !important;
+}
+
 /*! normalize.css v3.0.1 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
