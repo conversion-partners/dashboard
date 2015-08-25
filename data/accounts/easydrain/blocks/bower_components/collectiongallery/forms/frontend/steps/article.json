@@ -4,9 +4,23 @@
   "items": {
     "type": "object",
     "properties": {
+      "title": {
+        "type": "string"
+      },
+      "subtitle": {
+        "type": "string"
+      },
+      "dimentions": {
+        "type": "string"
+      },
+      "installdepth": {
+        "type": "string"
+      },
+      "grateoptions": {
+        "type": "string"
+      },
       "url": {
-        "type": "string",
-        "propertyOrder": 1
+        "type": "string"
       }
     }
   }
