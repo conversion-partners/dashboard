@@ -65,7 +65,14 @@ app.use('/dashboard/', express.static('.'));
 app.use('/*', function (req, res) {
   res.redirect('/dashboard/');
 });
-var server = app.listen(3000, function () {
+
+
+var config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
+var hostname = "localhost";//config.hostname;//"localhost";
+console.log("config : ");
+console.log(config);
+
+var server = app.listen(3000, config.hostname, function () {
   var host = server.address().address;
   var port = server.address().port;
   console.log('Example app listening at http://%s:%s', host, port);

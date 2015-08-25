@@ -1,7 +1,12 @@
 var proxy = require('redbird')({port: 9090});
+var fs = require('fs');
 
-proxy.register("localhost:9090/dashboard/", "http://127.0.0.1:3000/dashboard/");
-proxy.register("localhost:9090/dashboard", "http://127.0.0.1:3000/dashboard");
-proxy.register("localhost:9090/api/", "http://127.0.0.1:3000/api/");
+var config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
+console.log("config : ");
+console.log(config);
 
-proxy.register("localhost:9090", "http://127.0.0.1:9999");
+proxy.register(config.hostname + ":9090/dashboard/", "http://" + config.hostname + ":3000/dashboard/");
+proxy.register(config.hostname +":9090/dashboard", "http://" + config.hostname + ":3000/dashboard");
+proxy.register(config.hostname +":9090/api/", "http://" + config.hostname + ":3000/api/");
+
+proxy.register(config.hostname +":9090", "http://" + config.hostname + ":9999");

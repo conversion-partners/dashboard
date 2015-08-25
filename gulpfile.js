@@ -9,6 +9,11 @@ var options = {
 
 var serverFiles = [];
 
+var fs = require('fs');
+
+var config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
+console.log("config : ");
+console.log(config);
 
 gulp.task('shorthand', shell.task([
   'cd '+__dirname+'/data/accounts/easydrain/; /usr/bin/node '+__dirname+'/node_modules/nide/main.js -p 9999 --no-browser'
