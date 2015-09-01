@@ -35,6 +35,7 @@ var themeRoutes = {
     var template = store.get('template');
     console.log('using template : ');
     console.log(template);
+    // check if template exists else use alternative template ... new or previous version !!!!!!!!!!!!!!!!!!!!!!!
     var theme = store.get('theme');
     var account = store.get('account');
     var xhr = new XMLHttpRequest();
