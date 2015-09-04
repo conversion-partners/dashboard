@@ -54,7 +54,7 @@ app.use('/dashboard/data/accounts/:account/themes/bower_components/:theme/templa
           res.end();
         }
       });
-      return console.log(err);
+      //return console.log(err);
     } else {
       res.write(data);
       res.end();
