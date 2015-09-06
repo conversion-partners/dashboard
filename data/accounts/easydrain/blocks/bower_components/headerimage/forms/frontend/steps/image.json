@@ -2,23 +2,10 @@
   "type": "object",
   "title": "Author",
   "properties": {
-    "firstname": {
+    "image": {
       "type": "string",
-      "title": "First name",
+      "title": "Image",
       "propertyOrder": 1
-    },
-    "lastname": {
-      "type": "string",
-      "title": "Last name",
-      "propertyOrder": 2
-    },
-    "body": {
-      "type": "string",
-      "format": "html",
-      "propertyOrder": 3,
-      "options": {
-        "wysiwyg": true
-      }
     }
   }
 }
