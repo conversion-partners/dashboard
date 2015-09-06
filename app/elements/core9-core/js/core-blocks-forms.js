@@ -119,6 +119,7 @@ Core9.forms.filterForm = function(script, schema, data) {
           // this is not correct leave the false
           obj = scriptData;
         } else {
+          // this works with only one value
           obj[item] = scriptData;
         }
       }
