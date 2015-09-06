@@ -115,7 +115,8 @@ Core9.forms.filterForm = function(script, schema, data) {
         }
       } else {
         // this sucks
-        if (len == 1) {
+        if (len == 1 && false) {
+          // this is not correct leave the false
           obj = scriptData;
         } else {
           obj[item] = scriptData;

@@ -1,11 +1,9 @@
 {
   "type": "object",
-  "title": "Image",
+  "title": "Header image",
   "properties": {
-    "image": {
-      "type": "string",
-      "title": "Image",
-      "propertyOrder": 1
+    "headerimage": {
+      "type": "string"
     }
   }
 }
