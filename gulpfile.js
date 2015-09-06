@@ -24,8 +24,8 @@ gulp.task('shorthand2', shell.task([
 ]));
 
 gulp.task('shorthand3', shell.task([
- '/usr/local/bin/node-debug '+__dirname+'/app.js'
- //'/usr/bin/node '+__dirname+'/app.js'
+ //'/usr/local/bin/node-debug '+__dirname+'/app.js'
+ '/usr/bin/node '+__dirname+'/app.js'
 ]));
 
 

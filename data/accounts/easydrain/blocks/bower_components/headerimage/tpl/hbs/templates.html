@@ -3,17 +3,19 @@
 
 
   <script data-role="block" id="init" type="text/x-handlebars-template">
-    <div class="post">
-      {{> usermessage tagName="h1" }}
-      <h1>Comments</h1>
-      {{#each comments}} {{> usermessage tagName="h2" }} {{/each}}
+    <div class="widget jumbotron image" style="background: url('/dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/assets/images/series-header-1.jpg') no-repeat; background-position: center;">
+    	<div class="container">
+    		<div class="row">
+    			<div class="col-xs-12 col-md-offset-8 col-md-4">
+    				<a href="#" class="find-a-dealer">
+    					<span class="glyphicon glyphicon-globe"></span> Find a dealer near you</a>
+    			</div>
+    		</div>
+    	</div>
     </div>
   </script>
 
-  <script data-role="block" id="usermessage" type="text/x-handlebars-template">
-    <{{tagName}}>By {{firstname}} {{lastname}}</{{tagName}}>
-    <div class="body">{{{body}}}</div>
-  </script>
+
 
 
 </html>
