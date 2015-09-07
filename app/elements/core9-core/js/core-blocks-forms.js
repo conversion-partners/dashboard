@@ -176,6 +176,9 @@ Core9.forms.loadForm = function(script, schema, data) {
   saveButton.addEventListener('click', onSave, false);
   submitButton.removeEventListener('click', onSubmit, false);
   submitButton.addEventListener('click', onSubmit, false);
+
+
+
 }
 
 function setValue(path, val, obj) {
