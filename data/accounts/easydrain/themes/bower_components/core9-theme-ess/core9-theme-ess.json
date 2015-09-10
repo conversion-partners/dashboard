@@ -30,6 +30,10 @@
             "name": "Tell us form",
             "icon": "",
             "link": "/dashboard/themes/core9-theme-ess/blocks/tellusform/add"
+          }, {
+            "name": "Reference Gallery",
+            "icon": "",
+            "link": "/dashboard/themes/core9-theme-ess/blocks/referencegallery/add"
           }]
         }]
       }]
