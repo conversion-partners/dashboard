@@ -8,7 +8,7 @@
     <h2>{{title}}</h2>
     <br />
     <h3>{{subtitle}}</h3>
-    {{gallerydescription}}
+    {{{gallerydescription}}}
     <br />
     {{#each articles}} {{> article }} {{/each}}
   </div>
@@ -29,7 +29,7 @@
           </div>
           <h3>{{title}}</h3>
           <p class="subtitle">{{subtitle}}</p>
-          <p class="description">{{description}}</p>
+          <p class="description">{{{description}}}</p>
         </div>
       </li>
     </ul>
