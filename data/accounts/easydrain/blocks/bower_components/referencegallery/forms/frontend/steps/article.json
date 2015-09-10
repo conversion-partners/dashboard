@@ -10,13 +10,14 @@
       "subtitle": {
         "type": "string"
       },
-      "dimentions": {
-        "type": "string"
+      "gallerydescription": {
+        "type": "string",
+        "format": "html",
+        "options": {
+          "wysiwyg": true
+        }
       },
-      "installdepth": {
-        "type": "string"
-      },
-      "grateoptions": {
+      "projectlink": {
         "type": "string"
       },
       "url": {

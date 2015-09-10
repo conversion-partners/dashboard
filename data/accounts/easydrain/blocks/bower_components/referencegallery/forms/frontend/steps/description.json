@@ -1,16 +1,18 @@
 {
   "type": "object",
-  "title": "Author",
+  "title": "Hotel",
   "properties": {
     "title": {
       "type": "string",
-      "title": "Title",
-      "propertyOrder": 1
+      "title": "Title"
     },
-    "description": {
+    "subtitle": {
+      "type": "string",
+      "title": "Sub title"
+    },
+    "gallerydescription": {
       "type": "string",
       "format": "html",
-      "propertyOrder": 3,
       "options": {
         "wysiwyg": true
       }
