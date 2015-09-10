@@ -1,47 +1,49 @@
-[data-type="collectiongallery"] {
+[data-type="referencegallery"] {
   border: 1px solid transparent;
   padding: 0px;
   width: 100%;
 }
-[data-type="collectiongallery"] * {
+[data-type="referencegallery"] * {
   margin: 0;
   padding: 0;
 }
-[data-type="collectiongallery"].collectiongallery {
+[data-type="referencegallery"] article {
   width: 100%;
 }
-[data-type="collectiongallery"] article {
-  display: inline-block;
-  width: 550px;
-  border: 1px solid #ddd;
+[data-type="referencegallery"] article > span {
+  float: right;
+  margin-top: -25px;
 }
-[data-type="collectiongallery"] article > div {
+[data-type="referencegallery"] article > ul {
+  list-style: none;
+  width: 100%;
+}
+[data-type="referencegallery"] article > ul > li {
+  display: inline-block;
+  max-width: 49.7%;
+  overflow: hidden;
+  vertical-align: top;
+}
+[data-type="referencegallery"] article > div {
   padding: 36px;
   padding-top: 0px;
   text-align: center;
-  max-width: 160px;
-  float: left;
-}
-[data-type="collectiongallery"] article > div > h3 {
-  margin-top: 20px;
-  margin-bottom: 15px;
-}
-[data-type="collectiongallery"] article > div > p {
-  margin-top: 25px;
-  margin-bottom: 20px;
-}
-[data-type="collectiongallery"] article > div > dl {}
-[data-type="collectiongallery"] article > div > dl > dd {
-  margin-top: 5px;
-}
-[data-type="collectiongallery"] article > div > dl > dt {
-  margin-top: 15px;
-}
-[data-type="collectiongallery"] article > img {
-  max-width: 330px;
+  max-width: 40%;
   float: right;
 }
-[data-type="collectiongallery"].gt250 {}
-[data-type="collectiongallery"].lt150 {}
-[data-type="collectiongallery"].lt150 {}
-[data-type="collectiongallery"].lt150 {}
+[data-type="referencegallery"] article > ul > li > div > div.arrow-holder {
+  margin-left: -23px;
+  margin-top: 165px;
+  position: absolute;
+}
+[data-type="referencegallery"] article > ul > li > div > div.arrow-holder > .arrow-left {
+  width: 0;
+  height: 0;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-right: 20px solid white;
+}
+[data-type="referencegallery"].gt250 {}
+[data-type="referencegallery"].lt150 {}
+[data-type="referencegallery"].lt150 {}
+[data-type="referencegallery"].lt150 {}

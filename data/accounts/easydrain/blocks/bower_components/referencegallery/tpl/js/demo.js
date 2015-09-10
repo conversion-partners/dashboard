@@ -9,7 +9,7 @@ $(function() {
     },
     resize: function() {
       $('.live-classes').text(
-        $('[data-type="collectiongallery"]').attr('class').replace('core9-block', '')
+        $('[data-type="referencegallery"]').attr('class').replace('core9-block', '')
       );
     }
   });
