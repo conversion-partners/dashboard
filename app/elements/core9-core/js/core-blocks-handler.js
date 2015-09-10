@@ -63,7 +63,9 @@ Core9.blocks.handler.events.onhover = function() {
         action: 'showPageForm',
         message: 'You tried to open context menu says parent'
       }
-      Core9.iframe.child.sentMessageToParent(message);
+      try {
+        Core9.iframe.child.sentMessageToParent(message);
+      } catch (e) {}
       e.preventDefault();
     }, false);
   }
