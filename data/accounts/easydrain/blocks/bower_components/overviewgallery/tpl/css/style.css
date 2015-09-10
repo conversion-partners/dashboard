@@ -8,7 +8,12 @@
   padding: 0;
 }
 [data-type="overviewgallery"] article {
-  width: 100%;
+  display: inline-block;
+  overflow: hidden;
+  width: 30%;
+  border: 1px solid #ddd;
+  margin-right: 2.8%;
+  margin-bottom: 2.8%;
 }
 [data-type="overviewgallery"] article > span {
   float: right;
@@ -20,28 +25,28 @@
 }
 [data-type="overviewgallery"] article > ul > li {
   display: inline-block;
-  max-width: 49.7%;
   overflow: hidden;
   vertical-align: top;
+  width: 100%;
 }
-[data-type="overviewgallery"] article > div {
+[data-type="overviewgallery"] article > ul > li > div {
   padding: 36px;
-  padding-top: 0px;
   text-align: center;
-  max-width: 40%;
-  float: right;
+    background-color: #efefef;
 }
-[data-type="overviewgallery"] article > ul > li > div > div.arrow-holder {
-  margin-left: -23px;
-  margin-top: 165px;
-  position: absolute;
+[data-type="overviewgallery"] article > ul > li > div.arrow-holder {
+  margin-top: -29px;
+  padding: 0px;
 }
-[data-type="overviewgallery"] article > ul > li > div > div.arrow-holder > .arrow-left {
+[data-type="overviewgallery"] article > ul > li > div.arrow-holder >.arrow-up {
   width: 0;
   height: 0;
-  border-top: 20px solid transparent;
-  border-bottom: 20px solid transparent;
-  border-right: 20px solid white;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-bottom: 25px solid #efefef;
+  left: 50%;
+  position: relative;
+  margin-left: -12.5px;
 }
 [data-type="overviewgallery"].gt250 {}
 [data-type="overviewgallery"].lt150 {}
