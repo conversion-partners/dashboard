@@ -115,9 +115,8 @@ Core9.forms.filterForm = function(script, schema, data) {
         }
       } else {
         // this sucks
-        if (len == 1) {
-          // this is not correct leave the false
-          // this is needed for correct forms
+        if (len == 1 && type == "object") {
+          // this is needed for correct array forms
           obj = scriptData;
         } else {
           // this works with only one value per form
