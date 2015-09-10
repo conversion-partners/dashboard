@@ -26,6 +26,10 @@
             "name": "Collection gallery",
             "icon": "",
             "link": "/dashboard/themes/core9-theme-ess/blocks/collectiongallery/add"
+          }, {
+            "name": "Tell us form",
+            "icon": "",
+            "link": "/dashboard/themes/core9-theme-ess/blocks/tellusform/add"
           }]
         }]
       }]
