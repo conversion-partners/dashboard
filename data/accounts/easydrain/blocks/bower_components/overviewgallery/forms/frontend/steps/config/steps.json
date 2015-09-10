@@ -1,0 +1,10 @@
+[
+	{
+		"label": "Description",
+		"file": "description.json"
+	},
+	{
+		"label": "Articles",
+		"file": "article.json"
+	}
+]
