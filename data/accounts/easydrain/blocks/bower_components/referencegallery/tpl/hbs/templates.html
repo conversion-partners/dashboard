@@ -6,8 +6,11 @@
 
   <div class="referencegallery">
     <h2>{{title}}</h2>
-    <hr /> {{description}}
-    <br /> {{#each articles}} {{> article }} {{/each}}
+    <br />
+    <h3>{{subtitle}}</h3>
+    {{gallerydescription}}
+    <br />
+    {{#each articles}} {{> article }} {{/each}}
   </div>
 
 </script>
@@ -26,11 +29,11 @@
           </div>
           <h3>{{title}}</h3>
           <p class="subtitle">{{subtitle}}</p>
-          <p class="description">Tel Aviv is a city on the central coast of Israel. Reacently the residences at W Tel Aviv - Jaffa opened his doors in this City. The building, which historically housed a French hospital, contains a luxury hotel as well as a set of branded residences.</p>
+          <p class="description">{{description}}</p>
         </div>
       </li>
     </ul>
-    <span>VIEW PROJECT</span>
+    <span><a href="{{projectlink}}">VIEW PROJECT</a></span>
   </article>
 
 </script>
