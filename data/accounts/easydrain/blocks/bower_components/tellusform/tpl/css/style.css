@@ -24,3 +24,7 @@ form.tellusform > div > label {
   display: block;
   margin-bottom: 11px;
 }
+form.tellusform  > div.button {
+  width: 95.4%;
+  text-align: right;
+}
