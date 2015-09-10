@@ -22,7 +22,10 @@
       },
       "description": {
         "type": "string",
-        "format":"textarea",
+        "format": "html",
+        "options": {
+          "wysiwyg": true
+        },
         "propertyOrder": 5
       }
     }
