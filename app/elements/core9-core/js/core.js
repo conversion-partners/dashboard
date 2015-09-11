@@ -135,6 +135,7 @@ Core9.iframe = {
     var document = iframe.contentDocument;
     var serializer = new XMLSerializer();
     var content = serializer.serializeToString(document);
+    return content;
   }
 }
 

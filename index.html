@@ -218,9 +218,11 @@
 	<script>
 		Core9.exportPage = function() {
 
+			var iframe = Core9.panel.getIframeById('panel-iframe-site');
+			var content = Core9.iframe.getContent(iframe);
 
 			var url = '/api/io/save';
-			var content = "iframe content";
+		
 			var file = store.get('cached-file');
 			console.log(file);
 			$.ajax({
