@@ -38,6 +38,10 @@
             "name": "Overview Gallery",
             "icon": "",
             "link": "/dashboard/themes/core9-theme-ess/blocks/overviewgallery/add"
+          }, {
+            "name": "Free html",
+            "icon": "",
+            "link": "/dashboard/themes/core9-theme-ess/blocks/freehtml/add"
           }]
         }]
       }]
