@@ -447,6 +447,8 @@ $(document).ready(function() {
     //FIXME
     store.set('template', templateFile);
     store.set('theme', theme);
+    var cachedFile = "";
+    store.set('cached-file', pageFile);
     history.pushState(null, null, "/dashboard/page/edit");
     postClick("/dashboard/page/edit");
   });

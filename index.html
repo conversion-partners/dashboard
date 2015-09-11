@@ -72,7 +72,7 @@
 
 <body>
 
-	<button style="right: 20px;
+	<button id="export-page" style="right: 20px;
   z-index: 999;
   margin-right: 50px;
   height: 40px;
@@ -213,6 +213,20 @@
 
 		document.onmousemove = _move_elem;
 		document.onmouseup = _destroy;
+	</script>
+
+	<script>
+
+	//export-page
+	document.getElementById("export-page").addEventListener("click", function(){
+	  var cachedFile = store.get('cached-file');
+		if(typeof cachedFile != 'undefined'){
+			console.log(cachedFile);
+		}
+
+
+	});
+
 	</script>
 
 
