@@ -19,7 +19,7 @@
   padding-right: 20px;
 }
 [data-type="gallery"] ul > li > img {
-  max-width: 255px;
+  max-width: 250px;
 }
 [data-type="gallery"].gt250 {
   font-family: sans-serif;
