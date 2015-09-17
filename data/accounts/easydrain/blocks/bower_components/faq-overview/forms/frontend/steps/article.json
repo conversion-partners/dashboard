@@ -12,9 +12,18 @@
         "type": "string",
         "propertyOrder": 2
       },
-      "url": {
-        "type": "string",
-        "propertyOrder": 3
+      "items" : {
+        "type": "array",
+        "format": "grid",
+        "items": {
+          "type": "object",
+          "properties": {
+            "item": {
+              "type": "string",
+              "propertyOrder": 1
+            }
+          }
+        }
       }
     }
   }
