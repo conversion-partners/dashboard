@@ -34,20 +34,7 @@
   text-align: center;
     background-color: #efefef;
 }
-[data-type="faq-overview"] article > ul > li > div.arrow-holder {
-  margin-top: -29px;
-  padding: 0px;
-}
-[data-type="faq-overview"] article > ul > li > div.arrow-holder >.arrow-up {
-  width: 0;
-  height: 0;
-  border-left: 25px solid transparent;
-  border-right: 25px solid transparent;
-  border-bottom: 25px solid #efefef;
-  left: 50%;
-  position: relative;
-  margin-left: -12.5px;
-}
+
 [data-type="faq-overview"].gt250 {}
 [data-type="faq-overview"].lt150 {}
 [data-type="faq-overview"].lt150 {}

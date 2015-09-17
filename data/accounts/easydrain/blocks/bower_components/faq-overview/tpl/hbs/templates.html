@@ -20,10 +20,9 @@
   <article>
     <ul>
       <li>
-        <img src="{{url}}" />
-        <div class="arrow-holder">
-          <div class="arrow-up"></div>
-        </div>
+        <ul>
+          {{#each items}} {{> item }} {{/each}}
+        </ul>
       </li>
       <li>
         <div>
@@ -32,6 +31,12 @@
       </li>
     </ul>
   </article>
+
+</script>
+
+<script data-role="block" id="item" type="text/x-handlebars-template">
+
+    <li>{{item}}</li>
 
 </script>
 

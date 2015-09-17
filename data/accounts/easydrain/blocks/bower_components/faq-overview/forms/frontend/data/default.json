@@ -5,18 +5,17 @@
   "articles": [{
     "category": "Hotels",
     "categorylink": "http://www.easydrain.nl/nl/over-ess/referenties/w-tel-aviv",
-    "url": "/dashboard/data/accounts/easydrain/blocks/bower_components/faq-overview/tpl/images/w-hotel.jpg"
+    "items": [{"item":"test"}, {"item":"test2"}]
   }, {
     "category": "Hotels",
     "categorylink": "http://www.easydrain.nl/nl/over-ess/referenties/w-tel-aviv",
-    "url": "/dashboard/data/accounts/easydrain/blocks/bower_components/faq-overview/tpl/images/w-hotel.jpg"
+    "items": [{"item":"test"}, {"item":"test2"}]
+  }, {
+    "category": "Hotels",
+    "items": [{"item":"test"}, {"item":"test2"}]
   }, {
     "category": "Hotels",
     "categorylink": "http://www.easydrain.nl/nl/over-ess/referenties/w-tel-aviv",
-    "url": "/dashboard/data/accounts/easydrain/blocks/bower_components/faq-overview/tpl/images/w-hotel.jpg"
-  }, {
-    "category": "Hotels",
-    "categorylink": "http://www.easydrain.nl/nl/over-ess/referenties/w-tel-aviv",
-    "url": "/dashboard/data/accounts/easydrain/blocks/bower_components/faq-overview/tpl/images/w-hotel.jpg"
+    "items": [{"item":"test"}, {"item":"test2"}]
   }]
 }
