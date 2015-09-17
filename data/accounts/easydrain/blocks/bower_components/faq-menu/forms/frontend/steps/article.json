@@ -7,26 +7,6 @@
       "title": {
         "type": "string",
         "propertyOrder": 1
-      },
-      "subtitle": {
-        "type": "string",
-        "propertyOrder": 2
-      },
-      "projectlink": {
-        "type": "string",
-        "propertyOrder": 3
-      },
-      "url": {
-        "type": "string",
-        "propertyOrder": 4
-      },
-      "description": {
-        "type": "string",
-        "format": "html",
-        "options": {
-          "wysiwyg": true
-        },
-        "propertyOrder": 5
       }
     }
   }

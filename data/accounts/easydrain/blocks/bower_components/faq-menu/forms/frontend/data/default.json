@@ -10,5 +10,21 @@
     "title": "W HOTEL"
   },{
     "title": "W HOTEL"
+  }],
+  "settings": [{
+    "key": "key",
+    "value":"val"
+  },{
+    "key": "key",
+    "value":"val"
+  },{
+    "key": "key",
+    "value":"val"
+  },{
+    "key": "key",
+    "value":"val"
+  },{
+    "key": "key",
+    "value":"val"
   }]
 }

@@ -1,6 +1,7 @@
 var stepData = {
-  "article.json": ["articles"],
-  "description.json": ["title", "subtitle", "gallerydescription"]
+  "article.json": ["categories"],
+  "description.json": ["title"],
+  "settings.json": ["settings"]
 }
 var api = {
   filter: function (input, cb) {

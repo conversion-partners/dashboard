@@ -1,20 +1,16 @@
 {
-  "type": "object",
-  "title": "Hotel",
-  "properties": {
-    "title": {
-      "type": "string",
-      "title": "Title"
-    },
-    "subtitle": {
-      "type": "string",
-      "title": "Sub title"
-    },
-    "gallerydescription": {
-      "type": "string",
-      "format": "html",
-      "options": {
-        "wysiwyg": true
+  "type": "array",
+  "format": "grid",
+  "items": {
+    "type": "object",
+    "properties": {
+      "key": {
+        "type": "string",
+        "propertyOrder": 1
+      },
+      "value": {
+        "type": "string",
+        "propertyOrder": 2
       }
     }
   }
