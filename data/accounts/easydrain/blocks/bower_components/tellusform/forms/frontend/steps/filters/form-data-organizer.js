@@ -1,5 +1,5 @@
 var stepData = {
-  "image.json": ["headerimage"]
+  "form.json": ["title"]
 }
 var api = {
   filter: function (input, cb) {

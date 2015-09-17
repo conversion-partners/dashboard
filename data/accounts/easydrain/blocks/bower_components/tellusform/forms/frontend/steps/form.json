@@ -1,8 +1,8 @@
 {
   "type": "object",
-  "title": "Header image",
+  "title": "Form",
   "properties": {
-    "headerimage": {
+    "title": {
       "type": "string"
     }
   }
