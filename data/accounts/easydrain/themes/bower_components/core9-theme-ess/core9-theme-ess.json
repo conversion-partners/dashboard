@@ -46,6 +46,10 @@
             "name": "Faq overview",
             "icon": "",
             "link": "/dashboard/themes/core9-theme-ess/blocks/faq-overview/add"
+          }, {
+            "name": "Faq menu",
+            "icon": "",
+            "link": "/dashboard/themes/core9-theme-ess/blocks/faq-menu/add"
           }]
         }]
       }]

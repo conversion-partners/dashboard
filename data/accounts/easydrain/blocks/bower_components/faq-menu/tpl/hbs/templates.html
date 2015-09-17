@@ -7,35 +7,19 @@
   <div class="faq-menu">
     <h2>{{title}}</h2>
     <br />
-    <h3>{{subtitle}}</h3>
-    {{{gallerydescription}}}
-    <br />
-    {{#each articles}} {{> article }} {{/each}}
+    <ul>
+      {{#each categories}} {{> category }} {{/each}}
+    </ul>
   </div>
 
 </script>
 
-<script data-role="block" id="article" type="text/x-handlebars-template">
+<script data-role="block" id="category" type="text/x-handlebars-template">
 
-  <article>
-    <ul>
-      <li>
-        <img src="{{url}}" />
-      </li>
-      <li>
-        <div>
-          <div class="arrow-holder">
-            <div class="arrow-left"></div>
-          </div>
-          <h3>{{title}}</h3>
-          <p class="subtitle">{{subtitle}}</p>
-          <p class="description">{{{description}}}</p>
-        </div>
-      </li>
-    </ul>
-    <span><a href="{{projectlink}}">VIEW PROJECT</a></span>
-  </article>
-
+  <li>
+    {{title}}
+  </li>
+ 
 </script>
 
 

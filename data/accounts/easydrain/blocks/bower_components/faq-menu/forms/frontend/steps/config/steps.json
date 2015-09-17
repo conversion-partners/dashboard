@@ -6,5 +6,9 @@
 	{
 		"label": "Articles",
 		"file": "article.json"
+	},
+	{
+		"label": "Settings",
+		"file": "settings.json"
 	}
 ]
