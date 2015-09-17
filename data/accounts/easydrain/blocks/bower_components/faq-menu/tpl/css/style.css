@@ -1,30 +1,30 @@
-[data-type="faq-overview"] {
+[data-type="faq-menu"] {
   border: 1px solid transparent;
   padding: 0px;
   width: 100%;
 }
-[data-type="faq-overview"] * {
+[data-type="faq-menu"] * {
   margin: 0;
   padding: 0;
 }
-[data-type="faq-overview"] article {
+[data-type="faq-menu"] article {
   width: 100%;
 }
-[data-type="faq-overview"] article > span {
+[data-type="faq-menu"] article > span {
   float: right;
   margin-top: -25px;
 }
-[data-type="faq-overview"] article > ul {
+[data-type="faq-menu"] article > ul {
   list-style: none;
   width: 100%;
 }
-[data-type="faq-overview"] article > ul > li {
+[data-type="faq-menu"] article > ul > li {
   display: inline-block;
   max-width: 49.7%;
   overflow: hidden;
   vertical-align: top;
 }
-[data-type="faq-overview"] article > div {
+[data-type="faq-menu"] article > div {
   padding: 36px;
   padding-top: 0px;
   text-align: center;
@@ -32,7 +32,7 @@
   float: right;
 }
 
-[data-type="faq-overview"].gt250 {}
-[data-type="faq-overview"].lt150 {}
-[data-type="faq-overview"].lt150 {}
-[data-type="faq-overview"].lt150 {}
+[data-type="faq-menu"].gt250 {}
+[data-type="faq-menu"].lt150 {}
+[data-type="faq-menu"].lt150 {}
+[data-type="faq-menu"].lt150 {}
