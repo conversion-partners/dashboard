@@ -307,6 +307,7 @@ Core9.forms.setSelectBox = function(formData) {
   }
 }
 Core9.forms.init = function(data) {
+  jQuery('#form-holder').empty();
   Core9.forms.__registry.data = data;
   Core9.forms.setSelectBox(data.block.formData);
   Core9.forms.config.account = data.block.account;
