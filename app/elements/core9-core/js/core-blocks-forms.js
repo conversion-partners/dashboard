@@ -197,8 +197,7 @@ function setValue(path, val, obj) {
   }
 }
 Core9.forms.saveFormDataToUserRegistry = function(result) {
-  console.log('save to user registry');
-  console.log(result);
+
   var script = result.script;
   var oldUserData = result.data.data.userData;
   var newUserData = result.formData;
@@ -208,7 +207,6 @@ Core9.forms.saveFormDataToUserRegistry = function(result) {
         var newValue = newUserData[key];
         var oldVal = Object.resolve(key, oldUserData);
         setValue(key, newValue, oldUserData);
-        console.log(oldVal);
       }
     }
   } else {
@@ -226,13 +224,13 @@ Core9.forms.saveFormDataToUserRegistry = function(result) {
   Core9.forms.__registry.data.block.userData = oldUserData;
 }
 Core9.forms.saveData = function(result) {
-  console.log(result);
+
   var data = result.data.data.userData;
   var block = Core9.forms.__registry.data.block;
   var file = block.pageDataDirectory + block.id + '.json';
   var url = '/api/io/save';
   var content = JSON.stringify(data);
-  console.log(file);
+
   $.ajax({
     type: "POST",
     url: url,
@@ -280,8 +278,6 @@ Core9.forms.saveForm = function(script, schema, data, formData) {
     plugin.remote.save(input, reportResult);
   }
   var reportResult = function(result) {
-    console.log("Result is: ");
-    console.log(result);
     if (result.data.action == 'submit') {
       // submit to backend
       Core9.forms.saveFormDataToUserRegistry(result);

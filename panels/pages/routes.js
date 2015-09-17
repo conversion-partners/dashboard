@@ -1,9 +1,8 @@
 var pageRoutes = {
   '/page/edit$/': function() {
-    console.log('edit page');
+
     var template = store.get('template');
-    console.log('using template : ');
-    console.log(template);
+
     var page = store.get('page');
     var theme = store.get('theme');
     var account = store.get('account');

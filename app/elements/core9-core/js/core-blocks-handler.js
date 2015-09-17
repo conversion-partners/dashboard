@@ -246,7 +246,7 @@ Core9.blocks.handler.getData = function() {
   });
 }
 Core9.blocks.handler.j = function(url, responseType) {
-  console.log('url : ' + url);
+
   return new Promise(function(resolve, reject) {
     var xhr = new XMLHttpRequest;
     xhr.addEventListener("error", reject);
@@ -281,8 +281,6 @@ Core9.blocks.handler.triggerBlockDataReady = function() {
 }
 Core9.blocks.handler.getBlocks = function() {
   var blocks = document.querySelectorAll(".core9-block");
-  console.log('all blocks : ');
-  console.log(blocks);
   return blocks;
 }
 var RUNNED_INIT = false;
