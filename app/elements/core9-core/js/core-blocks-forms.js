@@ -69,6 +69,8 @@ Core9.forms.__registry = {
   data: {}
 }
 Core9.forms.getData = function (formData) {
+  console.log('init form');
+  // check for global data if it exists load it
   var script;
   if(typeof formData == 'undefined') {
     return;
