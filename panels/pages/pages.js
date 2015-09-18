@@ -429,7 +429,7 @@ $(document).ready(function() {
     var domainDirectory = domain + "_" + pageLanguage + "-" + pageCountry;
     var pageFile = '/dashboard/data/accounts/' + account + '/sites/' + domainDirectory + '/pages/' + pageName + '/versions/' + pageVersionName + '/index.html';
     var pageDataDirectory = '/dashboard/data/accounts/' + account + '/sites/' + domainDirectory + '/pages/' + pageName + '/versions/' + pageVersionName + '/data/';
-
+    var globalDataDirectory = '/dashboard/data/accounts/' + account + '/sites/' + domainDirectory + '/global-data/';
     var templateVersion = "";
 
     for (var i = 0; i < page.versions.length; i++) {
@@ -444,6 +444,7 @@ $(document).ready(function() {
     templateFile = templateFile.toLowerCase();
     store.set('page', pageFile);
     store.set('page-data-directory', pageDataDirectory);
+    store.set('global-data-directory', globalDataDirectory);
     //FIXME
     store.set('template', templateFile);
     store.set('theme', theme);

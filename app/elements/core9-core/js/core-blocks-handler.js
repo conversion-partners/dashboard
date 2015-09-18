@@ -57,6 +57,7 @@ Core9.blocks.handler.events.onhover = function () {
           theme: Core9.blocks.handler.config.theme,
           page: store.get('page'),
           pageDataDirectory: store.get('page-data-directory'),
+          globalDataDirectory: store.get('global-data-directory'),
           defaultData: Core9.blocks.handler.__registry.blocks[e.currentTarget.dataset.id].loadedDEFAULTDATA,
           userData: Core9.blocks.handler.__registry.blocks[e.currentTarget.dataset.id].loadedUSERDATA,
           formData: Core9.blocks.handler.__registry.blocks[e.currentTarget.dataset.id].loadedSTEPS
