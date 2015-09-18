@@ -50,7 +50,8 @@ Core9.forms = {
   config: {
     account: {},
     theme: {},
-    type: {}
+    type: {},
+    saveGlobalData : false
   },
   paths: {
     blocks: "/dashboard/data/accounts/{0}/blocks/bower_components/",
@@ -194,9 +195,31 @@ function setValue(path, val, obj) {
     }
   }
 }
+
+Core9.forms.getGlobalDataId = function (userData) {
+  if(typeof userData.settings != 'undefined') {
+    for(var i = 0; i < userData.settings.length; i++) {
+      var setting = userData.settings[i];
+      if(setting.key == "global") {
+        return setting.value;
+      }
+    }
+  }
+  return false;
+}
+
 Core9.forms.saveFormDataToUserRegistry = function (result) {
+
+  // check if global settings was in old data then save to global data else don't
+
   var script = result.script;
   var oldUserData = result.data.data.userData;
+
+  var globalDataId = Core9.forms.getGlobalDataId(oldUserData);
+  if(globalDataId){
+    Core9.forms.config.saveGlobalData = true;
+  }
+
   var newUserData = result.formData;
   if(typeof newUserData != "string" && !isArray(newUserData)) {
     for(var key in newUserData) {
@@ -254,9 +277,10 @@ Core9.forms.saveData = function (result) {
     console.log('global settings : ');
     for(var i = 0; i < data.settings.length; i++) {
       var setting = data.settings[i];
-      if(setting.key == "global") {
+      if(setting.key == "global" && Core9.forms.config.saveGlobalData && setting.value.trim().length > 0) {
         console.log(setting.value);
-          Core9.forms.ajax(content, globalDataDirectory + setting.value + '.json');
+        // only save data if settings was already set
+        Core9.forms.ajax(content, globalDataDirectory + setting.value + '.json');
       }
     }
   }
