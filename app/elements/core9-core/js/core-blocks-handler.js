@@ -121,27 +121,34 @@ Core9.blocks.handler.userDataById = function (block) {
   return Core9.blocks.handler.j(store.get('page-data-directory') + block.id + '.json');
   //return Core9.blocks.handler.j(Core9.blocks.handler.paths.userDataById.format(Core9.blocks.handler.config.account, page, version, block.id));
 }
+Core9.blocks.handler.getGlobalDataById = function (id) {
+  return Core9.blocks.handler.j(store.get('global-data-directory') + id + '.json');
+}
 Core9.blocks.handler.setTemplateHtml = function (block, data) {
   Core9.blocks.handler.__registry.blocks[block.id].loadedHTML = data.currentTarget.response;
   Core9.blocks.handler.createHandleBarTemplate(block);
 }
-Core9.blocks.handler.getGlobalData = function (userData) {
-  console.log('userData : ');
-  console.log(userData);
-
-  if (typeof userData.settings != 'undefined') {
-    console.log('global settings : ');
-
+Core9.blocks.handler.getGlobalDataId = function (userData) {
+  if(typeof userData.settings != 'undefined') {
     for(var i = 0; i < userData.settings.length; i++) {
-        var setting = userData.settings[i];
-        if(setting.key == "global"){
-          console.log(setting.value);
-        }
+      var setting = userData.settings[i];
+      if(setting.key == "global") {
+        return setting.value;
+      }
     }
-
   }
-
-  return userData;
+  return false;
+}
+Core9.blocks.handler.setHandleBarTemplateContent = function (userData, defaultData, template, block) {
+  var len = Object.keys(userData).length;
+  var content = {};
+  // FIXME do some error handling here!!!!!!!
+  if(len == 0) {
+    content = template(defaultData);
+  } else {
+    content = template(userData);
+  }
+  Core9.blocks.handler.__registry.blocks[block.id].$blockref.innerHTML = content;
 }
 Core9.blocks.handler.createHandleBarTemplate = function (block) {
   var html = Core9.blocks.handler.__registry.blocks[block.id].loadedHTML;
@@ -161,17 +168,25 @@ Core9.blocks.handler.createHandleBarTemplate = function (block) {
   var defaultData = Core9.blocks.handler.__registry.blocks[block.id].loadedDEFAULTDATA;
   var userData = Core9.blocks.handler.__registry.blocks[block.id].loadedUSERDATA;
   // check if userData should be globalData
-  userData = Core9.blocks.handler.getGlobalData(userData);
-  // and turn globalData in userData
-  var len = Object.keys(userData).length;
-  var content = {};
-  // FIXME do some error handling here!!!!!!!
-  if(len == 0) {
-    content = template(defaultData);
+  var globalDataId = Core9.blocks.handler.getGlobalDataId(userData);
+  if(globalDataId) {
+    Core9.blocks.handler.useGlobalData(userData, defaultData, template, block, globalDataId);
   } else {
-    content = template(userData);
+    Core9.blocks.handler.setHandleBarTemplateContent(userData, defaultData, template, block);
   }
-  Core9.blocks.handler.__registry.blocks[block.id].$blockref.innerHTML = content;
+}
+Core9.blocks.handler.useGlobalData = function (userData, defaultData, template, block, globalDataId) {
+  var promise = Core9.blocks.handler.getGlobalDataById(globalDataId);
+  promise.then(function (data) {
+    console.log("end promise");
+    var data = JSON.parse(data.currentTarget.response);
+    console.log(data);
+    userData = data;
+    Core9.blocks.handler.setHandleBarTemplateContent(userData, defaultData, template, block);
+  }, function (err) {
+    console.log(err);
+  });
+
 }
 Core9.blocks.handler.setDefaultBlockData = function (block, data) {
   Core9.blocks.handler.__registry.blocks[block.id].loadedDEFAULTDATA = JSON.parse(data.currentTarget.response);
