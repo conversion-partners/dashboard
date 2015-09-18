@@ -211,12 +211,12 @@ Core9.forms.saveFormDataToUserRegistry = function(result) {
     }
   } else {
     // assume this is always a array and only one array per form.
+    var keys = result.data.stepData[script];
+    var key = keys[0];
+    oldUserData[key] = [];
     for (var i = 0; i < newUserData.length; i++) {
       var newValue = newUserData[i];
       //var oldVal = Object.resolve(key, oldUserData);
-
-      var keys = result.data.stepData[script];
-      var key = keys[0];
       oldUserData[key][i] = newValue;
     }
   }

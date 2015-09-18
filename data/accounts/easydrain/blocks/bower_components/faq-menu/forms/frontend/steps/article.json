@@ -5,8 +5,7 @@
     "type": "object",
     "properties": {
       "title": {
-        "type": "string",
-        "propertyOrder": 1
+        "type": "string"
       }
     }
   }
