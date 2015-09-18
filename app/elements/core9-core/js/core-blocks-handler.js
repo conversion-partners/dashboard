@@ -7,6 +7,14 @@ if(!String.prototype.format) {
   };
 }
 
+Object.size = function(obj) {
+    var size = 0, key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
+};
+
 function isEmpty(str) {
   return(!str.trim() || 0 === str.trim().length);
 }
@@ -49,6 +57,13 @@ Core9.blocks.handler.events.onhover = function () {
   var blocks = Core9.blocks.handler.getBlocks();
   for(var i = 0; i < blocks.length; i++) {
     blocks[i].addEventListener('contextmenu', function (e) {
+      var userData = Core9.blocks.handler.__registry.blocks[e.currentTarget.dataset.id].loadedUSERDATA;
+      var globalData = Core9.blocks.handler.__registry.blocks[e.currentTarget.dataset.id].loadedGLOBALDATA;
+      var size = Object.size(globalData);
+      if(size > 0){
+        userData = globalData;
+      }
+
       var message = {
         block: {
           id: e.currentTarget.dataset.id,
@@ -59,7 +74,8 @@ Core9.blocks.handler.events.onhover = function () {
           pageDataDirectory: store.get('page-data-directory'),
           globalDataDirectory: store.get('global-data-directory'),
           defaultData: Core9.blocks.handler.__registry.blocks[e.currentTarget.dataset.id].loadedDEFAULTDATA,
-          userData: Core9.blocks.handler.__registry.blocks[e.currentTarget.dataset.id].loadedUSERDATA,
+          userData: userData,
+          globalData: Core9.blocks.handler.__registry.blocks[e.currentTarget.dataset.id].loadedGLOBALDATA,
           formData: Core9.blocks.handler.__registry.blocks[e.currentTarget.dataset.id].loadedSTEPS
         },
         action: 'showPageForm',
@@ -89,6 +105,7 @@ Core9.blocks.handler.filRegistry = function () {
         "loadedCSS": {},
         "loadedDEFAULTDATA": {},
         "loadedUSERDATA": {},
+        "loadedGLOBALDATA":{},
         "loadedSTEPS": {}
       };
     }
@@ -178,10 +195,9 @@ Core9.blocks.handler.createHandleBarTemplate = function (block) {
 Core9.blocks.handler.useGlobalData = function (userData, defaultData, template, block, globalDataId) {
   var promise = Core9.blocks.handler.getGlobalDataById(globalDataId);
   promise.then(function (data) {
-    console.log("end promise");
     var data = JSON.parse(data.currentTarget.response);
-    console.log(data);
     userData = data;
+    Core9.blocks.handler.setGlobalBlockData(block, data);
     Core9.blocks.handler.setHandleBarTemplateContent(userData, defaultData, template, block);
   }, function (err) {
     console.log(err);
@@ -190,6 +206,9 @@ Core9.blocks.handler.useGlobalData = function (userData, defaultData, template, 
 }
 Core9.blocks.handler.setDefaultBlockData = function (block, data) {
   Core9.blocks.handler.__registry.blocks[block.id].loadedDEFAULTDATA = JSON.parse(data.currentTarget.response);
+}
+Core9.blocks.handler.setGlobalBlockData = function (block, data) {
+  Core9.blocks.handler.__registry.blocks[block.id].loadedGLOBALDATA = data;
 }
 Core9.blocks.handler.setFormSteps = function (block, data) {
   var steps = JSON.parse(data.currentTarget.response);
