@@ -127,6 +127,19 @@ Core9.blocks.handler.setTemplateHtml = function (block, data) {
 Core9.blocks.handler.getGlobalData = function (userData) {
   console.log('userData : ');
   console.log(userData);
+
+  if (typeof userData.settings != 'undefined') {
+    console.log('global settings : ');
+
+    for(var i = 0; i < userData.settings.length; i++) {
+        var setting = userData.settings[i];
+        if(setting.key == "global"){
+          console.log(setting.value);
+        }
+    }
+
+  }
+
   return userData;
 }
 Core9.blocks.handler.createHandleBarTemplate = function (block) {
