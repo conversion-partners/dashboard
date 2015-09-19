@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+
+  <script data-role="block" id="init" type="text/x-handlebars-template">
+    <div class="post">
+      {{> usermessage tagName="h1" }}
+      <h1>Comments</h1>
+      {{#each comments}} {{> usermessage tagName="h2" }} {{/each}}
+    </div>
+  </script>
+
+  <script data-role="block" id="usermessage" type="text/x-handlebars-template">
+    <{{tagName}}>By {{firstname}} {{lastname}}</{{tagName}}>
+    <div class="body">{{{body}}}</div>
+  </script>
+
+
+</html>
