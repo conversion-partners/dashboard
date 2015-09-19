@@ -222,7 +222,7 @@
 			var content = Core9.iframe.getContent(iframe);
 
 			var url = '/api/io/save';
-		
+
 			var file = store.get('cached-file');
 			console.log(file);
 			$.ajax({
@@ -230,7 +230,7 @@
 				url: url,
 				data: {
 					content: content,
-					file: file,
+					file: file.toLowerCase(),
 					account: store.get('account')
 				},
 				statusCode: {
