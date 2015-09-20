@@ -216,13 +216,31 @@
 	</script>
 
 	<script>
+		function removeIdsFromIframeContent(doc, idsToRemove) {
+			for (i = 0; i < idsToRemove.length; i++) {
+				var id = idsToRemove[i];
+				try {
+					var elem = doc.getElementById(id);
+					elem.parentNode.removeChild(elem);
+				} catch (err) {}
+
+			}
+		}
+
 		Core9.exportPage = function() {
 
 			var iframe = Core9.panel.getIframeById('panel-iframe-site');
 			var doc = Core9.iframe.getContentAsDocument(iframe);
 
-			var script = doc.getElementById('js-boot');
-			script.parentNode.removeChild(script);
+			/**
+					  <link id="css-bootstrap" rel="stylesheet" type="text/css" href="/dashboard/app/elements/core9-gridmanager/demo/css/bootstrap.css" media="all" />
+			**/
+
+			var idsToRemove = ["js-boot", "js-boot-handler", "js-blocks", "js-child", "js-handlebars", "js-store", "css-demo"];
+
+			removeIdsFromIframeContent(doc, idsToRemove);
+			//var script = doc.getElementById('js-boot');
+			//script.parentNode.removeChild(script);
 
 			var content = Core9.iframe.documentToString(doc);
 			var url = '/api/io/save';
