@@ -8,7 +8,7 @@ if [ $OUTPUT -gt 0 ]; then
    
     echo "changed "
     git add --all . -f
-    git commit -m 'key test'
+    git commit -m 'key'
     git push -u origin master
 
 fi

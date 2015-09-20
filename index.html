@@ -219,10 +219,13 @@
 		Core9.exportPage = function() {
 
 			var iframe = Core9.panel.getIframeById('panel-iframe-site');
-			var content = Core9.iframe.getContent(iframe);
+			var doc = Core9.iframe.getContentAsDocument(iframe);
 
+			var script = doc.getElementById('js-boot');
+			script.parentNode.removeChild(script);
+
+			var content = Core9.iframe.documentToString(doc);
 			var url = '/api/io/save';
-
 			var file = store.get('cached-file');
 			console.log(file);
 			$.ajax({

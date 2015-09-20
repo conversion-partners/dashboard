@@ -1,7 +1,6 @@
 Core9 = {}
-
-// First, checks if it isn't implemented yet.
-if (!String.prototype.format) {
+  // First, checks if it isn't implemented yet.
+if(!String.prototype.format) {
   String.prototype.format = function () {
     var args = arguments;
     return this.replace(/{(\d+)}/g, function (match, number) {
@@ -9,25 +8,21 @@ if (!String.prototype.format) {
     });
   };
 }
-
 var reduceFun = function (array) {
   return Core9.deDupeArray(array);
 }
 
 function guid() {
   function s4() {
-    return Math.floor((1 + Math.random()) * 0x10000)
-      .toString(16)
-      .substring(1);
+    return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
   }
   return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
 function getArray(nr) {
   return Array.apply(null, {
-      length: nr
-    })
-    .map(Number.call, Number)
+    length: nr
+  }).map(Number.call, Number)
 }
 
 function postClick(url) {
@@ -39,53 +34,41 @@ function postClick(url) {
 }
 
 function arrayContains(needle, arrhaystack) {
-  return (arrhaystack.indexOf(needle) > -1);
+  return(arrhaystack.indexOf(needle) > -1);
 }
 
 function isEmpty(str) {
-  return (!str.trim() || 0 === str.trim().length);
+  return(!str.trim() || 0 === str.trim().length);
 }
-
-
-
-
 Core9.workspace = {
   cleanWorkspace: function () {
-    while (Core9.workspace.firstChild) {
+    while(Core9.workspace.firstChild) {
       try {
         Core9.workspace.removeChild(Core9.workspace.firstChild);
-      } catch (e) {
+      } catch(e) {
         // TODO: handle exception
       }
-
     }
   }
 };
-
 Core9.xmlToString = function (xmlData) {
-
   var xmlString;
   //IE
-  if (window.ActiveXObject) {
+  if(window.ActiveXObject) {
     xmlString = xmlData.xml;
   }
   // code for Mozilla, Firefox, Opera, etc.
   else {
-    xmlString = (new XMLSerializer())
-      .serializeToString(xmlData);
+    xmlString = (new XMLSerializer()).serializeToString(xmlData);
   }
   return xmlString;
 };
-
 Core9.guid = function () {
   function s4() {
-    return Math.floor((1 + Math.random()) * 0x10000)
-      .toString(16)
-      .substring(1);
+    return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
   }
   return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
-
 Core9.iframeLoadedEvent = new Event('iframeLoadedEvent');
 Core9.j = function (url) {
   return new Promise(function (resolve, reject) {
@@ -96,35 +79,30 @@ Core9.j = function (url) {
     xhr.send(null);
   });
 }
-
 Core9.deDupeArray = function (a) {
   var temp = {};
-  for (var i = 0; i < a.length; i++)
-    temp[a[i]] = true;
+  for(var i = 0; i < a.length; i++) temp[a[i]] = true;
   var r = [];
-  for (var k in temp)
-    if (k != 'undefined')
-      r.push(k);
+  for(var k in temp)
+    if(k != 'undefined') r.push(k);
   return r;
 }
-
 Core9.ajax = function (method, url, data, callback) {
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function () {
-    if (xhr.readyState == 4) {
+    if(xhr.readyState == 4) {
       callback(xhr);
     }
   }
   xhr.open(method, url, true);
   xhr.send(null);
 }
-
 Core9.iframe = {
   write: function (iframe, content, grid) {
     // if grid == false then page edit mode
-    if (grid && grid != "pagemode") { //FIXME what a mess
+    if(grid && grid != "pagemode") { //FIXME what a mess
       content = content.replace('</body>', '<script id="js-boot" src="/dashboard/app/elements/core9-gridmanager/boot.min.js"></script></body>');
-    }else if(grid == "pagemode"){
+    } else if(grid == "pagemode") {
       content = content.replace('</body>', '<script id="js-boot" src="/dashboard/app/elements/core9-gridmanager/boot-page-edit.min.js"></script><script id="js-boot-handler" src="/dashboard/app/elements/core9-core/js/core-blocks-handler.js"></script></body>');
     }
     iframe.contentWindow.document.open();
@@ -136,13 +114,20 @@ Core9.iframe = {
     var serializer = new XMLSerializer();
     var content = serializer.serializeToString(document);
     return content;
+  },
+  getContentAsDocument: function (iframe) {
+    return iframe.contentDocument;
+  },
+  documentToString: function (document) {
+    var serializer = new XMLSerializer();
+    var content = serializer.serializeToString(document);
+    return content;
   }
 }
-
 Core9.system = {
   unwrapModule: function (mod) {
-    for (key in mod) {
-      if (mod.hasOwnProperty(key)) {
+    for(key in mod) {
+      if(mod.hasOwnProperty(key)) {
         var value = mod[key];
         return value;
       }
@@ -150,12 +135,10 @@ Core9.system = {
   },
   multiImport: function (modules) {
     return Promise.all(modules.map(function (m) {
-
       return System.import(m)
     }))
   }
 }
-
 Core9.panel = {
   __listOfPanels: {},
   __registry: {},
@@ -163,33 +146,28 @@ Core9.panel = {
   __setRegistry: function (panel, json) {
     Core9.panel.__registry[panel] = json;
     var lastItem = Core9.panel.__listOfPanels[Core9.panel.__listOfPanels.length - 1];
-    if (panel == lastItem) {
+    if(panel == lastItem) {
       Core9.panel.__resolve('all panels loaded');
       var defaultRoutes = {
         'default': function () {}
       }
-      Router.addRoutes(defaultRoutes)
-        .listen();
+      Router.addRoutes(defaultRoutes).listen();
     }
   },
   __setPanelJson: function (panel) {
-    Core9.ajax('GET', '/dashboard/panels/' + panel + '/routes.js', null,
-      function (data) {
-        eval(data.responseText);
-        //console.log('adding routes for ' + panel);
-      });
-    Core9.ajax('GET', '/dashboard/panels/' + panel + '/data.json', null,
-      function (data) {
-        Core9.panel.__setRegistry(panel, JSON
-          .parse(data.responseText));
-      });
+    Core9.ajax('GET', '/dashboard/panels/' + panel + '/routes.js', null, function (data) {
+      eval(data.responseText);
+      //console.log('adding routes for ' + panel);
+    });
+    Core9.ajax('GET', '/dashboard/panels/' + panel + '/data.json', null, function (data) {
+      Core9.panel.__setRegistry(panel, JSON.parse(data.responseText));
+    });
   },
   add: function (listOfPanels, resolve) {
-    if (listOfPanels.length == 0)
-      return;
+    if(listOfPanels.length == 0) return;
     Core9.panel.__resolve = resolve;
     Core9.panel.__listOfPanels = listOfPanels;
-    for (var i = 0; i < listOfPanels.length; i++) {
+    for(var i = 0; i < listOfPanels.length; i++) {
       Core9.panel.__setPanelJson(listOfPanels[i]);
     }
   },
@@ -198,21 +176,16 @@ Core9.panel = {
   },
   __activatePanelButton: function (panel, button) {
     // now close open
-
-    button.getElementsByClassName("open")[0].addEventListener('click',
-      function () {
-        panel.style.width = '100%';
-        panel.childNodes[1].style.width = "100%";
-      }, false);
-
-    button.getElementsByClassName("close")[0].addEventListener('click',
-      function () {
-        try {
-          panel.style.width = '0px'
-          panel.childNodes[1].style.width = "0px";
-        } catch (e) {}
-      }, false);
-
+    button.getElementsByClassName("open")[0].addEventListener('click', function () {
+      panel.style.width = '100%';
+      panel.childNodes[1].style.width = "100%";
+    }, false);
+    button.getElementsByClassName("close")[0].addEventListener('click', function () {
+      try {
+        panel.style.width = '0px'
+        panel.childNodes[1].style.width = "0px";
+      } catch(e) {}
+    }, false);
     /*
      * button.addEventListener('click', function() { if (panel.style.width ==
      * '100%') { panel.style.width = '0px' panel.childNodes[1].style.width =
@@ -225,13 +198,10 @@ Core9.panel = {
     var panelButton = document.createElement('div');
     var openButton = document.createElement('div');
     var closeButton = document.createElement('div');
-
     openButton.className = "open";
     closeButton.className = "close";
-
     panelButton.appendChild(openButton);
     panelButton.appendChild(closeButton);
-
     panelButton.style.zIndex = "9";
     panelButton.className = "panelbutton";
     return panelButton;
@@ -241,23 +211,18 @@ Core9.panel = {
     panel.setAttribute('id', id);
     panel.style.zIndex = zIndex.toString();
     panel.className = "panel " + classes;
-    if (button) {
+    if(button) {
       panel.style.width = '100%';
-      panel.appendChild(Core9.panel.__activatePanelButton(panel,
-        Core9.panel.__createPanelButton()));
+      panel.appendChild(Core9.panel.__activatePanelButton(panel, Core9.panel.__createPanelButton()));
     }
-
     return panel;
   },
-
   iframe: {
     create: function (id, zIndex, classes, content, button) {
-      var panel = Core9.panel.__createPanel(id, zIndex, classes, content,
-        button);
+      var panel = Core9.panel.__createPanel(id, zIndex, classes, content, button);
       var guid = Core9.guid();
       var content;
       Core9.ajax('GET', content, null, function (data) {
-
         var iframe = document.createElement('iframe');
         iframe.setAttribute('id', id + '-' + guid);
         iframe.className = "iframe " + classes;
@@ -290,29 +255,22 @@ Core9.panel = {
   },
   div: {
     create: function (id, zIndex, classes, content, button) {
-      var panel = Core9.panel.__createPanel(id, zIndex, classes, content,
-        button);
-
+      var panel = Core9.panel.__createPanel(id, zIndex, classes, content, button);
       Core9.ajax('GET', content, null, function (data) {
         var guid = Core9.guid();
         var div = document.createElement('div');
-        div.innerHTML = data.responseText.replace('evalscript',
-          'evalscript-' + guid);
+        div.innerHTML = data.responseText.replace('evalscript', 'evalscript-' + guid);
         panel.appendChild(div);
         try {
           var x = document.getElementById('evalscript-' + guid);
-          if (x !== null)
-            eval(x.innerHTML);
-        } catch (e) {
+          if(x !== null) eval(x.innerHTML);
+        } catch(e) {
           console.log(e);
         }
-
       });
-
       return panel;
     }
   },
-
   create: function (id, zIndex, classes, type, content, button) {
     return Core9.panel[type]['create']
       (id, zIndex, classes, content, button);
@@ -321,22 +279,19 @@ Core9.panel = {
   update: function (id, classes, content) {},
   get: function (id) {},
   close: function () {
-    for (var i = 0; i < Core9.panellist.length; i++) {
+    for(var i = 0; i < Core9.panellist.length; i++) {
       var panel = Core9.panel.__registry[Core9.panellist[i]];
-      if (panel.id) {
-        document.querySelector('#' + panel.id)
-          .classList.remove("core9-selected");
-        document.querySelector('#' + panel.id + ' > div.panelbutton > div.close')
-          .click();
+      if(panel.id) {
+        document.querySelector('#' + panel.id).classList.remove("core9-selected");
+        document.querySelector('#' + panel.id + ' > div.panelbutton > div.close').click();
       }
     }
   },
   setPanelWidth: function () {
-    var menuWidth = document.querySelector('#panel-iframe-menu')
-      .offsetWidth;
+    var menuWidth = document.querySelector('#panel-iframe-menu').offsetWidth;
     var w = window.innerWidth;
     var panel = document.querySelector('.core9-selected > iframe');
-    if (panel) {
+    if(panel) {
       var margL = panel.style.marginLeft;
       panel.style.width = (w - menuWidth) + "px";
       panel.style.marginLeft = menuWidth + "px";
@@ -345,18 +300,13 @@ Core9.panel = {
   open: function (openPanel) {
     this.close();
     var panel = document.querySelector('#' + openPanel + ' > div.panelbutton > div.open');
-    if (panel) {
-      document.querySelector('#' + openPanel)
-        .className = document.querySelector('#' + openPanel)
-        .className + " core9-selected";
+    if(panel) {
+      document.querySelector('#' + openPanel).className = document.querySelector('#' + openPanel).className + " core9-selected";
       panel.click();
       this.setPanelWidth();
     }
-
   },
   getIframeById: function (id) {
-    return document.getElementById(id)
-      .childNodes[1];
+    return document.getElementById(id).childNodes[1];
   }
-
 }
