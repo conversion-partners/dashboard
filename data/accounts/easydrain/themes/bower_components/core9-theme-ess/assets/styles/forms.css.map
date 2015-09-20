@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "file": "",
-  "sources": ["app/styles/forms.scss","app/styles/settings.scss"],
-  "names": [],
-  "mappings": ";AAEA,WAAW,iBAAiB,eAAe,eAAe,kBAAkB,eAAe,kBAAkB,oBAAoB,kBAAkB,mBAAmB,KAAK;EAE1K,WAAW;EACX,eAAe;EACf,QAAQ;;AAGT,aAAa;EACX,kBCLgB;EDMhB,YAAY"
-}

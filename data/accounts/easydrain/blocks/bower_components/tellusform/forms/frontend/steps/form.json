@@ -1,9 +1,0 @@
-{
-  "type": "object",
-  "title": "Form",
-  "properties": {
-    "title": {
-      "type": "string"
-    }
-  }
-}
