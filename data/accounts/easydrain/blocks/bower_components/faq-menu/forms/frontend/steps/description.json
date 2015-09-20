@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "title": "Hotel",
+  "properties": {
+    "title": {
+      "type": "string",
+      "title": "Title"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "array",
+  "format": "grid",
+  "items": {
+    "type": "object",
+    "properties": {
+      "category": {
+        "type": "string",
+        "propertyOrder": 1
+      },
+      "categorylink": {
+        "type": "string",
+        "propertyOrder": 2
+      },
+      "url": {
+        "type": "string",
+        "propertyOrder": 3
+      }
+    }
+  }
+}

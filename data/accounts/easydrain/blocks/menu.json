@@ -1,0 +1,30 @@
+  {
+    "name": "core9-theme-ess",
+    "menu": {
+      "name": "core9-theme-ess",
+      "icon": "",
+      "link": "/dashboard/themes/core9-theme-ess",
+      "items": [{
+        "title": "Easydrain",
+        "icon": "",
+        "items": [{
+          "name": "Blocks",
+          "icon": "",
+          "link": "/dashboard/themes/core9-theme-ess/blocks",
+          "items": [{
+            "title": "Headers",
+            "icon": "",
+            "items": [{
+              "name": "Full menu",
+              "icon": "",
+              "link": "/dashboard/themes/core9-theme-ess/blocks/full-menu/add"
+            }, {
+              "name": "Minimal menu",
+              "icon": "",
+              "link": "/dashboard/themes/core9-theme-ess/blocks/minimal-menu/add"
+            }]
+          }]
+        }]
+      }]
+    }
+  }
