@@ -232,15 +232,9 @@
 			var iframe = Core9.panel.getIframeById('panel-iframe-site');
 			var doc = Core9.iframe.getContentAsDocument(iframe);
 
-			/**
-					  <link id="css-bootstrap" rel="stylesheet" type="text/css" href="/dashboard/app/elements/core9-gridmanager/demo/css/bootstrap.css" media="all" />
-			**/
-
-			var idsToRemove = ["js-boot", "js-boot-handler", "js-blocks", "js-child", "js-handlebars", "js-store", "css-demo"];
+			var idsToRemove = ["js-boot", "js-boot-handler", "js-blocks", "js-child", "js-handlebars", "js-store", "css-demo", "css-bootstrap", "js-responsive-elements"];
 
 			removeIdsFromIframeContent(doc, idsToRemove);
-			//var script = doc.getElementById('js-boot');
-			//script.parentNode.removeChild(script);
 
 			var content = Core9.iframe.documentToString(doc);
 			var url = '/api/io/save';
