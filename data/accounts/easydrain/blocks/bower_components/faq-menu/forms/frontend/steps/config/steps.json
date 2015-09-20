@@ -1,0 +1,14 @@
+[
+	{
+		"label": "Description",
+		"file": "description.json"
+	},
+	{
+		"label": "Articles",
+		"file": "article.json"
+	},
+	{
+		"label": "Settings",
+		"file": "settings.json"
+	}
+]

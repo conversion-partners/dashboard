@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>core9-block-image</title>
+
+	<link data-role="demo" rel="stylesheet" type="text/css" href="/dashboard/app/src/responsive-elements/website/media/style.css">
+	<script data-role="demo" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script data-role="demo" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+	<script data-role="demo" src="/dashboard/bower_components/store-js/store.min.js"></script>
+	<script data-role="demo" src="/dashboard/app/src/responsive-elements/responsive-elements.js"></script>
+	<script data-role="demo" src="/dashboard/bower_components/handlebars/handlebars.min.js"></script>
+	<script data-role="demo" src="/dashboard/app/elements/core9-core/js/core-blocks-loader.js"></script>
+
+
+	<link data-role="block" data-style="type" rel="stylesheet" type="text/css" href="/dashboard/data/accounts/easydrain/blocks/bower_components/gallery/tpl/css/style.css" data-theme="block">
+	<link data-role="block" data-style="type" rel="stylesheet" type="text/css" href="/dashboard/data/accounts/easydrain/blocks/bower_components/gallery/tpl/css/core9-theme-ess.css" data-theme="core9-theme-ess">
+
+
+	<script data-role="demo" src="tpl/js/demo.js"></script>
+
+	<script>
+		var session = {
+			account: "easydrain",
+			theme: "core9-theme-ess"
+		}
+		var PAGEMODE = "demo";
+	</script>
+
+
+
+</head>
+
+<body>
+
+	<div id="demo">
+		<img class="hint" src="/dashboard/app/src/responsive-elements/website/media/img/hint.png">
+		<div id="resizable">
+			<div data-role="block" class="core9-block" data-type="gallery" data-respond data-id="testid1"></div>
+			<div class="slider-handle ui-resizable-handle ui-resizable-e"></div>
+		</div>
+	</div>
+
+
+
+	<script src="/dashboard/app/elements/core9-core/js/core-blocks-handler.js"></script>
+
+</body>
+
+</html>

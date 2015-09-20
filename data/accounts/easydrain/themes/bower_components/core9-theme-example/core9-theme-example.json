@@ -1,0 +1,232 @@
+{
+  "name": "core9-theme-example",
+  "menu": {
+    "name": "core9-theme-example",
+    "icon": "",
+    "link": "/dashboard/themes/easydrain",
+    "items": [{
+      "title": "Easydrain",
+      "icon": "",
+      "items": [{
+        "name": "Blocks",
+        "icon": "",
+        "link": "/dashboard/themes/core9-theme-example/blocks",
+        "items": [{
+          "title": "Headers",
+          "icon": "",
+          "items": [{
+            "name": "Full menu",
+            "icon": "",
+            "link": "/dashboard/themes/core9-theme-example/blocks/full-menu/add"
+          }, {
+            "name": "Minimal menu",
+            "icon": "",
+            "link": "/dashboard/themes/core9-theme-example/blocks/minimal-menu/add"
+          }]
+        }]
+      }]
+    }]
+  },
+  "blocks": "",
+  "templates": {
+    "core9-theme-example": {
+      "entries": [{
+        "language": "",
+        "country": "",
+        "page": "Home page"
+      }, {
+        "language": "nl",
+        "country": "",
+        "page": "Home page"
+      }, {
+        "language": "de",
+        "country": "",
+        "page": "Home page"
+      }, {
+        "language": "nl",
+        "country": "BE",
+        "page": "Home page"
+      }]
+    }
+  },
+  "pages": {
+    "core9-theme-example": {
+      "entries": [{
+        "language": "",
+        "country": "",
+        "page": "Home page page",
+        "url": "/index.html",
+        "versions": [{
+            "title": "page",
+            "theme": "core9-theme-example",
+            "language": "",
+            "country": "",
+            "percentage": "100",
+            "startdate": "",
+            "enddate": "",
+            "status": "active"
+          }, {
+            "title": "page",
+            "theme": "core9-theme-example",
+            "language": "",
+            "country": "",
+            "percentage": "100",
+            "startdate": "",
+            "enddate": "",
+            "status": "active"
+          }, {
+            "title": "page",
+            "theme": "core9-theme-example",
+            "language": "",
+            "country": "",
+            "percentage": "100",
+            "startdate": "",
+            "enddate": "",
+            "status": "active"
+          }
+
+        ]
+      }, {
+        "language": "",
+        "country": "",
+        "page": "Contact page page",
+        "url": "/contact.html",
+        "versions": [{
+            "title": "page",
+            "theme": "core9-theme-example",
+            "language": "",
+            "country": "",
+            "percentage": "100",
+            "startdate": "",
+            "enddate": "",
+            "status": "active"
+          }, {
+            "title": "page",
+            "theme": "core9-theme-example",
+            "language": "",
+            "country": "",
+            "percentage": "100",
+            "startdate": "",
+            "enddate": "",
+            "status": "active"
+          }, {
+            "title": "page",
+            "theme": "core9-theme-example",
+            "language": "",
+            "country": "",
+            "percentage": "100",
+            "startdate": "",
+            "enddate": "",
+            "status": "active"
+          }
+
+        ]
+      }, {
+        "language": "nl",
+        "country": "",
+        "page": "Home page page",
+        "url": "/index.html",
+        "versions": [{
+            "title": "page",
+            "theme": "core9-theme-example",
+            "language": "",
+            "country": "",
+            "percentage": "100",
+            "startdate": "",
+            "enddate": "",
+            "status": "active"
+          }, {
+            "title": "page",
+            "theme": "core9-theme-example",
+            "language": "",
+            "country": "",
+            "percentage": "100",
+            "startdate": "",
+            "enddate": "",
+            "status": "active"
+          }, {
+            "title": "page",
+            "theme": "core9-theme-example",
+            "language": "",
+            "country": "",
+            "percentage": "100",
+            "startdate": "",
+            "enddate": "",
+            "status": "active"
+          }
+
+        ]
+      }, {
+        "language": "nl",
+        "country": "BE",
+        "page": "Home page page",
+        "url": "/index.html",
+        "versions": [{
+            "title": "page",
+            "theme": "core9-theme-example",
+            "language": "",
+            "country": "",
+            "percentage": "100",
+            "startdate": "",
+            "enddate": "",
+            "status": "active"
+          }, {
+            "title": "page",
+            "theme": "core9-theme-example",
+            "language": "",
+            "country": "",
+            "percentage": "100",
+            "startdate": "",
+            "enddate": "",
+            "status": "active"
+          }, {
+            "title": "page",
+            "theme": "core9-theme-example",
+            "language": "",
+            "country": "",
+            "percentage": "100",
+            "startdate": "",
+            "enddate": "",
+            "status": "active"
+          }
+
+        ]
+      }, {
+        "language": "de",
+        "country": "DE",
+        "page": "Home page page",
+        "url": "/index.html",
+        "versions": [{
+            "title": "page",
+            "theme": "core9-theme-example",
+            "language": "",
+            "country": "",
+            "percentage": "100",
+            "startdate": "",
+            "enddate": "",
+            "status": "active"
+          }, {
+            "title": "page",
+            "theme": "core9-theme-example",
+            "language": "",
+            "country": "",
+            "percentage": "100",
+            "startdate": "",
+            "enddate": "",
+            "status": "active"
+          }, {
+            "title": "page",
+            "theme": "core9-theme-example",
+            "language": "",
+            "country": "",
+            "percentage": "100",
+            "startdate": "",
+            "enddate": "",
+            "status": "active"
+          }
+
+        ]
+      }]
+    }
+  }
+}

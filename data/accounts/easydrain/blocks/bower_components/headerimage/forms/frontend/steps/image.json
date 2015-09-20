@@ -1,0 +1,9 @@
+{
+  "type": "object",
+  "title": "Header image",
+  "properties": {
+    "headerimage": {
+      "type": "string"
+    }
+  }
+}

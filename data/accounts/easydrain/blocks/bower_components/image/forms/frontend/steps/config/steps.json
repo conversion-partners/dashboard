@@ -1,0 +1,10 @@
+[
+	{
+		"label": "Author",
+		"file": "author.json"
+	},
+	{
+		"label": "Comments",
+		"file": "comments.json"
+	}
+]
