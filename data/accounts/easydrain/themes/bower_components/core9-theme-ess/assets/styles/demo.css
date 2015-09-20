@@ -1,0 +1,21 @@
+/* Grid demo styles */
+.grid-demo {
+  padding: 10px 30px; }
+  .grid-demo [class*="col-"] {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 1em;
+    text-align: center;
+    line-height: 2;
+    background-color: transparent;
+    border: 0 solid #d1d1d1; }
+
+.grid-demo > .row > div {
+  padding: 0; }
+
+.grid-demo {
+  padding: 0;
+  margin-top: -9px; }
+
+.grid-demo > .row {
+  margin: 0; }

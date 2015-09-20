@@ -1,0 +1,17 @@
+{
+  "type": "array",
+  "format": "grid",
+  "items": {
+    "type": "object",
+    "properties": {
+      "key": {
+        "type": "string",
+        "propertyOrder": 1
+      },
+      "value": {
+        "type": "string",
+        "propertyOrder": 2
+      }
+    }
+  }
+}

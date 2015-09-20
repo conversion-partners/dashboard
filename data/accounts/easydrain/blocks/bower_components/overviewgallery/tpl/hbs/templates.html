@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+
+<script data-role="block" id="init" type="text/x-handlebars-template">
+
+  <div class="overviewgallery">
+    <h2>{{title}}</h2>
+    <br />
+    <h3>{{subtitle}}</h3>
+    {{{gallerydescription}}}
+    <br />
+    {{#each articles}} {{> article }} {{/each}}
+  </div>
+
+</script>
+
+<script data-role="block" id="article" type="text/x-handlebars-template">
+
+  <article>
+    <ul>
+      <li>
+        <img src="{{url}}" />
+        <div class="arrow-holder">
+          <div class="arrow-up"></div>
+        </div>
+      </li>
+      <li>
+        <div>
+          <a href="{{categorylink}}"><h3>{{category}}</h3></a>
+        </div>
+      </li>
+    </ul>
+  </article>
+
+</script>
+
+
+</html>
