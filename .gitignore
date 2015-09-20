@@ -1,3 +1,2 @@
 .nide
-data/accounts/*/*
-/data/accounts/**/data.json
+data/accounts/**
