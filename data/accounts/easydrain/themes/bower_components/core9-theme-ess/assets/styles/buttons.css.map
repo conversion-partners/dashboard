@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "file": "",
-  "sources": ["app/styles/buttons.scss","app/styles/settings.scss"],
-  "names": [],
-  "mappings": ";AAEA;EACC,eAAe;EACf,QAAQ;EACR,gBAAgB;;AAGjB;EACC,OAAO;;AAGR;EACC,kBCVgB;;ADajB,YAAY,QAAQ,YAAY,SAAS,YAAY,QAAQ,YAAY;EAIxE,OAAO;EACP,kBClBgB;;ADqBjB;EACC,OCtBgB;;ADyBjB,aAAa,KAAK;EACjB,eAAe;EACf,gBAAgB;;AAGjB,eAAe,aAAa,EAAE,UAAU,GAAG,aAAa,EAAE,UAAU,CAAC,QAAQ,aAAa,EAAE,UAAU,CAAC;EAEtG,kBC9BiB;ED+BjB,OCjCgB"
-}

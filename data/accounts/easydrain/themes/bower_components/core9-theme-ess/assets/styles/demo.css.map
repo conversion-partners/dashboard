@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "file": "",
-  "sources": ["app/styles/demo.scss"],
-  "names": [],
-  "mappings": ";AACA;EACE,SAAS;EAAX,WAAW;IAEP,YAAY;IACZ,eAAe;IACf,WAAW;IACX,YAAY;IACZ,aAAa;IACb,kBAAkB;IAClB,QAAQ;;AAGZ,aAAa,OAAO;EAClB,SAAS;;AAEX;EACE,SAAS;EACT,YAAY;;AAEd,aAAa;EACX,QAAQ"
-}
