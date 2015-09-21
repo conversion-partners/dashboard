@@ -449,10 +449,23 @@
 			<button id='restore2' type="button" class="btn btn-default">Restore</button>
 			<span id='valid_indicator'></span>
 		</div>
+		<a id="save-nestable" href="#">save</a>
 		<div id="nestablecontainer">
 			<div class="dd" id="nestable"></div>
 		</div>
 	</div>
+
+	<script>
+
+	function saveNestable(){
+		var data = $('#nestable').nestable('serialize');
+		console.log(JSON.stringify(data));
+	}
+	document.getElementById('save-nestable').addEventListener("click", saveNestable, false);
+
+	</script>
+
+
 	<script>
 		var callback = function(event) {
 			try {

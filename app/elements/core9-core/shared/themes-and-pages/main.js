@@ -11,39 +11,35 @@ function init() {
   }
 }
 $(document).ready(function () {
-
   $('#exit-modal').on('click', function () {
     $('#choose-theme').toggle();
   });
-
-
   $('#refresh-templates').on('click', function () {
-
     var entries = getSelectBoxEntries();
     var data = [];
     for(i = 0; i < entries.length; i++) {
-      if(TYPEOFPAGE == 'pages'){
-      var item = {
-        "id": guid(),
-        "$loki": entries[i].$loki,
-        "page": entries[i].page
+      if(TYPEOFPAGE == 'pages') {
+        var item = {
+          "id": guid(),
+          "$loki": entries[i].$loki,
+          "page": entries[i].page
+        }
       }
-    }
-    if(TYPEOFPAGE == 'themes'){
-      var item = {
-        "id": guid(),
-        "$loki": entries[i].$loki,
-        "template": entries[i].template
+      if(TYPEOFPAGE == 'themes') {
+        var item = {
+          "id": guid(),
+          "$loki": entries[i].$loki,
+          "template": entries[i].template
+        }
       }
-    }
-
-
       data.push(item);
     }
+    console.log('entries : ');
+    console.log(entries);
     initNestable(JSON.stringify(data));
+    console.log('data : ');
+    console.log(data);
   });
-
-
   $('#delpage').on('click', function () {
     var lokiId = getCurrentPageId();
     Core9.data[TYPEOFPAGE].remove(lokiId);
