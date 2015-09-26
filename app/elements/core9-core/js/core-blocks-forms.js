@@ -252,7 +252,7 @@ Core9.forms.ajax = function (content, file) {
     url: url,
     data: {
       content: content,
-      file: file,
+      file: file.toLowerCase(),
       account: Core9.forms.config.account
     },
     statusCode: {
