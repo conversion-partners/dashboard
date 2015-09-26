@@ -199,8 +199,8 @@ $(document).ready(function () {
     var theme = $(".template-data").val();
     var template = '/dashboard/data/accounts/' + account + '/themes/bower_components/' + theme + '/templates/pages/' + page + '/versions/' + dropdown + '/index.html'
     template = template.toLowerCase();
-    store.set('template', template);
-    store.set('theme', theme);
+    store.set('template', template.toLowerCase());
+    store.set('theme', theme.toLowerCase());
     history.pushState(null, null, "/dashboard/theme/edit");
     postClick("/dashboard/theme/edit");
   });

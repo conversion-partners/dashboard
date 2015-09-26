@@ -70,9 +70,9 @@ Core9.blocks.handler.events.onhover = function () {
           type: e.currentTarget.dataset.type,
           account: Core9.blocks.handler.config.account,
           theme: Core9.blocks.handler.config.theme,
-          page: store.get('page'),
-          pageDataDirectory: store.get('page-data-directory'),
-          globalDataDirectory: store.get('global-data-directory'),
+          page: store.get('page').toLowerCase(),
+          pageDataDirectory: store.get('page-data-directory').toLowerCase(),
+          globalDataDirectory: store.get('global-data-directory').toLowerCase(),
           defaultData: Core9.blocks.handler.__registry.blocks[e.currentTarget.dataset.id].loadedDEFAULTDATA,
           userData: userData,
           globalData: Core9.blocks.handler.__registry.blocks[e.currentTarget.dataset.id].loadedGLOBALDATA,
@@ -122,24 +122,24 @@ Core9.blocks.handler.getBowerData = function () {
   return Core9.blocks.handler.j(Core9.blocks.handler.paths.bower.format(Core9.blocks.handler.config.account));
 }
 Core9.blocks.handler.getTemplateHtml = function (block) {
-  return Core9.blocks.handler.j(Core9.blocks.handler.paths.template.format(Core9.blocks.handler.config.account, block.type), "document");
+  return Core9.blocks.handler.j(Core9.blocks.handler.paths.template.format(Core9.blocks.handler.config.account, block.type).toLowerCase(), "document");
 }
 Core9.blocks.handler.getTemplateCss = function (block) {
-  return Core9.blocks.handler.j(Core9.blocks.handler.paths.demoFile.format(Core9.blocks.handler.config.account, block.type), "document");
+  return Core9.blocks.handler.j(Core9.blocks.handler.paths.demoFile.format(Core9.blocks.handler.config.account, block.type).toLowerCase(), "document");
 }
 Core9.blocks.handler.getFormSteps = function (block) {
-  return Core9.blocks.handler.j(Core9.blocks.handler.paths.formSteps.format(Core9.blocks.handler.config.account, block.type));
+  return Core9.blocks.handler.j(Core9.blocks.handler.paths.formSteps.format(Core9.blocks.handler.config.account, block.type).toLowerCase());
 }
 Core9.blocks.handler.getDefaultBlockData = function (block) {
-  return Core9.blocks.handler.j(Core9.blocks.handler.paths.defaultBlockData.format(Core9.blocks.handler.config.account, block.type));
+  return Core9.blocks.handler.j(Core9.blocks.handler.paths.defaultBlockData.format(Core9.blocks.handler.config.account, block.type).toLowerCase());
 }
 Core9.blocks.handler.userDataById = function (block) {
   //page-data-directory = "/dashboard/data/accounts/easydrain/sites/easydrain.nl_null-null/pages/test/versions/blue/data/"
-  return Core9.blocks.handler.j(store.get('page-data-directory') + block.id + '.json');
+  return Core9.blocks.handler.j(store.get('page-data-directory') + block.id + '.json'.toLowerCase());
   //return Core9.blocks.handler.j(Core9.blocks.handler.paths.userDataById.format(Core9.blocks.handler.config.account, page, version, block.id));
 }
 Core9.blocks.handler.getGlobalDataById = function (id) {
-  return Core9.blocks.handler.j(store.get('global-data-directory') + id + '.json');
+  return Core9.blocks.handler.j(store.get('global-data-directory') + id + '.json'.toLowerCase());
 }
 Core9.blocks.handler.setTemplateHtml = function (block, data) {
   Core9.blocks.handler.__registry.blocks[block.id].loadedHTML = data.currentTarget.response;
@@ -216,8 +216,8 @@ Core9.blocks.handler.setFormSteps = function (block, data) {
   var fileList = [];
   for(var i = 0; i < steps.length; i++) {
     var step = steps[i];
-    stepList.push(Core9.blocks.handler.j(Core9.blocks.handler.paths.formStepsDirectory.format(Core9.blocks.handler.config.account, block.type) + step.file));
-    fileList.push(step.file);
+    stepList.push(Core9.blocks.handler.j(Core9.blocks.handler.paths.formStepsDirectory.format(Core9.blocks.handler.config.account, block.type).toLowerCase() + step.file));
+    fileList.push(step.file.toLowerCase());
   }
   var newResult = {};
   Promise.all(stepList).then(function (values) {

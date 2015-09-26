@@ -442,14 +442,14 @@ $(document).ready(function() {
 
     var templateFile = '/dashboard/data/accounts/' + account + '/themes/bower_components/' + theme + '/templates/pages/' + template + '/versions/' + templateVersion + '/index.html';
     templateFile = templateFile.toLowerCase();
-    store.set('page', pageFile);
-    store.set('page-data-directory', pageDataDirectory);
-    store.set('global-data-directory', globalDataDirectory);
+    store.set('page', pageFile.toLowerCase());
+    store.set('page-data-directory', pageDataDirectory.toLowerCase());
+    store.set('global-data-directory', globalDataDirectory.toLowerCase());
     //FIXME
-    store.set('template', templateFile);
-    store.set('theme', theme);
+    store.set('template', templateFile.toLowerCase());
+    store.set('theme', theme.toLowerCase());
     var cachedFile = "";
-    store.set('cached-file', pageFile);
+    store.set('cached-file', pageFile.toLowerCase());
     history.pushState(null, null, "/dashboard/page/edit");
     postClick("/dashboard/page/edit");
   });
