@@ -238,14 +238,14 @@
 
 			var content = Core9.iframe.documentToString(doc);
 			var url = '/api/io/save';
-			var file = store.get('cached-file');
+			var file = store.get('cached-file').toLowerCase();
 			console.log(file);
 			$.ajax({
 				type: "POST",
 				url: url,
 				data: {
 					content: content,
-					file: file.toLowerCase(),
+					file: file,
 					account: store.get('account')
 				},
 				statusCode: {
