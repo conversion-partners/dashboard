@@ -264,7 +264,6 @@
 		document.getElementById("export-page").addEventListener("click", function() {
 			var cachedFile = store.get('cached-file');
 			if (typeof cachedFile != 'undefined') {
-				console.log(cachedFile);
 				Core9.exportPage();
 			}
 
