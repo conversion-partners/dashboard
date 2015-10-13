@@ -66,7 +66,23 @@
 			cursor: move;
 			position: relative;
 			/* important (all position that's not `static`) */
+			_resize: both;
+			_overflow: auto;
 		}
+
+		.modal-header .close {
+			margin-top: -9px;
+		}
+
+		::-webkit-scrollbar{
+  width:20px;
+}
+
+::-webkit-scrollbar-thumb{
+   background-color: rgba(255,255,255,255);
+
+}  
+
 	</style>
 
 </head>
@@ -96,7 +112,7 @@
 				</div>
 				<div class="modal-body">
 
-					<div id="form-container" style="width:100%;background:transparent;overflow: hidden;height:80px;">
+					<div id="form-container" style="width:100%;background:transparent;overflow: hidden;height:200px; resize:vertical; overflow:auto;">
 						<style>
 							iframe#iframe-form-holder {
 								width: 100%;
@@ -106,7 +122,6 @@
 						</style>
 						<iframe id="iframe-form-holder" src="/dashboard/panels/forms/form.html" height="100%"></iframe>​
 					</div>
-
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -116,6 +131,16 @@
 		</div>
 	</div>
 	<!-- modal test -->
+
+	<script>
+		(function() {
+
+
+
+		})();
+	</script>
+
+
 
 	<script src="/dashboard/app/elements/core9-core/js/core-blocks-menu.js"></script>
 	<script src="/dashboard/app/elements/core9-core/js/core-blocks-export.js"></script>
