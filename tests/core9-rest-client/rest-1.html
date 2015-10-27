@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="/dashboard/bower_components/systemjs/dist/system.js"></script>
+</head>
+<body>
+	<script>
+		Core9 = {}
+		Core9.system = {
+			unwrapModule : function(mod) {
+				for (key in mod) {
+					if (mod.hasOwnProperty(key)) {
+						var value = mod[key];
+						return value;
+					}
+				}
+			},
+			multiImport : function(modules) {
+				return Promise.all(modules.map(function(m) {
+
+					return System.import(m)
+				}))
+			}
+		}
+		System.config({
+			baseURL : '/dashboard/'
+		});
+	</script>
+
+
+	<script>
+		var init = function(modules) {
+			var db = Core9.system.unwrapModule(modules[0]).getDB({
+				"username" : "admin",
+				"password" : "changeit"
+			});
+
+			db.collection.create('tobedeleted', function(data) {
+				db.collection.remove('tobedeleted', function(data) {
+					db.collection.create('config', function(data) {
+						var json = {
+							"domain" : "www.easydrain.nl"
+						}
+						db.collection.doc.put('config', null, json, function(
+								data) {
+							db.collection.remove('config', function(data) {
+								db.collection.getAll(function(data) {
+									console.log('test 1 : ');
+									console.log(data);
+								});
+							});
+						});
+					});
+				});
+			});
+
+			db.collection.create('test', function(data) {
+				var json = {
+					"domain" : "www.easydrain.nl"
+				}
+				db.collection.doc.put('test', null, json, function(data) {
+					db.collection.doc.getAll('test', function(data) {
+						var id = data[0]._id;
+						console.log(data);
+						var json = {
+							"domain2" : "www.easydrain.de"
+						}
+						db.collection.doc.patch('test', id, json, function(data) {
+							db.collection.doc.getAll('test', function(data) {
+								console.log(data);
+								db.collection.remove('test', function(data) {
+								});
+							});
+						});
+
+					});
+				});
+			});
+			
+			db.collection.create('test2', function(data) {
+				var json = {
+					"domain3" : "www.easydrain.nl"
+				}
+				db.collection.doc.put('test2', null, json, function(data) {
+ 					db.collection.doc.getAll('test2', function(data) {
+						var id = data[0]._id;
+						console.log(data);
+						var json = {
+							"domain4" : "www.easydrain.de"
+						}
+						
+
+ 						db.collection.doc.put('test2', id, json, function(data) {
+							db.collection.doc.getAll('test2', function(data) {
+								console.log(data);
+								db.collection.remove('test2', function(data) {
+								});
+							});
+						}); 
+						
+						
+
+					}); 
+				});
+			});
+
+		}
+	</script>
+
+
+
+	<script>
+		Core9.system.multiImport([ 'app/elements/core9-core/js/core-db' ])
+				.then(function(modules) {
+					init(modules);
+				});
+	</script>
+</body>
+</html>
