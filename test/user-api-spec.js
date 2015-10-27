@@ -1,4 +1,6 @@
-
+require('co-mocha');
+var should = require('should');
+var data = require('../vendor/users/user-data.js');
 
 describe('user data', function(){
   it('should have +1 user count after saving', function* (){
@@ -8,6 +10,6 @@ describe('user data', function(){
 
     var newUsers = yield data.users.get();
 
-    newUsers.lenght.should.equal(users.length + 1);
+    newUsers.length.should.equal(users.length + 1);
   });
 })
