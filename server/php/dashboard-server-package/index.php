@@ -32,17 +32,14 @@ $server_env = $_SERVER;
 
 $server = new Server($config, $server_env);
 
-// Aliasses now working!!!!!!!!!!!!!!!!!!!!!!!!!!!! cleanup !!!!!!!!!!!!!!!!!!!!!!!!
-
-/**
-echo "<pre>";
-var_dump($config);
-var_dump($server);
-**/
 
 
 if ($server->pageExists()) {
     $server->showPage();
     die();
+}else{
+  echo "Page not found <br /><pre>";
+  var_dump($config);
+  var_dump($server);
 }
 //exit;
