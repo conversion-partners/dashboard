@@ -1,0 +1,27 @@
+{
+  "name": "conversion-partners/dashboard-server-package",
+  "description": "server part of dashboard project",
+  "authors": [{
+    "name": "Robert Cooke",
+    "email": "robertjessecooke@gmail.com"
+  }],
+  "repositories": [{
+    "type": "git",
+    "url": "https://github.com/conversion-partners/git"
+  }],
+  "minimum-stability": "dev",
+  "require": {
+    "monolog/monolog": "*",
+    "zordius/lightncandy": "*",
+    "conversion-partners/git": "dev-master"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "*"
+  },
+  "autoload": {
+    "psr-0": {
+      "Dashboardserver": "src/",
+      "Dashboardserver\\Tests": "tests/"
+    }
+  }
+}
