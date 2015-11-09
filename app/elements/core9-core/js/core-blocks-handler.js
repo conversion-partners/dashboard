@@ -231,6 +231,7 @@ Core9.blocks.handler.setFormSteps = function (block, data) {
       }
     }
     Core9.blocks.handler.__registry.blocks[block.id].loadedSTEPS = newResult;
+    Core9.blocks.handler.triggerBlockDataReady();
   });
 }
 Core9.blocks.handler.setUserDataById = function (block, data) {
