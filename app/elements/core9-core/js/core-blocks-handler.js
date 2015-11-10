@@ -124,7 +124,7 @@ Core9.blocks.handler.getBowerData = function () {
 Core9.blocks.handler.getTemplateHtml = function (block) {
   return Core9.blocks.handler.j(Core9.blocks.handler.paths.template.format(Core9.blocks.handler.config.account, block.type).toLowerCase(), "document");
 }
-Core9.blocks.handler.getTemplateCss = function (block) {
+Core9.blocks.handler.getTemplateDemoFile = function (block) {
   return Core9.blocks.handler.j(Core9.blocks.handler.paths.demoFile.format(Core9.blocks.handler.config.account, block.type).toLowerCase(), "document");
 }
 Core9.blocks.handler.getFormSteps = function (block) {
@@ -241,7 +241,7 @@ Core9.blocks.handler.setUserDataById = function (block, data) {
     Core9.blocks.handler.__registry.blocks[block.id].loadedUSERDATA = Core9.blocks.handler.__registry.blocks[block.id].loadedDEFAULTDATA;
   }
 }
-Core9.blocks.handler.setTemplateCss = function (block, data) {
+Core9.blocks.handler.setTemplateCssAndJs = function (block, data) {
   var html = data.currentTarget.response;
   var styleLinks = html.querySelectorAll('link[data-theme], link[data-role="block"]');
   Core9.blocks.handler.__registry.blocks[block.id].loadedCSS = {}
@@ -267,7 +267,7 @@ Core9.blocks.handler.getBlockData = function (block) {
   promiseList.push(Core9.blocks.handler.getDefaultBlockData(block));
   promiseList.push(Core9.blocks.handler.userDataById(block));
   promiseList.push(Core9.blocks.handler.getTemplateHtml(block));
-  promiseList.push(Core9.blocks.handler.getTemplateCss(block));
+  promiseList.push(Core9.blocks.handler.getTemplateDemoFile(block));
   promiseList.push(Core9.blocks.handler.getFormSteps(block));
   Promise.all(promiseList).then(function (values) {
     //console.log('values for block ' + block.type + ' id : ' + block.id)
@@ -277,7 +277,7 @@ Core9.blocks.handler.getBlockData = function (block) {
     Core9.blocks.handler.setDefaultBlockData(block, values[0]);
     Core9.blocks.handler.setUserDataById(block, values[1]);
     Core9.blocks.handler.setTemplateHtml(block, values[2]);
-    Core9.blocks.handler.setTemplateCss(block, values[3]);
+    Core9.blocks.handler.setTemplateCssAndJs(block, values[3]);
     Core9.blocks.handler.setFormSteps(block, values[4]);
   });
 }
