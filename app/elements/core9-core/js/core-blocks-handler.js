@@ -243,6 +243,7 @@ Core9.blocks.handler.setUserDataById = function (block, data) {
 }
 Core9.blocks.handler.setTemplateCssAndJs = function (block, data) {
   var html = data.currentTarget.response;
+  var jsLinks = html.querySelectorAll('script[data-theme], script[data-role="block"]');
   var styleLinks = html.querySelectorAll('link[data-theme], link[data-role="block"]');
   Core9.blocks.handler.__registry.blocks[block.id].loadedCSS = {}
   for(var i = 0; i < styleLinks.length; i++) {
