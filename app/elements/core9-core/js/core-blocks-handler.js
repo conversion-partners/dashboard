@@ -248,6 +248,18 @@ Core9.blocks.handler.setTemplateCssAndJs = function(block, data) {
   var jsLinks = html.querySelectorAll('script[data-theme], script[data-role="block"]');
   var styleLinks = html.querySelectorAll('link[data-theme], link[data-role="block"]');
   Core9.blocks.handler.__registry.blocks[block.id].loadedCSS = {}
+  Core9.blocks.handler.__registry.blocks[block.id].loadedJS = {}
+
+  for (var i = 0; i < jsLinks.length; i++) {
+    var link = jsLinks[i];
+    if (link.dataset.theme == "block") {
+      Core9.blocks.handler.__registry.blocks[block.id].loadedJS.block = link;
+    } else {
+      Core9.blocks.handler.__registry.blocks[block.id].loadedJS[link.dataset.theme] = link;
+    }
+  }
+
+
   for (var i = 0; i < styleLinks.length; i++) {
     var link = styleLinks[i];
     if (link.dataset.theme == "block") {
@@ -260,8 +272,10 @@ Core9.blocks.handler.setTemplateCssAndJs = function(block, data) {
   // always add block css
   if (typeof PAGEMODE === 'undefined') {
     $('head').append(Core9.blocks.handler.__registry.blocks[block.id].loadedCSS.block);
+    $('head').append(Core9.blocks.handler.__registry.blocks[block.id].loadedJS.block);
     try {
       $('head').append(Core9.blocks.handler.__registry.blocks[block.id].loadedCSS[Core9.blocks.handler.config.account.theme]);
+      $('head').append(Core9.blocks.handler.__registry.blocks[block.id].loadedJS[Core9.blocks.handler.config.account.theme]);
     } catch (e) {}
   }
 }
