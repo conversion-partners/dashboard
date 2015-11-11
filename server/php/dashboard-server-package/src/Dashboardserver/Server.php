@@ -41,8 +41,11 @@ class Server
     public function pageExists()
     {
         $path = $this->getPagePath();
-        //echo '<br>'.$path.'<br>';
+
         $exists = file_exists($path);
+        if (!$exists) {
+            echo '<br>'.$path.'<br>';
+        }
 
         return $exists;
     }
