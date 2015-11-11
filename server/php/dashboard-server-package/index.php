@@ -13,7 +13,8 @@ $config->setDomainAliases(array('www.easydrain.co.uk' => 'www.easydrain.com', 'w
 $config->setLocaleStrategy('DomainFolder');
 $config->setServerStrategy('Nginx');
 if (isset($_SERVER['APPLICATION_ENV']) && $_SERVER['APPLICATION_ENV'] == 'develop') {
-    $config->setAccountPath('/var/www/easy-sanitary-solutions/html/dashboard/data/accounts/');
+    //$config->setAccountPath('/var/www/easy-sanitary-solutions/html/dashboard/data/accounts/');
+    $config->setAccountPath('/var/www/dashboard/server/php/html/dashboard/data/accounts/');
 } else {
     $config->setAccountPath('/var/www/html/dashboard/data/accounts/');
 }
@@ -32,14 +33,13 @@ $server_env = $_SERVER;
 
 $server = new Server($config, $server_env);
 
-
-
 if ($server->pageExists()) {
     $server->showPage();
     die();
-}else{
-  echo "Page not found <br /><pre>";
-  var_dump($config);
-  var_dump($server);
+} else {
+    echo 'Page not found <br /><pre>';
+    var_dump($config);
+    var_dump($server);
 }
 //exit;
+

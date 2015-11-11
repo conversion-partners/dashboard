@@ -38,6 +38,8 @@ class Account
                   return $page; // yup just the first page
               }
           }
+        } else {
+            echo $jsonPages.' does not exists'.'<br>';
         }
 
         return false;
