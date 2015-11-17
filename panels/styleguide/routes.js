@@ -1,9 +1,9 @@
 
 
 
-var fileRoutes = {
-  '/files$/': function(req) {
-    Core9.panel.open('panel-nide');
+var styleguideRoutes = {
+  '/styleguide$/': function(req) {
+    Core9.panel.open('panel-styleguide');
   }
 }
-Router.addRoutes(fileRoutes);
+Router.addRoutes(styleguideRoutes);
