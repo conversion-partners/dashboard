@@ -62,8 +62,12 @@ app.use('/dashboard/data/accounts/:account/themes/bower_components/:theme/templa
   });
 });
 app.use('/dashboard/', express.static('.'));
+//app.use('/dashboard/', express.static('.'));
+
 app.use('/*', function (req, res) {
-  res.redirect('/dashboard/');
+  //res.redirect('/dashboard/');
+  res.status(200)        // HTTP status 404: NotFound
+   .send('');
 });
 
 

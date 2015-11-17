@@ -1,0 +1,24 @@
+{
+  "name": "styleguide",
+  "version": "0.0.0",
+  "authors": [
+    "jessec <robertjessecooke@gmail.com>"
+  ],
+  "description" : "testing stuff",
+  "license" : "MIT",
+  "id" : "panel-styleguide",
+  "z-index" : 19,
+  "class" : "fullbleed",
+  "type" : "iframe",
+  "url" : "/dashboard/panels/styleguide/index.html",
+  "button" : false,
+  "menu" : {
+      "action" : "addItems",
+      "findmenusbytitle" : "Themes",
+      "addItems" : [ {
+      "name" : "Styleguide",
+      "icon" : "",
+      "link" : "/dashboard/styleguide"
+    } ]
+  }
+}
