@@ -12,6 +12,19 @@ app.use(bodyParser.urlencoded({
   extended: true
 })); // for parsing application/x-www-form-urlencoded
 app.use(multer()); // for parsing multipart/form-data
+
+
+//app.use(express.json({limit: '50mb'}));
+//app.use(express.urlencoded({limit: '50mb'}));
+
+var bodyParser = require('body-parser');
+app.use(bodyParser({limit: '200kb'}));
+//app.use(bodyParser.json({limit: '1500kb'}));
+//app.use(bodyParser.urlencoded({limit: '1500kb', extended: true}));
+
+
+
+
 app.post('/api/io/:action', function (req, res) {
   switch(req.params.action) {
   case 'save':
