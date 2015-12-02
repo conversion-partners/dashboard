@@ -26,6 +26,7 @@
     "co-supertest": "0.0.10",
     "express": "~4.13.0",
     "fs": "0.0.2",
+    "grunt-sync": "^0.4.1",
     "gulp": "^3.9.0",
     "gulp-develop-server": "~0.4.3",
     "gulp-livereload": "~3.8.0",
