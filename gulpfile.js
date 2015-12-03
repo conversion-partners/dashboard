@@ -55,12 +55,12 @@ gulp.task( 'default', ['shorthand2','shorthand', 'server:start' ], function() {
 
 
 gulp.task('watch-folder', function() {
-  gulp.watch('./data/accounts/easydrain/sites/**/*', ['copy-folder']);
+  gulp.watch('./data/accounts/easydrain/**/*', ['copy-folder']);
 });
 
 gulp.task('copy-folder', function() {
-  gulp.src('./data/accounts/easydrain/sites/**/*')
-    .pipe(gulp.dest('/var/www/easy-sanitary-solutions/html/dashboard/data/accounts/easydrain/sites'));
+  gulp.src('./data/accounts/easydrain/**/*')
+    .pipe(gulp.dest('/var/www/easy-sanitary-solutions/html/dashboard/data/accounts/easydrain'));
 });
 
 
