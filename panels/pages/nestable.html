@@ -42,6 +42,17 @@
 		#new-page-form > div > h3 > span {
 			display: none;
 		}
+
+		#nestable-menu {
+			margin-top: -21px;
+			margin-left: 50px;
+		}
+
+		#nestable-menu > button {
+			height: 16px;
+    font-size: 9px;
+		}
+
 	</style>
 </head>
 
@@ -451,10 +462,29 @@
 			<span id='valid_indicator'></span>
 		</div>
 		<a id="save-nestable" href="#">save</a> &nbsp;&nbsp;&nbsp; <a id="load-nestable" href="#">load</a>
+		<menu id="nestable-menu">
+			<button type="button" data-action="expand-all">Expand All</button>
+			<button type="button" data-action="collapse-all">Collapse All</button>
+		</menu>
 		<div id="nestablecontainer">
 			<div class="dd" id="nestable"></div>
 		</div>
 	</div>
+
+	<script>
+		$(document).ready(function() {
+			$('#nestable-menu').on('click', function(e) {
+				var target = $(e.target),
+					action = target.data('action');
+				if (action === 'expand-all') {
+					$('.dd').nestable('expandAll');
+				}
+				if (action === 'collapse-all') {
+					$('.dd').nestable('collapseAll');
+				}
+			});
+		});
+	</script>
 
 	<script>
 		function saveNestable() {
