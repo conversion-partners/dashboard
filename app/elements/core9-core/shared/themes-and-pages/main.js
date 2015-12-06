@@ -34,12 +34,12 @@ $(document).ready(function () {
       }
       data.push(item);
     }
-    console.log('entries : ');
-    console.log(entries);
+    //console.log('entries : ');
+    //console.log(entries);
     initNestable(JSON.stringify(data));
     // create a save and init connected to the selected items (domain, language, country)
-    console.log('data : ');
-    console.log(data);
+    //console.log('data : ');
+    //console.log(data);
   });
   $('#delpage').on('click', function () {
     var lokiId = getCurrentPageId();
