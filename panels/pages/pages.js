@@ -407,12 +407,7 @@ $(document).ready(function() {
     changeSelect2Data("choose-theme-select", activeVersions);
   });
 
-  function fromEmptyToNull(val) {
-    if (isEmpty(val)) {
-      return "null";
-    }
-    return val;
-  }
+
   $('#edit-selected-theme').on('click', function() {
     var dropdown = $('.choose-theme-select').val();
     var account = store.get('account');
@@ -456,3 +451,16 @@ $(document).ready(function() {
 
 
 });
+
+
+
+function getPageMenuFile(){
+    var account = store.get('account');
+  var page = getCurrentPage();
+  var pageLanguage = fromEmptyToNull(page.language);
+  var pageCountry = fromEmptyToNull(page.country);
+  var domain = $(".template-data").val();
+  var domainDirectory = domain + "_" + pageLanguage + "-" + pageCountry;
+  return '/dashboard/data/accounts/' + account + '/sites/' + domainDirectory + '/global-data/page-menu.json';
+
+}

@@ -460,6 +460,8 @@
 	function saveNestable(){
 		var data = $('#nestable').nestable('serialize');
 		console.log(JSON.stringify(data));
+		var file = getPageMenuFile();
+		console.log('save to file : ' + file);
 	}
 	document.getElementById('save-nestable').addEventListener("click", saveNestable, false);
 

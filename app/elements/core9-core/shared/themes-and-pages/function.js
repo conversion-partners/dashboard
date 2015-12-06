@@ -1,3 +1,11 @@
+function fromEmptyToNull(val) {
+  if (isEmpty(val)) {
+    return "null";
+  }
+  return val;
+}
+
+
 function changeSelect2Data(className, dataCategory) {
   $("." + className).select2({
     data: dataCategory
