@@ -481,13 +481,13 @@
 	<script>
 		function saveNestable() {
 			var data = $('#nestable').nestable('serialize');
-			console.log(JSON.stringify(data));
+			//console.log(JSON.stringify(data));
 			var file = getThemeMenuFile();
-			console.log('save to file : ' + file);
+			//console.log('save to file : ' + file);
 			var content = JSON.stringify(data);
 			var url = '/api/io/save';
 			var file = file.toLowerCase();
-			console.log(file);
+			//console.log(file);
 			///dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/global-data/theme-menu.json
 
 			$.ajax({
