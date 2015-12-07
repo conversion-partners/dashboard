@@ -80,34 +80,41 @@ function saveTheme(data) {
   var id = guid();
   Core9.data.currentid = id;
   document.getElementById('delpage').dataset.currentid = id;
-  if(json.length != 0) {
-    json.unshift({
-      "id": id,
-      "template": pageName
-    });
-  } else {
-    json.push({
-      "id": id,
-      "template": pageName
-    });
+  var prevEntry = json[0];
+  var save = false;
+  if(prevEntry.template != pageName) {
+    if(json.length != 0) {
+      json.unshift({
+        "id": id,
+        "template": pageName
+      });
+    } else {
+      json.push({
+        "id": id,
+        "template": pageName
+      });
+    }
+    save = true;
   }
   initNestable(JSON.stringify(json));
-  if(TYPEOFPAGE == 'themes') {
-    var templateData = {
-      "theme": data.theme,
-      "language": data.language,
-      "country": data.country,
-      "template": pageName,
-      "versions": [{
-        "status": "active",
-        "title": "New-Page"
-      }]
+  if(save) {
+    if(TYPEOFPAGE == 'themes') {
+      var templateData = {
+        "theme": data.theme,
+        "language": data.language,
+        "country": data.country,
+        "template": pageName,
+        "versions": [{
+          "status": "active",
+          "title": "New-Page"
+        }]
+      }
+      Core9.data[TYPEOFPAGE].insert(templateData);
     }
-    Core9.data[TYPEOFPAGE].insert(templateData);
+    try {
+      Core9.template.save();
+    } catch(e) {}
   }
-  try {
-    Core9.template.save();
-  } catch(e) {}
 }
 /*
   new template
@@ -205,7 +212,6 @@ $(document).ready(function () {
     postClick("/dashboard/theme/edit");
   });
 });
-
 
 function getThemeMenuFile() {
   var account = store.get('account');
