@@ -197,7 +197,7 @@ $(document).ready(function () {
     var account = store.get('account');
     var page = $('#choose-theme-template-page').html();
     var theme = $(".template-data").val();
-    var template = '/dashboard/data/accounts/' + account + '/themes/bower_components/' + theme + '/templates/pages/' + page + '/versions/' + dropdown + '/index.html'
+    var template = '/dashboard/data/accounts/' + account + '/themes/bower_components/' + theme + '/templates/pages/' + page + '/versions/' + dropdown + '/index.html';
     template = template.toLowerCase();
     store.set('template', template.toLowerCase());
     store.set('theme', theme.toLowerCase());
@@ -205,3 +205,11 @@ $(document).ready(function () {
     postClick("/dashboard/theme/edit");
   });
 });
+
+
+function getThemeMenuFile() {
+  var account = store.get('account');
+  var theme = $(".template-data").val();
+  var file = '/dashboard/data/accounts/' + account + '/themes/bower_components/' + theme + '/global-data/theme-menu.json';
+  return file.toLowerCase();
+}
