@@ -48,10 +48,10 @@ $(document).ready(function() {
 **/
     setTimeout(function() {
       $("#load-nestable")[0].click();
-    }, 1800);
+    }, 900);
     setTimeout(function() {
       $("button[data-action='collapse-all']")[0].click();
-    }, 2700);
+    }, 1800);
 
 
   });
