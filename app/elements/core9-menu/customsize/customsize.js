@@ -66,7 +66,7 @@ $(document).ready(
 
           setTimeout(function(){
 
-            console.log('setting');
+            console.log('setting on click on heading');
             $('h2').on('click',function(){
               $('#menu').multilevelpushmenu('collapse', 0);
             });
