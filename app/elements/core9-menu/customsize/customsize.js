@@ -9,6 +9,8 @@ $(document).ready(
   function() {
 
 
+
+
     var body = document.body,
       html = document.documentElement;
 
@@ -61,6 +63,15 @@ $(document).ready(
       if (event.data.action == 'addItems') {
         addItemsToMenu(event.data.findmenusbytitle,
           event.data.addItems);
+
+          setTimeout(function(){
+
+            console.log('setting');
+            $('h2').on('click',function(){
+              $('#menu').multilevelpushmenu('collapse', 0);
+            });
+
+          }, 2000);
 
       }
     }
