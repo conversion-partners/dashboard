@@ -8,6 +8,7 @@
 	<link rel="shortcut icon" href="/dashboard/favicon.ico">
 	<link rel="stylesheet" href="/dashboard/bower_components/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="style.css">
+	<script src="/dashboard/bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="/dashboard/bower_components/store-js/store.min.js"></script>
 	<script src="/dashboard/bower_components/json-editor/dist/jsoneditor.min.js"></script>
 	<script src="/dashboard/app/elements/core9-core/js/core.js"></script>
@@ -87,8 +88,39 @@
 		.modal-backdrop {
 			opacity: 0.1 !important;
 		}
+
 		#mini-menu {
-			display:none;
+			background: #336ca6;
+			padding: 20px;
+			width: 150px;
+			position: absolute;
+			margin-top: 0px;
+			height: 70px;
+			margin-right: 50px;
+			z-index: 9999;
+			right: 20px;
+		}
+
+		#mini-menu > div {
+			width: 20px;
+			height: 20px;
+			background: #336ca6;
+			position: relative;
+			bottom: -27px;
+			left: -20px;
+		}
+
+		button#export-page {
+			color: #333;
+			text-decoration: none;
+			line-height: 100%;
+			white-space: nowrap;
+			display: inline-block;
+			position: relative;
+			vertical-align: middle;
+			margin: 0 2px 5px 0;
+			background-color: #ececec;
+			border: solid 1px #b8b8b9;
 		}
 	</style>
 
@@ -96,14 +128,29 @@
 
 <body>
 	<div id="mini-menu">
-		<button id="export-page" style="right: 20px;
-  z-index: 999;
-  margin-right: 50px;
-  height: 40px;
-  width: 70px;
-  position: fixed;">export</button>
+		<button id="export-page">export</button>
+		<div></div>
 	</div>
 	<script>
+		$(document).ready(function() {
+			function miniHandlerIn() {
+				console.log('in');
+				$('#mini-menu').css('margin-top', '0px');
+			}
+
+			function miniHandlerOut() {
+				console.log('out');
+				$('#mini-menu').css('margin-top', '-70px');
+			}
+
+			function divHandlerIn() {
+				$('#mini-menu').css('margin-top', '0px');
+			}
+
+			function divHandlerOut() {}
+			$('#mini-menu').hover(miniHandlerIn, miniHandlerOut);
+			$('#mini-menu > div').hover(divHandlerIn, divHandlerOut);
+		});
 		window.addEventListener('urlchange', function(e) {
 			console.log("url changed");
 			var url = e.detail[2];
@@ -118,9 +165,9 @@
 			console.log(e.detail);
 			console.log(location);
 			if (path == '/dashboard/page/edit') {
-				document.getElementById('mini-menu').style.display = 'block';
+				//document.getElementById('mini-menu').style.display = 'block';
 			} else {
-				document.getElementById('mini-menu').style.display = 'none';
+				//document.getElementById('mini-menu').style.display = 'none';
 			}
 		}, false);
 	</script>
