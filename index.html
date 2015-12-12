@@ -92,22 +92,36 @@
 </head>
 
 <body>
-
-	<script>
-		window.addEventListener('urlchange', function(e) {
-			console.log("url changed");
-			console.log(e);
-			console.log(e.detail);
-			console.log(location);
-		}, false);
-	</script>
-
 	<button id="export-page" style="right: 20px;
   z-index: 999;
   margin-right: 50px;
   height: 40px;
   width: 70px;
-  position: fixed;">export</button>
+  position: fixed;
+	display:none;">export</button>
+	<script>
+		window.addEventListener('urlchange', function(e) {
+			console.log("url changed");
+			var url = e.detail[2];
+			var parser = document.createElement('a');
+			parser.href = url;
+			console.log('url : ' + url);
+			console.log('parser : ');
+			console.log(parser);
+			var path =  parser.pathname;
+			console.log('path : ' + path);
+			console.log(e);
+			console.log(e.detail);
+			console.log(location);
+			if (path == '/dashboard/page/edit') {
+				document.getElementById('export-page').style.display = 'block';
+			} else {
+				document.getElementById('export-page').style.display = 'none';
+			}
+		}, false);
+	</script>
+
+
 
 	<!-- modal test -->
 	<!-- Trigger the modal with a button -->
