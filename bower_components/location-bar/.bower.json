@@ -1,0 +1,35 @@
+{
+  "name": "location-bar",
+  "main": "location-bar.js",
+  "version": "2.0.0",
+  "homepage": "https://github.com/KidkArolis/location-bar",
+  "authors": [
+    "Karolis Narkevicius <karolis.n@gmail.com>"
+  ],
+  "description": "A microlib for managing browser's location bar via pushState and hashChange APIs. This lib makes it easy to listen to URL changes and update the URL.",
+  "keywords": [
+    "history",
+    "pushState",
+    "browser",
+    "location",
+    "url"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "2.0.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "2.0.0",
+    "commit": "288f0ba045d32b7088d4376e480b75aaa67293ba"
+  },
+  "_source": "git://github.com/KidkArolis/location-bar.git",
+  "_target": "~2.0.0",
+  "_originalSource": "location-bar",
+  "_direct": true
+}
