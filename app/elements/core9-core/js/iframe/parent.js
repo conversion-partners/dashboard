@@ -11,38 +11,28 @@ Core9.iframe.parent = {
     var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
     eventer(messageEvent, function (e) {
       //console.log(e);
-
       if(e.data.action == "showPageForm") {
-
         setTimeout(function () {
-
           document.getElementById('page-form').click();
-
           Core9.iframe.parent.sentMessageToIframe(e.data, document.querySelector('#iframe-form-holder'));
         }, 100);
       }
-
-
-
-
       if(e.data.action == "resetPageEditor") {
-
-
         setTimeout(function () {
-
           var iframe = Core9.panel.getIframeById('panel-iframe-site');
           var cmd = 'Core9.blocks.handler.init();';
           Core9.iframe.parent.sentMessageToIframe(cmd, iframe);
-
         }, 0);
-
-
       }
-
-
-
-
-
+      if(e.data.action == 'cogClick') {
+        console.log(e.data);
+        var parts = e.data.href.split('/');
+        var block = parts[parts.length - 2];
+        console.log(block);
+        var url = '/dashboard/data/accounts/' + store.get('account') + '/blocks/bower_components/' + block + '/index.html';
+        history.pushState(null, null, url);
+        return false;
+      }
       if(e.data.action == 'menuClick') {
         if(typeof e.data.href !== 'undefined') {
           history.pushState(null, null, e.data.href);

@@ -14,6 +14,13 @@ $(document).ready(function () {
     menuWidth: 220, // '450px', '30em', '25%' will also work
     menuHeight: height
   });
+  var cogClick = function (that) {
+    Core9.iframe.child.sentMessageToParent({
+      action: "cogClick",
+      href: that.href,
+      data: that.textContent
+    });
+  }
   var postClick = function () {
     Core9.iframe.child.sentMessageToParent({
       action: "menuClick",
@@ -49,8 +56,9 @@ $(document).ready(function () {
           $('#menu').multilevelpushmenu('collapse', 0);
         });
         $('i.fa-cog').on('click', function (event) {
-          console.log(this);
+          console.log(this.parentNode);
           event.stopPropagation();
+          cogClick(this.parentNode);
           return false;
         });
       }, 2000);
