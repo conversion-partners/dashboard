@@ -48,8 +48,10 @@ $(document).ready(function () {
         $('h2').on('click', function () {
           $('#menu').multilevelpushmenu('collapse', 0);
         });
-        $('i.fa-cog').on('click', function () {
+        $('i.fa-cog').on('click', function (event) {
           console.log(this);
+          event.stopPropagation();
+          return false;
         });
       }, 2000);
     }
