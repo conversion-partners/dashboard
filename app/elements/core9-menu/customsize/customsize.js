@@ -56,7 +56,7 @@ $(document).ready(function () {
           $('#menu').multilevelpushmenu('collapse', 0);
         });
         $('i.fa-cog').on('click', function (event) {
-          console.log(this.parentNode);
+          //console.log(this.parentNode);
           event.stopPropagation();
           cogClick(this.parentNode);
           return false;

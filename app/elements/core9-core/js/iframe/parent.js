@@ -25,11 +25,11 @@ Core9.iframe.parent = {
         }, 0);
       }
       if(e.data.action == 'cogClick') {
-        console.log(e.data);
+        //console.log(e.data);
         var parts = e.data.href.split('/');
         var block = parts[parts.length - 2];
-        console.log(block);
-        var url = '/dashboard/data/accounts/' + store.get('account') + '/blocks/bower_components/' + block + '/index.html';
+        //console.log(block);
+        var url = '/dashboard/blockpreview/data/accounts/' + store.get('account') + '/blocks/bower_components/' + block + '/index.html';
         history.pushState(null, null, url);
         return false;
       }
