@@ -10,7 +10,7 @@
 		if (arguments[2] == 'javascript:void(0);')
 			return false;
 		window.dispatchEvent(new CustomEvent('urlchange', {
-			'detail' : 'some data'
+			'detail' : arguments
 		}));
 		return pushState.apply(history, arguments);
 	}
