@@ -1,10 +1,7 @@
-
-
-
 var blockpreviewRoutes = {
-  '/blockpreview$/': function(req) {
-    console.log(req);
+  '/blockpreview/*': function (req) {
     Core9.panel.open('panel-blockpreview');
+    console.log(req);
   }
 }
 Router.addRoutes(blockpreviewRoutes);

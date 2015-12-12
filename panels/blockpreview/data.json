@@ -1,15 +1,13 @@
 {
-  "name": "nide",
+  "name": "blockpreview",
   "version": "0.0.0",
-  "authors": [
-    "jessec <robertjessecooke@gmail.com>"
-  ],
-  "description" : "testing stuff",
-  "license" : "MIT",
-  "id" : "panel-blockpreview",
-  "z-index" : 19,
-  "class" : "fullbleed",
-  "type" : "iframe",
-  "url" : "/dashboard/panels/blockpreview/index.html",
-  "button" : false
+  "authors": ["jessec <robertjessecooke@gmail.com>"],
+  "description": "testing stuff",
+  "license": "MIT",
+  "id": "panel-blockpreview",
+  "z-index": 29,
+  "class": "fullbleed",
+  "type": "iframe",
+  "url": "/dashboard/panels/blockpreview/index.html",
+  "button": false
 }
