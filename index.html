@@ -94,7 +94,7 @@
 			padding: 20px;
 			width: 150px;
 			position: absolute;
-			margin-top: 0px;
+			margin-top: -70px;
 			height: 70px;
 			margin-right: 50px;
 			z-index: 9999;
@@ -108,6 +108,7 @@
 			position: relative;
 			bottom: -27px;
 			left: -20px;
+			display: none;
 		}
 
 		button#export-page {
@@ -165,9 +166,11 @@
 			console.log(e.detail);
 			console.log(location);
 			if (path == '/dashboard/page/edit') {
-				//document.getElementById('mini-menu').style.display = 'block';
+				document.getElementById('mini-menu').style.display = 'block';
+				document.querySelector('#mini-menu > div').style.display = 'block';
 			} else {
-				//document.getElementById('mini-menu').style.display = 'none';
+				document.getElementById('mini-menu').style.display = 'none';
+				document.querySelector('#mini-menu > div').style.display = 'none';
 			}
 		}, false);
 	</script>
