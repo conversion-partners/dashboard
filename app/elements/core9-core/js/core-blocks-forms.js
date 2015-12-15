@@ -219,12 +219,14 @@ Core9.forms.saveFormDataToUserRegistry = function (result) {
   var script = result.script;
   var oldUserData = result.data.data.userData;
 
+  // see if we need to save global
+
   var globalDataId = Core9.forms.getGlobalDataId(oldUserData);
 
   if(script == "settings.json"){
     var settingData = {};
     settingData.settings = result.formData;
-      globalDataId = Core9.forms.getGlobalDataId(settingData);
+      //globalDataId = Core9.forms.getGlobalDataId(settingData);
   }
 
   if(globalDataId){
