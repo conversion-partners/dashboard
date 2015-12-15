@@ -179,7 +179,8 @@ Core9.blocks.handler.createHandleBarTemplate = function (block) {
       Handlebars.registerPartial(tpl.id, tpl.innerText);
     }
   }
-  var template = Handlebars.compile(init.innerText);
+  var template = null;
+  template = Handlebars.compile(init.innerText);
   Core9.blocks.handler.__registry.blocks[block.id].$blockref.innerHTML = "";
   var json = {};
   var defaultData = Core9.blocks.handler.__registry.blocks[block.id].loadedDEFAULTDATA;

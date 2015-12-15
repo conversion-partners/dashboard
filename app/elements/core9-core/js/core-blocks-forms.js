@@ -163,24 +163,25 @@ Core9.forms.loadForm = function (script, schema, data) {
     data.action = "save";
     Core9.forms.saveForm(script, schema, data, Core9.editor.getValue());
   }
-
+/*
   function onSubmit() {
     var script = $('#form-select').val();
     if(isEmpty(script)) {
       alert('Please select a form');
       return;
     }
-    data.action = "submit";
+    data.action = "save";
     Core9.forms.saveForm(script, schema, data, Core9.editor.getValue());
   }
+  */
   $('label').next('select').hide();
   // Hook up the submit button to log to the console
   var saveButton = document.getElementById('save');
-  var submitButton = document.getElementById('submit');
+  //var submitButton = document.getElementById('submit');
   saveButton.removeEventListener('click', onSave, false);
   saveButton.addEventListener('click', onSave, false);
-  submitButton.removeEventListener('click', onSubmit, false);
-  submitButton.addEventListener('click', onSubmit, false);
+  //submitButton.removeEventListener('click', onSubmit, false);
+  //submitButton.addEventListener('click', onSubmit, false);
 }
 
 function setValue(path, val, obj) {
@@ -219,6 +220,13 @@ Core9.forms.saveFormDataToUserRegistry = function (result) {
   var oldUserData = result.data.data.userData;
 
   var globalDataId = Core9.forms.getGlobalDataId(oldUserData);
+
+  if(script == "settings.json"){
+    var settingData = {};
+    settingData.settings = result.formData;
+      globalDataId = Core9.forms.getGlobalDataId(settingData);
+  }
+
   if(globalDataId){
     Core9.forms.config.saveGlobalData = true;
   }
@@ -303,11 +311,12 @@ Core9.forms.saveForm = function (script, schema, data, formData) {
     plugin.remote.save(input, reportResult);
   }
   var reportResult = function (result) {
-    if(result.data.action == 'submit') {
+    if(result.data.action == 'save') {
       // submit to backend
       Core9.forms.saveFormDataToUserRegistry(result);
       Core9.forms.saveData(result);
-    } else if(result.data.action == 'save') {
+    } else if(result.data.action == 'submit') {
+      // not used anymore is saved directly
       // save form to registry and processed next form
       // set to registry userdata
       Core9.forms.saveFormDataToUserRegistry(result);

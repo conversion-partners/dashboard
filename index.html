@@ -135,12 +135,12 @@
 	<script>
 		$(document).ready(function() {
 			function miniHandlerIn() {
-				console.log('in');
+				//console.log('in');
 				$('#mini-menu').css('margin-top', '0px');
 			}
 
 			function miniHandlerOut() {
-				console.log('out');
+				//console.log('out');
 				$('#mini-menu').css('margin-top', '-70px');
 			}
 
@@ -153,18 +153,18 @@
 			$('#mini-menu > div').hover(divHandlerIn, divHandlerOut);
 		});
 		window.addEventListener('urlchange', function(e) {
-			console.log("url changed");
+			//console.log("url changed");
 			var url = e.detail[2];
 			var parser = document.createElement('a');
 			parser.href = url;
-			console.log('url : ' + url);
-			console.log('parser : ');
-			console.log(parser);
+			//console.log('url : ' + url);
+			//console.log('parser : ');
+			//console.log(parser);
 			var path = parser.pathname;
-			console.log('path : ' + path);
-			console.log(e);
-			console.log(e.detail);
-			console.log(location);
+			//console.log('path : ' + path);
+			//console.log(e);
+			//console.log(e.detail);
+			//console.log(location);
 			if (path == '/dashboard/page/edit') {
 				document.getElementById('mini-menu').style.display = 'block';
 				document.querySelector('#mini-menu > div').style.display = 'block';

@@ -464,5 +464,5 @@ function getPageMenuFile() {
   var pageCountry = fromEmptyToNull($('.country-data').val());
   var domain = $(".template-data").val();
   var domainDirectory = domain + "_" + pageLanguage + "-" + pageCountry;
-  return '/dashboard/data/accounts/' + account + '/sites/' + domainDirectory + '/global-data/page-menu.json'.toLowerCase();
+  return '/dashboard/data/accounts/' + account + '/sites/' + domainDirectory + '/menu/page-menu.json'.toLowerCase();
 }
