@@ -245,9 +245,11 @@ Core9.blocks.handler.setTemplateCssAndJs = function (block, data) {
   var html = data.currentTarget.response;
   var jsLinks = html.querySelectorAll('script[data-theme], script[data-role="block"]');
   var styleLinks = html.querySelectorAll('link[data-theme], link[data-role="block"]');
-  Core9.blocks.handler.__registry.blocks[block.id].loadedCSS = {}
-  Core9.blocks.handler.__registry.blocks[block.id].loadedJS = {}
+  Core9.blocks.handler.__registry.blocks[block.id].loadedCSS = {};
+  Core9.blocks.handler.__registry.blocks[block.id].loadedCSS.block = [];
+  Core9.blocks.handler.__registry.blocks[block.id].loadedJS = {};
   Core9.blocks.handler.__registry.blocks[block.id].loadedJS.block = [];
+
   for(var i = 0; i < jsLinks.length; i++) {
     var link = jsLinks[i];
     if(link.dataset.theme == "block") {
@@ -259,7 +261,7 @@ Core9.blocks.handler.setTemplateCssAndJs = function (block, data) {
   for(var i = 0; i < styleLinks.length; i++) {
     var link = styleLinks[i];
     if(link.dataset.theme == "block") {
-      Core9.blocks.handler.__registry.blocks[block.id].loadedCSS.block = link;
+      Core9.blocks.handler.__registry.blocks[block.id].loadedCSS.block[i] = link;
     } else {
       Core9.blocks.handler.__registry.blocks[block.id].loadedCSS[link.dataset.theme] = link;
     }
@@ -267,7 +269,13 @@ Core9.blocks.handler.setTemplateCssAndJs = function (block, data) {
   // if theme if(){  }
   // always add block css
   if(typeof PAGEMODE === 'undefined') {
-    $('head').append(Core9.blocks.handler.__registry.blocks[block.id].loadedCSS.block);
+    //$('head').append(Core9.blocks.handler.__registry.blocks[block.id].loadedCSS.block);
+
+    for(var i = 0; i < Core9.blocks.handler.__registry.blocks[block.id].loadedCSS.block.length; i++) {
+      var style = Core9.blocks.handler.__registry.blocks[block.id].loadedCSS.block[i];
+      $('head').append(style);
+    }
+
     for(var i = 0; i < Core9.blocks.handler.__registry.blocks[block.id].loadedJS.block.length; i++) {
       var script = Core9.blocks.handler.__registry.blocks[block.id].loadedJS.block[i];
       $('head').append(script);
