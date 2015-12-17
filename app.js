@@ -85,7 +85,7 @@ app.use('/*', function (req, res) {
 
 
 var config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
-var hostname = "localhost";//config.hostname;//"localhost";
+//var hostname = "localhost";//config.hostname;//"localhost";
 console.log("config : ");
 console.log(config);
 
