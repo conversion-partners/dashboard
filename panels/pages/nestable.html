@@ -50,9 +50,8 @@
 
 		#nestable-menu > button {
 			height: 16px;
-    font-size: 9px;
+			font-size: 9px;
 		}
-
 	</style>
 </head>
 
@@ -532,6 +531,13 @@
 			});
 		}
 		document.getElementById('load-nestable').addEventListener("click", loadNestable, false);
+
+
+		document.addEventListener("save-new-page", function(e) {
+			console.log(e.detail); // Prints "Example of an event"
+			saveNestable();
+			$('.dd').nestable('collapseAll');
+		});
 	</script>
 
 
