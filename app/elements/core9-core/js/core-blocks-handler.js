@@ -57,6 +57,9 @@ Core9.blocks.handler.events.onhover = function () {
   var blocks = Core9.blocks.handler.getBlocks();
   for(var i = 0; i < blocks.length; i++) {
     blocks[i].addEventListener('contextmenu', function (e) {
+      if(typeof contextmenu !== 'undefined' && contextmenu == false) {
+        return;
+      }
       var userData = Core9.blocks.handler.__registry.blocks[e.currentTarget.dataset.id].loadedUSERDATA;
       var globalData = Core9.blocks.handler.__registry.blocks[e.currentTarget.dataset.id].loadedGLOBALDATA;
       var size = Object.size(globalData);
@@ -249,7 +252,6 @@ Core9.blocks.handler.setTemplateCssAndJs = function (block, data) {
   Core9.blocks.handler.__registry.blocks[block.id].loadedCSS.block = [];
   Core9.blocks.handler.__registry.blocks[block.id].loadedJS = {};
   Core9.blocks.handler.__registry.blocks[block.id].loadedJS.block = [];
-
   for(var i = 0; i < jsLinks.length; i++) {
     var link = jsLinks[i];
     if(link.dataset.theme == "block") {
@@ -270,12 +272,10 @@ Core9.blocks.handler.setTemplateCssAndJs = function (block, data) {
   // always add block css
   if(typeof PAGEMODE === 'undefined') {
     //$('head').append(Core9.blocks.handler.__registry.blocks[block.id].loadedCSS.block);
-
     for(var i = 0; i < Core9.blocks.handler.__registry.blocks[block.id].loadedCSS.block.length; i++) {
       var style = Core9.blocks.handler.__registry.blocks[block.id].loadedCSS.block[i];
       $('head').append(style);
     }
-
     for(var i = 0; i < Core9.blocks.handler.__registry.blocks[block.id].loadedJS.block.length; i++) {
       var script = Core9.blocks.handler.__registry.blocks[block.id].loadedJS.block[i];
       $('head').append(script);
