@@ -268,34 +268,44 @@ Core9.blocks.handler.setTemplateCssAndJs = function (block, data) {
       Core9.blocks.handler.__registry.blocks[block.id].loadedCSS[link.dataset.theme] = link;
     }
   }
-  // if theme if(){  }
-  // always add block css
+
   if(typeof PAGEMODE === 'undefined') {
-    //$('head').append(Core9.blocks.handler.__registry.blocks[block.id].loadedCSS.block);
-    for(var i = 0; i < Core9.blocks.handler.__registry.blocks[block.id].loadedCSS.block.length; i++) {
-      var style = Core9.blocks.handler.__registry.blocks[block.id].loadedCSS.block[i];
-      var blocktype = "style-" + block.type + "-" + i;
-      style.dataset.blocktype = blocktype;
-      if($(document).find("[data-blocktype='"+blocktype+"']").length == 0){
-        $('head').append(style);
+
+    //return false;
+
+
+
+    setTimeout(function(){
+
+      for(var i = 0; i < Core9.blocks.handler.__registry.blocks[block.id].loadedCSS.block.length; i++) {
+        var style = Core9.blocks.handler.__registry.blocks[block.id].loadedCSS.block[i];
+        var blocktype = "style-" + block.type + "-" + i;
+        style.dataset.blocktype = blocktype;
+        if($(document).find("[data-blocktype='"+blocktype+"']").length == 0){
+          $('head').append(style);
+        }
+
       }
+      for(var i = 0; i < Core9.blocks.handler.__registry.blocks[block.id].loadedJS.block.length; i++) {
+        var script = Core9.blocks.handler.__registry.blocks[block.id].loadedJS.block[i];
+        var blocktype = "script-" +block.type + "-" + i;
+        script.dataset.blocktype = blocktype;
 
-    }
-    for(var i = 0; i < Core9.blocks.handler.__registry.blocks[block.id].loadedJS.block.length; i++) {
-      var script = Core9.blocks.handler.__registry.blocks[block.id].loadedJS.block[i];
-      var blocktype = "script-" +block.type + "-" + i;
-      script.dataset.blocktype = blocktype;
+        if($(document).find("[data-blocktype='"+blocktype+"']").length == 0){
+          $('head').append(script);
+        }
 
-      if($(document).find("[data-blocktype='"+blocktype+"']").length == 0){
-        $('head').append(script);
       }
+      //$('head').append(Core9.blocks.handler.__registry.blocks[block.id].loadedJS.block);
+      try {
+        $('head').append(Core9.blocks.handler.__registry.blocks[block.id].loadedCSS[Core9.blocks.handler.config.account.theme]);
+        $('head').append(Core9.blocks.handler.__registry.blocks[block.id].loadedJS[Core9.blocks.handler.config.account.theme]);
+      } catch(e) {}
 
-    }
-    //$('head').append(Core9.blocks.handler.__registry.blocks[block.id].loadedJS.block);
-    try {
-      $('head').append(Core9.blocks.handler.__registry.blocks[block.id].loadedCSS[Core9.blocks.handler.config.account.theme]);
-      $('head').append(Core9.blocks.handler.__registry.blocks[block.id].loadedJS[Core9.blocks.handler.config.account.theme]);
-    } catch(e) {}
+      console.log("adding blocks");
+    }, 2000);
+
+
   }
 }
 Core9.blocks.handler.getBlockData = function (block) {

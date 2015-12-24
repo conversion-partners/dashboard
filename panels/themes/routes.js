@@ -66,6 +66,7 @@ var themeRoutes = {
           var t = '$("#gm-canvas").append(document.getElementsByClassName("core9-template")[0].children); $(".core9-template").remove();';
 
           var cmd = 'window.gm = jQuery("#mycanvas").gridmanager().data("gridmanager");$(".gm-preview").trigger("click");' + t;
+          console.log('init grid manager');
           Core9.iframe.parent.sentMessageToIframe(cmd, iframe);
         }, 1000); // smarter needs to be handled in sendMessage to iframe
         initPanelIframeSite = false;
@@ -95,6 +96,7 @@ var themeRoutes = {
       var iframe = Core9.panel.getIframeById('panel-iframe-site');
       var cmd = 'Core9.blocks.handler.init();';
       Core9.iframe.parent.sentMessageToIframe(cmd, iframe);
+      //window.location.href = '/dashboard/themes/'+theme+'/blocks/resetblock/add#'; //location.pathname + '#';//
     }, 1000);
   },
   '/themes$': function (req) {
