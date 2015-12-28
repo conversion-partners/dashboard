@@ -10,7 +10,7 @@
   "z-index" : 19,
   "class" : "fullbleed",
   "type" : "iframe",
-  "url" : "http://localhost:9090/",
+  "url" : "http://vps40041.public.cloudvps.com:9090/",
   "button" : false,
   "menu" : {
       "action" : "addItems",

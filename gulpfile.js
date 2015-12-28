@@ -16,7 +16,7 @@ console.log("config : ");
 console.log(config);
 
 gulp.task('shorthand', shell.task([
-  'cd ' + __dirname + '/data/accounts/easydrain/; /usr/bin/node ' + __dirname + '/node_modules/nide/main.js  -H ' + config.hostname + ' -p 9999 --no-browser'
+  'cd ' + __dirname + '/data/accounts/easydrain/ && /usr/bin/node ' + __dirname + '/node_modules/nide/main.js  -H ' + config.hostname + ' -p 9999 --no-browser'
 ]));
 
 gulp.task('shorthand2', shell.task([
@@ -31,7 +31,7 @@ gulp.task('shorthand3', shell.task([
 
 
 gulp.task('shorthand4', shell.task([
-  "cd " + __dirname + '/data/accounts/easydrain; /usr/bin/node ' + __dirname + '/node_modules/nide/main.js init --no-browser'
+  'cd ' + __dirname + '/data/accounts/easydrain && /usr/bin/node ' + __dirname + '/node_modules/nide/main.js init --no-browser'
 ]));
 
 gulp.task('server:start', function() {
