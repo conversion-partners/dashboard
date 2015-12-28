@@ -1,0 +1,24 @@
+{
+  "name": "nide",
+  "version": "0.0.0",
+  "authors": [
+    "jessec <robertjessecooke@gmail.com>"
+  ],
+  "description" : "testing stuff",
+  "license" : "MIT",
+  "id" : "panel-nide",
+  "z-index" : 19,
+  "class" : "fullbleed",
+  "type" : "iframe",
+  "url" : "http://vps40041.public.cloudvps.com:9090/",
+  "button" : false,
+  "menu" : {
+      "action" : "addItems",
+      "findmenusbytitle" : "All Categories",
+      "addItems" : [ {
+      "name" : "Files",
+      "icon" : "",
+      "link" : "/dashboard/files"
+    } ]
+  }
+}
