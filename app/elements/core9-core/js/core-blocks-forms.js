@@ -145,7 +145,6 @@ Core9.forms.loadForm = function (script, schema, data) {
   Core9.editor = new JSONEditor(document.querySelector('#form-holder'), {
     ajax: true,
     startval: starting_value,
-    collapsed: true,
     disable_edit_json: true,
     //disable_collapse: false, // needs to be a user setting
     disable_properties: true,
