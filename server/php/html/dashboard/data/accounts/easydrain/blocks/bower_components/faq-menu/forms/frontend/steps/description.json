@@ -1,0 +1,9 @@
+{
+  "type": "object",
+  "title": "Category",
+  "properties": {
+    "title": {
+      "type": "string"
+    }
+  }
+}

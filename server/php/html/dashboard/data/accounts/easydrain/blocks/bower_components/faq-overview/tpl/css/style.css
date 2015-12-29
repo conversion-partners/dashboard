@@ -1,0 +1,75 @@
+[data-type="faq-overview"] {
+  border: 1px solid transparent;
+  padding: 0px;
+  width: 100%;
+}
+[data-type="faq-overview"] * {
+  margin: 0;
+  padding: 0;
+}
+[data-type="faq-overview"] > div.faq-overview > p {
+  width: 50%;
+}
+[data-type="faq-overview"] article {
+  display: inline-block;
+  overflow: hidden;
+  width: 30%;
+  border: 1px solid #ddd;
+  margin-bottom: 5%;
+}
+[data-type="faq-overview"] article:nth-child(7) {
+  margin-left: 5%;
+}
+[data-type="faq-overview"] article:nth-child(8) {
+  float: right;
+}
+[data-type="faq-overview"] article > span {
+  float: right;
+  margin-top: -25px;
+}
+[data-type="faq-overview"] article > ul {
+  list-style: none;
+  width: 100%;
+}
+[data-type="faq-overview"] article > ul > li {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  width: 100%;
+}
+
+[data-type="faq-overview"] article > ul >  li:nth-child(1) {
+  text-align: center;
+  padding:5px;
+}
+[data-type="faq-overview"] article > ul >  li:nth-child(2) {
+  padding:15px;
+}
+
+[data-type="faq-overview"] article > ul > li > div {
+  padding: 10px;
+  text-align: center;
+  background-color: #ff5500;
+}
+
+[data-type="faq-overview"] article > ul > li:nth-child(2) > ul {
+  list-style: none;
+}
+
+[data-type="faq-overview"] article > ul > li:nth-child(2) > ul > li {
+  border-bottom: 1px solid #ddd;
+}
+[data-type="faq-overview"] article > ul > li:nth-child(2) > ul > li:last-child {
+  border-bottom: 0px solid #000;
+}
+
+[data-type="faq-overview"] article > ul > li:nth-child(2) > ul > li > a {
+  text-decoration: none;
+  color: #000;
+}
+
+
+[data-type="faq-overview"] article > ul > li > div > a > h3 {
+  text-decoration: none;
+  color: #fff;
+}

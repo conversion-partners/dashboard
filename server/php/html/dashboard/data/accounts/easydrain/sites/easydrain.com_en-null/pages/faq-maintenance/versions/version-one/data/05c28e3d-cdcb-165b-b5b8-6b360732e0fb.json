@@ -1,0 +1,38 @@
+{
+  "title": "Categories",
+  "categories": [{
+    "title": "Purchasing",
+    "link": "faq-purchasing?id=test"
+  }, {
+    "title": "Installation",
+    "link": "faq-installation"
+  }, {
+    "title": "Parts",
+    "link": "faq-parts"
+  }, {
+    "title": "Maintenance",
+    "link": "faq-maintenance"
+  }, {
+    "title": "Waranty",
+    "link": "faq-waranty"
+  }, {
+    "title": "Other",
+    "link": "faq-other"
+  }],
+  "settings": [{
+    "key": "key",
+    "value": "val"
+  }, {
+    "key": "key",
+    "value": "val"
+  }, {
+    "key": "key",
+    "value": "val"
+  }, {
+    "key": "key",
+    "value": "val"
+  }, {
+    "key": "key",
+    "value": "val"
+  }]
+}

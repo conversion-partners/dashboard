@@ -1,0 +1,38 @@
+{
+  "type": "array",
+  "format": "grid",
+  "items": {
+    "type": "object",
+    "properties": {
+      "categorytitle": {
+        "type": "string",
+        "propertyOrder": 1
+      },
+      "category": {
+        "type": "string",
+        "propertyOrder": 2
+      },
+      "categorylink": {
+        "type": "string",
+        "propertyOrder": 3
+      },
+      "items": {
+        "type": "array",
+        "format": "grid",
+        "items": {
+          "type": "object",
+          "properties": {
+            "item": {
+              "type": "string",
+              "propertyOrder": 1
+            },
+            "link": {
+              "type": "string",
+              "propertyOrder": 2
+            }
+          }
+        }
+      }
+    }
+  }
+}

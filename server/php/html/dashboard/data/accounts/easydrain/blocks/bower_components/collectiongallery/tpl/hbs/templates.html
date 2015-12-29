@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+
+<script data-role="block" id="init" type="text/x-handlebars-template">
+
+  <div class="collectiongallery">
+    <h2>{{title}}</h2><hr />
+    {{description}} <br />
+    {{#each articles}} {{> article }} {{/each}}
+  </div>
+
+</script>
+
+<script data-role="block" id="article" type="text/x-handlebars-template">
+
+  <article>
+    <div>
+    <h3>{{title}}</h3>
+    <p class="subtitle">{{subtitle}}</p>
+    <dl>
+      <dt>Dimensions</dt>
+      <dd>{{dimentions}}</dd>
+      <dt>Min. installation depth</dt>
+      <dd>{{installdepth}}</dd>
+      <dt>Grate options</dt>
+      <dd>{{{grateoptions}}}</dd>
+    </dl>
+  </div>
+    <img src="{{url}}" />
+  </article>
+
+</script>
+
+
+</html>

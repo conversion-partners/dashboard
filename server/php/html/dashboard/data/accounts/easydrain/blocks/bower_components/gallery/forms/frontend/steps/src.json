@@ -1,0 +1,13 @@
+{
+  "type": "array",
+  "format": "grid",
+  "items": {
+    "type": "object",
+    "properties": {
+      "url": {
+        "type": "string",
+        "propertyOrder": 1
+      }
+    }
+  }
+}

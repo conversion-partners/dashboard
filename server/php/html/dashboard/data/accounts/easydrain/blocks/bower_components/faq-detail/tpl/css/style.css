@@ -1,0 +1,40 @@
+[data-type="faq-detail"] {
+  border: 1px solid transparent;
+  padding: 0px;
+  width: 100%;
+  margin-bottom: 50px;
+}
+[data-type="faq-detail"] * {
+  margin: 0;
+  padding: 0;
+}
+[data-type="faq-detail"] > div > h2 {
+  margin-left: -50px;
+}
+[data-type="faq-detail"] div > ul, div > ul > li > ul {
+  list-style: none;
+  width: 100%;
+}
+[data-type="faq-detail"] div > ul > li {
+  border-bottom: 1px solid #ddd;
+}
+[data-type="faq-detail"] div > ul > li:last-child {
+  _border-bottom: 0px solid #ddd;
+}
+[data-type="faq-detail"] div > ul > li > ul > li > label {
+  margin-left: -50px;
+  margin-top: -37px;
+}
+[data-type="faq-detail"] div > ul > li > ul > li > label.collapse {
+  font-size: 31px;
+  display: block;
+}
+[data-type="faq-detail"] div > ul > li > ul > li > label.collapse + input {
+  display: none;
+}
+[data-type="faq-detail"] div > ul > li > ul > li > label.collapse + input + * {
+  display: none;
+}
+[data-type="faq-detail"] div > ul > li > ul > li > label.collapse+ input:checked + * {
+  display: block;
+}

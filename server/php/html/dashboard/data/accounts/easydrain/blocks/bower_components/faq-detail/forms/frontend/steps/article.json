@@ -1,0 +1,15 @@
+{
+  "type": "array",
+  "format": "grid",
+  "items": {
+    "type": "object",
+    "properties": {
+      "question": {
+        "type": "string"
+      },
+      "answer": {
+        "type": "string"
+      }
+    }
+  }
+}

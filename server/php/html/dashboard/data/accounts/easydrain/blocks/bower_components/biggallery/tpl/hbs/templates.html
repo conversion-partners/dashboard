@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+
+<script data-role="block" id="init" type="text/x-handlebars-template">
+
+
+  <div class="biggallery">
+    <div id="biggalleryviewer">
+      <div id="biggalleryviewerimg"></div>
+      <div id="biggalleryviewerdesc">
+        <span class="prev">&lt;</span><span class="delete">x</span><span class="next">&gt;</span>
+      </div>
+    </div>
+    <div class="wrapper">
+      <div class="title">
+        <h2>{{title}}</h2>
+      </div>
+      <hr />
+      <p>{{description}}</p>
+      <div class="masonry">
+        {{#each src}} {{> images }} {{/each}}
+      </div>
+    </div>
+  </div>
+
+</script>
+
+<script data-role="block" id="images" type="text/x-handlebars-template">
+  <div class="item">
+    <img src="{{url}}" />
+  </div>
+</script>
+
+
+</html>

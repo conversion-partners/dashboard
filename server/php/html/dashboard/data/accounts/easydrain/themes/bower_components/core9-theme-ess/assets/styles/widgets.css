@@ -1,0 +1,203 @@
+/** Colors **/
+.widget.image img {
+  max-width: 100%; }
+.widget.jumbotron {
+  background-color: #fff;
+  padding-top: 0;
+  padding-bottom: 0; }
+  .widget.jumbotron .carousel-inner .item {
+    text-align: center; }
+    .widget.jumbotron .carousel-inner .item img {
+      display: inline-block; }
+  .widget.jumbotron.image {
+    min-height: 300px; }
+.widget.slider {
+  position: relative;
+  margin-bottom: 3rem; }
+  .widget.slider:before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    bottom: 22px;
+    left: 11px;
+    width: 50%;
+    height: 10%;
+    box-shadow: 0 17px 24px rgba(0, 0, 0, 0.5);
+    -webkit-transform: rotate(-4deg) skew(-18deg);
+        -ms-transform: rotate(-4deg) skew(-18deg);
+            transform: rotate(-4deg) skew(-18deg); }
+  .widget.slider:after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    bottom: 22px;
+    right: 11px;
+    width: 50%;
+    height: 10%;
+    box-shadow: 0 17px 24px rgba(0, 0, 0, 0.5);
+    -webkit-transform: rotate(4deg) skew(18deg);
+        -ms-transform: rotate(4deg) skew(18deg);
+            transform: rotate(4deg) skew(18deg); }
+.widget.teaser p.subtitle {
+  color: #59585b;
+  text-transform: uppercase;
+  font-size: 2rem;
+  font-weight: 200;
+  margin-top: -14px; }
+.widget.teaser p.lead {
+  font-size: 1.6rem;
+  font-weight: 400; }
+.widget.blockgallery {
+  margin-bottom: 5rem; }
+  .widget.blockgallery img {
+    max-width: 100%; }
+  .widget.blockgallery .blockgallery-item {
+    background-color: #f2f0f1;
+    text-align: center;
+    transition: all 0.3s ease-out; }
+    @media (min-width: 768px) {
+      .widget.blockgallery .blockgallery-item:hover {
+        -webkit-transform: scale(1.15);
+        -ms-transform: scale(1.15);
+        transform: scale(1.15);
+        z-index: 999;
+        position: absolute;
+        border-bottom: 5px solid #59585b; } }
+.widget.newsletter {
+  position: relative;
+  margin-bottom: 5rem;
+  padding: 2rem;
+  border: 1px solid #f2f0f1;
+  background-color: #fff; }
+  .widget.newsletter p.title {
+    text-align: center;
+    font-size: 2rem; }
+  .widget.newsletter:before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    bottom: 22px;
+    left: 11px;
+    width: 50%;
+    height: 10%;
+    box-shadow: 0 17px 24px rgba(0, 0, 0, 0.5);
+    -webkit-transform: rotate(-4deg) skew(-18deg);
+        -ms-transform: rotate(-4deg) skew(-18deg);
+            transform: rotate(-4deg) skew(-18deg); }
+  .widget.newsletter:after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    bottom: 22px;
+    right: 11px;
+    width: 50%;
+    height: 10%;
+    box-shadow: 0 17px 24px rgba(0, 0, 0, 0.5);
+    -webkit-transform: rotate(4deg) skew(18deg);
+        -ms-transform: rotate(4deg) skew(18deg);
+            transform: rotate(4deg) skew(18deg); }
+.widget.symbols ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none; }
+  .widget.symbols ul li {
+    color: #fff;
+    margin: 10px;
+    background-color: #F78F1E;
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle; }
+    .widget.symbols ul li span {
+      margin: auto;
+      display: block;
+      font-size: 8rem; }
+    @media (min-width: 768px) {
+      .widget.symbols ul li:hover {
+        -webkit-transform: scale(1.25);
+        -ms-transform: scale(1.25);
+        transform: scale(1.25);
+        z-index: 999;
+        padding: 1rem; }
+        .widget.symbols ul li:hover p {
+          display: block; }
+        .widget.symbols ul li:hover span {
+          font-size: 2rem; }
+      .widget.symbols ul li p {
+        display: none; } }
+.widget.downloads .tab-content {
+  border-left: 1px solid #f2f0f1;
+  margin-bottom: 5rem; }
+.widget.buttons button {
+  margin: 12px 0 12px 24px;
+  padding: 5px 36px; }
+.widget.collectiongallery {
+  margin-bottom: 100px; }
+  .widget.collectiongallery .collectiongallery-item {
+    border: 1px solid #f2f0f1;
+    margin: 10px;
+    text-align: center; }
+  .widget.collectiongallery dd, .widget.collectiongallery dt {
+    font-weight: normal;
+    font-size: 13px; }
+  .widget.collectiongallery dt {
+    margin-top: 12px; }
+  .widget.collectiongallery dd {
+    color: #59585b; }
+  .widget.collectiongallery .image {
+    text-align: right; }
+  .widget.collectiongallery img {
+    max-width: 100%; }
+.widget.selectionhelp .selectionhelp-item {
+  border: 1px solid #f2f0f1;
+  width: 290px;
+  margin: 20px auto; }
+  .widget.selectionhelp .selectionhelp-item p.subtitle, .widget.selectionhelp .selectionhelp-item h3 {
+    text-align: center; }
+  .widget.selectionhelp .selectionhelp-item p.subtitle {
+    color: #000;
+    padding: 0; }
+  .widget.selectionhelp .selectionhelp-item p {
+    padding: 10px;
+    color: #59585b; }
+.widget.producttypes .producttype-item {
+  border: 1px solid #f2f0f1;
+  width: 290px;
+  margin: 20px auto; }
+  .widget.producttypes .producttype-item p.subtitle, .widget.producttypes .producttype-item h3 {
+    text-align: center; }
+  .widget.producttypes .producttype-item p.subtitle {
+    color: #000;
+    padding: 0; }
+  .widget.producttypes .producttype-item p {
+    padding: 10px;
+    color: #59585b; }
+  .widget.producttypes .producttype-item dd, .widget.producttypes .producttype-item dt {
+    text-align: center;
+    font-weight: normal;
+    font-size: 13px; }
+  .widget.producttypes .producttype-item dt {
+    margin-top: 12px; }
+  .widget.producttypes .producttype-item dd {
+    color: #59585b; }
+  .widget.producttypes .producttype-item .btn {
+    padding: 10px 0; }
+.widget.imagegallery .imagegallery-horizontal {
+  margin-bottom: 20px; }
+  .widget.imagegallery .imagegallery-horizontal ul {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    list-style-type: none;
+    white-space: nowrap;
+    overflow-x: auto; }
+  .widget.imagegallery .imagegallery-horizontal li {
+    display: inline;
+    padding: 0;
+    margin: 0;
+    list-style-type: none; }
+.widget.innovation {
+  margin-bottom: 20px; }
+  .widget.innovation .innovation-item {
+    text-align: center; }
