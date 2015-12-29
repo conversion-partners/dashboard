@@ -1,3 +1,4 @@
+    document.body.style.opacity = "0";
 if (!String.prototype.format) {
   String.prototype.format = function() {
     var args = arguments;
@@ -276,7 +277,7 @@ Core9.blocks.handler.setTemplateCssAndJs = function(block, data) {
 
   if (typeof PAGEMODE === 'undefined') {
     //return false;
-    document.body.style.opacity = "0";
+
     setTimeout(function() {
       for (var i = 0; i < Core9.blocks.handler.__registry.blocks[block.id].loadedCSS.block.length; i++) {
         var style = Core9.blocks.handler.__registry.blocks[block.id].loadedCSS.block[i];
