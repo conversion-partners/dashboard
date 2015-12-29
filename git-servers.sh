@@ -6,8 +6,8 @@ cp config/servers/vps40041.public.cloudvps.com/files/gulpfile.js .
 cp config/servers/vps40041.public.cloudvps.com/files/panels/nide/data.json panels/nide/data.json
 
 
-#git add --all . -f
-git add .
+git add --all . -f
+#git add .
 #git reset -- data/accounts/easydrain/sites/*
 git commit -m "cc"
 git push  origin HEAD:gh-pages
