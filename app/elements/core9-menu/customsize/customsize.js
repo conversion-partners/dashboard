@@ -12,7 +12,10 @@ $(document).ready(function () {
   $('#menu').multilevelpushmenu({
     menu: arrMenu,
     menuWidth: 220, // '450px', '30em', '25%' will also work
-    menuHeight: height
+    menuHeight: height,
+    onCollapseMenuEnd: function () {
+      document.body.className = "menu-close";
+    }
   });
   var cogClick = function (that) {
     Core9.iframe.child.sentMessageToParent({

@@ -42,7 +42,7 @@
   </style>
 </head>
 
-<body>
+<body class="">
   <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -51,6 +51,33 @@
   <script src="/dashboard/bower_components/jquery/dist/jquery.min.js"></script>
   <script src="/dashboard/bower_components/multilevelpushmenu/jquery.multilevelpushmenu.min.js"></script>
   <script type="text/javascript" src="/dashboard/app/elements/core9-menu/customsize/customsize.js"></script>
+
+  <script>
+    document.addEventListener("mousemove", function() {
+      if (document.body.className == 'menu-close') {
+        $('i.fa-reorder').click();
+        document.body.className = 'menu-open'
+      }
+    });
+
+    var inactivityTime = function() {
+      var t;
+      window.onload = resetTimer;
+      document.onmousemove = resetTimer;
+      document.onkeypress = resetTimer;
+
+      function logout() {
+        $('i.fa-reorder').click();
+      }
+
+      function resetTimer() {
+        clearTimeout(t);
+        t = setTimeout(logout, 3000)
+          // 1000 milisec = 1 sec
+      }
+    };
+    inactivityTime();
+  </script>
 </body>
 
 </html>
