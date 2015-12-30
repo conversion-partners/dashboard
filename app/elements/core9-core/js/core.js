@@ -38,6 +38,7 @@ function arrayContains(needle, arrhaystack) {
 }
 
 function isEmpty(str) {
+  if(str == null){ return "";}
   return(!str.trim() || 0 === str.trim().length);
 }
 Core9.workspace = {
