@@ -247,8 +247,13 @@ Core9.panel = {
       // Fixme too hacky!!
       setTimeout(function () {
         var iframe = document.getElementById(id + '-' + guid);
-        panel.appendChild(iframe);
-        Core9.iframe.write(iframe, content, false);
+
+        if(iframe !== null){
+          panel.appendChild(iframe);
+          Core9.iframe.write(iframe, content, false);
+        }
+
+
       }, 1000);
       return panel;
     }

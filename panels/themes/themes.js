@@ -219,6 +219,7 @@ $(document).ready(function () {
 function getThemeMenuFile() {
   var account = store.get('account');
   var theme = $(".template-data").val();
-  var file = '/dashboard/data/accounts/' + account + '/themes/bower_components/' + theme + '/global-data/theme-menu.json';
+  var uid = createUiFromSelectBoxValues();
+  var file = '/dashboard/data/accounts/' + account + '/themes/bower_components/' + theme + '/global-data/theme-menu-'+uid+'.json';
   return file.toLowerCase();
 }
