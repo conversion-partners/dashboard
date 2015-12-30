@@ -1,21 +1,21 @@
 TYPEOFPAGE = 'pages';
-var activateEditor = function () {
+var activateEditor = function() {
   var pageData = getCurrentPage();
-  if(typeof pageData == 'undefined'){
+  if (typeof pageData == 'undefined') {
     return;
   }
   var starting_value = {};
   try {
     starting_value = pageData.versions;
-  } catch(e) {
+  } catch (e) {
     alert("Please reload page");
   }
   try {
     Core9.editor2.destroy();
-  } catch(e) {}
+  } catch (e) {}
   try {
     Core9.editor.destroy();
-  } catch(e) {}
+  } catch (e) {}
   Core9.editor2 = new JSONEditor(document.getElementById('editor_holder'), {
     disable_edit_json: true,
     disable_collapse: true,
@@ -99,15 +99,15 @@ var activateEditor = function () {
   });
   //FIXME disable title edit for first 6 versions
   var versionArr = [0, 1, 2, 3, 4, 5];
-  for(var i = 0; i < versionArr.length; i++) {
+  for (var i = 0; i < versionArr.length; i++) {
     try {
       Core9.editor.getEditor('root.' + i + '.title').disable();
-    } catch(e) {}
+    } catch (e) {}
   }
-  Core9.editor.on('change', function () {
+  Core9.editor.on('change', function() {
     var errors = Core9.editor.validate();
     var indicator = document.getElementById('valid_indicator');
-    if(errors.length) {
+    if (errors.length) {
       indicator.style.color = 'red';
       indicator.textContent = "not valid";
     } else {
@@ -119,18 +119,18 @@ var activateEditor = function () {
   function ifUndefined(versions, i, val, overide) {
     var result = "";
     try {
-      if(typeof versions[i][val] == 'undefined') {
+      if (typeof versions[i][val] == 'undefined') {
         result = "";
       }
-    } catch(e) {
+    } catch (e) {
       result = "";
     }
-    if(overide) {
+    if (overide) {
       result = overide;
-    } else if(versions[i][val]) {
+    } else if (versions[i][val]) {
       result = versions[i][val];
     }
-    if(typeof result == 'undefined') {
+    if (typeof result == 'undefined') {
       result = "";
     }
     return result;
@@ -142,7 +142,7 @@ var activateEditor = function () {
     page.url = url;
     var versions = Core9.editor.getValue();
     page.versions = [];
-    for(var i = 0; i < versions.length; i++) {
+    for (var i = 0; i < versions.length; i++) {
       page.versions[i] = {};
       page.versions[i].title = ifUndefined(versions, i, 'title');
       page.versions[i].theme = ifUndefined(versions, i, 'theme');
@@ -161,20 +161,20 @@ var activateEditor = function () {
 
   function getOptions(options) {
     //returns false by one empty option
-    if(typeof options == 'undefined' || (options.length == 1 && isEmpty(options[0]))) {
+    if (typeof options == 'undefined' || (options.length == 1 && isEmpty(options[0]))) {
       return false;
     }
     var optionStr = "";
     var emptyOption = false;
-    for(var i = 0; i < options.length; i++) {
+    for (var i = 0; i < options.length; i++) {
       var option = options[i];
-      if(!isEmpty(option)) {
+      if (!isEmpty(option)) {
         optionStr = optionStr.concat('<option value="' + option + '">' + option + '</option>');
       } else {
         emptyOption = true;
       }
     }
-    if(emptyOption) {
+    if (emptyOption) {
       optionStr = '<option value=""></option>'.concat(optionStr);
     }
     return optionStr;
@@ -191,13 +191,13 @@ var activateEditor = function () {
     var session = Core9.select.getSession();
     var options = getOptions(data);
     var select = $('[data-schemapath="root.' + version + '.' + type + '"]').find('select');
-    if(typeof data != 'undefined') {
-      if(data.length > 1) {
+    if (typeof data != 'undefined') {
+      if (data.length > 1) {
         $(select).empty().append(options).prop('disabled', false);
         // watch and update session
         session[type] = $('[data-schemapath="root.' + version + '.' + type + '"]').find('select').val();
         Core9.select.setSession(session);
-        Core9.editor.watch('root.' + version + '.' + type, function () {
+        Core9.editor.watch('root.' + version + '.' + type, function() {
           var session = Core9.select.getSession();
           var val = $('[data-schemapath="root.' + version + '.' + type + '"]').find('select').val();
           session[type] = val;
@@ -205,7 +205,7 @@ var activateEditor = function () {
           callback();
         });
       } else {
-        if(data.length == 0) {
+        if (data.length == 0) {
           session[type] = "";
         } else {
           session[type] = data[0];
@@ -254,21 +254,21 @@ var activateEditor = function () {
 
   function resetSession(arr) {
     var session = Core9.select.getSession();
-    for(var i = 0; i < arr.length; i++) {
+    for (var i = 0; i < arr.length; i++) {
       session[arr[i]] = "";
     }
     Core9.select.setSession(session);
   }
 
   function watchVersion(version) {
-    Core9.editor.watch('root.' + version + '.theme', function () {
+    Core9.editor.watch('root.' + version + '.theme', function() {
       disableSelectBoxesForVersion(version);
       var session = {
         vers: version,
         language: ""
       };
       session.theme = $('[data-schemapath="root.' + version + '.theme"]').find('select').val();
-      if(isEmpty(session.theme)) {
+      if (isEmpty(session.theme)) {
         alert('please make a choice');
         return;
       }
@@ -280,10 +280,10 @@ var activateEditor = function () {
   watchVersion(1);
   watchVersion(2);
   watchVersion(3);
-  document.getElementById('submit2').addEventListener('click', function () {
+  document.getElementById('submit2').addEventListener('click', function() {
     save();
   });
-  document.getElementById('restore2').addEventListener('click', function () {
+  document.getElementById('restore2').addEventListener('click', function() {
     Core9.editor.setValue(starting_value);
   });
 }
@@ -296,7 +296,7 @@ function savePage(data) {
   document.getElementById('delpage').dataset.currentid = id;
   var prevEntry = json[0];
   var save = false;
-  if(prevEntry.page != pageName) {
+  if (prevEntry.page != pageName) {
     json.unshift({
       "id": id,
       "page": pageName
@@ -323,7 +323,7 @@ function savePage(data) {
       "status": "active"
     }]
   }
-  if(save) {
+  if (save) {
     Core9.data[TYPEOFPAGE].insert(pageData);
     try {
       Core9.template.save();
@@ -331,14 +331,14 @@ function savePage(data) {
         "detail": "Example of an event"
       });
       document.dispatchEvent(event);
-    } catch(e) {}
+    } catch (e) {}
   }
 }
 
 function showNewPageForm() {
   try {
     Core9.editor3.destroy();
-  } catch(e) {}
+  } catch (e) {}
   Core9.editor3 = new JSONEditor(document.getElementById('new-page-form'), {
     ajax: true,
     disable_edit_json: true,
@@ -375,20 +375,20 @@ function showNewPageForm() {
     }
   });
   var languageSelect = $('[data-schemapath="root.language"]').find('select');
-  if(languageSelect) {
+  if (languageSelect) {
     $(languageSelect).append(document.getElementById('language-options').innerHTML);
   }
   var countrySelect = $('[data-schemapath="root.country"]').find('select');
-  if(countrySelect) {
+  if (countrySelect) {
     $(countrySelect).append(document.getElementById('country-options').innerHTML);
   }
-  $('#save-new-page').on('click', function () {
+  $('#save-new-page').on('click', function() {
     var data = Core9.editor3.getValue();
     data.newdomain = $('[data-schemapath="root.newdomain"]').find('input').val();
     data.domain = $('[data-schemapath="root.domain"]').find('select').val();
-    if(isEmpty(data.domain) && !isEmpty(data.newdomain)) {
+    if (isEmpty(data.domain) && !isEmpty(data.newdomain)) {
       data.domain = data.newdomain;
-    } else if(!isEmpty(data.domain)) {
+    } else if (!isEmpty(data.domain)) {
       // use data.domain
     } else {
       alert("No domain filled in");
@@ -399,25 +399,25 @@ function showNewPageForm() {
     savePage(data);
   });
 }
-$(document).ready(function () {
-  $('#newpages').on('click', function () {
+$(document).ready(function() {
+  $('#newpages').on('click', function() {
     $("#myModal").modal();
     showNewPageForm();
   });
-  $('#editpage').on('click', function () {
+  $('#editpage').on('click', function() {
     $('#page-selector').modal();
     $('#choose-theme').toggle();
     var versions = Core9.editor.getValue();
     var activeVersions = [];
-    for(var i = 0; i < versions.length; i++) {
+    for (var i = 0; i < versions.length; i++) {
       var status = versions[i].status;
-      if(status == 'active') {
+      if (status == 'active') {
         activeVersions.push(versions[i].title);
       }
     }
     changeSelect2Data("choose-theme-select", activeVersions);
   });
-  $('#edit-selected-theme').on('click', function () {
+  $('#edit-selected-theme').on('click', function() {
     var dropdown = $('.choose-theme-select').val();
     var account = store.get('account');
     var version = getActiveTab();
@@ -435,9 +435,9 @@ $(document).ready(function () {
     var pageDataDirectory = '/dashboard/data/accounts/' + account + '/sites/' + domainDirectory + '/pages/' + pageName + '/versions/' + pageVersionName + '/data/';
     var globalDataDirectory = '/dashboard/data/accounts/' + account + '/sites/' + domainDirectory + '/global-data/';
     var templateVersion = "";
-    for(var i = 0; i < page.versions.length; i++) {
+    for (var i = 0; i < page.versions.length; i++) {
       var version = page.versions[i];
-      if(version.title == dropdown) {
+      if (version.title == dropdown) {
         templateVersion = version.version;
       }
     }
@@ -469,5 +469,6 @@ function getPageMenuFile() {
   var pageCountry = fromEmptyToNull($('.country-data').val());
   var domain = $(".template-data").val();
   var domainDirectory = domain + "_" + pageLanguage + "-" + pageCountry;
-  return '/dashboard/data/accounts/' + account + '/sites/' + domainDirectory + '/menu/page-menu.json'.toLowerCase();
+  var uid = createUiFromSelectBoxValues();
+  return '/dashboard/data/accounts/' + account + '/sites/' + domainDirectory + '/menu/page-menu-' + uid + '.json'.toLowerCase();
 }
