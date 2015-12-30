@@ -2,10 +2,11 @@ var pageRoutes = {
   '/page/edit$/': function() {
 
     var template = store.get('template');
-
     var page = store.get('page');
     var theme = store.get('theme');
     var account = store.get('account');
+
+    
     var xhr = new XMLHttpRequest();
     xhr.onload = function() {
       var that = this;
