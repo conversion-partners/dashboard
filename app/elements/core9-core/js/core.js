@@ -232,7 +232,9 @@ Core9.panel = {
         iframeWindow.onload = function () {
           Core9.iframeLoadedEvent.detail = {
             id: guid,
-            classes: classes
+            classes: classes,
+            frameId: iframe.id,
+            frameType : id
           };
           window.dispatchEvent(Core9.iframeLoadedEvent);
           /*
@@ -251,6 +253,7 @@ Core9.panel = {
         if(iframe !== null){
           panel.appendChild(iframe);
           Core9.iframe.write(iframe, content, false);
+          //window.dispatchEvent(Core9.iframeLoadedEvent);
         }
 
 
