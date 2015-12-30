@@ -2,6 +2,9 @@ TYPEOFPAGE = 'themes';
 
 function activateEditor() {
   var pageData = getSelectBoxEntries()[0];
+  if(typeof pageData == 'undefined'){
+    return;
+  }
   var starting_value = pageData.versions;
   try {
     Core9.editor.destroy();
