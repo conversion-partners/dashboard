@@ -5,12 +5,29 @@ if(typeof Core9.iframe === 'undefined') {
   Core9.iframe = {}
 };
 Core9.iframe.parent = {
+  // send and handle actions with proper events and event handling!!!
   listenToPostMessages: function () {
     var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
     var eventer = window[eventMethod];
     var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
     eventer(messageEvent, function (e) {
       //console.log(e);
+
+
+      if(e.data.action == "hideAjaxLoader") {
+        console.log('hideAjaxLoader');
+        var event = new CustomEvent("hideAjaxLoader", {
+          "detail": "Hide ajax loader"
+        });
+        window.dispatchEvent(event);
+      }
+      if(e.data.action == "showAjaxLoader") {
+        console.log('showAjaxLoader');
+        var event = new CustomEvent("showAjaxLoader", {
+          "detail": "Show ajax loader"
+        });
+        window.dispatchEvent(event);
+      }
       if(e.data.action == "showPageForm") {
         setTimeout(function () {
           document.getElementById('page-form').click();

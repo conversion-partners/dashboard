@@ -23,7 +23,6 @@ var pageRoutes = {
         var docString = Core9.xmlToString(doc);
         Core9.panel.open('panel-iframe-site');
         var iframe = Core9.panel.getIframeById('panel-iframe-site');
-        console.log(docString);
         Core9.iframe.write(iframe, docString, "pagemode"); // false is no gridmanager
         if(gridmanagerEnable){
           setTimeout(function() {
