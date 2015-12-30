@@ -267,8 +267,6 @@
 
 	<script>
 		window.addEventListener("hideAjaxLoader", function(event) {
-			$('#mini-menu').fadeIn();
-			$('#mini-menu > div').fadeIn();
 			$('.ajax-container').fadeOut();
 			console.log('ok need to hide loader');
 			console.log(event);
@@ -305,11 +303,17 @@
 			parser.href = url;
 			var path = parser.pathname;
 			if (path == '/dashboard/page/edit') {
+
+				window.addEventListener("hideAjaxLoader", function(event) {
+					$('#mini-menu').fadeIn();
+					$('#mini-menu > div').fadeIn();
+				}, false);
+
 				//document.getElementById('mini-menu').style.display = 'block';
 				//document.querySelector('#mini-menu > div').style.display = 'block';
 			} else {
-				//document.getElementById('mini-menu').style.display = 'none';
-				//document.querySelector('#mini-menu > div').style.display = 'none';
+				document.getElementById('mini-menu').style.display = 'none';
+			  document.querySelector('#mini-menu > div').style.display = 'none';
 			}
 		}, false);
 	</script>
