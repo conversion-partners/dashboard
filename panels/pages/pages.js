@@ -1,6 +1,9 @@
 TYPEOFPAGE = 'pages';
 var activateEditor = function () {
   var pageData = getCurrentPage();
+  if(typeof pageData == 'undefined'){
+    return;
+  }
   var starting_value = {};
   try {
     starting_value = pageData.versions;
