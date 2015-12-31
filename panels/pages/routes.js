@@ -20,6 +20,7 @@ var pageRoutes = {
         }else{
           doc.getElementsByTagName("body")[0].innerHTML =  html;
         }
+        doc.body.style.opacity = 0;
         var docString = Core9.xmlToString(doc);
         Core9.panel.open('panel-iframe-site');
         var iframe = Core9.panel.getIframeById('panel-iframe-site');
