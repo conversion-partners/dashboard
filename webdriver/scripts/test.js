@@ -2,8 +2,8 @@ var webdriverio = require('webdriverio');
 var login = require('./modules/login/login.js');
 var options = {
   desiredCapabilities: {
-    browserName: 'chrome'
-      //browserName: 'phantomjs'
+    //browserName: 'chrome'
+  browserName: 'phantomjs'
   }
 };
 var client = webdriverio.remote(options);
