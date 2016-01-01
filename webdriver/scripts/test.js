@@ -19,16 +19,12 @@ client.init()
   //.then(console.log)
   .then(function () {
     setTimeout(function () {
-
       client.saveScreenshot('./webdriver/images/screenshots/snapshot.png', function (err, screenshot, response) {});
       client.execute('return localStorage.getItem(arguments[0])', 'account')
         .then((value) => console.log('storageKey = ' + JSON.stringify(value)));
-      client.element('#panel-login', function (err, res) {
-        //console.log(err);
-        //console.log(res);
-      });
+
       client.element('#panel-login > iframe', function (err, res) {
-        //console.log(err);
+        //console.log(err); if err then we are already logged in.
         client.frame(res.value)
           .execute(function (a, b, c, d) {
             document.querySelector('#user-email')
