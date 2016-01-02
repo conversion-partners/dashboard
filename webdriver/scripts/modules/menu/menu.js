@@ -8,7 +8,7 @@ module.exports = {
     console.log(err); //if err then we are already logged in.
     */
     return this.execute(function () {
-        var iframe = document.querySelector("#panel-login > iframe")
+        var iframe = document.querySelector("#panel-menu > iframe")
           .contentWindow;
         iframe.eval('document.querySelector("#user-email").value = "asdfsdf";');
         iframe.eval('console.log(document.querySelector("#user-email").value);');
