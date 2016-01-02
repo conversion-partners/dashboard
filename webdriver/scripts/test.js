@@ -2,8 +2,8 @@ var webdriverio = require('webdriverio');
 var login = require('./modules/login/login.js');
 var options = {
   desiredCapabilities: {
-    //browserName: 'chrome'
-    browserName: 'phantomjs'
+    browserName: 'chrome'
+    //browserName: 'phantomjs'
   }
   //capabilities: [{
   //browserName: 'phantomjs',
@@ -19,18 +19,14 @@ client.init()
   //.windowHandleMaximize("current")
   .pause(8000) // needs event handling
   .then(function () {
-    client.saveScreenshot('./webdriver/images/screenshots/snapshot.png', function (err, screenshot, response) {});
-    client.execute('return localStorage.getItem(arguments[0])', 'account')
-      .then((value) => console.log('storageKey = ' + JSON.stringify(value)));
+    //client.saveScreenshot('./webdriver/images/screenshots/snapshot.png', function (err, screenshot, response) {});
+    //client.execute('return localStorage.getItem(arguments[0])', 'account')
+    //  .then((value) => console.log('storageKey = ' + JSON.stringify(value)));
     client.element('#panel-login > iframe', function (err, res) {
       return client.login(err, res)
-        .then(function (res) {
-          console.log(res);
+        .then(function () {
+          console.log(arguments);
           return res;
-        })
-        .then(function (res) {
-          console.log('if false then we are logged in or something\'s gone wrong..'); // fix this!!
-          console.log(res);
         });
     });
   });
