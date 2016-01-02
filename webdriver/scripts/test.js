@@ -1,7 +1,7 @@
 var webdriverio = require('webdriverio');
 var login = require('./modules/login/login.js');
 var menu = require('./modules/menu/menu.js');
-var page = require('./modules/page/page.js');
+var page = require('./modules/pages/pages.js');
 var options = {
   desiredCapabilities: {
     browserName: 'chrome'
