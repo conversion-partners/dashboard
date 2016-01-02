@@ -28,7 +28,7 @@ module.exports = {
         console.log(ret.value); // outputs: 10
       })
       .saveScreenshot('./webdriver/images/screenshots/snapshot.png', function (err, screenshot, response) {})
-      .getHTML('body')
+      .getHTML('head title')
       .then(console.log)
       .end();
   }
