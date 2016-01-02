@@ -18,6 +18,10 @@ client.init()
   .url('http://localhost:9090/dashboard/')
   .execute('localStorage.setItem("account","")')
   .execute('localStorage.setItem("login","false")')
+
+  .execute('localStorage.setItem("account","easydrain")')
+  .execute('localStorage.setItem("login","true")')
+
   //.windowHandleMaximize("current")
   .pause(8000) // needs event handling
   .then(function () {
