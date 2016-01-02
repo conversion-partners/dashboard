@@ -1,10 +1,11 @@
 var webdriverio = require('webdriverio');
 var login = require('./modules/login/login.js');
 var menu = require('./modules/menu/menu.js');
+var page = require('./modules/page/page.js');
 var options = {
   desiredCapabilities: {
     browserName: 'chrome'
-    //browserName: 'phantomjs'
+      //browserName: 'phantomjs'
   }
   //capabilities: [{
   //browserName: 'phantomjs',
@@ -14,14 +15,13 @@ var options = {
 var client = webdriverio.remote(options);
 client.addCommand("login", login.getFunction.bind(client));
 client.addCommand("menu", menu.getFunction.bind(client));
+client.addCommand("page", page.getFunction.bind(client));
 client.init()
   .url('http://localhost:9090/dashboard/')
   .execute('localStorage.setItem("account","")')
   .execute('localStorage.setItem("login","false")')
-
   .execute('localStorage.setItem("account","easydrain")')
   .execute('localStorage.setItem("login","true")')
-
   //.windowHandleMaximize("current")
   .pause(8000) // needs event handling
   .then(function () {
@@ -33,8 +33,10 @@ client.init()
         .then(function () {
           console.log(arguments);
           return client.menu(arguments);
-        }).then(function(){
+        })
+        .then(function () {
           console.log(arguments);
+          return client.page(arguments);
         });
     });
   });
