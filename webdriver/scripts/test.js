@@ -25,8 +25,10 @@ client.init()
     client.element('#panel-login > iframe', function (err, res) {
       return client.login(err, res)
         .then(function () {
+          //console.log(arguments);
+          return arguments;
+        }).then(function(){
           console.log(arguments);
-          return res;
         });
     });
   });
