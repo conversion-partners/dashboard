@@ -37,6 +37,9 @@ client.init()
         .then(function () {
           console.log(arguments);
           return client.page(arguments);
+        })
+        .then(function () {
+          console.log(arguments);
         });
     });
   });
