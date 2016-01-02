@@ -20,7 +20,7 @@ module.exports = {
               return result;
         }, null)
         .then(function (ret) {
-        console.log(ret.value); // outputs: 10
+        console.log(ret.value);
         });
       }
 };
