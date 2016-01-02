@@ -451,3 +451,26 @@
 [INFO  - 2016-01-02T17:24:34.061Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
 [INFO  - 2016-01-02T17:25:53.799Z] ShutdownReqHand - _handle - About to shutdown
 [INFO  - 2016-01-02T17:25:54.382Z] ShutdownReqHand - _handle - About to shutdown
+[INFO  - 2016-01-02T23:17:58.160Z] GhostDriver - Main - running on port 13634
+[INFO  - 2016-01-02T23:17:58.417Z] Session [0f9ab4c0-b1a7-11e5-8edc-07f4a9cd6fdd] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Unknown; Linux x86_64) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.0.0 Safari/538.1","webSecurityEnabled":true}
+[INFO  - 2016-01-02T23:17:58.417Z] Session [0f9ab4c0-b1a7-11e5-8edc-07f4a9cd6fdd] - page.customHeaders:  - {}
+[INFO  - 2016-01-02T23:17:58.417Z] Session [0f9ab4c0-b1a7-11e5-8edc-07f4a9cd6fdd] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.0.0","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"linux-unknown-64bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
+[INFO  - 2016-01-02T23:17:58.417Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: 0f9ab4c0-b1a7-11e5-8edc-07f4a9cd6fdd
+[ERROR - 2016-01-02T23:18:07.595Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1451776687559
+[INFO  - 2016-01-02T23:18:21.347Z] GhostDriver - Main - running on port 5298
+[INFO  - 2016-01-02T23:18:21.772Z] Session [1d866570-b1a7-11e5-acea-6d7e1b1ee02d] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Unknown; Linux x86_64) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.0.0 Safari/538.1","webSecurityEnabled":true}
+[INFO  - 2016-01-02T23:18:21.772Z] Session [1d866570-b1a7-11e5-acea-6d7e1b1ee02d] - page.customHeaders:  - {}
+[INFO  - 2016-01-02T23:18:21.773Z] Session [1d866570-b1a7-11e5-acea-6d7e1b1ee02d] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.0.0","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"linux-unknown-64bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
+[INFO  - 2016-01-02T23:18:21.773Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: 1d866570-b1a7-11e5-acea-6d7e1b1ee02d
+[ERROR - 2016-01-02T23:18:35.689Z] Session [1d866570-b1a7-11e5-acea-6d7e1b1ee02d] - page.onError - msg: ReferenceError: Can't find variable: Promise
+[ERROR - 2016-01-02T23:18:35.690Z] Session [1d866570-b1a7-11e5-acea-6d7e1b1ee02d] - page.onError - stack:
+  filRegistry (http://localhost:9090/dashboard/app/elements/core9-core/js/core-blocks-handler.js:105)
+  getData (http://localhost:9090/dashboard/app/elements/core9-core/js/core-blocks-handler.js:340)
+  init (http://localhost:9090/dashboard/app/elements/core9-core/js/core-blocks-handler.js:407)
+  (anonymous function) (http://localhost:9090/dashboard/app/elements/core9-core/js/core-blocks-handler.js:420)
+[ERROR - 2016-01-02T23:18:36.158Z] Session [1d866570-b1a7-11e5-acea-6d7e1b1ee02d] - page.onError - msg: SyntaxError: DOM Exception 12: An invalid or illegal string was specified.
+[ERROR - 2016-01-02T23:18:36.158Z] Session [1d866570-b1a7-11e5-acea-6d7e1b1ee02d] - page.onError - stack:
+  postMessage (http://w.sharethis.com/share5x/js/st.14d343a80d74562e54acd9157cb9a0c9.js:1)
+  broadcastSendMessage (http://w.sharethis.com/share5x/js/st.14d343a80d74562e54acd9157cb9a0c9.js:1)
+  processFromParent (http://w.sharethis.com/share5x/js/st.14d343a80d74562e54acd9157cb9a0c9.js:1)
+  (anonymous function) (http://w.sharethis.com/share5x/js/st.14d343a80d74562e54acd9157cb9a0c9.js:1)

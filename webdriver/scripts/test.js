@@ -4,8 +4,8 @@ var menu = require('./modules/menu/menu.js');
 var page = require('./modules/pages/pages.js');
 var options = {
   desiredCapabilities: {
-    browserName: 'chrome'
-      //browserName: 'phantomjs'
+    //browserName: 'chrome'
+    browserName: 'phantomjs'
   }
   //capabilities: [{
   //browserName: 'phantomjs',
@@ -40,6 +40,10 @@ client.init()
         })
         .then(function () {
           console.log(arguments);
+
+          setTimeout(function(){
+            client.execute('$("#export-page").click();');
+          }, 8000);
         });
     });
   });
