@@ -3,8 +3,8 @@ var login = require('./modules/login/login.js');
 var menu = require('./modules/menu/menu.js');
 var options = {
   desiredCapabilities: {
-    //browserName: 'chrome'
-    browserName: 'phantomjs'
+    browserName: 'chrome'
+    //browserName: 'phantomjs'
   }
   //capabilities: [{
   //browserName: 'phantomjs',
