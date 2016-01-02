@@ -23,8 +23,8 @@
                     iframe.eval('$(".country-data").select2("val", "");');
                     iframe.eval('$("#refresh-templates").click();');
                     iframe.eval('function getLink(n){return $("#nestable > ol > li").filter(function(){var t=$(this).find("span").context.innerText.trim();return t=t.substring(0,t.length-4),t==n?(console.log(n),console.log(t),$(this)):void 0})}');
-
-                    iframe.eval('var page = "home";');
+                    var test = 'home';
+                    iframe.eval('var page = "'+test+'";');
                     iframe.eval('var id = getLink("home")[0].dataset.id;');
                     iframe.eval('Core9.data.currentid = id;');
                     iframe.eval('document.getElementById("delpage").dataset.currentid = id;');
