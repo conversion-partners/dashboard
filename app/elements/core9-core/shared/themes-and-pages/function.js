@@ -211,6 +211,10 @@ function initNestable(jsonStr) {
       var id = getIdFromItem(element);
       Core9.data.currentid = id;
       document.getElementById('delpage').dataset.currentid = id;
+      console.log('clicked!!!!!!!!!!');
+      console.log(id);
+      console.log(element);
+      console.log(this);
       activateEditor();
     }
   }).on('change', updateOutput);
