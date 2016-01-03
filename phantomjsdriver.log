@@ -474,3 +474,17 @@
   broadcastSendMessage (http://w.sharethis.com/share5x/js/st.14d343a80d74562e54acd9157cb9a0c9.js:1)
   processFromParent (http://w.sharethis.com/share5x/js/st.14d343a80d74562e54acd9157cb9a0c9.js:1)
   (anonymous function) (http://w.sharethis.com/share5x/js/st.14d343a80d74562e54acd9157cb9a0c9.js:1)
+[INFO  - 2016-01-02T23:22:58.158Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2016-01-02T23:23:21.344Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2016-01-02T23:27:58.158Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2016-01-02T23:28:21.344Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2016-01-02T23:32:58.158Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2016-01-02T23:33:21.344Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2016-01-02T23:37:58.158Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2016-01-02T23:38:21.344Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2016-01-02T23:42:58.158Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2016-01-02T23:43:21.344Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2016-01-02T23:47:58.158Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2016-01-02T23:48:21.344Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2016-01-02T23:50:02.773Z] ShutdownReqHand - _handle - About to shutdown
+[INFO  - 2016-01-02T23:50:03.351Z] ShutdownReqHand - _handle - About to shutdown
