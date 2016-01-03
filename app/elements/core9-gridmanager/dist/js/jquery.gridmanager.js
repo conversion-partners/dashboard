@@ -730,6 +730,10 @@
         }
       });
       gm.log("Save Function Called");
+      var message = {
+        action: "resetThemeEditor"
+      }
+      Core9.iframe.child.sentMessageToParent(message);
     };
     /*------------------------------------------ ROWS ---------------------------------------*/
     /**

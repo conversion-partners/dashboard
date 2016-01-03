@@ -12,8 +12,6 @@ Core9.iframe.parent = {
     var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
     eventer(messageEvent, function (e) {
       //console.log(e);
-
-
       if(e.data.action == "hideAjaxLoader") {
         //console.log('hideAjaxLoader');
         var event = new CustomEvent("hideAjaxLoader", {
@@ -30,9 +28,23 @@ Core9.iframe.parent = {
       }
       if(e.data.action == "showPageForm") {
         setTimeout(function () {
-          document.getElementById('page-form').click();
+          document.getElementById('page-form')
+            .click();
           Core9.iframe.parent.sentMessageToIframe(e.data, document.querySelector('#iframe-form-holder'));
         }, 100);
+      }
+      if(e.data.action == "resetThemeEditor") {
+        /* this is still not working
+        setTimeout(function () {
+          console.log('resetting theme editor');
+          //var iframe = Core9.panel.getIframeById('panel-iframe-site');
+          //var cmd = 'Core9.blocks.handler.init();';
+          //Core9.iframe.parent.sentMessageToIframe(cmd, iframe);
+          var iframe = document.querySelector("#panel-themes > iframe")
+            .contentWindow;
+          iframe.eval('$("#edit-selected-theme").trigger("click");');
+        }, 1000);
+        */
       }
       if(e.data.action == "resetPageEditor") {
         setTimeout(function () {
