@@ -641,17 +641,22 @@
       cols = canvas.find(gm.options.colSelector);
       rows = canvas.find(gm.options.rowSelector);
       // Make Rows sortable
-      canvas.sortable({
-        items: rows,
-        axis: 'y',
-        placeholder: gm.options.rowSortingClass,
-        handle: ".gm-moveRow",
-        forcePlaceholderSize: true,
-        opacity: 0.7,
-        revert: true,
-        tolerance: "pointer",
-        cursor: "move"
-      });
+      try {
+        canvas.sortable({
+          items: rows,
+          axis: 'y',
+          placeholder: gm.options.rowSortingClass,
+          handle: ".gm-moveRow",
+          forcePlaceholderSize: true,
+          opacity: 0.7,
+          revert: true,
+          tolerance: "pointer",
+          cursor: "move"
+        });
+      } catch (e) {
+
+      }
+
       /*
       Make columns sortable
       This needs to be applied to each element, otherwise containment leaks

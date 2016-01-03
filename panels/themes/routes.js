@@ -62,11 +62,12 @@ var themeRoutes = {
         var iframe = Core9.panel.getIframeById('panel-iframe-site');
         Core9.iframe.write(iframe, docString, true);
         setTimeout(function () {
-
+          
+          // this shit is too funcky
+          var script = '$.getScript("/dashboard/app/elements/core9-gridmanager/demo/js/jquery.js", function () {});$.getScript("/dashboard/app/elements/core9-gridmanager/demo/js/jquery-ui.js", function () {});$.getScript("/dashboard/app/elements/core9-gridmanager/dist/js/jquery.gridmanager.js", function () {});';
           var t = '$("#gm-canvas").append(document.getElementsByClassName("core9-template")[0].children); $(".core9-template").remove();';
+          var cmd = script + 'window.gm = jQuery("#mycanvas").gridmanager().data("gridmanager");$(".gm-preview").trigger("click");' + t;
 
-          var cmd = 'window.gm = jQuery("#mycanvas").gridmanager().data("gridmanager");$(".gm-preview").trigger("click");' + t;
-          console.log('init grid manager');
           Core9.iframe.parent.sentMessageToIframe(cmd, iframe);
         }, 1000); // smarter needs to be handled in sendMessage to iframe
         initPanelIframeSite = false;
