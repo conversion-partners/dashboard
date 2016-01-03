@@ -53,8 +53,8 @@ $(document).ready(function () {
     if(typeof event.data === 'undefined' || typeof event.data.action === 'undefined') return;
     if(event.data.action == 'addItems') {
       addItemsToMenu(event.data.findmenusbytitle, event.data.addItems);
-      setTimeout(function () {
-        console.log('setting on click on heading');
+      setTimeout(function () { // fixme to buggy
+        //console.log('setting on click on heading');
         $('h2').on('click', function () {
           $('#menu').multilevelpushmenu('collapse', 0);
         });

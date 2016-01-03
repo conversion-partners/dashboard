@@ -15,14 +15,14 @@ Core9.iframe.parent = {
 
 
       if(e.data.action == "hideAjaxLoader") {
-        console.log('hideAjaxLoader');
+        //console.log('hideAjaxLoader');
         var event = new CustomEvent("hideAjaxLoader", {
           "detail": "Hide ajax loader"
         });
         window.dispatchEvent(event);
       }
       if(e.data.action == "showAjaxLoader") {
-        console.log('showAjaxLoader');
+        //console.log('showAjaxLoader');
         var event = new CustomEvent("showAjaxLoader", {
           "detail": "Show ajax loader"
         });

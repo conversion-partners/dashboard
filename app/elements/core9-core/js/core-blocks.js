@@ -58,7 +58,7 @@ Core9.blocks.insertBlock = function (div, block) {
   return div;
 }
 Core9.blocks.init = function () {
-  console.log('running init');
+  //console.log('running init');
   var blocks = document.getElementsByClassName('core9-block');
   Core9.blocks.loopBlocks(blocks);
 }

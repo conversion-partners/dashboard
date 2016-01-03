@@ -179,7 +179,7 @@ function getSelectBoxEntries() {
 }
 
 function initNestable(jsonStr) {
-  console.log('init nestable..');
+  //console.log('init nestable..');
   initTemplateSelectBoxes();
   var container = document.getElementById('nestablecontainer');
   while (container.firstChild) {
@@ -211,10 +211,6 @@ function initNestable(jsonStr) {
       var id = getIdFromItem(element);
       Core9.data.currentid = id;
       document.getElementById('delpage').dataset.currentid = id;
-      console.log('clicked!!!!!!!!!!');
-      console.log(id);
-      console.log(element);
-      console.log(this);
       activateEditor();
     }
   }).on('change', updateOutput);
