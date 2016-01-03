@@ -45,6 +45,7 @@ Core9.iframe.parent = {
           iframe.eval('$("#edit-selected-theme").trigger("click");');
         }, 1000);
         */
+          history.pushState(null, null, '/dashboard/templates');
       }
       if(e.data.action == "resetPageEditor") {
         setTimeout(function () {
