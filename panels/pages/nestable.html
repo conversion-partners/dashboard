@@ -525,22 +525,22 @@
 			return false;
 		}
 
-		function addPageToPages(page, db) {
+		function addPageToPages(page, db, pageSettings) {
 			Core9.data.pageDataObj.page = page.page;
 		}
 
-		function eachRecursive(obj, pages, db) {
+		function eachRecursive(obj, pages, db, pageSettings) {
 			for (var k in obj) {
 				if (typeof obj[k].page != 'undefined') {
 					console.log(obj[k]);
 					if (!inPages(obj[k], pages, db)) {
-						addPageToPages(obj[k], db);
+						addPageToPages(obj[k], db, pageSettings);
 					} else {
 						console.log('in pages');
 					}
 				}
 				if (typeof obj[k] == "object" && obj[k] !== null) {
-					eachRecursive(obj[k], pages, db);
+					eachRecursive(obj[k], pages, db, pageSettings);
 				} else {}
 			}
 		}
@@ -570,7 +570,7 @@
 				var content = JSON.stringify(data);
 				var dat = JSON.parse(content);
 				//console.log(dat);
-				eachRecursive(dat, pages, db);
+				eachRecursive(dat, pages, db, pageSettings);
 				initNestable(content);
 			});
 		}
