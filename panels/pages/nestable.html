@@ -516,8 +516,6 @@
 		document.getElementById('save-nestable').addEventListener("click", saveNestable, false);
 
 		function inPages(page, pages, db) {
-			console.log('pages', typeof pages);
-
 			for (var i = 0; i < pages.length; i++) {
 				var pageItem = pages[i];
 				if (pageItem.page == page.page) {
@@ -525,17 +523,14 @@
 				}
 			}
 			return false;
-
 		}
 
 		function addPageToPages(page, db) {
 			Core9.data.pageDataObj.page = page.page;
 		}
 
-		// This function handles arrays and objects
 		function eachRecursive(obj, pages, db) {
 			for (var k in obj) {
-
 				if (typeof obj[k].page != 'undefined') {
 					console.log(obj[k]);
 					if (!inPages(obj[k], pages, db)) {
