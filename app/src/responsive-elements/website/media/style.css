@@ -48,3 +48,13 @@ body {
   min-height: 200px;
   width: 500px;
 }
+#demo {
+  background: url(/dashboard/app/src/responsive-elements/website/media/img/scale.png) left top repeat-x !important;
+  padding-top: 24px !important;
+}
+#demo .slider-handle {
+  right: -33px !important;
+}
+#demo #resizable {
+  border-right: 2px solid red;
+}
