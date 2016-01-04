@@ -526,7 +526,52 @@
 		}
 
 		function addPageToPages(page, db, pageSettings) {
+			console.log('page settings : ');
+			// pageSettings {language: "", country: "", domain: "testdomain.nl"}
+			/*
+			, {
+			  "domain": "testdomain.nl",
+			  "language": "",
+			  "country": "",
+			  "page": "testpage5",
+			  "menuid": "7ef2d094-3a84-761a-eb45-162355c4784f",
+			  "url": "",
+			  "versions": [{
+			    "title": "version-one",
+			    "theme": "",
+			    "language": "",
+			    "country": "",
+			    "template": "",
+			    "version": "",
+			    "percentage": 100,
+			    "startdate": "",
+			    "enddate": "",
+			    "status": "active"
+			  }],
+			  "meta": {
+			    "revision": 0,
+			    "created": 1451938102080,
+			    "version": 0
+			  },
+			  "$loki": 106
+			}
+			*/
+			console.log(pageSettings);
 			Core9.data.pageDataObj.page = page.page;
+			Core9.data.pageDataObj.domain = pageSettings.domain;
+			Core9.data.pageDataObj.language = pageSettings.language;
+			Core9.data.pageDataObj.country = pageSettings.country;
+			Core9.data.pageDataObj.menuid = guid();
+
+			Core9.data[TYPEOFPAGE].insert(Core9.data.pageDataObj);
+			try {
+				Core9.template.save();
+				var event = new CustomEvent("save-new-page", {
+					"detail": "Example of an event"
+				});
+				document.dispatchEvent(event);
+			} catch (e) {}
+
 		}
 
 		function eachRecursive(obj, pages, db, pageSettings) {
@@ -545,6 +590,10 @@
 			}
 		}
 
+
+		function inMenu() {}
+
+		function addPageToMenu() {}
 
 
 		function loadNestable() {
@@ -571,6 +620,11 @@
 				var dat = JSON.parse(content);
 				//console.log(dat);
 				eachRecursive(dat, pages, db, pageSettings);
+
+				if (!inMenu()) {
+					content = addPageToMenu();
+				}
+
 				initNestable(content);
 			});
 		}
