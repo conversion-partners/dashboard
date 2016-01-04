@@ -11,6 +11,26 @@ Core9.data.countryOptions = [];
 Core9.data.templateOptions = [];
 Core9.data.versionOptions = [];
 Core9.data.pageData = [];
+Core9.data.pageDataObj = {
+    "domain": "",
+    "language": "",
+    "country": "",
+    "page": "",
+    "menuid" : "",
+    "url": "",
+    "versions": [{
+      "title": "version-one",
+      "theme": "",
+      "language": "",
+      "country": "",
+      "template": "",
+      "version": "",
+      "percentage": 100,
+      "startdate": "",
+      "enddate": "",
+      "status": "active"
+    }]
+  };
 Core9.template = {
   paths: {
     "template": "/dashboard/data/accounts/{0}/themes/bower_components/{1}/data/templates.json",

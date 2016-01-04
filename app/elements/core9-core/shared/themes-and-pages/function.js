@@ -121,7 +121,7 @@ function setActiveTab(tab) {
   $('#editor_holder2 > div > div.rows > div.tabs.list-group.col-md-2 > a.list-group-item').eq(tab)[0].click();
 }
 
-function getSelectboxValues() {
+function getPageSettings() {
   var res = {};
   var template = $(".template-data").val();
   var language = $(".language-data").val();
@@ -140,13 +140,13 @@ function getSelectboxValues() {
 }
 
 function createUiFromSelectBoxValues() {
-  var res = getSelectboxValues();
+  var res = getPageSettings();
   return res.template + "-" + res.language + "-" + res.country;
 }
 
 function getSelectBoxEntries() {
   var page = getSelectedPageId();
-  var res = getSelectboxValues();
+  var res = getPageSettings();
   var template = res.template;
   var language = res.language;
   var country = res.country;

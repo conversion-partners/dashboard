@@ -515,18 +515,67 @@
 		}
 		document.getElementById('save-nestable').addEventListener("click", saveNestable, false);
 
+		function inPages(page, pages, db) {
+			console.log('pages', typeof pages);
+
+			for (var i = 0; i < pages.length; i++) {
+				var pageItem = pages[i];
+				if (pageItem.page == page.page) {
+					return true;
+				}
+			}
+			return false;
+
+		}
+
+		function addPageToPages(page, db) {
+			Core9.data.pageDataObj.page = page.page;
+		}
+
+		// This function handles arrays and objects
+		function eachRecursive(obj, pages, db) {
+			for (var k in obj) {
+
+				if (typeof obj[k].page != 'undefined') {
+					console.log(obj[k]);
+					if (!inPages(obj[k], pages, db)) {
+						addPageToPages(obj[k], db);
+					} else {
+						console.log('in pages');
+					}
+				}
+				if (typeof obj[k] == "object" && obj[k] !== null) {
+					eachRecursive(obj[k], pages, db);
+				} else {}
+			}
+		}
+
+
+
 		function loadNestable() {
+
+			var pageSettings = getPageSettings();
+			pageSettings.domain = pageSettings.template;
+			delete pageSettings.template;
+			//console.log(pageSettings);
+			var db = Core9.data[TYPEOFPAGE];
+			var pages = db.findObjects(pageSettings);
+			console.log('res');
+			console.log(pages);
+			console.log('res');
 
 			var db = Core9.data.pages;
 			var data = $('#nestable').nestable('serialize');
-			console.log(data);
+			//console.log(data);
 			var file = getPageMenuFile();
 			var content = JSON.stringify(data);
 			var url = '/api/io/save';
 			var file = file.toLowerCase();
 			$.get(file, function(data) {
 				var content = JSON.stringify(data);
-				console.log(content);
+				var dat = JSON.parse(content);
+				//console.log(dat);
+				eachRecursive(dat, pages, db);
 				initNestable(content);
 			});
 		}
