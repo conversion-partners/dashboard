@@ -543,7 +543,12 @@
 			Core9.data.pageDataObj.language = pageSettings.language;
 			Core9.data.pageDataObj.country = pageSettings.country;
 			Core9.data.pageDataObj.menuid = guid();
-			Core9.data[TYPEOFPAGE].insert(Core9.data.pageDataObj);
+			try {
+				Core9.data[TYPEOFPAGE].update(Core9.data.pageDataObj);
+			} catch (e) {
+
+			}
+
 			try {
 				Core9.template.save();
 				var event = new CustomEvent("save-new-page", {
@@ -605,7 +610,7 @@
 					tempArr.push(json[k]);
 				}
 			}
-			console.log(tempArr);
+
 			for (var i = 0; i < pages.length; i++) {
 				var page = pages[i];
 				if (tempArr.indexOf(page.page) == -1) {
@@ -614,7 +619,6 @@
 						page: page.page
 					}
 					obj.push(newPage);
-					console.log("adding : ", newPage);
 				}
 			}
 			return JSON.stringify(obj);
