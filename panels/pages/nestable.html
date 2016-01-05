@@ -471,6 +471,18 @@
 	</div>
 
 	<script>
+		if (!String.prototype.endsWith) {
+			String.prototype.endsWith = function(searchString, position) {
+				var subjectString = this.toString();
+				if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+					position = subjectString.length;
+				}
+				position -= searchString.length;
+				var lastIndex = subjectString.indexOf(searchString, position);
+				return lastIndex !== -1 && lastIndex === position;
+			};
+		}
+
 		$(document).ready(function() {
 			$('#nestable-menu').on('click', function(e) {
 				var target = $(e.target),
@@ -526,43 +538,11 @@
 		}
 
 		function addPageToPages(page, db, pageSettings) {
-			console.log('page settings : ');
-			// pageSettings {language: "", country: "", domain: "testdomain.nl"}
-			/*
-			, {
-			  "domain": "testdomain.nl",
-			  "language": "",
-			  "country": "",
-			  "page": "testpage5",
-			  "menuid": "7ef2d094-3a84-761a-eb45-162355c4784f",
-			  "url": "",
-			  "versions": [{
-			    "title": "version-one",
-			    "theme": "",
-			    "language": "",
-			    "country": "",
-			    "template": "",
-			    "version": "",
-			    "percentage": 100,
-			    "startdate": "",
-			    "enddate": "",
-			    "status": "active"
-			  }],
-			  "meta": {
-			    "revision": 0,
-			    "created": 1451938102080,
-			    "version": 0
-			  },
-			  "$loki": 106
-			}
-			*/
-			console.log(pageSettings);
 			Core9.data.pageDataObj.page = page.page;
 			Core9.data.pageDataObj.domain = pageSettings.domain;
 			Core9.data.pageDataObj.language = pageSettings.language;
 			Core9.data.pageDataObj.country = pageSettings.country;
 			Core9.data.pageDataObj.menuid = guid();
-
 			Core9.data[TYPEOFPAGE].insert(Core9.data.pageDataObj);
 			try {
 				Core9.template.save();
@@ -571,29 +551,75 @@
 				});
 				document.dispatchEvent(event);
 			} catch (e) {}
-
 		}
 
-		function eachRecursive(obj, pages, db, pageSettings) {
+
+		function eachRecursivePages(obj, pages, db, pageSettings) {
 			for (var k in obj) {
 				if (typeof obj[k].page != 'undefined') {
-					console.log(obj[k]);
 					if (!inPages(obj[k], pages, db)) {
 						addPageToPages(obj[k], db, pageSettings);
-					} else {
-						console.log('in pages');
 					}
 				}
 				if (typeof obj[k] == "object" && obj[k] !== null) {
-					eachRecursive(obj[k], pages, db, pageSettings);
-				} else {}
+					eachRecursivePages(obj[k], pages, db, pageSettings);
+				}
 			}
 		}
 
+		JSON.flatten = function(data) {
+			var result = {};
 
-		function inMenu() {}
+			function recurse(cur, prop) {
+				if (Object(cur) !== cur) {
+					result[prop] = cur;
+				} else if (Array.isArray(cur)) {
+					for (var i = 0, l = cur.length; i < l; i++)
+						recurse(cur[i], prop + "[" + i + "]");
+					if (l == 0)
+						result[prop] = [];
+				} else {
+					var isEmpty = true;
+					for (var p in cur) {
+						isEmpty = false;
+						recurse(cur[p], prop ? prop + "." + p : p);
+					}
+					if (isEmpty && prop)
+						result[prop] = {};
+				}
+			}
+			recurse(data, "");
+			return result;
+		}
 
-		function addPageToMenu() {}
+
+
+
+
+		function eachRecursiveMenu(obj, pages, db, pageSettings) {
+
+			var json = JSON.flatten(obj);
+			var tempArr = [];
+			for (var k in json) {
+				if (k.endsWith('.page')) {
+					tempArr.push(json[k]);
+				}
+			}
+			console.log(tempArr);
+			for (var i = 0; i < pages.length; i++) {
+				var page = pages[i];
+				if (tempArr.indexOf(page.page) == -1) {
+					var newPage = {
+						id: page.menuid,
+						page: page.page
+					}
+					obj.push(newPage);
+					console.log("adding : ", newPage);
+				}
+			}
+			return JSON.stringify(obj);
+		}
+
 
 
 		function loadNestable() {
@@ -601,16 +627,10 @@
 			var pageSettings = getPageSettings();
 			pageSettings.domain = pageSettings.template;
 			delete pageSettings.template;
-			//console.log(pageSettings);
 			var db = Core9.data[TYPEOFPAGE];
 			var pages = db.findObjects(pageSettings);
-			console.log('res');
-			console.log(pages);
-			console.log('res');
-
 			var db = Core9.data.pages;
 			var data = $('#nestable').nestable('serialize');
-			//console.log(data);
 			var file = getPageMenuFile();
 			var content = JSON.stringify(data);
 			var url = '/api/io/save';
@@ -618,13 +638,8 @@
 			$.get(file, function(data) {
 				var content = JSON.stringify(data);
 				var dat = JSON.parse(content);
-				//console.log(dat);
-				eachRecursive(dat, pages, db, pageSettings);
-
-				if (!inMenu()) {
-					content = addPageToMenu();
-				}
-
+				eachRecursivePages(dat, pages, db, pageSettings);
+				content = eachRecursiveMenu(dat, pages, db, pageSettings);
 				initNestable(content);
 			});
 		}
