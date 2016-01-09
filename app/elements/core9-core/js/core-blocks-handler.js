@@ -186,7 +186,7 @@ Core9.blocks.handler.setHandleBarTemplateContent = function(userData, defaultDat
     .length;
   var content = {};
   // FIXME do some error handling here!!!!!!!
-  if (len == 0) {
+  if (len == 0 || Core9.blocks.handler.config.page == "theme") {
     content = template(defaultData);
   } else {
     content = template(userData);
