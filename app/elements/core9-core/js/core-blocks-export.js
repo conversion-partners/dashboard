@@ -38,6 +38,8 @@ Core9.exportPage = function () {
             var iframe = document.querySelector("#panel-iframe-site > iframe")
               .contentWindow;
             iframe.eval('Core9.blocks.handler.preAndPostSaving("postSave");');
+            //document.getElementById("export-page")
+            document.getElementById("export-page").style.backgroundColor = "";
           }
         }
       });
@@ -46,6 +48,7 @@ Core9.exportPage = function () {
   //export-page
 document.getElementById("export-page")
   .addEventListener("click", function () {
+    document.getElementById("export-page").style.backgroundColor = "green";
     var cachedFile = store.get('cached-file');
     if(typeof cachedFile != 'undefined') {
       Core9.exportPage();
