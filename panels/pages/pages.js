@@ -14,6 +14,9 @@ var activateEditor = function () {
     Core9.editor2.destroy();
   } catch(e) {}
   try {
+    Core9.editor3.destroy();
+  } catch(e) {}
+  try {
     Core9.editor.destroy();
   } catch(e) {}
   Core9.editor2 = new JSONEditor(document.getElementById('editor_holder'), {
