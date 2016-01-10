@@ -540,9 +540,9 @@
 	<script>
 		$(document).ready(function() {
 			$('nav a').on('click', function() {
-				console.log(this);
+				$("nav li").removeClass("active")
+				$(this).parent().addClass("active");
 				var action = $(this).data('action');
-				console.log(action);
 				if (action === 'show-meta-form') {
 					$('#editor_holder2').hide();
 					$('#editor_holder3').show();
