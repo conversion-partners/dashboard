@@ -36,6 +36,16 @@ var activateEditor = function () {
       }
     }
   });
+
+  if(typeof pageData.metadata == 'undefined'){
+    var metadata = {
+      title : "",
+      metadescription : "",
+      tags : ""
+    }
+    pageData.metadata = metadata;
+  }
+
   Core9.editor3 = new JSONEditor(document.getElementById('editor_holder3'), {
     disable_edit_json: true,
     disable_collapse: true,
