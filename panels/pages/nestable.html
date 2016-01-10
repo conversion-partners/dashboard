@@ -469,8 +469,8 @@
 					<div class="container-fluid">
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav">
-								<li class="active"><a href="#">Version</span></a></li>
-								<li><a href="#">Meta</a></li>
+								<li class="active"><a data-action="show-version-form" href="#">Version</span></a></li>
+								<li><a data-action="show-meta-form" href="#">Meta</a></li>
 								<li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Extentions <span class="caret"></span></a>
 									<ul class="dropdown-menu">
@@ -492,8 +492,10 @@
 
 			</div>
 
+			<div style="display:none;" id='editor_holder3'></div>
+
 			<div id='editor_holder2'></div>
-			<div id='editor_holder3'></div>
+
 			<button id='submit2' type="button" class="btn btn-default">Save</button>
 			<button id='restore2' type="button" class="btn btn-default">Restore</button>
 			<span id='valid_indicator'></span>
@@ -530,6 +532,24 @@
 				}
 				if (action === 'collapse-all') {
 					$('.dd').nestable('collapseAll');
+				}
+			});
+		});
+	</script>
+
+	<script>
+		$(document).ready(function() {
+			$('nav a').on('click', function() {
+				console.log(this);
+				var action = $(this).data('action');
+				console.log(action);
+				if (action === 'show-meta-form') {
+					$('#editor_holder2').hide();
+					$('#editor_holder3').show();
+				}
+				if (action === 'show-version-form') {
+					$('#editor_holder3').hide();
+					$('#editor_holder2').show();
 				}
 			});
 		});

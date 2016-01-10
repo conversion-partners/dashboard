@@ -33,6 +33,31 @@ var activateEditor = function () {
       }
     }
   });
+  Core9.editor3 = new JSONEditor(document.getElementById('editor_holder3'), {
+    disable_edit_json: true,
+    disable_collapse: true,
+    disable_properties: true,
+    format: 'grid',
+    theme: 'bootstrap3',
+    schema: {
+      type: "object",
+      title: pageData.page,
+      properties: {
+        title: {
+          type: "string",
+          default: pageData.title
+        },
+        metadescription: {
+          type: "string",
+          default: pageData.metadescription
+        },
+        tags: {
+          type: "string",
+          default: pageData.tags
+        }
+      }
+    }
+  });
   Core9.editor = new JSONEditor(document.getElementById('editor_holder2'), {
     ajax: true,
     disable_edit_json: true,
@@ -141,7 +166,9 @@ var activateEditor = function () {
     var page = getCurrentPage();
     var url = Core9.editor2.getValue()
       .url;
+    var metadata = Core9.editor3.getValue();
     page.url = url;
+    page.metadata = metadata;
     var versions = Core9.editor.getValue();
     page.versions = [];
     for(var i = 0; i < versions.length; i++) {
