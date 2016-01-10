@@ -48,15 +48,15 @@ var activateEditor = function () {
       properties: {
         title: {
           type: "string",
-          default: pageData.title
+          default: pageData.metadata.title
         },
         metadescription: {
           type: "string",
-          default: pageData.metadescription
+          default: pageData.metadata.metadescription
         },
         tags: {
           type: "string",
-          default: pageData.tags
+          default: pageData.metadata.tags
         }
       }
     }
@@ -197,6 +197,7 @@ var activateEditor = function () {
     }
     Core9.data[TYPEOFPAGE].update(page);
     Core9.template.save();
+    store.set('page-meta-data', JSON.stringify(page));
   }
 
   function getOptions(options) {
@@ -511,6 +512,8 @@ $(document)
       });
     $('#editpage')
       .on('click', function () {
+        $('#submit2')
+          .trigger('click');
         $('#page-selector')
           .modal();
         $('#choose-theme')

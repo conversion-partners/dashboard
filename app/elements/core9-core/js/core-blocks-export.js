@@ -8,6 +8,9 @@ function removeIdsFromIframeContent(doc, idsToRemove) {
   }
 }
 Core9.exportPage = function () {
+
+    Core9.pageMetaData = JSON.parse(store.get('page-meta-data'));
+    console.log(Core9.pageMetaData);
     var iframe = document.querySelector("#panel-iframe-site > iframe")
       .contentWindow;
     iframe.eval('Core9.blocks.handler.preAndPostSaving("preSave");');
