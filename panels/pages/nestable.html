@@ -454,8 +454,46 @@
 				<button id="newpages" class="btn btn-default" type="button">New</button>
 				<button id="delpage" type="button" class="btn btn-default">Delete</button>
 			</div>
-			<div style="width: 425px;  margin-top: -35px;" id='editor_holder'></div>
+			<div style="
+			width: 425px;
+    	margin-top: -35px;
+    	margin-bottom: -58px;" id='editor_holder'></div>
+
+			<div style="
+			height: 50px;
+	    width: 425px;
+	    margin-top: 86px;
+	    margin-bottom: 30px;" id='editor_menu'>
+
+				<nav class="navbar navbar-default">
+					<div class="container-fluid">
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+							<ul class="nav navbar-nav">
+								<li class="active"><a href="#">Version</span></a></li>
+								<li><a href="#">Meta</a></li>
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Extentions <span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li><a href="#">Action</a></li>
+										<li><a href="#">Another action</a></li>
+										<li><a href="#">Something else here</a></li>
+										<li role="separator" class="divider"></li>
+										<li><a href="#">Separated link</a></li>
+										<li role="separator" class="divider"></li>
+										<li><a href="#">One more separated link</a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+						<!-- /.navbar-collapse -->
+					</div>
+					<!-- /.container-fluid -->
+				</nav>
+
+			</div>
+
 			<div id='editor_holder2'></div>
+			<div id='editor_holder3'></div>
 			<button id='submit2' type="button" class="btn btn-default">Save</button>
 			<button id='restore2' type="button" class="btn btn-default">Restore</button>
 			<span id='valid_indicator'></span>
