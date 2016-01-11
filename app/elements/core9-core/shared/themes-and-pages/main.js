@@ -34,18 +34,9 @@ $(document).ready(function() {
       }
       data.push(item);
     }
-    //console.log('entries : ');
-    //console.log(entries);
-    initNestable(JSON.stringify(data));
-    // create a save and init connected to the selected items (domain, language, country)
-    //console.log('data : ');
-    //console.log(data);
-    // sucky sucky
-/**
-    setTimeout(function() {
-      $('#nestable > ol > li:nth-child(1)')[0].click();
-    }, 900);
-**/
+
+    //initNestable(JSON.stringify(data));
+
     setTimeout(function() {
       $("#load-nestable")[0].click();
     }, 900);

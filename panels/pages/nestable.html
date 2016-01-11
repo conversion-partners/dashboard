@@ -700,8 +700,8 @@
 			$.get(file, function(data) {
 				var content = JSON.stringify(data);
 				var dat = JSON.parse(content);
-				eachRecursivePages(dat, pages, db, pageSettings);
-				content = eachRecursiveMenu(dat, pages, db, pageSettings);
+				//eachRecursivePages(dat, pages, db, pageSettings);
+				//content = eachRecursiveMenu(dat, pages, db, pageSettings);
 				initNestable(content);
 			});
 		}
