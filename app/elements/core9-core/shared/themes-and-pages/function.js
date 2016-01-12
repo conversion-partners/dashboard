@@ -75,7 +75,8 @@ function getCurrentPageId() {
       "country": data.country,
       "template": pageName
     }
-    if (typeof lokiId == 'undefined') {
+
+    if (typeof lokiId == 'undefined' || true) { // FIXME
       var res = Core9.data[TYPEOFPAGE].findObjects(templateData);
       if (res.length > 0) {
         for (var i = 0; i < res.length; i++) {
@@ -93,7 +94,7 @@ function getCurrentPageId() {
       "country": data.country,
       "page": pageName
     }
-    if (typeof lokiId == 'undefined') {
+    if (typeof lokiId == 'undefined' || true) { // FIXME
       var res = Core9.data[TYPEOFPAGE].findObjects(pageData);
       if (res.length > 0) {
         for (var i = 0; i < res.length; i++) {
