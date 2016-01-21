@@ -228,9 +228,9 @@ Core9.forms.saveFormDataToUserRegistry = function (result) {
       //globalDataId = Core9.forms.getGlobalDataId(settingData);
   }
 
-  if(globalDataId){
-    Core9.forms.config.saveGlobalData = true;
-  }
+  //if(globalDataId){
+    //Core9.forms.config.saveGlobalData = true;
+  //}
 
   var newUserData = result.formData;
   if(typeof newUserData != "string" && !isArray(newUserData)) {
@@ -289,7 +289,8 @@ Core9.forms.saveData = function (result) {
     console.log('global settings : ');
     for(var i = 0; i < data.settings.length; i++) {
       var setting = data.settings[i];
-      if(setting.key == "global" && Core9.forms.config.saveGlobalData && setting.value.trim().length > 0) {
+      //if(setting.key == "global" && Core9.forms.config.saveGlobalData && setting.value.trim().length > 0) {
+      if(setting.key == "global"  && setting.value.trim().length > 0) {
         console.log(setting.value);
         // only save data if settings was already set
         Core9.forms.ajax(content, globalDataDirectory + setting.value + '.json');
