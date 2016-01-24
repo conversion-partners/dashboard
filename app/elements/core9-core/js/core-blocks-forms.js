@@ -140,7 +140,6 @@ Core9.forms.setDataListOnGlobalSettings = function (inputField) {
   inputField.attr('placeholder', "Loading options...");
   var dataList = document.createElement("DATALIST");
   dataList.id = 'global-data';
-
   // Create a new XMLHttpRequest.
   var request = new XMLHttpRequest();
   // Handle state changes for the request.
@@ -170,10 +169,10 @@ Core9.forms.setDataListOnGlobalSettings = function (inputField) {
   // Update the placeholder text.
   //input.placeholder = "Loading options...";
   // Set up and make the request.
-
-  var dataDir = store.get("global-data-directory");
-  console.log();
-  request.open('GET', '/dashboard/data/accounts/easydrain/sites/easydrain.com_en-null/global-data/get-data-items', true);
+  var dataDir = store.get("global-data-directory") + 'get-data-items';
+  console.log(dataDir);
+  //request.open('GET', '/dashboard/data/accounts/easydrain/sites/easydrain.com_en-null/global-data/get-data-items', true);
+  request.open('GET', dataDir, true);
   request.send();
 }
 Core9.forms.loadForm = function (script, schema, data) {
