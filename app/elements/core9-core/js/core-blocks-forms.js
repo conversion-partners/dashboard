@@ -170,7 +170,7 @@ Core9.forms.setDataListOnGlobalSettings = function (inputField) {
   //input.placeholder = "Loading options...";
   // Set up and make the request.
   var dataDir = store.get("global-data-directory") + 'get-data-items';
-  console.log(dataDir);
+  //console.log(dataDir);
   //request.open('GET', '/dashboard/data/accounts/easydrain/sites/easydrain.com_en-null/global-data/get-data-items', true);
   request.open('GET', dataDir, true);
   request.send();
