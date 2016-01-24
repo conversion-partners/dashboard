@@ -53,8 +53,7 @@ Core9.forms = {
     account: {},
     theme: {},
     type: {},
-    saveGlobalData: false,
-    saveLocalData: false
+    saveGlobalData: false
   },
   paths: {
     blocks: "/dashboard/data/accounts/{0}/blocks/bower_components/",
