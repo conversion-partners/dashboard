@@ -40,6 +40,44 @@ app.post('/api/io/:action', function (req, res) {
   }
   res.sendStatus(200);
 });
+app.use('/dashboard/data/accounts/:account/sites/:domain/global-data/get-data-items', function (req, res) {
+  console.log(this);
+  var p = req.params;
+  var globalDataDir = '../dashboard/data/accounts/' + p.account + '/sites/' + p.domain + '/global-data';
+  var file = '..' + req.originalUrl;
+  //var contentType = mime.lookup(file);
+  // FIXME errorhandling
+  res.writeHead(200, {
+    "Content-Type": "application/json" //contentType
+  });
+
+  function getFiles(dir, files_, path) {
+    files_ = files_ || [];
+    var files = fs.readdirSync(dir);
+    for(var i in files) {
+      var name = dir + '/' + files[i];
+      var noPath = files[i];
+      if(fs.statSync(name)
+        .isDirectory()) {
+        getFiles(name, files_, path);
+      } else {
+        if(path) {
+          files_.push(name);
+        } else {
+          files_.push(noPath);
+        }
+      }
+    }
+    return files_;
+  }
+  var fileArr = getFiles(globalDataDir, [], false);
+  var globalData = [];
+  for(var i = 0; i < fileArr.length; i++) {
+    globalData.push(fileArr[i].replace('.json', ''));
+  }
+  res.write(JSON.stringify(globalData));
+  res.end();
+});
 app.use('/dashboard/data/accounts/:account/themes/bower_components/:theme/templates/pages/:page/versions/:version/index.html', function (req, res) {
   console.log(this);
   var p = req.params;

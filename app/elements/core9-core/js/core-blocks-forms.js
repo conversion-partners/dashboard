@@ -24,9 +24,10 @@ if(!Object.byString) {
 }
 if(!Object.resolve) {
   Object.resolve = function (path, obj, safe) {
-    return path.split('.').reduce(function (prev, curr) {
-      return !safe ? prev[curr] : (prev ? prev[curr] : undefined)
-    }, obj || self)
+    return path.split('.')
+      .reduce(function (prev, curr) {
+        return !safe ? prev[curr] : (prev ? prev[curr] : undefined)
+      }, obj || self)
   }
 }
 var isArray = function (val) {
@@ -37,7 +38,8 @@ var isArray = function (val) {
 }
 
 function isEmpty(str) {
-  return(!str.trim() || 0 === str.trim().length);
+  return(!str.trim() || 0 === str.trim()
+    .length);
 }
 if(typeof Core9 === 'undefined') {
   Core9 = {}
@@ -51,7 +53,7 @@ Core9.forms = {
     account: {},
     theme: {},
     type: {},
-    saveGlobalData : false
+    saveGlobalData: false
   },
   paths: {
     blocks: "/dashboard/data/accounts/{0}/blocks/bower_components/",
@@ -133,6 +135,47 @@ Core9.forms.filterForm = function (script, schema, data) {
   }
   plugin.whenConnected(start);
 }
+Core9.forms.setDataListOnGlobalSettings = function (inputField) {
+  console.log(inputField);
+  inputField.attr('placeholder', "Loading options...");
+  var dataList = document.createElement("DATALIST");
+  dataList.id = 'global-data';
+
+  // Create a new XMLHttpRequest.
+  var request = new XMLHttpRequest();
+  // Handle state changes for the request.
+  request.onreadystatechange = function (response) {
+    if(request.readyState === 4) {
+      if(request.status === 200) {
+        // Parse the JSON
+        var jsonOptions = JSON.parse(request.responseText);
+        // Loop over the JSON array.
+        jsonOptions.forEach(function (item) {
+          // Create a new <option> element.
+          var option = document.createElement('option');
+          // Set the value using the item in the JSON array.
+          option.value = item;
+          // Add the <option> element to the <datalist>.
+          dataList.appendChild(option);
+          inputField.after(dataList);
+        });
+        // Update the placeholder text.
+        inputField.attr('placeholder', "e.g. datalist");
+      } else {
+        // An error occured :(
+        inputField.attr('placeholder', "Couldn't load datalist options :(");
+      }
+    }
+  };
+  // Update the placeholder text.
+  //input.placeholder = "Loading options...";
+  // Set up and make the request.
+
+  var dataDir = store.get("global-data-directory");
+  console.log();
+  request.open('GET', '/dashboard/data/accounts/easydrain/sites/easydrain.com_en-null/global-data/get-data-items', true);
+  request.send();
+}
 Core9.forms.loadForm = function (script, schema, data) {
   var starting_value = data.formData[script];
   if(typeof Core9.editor === 'undefined') {
@@ -152,9 +195,22 @@ Core9.forms.loadForm = function (script, schema, data) {
     theme: 'bootstrap3',
     schema: schema
   });
+  console.log(script);
+  if(script == 'settings.json') {
+    Core9.editor.watch('root.0.key', function () {
+      console.log(this);
+    });
+    var value = jQuery("[name='root[0][value]']");
+    value.attr('list', 'global-data');
+    Core9.forms.setDataListOnGlobalSettings(value);
+    //var att = document.createAttribute("class");       // Create a "class" attribute
+    //att.value = "democlass";                           // Set the value of the class attribute
+    //h1.setAttributeNode(att);
+  }
   // location.origin + "/dashboard/data/accounts/easydrain/blocks/bower_components/image/forms/frontend/steps/author.json"
   function onSave() {
-    var script = $('#form-select').val();
+    var script = $('#form-select')
+      .val();
     if(isEmpty(script)) {
       alert('Please select a form');
       return;
@@ -162,18 +218,20 @@ Core9.forms.loadForm = function (script, schema, data) {
     data.action = "save";
     Core9.forms.saveForm(script, schema, data, Core9.editor.getValue());
   }
-/*
-  function onSubmit() {
-    var script = $('#form-select').val();
-    if(isEmpty(script)) {
-      alert('Please select a form');
-      return;
+  /*
+    function onSubmit() {
+      var script = $('#form-select').val();
+      if(isEmpty(script)) {
+        alert('Please select a form');
+        return;
+      }
+      data.action = "save";
+      Core9.forms.saveForm(script, schema, data, Core9.editor.getValue());
     }
-    data.action = "save";
-    Core9.forms.saveForm(script, schema, data, Core9.editor.getValue());
-  }
-  */
-  $('label').next('select').hide();
+    */
+  $('label')
+    .next('select')
+    .hide();
   // Hook up the submit button to log to the console
   var saveButton = document.getElementById('save');
   //var submitButton = document.getElementById('submit');
@@ -198,7 +256,6 @@ function setValue(path, val, obj) {
     }
   }
 }
-
 Core9.forms.getGlobalDataId = function (userData) {
   if(typeof userData.settings != 'undefined') {
     for(var i = 0; i < userData.settings.length; i++) {
@@ -210,28 +267,20 @@ Core9.forms.getGlobalDataId = function (userData) {
   }
   return false;
 }
-
 Core9.forms.saveFormDataToUserRegistry = function (result) {
-
   // check if global settings was in old data then save to global data else don't
-
   var script = result.script;
   var oldUserData = result.data.data.userData;
-
   // see if we need to save global
-
   var globalDataId = Core9.forms.getGlobalDataId(oldUserData);
-
-  if(script == "settings.json"){
+  if(script == "settings.json") {
     var settingData = {};
     settingData.settings = result.formData;
-      //globalDataId = Core9.forms.getGlobalDataId(settingData);
+    //globalDataId = Core9.forms.getGlobalDataId(settingData);
   }
-
   //if(globalDataId){
-    //Core9.forms.config.saveGlobalData = true;
+  //Core9.forms.config.saveGlobalData = true;
   //}
-
   var newUserData = result.formData;
   if(typeof newUserData != "string" && !isArray(newUserData)) {
     for(var key in newUserData) {
@@ -290,7 +339,8 @@ Core9.forms.saveData = function (result) {
     for(var i = 0; i < data.settings.length; i++) {
       var setting = data.settings[i];
       //if(setting.key == "global" && Core9.forms.config.saveGlobalData && setting.value.trim().length > 0) {
-      if(setting.key == "global"  && setting.value.trim().length > 0) {
+      if(setting.key == "global" && setting.value.trim()
+        .length > 0) {
         console.log(setting.value);
         // only save data if settings was already set
         Core9.forms.ajax(content, globalDataDirectory + setting.value + '.json');
@@ -343,7 +393,8 @@ Core9.forms.setSelectBox = function (formData) {
   }
 }
 Core9.forms.init = function (data) {
-  jQuery('#form-holder').empty();
+  jQuery('#form-holder')
+    .empty();
   Core9.forms.__registry.data = data;
   Core9.forms.setSelectBox(data.block.formData);
   Core9.forms.config.account = data.block.account;
