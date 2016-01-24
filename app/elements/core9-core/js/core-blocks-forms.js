@@ -255,12 +255,13 @@ function setValue(path, val, obj) {
     }
   }
 }
-Core9.forms.getGlobalDataId = function (userData) {
+Core9.forms.checkIfGlobalDataExists = function (userData) {
   if(typeof userData.settings != 'undefined') {
     for(var i = 0; i < userData.settings.length; i++) {
       var setting = userData.settings[i];
       if(setting.key == "global") {
-        return setting.value;
+        //return setting.value;
+        return true;
       }
     }
   }
@@ -271,15 +272,20 @@ Core9.forms.saveFormDataToUserRegistry = function (result) {
   var script = result.script;
   var oldUserData = result.data.data.userData;
   // see if we need to save global
-  var globalDataId = Core9.forms.getGlobalDataId(oldUserData);
+  var globalDataSettingInUserData = false;
+  var globalDataSettingInNewData = false;
   if(script == "settings.json") {
+    globalDataSettingInUserData = Core9.forms.checkIfGlobalDataExists(oldUserData);
     var settingData = {};
     settingData.settings = result.formData;
-    //globalDataId = Core9.forms.getGlobalDataId(settingData);
+    globalDataSettingInNewData = Core9.forms.checkIfGlobalDataExists(settingData);
   }
-  //if(globalDataId){
-  //Core9.forms.config.saveGlobalData = true;
-  //}
+  if(globalDataSettingInUserData) {
+    Core9.forms.config.saveGlobalData = true;
+  }
+  if(!globalDataSettingInNewData) {
+    Core9.forms.config.saveGlobalData = false;
+  }
   var newUserData = result.formData;
   if(typeof newUserData != "string" && !isArray(newUserData)) {
     for(var key in newUserData) {
@@ -337,8 +343,7 @@ Core9.forms.saveData = function (result) {
     console.log('global settings : ');
     for(var i = 0; i < data.settings.length; i++) {
       var setting = data.settings[i];
-      //if(setting.key == "global" && Core9.forms.config.saveGlobalData && setting.value.trim().length > 0) {
-      if(setting.key == "global" && setting.value.trim()
+      if(setting.key == "global" && Core9.forms.config.saveGlobalData && setting.value.trim()
         .length > 0) {
         console.log(setting.value);
         // only save data if settings was already set
@@ -346,7 +351,9 @@ Core9.forms.saveData = function (result) {
       }
     }
   }
-  Core9.forms.ajax(content, file);
+  if(!Core9.forms.config.saveGlobalData) {
+    Core9.forms.ajax(content, file);
+  }
 }
 Core9.forms.saveForm = function (script, schema, data, formData) {
   var path = location.origin + Core9.forms.paths.formFilter.format(Core9.forms.config.account, Core9.forms.config.type) + 'save.js';
