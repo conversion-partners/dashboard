@@ -12,19 +12,14 @@ app.use(bodyParser.urlencoded({
   extended: true
 })); // for parsing application/x-www-form-urlencoded
 app.use(multer()); // for parsing multipart/form-data
-
-
 //app.use(express.json({limit: '50mb'}));
 //app.use(express.urlencoded({limit: '50mb'}));
-
 var bodyParser = require('body-parser');
-app.use(bodyParser({limit: '200kb'}));
+app.use(bodyParser({
+  limit: '200kb'
+}));
 //app.use(bodyParser.json({limit: '1500kb'}));
 //app.use(bodyParser.urlencoded({limit: '1500kb', extended: true}));
-
-
-
-
 app.post('/api/io/:action', function (req, res) {
   switch(req.params.action) {
   case 'save':
@@ -43,9 +38,7 @@ app.post('/api/io/:action', function (req, res) {
   default:
     console.log(req);
   }
-
   res.sendStatus(200);
-
 });
 app.use('/dashboard/data/accounts/:account/themes/bower_components/:theme/templates/pages/:page/versions/:version/index.html', function (req, res) {
   console.log(this);
@@ -76,21 +69,19 @@ app.use('/dashboard/data/accounts/:account/themes/bower_components/:theme/templa
 });
 app.use('/dashboard/', express.static('.'));
 //app.use('/dashboard/', express.static('.'));
-
 app.use('/*', function (req, res) {
   //res.redirect('/dashboard/');
-  res.status(200)        // HTTP status 404: NotFound
-   .send('');
+  res.status(200) // HTTP status 404: NotFound
+    .send('');
 });
-
-
 var config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
 //var hostname = "localhost";//config.hostname;//"localhost";
 console.log("config : ");
 console.log(config);
-
 var server = app.listen(3000, config.hostname, function () {
-  var host = server.address().address;
-  var port = server.address().port;
+  var host = server.address()
+    .address;
+  var port = server.address()
+    .port;
   console.log('Example app listening at http://%s:%s', host, port);
 });
