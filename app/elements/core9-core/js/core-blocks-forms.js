@@ -339,13 +339,13 @@ Core9.forms.saveData = function (result) {
         var globalJson = globalDataDirectory + Core9.forms.config.data.newGlobalDataSetting + '.json';
         Core9.forms.ajax(content, globalJson);
         console.log("error");
-      })
-      .always(function () {
-        console.log("complete");
         var message = {
           action: "gotopages"
         }
         Core9.iframe.child.sentMessageToParent(message);
+      })
+      .always(function () {
+        console.log("complete");
       });
   }
   if(Core9.forms.config.data.saveLocalData) {
