@@ -34,18 +34,11 @@ Core9.iframe.parent = {
         }, 100);
       }
       if(e.data.action == "resetThemeEditor") {
-        /* this is still not working
-        setTimeout(function () {
-          console.log('resetting theme editor');
-          //var iframe = Core9.panel.getIframeById('panel-iframe-site');
-          //var cmd = 'Core9.blocks.handler.init();';
-          //Core9.iframe.parent.sentMessageToIframe(cmd, iframe);
-          var iframe = document.querySelector("#panel-themes > iframe")
-            .contentWindow;
-          iframe.eval('$("#edit-selected-theme").trigger("click");');
-        }, 1000);
-        */
-          history.pushState(null, null, '/dashboard/templates');
+        history.pushState(null, null, '/dashboard/templates');
+      }
+      if(e.data.action == "gotopages") {
+        $('#modal-form > div.modal-footer > button').trigger('click');
+        history.pushState(null, null, '/dashboard/pages');
       }
       if(e.data.action == "resetPageEditor") {
         setTimeout(function () {
