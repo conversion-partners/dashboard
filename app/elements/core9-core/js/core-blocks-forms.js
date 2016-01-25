@@ -308,6 +308,10 @@ Core9.forms.saveFormDataToUserRegistry = function (result) {
   if(!globalDataSettingInOldData) {
     Core9.forms.config.data.saveGlobalData = false;
   }
+  if(Core9.forms.config.data.newGlobalDataSetting.length > 0) {
+    Core9.forms.config.data.saveGlobalData = true;
+    Core9.forms.config.data.saveLocalData = true;
+  }
   // case if globaldata set and we change it now local will not be saved (compare globaldata value old and new)
   var data = Core9.forms.updateUserData(script, result, oldUserData, newUserData);
   //result.data.data.userData = oldUserData;
@@ -322,7 +326,7 @@ Core9.forms.saveData = function (result) {
   var globalDataDirectory = block.globalDataDirectory;
   var content = JSON.stringify(data);
   if(Core9.forms.config.data.saveGlobalData) {
-    var globalJson = globalDataDirectory + Core9.forms.config.data.oldGlobalDataSetting + '.json';
+    var globalJson = globalDataDirectory + Core9.forms.config.data.newGlobalDataSetting + '.json';
     $.getJSON(globalJson, function (data) {
         console.log("success");
         Core9.forms.ajax(content, globalJson);
