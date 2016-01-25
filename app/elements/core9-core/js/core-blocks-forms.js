@@ -140,38 +140,24 @@ Core9.forms.setDataListOnGlobalSettings = function (inputField) {
   inputField.attr('placeholder', "Loading options...");
   var dataList = document.createElement("DATALIST");
   dataList.id = 'global-data';
-  // Create a new XMLHttpRequest.
   var request = new XMLHttpRequest();
-  // Handle state changes for the request.
   request.onreadystatechange = function (response) {
     if(request.readyState === 4) {
       if(request.status === 200) {
-        // Parse the JSON
         var jsonOptions = JSON.parse(request.responseText);
-        // Loop over the JSON array.
         jsonOptions.forEach(function (item) {
-          // Create a new <option> element.
           var option = document.createElement('option');
-          // Set the value using the item in the JSON array.
           option.value = item;
-          // Add the <option> element to the <datalist>.
           dataList.appendChild(option);
           inputField.after(dataList);
         });
-        // Update the placeholder text.
         inputField.attr('placeholder', "e.g. datalist");
       } else {
-        // An error occured :(
         inputField.attr('placeholder', "Couldn't load datalist options :(");
       }
     }
   };
-  // Update the placeholder text.
-  //input.placeholder = "Loading options...";
-  // Set up and make the request.
   var dataDir = store.get("global-data-directory") + 'get-data-items';
-  //console.log(dataDir);
-  //request.open('GET', '/dashboard/data/accounts/easydrain/sites/easydrain.com_en-null/global-data/get-data-items', true);
   request.open('GET', dataDir, true);
   request.send();
 }
@@ -188,7 +174,6 @@ Core9.forms.loadForm = function (script, schema, data) {
     ajax: true,
     startval: starting_value,
     disable_edit_json: true,
-    //disable_collapse: false, // needs to be a user setting
     disable_properties: true,
     format: 'grid',
     theme: 'bootstrap3',
@@ -202,11 +187,8 @@ Core9.forms.loadForm = function (script, schema, data) {
     var value = jQuery("[name='root[0][value]']");
     value.attr('list', 'global-data');
     Core9.forms.setDataListOnGlobalSettings(value);
-    //var att = document.createAttribute("class");       // Create a "class" attribute
-    //att.value = "democlass";                           // Set the value of the class attribute
-    //h1.setAttributeNode(att);
   }
-  // location.origin + "/dashboard/data/accounts/easydrain/blocks/bower_components/image/forms/frontend/steps/author.json"
+
   function onSave() {
     var script = $('#form-select')
       .val();
@@ -217,27 +199,12 @@ Core9.forms.loadForm = function (script, schema, data) {
     data.action = "save";
     Core9.forms.saveForm(script, schema, data, Core9.editor.getValue());
   }
-  /*
-    function onSubmit() {
-      var script = $('#form-select').val();
-      if(isEmpty(script)) {
-        alert('Please select a form');
-        return;
-      }
-      data.action = "save";
-      Core9.forms.saveForm(script, schema, data, Core9.editor.getValue());
-    }
-    */
   $('label')
     .next('select')
     .hide();
-  // Hook up the submit button to log to the console
   var saveButton = document.getElementById('save');
-  //var submitButton = document.getElementById('submit');
   saveButton.removeEventListener('click', onSave, false);
   saveButton.addEventListener('click', onSave, false);
-  //submitButton.removeEventListener('click', onSubmit, false);
-  //submitButton.addEventListener('click', onSubmit, false);
 }
 
 function setValue(path, val, obj) {
