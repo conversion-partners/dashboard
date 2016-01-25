@@ -53,7 +53,15 @@ Core9.forms = {
     account: {},
     theme: {},
     type: {},
-    saveGlobalData: false
+    data: {
+      globalDataSetting: "",
+      saveGlobalData: false,
+      globalData: {},
+      saveLocalData: false,
+      localData: {},
+      oldData: {},
+      newData: {}
+    }
   },
   paths: {
     blocks: "/dashboard/data/accounts/{0}/blocks/bower_components/",
@@ -85,10 +93,6 @@ Core9.forms.getData = function (formData) {
   data.defaultData = Core9.forms.__registry.data.block.defaultData;
   Core9.forms.filterForm(script, schema, data);
 }
-Core9.forms.getUserOrDefaultData = function (result) {
-  // check user or default data
-  return result.data.userData;
-}
 Core9.forms.filterForm = function (script, schema, data) {
   var path = location.origin + Core9.forms.paths.formFilter.format(Core9.forms.config.account, Core9.forms.config.type) + 'form-data-organizer.js';
   var plugin = new jailed.Plugin(path);
@@ -103,7 +107,7 @@ Core9.forms.filterForm = function (script, schema, data) {
   }
   var reportResult = function (result) {
     var schema = result.schema;
-    var data = Core9.forms.getUserOrDefaultData(result);
+    var data = result.data.userData;
     result.formData = {};
     // then get data accociated with script
     var items = result.stepData[script];
@@ -228,6 +232,7 @@ Core9.forms.checkIfGlobalDataExists = function (userData) {
       var setting = userData.settings[i];
       if(setting.key == "global") {
         //return setting.value;
+        Core9.forms.config.data.globalDataSetting = setting.value;
         return true;
       }
     }
@@ -235,9 +240,20 @@ Core9.forms.checkIfGlobalDataExists = function (userData) {
   return false;
 }
 Core9.forms.saveFormDataToUserRegistry = function (result) {
+  /*
+    Core9.forms.config.data...
+  globalDataSetting: "",
+  saveGlobalData: false,
+  globalData: {},
+  saveLocalData: false,
+  localData: {},
+  oldData: {},
+  newData: {}
+  */
   // check if global settings was in old data then save to global data else don't
   var script = result.script;
   var oldUserData = result.data.data.userData;
+  Core9.forms.config.data.oldData = result.data.data.userData;
   // see if we need to save global
   var globalDataSettingInUserData = false;
   var globalDataSettingInNewData = false;
@@ -248,12 +264,13 @@ Core9.forms.saveFormDataToUserRegistry = function (result) {
     globalDataSettingInNewData = Core9.forms.checkIfGlobalDataExists(settingData);
   }
   if(globalDataSettingInUserData) {
-    Core9.forms.config.saveGlobalData = true;
+    Core9.forms.config.data.saveGlobalData = true;
   }
   if(!globalDataSettingInNewData) {
-    Core9.forms.config.saveGlobalData = false;
+    Core9.forms.config.data.saveGlobalData = false;
   }
   var newUserData = result.formData;
+  Core9.forms.config.data.newData = result.formData;
   if(typeof newUserData != "string" && !isArray(newUserData)) {
     for(var key in newUserData) {
       if(newUserData.hasOwnProperty(key)) {
@@ -275,6 +292,8 @@ Core9.forms.saveFormDataToUserRegistry = function (result) {
   }
   result.data.data.userData = oldUserData;
   Core9.forms.__registry.data.block.userData = oldUserData;
+  //Core9.forms.config.data.globalData = {};
+  //Core9.forms.config.data.localData = {};
 }
 Core9.forms.ajax = function (content, file) {
   var url = '/api/io/save';
@@ -306,19 +325,10 @@ Core9.forms.saveData = function (result) {
   var file = block.pageDataDirectory + block.id + '.json';
   var globalDataDirectory = block.globalDataDirectory;
   var content = JSON.stringify(data);
-  if(typeof data.settings != 'undefined') {
-    console.log('global settings : ');
-    for(var i = 0; i < data.settings.length; i++) {
-      var setting = data.settings[i];
-      if(setting.key == "global" && Core9.forms.config.saveGlobalData && setting.value.trim()
-        .length > 0) {
-        console.log(setting.value);
-        // only save data if settings was already set
-        Core9.forms.ajax(content, globalDataDirectory + setting.value + '.json');
-      }
-    }
+  if(Core9.forms.config.data.saveGlobalData) {
+    Core9.forms.ajax(content, globalDataDirectory + Core9.forms.config.data.globalDataSetting + '.json');
   }
-  if(!Core9.forms.config.saveGlobalData) {
+  if(!Core9.forms.config.data.saveGlobalData) {
     Core9.forms.ajax(content, file);
   }
 }
@@ -337,14 +347,8 @@ Core9.forms.saveForm = function (script, schema, data, formData) {
   }
   var reportResult = function (result) {
     if(result.data.action == 'save') {
-      // submit to backend
       Core9.forms.saveFormDataToUserRegistry(result);
       Core9.forms.saveData(result);
-    } else if(result.data.action == 'submit') {
-      // not used anymore is saved directly
-      // save form to registry and processed next form
-      // set to registry userdata
-      Core9.forms.saveFormDataToUserRegistry(result);
     }
   }
   plugin.whenConnected(start);
