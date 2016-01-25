@@ -280,19 +280,31 @@ Core9.forms.saveFormDataToUserRegistry = function (result) {
   Core9.forms.config.data.oldData = result.data.data.userData;
   Core9.forms.config.data.newData = result.formData;
   // see if we need to save global
-  var globalDataSettingInUserData = false;
+  var globalDataSettingInOldData = false;
   var globalDataSettingInNewData = false;
   if(script == "settings.json") {
-    globalDataSettingInUserData = Core9.forms.checkIfGlobalDataExists(oldUserData);
+    globalDataSettingInOldData = Core9.forms.checkIfGlobalDataExists(oldUserData);
     var settingData = {};
     settingData.settings = result.formData;
     globalDataSettingInNewData = Core9.forms.checkIfGlobalDataExists(settingData);
   }
   Core9.forms.config.data.saveLocalData = true;
-  if(globalDataSettingInUserData) {
-    Core9.forms.config.data.saveGlobalData = true;
+  if(globalDataSettingInOldData && !globalDataSettingInNewData) {
+    Core9.forms.config.data.saveLocalData = true;
+  }
+  if(!globalDataSettingInOldData && globalDataSettingInNewData) {
+    Core9.forms.config.data.saveLocalData = true;
+  }
+  if(globalDataSettingInOldData && globalDataSettingInNewData) {
+    Core9.forms.config.data.saveLocalData = false;
   }
   if(!globalDataSettingInNewData) {
+    Core9.forms.config.data.saveGlobalData = false;
+  }
+  if(globalDataSettingInNewData) {
+    Core9.forms.config.data.saveGlobalData = true;
+  }
+  if(!globalDataSettingInOldData) {
     Core9.forms.config.data.saveGlobalData = false;
   }
   var data = Core9.forms.updateUserData(script, result, oldUserData, newUserData);
@@ -308,7 +320,22 @@ Core9.forms.saveData = function (result) {
   var globalDataDirectory = block.globalDataDirectory;
   var content = JSON.stringify(data);
   if(Core9.forms.config.data.saveGlobalData) {
-    Core9.forms.ajax(content, globalDataDirectory + Core9.forms.config.data.globalDataSetting + '.json');
+    var globalJson = globalDataDirectory + Core9.forms.config.data.globalDataSetting + '.json';
+    $.getJSON(globalJson, function (data) {
+        console.log("success");
+        Core9.forms.ajax(content, globalJson);
+      })
+      .done(function () {
+        console.log("second success");
+      })
+      .fail(function () {
+        // create new global json file
+        Core9.forms.ajax(content, globalJson);
+        console.log("error");
+      })
+      .always(function () {
+        console.log("complete");
+      });
   }
   if(Core9.forms.config.data.saveLocalData) {
     Core9.forms.ajax(content, file);
