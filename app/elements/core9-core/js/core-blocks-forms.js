@@ -308,10 +308,15 @@ Core9.forms.saveFormDataToUserRegistry = function (result) {
   if(!globalDataSettingInOldData) {
     Core9.forms.config.data.saveGlobalData = false;
   }
-  if(Core9.forms.config.data.newGlobalDataSetting.length > 0) {
-    Core9.forms.config.data.saveGlobalData = true;
-    Core9.forms.config.data.saveLocalData = true;
+
+  if(typeof Core9.forms.config.data.newGlobalDataSetting != 'undefined') {
+    if(Core9.forms.config.data.newGlobalDataSetting.length > 0) {
+      Core9.forms.config.data.saveGlobalData = true;
+      Core9.forms.config.data.saveLocalData = true;
+    }
   }
+
+
   // case if globaldata set and we change it now local will not be saved (compare globaldata value old and new)
   var data = Core9.forms.updateUserData(script, result, oldUserData, newUserData);
   //result.data.data.userData = oldUserData;
