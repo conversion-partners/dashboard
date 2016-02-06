@@ -48,7 +48,7 @@ Core9.blocks.insertBlock = function (div, block) {
   if(typeof div === 'undefined') return;
   //Core9.blocks.getUniqueId
   //			<div data-role="block" class="core9-block" data-type="image" data-respond data-id="testid1"></div>
-  var id = Core9.blocks.getUniqueId();
+  var id = block +'-'+ Core9.blocks.getUniqueId();
   var html = "<div data-id='" +id +"' data-type='" + block + "' data-respond  class='core9-block' data-role='block'>" + block + "</div>";
   var c = document.createComment("gm-editable-region");
   div.appendChild(c);
