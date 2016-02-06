@@ -36,16 +36,14 @@ var activateEditor = function () {
       }
     }
   });
-
-  if(typeof pageData.metadata == 'undefined'){
+  if(typeof pageData.metadata == 'undefined') {
     var metadata = {
-      title : "",
-      metadescription : "",
-      tags : ""
+      title: "",
+      metadescription: "",
+      tags: ""
     }
     pageData.metadata = metadata;
   }
-
   Core9.editor3 = new JSONEditor(document.getElementById('editor_holder3'), {
     disable_edit_json: true,
     disable_collapse: true,
@@ -415,14 +413,40 @@ function savePage(data) {
     }]
   }
   */
+  //nasty!! global
+  delete Core9.data.pageDataObj['$loki'];
+  var dat = JSON.parse(JSON.stringify(Core9.data.pageDataObj));
+  /*
   Core9.data.pageDataObj.domain = data.domain;
   Core9.data.pageDataObj.language = data.language;
   Core9.data.pageDataObj.country = data.country;
   Core9.data.pageDataObj.page = pageName;
   Core9.data.pageDataObj.menuid = id;
+  */
+  dat.domain = data.domain;
+  dat.language = data.language;
+  dat.country = data.country;
+  dat.page = pageName;
+  dat.menuid = id;
+  function isNumeric(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+  }
+
   if(save) {
     //Core9.data[TYPEOFPAGE].insert(pageData);
-    Core9.data[TYPEOFPAGE].insert(Core9.data.pageDataObj);
+    try {
+      /*
+      if(isNumeric(Core9.data.pageDataObj.$loki)) {
+        Core9.data.pageDataObj.$loki = Core9.data.pageDataObj.$loki + 1;
+        Core9.data[TYPEOFPAGE].data.push(Core9.data.pageDataObj);
+      } else {
+        Core9.data[TYPEOFPAGE].insert(Core9.data.pageDataObj);
+      }
+      */
+      Core9.data[TYPEOFPAGE].insert(dat);
+    } catch(e) {
+      //Core9.data[TYPEOFPAGE].update(Core9.data.pageDataObj);
+    }
     try {
       Core9.template.save();
       var event = new CustomEvent("save-new-page", {

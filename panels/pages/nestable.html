@@ -596,18 +596,21 @@
 		}
 
 		function addPageToPages(page, db, pageSettings) {
+			/*
 			Core9.data.pageDataObj.page = page.page;
 			Core9.data.pageDataObj.domain = pageSettings.domain;
 			Core9.data.pageDataObj.language = pageSettings.language;
 			Core9.data.pageDataObj.country = pageSettings.country;
 			Core9.data.pageDataObj.menuid = guid();
+			*/
 			try {
-				Core9.data[TYPEOFPAGE].update(Core9.data.pageDataObj);
+				//Core9.data[TYPEOFPAGE].update(Core9.data.pageDataObj);
 			} catch (e) {
 
 			}
 
 			try {
+				console.log('saving page');
 				//Core9.template.save();
 				var event = new CustomEvent("save-new-page", {
 					"detail": "Example of an event"
