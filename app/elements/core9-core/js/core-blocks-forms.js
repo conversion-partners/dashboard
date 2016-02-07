@@ -373,8 +373,8 @@ Core9.forms.saveData = function (result) {
     if(Core9.forms.config.data.updateLocalData) {
       $.getJSON(file, function (data) {
           console.log("success");
-          data.settings[0].key = "global";
-          data.settings[0].value = Core9.forms.config.data.newGlobalDataSetting;
+          data.settings[0].key = Core9.forms.config.data.updatedOldData.settings[0].key;
+          data.settings[0].value = Core9.forms.config.data.updatedOldData.settings[0].value;
           Core9.forms.ajax(JSON.stringify(data), file);
         })
         .done(function () {
