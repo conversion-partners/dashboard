@@ -425,6 +425,14 @@ Core9.forms.setSelectBox = function (formData) {
   }
 }
 Core9.forms.init = function (data) {
+  Core9.forms.config.data.globalChange = false;
+  Core9.forms.config.data.reloadGlobalData = false;
+  Core9.forms.config.data.updateGlobalData = false;
+  Core9.forms.config.data.globalData = {};
+  Core9.forms.config.data.saveLocalData = true;
+  Core9.forms.config.data.localData = {};
+  Core9.forms.config.data.origData = {};
+  Core9.forms.config.data.updatedOldData = {};
   jQuery('#form-holder')
     .empty();
   Core9.forms.__registry.data = data;

@@ -27,7 +27,7 @@ var pageRoutes = {
         Core9.iframe.write(iframe, docString, "pagemode"); // false is no gridmanager
         if(gridmanagerEnable){
           setTimeout(function() {
-            var cmd = 'window.gm = jQuery("#gm-canvas").gridmanager().data("gridmanager");$(".gm-preview").trigger("click");  Core9.forms.config.data.globalChange = false;';
+            var cmd = 'window.gm = jQuery("#gm-canvas").gridmanager().data("gridmanager");$(".gm-preview").trigger("click");';
             Core9.iframe.parent.sentMessageToIframe(cmd, iframe);
           }, 1000); // smarter needs to be handled in sendMessage to iframe
         }
