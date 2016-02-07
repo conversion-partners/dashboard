@@ -348,10 +348,12 @@ Core9.forms.saveData = function (result) {
   }
   $.getJSON(file, function (data) {
       console.log("success");
-      data.settings[0].key = Core9.forms.config.data.updatedOldData.settings[0].key;
-      data.settings[0].value = Core9.forms.config.data.updatedOldData.settings[0].value;
-      Core9.forms.ajax(JSON.stringify(data), file);
-      Core9.forms.config.data.stopSave = true; // fuck
+      if(typeof data.settings != 'undefined') {
+        data.settings[0].key = Core9.forms.config.data.updatedOldData.settings[0].key;
+        data.settings[0].value = Core9.forms.config.data.updatedOldData.settings[0].value;
+        Core9.forms.ajax(JSON.stringify(data), file);
+        Core9.forms.config.data.stopSave = true; // fuck
+      }
     })
     .done(function () {
       console.log("second success");
