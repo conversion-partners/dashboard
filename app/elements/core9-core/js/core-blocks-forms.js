@@ -57,8 +57,11 @@ Core9.forms = {
       newGlobalDataSetting: "",
       oldGlobalDataSetting: "",
       saveGlobalData: false,
+      reloadGlobalData: false,
+      updateGlobalData: false,
       globalData: {},
       saveLocalData: false,
+      updateLocalData: false,
       localData: {},
       origData: {},
       oldData: {},
@@ -270,17 +273,21 @@ Core9.forms.updateUserData = function (script, result, oldUserData, newUserData)
 Core9.forms.saveFormDataToUserRegistry = function (result) {
   /*
     Core9.forms.config.data...
-  globalDataSetting: "",
-  saveGlobalData: false,
-  globalData: {},
-  saveLocalData: false,
-  localData: {},
-  oldData: {},
-  newData: {}
+    newGlobalDataSetting: "",
+    oldGlobalDataSetting: "",
+    saveGlobalData: false,
+    reloadGlobalData: false,
+    updateGlobalData: false,
+    globalData: {},
+    saveLocalData: false,
+    updateLocalData: false,
+    localData: {},
+    origData: {},
+    oldData: {},
+    newData: {}
   */
   // check if global settings was in old data then save to global data else don't
   var script = result.script;
-  var oldUserData = result.data.data.userData;
   var newUserData = result.formData;
   Core9.forms.config.data.origData = JSON.parse(JSON.stringify(result.data.data.userData));
   Core9.forms.config.data.newData = result.formData;
@@ -288,7 +295,7 @@ Core9.forms.saveFormDataToUserRegistry = function (result) {
   var globalDataSettingInOldData = false;
   var globalDataSettingInNewData = false;
   if(script == "settings.json") {
-    globalDataSettingInOldData = Core9.forms.checkIfGlobalDataExists("oldGlobalDataSetting", oldUserData);
+    globalDataSettingInOldData = Core9.forms.checkIfGlobalDataExists("oldGlobalDataSetting", Core9.forms.config.data.origData);
     var settingData = {};
     settingData.settings = result.formData;
     globalDataSettingInNewData = Core9.forms.checkIfGlobalDataExists("newGlobalDataSetting", settingData);
@@ -296,12 +303,22 @@ Core9.forms.saveFormDataToUserRegistry = function (result) {
   // if globalOld and globalNew equal and global is set then save global else save local
   if(globalDataSettingInNewData) {
     Core9.forms.config.data.saveGlobalData = true;
+    Core9.forms.config.data.updateLocalData = true;
   } else {
     Core9.forms.config.data.saveLocalData = true;
   }
+  if(Core9.forms.config.data.origData.settings[0].key == "global") {
+    Core9.forms.config.data.updateGlobalData = true;
+    Core9.forms.config.data.saveLocalData = false;
+  }
+  if(Core9.forms.config.data.origData.settings[0].key != "global" && globalDataSettingInNewData) {
+    Core9.forms.config.data.reloadGlobalData = true;
+  }
+  if(Core9.forms.config.data.origData.settings[0].key == "global" && Core9.forms.config.data.newGlobalDataSetting != Core9.forms.config.data.oldGlobalDataSetting) {
+    Core9.forms.config.data.reloadGlobalData = true;
+  }
   // case if globaldata set and we change it now local will not be saved (compare globaldata value old and new)
-  var data = Core9.forms.updateUserData(script, result, oldUserData, newUserData);
-  //result.data.data.userData = oldUserData;
+  var data = Core9.forms.updateUserData(script, result, Core9.forms.config.data.origData, newUserData);
   Core9.forms.__registry.data.block.userData = data;
   //Core9.forms.config.data.globalData = {};
   //Core9.forms.config.data.localData = {};
@@ -312,46 +329,59 @@ Core9.forms.saveData = function (result) {
   var file = block.pageDataDirectory + block.id + '.json';
   var globalDataDirectory = block.globalDataDirectory;
   var content = JSON.stringify(data);
+  var conf = Core9.forms.config; //for debug only
   if(Core9.forms.config.data.saveGlobalData) {
-    var globalJson = globalDataDirectory + Core9.forms.config.data.newGlobalDataSetting + '.json';
-    $.getJSON(globalJson, function (data) {
-        console.log("success");
-        Core9.forms.ajax(content, globalJson);
-      })
-      .done(function () {
-        console.log("second success");
-      })
-      .fail(function () {
-        // create new global json file
-        var globalJson = globalDataDirectory + Core9.forms.config.data.newGlobalDataSetting + '.json';
-        Core9.forms.ajax(content, globalJson);
-        console.log("error");
-        var message = {
-          action: "gotopages"
-        }
-        Core9.iframe.child.sentMessageToParent(message);
-      })
-      .always(function () {
-        console.log("complete");
-      });
-    $.getJSON(file, function (data) {
-        console.log("success");
-        data.settings[0].key = "global";
-        data.settings[0].value = Core9.forms.config.data.newGlobalDataSetting;
-        Core9.forms.ajax(JSON.stringify(data), file);
-      })
-      .done(function () {
-        console.log("second success");
-      })
-      .fail(function () {
-        console.log("error");
-      })
-      .always(function () {
-        console.log("complete");
-      });
+    if(Core9.forms.config.data.updateGlobalData) {
+      var globalJson = globalDataDirectory + Core9.forms.config.data.newGlobalDataSetting + '.json';
+      $.getJSON(globalJson, function (data) {
+          console.log("success");
+          Core9.forms.ajax(content, globalJson);
+        })
+        .done(function () {
+          console.log("second success");
+        })
+        .fail(function () {
+          // create new global json file
+          var globalJson = globalDataDirectory + Core9.forms.config.data.newGlobalDataSetting + '.json';
+          Core9.forms.ajax(content, globalJson);
+          console.log("error");
+          var message = {
+            action: "gotopages"
+          }
+          Core9.iframe.child.sentMessageToParent(message);
+        })
+        .always(function () {
+          console.log("complete");
+        });
+    }
+    if(Core9.forms.config.data.updateLocalData) {
+      $.getJSON(file, function (data) {
+          console.log("success");
+          data.settings[0].key = "global";
+          data.settings[0].value = Core9.forms.config.data.newGlobalDataSetting;
+          Core9.forms.ajax(JSON.stringify(data), file);
+        })
+        .done(function () {
+          console.log("second success");
+        })
+        .fail(function () {
+          console.log("error");
+        })
+        .always(function () {
+          console.log("complete");
+        });
+    }
   }
   if(Core9.forms.config.data.saveLocalData) {
     Core9.forms.ajax(content, file);
+  }
+  if(Core9.forms.config.data.reloadGlobalData) {
+    setTimeout(function () {
+      var message = {
+        action: "gotopages"
+      }
+      Core9.iframe.child.sentMessageToParent(message);
+    }, 3000);
   }
 }
 Core9.forms.ajax = function (content, file) {
