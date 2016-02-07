@@ -54,6 +54,7 @@ Core9.forms = {
     theme: {},
     type: {},
     data: {
+      stopSave: false,
       globalChange: false,
       reloadGlobalData: false,
       updateGlobalData: false,
@@ -301,13 +302,16 @@ Core9.forms.saveFormDataToUserRegistry = function (result) {
   console.log('pause');
 }
 Core9.forms.saveData = function (result) {
+  if(Core9.forms.config.data.stopSave) {
+    return;
+  }
   var data = Core9.forms.config.data.updatedOldData; //result.data.data.userData;
   var block = Core9.forms.__registry.data.block;
   var file = block.pageDataDirectory + block.id + '.json';
   var globalDataDirectory = block.globalDataDirectory;
   var content = JSON.stringify(data);
   var conf = Core9.forms.config; //for debug only
-  if(Core9.forms.config.data.updateGlobalData) {
+  if(Core9.forms.config.data.updateGlobalData && !Core9.forms.config.data.globalChange && Core9.forms.config.data.updatedOldData.settings[0].value.length != 0) {
     var globalJson = globalDataDirectory + Core9.forms.config.data.updatedOldData.settings[0].value + '.json';
     $.getJSON(globalJson, function (data) {
         console.log("success");
@@ -315,6 +319,7 @@ Core9.forms.saveData = function (result) {
         dat.settings[0].key = "global";
         dat.settings[0].value = Core9.forms.config.data.updatedOldData.settings[0].value;
         Core9.forms.ajax(JSON.stringify(dat), globalJson);
+        Core9.forms.config.data.stopSave = true; // fuck
       })
       .done(function () {
         console.log("second success");
@@ -326,6 +331,7 @@ Core9.forms.saveData = function (result) {
         dat.settings[0].key = "global";
         dat.settings[0].value = Core9.forms.config.data.updatedOldData.settings[0].value;
         Core9.forms.ajax(JSON.stringify(dat), globalJson);
+        Core9.forms.config.data.stopSave = true; // fuck
         console.log("error");
         var message = {
           action: "gotopages"
@@ -336,14 +342,16 @@ Core9.forms.saveData = function (result) {
         console.log("complete");
       });
   }
-  if(Core9.forms.config.data.saveLocalData) {
+  if(Core9.forms.config.data.saveLocalData && !Core9.forms.config.data.globalChange) {
     Core9.forms.ajax(content, file);
+    Core9.forms.config.data.stopSave = true; // fuck
   }
   $.getJSON(file, function (data) {
       console.log("success");
       data.settings[0].key = Core9.forms.config.data.updatedOldData.settings[0].key;
       data.settings[0].value = Core9.forms.config.data.updatedOldData.settings[0].value;
       Core9.forms.ajax(JSON.stringify(data), file);
+      Core9.forms.config.data.stopSave = true; // fuck
     })
     .done(function () {
       console.log("second success");
@@ -356,6 +364,7 @@ Core9.forms.saveData = function (result) {
     });
   if(Core9.forms.config.data.reloadGlobalData) {
     //setTimeout(function () {
+    Core9.forms.config.data.stopSave = true; // fuck
     var message = {
       action: "gotopages"
     }
@@ -425,6 +434,7 @@ Core9.forms.setSelectBox = function (formData) {
   }
 }
 Core9.forms.init = function (data) {
+  Core9.forms.config.data.stopSave = false;
   Core9.forms.config.data.globalChange = false;
   Core9.forms.config.data.reloadGlobalData = false;
   Core9.forms.config.data.updateGlobalData = false;
@@ -441,4 +451,5 @@ Core9.forms.init = function (data) {
   Core9.forms.config.theme = data.block.theme;
   Core9.forms.config.type = data.block.type;
   Core9.forms.getData();
+  console.log("pause");
 }
