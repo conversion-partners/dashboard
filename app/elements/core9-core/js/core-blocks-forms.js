@@ -54,7 +54,6 @@ Core9.forms = {
     theme: {},
     type: {},
     data: {
-      saveGlobalData: false,
       reloadGlobalData: false,
       updateGlobalData: false,
       globalData: {},
@@ -269,7 +268,6 @@ Core9.forms.updateUserData = function (script, result, oldUserData, newUserData)
 Core9.forms.saveFormDataToUserRegistry = function (result) {
   /*
     Core9.forms.config.data...
-    saveGlobalData: false,
     reloadGlobalData: false,
     updateGlobalData: false,
     globalData: {},
@@ -286,11 +284,9 @@ Core9.forms.saveFormDataToUserRegistry = function (result) {
   if(typeof Core9.forms.config.data.updatedOldData.settings != 'undefined') {
     Core9.forms.config.data.reloadGlobalData = true;
     if(Core9.forms.config.data.updatedOldData.settings[0].key == "global") {
-      Core9.forms.config.data.saveGlobalData = true;
       if(Core9.forms.config.data.updatedOldData.settings[0].value == Core9.forms.config.data.origData.settings[0].value) {
         Core9.forms.config.data.updateGlobalData = true;
       }
-      Core9.forms.config.data.saveLocalData = false;
     } else {
       Core9.forms.config.data.saveLocalData = true;
       Core9.forms.config.data.updateGlobalData = false;
@@ -311,36 +307,35 @@ Core9.forms.saveData = function (result) {
   var globalDataDirectory = block.globalDataDirectory;
   var content = JSON.stringify(data);
   var conf = Core9.forms.config; //for debug only
-  if(Core9.forms.config.data.saveGlobalData) {
-    if(Core9.forms.config.data.updateGlobalData) {
-      var globalJson = globalDataDirectory + Core9.forms.config.data.updatedOldData.settings[0].value + '.json';
-      $.getJSON(globalJson, function (data) {
-          console.log("success");
-          var dat = JSON.parse(content);
-          dat.settings[0].key = "global";
-          dat.settings[0].value = Core9.forms.config.data.updatedOldData.settings[0].value;
-          Core9.forms.ajax(JSON.stringify(dat), globalJson);
-        })
-        .done(function () {
-          console.log("second success");
-        })
-        .fail(function () {
-          // create new global json file
-          var globalJson = globalDataDirectory + Core9.forms.config.data.updatedOldData.settings[0].value + '.json';
-          var dat = JSON.parse(content);
-          dat.settings[0].key = "global";
-          dat.settings[0].value = Core9.forms.config.data.updatedOldData.settings[0].value;
-          Core9.forms.ajax(JSON.stringify(dat), globalJson);
-          console.log("error");
-          var message = {
-            action: "gotopages"
-          }
-          Core9.iframe.child.sentMessageToParent(message);
-        })
-        .always(function () {
-          console.log("complete");
-        });
-    }
+  if(Core9.forms.config.data.updateGlobalData) {
+    Core9.forms.config.data.saveLocalData = false;
+    var globalJson = globalDataDirectory + Core9.forms.config.data.updatedOldData.settings[0].value + '.json';
+    $.getJSON(globalJson, function (data) {
+        console.log("success");
+        var dat = JSON.parse(content);
+        dat.settings[0].key = "global";
+        dat.settings[0].value = Core9.forms.config.data.updatedOldData.settings[0].value;
+        Core9.forms.ajax(JSON.stringify(dat), globalJson);
+      })
+      .done(function () {
+        console.log("second success");
+      })
+      .fail(function () {
+        // create new global json file
+        var globalJson = globalDataDirectory + Core9.forms.config.data.updatedOldData.settings[0].value + '.json';
+        var dat = JSON.parse(content);
+        dat.settings[0].key = "global";
+        dat.settings[0].value = Core9.forms.config.data.updatedOldData.settings[0].value;
+        Core9.forms.ajax(JSON.stringify(dat), globalJson);
+        console.log("error");
+        var message = {
+          action: "gotopages"
+        }
+        Core9.iframe.child.sentMessageToParent(message);
+      })
+      .always(function () {
+        console.log("complete");
+      });
   }
   if(Core9.forms.config.data.saveLocalData) {
     Core9.forms.ajax(content, file);
