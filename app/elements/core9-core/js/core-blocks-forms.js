@@ -364,6 +364,9 @@ Core9.forms.saveData = function (result) {
     .always(function () {
       console.log("complete");
     });
+
+
+
   if(Core9.forms.config.data.reloadGlobalData) {
     //setTimeout(function () {
     Core9.forms.config.data.stopSave = true; // fuck
@@ -373,6 +376,13 @@ Core9.forms.saveData = function (result) {
     Core9.iframe.child.sentMessageToParent(message);
     //}, 300);
   }
+
+  var message = {
+    action: "closeblockform"
+  }
+  Core9.iframe.child.sentMessageToParent(message);
+
+
 }
 Core9.forms.ajax = function (content, file) {
   var url = '/api/io/save';

@@ -37,8 +37,13 @@ Core9.iframe.parent = {
         history.pushState(null, null, '/dashboard/templates');
       }
       if(e.data.action == "gotopages") {
-        $('#modal-form > div.modal-footer > button').trigger('click');
+        $('#modal-form > div.modal-footer > button')
+          .trigger('click');
         history.pushState(null, null, '/dashboard/pages');
+      }
+      if(e.data.action == "closeblockform") {
+        $('#modal-form > div.modal-footer > button')
+          .trigger('click');
       }
       if(e.data.action == "resetPageEditor") {
         setTimeout(function () {
