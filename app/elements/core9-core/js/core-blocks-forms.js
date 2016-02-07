@@ -54,10 +54,11 @@ Core9.forms = {
     theme: {},
     type: {},
     data: {
+      globalChange: false,
       reloadGlobalData: false,
       updateGlobalData: false,
       globalData: {},
-      saveLocalData: false,
+      saveLocalData: true,
       localData: {},
       origData: {},
       updatedOldData: {}
@@ -191,6 +192,8 @@ Core9.forms.loadForm = function (script, schema, data) {
   if(script == 'settings.json') {
     Core9.editor.watch('root.0.key', function () {
       console.log(this);
+      //here
+      Core9.forms.config.data.globalChange = true;
     });
     var value = jQuery("[name='root[0][value]']");
     value.attr('list', 'global-data');
@@ -283,19 +286,16 @@ Core9.forms.saveFormDataToUserRegistry = function (result) {
   Core9.forms.config.data.updatedOldData = data;
   if(typeof Core9.forms.config.data.updatedOldData.settings != 'undefined') {
     Core9.forms.config.data.reloadGlobalData = true;
-    if(Core9.forms.config.data.updatedOldData.settings[0].key == "global") {
-      if(Core9.forms.config.data.updatedOldData.settings[0].value == Core9.forms.config.data.origData.settings[0].value) {
-        Core9.forms.config.data.updateGlobalData = true;
-      }
-    } else {
-      Core9.forms.config.data.saveLocalData = true;
-      Core9.forms.config.data.updateGlobalData = false;
-    }
-    if(Core9.forms.config.data.updatedOldData.settings[0].key == "global") {
-      Core9.forms.config.data.saveLocalData = false;
-    }
+  }
+  if(typeof Core9.forms.config.data.updatedOldData.settings != 'undefined' && Core9.forms.config.data.updatedOldData.settings[0].key == "global" && Core9.forms.config.data.updatedOldData.settings[0].value.length != 0) {
+    Core9.forms.config.data.updateGlobalData = true;
+    Core9.forms.config.data.saveLocalData = false;
   } else {
     Core9.forms.config.data.saveLocalData = true;
+    Core9.forms.config.data.updateGlobalData = false;
+  }
+  if(Core9.forms.config.data.globalChange) {
+    Core9.forms.config.data.saveLocalData = false;
     Core9.forms.config.data.updateGlobalData = false;
   }
   console.log('pause');
@@ -308,7 +308,6 @@ Core9.forms.saveData = function (result) {
   var content = JSON.stringify(data);
   var conf = Core9.forms.config; //for debug only
   if(Core9.forms.config.data.updateGlobalData) {
-    Core9.forms.config.data.saveLocalData = false;
     var globalJson = globalDataDirectory + Core9.forms.config.data.updatedOldData.settings[0].value + '.json';
     $.getJSON(globalJson, function (data) {
         console.log("success");
