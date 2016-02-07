@@ -60,6 +60,7 @@ Core9.forms = {
       globalData: {},
       saveLocalData: false,
       localData: {},
+      origData: {},
       oldData: {},
       newData: {}
     }
@@ -281,7 +282,7 @@ Core9.forms.saveFormDataToUserRegistry = function (result) {
   var script = result.script;
   var oldUserData = result.data.data.userData;
   var newUserData = result.formData;
-  Core9.forms.config.data.oldData = result.data.data.userData;
+  Core9.forms.config.data.origData = JSON.parse(JSON.stringify(result.data.data.userData));
   Core9.forms.config.data.newData = result.formData;
   // see if we need to save global
   var globalDataSettingInOldData = false;
@@ -292,30 +293,11 @@ Core9.forms.saveFormDataToUserRegistry = function (result) {
     settingData.settings = result.formData;
     globalDataSettingInNewData = Core9.forms.checkIfGlobalDataExists("newGlobalDataSetting", settingData);
   }
-  Core9.forms.config.data.saveLocalData = true;
-  if(globalDataSettingInOldData && !globalDataSettingInNewData) {
-    Core9.forms.config.data.saveLocalData = true;
-  }
-  if(!globalDataSettingInOldData && globalDataSettingInNewData) {
-    Core9.forms.config.data.saveLocalData = true;
-  }
-  if(globalDataSettingInOldData && globalDataSettingInNewData) {
-    Core9.forms.config.data.saveLocalData = false;
-  }
-  if(!globalDataSettingInNewData) {
-    Core9.forms.config.data.saveGlobalData = false;
-  }
+  // if globalOld and globalNew equal and global is set then save global else save local
   if(globalDataSettingInNewData) {
     Core9.forms.config.data.saveGlobalData = true;
-  }
-  if(!globalDataSettingInOldData) {
-    Core9.forms.config.data.saveGlobalData = false;
-  }
-  if(typeof Core9.forms.config.data.newGlobalDataSetting != 'undefined') {
-    if(Core9.forms.config.data.newGlobalDataSetting.length > 0) {
-      Core9.forms.config.data.saveGlobalData = true;
-      Core9.forms.config.data.saveLocalData = true;
-    }
+  } else {
+    Core9.forms.config.data.saveLocalData = true;
   }
   // case if globaldata set and we change it now local will not be saved (compare globaldata value old and new)
   var data = Core9.forms.updateUserData(script, result, oldUserData, newUserData);
@@ -348,6 +330,21 @@ Core9.forms.saveData = function (result) {
           action: "gotopages"
         }
         Core9.iframe.child.sentMessageToParent(message);
+      })
+      .always(function () {
+        console.log("complete");
+      });
+    $.getJSON(file, function (data) {
+        console.log("success");
+        data.settings[0].key = "global";
+        data.settings[0].value = Core9.forms.config.data.newGlobalDataSetting;
+        Core9.forms.ajax(JSON.stringify(data), file);
+      })
+      .done(function () {
+        console.log("second success");
+      })
+      .fail(function () {
+        console.log("error");
       })
       .always(function () {
         console.log("complete");
