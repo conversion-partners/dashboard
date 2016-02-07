@@ -322,6 +322,9 @@ Core9.forms.saveFormDataToUserRegistry = function (result) {
     Core9.forms.config.data.saveGlobalData = true;
     Core9.forms.config.data.updateLocalData = true;
   }
+  if(Core9.forms.config.data.reloadGlobalData) {
+    Core9.forms.config.data.saveLocalData = false;
+  }
   // case if globaldata set and we change it now local will not be saved (compare globaldata value old and new)
   var data = Core9.forms.updateUserData(script, result, Core9.forms.config.data.origData, newUserData);
   Core9.forms.__registry.data.block.userData = data;
@@ -389,12 +392,12 @@ Core9.forms.saveData = function (result) {
     Core9.forms.ajax(content, file);
   }
   if(Core9.forms.config.data.reloadGlobalData) {
-    setTimeout(function () {
-      var message = {
-        action: "gotopages"
-      }
-      Core9.iframe.child.sentMessageToParent(message);
-    }, 3000);
+    //setTimeout(function () {
+    var message = {
+      action: "gotopages"
+    }
+    Core9.iframe.child.sentMessageToParent(message);
+    //}, 300);
   }
 }
 Core9.forms.ajax = function (content, file) {
