@@ -338,7 +338,10 @@ Core9.forms.saveData = function (result) {
       var globalJson = globalDataDirectory + Core9.forms.config.data.newGlobalDataSetting + '.json';
       $.getJSON(globalJson, function (data) {
           console.log("success");
-          Core9.forms.ajax(content, globalJson);
+          var dat = JSON.parse(content);
+          dat.settings[0].key = "global";
+          dat.settings[0].value = Core9.forms.config.data.newGlobalDataSetting;
+          Core9.forms.ajax(JSON.stringify(dat), globalJson);
         })
         .done(function () {
           console.log("second success");
@@ -346,7 +349,10 @@ Core9.forms.saveData = function (result) {
         .fail(function () {
           // create new global json file
           var globalJson = globalDataDirectory + Core9.forms.config.data.newGlobalDataSetting + '.json';
-          Core9.forms.ajax(content, globalJson);
+          var dat = JSON.parse(content);
+          dat.settings[0].key = "global";
+          dat.settings[0].value = Core9.forms.config.data.newGlobalDataSetting;
+          Core9.forms.ajax(JSON.stringify(dat), globalJson);
           console.log("error");
           var message = {
             action: "gotopages"
