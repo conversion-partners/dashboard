@@ -63,7 +63,9 @@ app.set('view engine', 'ejs');
 // Use application-level middleware for common functionality, including
 // logging, parsing, and session handling.
 app.use(require('morgan')('combined', {
-  skip: function (req, res) { return res.statusCode < 400 }
+  skip: function (req, res) {
+    return res.statusCode < 400
+  }
 }));
 app.use(require('cookie-parser')());
 //app.use(require('body-parser').urlencoded({ extended: true }));
@@ -109,12 +111,49 @@ app.use(bodyParser({
 }));
 //app.use(bodyParser.json({limit: '1500kb'}));
 //app.use(bodyParser.urlencoded({limit: '1500kb', extended: true}));
+app.use('/api/session/get/user', require('connect-ensure-login')
+  .ensureLoggedIn(),
+  function (req, res) {
+    res.writeHead(200, {
+      "Content-Type": "application/json" //contentType
+    });
+    res.write(JSON.stringify(req.user));
+    res.end();
+  });
+app.use('/api/session/set/perm/write', require('connect-ensure-login')
+  .ensureLoggedIn(),
+  function (req, res) {
+    /*
+        var sess = req.session;
+    if(sess.views) {
+      sess.views++
+        res.setHeader('Content-Type', 'text/html')
+      res.write('<p>views: ' + sess.views + '</p>')
+      res.write('<p>expires in: ' + (sess.cookie.maxAge / 1000) + 's</p>')
+      res.end()
+    } else {
+      sess.views = 1
+      res.end('welcome to the session demo. refresh!')
+    }
+    */
+    res.writeHead(200, {
+      "Content-Type": "application/json" //contentType
+    });
+    if(typeof req.session.app == 'undefined'){
+      req.session.app = {}
+    }
+    req.session.app.write = true;
+    var dat = {
+      user: req.user,
+      session: req.session
+    }
+    res.write(JSON.stringify(dat));
+    res.end();
+  });
 app.post('/api/io/:action', require('connect-ensure-login')
   .ensureLoggedIn(),
   function (req, res) {
-
     //console.log(req);
-
     switch(req.params.action) {
     case 'save':
       //var onlyPath = require('path').dirname('G:\node-demos\7-node-module\demo\config.json');
@@ -210,12 +249,9 @@ app.get('/profile',
     res.render('profile', { user: req.user });
   });
 **/
-
 app.use('/dashboard/', require('connect-ensure-login')
   .ensureLoggedIn(), express.static('.'));
-
 //app.use('/dashboard/', express.static('.'));
-
 app.use('/*', function (req, res) {
   //res.redirect('/dashboard/');
   res.status(200) // HTTP status 404: NotFound
