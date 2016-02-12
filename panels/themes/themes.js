@@ -106,8 +106,29 @@ function saveTheme(data) {
     save = true;
   }
   initNestable(JSON.stringify(json));
+  /*
+  var menuData =   {
+    "theme": "",
+    "language": "",
+    "country": "",
+    "template": "",
+      "menuid": "",
+    "versions": [{
+      "status": "active",
+      "title": "New-Page"
+    }
+  */
+  //nasty!! global
+  delete Core9.data.menuDataObj['$loki'];
+  var dat = JSON.parse(JSON.stringify(Core9.data.menuDataObj));
+  dat.theme = data.theme;
+  dat.language = data.language;
+  dat.country = data.country;
+  dat.template = pageName;
+  dat.menuid = id;
   if(save) {
     if(TYPEOFPAGE == 'themes') {
+      /*
       var templateData = {
         "theme": data.theme,
         "language": data.language,
@@ -119,6 +140,12 @@ function saveTheme(data) {
         }]
       }
       Core9.data[TYPEOFPAGE].insert(templateData);
+      */
+      try {
+        Core9.data[TYPEOFPAGE].insert(dat);
+      } catch(e) {
+        //Core9.data[TYPEOFPAGE].update(Core9.data.pageDataObj);
+      }
     }
     try {
       Core9.template.save();

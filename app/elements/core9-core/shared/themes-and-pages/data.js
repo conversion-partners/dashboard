@@ -12,25 +12,36 @@ Core9.data.templateOptions = [];
 Core9.data.versionOptions = [];
 Core9.data.pageData = [];
 Core9.data.pageDataObj = {
-    "domain": "",
+  "domain": "",
+  "language": "",
+  "country": "",
+  "page": "",
+  "menuid": "",
+  "url": "",
+  "versions": [{
+    "title": "version-one",
+    "theme": "",
     "language": "",
     "country": "",
-    "page": "",
-    "menuid" : "",
-    "url": "",
-    "versions": [{
-      "title": "version-one",
-      "theme": "",
-      "language": "",
-      "country": "",
-      "template": "",
-      "version": "",
-      "percentage": 100,
-      "startdate": "",
-      "enddate": "",
-      "status": "active"
-    }]
-  };
+    "template": "",
+    "version": "",
+    "percentage": 100,
+    "startdate": "",
+    "enddate": "",
+    "status": "active"
+  }]
+};
+Core9.data.menuDataObj = {
+  "theme": "",
+  "language": "",
+  "country": "",
+  "template": "",
+  "menuid": "",
+  "versions": [{
+    "status": "active",
+    "title": "New-Page"
+  }]
+};
 Core9.template = {
   paths: {
     "template": "/dashboard/data/accounts/{0}/themes/bower_components/{1}/data/templates.json",
@@ -49,38 +60,41 @@ Core9.template = {
     this.dataInit();
   },
   dataInit: function () {
-    Core9.j(Core9.template.paths.bower.format(Core9.template.account)).then(function (data) {
-      var json = JSON.parse(data.currentTarget.response);
-      var themes = json.dependencies;
-      var themeData = [];
-      var blockData = [];
-      var pageData = [];
-      Object.keys(themes).forEach(function (key) {
-        Core9.template.installedThemes.push(key);
-        themeData.push(Core9.j(Core9.template.paths.template.format(Core9.template.account, key)));
-        blockData.push(Core9.j(Core9.template.paths.blocks.format(Core9.template.account, key)));
+    Core9.j(Core9.template.paths.bower.format(Core9.template.account))
+      .then(function (data) {
+        var json = JSON.parse(data.currentTarget.response);
+        var themes = json.dependencies;
+        var themeData = [];
+        var blockData = [];
+        var pageData = [];
+        Object.keys(themes)
+          .forEach(function (key) {
+            Core9.template.installedThemes.push(key);
+            themeData.push(Core9.j(Core9.template.paths.template.format(Core9.template.account, key)));
+            blockData.push(Core9.j(Core9.template.paths.blocks.format(Core9.template.account, key)));
+          });
+        pageData.push(Core9.j(Core9.template.paths.pages.format(Core9.template.account)));
+        var allData = [];
+        allData.push(Core9.template.dataCollect(Core9.data.themes, themeData));
+        allData.push(Core9.template.dataCollect(Core9.data.blocks, blockData));
+        allData.push(Core9.template.dataCollect(Core9.data.pages, pageData));
+        Promise.settle(allData)
+          .then(function (results) {
+            var len = 0;
+            results.forEach(function (result) {
+              if(result.isFulfilled()) {
+                len++;
+              } else {
+                console.log(result.reason());
+              }
+            });
+            if(len == allData.length) {
+              Core9.template.dataReady();
+            } else {
+              //raise exeption
+            }
+          });
       });
-      pageData.push(Core9.j(Core9.template.paths.pages.format(Core9.template.account)));
-      var allData = [];
-      allData.push(Core9.template.dataCollect(Core9.data.themes, themeData));
-      allData.push(Core9.template.dataCollect(Core9.data.blocks, blockData));
-      allData.push(Core9.template.dataCollect(Core9.data.pages, pageData));
-      Promise.settle(allData).then(function (results) {
-        var len = 0;
-        results.forEach(function (result) {
-          if(result.isFulfilled()) {
-            len++;
-          } else {
-            console.log(result.reason());
-          }
-        });
-        if(len == allData.length) {
-          Core9.template.dataReady();
-        } else {
-          //raise exeption
-        }
-      });
-    });
   },
   cleanJsonCollection: function (json) {
     for(var i = 0; i < json.length; i++) {
@@ -91,18 +105,20 @@ Core9.template = {
     return json;
   },
   dataCollect: function (collection, data) {
-    return Promise.settle(data).then(function (results) {
-      results.forEach(function (result) {
-        if(result.isFulfilled()) {
-          var json = JSON.parse(result.value().currentTarget.response);
-          json = Core9.template.cleanJsonCollection(json);
-          //console.log(json);
-          collection.insert(json);
-        } else {
-          console.log(result.reason());
-        }
+    return Promise.settle(data)
+      .then(function (results) {
+        results.forEach(function (result) {
+          if(result.isFulfilled()) {
+            var json = JSON.parse(result.value()
+              .currentTarget.response);
+            json = Core9.template.cleanJsonCollection(json);
+            //console.log(json);
+            collection.insert(json);
+          } else {
+            console.log(result.reason());
+          }
+        });
       });
-    });
   },
   showData: function () {
     console.log('template : ');
@@ -145,7 +161,6 @@ Core9.template = {
     Core9.template.allLanguages = Core9.template.getAllDataForType('language');
     Core9.template.allCountries = Core9.template.getAllDataForType('country');
     Core9.template.allVersions = Core9.template.getAllDataForTypeVersions();
-
     // fire dataready event
     var event = new Event('dataready');
     document.body.dispatchEvent(event);
