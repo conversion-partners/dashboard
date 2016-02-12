@@ -10,7 +10,7 @@ var fs = require('fs');
 var config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
 console.log("config : ");
 console.log(config);
-gulp.task('shorthand', shell.task(['cd ' + __dirname + '/data/accounts/easydrain/; /usr/bin/node ' + __dirname + '/node_modules/nide/main.js  -H ' + config.hostname + ' -p 9999 --no-browser']));
+gulp.task('shorthand', shell.task(['cd ' + __dirname + '/data/accounts/easydrain/; /usr/bin/node ' + __dirname + '/node_modules/nide/main.js -u admin -P secret  -H ' + config.hostname + ' -p 9999 --no-browser']));
 gulp.task('shorthand2', shell.task(['/usr/bin/node ' + __dirname + '/proxy.js']));
 gulp.task('shorthand3', shell.task([
   //'/usr/local/bin/node-debug '+__dirname+'/app.js'
