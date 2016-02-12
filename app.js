@@ -86,7 +86,8 @@ app.get('/auth/login', function (req, res) {
 app.post('/auth/login', passport.authenticate('local', {
   failureRedirect: '/auth/login'
 }), function (req, res) {
-  res.redirect('/auth/');
+  //console.log(req);
+  res.redirect('/dashboard/');
 });
 app.get('/auth/logout', function (req, res) {
   req.logout();
@@ -207,9 +208,11 @@ app.get('/profile',
     res.render('profile', { user: req.user });
   });
 **/
+/**
 app.use('/dashboard/', require('connect-ensure-login')
   .ensureLoggedIn(), express.static('.'));
-//app.use('/dashboard/', express.static('.'));
+**/
+app.use('/dashboard/', express.static('.'));
 app.use('/*', function (req, res) {
   //res.redirect('/dashboard/');
   res.status(200) // HTTP status 404: NotFound
