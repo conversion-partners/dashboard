@@ -52,7 +52,8 @@
 		if (store.get('login') == 'true') {
 			Core9.panellist = ['routes', 'editor', 'themes', 'pages', 'nide', 'blockpreview'];
 		} else {
-			Core9.panellist = ['routes', 'login', 'editor', 'themes', 'pages', 'nide', 'blockpreview'];
+			//Core9.panellist = ['routes', 'login', 'editor', 'themes', 'pages', 'nide', 'blockpreview'];
+			Core9.panellist = ['routes', 'editor', 'themes', 'pages', 'nide', 'blockpreview'];
 		}
 
 		// to enble files and media uploading Core9.panellist = ['routes','editor','themes','pages','media','nide'];
@@ -242,10 +243,10 @@
 <body>
 	<script>
 		/**
-								window.addEventListener("iframeLoadedEvent", function(event){
-									console.log(event);
-								}, false);
-								**/
+												window.addEventListener("iframeLoadedEvent", function(event){
+													console.log(event);
+												}, false);
+												**/
 	</script>
 	<div id="mini-menu">
 		<button id="export-page">export</button>
@@ -313,7 +314,7 @@
 				//document.querySelector('#mini-menu > div').style.display = 'block';
 			} else {
 				document.getElementById('mini-menu').style.display = 'none';
-			  document.querySelector('#mini-menu > div').style.display = 'none';
+				document.querySelector('#mini-menu > div').style.display = 'none';
 			}
 		}, false);
 	</script>
