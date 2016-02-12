@@ -500,7 +500,7 @@
 			<button id='restore2' type="button" class="btn btn-default">Restore</button>
 			<span id='valid_indicator'></span>
 		</div>
-		<a id="save-nestable" href="#">save</a> &nbsp;&nbsp;&nbsp; <a style="visibility:hidden;"id="load-nestable" href="#">load</a>
+		<a id="save-nestable" href="#">save</a> &nbsp;&nbsp;&nbsp; <a style="visibility:hidden;" id="load-nestable" href="#">load</a>
 		<menu id="nestable-menu">
 			<button type="button" data-action="expand-all">Expand All</button>
 			<button type="button" data-action="collapse-all">Collapse All</button>
@@ -596,19 +596,6 @@
 		}
 
 		function addPageToPages(page, db, pageSettings) {
-			/*
-			Core9.data.pageDataObj.page = page.page;
-			Core9.data.pageDataObj.domain = pageSettings.domain;
-			Core9.data.pageDataObj.language = pageSettings.language;
-			Core9.data.pageDataObj.country = pageSettings.country;
-			Core9.data.pageDataObj.menuid = guid();
-			*/
-			try {
-				//Core9.data[TYPEOFPAGE].update(Core9.data.pageDataObj);
-			} catch (e) {
-
-			}
-
 			try {
 				console.log('saving page');
 				//Core9.template.save();

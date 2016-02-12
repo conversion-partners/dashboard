@@ -416,33 +416,14 @@ function savePage(data) {
   //nasty!! global
   delete Core9.data.pageDataObj['$loki'];
   var dat = JSON.parse(JSON.stringify(Core9.data.pageDataObj));
-  /*
-  Core9.data.pageDataObj.domain = data.domain;
-  Core9.data.pageDataObj.language = data.language;
-  Core9.data.pageDataObj.country = data.country;
-  Core9.data.pageDataObj.page = pageName;
-  Core9.data.pageDataObj.menuid = id;
-  */
   dat.domain = data.domain;
   dat.language = data.language;
   dat.country = data.country;
   dat.page = pageName;
   dat.menuid = id;
-  function isNumeric(n) {
-    return !isNaN(parseFloat(n)) && isFinite(n);
-  }
-
   if(save) {
     //Core9.data[TYPEOFPAGE].insert(pageData);
     try {
-      /*
-      if(isNumeric(Core9.data.pageDataObj.$loki)) {
-        Core9.data.pageDataObj.$loki = Core9.data.pageDataObj.$loki + 1;
-        Core9.data[TYPEOFPAGE].data.push(Core9.data.pageDataObj);
-      } else {
-        Core9.data[TYPEOFPAGE].insert(Core9.data.pageDataObj);
-      }
-      */
       Core9.data[TYPEOFPAGE].insert(dat);
     } catch(e) {
       //Core9.data[TYPEOFPAGE].update(Core9.data.pageDataObj);
@@ -611,14 +592,7 @@ $(document)
         postClick("/dashboard/page/edit");
       });
   });
-/*
-function getThemeMenuFile() {
-  var account = store.get('account');
-  var theme = $(".template-data").val();
-  var file = '/dashboard/data/accounts/' + account + '/themes/bower_components/' + theme + '/global-data/theme-menu.json';
-  return file.toLowerCase();
-}
-*/
+
 function getPageMenuFile() {
   var account = store.get('account');
   var pageLanguage = fromEmptyToNull($('.language-data')
