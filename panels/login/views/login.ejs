@@ -114,10 +114,17 @@
 						-->
 
               <form  action="/auth/login" method="post" accept-charset="utf-8"  id="login" class="simform">
-                <div class="sminputs">
+
+								<div class="sminputs">
+									<div class="input full">
+										<label class="string optional" for="account-name">Account*</label>
+										<input class="string optional"  name="account" maxlength="255" id="account" placeholder="Account" type="text" size="50" />
+									</div>
+								</div>
+								<div class="sminputs">
                   <div class="input full">
-                    <label class="string optional" for="user-name">Email*</label>
-                    <input class="string optional"  name="username" maxlength="255" id="user-email" placeholder="Email" type="text" size="50" />
+                    <label class="string optional" for="user-name">User*</label>
+                    <input class="string optional"  name="username" maxlength="255" id="user-email" placeholder="User" type="text" size="50" />
                   </div>
                 </div>
                 <div class="sminputs">
