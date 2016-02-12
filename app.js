@@ -117,6 +117,7 @@ app.use('/api/session/get/user', require('connect-ensure-login')
     res.writeHead(200, {
       "Content-Type": "application/json" //contentType
     });
+    delete req.user.password;
     res.write(JSON.stringify(req.user));
     res.end();
   });
@@ -139,10 +140,11 @@ app.use('/api/session/set/perm/write', require('connect-ensure-login')
     res.writeHead(200, {
       "Content-Type": "application/json" //contentType
     });
-    if(typeof req.session.app == 'undefined'){
+    if(typeof req.session.app == 'undefined') {
       req.session.app = {}
     }
     req.session.app.write = true;
+    delete req.user.password;
     var dat = {
       user: req.user,
       session: req.session
