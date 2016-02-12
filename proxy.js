@@ -11,4 +11,4 @@ proxy.register(config.hostname +":9090/api/", "http://" + config.hostname + ":30
 
 proxy.register(config.hostname +":9090/auth/", "http://" + config.hostname + ":3000/auth/");
 
-proxy.register(config.hostname +":9090", "http://" + config.hostname + ":9999");
+//proxy.register(config.hostname +":9090", "http://" + config.hostname + ":9999");

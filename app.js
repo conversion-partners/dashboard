@@ -109,6 +109,9 @@ app.use(bodyParser({
 app.post('/api/io/:action', require('connect-ensure-login')
   .ensureLoggedIn(),
   function (req, res) {
+
+    console.log(req);
+
     switch(req.params.action) {
     case 'save':
       //var onlyPath = require('path').dirname('G:\node-demos\7-node-module\demo\config.json');
