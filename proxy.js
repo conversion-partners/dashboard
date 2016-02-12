@@ -1,4 +1,4 @@
-var proxy = require('redbird')({port: 9090});
+var proxy = require('redbird')({port: 9090, bunyan: false});
 var fs = require('fs');
 
 var config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
