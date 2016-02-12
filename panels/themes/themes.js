@@ -149,6 +149,10 @@ function saveTheme(data) {
     }
     try {
       Core9.template.save();
+      var event = new CustomEvent("save-new-theme", {
+        "detail": "Example of an event"
+      });
+      document.dispatchEvent(event);
     } catch(e) {}
   }
 }
