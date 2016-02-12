@@ -69,6 +69,9 @@ var activateEditor = function () {
       }
     }
   });
+
+  
+
   Core9.editor = new JSONEditor(document.getElementById('editor_holder2'), {
     ajax: true,
     disable_edit_json: true,
@@ -152,6 +155,13 @@ var activateEditor = function () {
       indicator.textContent = "valid";
     }
   });
+  /*
+  var percentage = Core9.editor.getEditor('root.0.percentage');
+  if(percentage) {
+    percentage.setValue("80");
+    console.log(percentage.getValue());
+  }
+  */
 
   function ifUndefined(versions, i, val, overide) {
     var result = "";
