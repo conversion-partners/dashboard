@@ -70,7 +70,7 @@ var activateEditor = function () {
     }
   });
 
-  
+
 
   Core9.editor = new JSONEditor(document.getElementById('editor_holder2'), {
     ajax: true,
@@ -377,10 +377,12 @@ var activateEditor = function () {
     .addEventListener('click', function () {
       save();
     });
+    /*
   document.getElementById('restore2')
     .addEventListener('click', function () {
       Core9.editor.setValue(starting_value);
     });
+    */
 }
 
 function savePage(data) {
