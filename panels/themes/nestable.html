@@ -534,22 +534,33 @@
 	</script>
 
 	<script>
+		function createStyleTag(display) {
+			var css = "";
+			css += '#editor_holder2  button.json-editor-btn-add { display: ' + display + '; }';
+			css += '#editor_holder2  button.json-editor-btn-delete:nth-child(2) { display: ' + display + '; }';
+			css += '#newtemplates { display: ' + display + '; }';
+			css += '#delpage { display: ' + display + '; }';
+			css += '#submit { display: ' + display + '; }';
+			var head = document.head || document.getElementsByTagName('head')[0],
+				style = document.createElement('style');
+			style.id = "disable-edit-buttuns";
+
+			style.type = 'text/css';
+			if (style.styleSheet) {
+				style.styleSheet.cssText = css;
+			} else {
+				style.appendChild(document.createTextNode(css));
+			}
+
+			head.appendChild(style);
+		}
+
 		function changeStateEditButtons(state) {
 			state = (state == "true") ? true : false;
 			if (state) {
-				$('#edittemplate').show();
-				$('#newtemplates').show();
-				$('#delpage').show();
-				$('#submit').show();
-				$('#editor_holder2  button.json-editor-btn-add').show();
-				$('#editor_holder2  button.json-editor-btn-delete:nth-child(2)').show();
+				createStyleTag('block');
 			} else {
-				$('#edittemplate').hide();
-				$('#newtemplates').hide();
-				$('#delpage').hide();
-				$('#submit').hide();
-				$('#editor_holder2  button.json-editor-btn-add').hide();
-				$('#editor_holder2  button.json-editor-btn-delete:nth-child(2)').hide();
+				createStyleTag('none');
 			}
 		}
 
