@@ -8,6 +8,23 @@ var mime = require('mime');
 var mkdirp = require('mkdirp');
 var path = require('path');
 var loginPage = '/auth/login';
+if(!String.prototype.startsWith) {
+  String.prototype.startsWith = function (searchString, position) {
+    position = position || 0;
+    return this.substr(position, searchString.length) === searchString;
+  };
+}
+if(!Array.prototype.contains) {
+  Array.prototype.contains = function (obj) {
+    var i = this.length;
+    while(i--) {
+      if(this[i] === obj) {
+        return true;
+      }
+    }
+    return false;
+  }
+}
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({
   extended: true
@@ -147,7 +164,7 @@ function isOtherUserBusy(user, data) {
   return false;
 }
 
-function writeSessionData(req,res, file, data) {
+function writeSessionData(req, res, file, data) {
   fs.writeFile(file, JSON.stringify(data), function (err) {
     var result = getResultModel();
     if(err) {
@@ -178,7 +195,7 @@ function updateSessionDataWithUser(file, req, res, data, set) {
     sendSessionData(req, res, result);
   } else if(data.site.menu.write.length === 0) {
     data.site.menu.write = user;
-    writeSessionData(req,res, file, data);
+    writeSessionData(req, res, file, data);
   }
 }
 
@@ -187,7 +204,7 @@ function removeUserFromSessionData(file, req, res, data, set) {
   var result = getResultModel();
   if(data.site.menu.write === user) {
     data.site.menu.write = "";
-    writeSessionData(req,res, file, data);
+    writeSessionData(req, res, file, data);
   } else {
     result.session = data;
     sendSessionData(req, res, result);
@@ -214,7 +231,7 @@ function createSessionData(file, req, res, set) {
   }
   session.site.menu.write = set ? user : "";
   mkdirp(path.dirname(file), function (err) {
-    writeSessionData(req,res, file, session);
+    writeSessionData(req, res, file, session);
   });
 }
 
@@ -272,24 +289,71 @@ app.use('/api/session/set/perm/write/:set', require('connect-ensure-login')
 '/api/session/set/perm/write'
 
   **/
+function saveGeneralFile(directory, file, req) {
+  mkdirp(directory, function (err) {
+    fs.writeFile(file, req.body.content, function (err) {
+      if(err) {
+        return console.log(err);
+      }
+      console.log("this file was saved : ");
+      console.log(file);
+    });
+  });
+}
+
+function isMenuFile(file) {
+  //var pageDb = "../dashboard/data/accounts/" + account + "/sites/data/pages.json";
+  //..\/dashboard\/data\/accounts\/[a-zA-Z0-9._-]+\/sites\/[a-zA-Z0-9._-]+\/sites/data/pages.json
+  //var pageMenu = "../dashboard/data/accounts/" + account + "/sites/easydrain.com_en-null/menu";
+  //../dashboard/data/accounts/easydrain/sites/easydrain.com_en-null/menu/page-menu-easydrain.com-en-.json
+  //..\/dashboard\/data\/accounts\/[a-zA-Z0-9._-]+\/sites\/[a-zA-Z0-9._-]+\/menu\/page-menu-[a-zA-Z0-9._-]+.json
+  //var templateDb = "../dashboard/data/accounts/" + account + "/themes/bower_components/core9-theme-ess/data/templates.json";
+  // ../dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/data/templates.json
+  // ..\/dashboard\/data\/accounts\/[a-zA-Z0-9._-]+\/themes\/bower_components\/[a-zA-Z0-9._-]+\/data\/templates.json
+  //var templateMenu = "../dashboard/data/accounts/" + account + "/themes/bower_components/core9-theme-ess/global-data/";
+  /// ../dashboard/data/accounts/easydrain/themes/bower_components/core9-theme-ess/global-data/theme-menu-core9-theme-ess--.json
+  // ..\/dashboard\/data\/accounts\/[a-zA-Z0-9._-]+\/themes\/bower_components\/[a-zA-Z0-9._-]+\/global-data\/theme-menu-[a-zA-Z0-9._-]+.json
+  var menuFilesPatterns = ["..\/dashboard\/data\/accounts\/[a-zA-Z0-9._-]+\/sites/data/pages.json", "..\/dashboard\/data\/accounts\/[a-zA-Z0-9._-]+\/sites\/[a-zA-Z0-9._-]+\/menu\/page-menu-[a-zA-Z0-9._-]+.json", "..\/dashboard\/data\/accounts\/[a-zA-Z0-9._-]+\/themes\/bower_components\/[a-zA-Z0-9._-]+\/data\/templates.json", "..\/dashboard\/data\/accounts\/[a-zA-Z0-9._-]+\/themes\/bower_components\/[a-zA-Z0-9._-]+\/global-data\/theme-menu-[a-zA-Z0-9._-]+.json"];
+  var re = new RegExp(menuFilesPatterns.join("|"), "i");
+  return(file.match(re) != null);
+}
+
+function isAllowedToSaveMenuFile(user, account, file) {}
+
+function isAllowedToSave(accountPath, file) {
+  var save = true;
+  if(!file.startsWith(accountPath)) {
+    save = false;
+  }
+  return save;
+}
 app.post('/api/io/:action', require('connect-ensure-login')
   .ensureLoggedIn(loginPage),
   function (req, res) {
-    //console.log(req);
+    var user = req.user.username;
+    var account = req.user.account;
+    var accountPath = "../dashboard/data/accounts/" + account;
     switch(req.params.action) {
     case 'save':
-      //var onlyPath = require('path').dirname('G:\node-demos\7-node-module\demo\config.json');
       var file = ".." + req.body.file;
       var directory = path.dirname(file);
-      // only write in own account folders TODO!!!!!
-      mkdirp(directory, function (err) {
-        fs.writeFile(file, req.body.content, function (err) {
-          if(err) {
-            return console.log(err);
+      console.log(JSON.stringify({
+        user: user,
+        account: account
+      }));
+      console.log("trying to save file : ");
+      console.log(file);
+      if(isAllowedToSave(accountPath, file)) {
+        if(isMenuFile(file)) {
+          console.log("is a menu file");
+          if(isAllowedToSaveMenuFile(user, account, file)) {
+            //saveGeneralFile(directory, file, req);
           }
-          console.log("The file was saved!");
-        });
-      });
+        } else {
+          console.log("is a not menu file");
+          //saveGeneralFile(directory, file, req);
+        }
+      }
       break;
     default:
       console.log("end of api req");
