@@ -151,13 +151,13 @@ function handleSessionWrite(account, user) {
         });
       });
     } else {
-      fs.writeFile(file, newSessionDat, function (err) {
+      fs.writeFile(file, data, function (err) {
         if(err) {
           console.log("The file was not saved!");
-          console.log(newSessionDat);
+          console.log(data);
         }
         console.log("The file was saved!");
-        console.log(newSessionDat);
+        console.log(data);
       });
     }
   });
@@ -203,7 +203,8 @@ app.post('/api/io/:action', require('connect-ensure-login')
       });
       break;
     default:
-      console.log(req);
+      console.log("end of api req");
+      //console.log(req);
     }
     res.sendStatus(200);
   });
@@ -291,10 +292,6 @@ app.use('/*', function (req, res) {
   res.status(200) // HTTP status 404: NotFound
     .send('');
 });
-
-
-
-
 var config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
 //var hostname = "localhost";//config.hostname;//"localhost";
 console.log("config : ");
