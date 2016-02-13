@@ -62,18 +62,22 @@ function activateEditor() {
       indicator.textContent = "valid";
     }
   });
+
+  function onClickSaveTemplate() {
+    var page = getCurrentPage();
+    page.versions = [];
+    var versions = Core9.editor.getValue();
+    for(var i = 0; i < versions.length; i++) {
+      var version = versions[i];
+      page.versions.push(version);
+    }
+    Core9.data[TYPEOFPAGE].update(page);
+    Core9.template.save();
+  }
   document.getElementById('submit')
-    .addEventListener('click', function () {
-      var page = getCurrentPage();
-      page.versions = [];
-      var versions = Core9.editor.getValue();
-      for(var i = 0; i < versions.length; i++) {
-        var version = versions[i];
-        page.versions.push(version);
-      }
-      Core9.data[TYPEOFPAGE].update(page);
-      Core9.template.save();
-    });
+    .removeEventListener('click', onClickSaveTemplate);
+  document.getElementById('submit')
+    .addEventListener('click', onClickSaveTemplate);
   document.getElementById('restore')
     .addEventListener('click', function () {
       Core9.editor.setValue(starting_value);
