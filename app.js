@@ -165,7 +165,10 @@ function updateSessionDataWithUser(file, req, res, data, set) {
     var result = getResultModel();
     result.session = data;
     sendSessionData(res, result);
-  } else {
+  } else if(data.site.menu.write !== user && data.site.menu.write.length !== 0) {
+    result.session = data;
+    sendSessionData(res, result);
+  } else if(data.site.menu.write.length === 0) {
     data.site.menu.write = user;
     writeSessionData(res, file, data);
   }
