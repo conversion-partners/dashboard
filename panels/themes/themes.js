@@ -78,10 +78,12 @@ function activateEditor() {
     .removeEventListener('click', onClickSaveTemplate);
   document.getElementById('submit')
     .addEventListener('click', onClickSaveTemplate);
+  /*
   document.getElementById('restore')
     .addEventListener('click', function () {
       Core9.editor.setValue(starting_value);
     });
+    */
 }
 
 function saveTheme(data) {

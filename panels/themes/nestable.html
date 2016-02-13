@@ -457,7 +457,9 @@
 			</div>
 			<div id='editor_holder2'></div>
 			<button id='submit' type="button" class="btn btn-default">Save</button>
+			<!--
 			<button id='restore' type="button" class="btn btn-default">Restore</button>
+		-->
 			<span id='valid_indicator'></span>
 		</div>
 		<a id="save-nestable" style="visibility:hidden;" href="#">save</a> &nbsp;&nbsp;&nbsp; <a style="visibility:hidden;" id="load-nestable" href="#">load</a>
@@ -532,6 +534,25 @@
 	</script>
 
 	<script>
+		function changeStateEditButtons(state) {
+			state = (state == "true") ? true : false;
+			if (state) {
+				$('#edittemplate').show();
+				$('#newtemplates').show();
+				$('#delpage').show();
+				$('#submit').show();
+				$('#editor_holder2  button.json-editor-btn-add').show();
+				$('#editor_holder2  button.json-editor-btn-delete:nth-child(2)').show();
+			} else {
+				$('#edittemplate').hide();
+				$('#newtemplates').hide();
+				$('#delpage').hide();
+				$('#submit').hide();
+				$('#editor_holder2  button.json-editor-btn-add').hide();
+				$('#editor_holder2  button.json-editor-btn-delete:nth-child(2)').hide();
+			}
+		}
+
 		function changeStateEditor(state) {
 			$.get("/api/session/set/perm/write/" + state, function(data) {
 				console.log(data);
@@ -551,6 +572,9 @@
 				}
 				if (editor == data.user.username) {
 					$('#activate-editor').html("Deactivate");
+					changeStateEditButtons("true");
+				} else {
+					changeStateEditButtons("false");
 				}
 				$('#editor-status > span').html(editor);
 				setTimeout(function() {
@@ -559,6 +583,7 @@
 			});
 		}
 		doPoll("");
+		changeStateEditButtons("false");
 
 		$('#activate-editor').on('click', function() {
 			var status = $(this).html();
