@@ -147,7 +147,7 @@ function isOtherUserBusy(user, data) {
   return false;
 }
 
-function writeSessionData(res, file, data) {
+function writeSessionData(req,res, file, data) {
   fs.writeFile(file, JSON.stringify(data), function (err) {
     var result = getResultModel();
     if(err) {
@@ -178,7 +178,7 @@ function updateSessionDataWithUser(file, req, res, data, set) {
     sendSessionData(req, res, result);
   } else if(data.site.menu.write.length === 0) {
     data.site.menu.write = user;
-    writeSessionData(res, file, data);
+    writeSessionData(req,res, file, data);
   }
 }
 
@@ -187,7 +187,7 @@ function removeUserFromSessionData(file, req, res, data, set) {
   var result = getResultModel();
   if(data.site.menu.write === user) {
     data.site.menu.write = "";
-    writeSessionData(res, file, data);
+    writeSessionData(req,res, file, data);
   } else {
     result.session = data;
     sendSessionData(req, res, result);
@@ -214,7 +214,7 @@ function createSessionData(file, req, res, set) {
   }
   session.site.menu.write = set ? user : "";
   mkdirp(path.dirname(file), function (err) {
-    writeSessionData(res, file, session);
+    writeSessionData(req,res, file, session);
   });
 }
 
