@@ -130,20 +130,68 @@ app.use('/api/session/get/user', require('connect-ensure-login')
 /**
 
 
-
 handleSessionWrite
 
 **/
-function handleSessionWrite(req, res) {
-  if(typeof req.session.app == 'undefined') {
-    req.session.app = {}
-  }
-  var account = req.user.account;
+function getResultModel() {
+  return {
+    error: {},
+    session: {}
+  };
+}
+
+function writeSessionData(res, file, data) {
+  fs.writeFile(file, JSON.stringify(data), function (err) {
+    var result = getResultModel();
+    if(err) {
+      result.error = err;
+      result.session = data;
+      sendSessionData(res, result);
+    } else {
+      result.session = data;
+      sendSessionData(res, result);
+    }
+  });
+}
+
+function sendSessionData(res, result) {
+  res.write(JSON.stringify(result));
+  res.end();
+}
+
+function updateSessionDataWithUser(file, req, res, data, set) {
   var user = req.user.username;
-  var result = {
-    session: {},
-    error: ""
+  if(data.site.menu.write == user) {
+    var result = getResultModel();
+    result.session = data;
+    sendSessionData(res, result);
+  } else {
+    data.site.menu.write = user;
+    writeSessionData(res, file, data);
   }
+}
+
+function removeUserFromSessionData(file, req, res, data, set) {
+  if(data.site.menu.write.length === 0) {
+    var result = getResultModel();
+    result.session = data;
+    sendSessionData(res, result);
+  } else {
+    data.site.menu.write = "";
+    writeSessionData(res, file, data);
+  }
+}
+
+function updateSessionDataWriteUser(file, req, res, data, set) {
+  if(set) {
+    updateSessionDataWithUser(file, req, res, data, set);
+  } else {
+    removeUserFromSessionData(file, req, res, data, set);
+  }
+}
+
+function createSessionData(file, req, res, set) {
+  var user = req.user.username;
   var session = {
     site: {
       menu: {
@@ -152,47 +200,31 @@ function handleSessionWrite(req, res) {
       }
     }
   }
-  var file = "data/accounts/" + account + "/sites/data/global-session.json";
+  session.site.menu.write = set ? user : "";
+  mkdirp(path.dirname(file), function (err) {
+    writeSessionData(res, file, session);
+  });
+}
+
+function sessionDataExists(file, req, res, data, set) {
+  updateSessionDataWriteUser(file, req, res, data, set);
+}
+
+function sessionDoesNotExists(file, req, res, set) {
+  createSessionData(file, req, res, set);
+}
+
+function handleSessionWrite(req, res, set) {
+  set = (set == "true") ? true : false;
+  if(typeof req.session.app == 'undefined') {
+    req.session.app = {}
+  }
+  var file = "data/accounts/" + req.user.account + "/sites/data/global-session.json";
   fs.readFile(file, 'utf8', function (err, data) {
     if(err || typeof data == 'undefined') {
-      // user is allowed to write if there is no file
-      session.site.menu.write = user;
-      var jsonSession = JSON.stringify(session);
-      var directory = path.dirname(file);
-      mkdirp(directory, function (err) {
-        fs.writeFile(file, jsonSession, function (err) {
-          if(err) {
-            result.error = err;
-            result.session = session;
-            res.write(JSON.stringify(result));
-            res.end();
-          }
-          result.session = session;
-          res.write(JSON.stringify(result));
-          res.end();
-        });
-      });
+      sessionDoesNotExists(file, req, res, set);
     } else {
-      // if user allowed to write set session
-      data = JSON.parse(data);
-      if(data.site.menu.write.length === 0) {
-        data.site.menu.write = user;
-        var sessionData = JSON.stringify(data);
-        fs.writeFile(file, sessionData, function (err) {
-          if(err) {
-            result.error = err;
-            result.session = data;
-            res.write(JSON.stringify(result));
-            res.end();
-          }
-          result.session = data;
-          res.write(JSON.stringify(result));
-          res.end();
-        });
-      }
-      result.session = data;
-      res.write(JSON.stringify(result));
-      res.end();
+      sessionDataExists(file, req, res, JSON.parse(data), set);
     }
   });
 }
@@ -203,7 +235,14 @@ function handleSessionWrite(req, res) {
 handleSessionWrite
 
 **/
-app.use('/api/session/set/perm/write', require('connect-ensure-login')
+/**
+
+
+
+'/api/session/set/perm/write'
+
+**/
+app.use('/api/session/set/perm/write/:set', require('connect-ensure-login')
   .ensureLoggedIn(loginPage),
   function (req, res) {
     console.log("------------------------------------------------------------------------------------------");
@@ -212,8 +251,15 @@ app.use('/api/session/set/perm/write', require('connect-ensure-login')
       "Content-Type": "application/json" //contentType
     });
     delete req.user.password;
-    var result = handleSessionWrite(req, res);
+    var result = handleSessionWrite(req, res, req.params.set);
   });
+/**
+
+
+
+'/api/session/set/perm/write'
+
+  **/
 app.post('/api/io/:action', require('connect-ensure-login')
   .ensureLoggedIn(loginPage),
   function (req, res) {
