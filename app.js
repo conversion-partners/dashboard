@@ -141,8 +141,18 @@ app.use('/api/session/get/user', require('connect-ensure-login')
       "Content-Type": "application/json" //contentType
     });
     delete req.user.password;
-    res.write(JSON.stringify(req.user));
-    res.end();
+    var sessionFile = "data/accounts/" + req.user.account + "/sites/data/global-session.json";
+    fs.readFile(sessionFile, 'utf8', function (err, data) {
+      console.log(data);
+      data = JSON.parse(data);
+      var userdata = {
+        user: req.user,
+        session: data,
+        error: err
+      }
+      res.write(JSON.stringify(userdata));
+      res.end();
+    });
   });
 /**
 

@@ -444,10 +444,15 @@
 			</ul>
 		</div>
 		<div id="menuitemcontent">
-			<div class="btn-group" role="group" aria-label="" style="width: 500px;">
+			<div class="btn-group" role="group" aria-label="" style="width: 100%;">
 				<button id="edittemplate" type="button" class="btn btn-default">Edit</button>
 				<button id="newtemplates" type="button" class="btn btn-default">New</button>
 				<button id="delpage" type="button" class="btn btn-default">Delete</button>
+				<div id="editor-status" style="width:200px;height:36px; float:right; background:#fff;">Current editor :
+					<span>updating..</span>
+					<br>
+					<button id="activate-editor" type="button" style="font-size:9px">Activate</button>
+				</div>
 			</div>
 			<div id='editor_holder2'></div>
 			<button id='submit' type="button" class="btn btn-default">Save</button>
@@ -525,6 +530,40 @@
 		});
 	</script>
 
+	<script>
+		function changeStateEditor(state) {
+			$.get("/api/session/set/perm/write/" + state, function(data) {
+				console.log(data);
+			});
+		}
+
+		function doPoll() {
+			$.post('/api/session/get/user', function(data) {
+				var editor = data.session.site.menu.write;
+				if (editor.length == 0) {
+					editor = "no editor active";
+					$('#activate-editor').html("Activate");
+				}
+				if (editor == data.user.username) {
+					$('#activate-editor').html("Deactivate");
+				}
+				$('#editor-status > span').html(editor);
+
+				setTimeout(doPoll, 5000);
+			});
+		}
+		doPoll();
+
+		$('#activate-editor').on('click', function() {
+			var status = $(this).html();
+			console.log(status);
+			if (status == "Activate") {
+				changeStateEditor("true");
+			} else {
+				changeStateEditor("false");
+			}
+		});
+	</script>
 
 	<script>
 		var callback = function(event) {
