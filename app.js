@@ -153,15 +153,16 @@ function writeSessionData(res, file, data) {
     if(err) {
       result.error = err;
       result.session = data;
-      sendSessionData(res, result);
+      sendSessionData(req, res, result);
     } else {
       result.session = data;
-      sendSessionData(res, result);
+      sendSessionData(req, res, result);
     }
   });
 }
 
-function sendSessionData(res, result) {
+function sendSessionData(req, res, result) {
+  result.session.whoami = req.user.username;
   res.write(JSON.stringify(result));
   res.end();
 }
@@ -171,10 +172,10 @@ function updateSessionDataWithUser(file, req, res, data, set) {
   var result = getResultModel();
   if(data.site.menu.write == user) {
     result.session = data;
-    sendSessionData(res, result);
+    sendSessionData(req, res, result);
   } else if(isOtherUserBusy(user, data)) {
     result.session = data;
-    sendSessionData(res, result);
+    sendSessionData(req, res, result);
   } else if(data.site.menu.write.length === 0) {
     data.site.menu.write = user;
     writeSessionData(res, file, data);
@@ -189,7 +190,7 @@ function removeUserFromSessionData(file, req, res, data, set) {
     writeSessionData(res, file, data);
   } else {
     result.session = data;
-    sendSessionData(res, result);
+    sendSessionData(req, res, result);
   }
 }
 
