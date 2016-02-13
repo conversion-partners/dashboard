@@ -318,7 +318,25 @@ function isMenuFile(file) {
   return(file.match(re) != null);
 }
 
-function isAllowedToSaveMenuFile(user, account, file) {}
+function isAllowedToSaveMenuFile(user, account, directory, file, req) {
+  var file = "data/accounts/" + account + "/sites/data/global-session.json";
+  fs.readFile(file, 'utf8', function (err, data) {
+    console.log(data);
+    data = JSON.parse(data);
+    if(err || typeof data == 'undefined') {
+      console.log(JSON.stringify(err));
+    } else {
+      console.log("working user is : ");
+      console.log(data.site.menu.write);
+      if(data.site.menu.write === user) {
+        console.log("user : " + user + "can write");
+        saveGeneralFile(directory, file, req);
+      } else {
+        console.log("user : " + user + "can not write");
+      }
+    }
+  });
+}
 
 function isAllowedToSave(accountPath, file) {
   var save = true;
@@ -346,12 +364,11 @@ app.post('/api/io/:action', require('connect-ensure-login')
       if(isAllowedToSave(accountPath, file)) {
         if(isMenuFile(file)) {
           console.log("is a menu file");
-          if(isAllowedToSaveMenuFile(user, account, file)) {
-            //saveGeneralFile(directory, file, req);
-          }
+          isAllowedToSaveMenuFile(user, account, directory, file, req);
         } else {
           console.log("is a not menu file");
-          //saveGeneralFile(directory, file, req);
+          console.log("this file can be saved");
+          saveGeneralFile(directory, file, req);
         }
       }
       break;
