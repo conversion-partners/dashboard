@@ -538,9 +538,13 @@
 			});
 		}
 
-		function doPoll() {
+		function doPoll(stateEditor) {
 			$.post('/api/session/get/user', function(data) {
 				var editor = data.session.site.menu.write;
+				if (editor !== stateEditor) {
+					$('#editor-status > img').hide();
+				}
+				stateEditor = editor;
 				if (editor.length == 0) {
 					editor = "no editor active";
 					$('#activate-editor').html("Activate");
@@ -549,15 +553,17 @@
 					$('#activate-editor').html("Deactivate");
 				}
 				$('#editor-status > span').html(editor);
-
-				setTimeout(doPoll, 5000);
+				setTimeout(function() {
+					doPoll(stateEditor);
+				}, 4000)
 			});
 		}
-		doPoll();
+		doPoll("");
 
 		$('#activate-editor').on('click', function() {
 			var status = $(this).html();
 			console.log(status);
+			$('#editor-status > img').show();
 			if (status == "Activate") {
 				changeStateEditor("true");
 			} else {
