@@ -80,12 +80,7 @@ function getSelectedPageId() {
 function getCurrentPage() {
   var id = getCurrentPageId();
   if(typeof id == 'undefined') {
-    var res = Core9.data[TYPEOFPAGE].data;
-    if(res.length == 1) {
-      return res[0];
-    } else {
-      alert('oeps please reload the page.');
-    }
+    alert('oeps a menu item with no id.');
   } else {
     return Core9.data[TYPEOFPAGE].get(id);
   }
