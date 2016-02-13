@@ -140,6 +140,13 @@ function getResultModel() {
   };
 }
 
+function isOtherUserBusy(user, data) {
+  if(data.site.menu.write !== user && data.site.menu.write.length !== 0) {
+    return true;
+  }
+  return false;
+}
+
 function writeSessionData(res, file, data) {
   fs.writeFile(file, JSON.stringify(data), function (err) {
     var result = getResultModel();
@@ -161,11 +168,11 @@ function sendSessionData(res, result) {
 
 function updateSessionDataWithUser(file, req, res, data, set) {
   var user = req.user.username;
+  var result = getResultModel();
   if(data.site.menu.write == user) {
-    var result = getResultModel();
     result.session = data;
     sendSessionData(res, result);
-  } else if(data.site.menu.write !== user && data.site.menu.write.length !== 0) {
+  } else if(isOtherUserBusy(user, data)) {
     result.session = data;
     sendSessionData(res, result);
   } else if(data.site.menu.write.length === 0) {
@@ -175,13 +182,14 @@ function updateSessionDataWithUser(file, req, res, data, set) {
 }
 
 function removeUserFromSessionData(file, req, res, data, set) {
-  if(data.site.menu.write.length === 0) {
-    var result = getResultModel();
-    result.session = data;
-    sendSessionData(res, result);
-  } else {
+  var user = req.user.username;
+  var result = getResultModel();
+  if(data.site.menu.write === user) {
     data.site.menu.write = "";
     writeSessionData(res, file, data);
+  } else {
+    result.session = data;
+    sendSessionData(res, result);
   }
 }
 
