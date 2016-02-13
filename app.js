@@ -7,6 +7,7 @@ var app = express();
 var mime = require('mime');
 var mkdirp = require('mkdirp');
 var path = require('path');
+var loginPage = '/auth/login';
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({
   extended: true
@@ -87,6 +88,11 @@ app.get('/auth/', function (req, res) {
 app.get('/auth/login', function (req, res) {
   res.render('login');
 });
+app.get('/login', function (req, res) {
+  res.redirect('/dashboard/');
+  //res.status(200) // HTTP status 404: NotFound
+  //  .send('');
+});
 app.post('/auth/login', passport.authenticate('local', {
   failureRedirect: '/auth/login'
 }), function (req, res) {
@@ -98,7 +104,7 @@ app.get('/auth/logout', function (req, res) {
   res.redirect('/auth/');
 });
 app.get('/auth/profile', require('connect-ensure-login')
-  .ensureLoggedIn(),
+  .ensureLoggedIn(loginPage),
   function (req, res) {
     res.render('profile', {
       user: req.user
@@ -112,7 +118,7 @@ app.use(bodyParser({
 //app.use(bodyParser.json({limit: '1500kb'}));
 //app.use(bodyParser.urlencoded({limit: '1500kb', extended: true}));
 app.use('/api/session/get/user', require('connect-ensure-login')
-  .ensureLoggedIn(),
+  .ensureLoggedIn(loginPage),
   function (req, res) {
     res.writeHead(200, {
       "Content-Type": "application/json" //contentType
@@ -121,22 +127,46 @@ app.use('/api/session/get/user', require('connect-ensure-login')
     res.write(JSON.stringify(req.user));
     res.end();
   });
-app.use('/api/session/set/perm/write', require('connect-ensure-login')
-  .ensureLoggedIn(),
-  function (req, res) {
-    /*
-        var sess = req.session;
-    if(sess.views) {
-      sess.views++
-        res.setHeader('Content-Type', 'text/html')
-      res.write('<p>views: ' + sess.views + '</p>')
-      res.write('<p>expires in: ' + (sess.cookie.maxAge / 1000) + 's</p>')
-      res.end()
+
+function handleSessionWrite(account, user) {
+  var file = "data/accounts/" + account + "/sites/data/global-session.json";
+  fs.readFile(file, 'utf8', function (err, data) {
+    if(err) {
+      var newSession = {
+        site: {
+          menu: {
+            write: user
+          }
+        }
+      }
+      var newSessionDat = JSON.stringify(newSession);
+      var directory = path.dirname(file);
+      mkdirp(directory, function (err) {
+        fs.writeFile(file, newSessionDat, function (err) {
+          if(err) {
+            return console.log(err);
+          }
+          console.log("The file was saved!");
+          console.log(newSessionDat);
+        });
+      });
     } else {
-      sess.views = 1
-      res.end('welcome to the session demo. refresh!')
+      fs.writeFile(file, newSessionDat, function (err) {
+        if(err) {
+          console.log("The file was not saved!");
+          console.log(newSessionDat);
+        }
+        console.log("The file was saved!");
+        console.log(newSessionDat);
+      });
     }
-    */
+  });
+}
+app.use('/api/session/set/perm/write', require('connect-ensure-login')
+  .ensureLoggedIn(loginPage),
+  function (req, res) {
+    console.log("------------------------------------------------------------------------------------------");
+    //console.log(req);
     res.writeHead(200, {
       "Content-Type": "application/json" //contentType
     });
@@ -145,6 +175,7 @@ app.use('/api/session/set/perm/write', require('connect-ensure-login')
     }
     req.session.app.write = true;
     delete req.user.password;
+    handleSessionWrite(req.user.account, req.user.username)
     var dat = {
       user: req.user,
       session: req.session
@@ -153,7 +184,7 @@ app.use('/api/session/set/perm/write', require('connect-ensure-login')
     res.end();
   });
 app.post('/api/io/:action', require('connect-ensure-login')
-  .ensureLoggedIn(),
+  .ensureLoggedIn(loginPage),
   function (req, res) {
     //console.log(req);
     switch(req.params.action) {
@@ -161,6 +192,7 @@ app.post('/api/io/:action', require('connect-ensure-login')
       //var onlyPath = require('path').dirname('G:\node-demos\7-node-module\demo\config.json');
       var file = ".." + req.body.file;
       var directory = path.dirname(file);
+      // only write in own account folders TODO!!!!!
       mkdirp(directory, function (err) {
         fs.writeFile(file, req.body.content, function (err) {
           if(err) {
@@ -176,7 +208,7 @@ app.post('/api/io/:action', require('connect-ensure-login')
     res.sendStatus(200);
   });
 app.use('/dashboard/data/accounts/:account/sites/:domain/global-data/get-data-items', require('connect-ensure-login')
-  .ensureLoggedIn(),
+  .ensureLoggedIn(loginPage),
   function (req, res) {
     //console.log(this);
     var p = req.params;
@@ -216,7 +248,7 @@ app.use('/dashboard/data/accounts/:account/sites/:domain/global-data/get-data-it
     res.end();
   });
 app.use('/dashboard/data/accounts/:account/themes/bower_components/:theme/templates/pages/:page/versions/:version/index.html', require('connect-ensure-login')
-  .ensureLoggedIn(),
+  .ensureLoggedIn(loginPage),
   function (req, res) {
     //console.log(this);
     var p = req.params;
@@ -252,13 +284,17 @@ app.get('/profile',
   });
 **/
 app.use('/dashboard/', require('connect-ensure-login')
-  .ensureLoggedIn(), express.static('.'));
+  .ensureLoggedIn(loginPage), express.static('.'));
 //app.use('/dashboard/', express.static('.'));
 app.use('/*', function (req, res) {
   //res.redirect('/dashboard/');
   res.status(200) // HTTP status 404: NotFound
     .send('');
 });
+
+
+
+
 var config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
 //var hostname = "localhost";//config.hostname;//"localhost";
 console.log("config : ");
