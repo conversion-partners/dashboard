@@ -8,7 +8,7 @@ var mime = require('mime');
 var mkdirp = require('mkdirp');
 var path = require('path');
 var loginPage = '/auth/login';
-global.__base = __dirname + '/';
+global.__baseDir = __dirname + '/';
 if(!String.prototype.startsWith) {
   String.prototype.startsWith = function (searchString, position) {
     position = position || 0;
@@ -402,26 +402,16 @@ app.use('/dashboard/data/accounts/:account/sites/:domain/global-data/get-data-it
       "Content-Type": "application/json" //contentType
     });
 
-    function getFiles(dir, files_, path) {
-      files_ = files_ || [];
+    function getFilesNoExt(dir) {
+      var files_ = [];
       var files = fs.readdirSync(dir);
-      for(var i in files) {
-        var name = dir + '/' + files[i];
-        var noPath = files[i];
-        if(fs.statSync(name)
-          .isDirectory()) {
-          getFiles(name, files_, path);
-        } else {
-          if(path) {
-            files_.push(name);
-          } else {
-            files_.push(noPath);
-          }
-        }
+      for(i = 0; i < files.length; i++) {
+        var file = files[i].replace('.json', '');
+        files_.push(file);
       }
       return files_;
     }
-    var fileArr = getFiles(globalDataDir, [], false);
+    var fileArr = getFilesNoExt(globalDataDir);
     var globalData = [];
     for(var i = 0; i < fileArr.length; i++) {
       globalData.push(fileArr[i].replace('.json', ''));

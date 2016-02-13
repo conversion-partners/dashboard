@@ -1,34 +1,10 @@
 //var userDb = require('../data/accounts/easydrain/users/user.js');
-var userDb = require(__base + 'data/accounts/easydrain/users/users.js');
+var userDb = require(__baseDir + 'data/accounts/easydrain/users/users.js');
 console.log(userDb);
-var records = [{
-  id: 1,
-  username: 'robert',
-  password: 'secret',
-  account: 'easydrain',
-  displayName: 'robert',
-  emails: [{
-    value: 'robert@easydrain.com'
-  }]
-}, {
-  id: 2,
-  username: 'rogier',
-  password: 'secret',
-  account: 'easydrain',
-  displayName: 'rogier',
-  emails: [{
-    value: 'rogier@easydrain.com'
-  }]
-}, {
-  id: 3,
-  username: 'maarten',
-  password: 'secret',
-  account: 'easydrain',
-  displayName: 'maarten',
-  emails: [{
-    value: 'maarten@easydrain.com'
-  }]
-}];
+var orgRecords = [];
+var records = orgRecords.concat(userDb.records);
+console.log('records :');
+console.log(JSON.stringify(records));
 exports.findById = function (id, cb) {
   process.nextTick(function () {
     var idx = id - 1;
