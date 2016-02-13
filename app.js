@@ -96,7 +96,7 @@ app.get('/login', function (req, res) {
 app.post('/auth/login', passport.authenticate('local', {
   failureRedirect: '/auth/login'
 }), function (req, res) {
-  console.log(req);
+  //console.log(req);
   res.redirect('/dashboard/');
 });
 app.get('/auth/logout', function (req, res) {
@@ -127,41 +127,82 @@ app.use('/api/session/get/user', require('connect-ensure-login')
     res.write(JSON.stringify(req.user));
     res.end();
   });
+/**
 
-function handleSessionWrite(account, user) {
+
+
+handleSessionWrite
+
+**/
+function handleSessionWrite(req, res) {
+  if(typeof req.session.app == 'undefined') {
+    req.session.app = {}
+  }
+  var account = req.user.account;
+  var user = req.user.username;
+  var result = {
+    session: {},
+    error: ""
+  }
+  var session = {
+    site: {
+      menu: {
+        write: "",
+        message: ""
+      }
+    }
+  }
   var file = "data/accounts/" + account + "/sites/data/global-session.json";
   fs.readFile(file, 'utf8', function (err, data) {
-    if(err) {
-      var newSession = {
-        site: {
-          menu: {
-            write: user
-          }
-        }
-      }
-      var newSessionDat = JSON.stringify(newSession);
+    if(err || typeof data == 'undefined') {
+      // user is allowed to write if there is no file
+      session.site.menu.write = user;
+      var jsonSession = JSON.stringify(session);
       var directory = path.dirname(file);
       mkdirp(directory, function (err) {
-        fs.writeFile(file, newSessionDat, function (err) {
+        fs.writeFile(file, jsonSession, function (err) {
           if(err) {
-            return console.log(err);
+            result.error = err;
+            result.session = session;
+            res.write(JSON.stringify(result));
+            res.end();
           }
-          console.log("The file was saved!");
-          console.log(newSessionDat);
+          result.session = session;
+          res.write(JSON.stringify(result));
+          res.end();
         });
       });
     } else {
-      fs.writeFile(file, data, function (err) {
-        if(err) {
-          console.log("The file was not saved!");
-          console.log(data);
-        }
-        console.log("The file was saved!");
-        console.log(data);
-      });
+      // if user allowed to write set session
+      data = JSON.parse(data);
+      if(data.site.menu.write.length === 0) {
+        data.site.menu.write = user;
+        var sessionData = JSON.stringify(data);
+        fs.writeFile(file, sessionData, function (err) {
+          if(err) {
+            result.error = err;
+            result.session = data;
+            res.write(JSON.stringify(result));
+            res.end();
+          }
+          result.session = data;
+          res.write(JSON.stringify(result));
+          res.end();
+        });
+      }
+      result.session = data;
+      res.write(JSON.stringify(result));
+      res.end();
     }
   });
 }
+/**
+
+
+
+handleSessionWrite
+
+**/
 app.use('/api/session/set/perm/write', require('connect-ensure-login')
   .ensureLoggedIn(loginPage),
   function (req, res) {
@@ -170,18 +211,8 @@ app.use('/api/session/set/perm/write', require('connect-ensure-login')
     res.writeHead(200, {
       "Content-Type": "application/json" //contentType
     });
-    if(typeof req.session.app == 'undefined') {
-      req.session.app = {}
-    }
-    req.session.app.write = true;
     delete req.user.password;
-    handleSessionWrite(req.user.account, req.user.username)
-    var dat = {
-      user: req.user,
-      session: req.session
-    }
-    res.write(JSON.stringify(dat));
-    res.end();
+    var result = handleSessionWrite(req, res);
   });
 app.post('/api/io/:action', require('connect-ensure-login')
   .ensureLoggedIn(loginPage),
