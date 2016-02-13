@@ -23,6 +23,8 @@ function getIdFromItem(element) {
 
 function updateOutput() {
   var content = $('#nestable').nestable('serialize');
+  console.log(content);
+  saveNestable();
 }
 
 function getSelectBoxValues() {
