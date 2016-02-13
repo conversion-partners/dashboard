@@ -1,3 +1,6 @@
+//var userDb = require('../data/accounts/easydrain/users/user.js');
+var userDb = require(__base + 'data/accounts/easydrain/users/users.js');
+console.log(userDb);
 var records = [{
   id: 1,
   username: 'robert',

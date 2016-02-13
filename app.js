@@ -8,6 +8,7 @@ var mime = require('mime');
 var mkdirp = require('mkdirp');
 var path = require('path');
 var loginPage = '/auth/login';
+global.__base = __dirname + '/';
 if(!String.prototype.startsWith) {
   String.prototype.startsWith = function (searchString, position) {
     position = position || 0;
