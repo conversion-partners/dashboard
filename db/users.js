@@ -1,20 +1,29 @@
 var records = [{
   id: 1,
-  username: 'jack',
+  username: 'robert',
   password: 'secret',
   account: 'easydrain',
-  displayName: 'Jack',
+  displayName: 'robert',
   emails: [{
-    value: 'jack@example.com'
+    value: 'robert@easydrain.com'
   }]
 }, {
   id: 2,
-  username: 'jill@easydrain',
+  username: 'rogier',
   password: 'secret',
   account: 'easydrain',
-  displayName: 'Jill',
+  displayName: 'rogier',
   emails: [{
-    value: 'jill@example.com'
+    value: 'rogier@easydrain.com'
+  }]
+}, {
+  id: 3,
+  username: 'maarten',
+  password: 'secret',
+  account: 'easydrain',
+  displayName: 'maarten',
+  emails: [{
+    value: 'maarten@easydrain.com'
   }]
 }];
 exports.findById = function (id, cb) {
