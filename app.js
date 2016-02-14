@@ -145,14 +145,21 @@ app.use('/api/session/get/user', require('connect-ensure-login')
     var sessionFile = "data/accounts/" + req.user.account + "/sites/data/global-session.json";
     fs.readFile(sessionFile, 'utf8', function (err, data) {
       console.log(data);
-      data = JSON.parse(data);
-      var userdata = {
-        user: req.user,
-        session: data,
-        error: err
+      if(typeof data !== 'undefined') {
+        data = JSON.parse(data);
+        var userdata = {
+          user: req.user,
+          session: data,
+          error: err
+        }
+        res.write(JSON.stringify(userdata));
+        res.end();
+      } else {
+        res.write(JSON.stringify({
+          user: {}
+        }));
+        res.end();
       }
-      res.write(JSON.stringify(userdata));
-      res.end();
     });
   });
 /**
