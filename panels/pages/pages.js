@@ -22,6 +22,7 @@ function realTimeTemplateData() {
       for(var i = 0; i < complete.length; i++) {
         templateArray.push(complete[i].template);
       }
+      templateArray.sort();
       activateEditor(templateArray);
     })
 }
