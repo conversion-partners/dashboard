@@ -160,6 +160,11 @@ function saveTheme(data) {
       });
       document.dispatchEvent(event);
     } catch(e) {}
+    /*
+    form is not activated yes
+    $('submit')
+      .trigger('click');
+      */
   }
 }
 /*

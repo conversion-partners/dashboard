@@ -1,5 +1,16 @@
+function realTimeTemplateData() {
+  /*
+  var account = store.get('account');
+  var themes = Core9.template.installedThemes;
+  for (var i = 0; i < themes.length; i++) {
+      var templateJsonDb = "/dashboard/data/accounts/" + account + "/themes/bower_components/"+themes[i]+"/data/templates.json";
+  }
+  */
+  Core9.template.init();
+}
 TYPEOFPAGE = 'pages';
 var activateEditor = function () {
+  var realTimeTemplates = realTimeTemplateData();
   var pageData = getCurrentPage();
   if(typeof pageData == 'undefined') {
     return;
