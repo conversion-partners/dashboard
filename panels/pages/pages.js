@@ -6,11 +6,11 @@ function realTimeTemplateData() {
       var templateJsonDb = "/dashboard/data/accounts/" + account + "/themes/bower_components/"+themes[i]+"/data/templates.json";
   }
   */
-  Core9.template.init();
+  //Core9.template.init();
 }
 TYPEOFPAGE = 'pages';
 var activateEditor = function () {
-  var realTimeTemplates = realTimeTemplateData();
+  //var realTimeTemplates = realTimeTemplateData();
   var pageData = getCurrentPage();
   if(typeof pageData == 'undefined') {
     return;
