@@ -755,7 +755,7 @@
 		function doPoll(stateEditor) {
 			$.post('/api/session/get/user', function(data) {
 
-				if (typeof data.session !== 'undefined') {
+
 					var editor = data.session.site.menu.write;
 					if (editor !== stateEditor) {
 						$('#editor-status > img').hide();
