@@ -305,7 +305,12 @@ function initNestable(jsonStr) {
         Core9.data.currentid = id;
         document.getElementById('delpage')
           .dataset.currentid = id;
-        activateEditor();
+        if(TYPEOFPAGE == 'pages') {
+          //activateEditor();
+          realTimeTemplateData();
+        } else {
+          activateEditor();
+        }
       }
     })
     .on('onEndEvent', function (event, item, source, destination) {

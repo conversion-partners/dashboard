@@ -1,16 +1,32 @@
+TYPEOFPAGE = 'pages';
+
 function realTimeTemplateData() {
-  /*
   var account = store.get('account');
   var themes = Core9.template.installedThemes;
-  for (var i = 0; i < themes.length; i++) {
-      var templateJsonDb = "/dashboard/data/accounts/" + account + "/themes/bower_components/"+themes[i]+"/data/templates.json";
+  var promises = [];
+  for(var i = 0; i < themes.length; i++) {
+    var templateJsonDb = "/dashboard/data/accounts/" + account + "/themes/bower_components/" + themes[i] + "/data/templates.json";
+    promises.push(Core9.j(templateJsonDb));
   }
-  */
-  //Core9.template.init();
+  Promise.all(promises)
+    .then(function (results) {
+      var complete = [];
+      for(var i = 0; i < results.length; i++) {
+        var result = results[i];
+        var data = JSON.parse(result.currentTarget.response);
+        complete = complete.concat(data);
+      }
+      console.log('new response');
+      console.log(complete);
+      var templateArray = [];
+      for(var i = 0; i < complete.length; i++) {
+        templateArray.push(complete[i].template);
+      }
+      activateEditor(templateArray);
+    })
 }
-TYPEOFPAGE = 'pages';
-var activateEditor = function () {
-  //var realTimeTemplates = realTimeTemplateData();
+var activateEditor = function (templateArray) {
+  //realTimeTemplateData();
   var pageData = getCurrentPage();
   if(typeof pageData == 'undefined') {
     return;
@@ -80,6 +96,12 @@ var activateEditor = function () {
       }
     }
   });
+  var templatesEditor = [];
+  if(typeof templateArray != 'undefined' && templateArray.length > 0) {
+    templatesEditor = templateArray;
+  }else{
+    templatesEditor = Core9.template.allTemplates;
+  }
   Core9.editor = new JSONEditor(document.getElementById('editor_holder2'), {
     ajax: true,
     disable_edit_json: true,
@@ -118,7 +140,7 @@ var activateEditor = function () {
           },
           template: {
             type: "string",
-            enum: Core9.template.allTemplates
+            enum: templatesEditor
           },
           version: {
             type: "string",
