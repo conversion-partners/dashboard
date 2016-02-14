@@ -69,9 +69,6 @@ var activateEditor = function () {
       }
     }
   });
-
-
-
   Core9.editor = new JSONEditor(document.getElementById('editor_holder2'), {
     ajax: true,
     disable_edit_json: true,
@@ -162,7 +159,6 @@ var activateEditor = function () {
     console.log(percentage.getValue());
   }
   */
-
   function ifUndefined(versions, i, val, overide) {
     var result = "";
     try {
@@ -377,7 +373,7 @@ var activateEditor = function () {
     .addEventListener('click', function () {
       save();
     });
-    /*
+  /*
   document.getElementById('restore2')
     .addEventListener('click', function () {
       Core9.editor.setValue(starting_value);
@@ -539,12 +535,6 @@ $(document)
       });
     $('#editpage')
       .on('click', function () {
-        $('#submit2')
-          .trigger('click');
-        $('#page-selector')
-          .modal();
-        $('#choose-theme')
-          .toggle();
         var versions = Core9.editor.getValue();
         var activeVersions = [];
         for(var i = 0; i < versions.length; i++) {
@@ -554,6 +544,40 @@ $(document)
           }
         }
         changeSelect2Data("choose-theme-select", activeVersions);
+        var emptyTemplates = false;
+        var versionStr = "";
+        for(var i = 0; i < activeVersions.length; i++) {
+          var template = $('[data-schemapath="root.' + i + '.template"]')
+            .find('select')
+            .val();
+          console.log(template);
+          if(template.length == 0) {
+            emptyTemplates = true;
+            versionStr += versionStr + " " + i;
+          }
+        }
+
+        function showMessage(msg) {
+          $('#message-box')
+            .html(msg);
+          $('#message-container')
+            .show();
+        }
+        if(emptyTemplates) {
+          showMessage('Please fill in template version : ' + versionStr);
+          $('#close-message')
+            .on('click', function () {
+              $('#message-container')
+                .hide();
+            });
+        } else {
+          $('#submit2')
+            .trigger('click');
+          $('#page-selector')
+            .modal();
+          $('#choose-theme')
+            .toggle();
+        }
       });
     $('#edit-selected-theme')
       .on('click', function () {
