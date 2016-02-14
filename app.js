@@ -26,13 +26,15 @@ if(!Array.prototype.contains) {
     return false;
   }
 }
-app.use(bodyParser.json()); // for parsing application/json
+//app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({
   extended: true
 })); // for parsing application/x-www-form-urlencoded
 app.use(multer()); // for parsing multipart/form-data
 //app.use(express.json({limit: '50mb'}));
 //app.use(express.urlencoded({limit: '50mb'}));
+//app.use(express.bodyParser({limit: '100mb'}));
 /** passport **/
 var passport = require('passport');
 var Strategy = require('passport-local')
