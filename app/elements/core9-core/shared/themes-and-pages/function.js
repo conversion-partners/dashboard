@@ -113,14 +113,14 @@ function createNewPageInCaseOfError(data) {
 }
 
 function createNewTemplateInCaseOfError(data) {
-  delete Core9.data.pageDataObj['$loki'];
   var id = document.getElementById('delpage')
     .dataset.currentid;
-  var dat = JSON.parse(JSON.stringify(Core9.data.pageDataObj));
-  dat.domain = data.domain;
+  delete Core9.data.menuDataObj['$loki'];
+  var dat = JSON.parse(JSON.stringify(Core9.data.menuDataObj));
+  dat.theme = data.theme;
   dat.language = data.language;
   dat.country = data.country;
-  dat.page = data.page;
+  dat.template = data.template;
   dat.menuid = id;
   //d2d78f5b-b51b-5b0a-0c1f-c85ecfb90e9d
   //d2d78f5b-b51b-5b0a-0c1f-c85ecfb90e9d
@@ -263,6 +263,9 @@ function getSelectBoxEntries() {
     query.domain = template;
   }
   var result = Core9.data[TYPEOFPAGE].findObjects(query);
+  if(result.length == 0) {
+    createNewTemplateInCaseOfError(query);
+  }
   return result;
 }
 
