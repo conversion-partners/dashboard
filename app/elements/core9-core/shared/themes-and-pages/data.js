@@ -166,9 +166,13 @@ Core9.template = {
     document.body.dispatchEvent(event);
   },
   save: function () {
-    Core9.template.saveData('themes', Core9.data.themes);
+    if(TYPEOFPAGE == 'themes') {
+      Core9.template.saveData('themes', Core9.data.themes);
+    }
     Core9.template.saveData('blocks', Core9.data.blocks);
-    Core9.template.savePageData('pages', Core9.data.pages);
+    if(TYPEOFPAGE == "pages") {
+      Core9.template.savePageData('pages', Core9.data.pages);
+    }
   },
   getThemesOrSites: function (type, collection) {
     var mapFun = function (obj) {

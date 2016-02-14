@@ -27,10 +27,19 @@ if(!Array.prototype.contains) {
   }
 }
 //app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.json({
+  limit: '450mb'
+}));
+/*
 app.use(bodyParser.urlencoded({
   extended: true
-})); // for parsing application/x-www-form-urlencoded
+}));
+*/
+// for parsing application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({
+  limit: "450mb",
+  extended: true
+}));
 app.use(multer()); // for parsing multipart/form-data
 //app.use(express.json({limit: '50mb'}));
 //app.use(express.urlencoded({limit: '50mb'}));
@@ -131,10 +140,10 @@ app.get('/auth/profile', require('connect-ensure-login')
     });
   });
 /** passport **/
-var bodyParser = require('body-parser');
-app.use(bodyParser({
-  limit: '200kb'
-}));
+//var bodyParser = require('body-parser');
+//app.use(bodyParser({
+//limit: '200kb'
+//}));
 //app.use(bodyParser.json({limit: '1500kb'}));
 //app.use(bodyParser.urlencoded({limit: '1500kb', extended: true}));
 app.use('/api/session/get/user', require('connect-ensure-login')
