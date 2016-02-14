@@ -1,8 +1,26 @@
-//var userDb = require('../data/accounts/easydrain/users/user.js');
-var userDb = require(__baseDir + 'data/accounts/easydrain/users/users.js');
-console.log(userDb);
-var orgRecords = [];
-var records = orgRecords.concat(userDb.records);
+var fs = require('fs');
+
+function getAccounts(dir) {
+  var files_ = [];
+  var files = fs.readdirSync(dir);
+  for(i = 0; i < files.length; i++) {
+    //var file = files[i].replace('.json', '');
+    files_.push(files[i]);
+  }
+  return files_;
+}
+var accountBaseDir = __baseDir + 'data/accounts/';
+var accountDirs = getAccounts(accountBaseDir);
+console.log('accounts : ');
+console.log(accountDirs);
+var records = [];
+var accounts = [];
+for(i = 0; i < accountDirs.length; i++) {
+  var userDb = require(__baseDir + 'data/accounts/' + accountDirs[i] + '/users/users.js');
+  console.log(userDb);
+  records = records.concat(userDb.records);
+}
+//var records = orgRecords.concat(userDb.records);
 console.log('records :');
 console.log(JSON.stringify(records));
 exports.findById = function (id, cb) {
