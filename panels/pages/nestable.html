@@ -754,22 +754,26 @@
 
 		function doPoll(stateEditor) {
 			$.post('/api/session/get/user', function(data) {
-				var editor = data.session.site.menu.write;
-				if (editor !== stateEditor) {
-					$('#editor-status > img').hide();
+
+				if (typeof data.session !== 'undefined') {
+					var editor = data.session.site.menu.write;
+					if (editor !== stateEditor) {
+						$('#editor-status > img').hide();
+					}
+					stateEditor = editor;
+					if (editor.length == 0) {
+						editor = "no editor active";
+						$('#activate-editor').html("Activate");
+					}
+					if (editor == data.user.username) {
+						$('#activate-editor').html("Deactivate");
+						changeStateEditButtons("true");
+					} else {
+						changeStateEditButtons("false");
+					}
+					$('#editor-status > span').html(editor);
 				}
-				stateEditor = editor;
-				if (editor.length == 0) {
-					editor = "no editor active";
-					$('#activate-editor').html("Activate");
-				}
-				if (editor == data.user.username) {
-					$('#activate-editor').html("Deactivate");
-					changeStateEditButtons("true");
-				} else {
-					changeStateEditButtons("false");
-				}
-				$('#editor-status > span').html(editor);
+
 				setTimeout(function() {
 					doPoll(stateEditor);
 				}, 4000)
