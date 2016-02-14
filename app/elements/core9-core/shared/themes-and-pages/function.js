@@ -86,6 +86,58 @@ function getCurrentPage() {
   }
 }
 
+function createNewPageInCaseOfError(data) {
+  delete Core9.data.pageDataObj['$loki'];
+  var id = document.getElementById('delpage')
+    .dataset.currentid;
+  var dat = JSON.parse(JSON.stringify(Core9.data.pageDataObj));
+  dat.domain = data.domain;
+  dat.language = data.language;
+  dat.country = data.country;
+  dat.page = data.page;
+  dat.menuid = id;
+  //d2d78f5b-b51b-5b0a-0c1f-c85ecfb90e9d
+  //d2d78f5b-b51b-5b0a-0c1f-c85ecfb90e9d
+  if(true) {
+    try {
+      Core9.data[TYPEOFPAGE].insert(dat);
+    } catch(e) {}
+    try {
+      Core9.template.save();
+      var event = new CustomEvent("save-new-page", {
+        "detail": "Example of an event"
+      });
+      document.dispatchEvent(event);
+    } catch(e) {}
+  }
+}
+
+function createNewTemplateInCaseOfError(data) {
+  delete Core9.data.pageDataObj['$loki'];
+  var id = document.getElementById('delpage')
+    .dataset.currentid;
+  var dat = JSON.parse(JSON.stringify(Core9.data.pageDataObj));
+  dat.domain = data.domain;
+  dat.language = data.language;
+  dat.country = data.country;
+  dat.page = data.page;
+  dat.menuid = id;
+  //d2d78f5b-b51b-5b0a-0c1f-c85ecfb90e9d
+  //d2d78f5b-b51b-5b0a-0c1f-c85ecfb90e9d
+  if(true) {
+    try {
+      Core9.data[TYPEOFPAGE].insert(dat);
+    } catch(e) {}
+    try {
+      Core9.template.save();
+      var event = new CustomEvent("save-new-page", {
+        "detail": "Example of an event"
+      });
+      document.dispatchEvent(event);
+    } catch(e) {}
+  }
+}
+
 function getCurrentPageId() {
   var delButton = $('#delpage');
   var page = $('li[data-id="' + Core9.data.currentid + '"]');
@@ -129,6 +181,9 @@ function getCurrentPageId() {
         for(var i = 0; i < res.length; i++) {
           return res[i].$loki; // sorry just one at a time
         }
+      } else {
+        // create page
+        createNewPageInCaseOfError(pageData);
       }
     } else {
       return lokiId;
