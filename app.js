@@ -9,6 +9,7 @@ var mkdirp = require('mkdirp');
 var path = require('path');
 var loginPage = '/auth/login';
 global.__baseDir = __dirname + '/';
+/*
 if(!String.prototype.startsWith) {
   String.prototype.startsWith = function (searchString, position) {
     position = position || 0;
@@ -26,35 +27,13 @@ if(!Array.prototype.contains) {
     return false;
   }
 }
-//app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.json({
-  limit: '450mb'
-}));
-/*
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
 */
-// for parsing application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({
-  limit: "450mb",
-  extended: true
-}));
-app.use(multer()); // for parsing multipart/form-data
-//app.use(express.json({limit: '50mb'}));
-//app.use(express.urlencoded({limit: '50mb'}));
-//app.use(express.bodyParser({limit: '100mb'}));
+app.use(multer());
 /** passport **/
 var passport = require('passport');
 var Strategy = require('passport-local')
   .Strategy;
 var db = require('./db');
-// Configure the local strategy for use by Passport.
-//
-// The local strategy require a `verify` function which receives the credentials
-// (`username` and `password`) submitted by the user.  The function must verify
-// that the password is correct and then invoke `cb` with a user object, which
-// will be set at `req.user` in route handlers after authentication.
 passport.use(new Strategy(function (username, password, cb) {
   db.users.findByUsername(username, function (err, user) {
     if(err) {
@@ -69,13 +48,6 @@ passport.use(new Strategy(function (username, password, cb) {
     return cb(null, user);
   });
 }));
-// Configure Passport authenticated session persistence.
-//
-// In order to restore authentication state across HTTP requests, Passport needs
-// to serialize users into and deserialize users out of the session.  The
-// typical implementation of this is as simple as supplying the user ID when
-// serializing, and querying the user record by ID from the database when
-// deserializing.
 passport.serializeUser(function (user, cb) {
   cb(null, user.id);
 });
@@ -90,15 +62,19 @@ passport.deserializeUser(function (id, cb) {
 // Configure view engine to render EJS templates.
 app.set('views', __dirname + '/panels/login/views');
 app.set('view engine', 'ejs');
-// Use application-level middleware for common functionality, including
-// logging, parsing, and session handling.
 app.use(require('morgan')('combined', {
   skip: function (req, res) {
     return res.statusCode < 400
   }
 }));
 app.use(require('cookie-parser')());
-//app.use(require('body-parser').urlencoded({ extended: true }));
+app.use(bodyParser.json({
+  limit: '450mb'
+}));
+app.use(bodyParser.urlencoded({
+  limit: "450mb",
+  extended: true
+}));
 app.use(require('express-session')({
   secret: 'keyboard cat',
   resave: false,
@@ -140,26 +116,22 @@ app.get('/auth/profile', require('connect-ensure-login')
     });
   });
 /** passport **/
-//var bodyParser = require('body-parser');
-//app.use(bodyParser({
-//limit: '200kb'
-//}));
-//app.use(bodyParser.json({limit: '1500kb'}));
-//app.use(bodyParser.urlencoded({limit: '1500kb', extended: true}));
 app.use('/api/session/get/user', require('connect-ensure-login')
   .ensureLoggedIn(loginPage),
   function (req, res) {
     res.writeHead(200, {
       "Content-Type": "application/json" //contentType
     });
-    delete req.user.password;
+
     var sessionFile = "data/accounts/" + req.user.account + "/sites/data/global-session.json";
     fs.readFile(sessionFile, 'utf8', function (err, data) {
       console.log(data);
       if(typeof data !== 'undefined') {
         data = JSON.parse(data);
+        var user = JSON.parse(JSON.stringify(req.user));
+        delete user.password;
         var userdata = {
-          user: req.user,
+          user: user,
           session: data,
           error: err
         }
@@ -308,7 +280,6 @@ app.use('/api/session/set/perm/write/:set', require('connect-ensure-login')
     res.writeHead(200, {
       "Content-Type": "application/json" //contentType
     });
-    delete req.user.password;
     var result = handleSessionWrite(req, res, req.params.set);
   });
 /**
