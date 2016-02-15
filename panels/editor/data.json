@@ -1,24 +1,26 @@
 {
   "name": "editor",
   "version": "0.0.0",
-  "authors": [
-    "jessec <robertjessecooke@gmail.com>"
-  ],
-  "description" : "testing stuff",
-  "license" : "MIT",
-  "id" : "panel-iframe-site",
-  "z-index" : 55,
-  "class" : "fullbleed",
-  "type" : "iframe",
-  "url" : "/dashboard/panels/editor/editor.html",
-  "button" : false,
-  "menu" : {
-      "action" : "addItems",
-      "findmenusbytitle" : "All Categories",
-      "addItems" : [ {
-      "name" : "Editor",
-      "icon" : "",
-      "link" : "/dashboard/editor"
-    } ]
+  "authors": ["jessec <robertjessecooke@gmail.com>"],
+  "description": "testing stuff",
+  "license": "MIT",
+  "id": "panel-iframe-site",
+  "z-index": 55,
+  "class": "fullbleed",
+  "type": "iframe",
+  "url": "/dashboard/panels/editor/editor.html",
+  "button": false,
+  "menu": {
+    "action": "addItems",
+    "findmenusbytitle": "All Categories",
+    "addItems": [{
+      "name": "Editor",
+      "icon": "",
+      "link": "/dashboard/editor"
+    }, {
+      "name": "Logout",
+      "icon": "",
+      "link": "/dashboard/auth/logout"
+    }]
   }
 }

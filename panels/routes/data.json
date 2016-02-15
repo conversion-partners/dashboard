@@ -1,15 +1,13 @@
 {
   "name": "routes",
   "version": "0.0.0",
-  "authors": [
-    "jessec <robertjessecooke@gmail.com>"
-  ],
-  "description" : "testing stuff",
-  "license" : "MIT",
-  "id" : "",
-  "z-index" : 6,
-  "class" : "",
-  "type" : "",
-  "url" : "",
-  "button" : false
+  "authors": ["jessec <robertjessecooke@gmail.com>"],
+  "description": "testing stuff",
+  "license": "MIT",
+  "id": "",
+  "z-index": 6,
+  "class": "",
+  "type": "",
+  "url": "",
+  "button": false
 }
