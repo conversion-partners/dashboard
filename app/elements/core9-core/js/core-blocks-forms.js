@@ -182,7 +182,7 @@ Core9.forms.fillStartingValueWithDefaultKeys = function (script, defaultData, da
   if(Object.prototype.toString.call(defaultData[variable]) === '[object Array]') {
     defaultKeys = Object.keys(defaultData[variable][0]);
   }
-  if(Object.prototype.toString.call(dat) === '[object Array]') {
+  if(Object.prototype.toString.call(dat) === '[object Array]') { // now we are dealing with an array ..
     for(var i = 0; i < dat.length; i++) {
       var item = dat[i];
       var objKeys = Object.keys(item);
@@ -199,6 +199,22 @@ Core9.forms.fillStartingValueWithDefaultKeys = function (script, defaultData, da
         }
       }
     }
+  }
+  if(Object.prototype.toString.call(dat) !== '[object Array]') { // now we are dealing with single variables ..
+    var dataKeys = Object.keys(dat);
+    for(var i = 0; i < variable.length; i++) {
+      var key = variable[i];
+      if(!isInArray(key, dataKeys)) {
+        dat[key] = "";
+      }
+    }
+    for(var i = 0; i < dataKeys.length; i++) {
+      var key = dataKeys[i];
+      if(!isInArray(key, variable)) {
+        delete dat[key];
+      }
+    }
+    console.log("pause");
   }
   return data;
 }
