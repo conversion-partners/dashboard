@@ -28,4 +28,8 @@ gulp.task('copy-folder', function () {
     .pipe(gulp.dest('/var/www/easy-sanitary-solutions/html/dashboard/data/accounts/easydrain'));
 });
 //gulp.task('default', ['shorthand4', 'shorthand3', 'shorthand', 'shorthand2', 'watch-folder'], function () {});
-gulp.task('default', ['shorthand3', 'shorthand', 'shorthand2', 'watch-folder'], function () {});
+if(config.hostname == "localhost") {
+  gulp.task('default', ['shorthand3', 'shorthand', 'shorthand2', 'watch-folder'], function () {});
+} else {
+  gulp.task('default', ['shorthand3', 'shorthand2', 'watch-folder'], function () {});
+}
