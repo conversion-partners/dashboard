@@ -192,6 +192,12 @@ Core9.forms.fillStartingValueWithDefaultKeys = function (script, defaultData, da
           item[key] = "";
         }
       }
+      for(var p = 0; p < objKeys.length; p++) {
+        var key = objKeys[p];
+        if(!isInArray(key, defaultKeys)) {
+          delete item[key];
+        }
+      }
     }
   }
   return data;
