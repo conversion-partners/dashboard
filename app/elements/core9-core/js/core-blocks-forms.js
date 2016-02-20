@@ -171,8 +171,35 @@ Core9.forms.setDataListOnGlobalSettings = function (inputField) {
   request.open('GET', dataDir, true);
   request.send();
 }
+
+function isInArray(value, array) {
+  return array.indexOf(value) > -1;
+}
+Core9.forms.fillStartingValueWithDefaultKeys = function (script, defaultData, data) {
+  var dat = data.formData[script];
+  var variable = data.stepData[script];
+  var defaultKeys = {};
+  if(Object.prototype.toString.call(defaultData[variable]) === '[object Array]') {
+    defaultKeys = Object.keys(defaultData[variable][0]);
+  }
+  if(Object.prototype.toString.call(dat) === '[object Array]') {
+    for(var i = 0; i < dat.length; i++) {
+      var item = dat[i];
+      var objKeys = Object.keys(item);
+      for(var p = 0; p < defaultKeys.length; p++) {
+        var key = defaultKeys[p];
+        if(!isInArray(key, objKeys)) {
+          item[key] = "";
+        }
+      }
+    }
+  }
+  return data;
+}
 Core9.forms.loadForm = function (script, schema, data) {
-  var starting_value = data.formData[script];
+  var newDat = Core9.forms.fillStartingValueWithDefaultKeys(script, data.data.defaultData, data);
+  var starting_value = newDat.formData[script];
+  //var starting_value = data.formData[script];
   if(typeof Core9.editor === 'undefined') {
     Core9.editor = {}
   };
