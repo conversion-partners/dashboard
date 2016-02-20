@@ -200,10 +200,8 @@ Core9.forms.loadForm = function (script, schema, data) {
     value.attr('list', 'global-data');
     Core9.forms.setDataListOnGlobalSettings(value);
   }
-  var saved = false;
 
   function onSave() {
-    if(saved) return;
     var script = $('#form-select')
       .val();
     if(isEmpty(script)) {
@@ -212,8 +210,6 @@ Core9.forms.loadForm = function (script, schema, data) {
     }
     data.action = "save";
     Core9.forms.saveForm(script, schema, data, Core9.editor.getValue());
-    saveButton.removeEventListener('click', this, false);
-    saved = true;
   }
   $('label')
     .next('select')
