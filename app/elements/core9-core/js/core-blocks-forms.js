@@ -214,7 +214,6 @@ Core9.forms.fillStartingValueWithDefaultKeys = function (script, defaultData, da
         delete dat[key];
       }
     }
-    console.log("pause");
   }
   return data;
 }
