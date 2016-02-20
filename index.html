@@ -243,10 +243,10 @@
 <body>
 	<script>
 		/**
-												window.addEventListener("iframeLoadedEvent", function(event){
-													console.log(event);
-												}, false);
-												**/
+														window.addEventListener("iframeLoadedEvent", function(event){
+															console.log(event);
+														}, false);
+														**/
 	</script>
 	<div id="mini-menu">
 		<button id="export-page">export</button>
@@ -306,12 +306,11 @@
 			if (path == '/dashboard/page/edit') {
 
 				window.addEventListener("hideAjaxLoader", function(event) {
-					$('#mini-menu').fadeIn();
-					$('#mini-menu > div').fadeIn();
+					if (location.pathname == '/dashboard/page/edit') {
+						$('#mini-menu').fadeIn();
+						$('#mini-menu > div').fadeIn();
+					}
 				}, false);
-
-				//document.getElementById('mini-menu').style.display = 'block';
-				//document.querySelector('#mini-menu > div').style.display = 'block';
 			} else {
 				document.getElementById('mini-menu').style.display = 'none';
 				document.querySelector('#mini-menu > div').style.display = 'none';
