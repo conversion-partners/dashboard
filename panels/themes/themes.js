@@ -95,20 +95,21 @@ function saveTheme(data) {
   Core9.data.currentid = id;
   document.getElementById('delpage')
     .dataset.currentid = id;
-  var prevEntry = json[0];
   var save = false;
-  if(prevEntry.template != pageName) {
-    if(json.length != 0) {
+  if(json.length != 0) {
+    var prevEntry = json[0];
+    if(prevEntry.template != pageName) {
       json.unshift({
         "id": id,
         "template": pageName
       });
-    } else {
-      json.push({
-        "id": id,
-        "template": pageName
-      });
+      save = true;
     }
+  } else {
+    json.push({
+      "id": id,
+      "template": pageName
+    });
     save = true;
   }
   initNestable(JSON.stringify(json));

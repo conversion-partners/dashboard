@@ -433,11 +433,12 @@ function savePage(data) {
       });
       save = true;
     }
-  }else{
+  } else {
     json.push({
       "id": id,
       "page": pageName
     });
+    save = true;
   }
   initNestable(JSON.stringify(json));
   /*
