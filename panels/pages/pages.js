@@ -100,7 +100,7 @@ var activateEditor = function (templateArray) {
   var templatesEditor = [];
   if(typeof templateArray != 'undefined' && templateArray.length > 0) {
     templatesEditor = templateArray;
-  }else{
+  } else {
     templatesEditor = Core9.template.allTemplates;
   }
   Core9.editor = new JSONEditor(document.getElementById('editor_holder2'), {
@@ -423,14 +423,21 @@ function savePage(data) {
   Core9.data.currentid = id;
   document.getElementById('delpage')
     .dataset.currentid = id;
-  var prevEntry = json[0];
   var save = false;
-  if(prevEntry.page != pageName) {
-    json.unshift({
+  if(json.length != 0) {
+    var prevEntry = json[0];
+    if(prevEntry.page != pageName) {
+      json.unshift({
+        "id": id,
+        "page": pageName
+      });
+      save = true;
+    }
+  }else{
+    json.push({
       "id": id,
       "page": pageName
     });
-    save = true;
   }
   initNestable(JSON.stringify(json));
   /*
