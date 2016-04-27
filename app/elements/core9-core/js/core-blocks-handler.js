@@ -332,6 +332,7 @@ Core9.blocks.handler.setTemplateCssAndJs = function (block, data) {
           .append(Core9.blocks.handler.__registry.blocks[block.id].loadedJS[Core9.blocks.handler.config.account.theme]);
       } catch(e) {}
       //console.log("adding blocks");
+      //FIXME this won't run if no blocks in template
       document.body.style.opacity = "1";
       try {
         var showAjaxLoader = {
@@ -447,9 +448,13 @@ Core9.blocks.handler.preAndPostSaving = function (action) {
 }
 var RUNNED_INIT = false;
 Core9.blocks.handler.init = function (account, theme) {
-  if(document.querySelector('#gm-canvas')) {
+  //mycanvas
+  if(document.querySelector('#mycanvas')) {
     Core9.blocks.handler.config.page = "theme";
   }
+  //if(document.querySelector('#gm-canvas')) {
+    //Core9.blocks.handler.config.page = "theme";
+  //}
   if(typeof account == 'undefined' && typeof theme == 'undefined') {
     account: store.get('account');
     theme: store.get('theme');
@@ -470,4 +475,4 @@ setTimeout(function () {
     }
   }
   Core9.blocks.handler.init(session.account, session.theme);
-}, 1000);
+}, 3000);

@@ -162,8 +162,10 @@ Core9.template = {
     Core9.template.allCountries = Core9.template.getAllDataForType('country');
     Core9.template.allVersions = Core9.template.getAllDataForTypeVersions();
     // fire dataready event
-    var event = new Event('dataready');
-    document.body.dispatchEvent(event);
+    if(typeof document.body != null) {
+      var event = new Event('dataready');
+      document.body.dispatchEvent(event);
+    }
   },
   save: function () {
     if(TYPEOFPAGE == 'themes') {
