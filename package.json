@@ -25,6 +25,7 @@
     "co-fs": "^1.2.0",
     "co-mocha": "^1.1.2",
     "co-supertest": "0.0.10",
+    "dashboard-path": "git+https://jessec@github.com/conversion-partners/dashboard-path.git",
     "express": "~4.13.0",
     "fs": "0.0.2",
     "grunt-sync": "^0.4.1",

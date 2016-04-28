@@ -8,6 +8,7 @@
   "exclude": [
       "server",
       "app",
+      "node_modules/dashboard-*",
       "node_modules/typings",
       "node_modules/typescript",
       "node_modules/ts-loader",
