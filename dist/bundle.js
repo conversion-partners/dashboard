@@ -42,9 +42,49 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var root = __webpack_require__(1);
+	var foo = root.foo;
+	var Bar = root.Bar;
+	var bas = root.bas;
+	console.log(bas);
+	var para = document.createElement("p");
+	var node = document.createTextNode(bas);
+	document.getElementById("root").appendChild(node);
+
+
+/***/ },
+/* 1 */
+/***/ function(module, exports, __webpack_require__) {
+
+	function __export(m) {
+	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+	}
+	__export(__webpack_require__(2));
+	__export(__webpack_require__(3));
+	exports.bas = "123";
+
+
+/***/ },
+/* 2 */
 /***/ function(module, exports) {
 
-	
+	exports.foo = 123;
+
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	var Bar = (function () {
+	    function Bar() {
+	    }
+	    return Bar;
+	})();
+	exports.Bar = Bar;
+
 
 /***/ }
 /******/ ]);
