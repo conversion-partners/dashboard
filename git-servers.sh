@@ -7,7 +7,7 @@ cp config/servers/vps40041.public.cloudvps.com/files/panels/nide/data.json panel
 
 
 #git add --all . -f
-git add .
+git add --all .
 #git reset -- data/accounts/easydrain/sites/*
 git commit -m "cc"
 git push  origin HEAD:gh-pages
