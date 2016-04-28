@@ -1,0 +1,100 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/nodejs',
+1 verbose cli   '/usr/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'git+https://jessec@github.com/conversion-partners/conversion-partners/dashboard-path.git',
+1 verbose cli   '--save-dev' ]
+2 info using npm@2.14.20
+3 info using node@v4.4.0
+4 verbose install initial load of /var/www/dashboard/package.json
+5 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/body-parser/package.json
+6 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/cheerio/package.json
+7 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/co-fs/package.json
+8 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/co-mocha/package.json
+9 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/co-supertest/package.json
+10 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/connect-ensure-login/package.json
+11 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/cookie-parser/package.json
+12 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/dashboard-path/package.json
+13 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/ejs/package.json
+14 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/express/package.json
+15 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/express-session/package.json
+16 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/fs/package.json
+17 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/grunt-sync/package.json
+18 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/gulp/package.json
+19 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/gulp-develop-server/package.json
+20 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/gulp-livereload/package.json
+21 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/gulp-shell/package.json
+22 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/http-proxy/package.json
+23 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/koa/package.json
+24 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/koa-router/package.json
+25 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/mime/package.json
+26 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/mkdirp/package.json
+27 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/mocha/package.json
+28 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/morgan/package.json
+29 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/multer/package.json
+30 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/nide/package.json
+31 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/passport/package.json
+32 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/passport-local/package.json
+33 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/path/package.json
+34 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/redbird/package.json
+35 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/should/package.json
+36 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/supertest/package.json
+37 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/ts-loader/package.json
+38 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/ts-npm-module/package.json
+39 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/typescript/package.json
+40 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/typings/package.json
+41 verbose installManyTop reading scoped package data from /var/www/dashboard/node_modules/webpack/package.json
+42 info package.json connect-ensure-login@0.1.1 No license field.
+43 info package.json fs@0.0.2 fs is also the name of a node core module.
+44 info package.json fs@0.0.2 No description
+45 info package.json fs@0.0.2 No repository field.
+46 info package.json fs@0.0.2 No README data
+47 info package.json mime@1.3.4 No license field.
+48 info package.json nide@0.2.0 No license field.
+49 info package.json passport-local@1.0.0 No license field.
+50 info package.json redbird@0.4.10 license should be a valid SPDX license expression
+51 info package.json grunt-sync@0.4.1 No license field.
+52 info package.json path@0.11.14 path is also the name of a node core module.
+53 verbose readDependencies loading dependencies from /var/www/dashboard/package.json
+54 silly cache add args [ 'git+https://jessec@github.com/conversion-partners/conversion-partners/dashboard-path.git',
+54 silly cache add   null ]
+55 verbose cache add spec git+https://jessec@github.com/conversion-partners/conversion-partners/dashboard-path.git
+56 silly cache add parsed spec Result {
+56 silly cache add   raw: 'git+https://jessec@github.com/conversion-partners/conversion-partners/dashboard-path.git',
+56 silly cache add   scope: null,
+56 silly cache add   name: null,
+56 silly cache add   rawSpec: 'git+https://jessec@github.com/conversion-partners/conversion-partners/dashboard-path.git',
+56 silly cache add   spec: 'https://jessec@github.com/conversion-partners/conversion-partners/dashboard-path.git',
+56 silly cache add   type: 'git' }
+57 verbose addRemoteGit caching git+https://jessec@github.com/conversion-partners/conversion-partners/dashboard-path.git
+58 silly tryClone cloning git+https://jessec@github.com/conversion-partners/conversion-partners/dashboard-path.git via git+https://jessec@github.com/conversion-partners/conversion-partners/dashboard-path.git
+59 verbose tryClone https-jessec-github-com-conversion-partners-conversion-partners-dashboard-path-git-38ada46c not in flight; caching
+60 verbose correctMkdir /home/jesse/.npm/_git-remotes correctMkdir not in flight; initializing
+61 info git [ 'clone',
+61 info git   '--template=/home/jesse/.npm/_git-remotes/_templates',
+61 info git   '--mirror',
+61 info git   'https://jessec@github.com/conversion-partners/conversion-partners/dashboard-path.git',
+61 info git   '/home/jesse/.npm/_git-remotes/https-jessec-github-com-conversion-partners-conversion-partners-dashboard-path-git-38ada46c' ]
+62 error git clone --template=/home/jesse/.npm/_git-remotes/_templates --mirror https://jessec@github.com/conversion-partners/conversion-partners/dashboard-path.git /home/jesse/.npm/_git-remotes/https-jessec-github-com-conversion-partners-conversion-partners-dashboard-path-git-38ada46c: Cloning into bare repository '/home/jesse/.npm/_git-remotes/https-jessec-github-com-conversion-partners-conversion-partners-dashboard-path-git-38ada46c'...
+62 error git clone --template=/home/jesse/.npm/_git-remotes/_templates --mirror https://jessec@github.com/conversion-partners/conversion-partners/dashboard-path.git /home/jesse/.npm/_git-remotes/https-jessec-github-com-conversion-partners-conversion-partners-dashboard-path-git-38ada46c: fatal: repository 'https://jessec@github.com/conversion-partners/conversion-partners/dashboard-path.git/' not found
+63 verbose stack Error: Command failed: git clone --template=/home/jesse/.npm/_git-remotes/_templates --mirror https://jessec@github.com/conversion-partners/conversion-partners/dashboard-path.git /home/jesse/.npm/_git-remotes/https-jessec-github-com-conversion-partners-conversion-partners-dashboard-path-git-38ada46c
+63 verbose stack Cloning into bare repository '/home/jesse/.npm/_git-remotes/https-jessec-github-com-conversion-partners-conversion-partners-dashboard-path-git-38ada46c'...
+63 verbose stack fatal: repository 'https://jessec@github.com/conversion-partners/conversion-partners/dashboard-path.git/' not found
+63 verbose stack
+63 verbose stack     at ChildProcess.exithandler (child_process.js:213:12)
+63 verbose stack     at emitTwo (events.js:87:13)
+63 verbose stack     at ChildProcess.emit (events.js:172:7)
+63 verbose stack     at maybeClose (internal/child_process.js:827:16)
+63 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
+64 verbose cwd /var/www/dashboard
+65 error Linux 3.13.0-83-generic
+66 error argv "/usr/bin/nodejs" "/usr/bin/npm" "install" "git+https://jessec@github.com/conversion-partners/conversion-partners/dashboard-path.git" "--save-dev"
+67 error node v4.4.0
+68 error npm  v2.14.20
+69 error code 128
+70 error Command failed: git clone --template=/home/jesse/.npm/_git-remotes/_templates --mirror https://jessec@github.com/conversion-partners/conversion-partners/dashboard-path.git /home/jesse/.npm/_git-remotes/https-jessec-github-com-conversion-partners-conversion-partners-dashboard-path-git-38ada46c
+70 error Cloning into bare repository '/home/jesse/.npm/_git-remotes/https-jessec-github-com-conversion-partners-conversion-partners-dashboard-path-git-38ada46c'...
+70 error fatal: repository 'https://jessec@github.com/conversion-partners/conversion-partners/dashboard-path.git/' not found
+71 error If you need help, you may report this error at:
+71 error     <https://github.com/npm/npm/issues>
+72 verbose exit [ 1, true ]
