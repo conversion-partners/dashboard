@@ -6,6 +6,7 @@
       "jsx": "react"
   },
   "exclude": [
+      "server",
       "app",
       "node_modules/typings",
       "node_modules/typescript",

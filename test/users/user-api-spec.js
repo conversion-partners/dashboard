@@ -1,8 +1,8 @@
 require('co-mocha');
 var should = require('should');
-var data = require('../../vendor/users/user-data.js');
+var data = require('../../test/users/user-data.js');
 var fs = require('co-fs');
-var api = require('../../vendor/users/user-web.js');
+var api = require('../../test/users/user-web.js');
 var request = require('co-supertest').agent(api.listen());
 
 
