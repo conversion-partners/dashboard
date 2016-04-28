@@ -1,0 +1,17 @@
+{
+	"domain" : "www.easydrain.nl",
+	"language" : "us",
+	"country" : "GB",
+	"url" : "/home",
+	"versions" : {
+			"default" : {
+					"title" : "default",
+					"percentage" : 30,
+					"theme" : "moon",
+					"template" : "front-page",
+					"startdate" : "23/11/2014",
+					"enddate" : "29/11/2014",
+					"status" : "active"
+					}
+			}
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="/dashboard/bower_components/systemjs/dist/system.js"></script>
+</head>
+<body>
+	<script>
+		Core9 = {}
+		Core9.system = {
+			unwrapModule : function(mod) {
+				for (key in mod) {
+					if (mod.hasOwnProperty(key)) {
+						var value = mod[key];
+						return value;
+					}
+				}
+			},
+			multiImport : function(modules) {
+				return Promise.all(modules.map(function(m) {
+
+					return System.import(m)
+				}))
+			}
+		}
+		System.config({
+			baseURL : '/dashboard/'
+		});
+	</script>
+
+
+	<script>
+		var init = function(modules) {
+			var theme = Core9.system.unwrapModule(modules[0]);
+
+      var callback = function(data){
+        console.log(data);
+      }
+      theme.get(callback);
+
+
+
+		}
+	</script>
+
+
+
+	<script>
+		Core9.system.multiImport([ 'app/elements/core9-core/js/core-theme' ])
+				.then(function(modules) {
+					init(modules);
+				});
+	</script>
+</body>
+</html>
