@@ -1,0 +1,33 @@
+{
+  "name": "ts-npm-module",
+  "version": "1.0.6",
+  "description": "A sample TypeScript npm module",
+  "main": "js/index.js",
+  "typings": "ts/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/basarat/ts-npm-module.git"
+  },
+  "keywords": [
+    "typescript",
+    "atom"
+  ],
+  "author": {
+    "name": "basaratali@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/basarat/ts-npm-module/issues"
+  },
+  "homepage": "https://github.com/basarat/ts-npm-module#readme",
+  "gitHead": "9dc0dfb303ba782cc6a539727b025da7f305e63e",
+  "readme": "# ts-npm-module\nOpen this probject in [`atom-typescript`](https://atom.io/packages/atom-typescript). Press F6 to build. And then `npm publish` away.\n\nThis project can be consumed flawlessly from the sister project [ts-npm-module-consume](https://github.com/basarat/ts-npm-module-consume)\n",
+  "readmeFilename": "README.md",
+  "_id": "ts-npm-module@1.0.6",
+  "_shasum": "d289ebf35511f9244b6db92648c431c1e43dc56c",
+  "_from": "git+https://jessec@github.com/conversion-partners/ts-npm-module.git",
+  "_resolved": "git+https://jessec@github.com/conversion-partners/ts-npm-module.git#9dc0dfb303ba782cc6a539727b025da7f305e63e"
+}
