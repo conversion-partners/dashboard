@@ -5,8 +5,9 @@ var fs = require('co-fs');
 var api = require('../../vendor/users/user-web.js');
 var request = require('co-supertest').agent(api.listen());
 
+
 before(function *(){
-  yield fs.writeFile('../../test/users/data/users.json', '[]');
+  yield fs.writeFile('./data/users.json', '[]');
 });
 
 describe('user data', function(){
