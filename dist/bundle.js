@@ -53,6 +53,7 @@
 	var para = document.createElement("p");
 	var node = document.createTextNode(bas);
 	document.getElementById("root").appendChild(node);
+	console.log(foo);
 
 
 /***/ },

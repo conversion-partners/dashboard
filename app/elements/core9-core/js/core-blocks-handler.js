@@ -269,6 +269,16 @@ Core9.blocks.handler.setUserDataById = function (block, data) {
     Core9.blocks.handler.__registry.blocks[block.id].loadedUSERDATA = Core9.blocks.handler.__registry.blocks[block.id].loadedDEFAULTDATA;
   }
 }
+
+function removeOverLay() {
+  document.body.style.opacity = "1";
+  try {
+    var showAjaxLoader = {
+      action: 'hideAjaxLoader'
+    }
+    Core9.iframe.child.sentMessageToParent(showAjaxLoader);
+  } catch(e) {}
+}
 Core9.blocks.handler.setTemplateCssAndJs = function (block, data) {
   var html = data.currentTarget.response;
   var jsLinks = html.querySelectorAll('script[data-theme], script[data-role="block"]');
@@ -298,6 +308,7 @@ Core9.blocks.handler.setTemplateCssAndJs = function (block, data) {
   if(typeof PAGEMODE === 'undefined') {
     //return false;
     setTimeout(function () {
+      //FIXME no setTimeout
       for(var i = 0; i < Core9.blocks.handler.__registry.blocks[block.id].loadedCSS.block.length; i++) {
         var style = Core9.blocks.handler.__registry.blocks[block.id].loadedCSS.block[i];
         var blocktype = "style-" + block.type + "-" + i;
@@ -333,13 +344,7 @@ Core9.blocks.handler.setTemplateCssAndJs = function (block, data) {
       } catch(e) {}
       //console.log("adding blocks");
       //FIXME this won't run if no blocks in template
-      document.body.style.opacity = "1";
-      try {
-        var showAjaxLoader = {
-          action: 'hideAjaxLoader'
-        }
-        Core9.iframe.child.sentMessageToParent(showAjaxLoader);
-      } catch(e) {}
+      removeOverLay();
     }, 3000);
   }
 }
@@ -367,10 +372,14 @@ Core9.blocks.handler.getData = function () {
   // carefull not chained
   Core9.blocks.handler.filRegistry()
     .then(function () {
-      for(var i = 0; i < Core9.blocks.handler.__registry.blockIds.length; i++) {
-        var id = Core9.blocks.handler.__registry.blockIds[i];
-        var block = Core9.blocks.handler.getBlockById(id);
-        Core9.blocks.handler.getBlockData(block);
+      if(Core9.blocks.handler.__registry.blockIds.length > 0) {
+        for(var i = 0; i < Core9.blocks.handler.__registry.blockIds.length; i++) {
+          var id = Core9.blocks.handler.__registry.blockIds[i];
+          var block = Core9.blocks.handler.getBlockById(id);
+          Core9.blocks.handler.getBlockData(block);
+        }
+      } else {
+        removeOverLay();
       }
     }, function (err) {
       console.log(err);
@@ -453,7 +462,7 @@ Core9.blocks.handler.init = function (account, theme) {
     Core9.blocks.handler.config.page = "theme";
   }
   //if(document.querySelector('#gm-canvas')) {
-    //Core9.blocks.handler.config.page = "theme";
+  //Core9.blocks.handler.config.page = "theme";
   //}
   if(typeof account == 'undefined' && typeof theme == 'undefined') {
     account: store.get('account');
