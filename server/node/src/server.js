@@ -1,7 +1,11 @@
+"use strict";
+///<reference path='../../../server/node/typings/main/ambient/node/index.d.ts'/>
 var http = require("http");
-
-http.createServer(function(request, response) {
-  response.writeHead(200, {"Content-Type": "text/plain"});
-  response.write("Hello World");
-  response.end();
-}).listen(8888);
+var ns = require('ts-npm-module');
+var bas = ns.bas;
+http.createServer(function (req, res) {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('Hello World name : ' + bas);
+}).listen(1337, '127.0.0.1');
+console.log('Server running at http://127.0.0.1:1337/');
+//# sourceMappingURL=server.js.map
