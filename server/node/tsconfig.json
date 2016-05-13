@@ -15,5 +15,5 @@
       "typings/browser.d.ts",
       "typings/main"
   ],
-  "compileOnSave": false
+  "compileOnSave": true
 }
