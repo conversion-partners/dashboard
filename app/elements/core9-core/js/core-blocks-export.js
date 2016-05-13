@@ -20,7 +20,7 @@ function setMetaDataOnIframeContent(doc, metaData) {
   //console.log(metaData);
   var desc = getMetaContentByName(doc, "description");
   //console.log(desc);
-  if(typeof desc != 'undefined') {
+  if(typeof desc != 'undefined' && !!desc ) {
     desc.parentNode.removeChild(desc);
   }
   var meta = document.createElement('meta');
