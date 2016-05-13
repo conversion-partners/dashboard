@@ -8,6 +8,7 @@
       "app",
       "config",
       "node_modules/typings",
+      "node_modules/ts-npm-module/ts/typings",
       "node_modules/typescript",
       "node_modules/ts-loader",
       "typings/browser",
