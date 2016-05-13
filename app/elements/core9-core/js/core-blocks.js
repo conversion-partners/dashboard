@@ -66,7 +66,8 @@ Core9.blocks.loopBlocks = function (blocks) {
   for(var i = 0; i < blocks.length; i++) {
     var block = blocks[i];
     //console.log(block);
-    block.appendChild(document.createTextNode(block.dataset.type));
+    //FIXME why is this???
+    //block.appendChild(document.createTextNode(block.dataset.type));
   }
 }
 Core9.blocks.emptyElementsByClass = function (doc, className) {

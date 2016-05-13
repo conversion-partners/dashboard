@@ -454,6 +454,8 @@ Core9.blocks.handler.preAndPostSaving = function (action) {
     }
     //console.log(script);
   }
+  //FIXME!!
+  $.getScript('/dashboard/app/elements/core9-gridmanager/boot-page-edit.min.js', function () {});
 }
 var RUNNED_INIT = false;
 Core9.blocks.handler.init = function (account, theme) {
