@@ -19,7 +19,7 @@
         "typings/browser.d.ts",
         "node_modules/dashboard-path",
         "node_modules/ts-npm-module/ts/typings",
-        "node_modules/sos-server-config/ts/typings"
+        "node_server/modules/sos-server-config/ts/typings"
     ],
     "compileOnSave": true
 }

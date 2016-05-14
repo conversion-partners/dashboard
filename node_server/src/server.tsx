@@ -5,7 +5,7 @@
 import http = require("http");
 
 
-import bs = require('sos-server-config');
+import bs = require('../modules/sos-server-config');
 
 var test = bs.foo2;
 
