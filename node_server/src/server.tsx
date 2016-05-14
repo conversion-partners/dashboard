@@ -1,10 +1,13 @@
 ///<reference path='../typings/main.d.ts'/>
+
+
+
 import http = require("http");
 
 
 import bs = require('sos-server-config');
 
-var test = bs.foo;
+var test = bs.foo2;
 
 
 import ns = require('ts-npm-module');
