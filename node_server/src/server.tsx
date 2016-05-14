@@ -4,7 +4,7 @@ import http = require("http");
 
 import bs = require('sos-server-config');
 
-var test = bs.foo2;
+var test = bs.foo;
 
 
 import ns = require('ts-npm-module');

@@ -2,7 +2,7 @@
 ///<reference path='../typings/main.d.ts'/>
 var http = require("http");
 var bs = require('sos-server-config');
-var test = bs.foo2;
+var test = bs.foo;
 var ns = require('ts-npm-module');
 var bas = ns.bas;
 http.createServer(function (req, res) {
