@@ -11,12 +11,15 @@
         "typings",
         "node_server/config",
         "node_server/node_modules",
-                "node_server/typings",
+        "node_server/typings",
+        "node_server/typings/**",
+        "node_server/node_modules_dev/sos-server-config/ts/typings",
         "node_modules/typings",
         "node_modules/typescript",
         "node_modules/ts-loader",
         "typings/browser",
         "typings/browser.d.ts",
+        "node_modules/dashboard-path",
         "node_modules/ts-npm-module/ts/typings"
     ],
     "compileOnSave": true
