@@ -7,6 +7,7 @@
   "exclude": [
       "app",
       "config",
+      "node_modules",
       "node_modules/typings",
       "node_modules/ts-npm-module/ts/typings",
       "node_modules/typescript",

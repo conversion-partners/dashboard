@@ -1,19 +1,23 @@
 {
-  "compilerOptions": {
-      "target": "es5",
-      "module": "commonjs",
-      "sourceMap": true,
-      "jsx": "react"
-  },
-  "exclude": [
-      "server",
-      "app",
-      "node_modules/dashboard-*",
-      "node_modules/typings",
-      "node_modules/typescript",
-      "node_modules/ts-loader",
-      "typings/browser",
-      "typings/browser.d.ts"
-  ],
-  "compileOnSave": false
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "sourceMap": true,
+        "jsx": "react"
+    },
+    "exclude": [
+        "server",
+        "app",
+        "typings",
+        "node_server/config",
+        "node_server/node_modules",
+                "node_server/typings",
+        "node_modules/typings",
+        "node_modules/typescript",
+        "node_modules/ts-loader",
+        "typings/browser",
+        "typings/browser.d.ts",
+        "node_modules/ts-npm-module/ts/typings"
+    ],
+    "compileOnSave": true
 }
