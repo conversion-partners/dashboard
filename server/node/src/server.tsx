@@ -1,6 +1,8 @@
 ///<reference path='../../../server/node/typings/main/ambient/node/index.d.ts'/>
 import http = require("http");
 
+import bs = require('sos-server-config');
+
 import ns = require('ts-npm-module');
 var bas = ns.bas;
 

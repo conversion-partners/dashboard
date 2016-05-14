@@ -1,5 +1,7 @@
 "use strict";
+///<reference path='../../../server/node/typings/main/ambient/node/index.d.ts'/>
 var http = require("http");
+//import bs = require('sos-server-config');
 var ns = require('ts-npm-module');
 var bas = ns.bas;
 http.createServer(function (req, res) {
