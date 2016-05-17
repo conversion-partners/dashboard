@@ -17,5 +17,4 @@ describe('products', function() {
     expect(data.getAll()).to.equal(0);
   });
 
-
 });
