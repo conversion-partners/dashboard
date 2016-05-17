@@ -1,7 +1,7 @@
 // tests/part1/cart-summary-test.js
 var chai = require('chai');
 var expect = chai.expect; // we are using the "expect" style of Chai
-var Data = require('./../src/data-generation/data');
+var Data = require('./../src/config/config');
 
 describe('products', function() {
   it('getAll() should return 0 if no number is passed in', function() {
