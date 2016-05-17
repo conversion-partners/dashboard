@@ -1,13 +1,14 @@
-var lib = require('./lib');
+//var lib = require('./lib');
 
-function Config(type : String)  : string {
-    this.type = type;
+class Configure {
+    type: string;
+    constructor(type: string) {
+        this.type = type;
+    }
+    getType() {
+        return "Hello, ";
+    }
 }
 
-Config.prototype.getType = function() {
-    return this.type;
-};
 
-
-
-module.exports = Config;
+export default Configure;

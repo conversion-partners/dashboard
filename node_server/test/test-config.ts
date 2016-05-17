@@ -1,20 +1,25 @@
-// tests/part1/cart-summary-test.js
+/// <reference path="../typings/mocha/mocha.d.ts" />
 var chai = require('chai');
 var expect = chai.expect; // we are using the "expect" style of Chai
-var Config = require('./../src/config/config');
+var Configurator = require('./../src/config/config');
 
-describe('products', function() {
-  it('getAll() should return 0 if no number is passed in', function() {
-    var config = new Config("server");
-    expect(config.getAll().to.equal(0);
+var tester = "test";
+
+console.log(tester);
+
+describe('products', function () {
+  it('getType() should return 0 if no number is passed in', function () {
+    var config = new Configurator();
+
+    expect(config.getType().to.equal("server"));
   });
 
-  it('getAll() should return 0 if no number is passed in', function() {
-    var config = new Config(5);
+  it('getType() should return 0 if no number is passed in', function () {
+    var config = new Configurator("server");
 
     //test
 
-    expect(config.getAll()).to.equal(0);
+    expect(config.getType().to.equal("server"));
   });
 
 });
