@@ -49,20 +49,7 @@
             "env": {}
         },
         {
-            "name": "mocha",
-            "type": "node",
-            "request": "launch",
-            "program": "${workspaceRoot}/node_server/node_modules/mocha/bin/mocha",
-            "stopOnEntry": false,
-            "args": [
-                "${workspaceRoot}/node_server/test/test-mocha.ts"
-            ],
-            "cwd": "${workspaceRoot}",
-            "sourceMaps": true,
-            "outDir": "${workspaceRoot}/node_server/dist"
-        },
-        {
-            "name": "Launch type",
+            "name": "Launch tape tests",
             "type": "node",
             "request": "launch",
             "program": "${workspaceRoot}/node_server/test/test-typescript.ts",
