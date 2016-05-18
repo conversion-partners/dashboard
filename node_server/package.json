@@ -18,6 +18,7 @@
     "chai": "^3.5.0",
     "mocha": "^2.4.5",
     "sos-server-config": "1.0.0",
+    "tape": "^4.5.1",
     "ts-loader": "^0.8.2",
     "ts-npm-module": "git+https://jessec@github.com/conversion-partners/ts-npm-module.git",
     "typescript": "^1.9.0-dev.20160427",

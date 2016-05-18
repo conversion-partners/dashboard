@@ -34,25 +34,42 @@
             "remoteRoot": null
         },
         {
-         "name": "mocha",
-         "type": "node",
-         "request": "launch",
-         "program": "${workspaceRoot}/node_server/node_modules/mocha/bin/mocha",
-         "stopOnEntry": false,
-         "args": [
-            "${workspaceRoot}/node_server/test/test-config.js"           
-         ],
-         "cwd": "${workspaceRoot}",
-         "runtimeExecutable": null,
-         "runtimeArgs": [
-            "--nolazy"
-         ],
-         "env": {
-            "NODE_ENV": "development"
-         },
-         "externalConsole": false,
-         "sourceMaps": false,
-         "outDir": null
-      }
+            "request": "launch",
+            "name": "Debug Tests",
+            "type": "node",
+            // Notice, we bypass the launcher and start the test runner directly
+            "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
+            "stopOnEntry": true,
+            // run the tests in the tests folder
+            "args": [
+                "node_server/test"
+            ],
+            "cwd": "${workspaceRoot}",
+            "runtimeExecutable": null,
+            "env": {}
+        },
+        {
+            "name": "mocha",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/node_server/node_modules/mocha/bin/mocha",
+            "stopOnEntry": false,
+            "args": [
+                "${workspaceRoot}/node_server/test/test-mocha.ts"
+            ],
+            "cwd": "${workspaceRoot}",
+            "sourceMaps": true,
+            "outDir": "${workspaceRoot}/node_server/dist"
+        },
+        {
+            "name": "Launch type",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/node_server/test/test-typescript.ts",
+            "cwd": "${workspaceRoot}",
+            "stopOnEntry": false,
+            "sourceMaps": true,
+            "outDir": "${workspaceRoot}/node_server/dist"
+        }
     ]
 }

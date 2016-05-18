@@ -7,19 +7,23 @@ var tester = "test";
 
 console.log(tester);
 
+/*
 describe('products', function () {
   it('getType() should return 0 if no number is passed in', function () {
-    var config = new Configurator();
-
-    expect(config.getType().to.equal("server"));
+    //var config = new Configurator();
+    var tmp = "test";
+    console.log(tmp);
+    //expect(config.getType().to.equal("server"));
   });
 
   it('getType() should return 0 if no number is passed in', function () {
-    var config = new Configurator("server");
+    //var config = new Configurator("server");
 
     //test
-
-    expect(config.getType().to.equal("server"));
+  var tmp = "test";
+    console.log(tmp);
+    //expect(config.getType().to.equal("server"));
   });
 
 });
+*/
