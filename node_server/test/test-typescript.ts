@@ -1,7 +1,7 @@
 var test = require('tape');
 // test objects
 import Configurator = require('../src/config/config');
-import product = require('./product');
+import product = require('../src/product');
 
 
 
