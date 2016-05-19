@@ -1,9 +1,9 @@
 ///<reference path='../typings/main.d.ts'/>
 "use strict";
-var http = require("http");
-var bs = require('../modules/sos-server-config');
+const http = require("http");
+const bs = require('../modules/sos-server-config');
 var test = bs.foo2;
-var ns = require('ts-npm-module');
+const ns = require('ts-npm-module');
 var bas = ns.bas;
 http.createServer(function (req, res) {
     res.writeHead(200, { 'Content-Type': 'text/plain' });

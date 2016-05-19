@@ -1,10 +1,12 @@
 {
     "compilerOptions": {
-        "target": "es5",
+        "target": "ES6",
         "module": "commonjs",
         "sourceMap": true,
         "jsx": "react",
-        "watch": false
+        "watch": false,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
     },
     "exclude": [
         "server",

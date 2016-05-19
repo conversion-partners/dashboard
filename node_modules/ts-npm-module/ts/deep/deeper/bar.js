@@ -1,8 +1,5 @@
 "use strict";
-var Bar = (function () {
-    function Bar() {
-    }
-    return Bar;
-}());
+class Bar {
+}
 exports.Bar = Bar;
 //# sourceMappingURL=bar.js.map
