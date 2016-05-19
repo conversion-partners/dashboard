@@ -3,6 +3,9 @@ class Product {
         return s;
     }
     getPrice(){}
+    getImage(){}
+    getGtin(){}
+    getCategory(){}
 }
 export { Product };
 export { Product as mainProduct };

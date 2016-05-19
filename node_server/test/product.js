@@ -6,6 +6,9 @@ var Product = (function () {
         return s;
     };
     Product.prototype.getPrice = function () { };
+    Product.prototype.getImage = function () { };
+    Product.prototype.getGtin = function () { };
+    Product.prototype.getCategory = function () { };
     return Product;
 }());
 exports.Product = Product;

@@ -4,7 +4,7 @@
         "module": "commonjs",
         "sourceMap": true,
         "jsx": "react",
-        "watch": true
+        "watch": false
     },
     "exclude": [
         "server",

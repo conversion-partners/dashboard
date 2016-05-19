@@ -8,6 +8,7 @@ test('timing test', function (t) {
     var start = Date.now();
     var prod = new product.Product();
     prod.getPrice();
+    prod.getCategory();
     var tmmmmp = prod.isAcceptable("dsafdsf");
     setTimeout(function () {
         t.equal(Date.now() - start, 100);

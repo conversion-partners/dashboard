@@ -17,6 +17,8 @@ test('timing test', function (t) {
     var prod = new product.Product();
     prod.getPrice();
 
+    prod.getCategory();
+
     var tmmmmp = prod.isAcceptable("dsafdsf");
 
 
