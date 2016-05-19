@@ -1,6 +1,5 @@
 "use strict";
 var test = require('tape');
-// test objects
 var product = require('./product');
 test('timing test', function (t) {
     t.plan(2);
