@@ -34,19 +34,14 @@
             "remoteRoot": null
         },
         {
-            "request": "launch",
-            "name": "Debug Tests",
+            "name": "Launch inversify",
             "type": "node",
-            // Notice, we bypass the launcher and start the test runner directly
-            "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
-            "stopOnEntry": true,
-            // run the tests in the tests folder
-            "args": [
-                "node_server/test"
-            ],
+            "request": "launch",
+            "program": "${workspaceRoot}/node_server/test/test-inversify.ts",
             "cwd": "${workspaceRoot}",
-            "runtimeExecutable": null,
-            "env": {}
+            "stopOnEntry": false,
+            "sourceMaps": true,
+            "outDir": "${workspaceRoot}/node_server/dist"
         },
         {
             "name": "Launch tape tests",
