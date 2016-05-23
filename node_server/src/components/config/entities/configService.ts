@@ -12,6 +12,10 @@ class ConfigService  implements IConfigService {
              
          });
     }
+    
+    getAccountPath(): string {
+        return "accountpath";
+    }
 }
 
 

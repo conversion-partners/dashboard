@@ -8,6 +8,7 @@ interface IConfig {
 
 interface IConfigService {
     getAll(): Object;
+    getAccountPath(): string;
 }
 
 interface IWarrior {

@@ -5,19 +5,16 @@ import { provide } from "../config/kernel";
 
 import TYPES from "../constants/types";
 
-@provide(TYPES.Warrior)
+@provide(TYPES.Config)
 class Config implements IConfig {
-    private _weapon: IWeapon;
+    private _service: IConfigService;
     public constructor(
-        @inject(TYPES.Weapon) @named("not-throwable") weapon: IWeapon
+        @inject(TYPES.ConfigService) @named("not-throwable") configService: IConfigService
     ) {
-        this._weapon = weapon;
+        this._service = configService;
     }
     public getAccountPath() {
-        return this._weapon.use();
-    }
-    public fight() {
-        return this._weapon.use();
+        return "test";// this._service.getAccountPath();
     }
 }
 

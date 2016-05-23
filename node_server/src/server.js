@@ -1,8 +1,6 @@
 ///<reference path='../typings/main.d.ts'/>
 "use strict";
 const http = require("http");
-const bs = require('../modules/sos-server-config');
-var test = bs.foo2;
 const ns = require('ts-npm-module');
 var bas = ns.bas;
 http.createServer(function (req, res) {

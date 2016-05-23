@@ -16,6 +16,9 @@ let ConfigService = class ConfigService {
         return new Promise(resolve => function () {
         });
     }
+    getAccountPath() {
+        return "accountpath";
+    }
 };
 ConfigService = __decorate([
     kernel_1.provideNamed(types_1.default.ConfigService, "not-throwable"), 

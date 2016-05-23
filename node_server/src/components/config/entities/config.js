@@ -16,19 +16,16 @@ const inversify_1 = require("inversify");
 const kernel_1 = require("../config/kernel");
 const types_1 = require("../constants/types");
 let Config = class Config {
-    constructor(weapon) {
-        this._weapon = weapon;
+    constructor(configService) {
+        this._service = configService;
     }
     getAccountPath() {
-        return this._weapon.use();
-    }
-    fight() {
-        return this._weapon.use();
+        return "test"; // this._service.getAccountPath();
     }
 };
 Config = __decorate([
-    kernel_1.provide(types_1.default.Warrior),
-    __param(0, inversify_1.inject(types_1.default.Weapon)),
+    kernel_1.provide(types_1.default.Config),
+    __param(0, inversify_1.inject(types_1.default.ConfigService)),
     __param(0, inversify_1.named("not-throwable")), 
     __metadata('design:paramtypes', [Object])
 ], Config);
