@@ -1,6 +1,4 @@
 var test = require('tape');
-// test objects
-import Configurator = require('../src/config/config');
 import product = require('../src/product');
 
 
