@@ -24,12 +24,6 @@ let ConfigService = class ConfigService {
     setConfigFile(configFile) {
         return __awaiter(this, void 0, void 0, function* () {
             this._configFile = configFile;
-            this._configObj = yield JSON.parse(this._configFile);
-        });
-    }
-    getConfigObj() {
-        return __awaiter(this, void 0, void 0, function* () {
-            return this._configObj;
         });
     }
     getAll() {

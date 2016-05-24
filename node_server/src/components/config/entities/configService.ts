@@ -9,21 +9,15 @@ import TYPES from "../constants/types";
 class ConfigService implements IConfigService {
 
     private _configFile: string;
-    private _configObj: Object;
 
     public async setConfigFile(configFile: string) {
         this._configFile = configFile;
-        this._configObj = await JSON.parse(this._configFile);
     }
 
-    private async getConfigObj(){
-        return this._configObj;
-    }
 
     public async getAll() {
 
         let _configFile = this._configFile;
-
         return new Promise(function (resolve, reject) {
             fs.readFile(_configFile, 'utf8', function (err, data) {
                 if (err) reject(err);

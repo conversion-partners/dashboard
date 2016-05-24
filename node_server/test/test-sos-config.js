@@ -16,14 +16,16 @@ function main() {
         //await ping();
         let config = kernel_1.kernel.get(types_1.default.Config);
         config.setConfigFile('/var/www/dashboard/node_server/test/test-sos-config-configfile.json');
-        let accountPath = config.getAccountPath();
         let configObj = yield config.getConfigObj();
+        let accountPath = configObj['path']['account'];
         console.log(configObj);
         console.log(accountPath);
         let goodAccountPath = "/var/www/dashboard/data/accounts";
+        console.log(goodAccountPath);
         test('account path test', function (t) {
-            t.plan(2);
-            t.equal(typeof goodAccountPath, accountPath);
+            //t.plan(2);
+            t.equal(goodAccountPath, accountPath);
+            t.end();
         });
     });
 }
