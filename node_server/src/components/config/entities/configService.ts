@@ -24,7 +24,7 @@ class ConfigService implements IConfigService {
         this._configFile = configFile;
     }
     public async setRequestUrl(url: string) {
-        this._requestUrl = url;
+        this._urlStrategy.setRequestUrl(url);
     }
 
     public async getConfigObj(): Promise<IConfigObject> {
@@ -46,8 +46,9 @@ class ConfigService implements IConfigService {
 
     public async getAccountPath() {
         let configObj = await this.getConfigObj();
+        let urlStrategy = this._urlStrategy;
         return new Promise(function (resolve, reject) {
-            resolve(configObj.path.account);
+            resolve(configObj.path.account + "/" + urlStrategy.getAccount());
         });
     }
 }

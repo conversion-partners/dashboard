@@ -19,15 +19,16 @@ interface IConfigService {
 }
 
 interface IUrlStrategy {
-    
+    getAccount(): string;
+    setRequestUrl(url: string): void;
 }
 
 interface IConfigObject {
-    path: IPathObject
+    path: IPathObject;
 }
 
 interface IPathObject {
-    account: string
+    account: string;
 }
 
 

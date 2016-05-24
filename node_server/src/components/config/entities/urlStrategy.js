@@ -1,4 +1,5 @@
 /// <reference path="../interfaces.d.ts" />
+/// <reference path="../../../../typings/main/ambient/node/index.d.ts" />
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -11,7 +12,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const kernel_1 = require("../config/kernel");
 const types_1 = require("../constants/types");
+var url = require("url");
 let UrlStrategy = class UrlStrategy {
+    getAccount() {
+        return this._parsedUrl['path'];
+    }
+    setRequestUrl(requestUrl) {
+        this._requestUrl = requestUrl;
+        this._parsedUrl = url.parse(requestUrl);
+    }
 };
 UrlStrategy = __decorate([
     kernel_1.provideNamed(types_1.default.UrlStrategy, "not-throwable"), 

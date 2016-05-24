@@ -22,6 +22,7 @@ async function main() {
     let goodAccountPath = "/var/www/dashboard/data/accounts/sos";
     let accountPath = await config.getAccountPath();
 
+    console.log(accountPath);
 
     test('account path test', function (t) {
         t.equal(goodAccountPath, accountPath);

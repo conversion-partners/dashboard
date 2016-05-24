@@ -35,7 +35,7 @@ let ConfigService = class ConfigService {
     }
     setRequestUrl(url) {
         return __awaiter(this, void 0, void 0, function* () {
-            this._requestUrl = url;
+            this._urlStrategy.setRequestUrl(url);
         });
     }
     getConfigObj() {
@@ -61,8 +61,9 @@ let ConfigService = class ConfigService {
     getAccountPath() {
         return __awaiter(this, void 0, void 0, function* () {
             let configObj = yield this.getConfigObj();
+            let urlStrategy = this._urlStrategy;
             return new Promise(function (resolve, reject) {
-                resolve(configObj.path.account);
+                resolve(configObj.path.account + "/" + urlStrategy.getAccount());
             });
         });
     }

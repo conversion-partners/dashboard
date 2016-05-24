@@ -24,6 +24,7 @@ function main() {
         config.setRequestUrl('http://www.shop-online-shop.nl/nl/winkels');
         let goodAccountPath = "/var/www/dashboard/data/accounts/sos";
         let accountPath = yield config.getAccountPath();
+        console.log(accountPath);
         test('account path test', function (t) {
             t.equal(goodAccountPath, accountPath);
             t.end();
