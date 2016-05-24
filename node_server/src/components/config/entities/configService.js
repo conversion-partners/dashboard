@@ -26,7 +26,7 @@ let ConfigService = class ConfigService {
             this._configFile = configFile;
         });
     }
-    getAll() {
+    getConfigObj() {
         return __awaiter(this, void 0, void 0, function* () {
             let _configFile = this._configFile;
             return new Promise(function (resolve, reject) {
@@ -39,7 +39,12 @@ let ConfigService = class ConfigService {
         });
     }
     getAccountPath() {
-        return "accountpath";
+        return __awaiter(this, void 0, void 0, function* () {
+            let obj = yield this.getConfigObj();
+            return new Promise(function (resolve, reject) {
+                resolve(obj['path']['account']);
+            });
+        });
     }
 };
 ConfigService = __decorate([

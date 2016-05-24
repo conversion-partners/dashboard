@@ -29,17 +29,15 @@ let Config = class Config {
     }
     setConfigFile(configFile) {
         this._service.setConfigFile(configFile);
-        this._configObj = this._service.getAll();
     }
     getConfigObj() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this._configObj;
+            return yield this._service.getConfigObj();
         });
     }
     getAccountPath() {
         return __awaiter(this, void 0, void 0, function* () {
-            let obj = yield this.getConfigObj();
-            return obj['path']['account'];
+            return yield this._service.getAccountPath();
         });
     }
 };

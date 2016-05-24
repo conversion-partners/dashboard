@@ -15,7 +15,7 @@ class ConfigService implements IConfigService {
     }
 
 
-    public async getAll() {
+    public async getConfigObj() {
 
         let _configFile = this._configFile;
         return new Promise(function (resolve, reject) {
@@ -26,8 +26,11 @@ class ConfigService implements IConfigService {
         });
     }
 
-    public getAccountPath(): string {
-        return "accountpath";
+    public async getAccountPath() {
+        let obj = await this.getConfigObj();
+        return new Promise(function (resolve, reject) {
+            resolve(obj['path']['account']);
+        });
     }
 }
 

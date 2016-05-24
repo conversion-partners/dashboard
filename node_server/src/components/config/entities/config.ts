@@ -8,7 +8,6 @@ import TYPES from "../constants/types";
 @provide(TYPES.Config)
 class Config implements IConfig {
     private _service: IConfigService;
-    private _configObj: Object;
     public constructor(
         @inject(TYPES.ConfigService) @named("not-throwable") configService: IConfigService
     ) {
@@ -16,14 +15,12 @@ class Config implements IConfig {
     }
     public setConfigFile(configFile) {
         this._service.setConfigFile(configFile);
-        this._configObj = this._service.getAll();
     }
     public async getConfigObj() {
-        return await this._configObj;
+        return await this._service.getConfigObj();
     }
     public async getAccountPath() {
-        let obj = await this.getConfigObj();
-        return obj['path']['account'];
+        return await this._service.getAccountPath();
     }
 }
 

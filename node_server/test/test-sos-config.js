@@ -24,7 +24,6 @@ function main() {
         console.log(goodAccountPath);
         console.log(accountPathFromAccountPath);
         test('account path test', function (t) {
-            //t.plan(2);
             t.equal(goodAccountPath, accountPathFromAll);
             t.equal(goodAccountPath, accountPathFromAccountPath);
             t.end();

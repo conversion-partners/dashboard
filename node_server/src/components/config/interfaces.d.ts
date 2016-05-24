@@ -10,8 +10,8 @@ interface IConfig {
 
 interface IConfigService {
     setConfigFile(configFile: string): void
-    getAll();
-    getAccountPath(): string;
+    getConfigObj();
+    getAccountPath(): Object;
 }
 
 interface IWarrior {
