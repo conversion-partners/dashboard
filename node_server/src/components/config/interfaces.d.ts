@@ -3,7 +3,7 @@
 /// <reference path="../../../node_modules/inversify-dts/inversify-logger-middleware/inversify-logger-middleware.d.ts" />
 
 interface IConfig {
-    getAccountPath(): string;
+    getAccountPath(): Object;
     setConfigFile(configFile: string): void
     getConfigObj():Object;
 }

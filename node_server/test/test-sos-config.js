@@ -13,32 +13,23 @@ const types_1 = require("../src/components/config/constants/types");
 require("../src/components/config/config/wiring");
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        //await ping();
+        let goodAccountPath = "/var/www/dashboard/data/accounts";
         let config = kernel_1.kernel.get(types_1.default.Config);
         config.setConfigFile('/var/www/dashboard/node_server/test/test-sos-config-configfile.json');
         let configObj = yield config.getConfigObj();
-        let accountPath = configObj['path']['account'];
+        let accountPathFromAll = configObj['path']['account'];
+        let accountPathFromAccountPath = yield config.getAccountPath();
         console.log(configObj);
-        console.log(accountPath);
-        let goodAccountPath = "/var/www/dashboard/data/accounts";
+        console.log(accountPathFromAll);
         console.log(goodAccountPath);
+        console.log(accountPathFromAccountPath);
         test('account path test', function (t) {
             //t.plan(2);
-            t.equal(goodAccountPath, accountPath);
+            t.equal(goodAccountPath, accountPathFromAll);
+            t.equal(goodAccountPath, accountPathFromAccountPath);
             t.end();
         });
     });
-}
-function ping() {
-    return __awaiter(this, void 0, void 0, function* () {
-        for (var i = 0; i < 10; i++) {
-            yield delay(300);
-            console.log("ping");
-        }
-    });
-}
-function delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }
 main();
 //# sourceMappingURL=test-sos-config.js.map
