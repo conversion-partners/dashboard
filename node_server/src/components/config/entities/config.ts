@@ -13,11 +13,17 @@ class Config implements IConfig {
     ) {
         this._service = configService;
     }
-    public setConfigFile(configFile) {
+    public setConfigFile(configFile: string) {
         this._service.setConfigFile(configFile);
+    }
+    public setRequestUrl(url: string) {
+        this._service.setRequestUrl(url);
     }
     public async getConfigObj() {
         return await this._service.getConfigObj();
+    }
+    public async getBaseAccountPath() {
+        return await this._service.getBaseAccountPath();
     }
     public async getAccountPath() {
         return await this._service.getAccountPath();

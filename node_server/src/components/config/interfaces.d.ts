@@ -3,24 +3,33 @@
 /// <reference path="../../../node_modules/inversify-dts/inversify-logger-middleware/inversify-logger-middleware.d.ts" />
 
 interface IConfig {
-    getAccountPath(): Object;
+    getBaseAccountPath(): Object;
     setConfigFile(configFile: string): void
-    getConfigObj():Promise<IConfigObject>;
+    getConfigObj(): Promise<IConfigObject>;
+    setRequestUrl(url: string): void;
+    getAccountPath(): Object;
 }
 
 interface IConfigService {
     setConfigFile(configFile: string): void
     getConfigObj(): Promise<IConfigObject>;
+    getBaseAccountPath(): Object;
+    setRequestUrl(url: string): void;
     getAccountPath(): Object;
 }
 
+interface IUrlStrategy {
+    
+}
+
 interface IConfigObject {
-    path: IPathObject 
+    path: IPathObject
 }
 
 interface IPathObject {
     account: string
 }
+
 
 interface IWarrior {
     fight(): string;

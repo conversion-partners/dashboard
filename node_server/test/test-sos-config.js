@@ -13,14 +13,19 @@ const types_1 = require("../src/components/config/constants/types");
 require("../src/components/config/config/wiring");
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        let goodAccountPath = "/var/www/dashboard/data/accounts";
+        let goodBaseAccountPath = "/var/www/dashboard/data/accounts";
         let config = kernel_1.kernel.get(types_1.default.Config);
         config.setConfigFile('/var/www/dashboard/node_server/test/test-sos-config-configfile.json');
-        let accountPathFromAccountPath = yield config.getAccountPath();
-        console.log(goodAccountPath);
-        console.log(accountPathFromAccountPath);
+        let baseAccountPath = yield config.getBaseAccountPath();
+        test('base account path test', function (t) {
+            t.equal(goodBaseAccountPath, baseAccountPath);
+            t.end();
+        });
+        config.setRequestUrl('http://www.shop-online-shop.nl/nl/winkels');
+        let goodAccountPath = "/var/www/dashboard/data/accounts/sos";
+        let accountPath = yield config.getAccountPath();
         test('account path test', function (t) {
-            t.equal(goodAccountPath, accountPathFromAccountPath);
+            t.equal(goodAccountPath, accountPath);
             t.end();
         });
     });

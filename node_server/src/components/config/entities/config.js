@@ -30,9 +30,17 @@ let Config = class Config {
     setConfigFile(configFile) {
         this._service.setConfigFile(configFile);
     }
+    setRequestUrl(url) {
+        this._service.setRequestUrl(url);
+    }
     getConfigObj() {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this._service.getConfigObj();
+        });
+    }
+    getBaseAccountPath() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this._service.getBaseAccountPath();
         });
     }
     getAccountPath() {

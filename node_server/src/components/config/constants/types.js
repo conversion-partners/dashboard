@@ -2,6 +2,7 @@
 const TYPES = {
     Config: "Config",
     ConfigService: "ConfigService",
+    UrlStrategy: "UrlStrategy",
     Warrior: "Warrior",
     Weapon: "Weapon"
 };
