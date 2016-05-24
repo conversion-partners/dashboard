@@ -17,6 +17,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments)).next());
     });
 };
+const fs = require('fs');
 const kernel_1 = require("../config/kernel");
 const types_1 = require("../constants/types");
 let ConfigService = class ConfigService {
@@ -26,12 +27,21 @@ let ConfigService = class ConfigService {
             this._configObj = yield JSON.parse(this._configFile);
         });
     }
+    getConfigObj() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this._configObj;
+        });
+    }
     getAll() {
         return __awaiter(this, void 0, void 0, function* () {
+            let _configFile = this._configFile;
             return new Promise(function (resolve, reject) {
-                resolve("Stuff worked!");
+                fs.readFile(_configFile, 'utf8', function (err, data) {
+                    if (err)
+                        reject(err);
+                    resolve(JSON.parse(data));
+                });
             });
-            //return this._configObj;
         });
     }
     getAccountPath() {

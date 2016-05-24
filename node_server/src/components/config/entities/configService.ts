@@ -1,5 +1,7 @@
 /// <reference path="../interfaces.d.ts" />
 
+import fs = require('fs');
+
 import { provideNamed } from "../config/kernel";
 import TYPES from "../constants/types";
 
@@ -14,14 +16,20 @@ class ConfigService implements IConfigService {
         this._configObj = await JSON.parse(this._configFile);
     }
 
+    private async getConfigObj(){
+        return this._configObj;
+    }
+
     public async getAll() {
 
+        let _configFile = this._configFile;
+
         return new Promise(function (resolve, reject) {
-            
-                resolve("Stuff worked!");
-           
+            fs.readFile(_configFile, 'utf8', function (err, data) {
+                if (err) reject(err);
+                resolve(JSON.parse(data));
+            });
         });
-        //return this._configObj;
     }
 
     public getAccountPath(): string {
