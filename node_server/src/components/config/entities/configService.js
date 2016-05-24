@@ -27,7 +27,7 @@ let ConfigService = class ConfigService {
         });
     }
     getConfigObj() {
-        return __awaiter(this, void 0, void 0, function* () {
+        return __awaiter(this, void 0, Promise, function* () {
             let _configFile = this._configFile;
             return new Promise(function (resolve, reject) {
                 fs.readFile(_configFile, 'utf8', function (err, data) {
@@ -40,9 +40,9 @@ let ConfigService = class ConfigService {
     }
     getAccountPath() {
         return __awaiter(this, void 0, void 0, function* () {
-            let obj = yield this.getConfigObj();
+            let configObj = yield this.getConfigObj();
             return new Promise(function (resolve, reject) {
-                resolve(obj['path']['account']);
+                resolve(configObj.path.account);
             });
         });
     }

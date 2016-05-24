@@ -15,10 +15,10 @@ class ConfigService implements IConfigService {
     }
 
 
-    public async getConfigObj() {
+    public async getConfigObj(): Promise<IConfigObject> {
 
         let _configFile = this._configFile;
-        return new Promise(function (resolve, reject) {
+        return new Promise<IConfigObject>(function (resolve, reject) {
             fs.readFile(_configFile, 'utf8', function (err, data) {
                 if (err) reject(err);
                 resolve(JSON.parse(data));
@@ -27,9 +27,9 @@ class ConfigService implements IConfigService {
     }
 
     public async getAccountPath() {
-        let obj = await this.getConfigObj();
+        let configObj = await this.getConfigObj();
         return new Promise(function (resolve, reject) {
-            resolve(obj['path']['account']);
+            resolve(configObj.path.account);
         });
     }
 }

@@ -14,6 +14,14 @@ interface IConfigService {
     getAccountPath(): Object;
 }
 
+interface IConfigObject {
+    path: IPathObject 
+}
+
+interface IPathObject {
+    account: string
+}
+
 interface IWarrior {
     fight(): string;
 }
