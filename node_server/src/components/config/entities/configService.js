@@ -9,11 +9,29 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator.throw(value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments)).next());
+    });
+};
 const kernel_1 = require("../config/kernel");
 const types_1 = require("../constants/types");
 let ConfigService = class ConfigService {
+    setConfigFile(configFile) {
+        return __awaiter(this, void 0, void 0, function* () {
+            this._configFile = configFile;
+            this._configObj = yield JSON.parse(this._configFile);
+        });
+    }
     getAll() {
-        return new Promise(resolve => function () {
+        return __awaiter(this, void 0, void 0, function* () {
+            return new Promise(function (resolve, reject) {
+                resolve("Stuff worked!");
+            });
+            //return this._configObj;
         });
     }
     getAccountPath() {

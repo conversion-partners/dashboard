@@ -4,16 +4,27 @@ import { provideNamed } from "../config/kernel";
 import TYPES from "../constants/types";
 
 @provideNamed(TYPES.ConfigService, "not-throwable")
-class ConfigService  implements IConfigService {
+class ConfigService implements IConfigService {
 
+    private _configFile: string;
+    private _configObj: Object;
 
-    getAll() {
-         return new Promise(resolve => function(){
-             
-         });
+    public async setConfigFile(configFile: string) {
+        this._configFile = configFile;
+        this._configObj = await JSON.parse(this._configFile);
     }
-    
-    getAccountPath(): string {
+
+    public async getAll() {
+
+        return new Promise(function (resolve, reject) {
+            
+                resolve("Stuff worked!");
+           
+        });
+        //return this._configObj;
+    }
+
+    public getAccountPath(): string {
         return "accountpath";
     }
 }

@@ -4,10 +4,13 @@
 
 interface IConfig {
     getAccountPath(): string;
+    setConfigFile(configFile: string): void
+    getConfigObj():Object;
 }
 
 interface IConfigService {
-    getAll(): Object;
+    setConfigFile(configFile: string): void
+    getAll();
     getAccountPath(): string;
 }
 
