@@ -14,9 +14,7 @@ class ConfigService implements IConfigService {
         this._configFile = configFile;
     }
 
-
     public async getConfigObj(): Promise<IConfigObject> {
-
         let _configFile = this._configFile;
         return new Promise<IConfigObject>(function (resolve, reject) {
             fs.readFile(_configFile, 'utf8', function (err, data) {

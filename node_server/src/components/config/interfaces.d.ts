@@ -5,12 +5,12 @@
 interface IConfig {
     getAccountPath(): Object;
     setConfigFile(configFile: string): void
-    getConfigObj():Object;
+    getConfigObj():Promise<IConfigObject>;
 }
 
 interface IConfigService {
     setConfigFile(configFile: string): void
-    getConfigObj();
+    getConfigObj(): Promise<IConfigObject>;
     getAccountPath(): Object;
 }
 

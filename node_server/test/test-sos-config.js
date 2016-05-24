@@ -16,15 +16,10 @@ function main() {
         let goodAccountPath = "/var/www/dashboard/data/accounts";
         let config = kernel_1.kernel.get(types_1.default.Config);
         config.setConfigFile('/var/www/dashboard/node_server/test/test-sos-config-configfile.json');
-        let configObj = yield config.getConfigObj();
-        let accountPathFromAll = configObj['path']['account'];
         let accountPathFromAccountPath = yield config.getAccountPath();
-        console.log(configObj);
-        console.log(accountPathFromAll);
         console.log(goodAccountPath);
         console.log(accountPathFromAccountPath);
         test('account path test', function (t) {
-            t.equal(goodAccountPath, accountPathFromAll);
             t.equal(goodAccountPath, accountPathFromAccountPath);
             t.end();
         });
