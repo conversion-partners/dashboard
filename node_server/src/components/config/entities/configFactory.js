@@ -14,7 +14,7 @@ class ConfigFactory {
         //let config = kernel.get<IConfig>(TYPES.Config);
         let config = kernel_1.kernel.get(types_1.default["Config"]);
         // todo..
-        //let configService = kernel.get<IConfigService>(TYPES[this._confObj.configService]);
+        //let configService = kernel.get<IConfigService>(TYPES[this._confObj.configService.type]);
         config.setConfigFile(this._configFile);
         return config;
     }

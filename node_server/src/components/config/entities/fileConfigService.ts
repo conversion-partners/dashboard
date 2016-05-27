@@ -7,7 +7,7 @@ import { provideNamed } from "../config/kernel";
 import TYPES from "../constants/types";
 
 @provideNamed(TYPES.ConfigService, "not-throwable")
-class ConfigService implements IConfigService {
+class FileConfigService implements IConfigService {
 
     private _configFile: string;
     private _requestUrl: string;
@@ -52,4 +52,4 @@ class ConfigService implements IConfigService {
 
 
 
-export default ConfigService;
+export default FileConfigService;

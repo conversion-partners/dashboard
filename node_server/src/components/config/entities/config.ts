@@ -20,6 +20,11 @@ class Config implements IConfig {
         this._accountService = accountService;
         this._configService.setUrlStrategy(urlStrategy);
     }
+    
+    public setConfigService(configService: IConfigService): void{
+        this._configService = configService;
+    }
+    
     public setConfigFile(configFile: string) {
         this._configService.setConfigFile(configFile);
     }

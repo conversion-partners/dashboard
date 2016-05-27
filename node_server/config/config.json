@@ -1,3 +1,16 @@
 {
-    "appconfigstuff":""
+    "app":{
+        
+    },
+    "accountService" : {
+        "type" : "file",
+        "source" : "/path.dsafasd.sda.fads.f//////"
+    },
+    "configService" : {
+        "type" : "ConfigService",
+        "source" : "/pathefdsafsadfsd"
+    },
+    "urlStrategy" : {
+        "type" : "domain-language"
+    }
 }

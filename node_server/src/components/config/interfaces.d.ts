@@ -37,6 +37,11 @@ interface IUrlStrategy {
 
 interface IConfigObject {
     path: IPathObject;
+    configService : IConfigServiceJSON;
+}
+
+interface IConfigServiceJSON {
+    type : string
 }
 
 interface IPathObject {
