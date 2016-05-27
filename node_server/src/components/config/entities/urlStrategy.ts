@@ -5,13 +5,13 @@ import {  inject, named } from "inversify";
 import { provideNamed } from "../config/kernel";
 import TYPES from "../constants/types";
 
-var url = require("url");
+import NodeURL = require('url');
 
 @provideNamed(TYPES.UrlStrategy, "not-throwable")
 class UrlStrategy implements IUrlStrategy {
 
     private _requestUrl: string;
-    private _parsedUrl: URL;
+    private _parsedUrl: NodeURL.Url;
 
     public getAccount() : string {
         return this._parsedUrl['path'];
@@ -19,7 +19,7 @@ class UrlStrategy implements IUrlStrategy {
     
     public setRequestUrl(requestUrl: string){
         this._requestUrl = requestUrl;
-        this._parsedUrl = url.parse(requestUrl);
+        this._parsedUrl = NodeURL.parse(requestUrl);
     }
 
     

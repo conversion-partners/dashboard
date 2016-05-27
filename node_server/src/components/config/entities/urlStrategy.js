@@ -12,14 +12,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const kernel_1 = require("../config/kernel");
 const types_1 = require("../constants/types");
-var url = require("url");
+const NodeURL = require('url');
 let UrlStrategy = class UrlStrategy {
     getAccount() {
         return this._parsedUrl['path'];
     }
     setRequestUrl(requestUrl) {
         this._requestUrl = requestUrl;
-        this._parsedUrl = url.parse(requestUrl);
+        this._parsedUrl = NodeURL.parse(requestUrl);
     }
 };
 UrlStrategy = __decorate([
