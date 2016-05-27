@@ -29,9 +29,6 @@ let Config = class Config {
         this._accountService = accountService;
         this._configService.setUrlStrategy(urlStrategy);
     }
-    setKernel(kernel) {
-        this._kernel = kernel;
-    }
     setConfigFile(configFile) {
         this._configService.setConfigFile(configFile);
     }

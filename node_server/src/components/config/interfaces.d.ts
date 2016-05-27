@@ -1,10 +1,15 @@
-/// <reference path="../../../node_modules/inversify-dts/inversify/inversify.d.ts" />
 /// <reference path="../../../node_modules/reflect-metadata/reflect-metadata.d.ts" />
 /// <reference path="../../../node_modules/inversify-dts/inversify-binding-decorators/inversify-binding-decorators.d.ts" />
 /// <reference path="../../../node_modules/inversify-dts/inversify-logger-middleware/inversify-logger-middleware.d.ts" />
 
+interface IConfigFactory {
+    setConfigFile(configFile: string): void;
+    getConfigObject(): IConfig;
+}
+
+
+
 interface IConfig {
-    setKernel(kernel: inversify.IKernel):void;
     getBaseAccountPath(): Object;
     setConfigFile(configFile: string): void;
     getConfigObj(): Promise<IConfigObject>;

@@ -8,16 +8,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 let test = require('tape');
-const kernel_1 = require("../src/components/config/config/kernel");
-const types_1 = require("../src/components/config/constants/types");
-require("../src/components/config/config/wiring");
+/*
+import { kernel } from "../src/components/config/config/kernel";
+import TYPES from "../src/components/config/constants/types";
+import "../src/components/config/config/wiring";
+*/
+const configFactory_1 = require("../src/components/config/entities/configFactory");
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        let goodBaseAccountPath = "/var/www/dashboard/data/accounts";
-        let config = kernel_1.kernel.get(types_1.default.Config);
-        config.setKernel(kernel_1.kernel);
-        config.setConfigFile('/var/www/dashboard/node_server/test/test-sos-config-configfile.json');
+        let configFactory = new configFactory_1.default();
+        configFactory.setConfigFile('/var/www/dashboard/node_server/test/test-sos-config-configfile.json');
+        let config = configFactory.getConfigObject();
         let baseAccountPath = yield config.getBaseAccountPath();
+        let goodBaseAccountPath = "/var/www/dashboard/data/accounts";
         test('base account path test', function (t) {
             t.equal(goodBaseAccountPath, baseAccountPath);
             t.end();

@@ -20,9 +20,6 @@ class Config implements IConfig {
         this._accountService = accountService;
         this._configService.setUrlStrategy(urlStrategy);
     }
-    public setKernel(kernel){
-        this._kernel = kernel;
-    }
     public setConfigFile(configFile: string) {
         this._configService.setConfigFile(configFile);
     }
