@@ -20,44 +20,60 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments)).next());
     });
 };
+const fs = require('fs');
 const inversify_1 = require("inversify");
 const kernel_1 = require("../config/kernel");
 const types_1 = require("../constants/types");
-let Config = class Config {
-    constructor(configService, accountService) {
-        this._configService = configService;
-        this._accountService = accountService;
+let AccountService = class AccountService {
+    constructor(urlStrategy) {
+        this._urlStrategy = urlStrategy;
     }
     setConfigFile(configFile) {
-        this._configService.setConfigFile(configFile);
+        return __awaiter(this, void 0, void 0, function* () {
+            this._configFile = configFile;
+        });
     }
     setRequestUrl(url) {
-        this._configService.setRequestUrl(url);
+        return __awaiter(this, void 0, void 0, function* () {
+            this._urlStrategy.setRequestUrl(url);
+        });
     }
     getConfigObj() {
-        return __awaiter(this, void 0, void 0, function* () {
-            return yield this._configService.getConfigObj();
+        return __awaiter(this, void 0, Promise, function* () {
+            let _configFile = this._configFile;
+            return new Promise(function (resolve, reject) {
+                fs.readFile(_configFile, 'utf8', function (err, data) {
+                    if (err)
+                        reject(err);
+                    resolve(JSON.parse(data));
+                });
+            });
         });
     }
     getBaseAccountPath() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this._configService.getBaseAccountPath();
+            let configObj = yield this.getConfigObj();
+            return new Promise(function (resolve, reject) {
+                resolve(configObj.path.account);
+            });
         });
     }
     getAccountPath() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this._configService.getAccountPath();
+            let configObj = yield this.getConfigObj();
+            let urlStrategy = this._urlStrategy;
+            return new Promise(function (resolve, reject) {
+                resolve(configObj.path.account + "/" + urlStrategy.getAccount());
+            });
         });
     }
 };
-Config = __decorate([
-    kernel_1.provide(types_1.default.Config),
-    __param(0, inversify_1.inject(types_1.default.ConfigService)),
-    __param(0, inversify_1.named("not-throwable")),
-    __param(1, inversify_1.inject(types_1.default.AccountService)),
-    __param(1, inversify_1.named("not-throwable")), 
-    __metadata('design:paramtypes', [Object, Object])
-], Config);
+AccountService = __decorate([
+    kernel_1.provideNamed(types_1.default.AccountService, "not-throwable"),
+    __param(0, inversify_1.inject(types_1.default.UrlStrategy)),
+    __param(0, inversify_1.named("not-throwable")), 
+    __metadata('design:paramtypes', [Object])
+], AccountService);
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = Config;
-//# sourceMappingURL=config.js.map
+exports.default = AccountService;
+//# sourceMappingURL=accountService.js.map

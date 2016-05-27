@@ -18,6 +18,10 @@ interface IConfigService {
     getAccountPath(): Object;
 }
 
+interface IAccountService {
+
+}
+
 interface IUrlStrategy {
     getAccount(): string;
     setRequestUrl(url: string): void;

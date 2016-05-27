@@ -7,26 +7,29 @@ import TYPES from "../constants/types";
 
 @provide(TYPES.Config)
 class Config implements IConfig {
-    private _service: IConfigService;
+    private _configService: IConfigService;
+    private _accountService: IAccountService;
     public constructor(
-        @inject(TYPES.ConfigService) @named("not-throwable") configService: IConfigService
+        @inject(TYPES.ConfigService) @named("not-throwable") configService: IConfigService,
+        @inject(TYPES.AccountService) @named("not-throwable") accountService: IAccountService
     ) {
-        this._service = configService;
+        this._configService = configService;
+        this._accountService = accountService;
     }
     public setConfigFile(configFile: string) {
-        this._service.setConfigFile(configFile);
+        this._configService.setConfigFile(configFile);
     }
     public setRequestUrl(url: string) {
-        this._service.setRequestUrl(url);
+        this._configService.setRequestUrl(url);
     }
     public async getConfigObj() {
-        return await this._service.getConfigObj();
+        return await this._configService.getConfigObj();
     }
     public async getBaseAccountPath() {
-        return await this._service.getBaseAccountPath();
+        return await this._configService.getBaseAccountPath();
     }
     public async getAccountPath() {
-        return await this._service.getAccountPath();
+        return await this._configService.getAccountPath();
     }
 }
 
