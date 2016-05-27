@@ -24,9 +24,10 @@ const inversify_1 = require("inversify");
 const kernel_1 = require("../config/kernel");
 const types_1 = require("../constants/types");
 let Config = class Config {
-    constructor(configService, accountService) {
+    constructor(configService, accountService, urlStrategy) {
         this._configService = configService;
         this._accountService = accountService;
+        this._configService.setUrlStrategy(urlStrategy);
     }
     setConfigFile(configFile) {
         this._configService.setConfigFile(configFile);
@@ -55,8 +56,10 @@ Config = __decorate([
     __param(0, inversify_1.inject(types_1.default.ConfigService)),
     __param(0, inversify_1.named("not-throwable")),
     __param(1, inversify_1.inject(types_1.default.AccountService)),
-    __param(1, inversify_1.named("not-throwable")), 
-    __metadata('design:paramtypes', [Object, Object])
+    __param(1, inversify_1.named("not-throwable")),
+    __param(2, inversify_1.inject(types_1.default.UrlStrategy)),
+    __param(2, inversify_1.named("not-throwable")), 
+    __metadata('design:paramtypes', [Object, Object, Object])
 ], Config);
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = Config;

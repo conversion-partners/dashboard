@@ -9,9 +9,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -21,12 +18,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 const fs = require('fs');
-const inversify_1 = require("inversify");
 const kernel_1 = require("../config/kernel");
 const types_1 = require("../constants/types");
 let ConfigService = class ConfigService {
-    constructor(urlStrategy) {
-        this._urlStrategy = urlStrategy;
+    setUrlStrategy(urlStrategy) {
+        return __awaiter(this, void 0, void 0, function* () {
+            this._urlStrategy = urlStrategy;
+        });
     }
     setConfigFile(configFile) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -69,10 +67,8 @@ let ConfigService = class ConfigService {
     }
 };
 ConfigService = __decorate([
-    kernel_1.provideNamed(types_1.default.ConfigService, "not-throwable"),
-    __param(0, inversify_1.inject(types_1.default.UrlStrategy)),
-    __param(0, inversify_1.named("not-throwable")), 
-    __metadata('design:paramtypes', [Object])
+    kernel_1.provideNamed(types_1.default.ConfigService, "not-throwable"), 
+    __metadata('design:paramtypes', [])
 ], ConfigService);
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = ConfigService;

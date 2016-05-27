@@ -9,12 +9,16 @@ import TYPES from "../constants/types";
 class Config implements IConfig {
     private _configService: IConfigService;
     private _accountService: IAccountService;
+
+
     public constructor(
         @inject(TYPES.ConfigService) @named("not-throwable") configService: IConfigService,
-        @inject(TYPES.AccountService) @named("not-throwable") accountService: IAccountService
+        @inject(TYPES.AccountService) @named("not-throwable") accountService: IAccountService,
+        @inject(TYPES.UrlStrategy) @named("not-throwable") urlStrategy: IUrlStrategy
     ) {
         this._configService = configService;
         this._accountService = accountService;
+        this._configService.setUrlStrategy(urlStrategy);
     }
     public setConfigFile(configFile: string) {
         this._configService.setConfigFile(configFile);

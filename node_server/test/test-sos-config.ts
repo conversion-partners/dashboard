@@ -24,12 +24,12 @@ async function main() {
 
     console.log(accountPath);
 
-    
+
     test('account path test', function (t) {
         t.equal(goodAccountPath, accountPath);
         t.end();
     });
-    
+
 }
 
 

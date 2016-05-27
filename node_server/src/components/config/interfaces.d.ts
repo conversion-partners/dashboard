@@ -4,14 +4,15 @@
 
 interface IConfig {
     getBaseAccountPath(): Object;
-    setConfigFile(configFile: string): void
+    setConfigFile(configFile: string): void;
     getConfigObj(): Promise<IConfigObject>;
     setRequestUrl(url: string): void;
     getAccountPath(): Object;
 }
 
 interface IConfigService {
-    setConfigFile(configFile: string): void
+    setConfigFile(configFile: string): void;
+    setUrlStrategy(urlStrategy: IUrlStrategy): void;
     getConfigObj(): Promise<IConfigObject>;
     getBaseAccountPath(): Object;
     setRequestUrl(url: string): void;

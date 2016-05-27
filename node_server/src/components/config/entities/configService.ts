@@ -12,14 +12,11 @@ class ConfigService implements IConfigService {
     private _configFile: string;
     private _requestUrl: string;
     private _urlStrategy: IUrlStrategy;
-    
-   
-    public constructor(
-        @inject(TYPES.UrlStrategy) @named("not-throwable") urlStrategy: IUrlStrategy
-    ) {
+
+    public async setUrlStrategy(urlStrategy: IUrlStrategy) {
         this._urlStrategy = urlStrategy;
     }
-    
+
     public async setConfigFile(configFile: string) {
         this._configFile = configFile;
     }
