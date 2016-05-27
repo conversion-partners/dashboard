@@ -16,7 +16,7 @@ import "../src/components/config/config/wiring";
 const configFactory_1 = require("../src/components/config/entities/configFactory");
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        let configFactory = new configFactory_1.default();
+        let configFactory = new configFactory_1.default('/var/www/dashboard/node_server/config/config.json');
         configFactory.setConfigFile('/var/www/dashboard/node_server/test/test-sos-config-configfile.json');
         let config = configFactory.getConfigObject();
         let baseAccountPath = yield config.getBaseAccountPath();

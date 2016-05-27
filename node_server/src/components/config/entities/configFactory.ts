@@ -7,6 +7,11 @@ import "../config/wiring";
 class ConfigFactory implements IConfigFactory {
 
     private _configFile: string;
+    private _confObj: Object;
+
+    public constructor(confFile: string) {
+        this._confObj = require(confFile);
+    }
 
     public setConfigFile(configFile: string): void {
         this._configFile = configFile;
@@ -15,6 +20,8 @@ class ConfigFactory implements IConfigFactory {
     public getConfigObject(): IConfig {
         //let config = kernel.get<IConfig>(TYPES.Config);
         let config = kernel.get<IConfig>(TYPES["Config"]);
+        // todo..
+        //let configService = kernel.get<IConfigService>(TYPES[this._confObj.configService]);
         config.setConfigFile(this._configFile);
         return config;
     }

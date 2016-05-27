@@ -8,7 +8,7 @@ import ConfigFactory from "../src/components/config/entities/configFactory";
 
 async function main() {
     
-    let configFactory = new ConfigFactory();
+    let configFactory = new ConfigFactory('/var/www/dashboard/node_server/config/config.json');
     configFactory.setConfigFile('/var/www/dashboard/node_server/test/test-sos-config-configfile.json');
     let config = configFactory.getConfigObject();
     
