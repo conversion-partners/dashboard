@@ -7,7 +7,7 @@
         "source" : "/path.dsafasd.sda.fads.f//////"
     },
     "configService" : {
-        "type" : "ConfigService",
+        "type" : "file",
         "source" : "/pathefdsafsadfsd"
     },
     "urlStrategy" : {

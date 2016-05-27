@@ -6,15 +6,19 @@ require("../config/wiring");
 class ConfigFactory {
     constructor(confFile) {
         this._confObj = require(confFile);
+        if (this._confObj.configService.type == "file") {
+            this._configService = "ConfigService";
+        }
+        else {
+            throw "No config service defined please set : file";
+        }
     }
     setConfigFile(configFile) {
         this._configFile = configFile;
     }
     getConfigObject() {
-        //let config = kernel.get<IConfig>(TYPES.Config);
-        let config = kernel_1.kernel.get(types_1.default["Config"]);
-        // todo..
-        //let configService = kernel.get<IConfigService>(TYPES[this._confObj.configService.type]);
+        let config = kernel_1.kernel.get(types_1.default.Config);
+        let configService = kernel_1.kernel.get(types_1.default[this._configService]);
         config.setConfigFile(this._configFile);
         return config;
     }
