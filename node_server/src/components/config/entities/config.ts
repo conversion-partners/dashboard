@@ -8,6 +8,7 @@ import TYPES from "../constants/types";
 @provide(TYPES.Config)
 class Config implements IConfig {
     private _configService: IConfigService;
+    private _configService2: IConfigService;
     private _accountService: IAccountService;
     private _kernel: inversify.IKernel;
 
@@ -20,11 +21,11 @@ class Config implements IConfig {
         this._accountService = accountService;
         this._configService.setUrlStrategy(urlStrategy);
     }
-    
-    public setConfigService(configService: IConfigService): void{
-        this._configService = configService;
+
+    public setConfigService(configService: IConfigService): void {
+        this._configService2 = configService;
     }
-    
+
     public setConfigFile(configFile: string) {
         this._configService.setConfigFile(configFile);
     }

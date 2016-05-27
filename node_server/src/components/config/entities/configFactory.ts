@@ -26,6 +26,7 @@ class ConfigFactory implements IConfigFactory {
         let config = kernel.get<IConfig>(TYPES.Config);
         let configService = kernel.get<IConfigService>(TYPES[this._configService]);
         config.setConfigFile(this._configFile);
+        config.setConfigService(configService);
         return config;
     }
 

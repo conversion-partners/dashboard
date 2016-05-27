@@ -10,6 +10,7 @@ interface IConfigFactory {
 
 
 interface IConfig {
+    setConfigService(configService: IConfigService): void;
     getBaseAccountPath(): Object;
     setConfigFile(configFile: string): void;
     getConfigObj(): Promise<IConfigObject>;
@@ -37,11 +38,11 @@ interface IUrlStrategy {
 
 interface IConfigObject {
     path: IPathObject;
-    configService : IConfigServiceJSON;
+    configService: IConfigServiceJSON;
 }
 
 interface IConfigServiceJSON {
-    type : string
+    type: string
 }
 
 interface IPathObject {

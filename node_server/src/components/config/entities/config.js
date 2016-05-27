@@ -30,7 +30,7 @@ let Config = class Config {
         this._configService.setUrlStrategy(urlStrategy);
     }
     setConfigService(configService) {
-        this._configService = configService;
+        this._configService2 = configService;
     }
     setConfigFile(configFile) {
         this._configService.setConfigFile(configFile);

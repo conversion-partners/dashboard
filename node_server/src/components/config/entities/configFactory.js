@@ -20,6 +20,7 @@ class ConfigFactory {
         let config = kernel_1.kernel.get(types_1.default.Config);
         let configService = kernel_1.kernel.get(types_1.default[this._configService]);
         config.setConfigFile(this._configFile);
+        config.setConfigService(configService);
         return config;
     }
 }
