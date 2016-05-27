@@ -13,7 +13,8 @@ class ConfigFactory implements IConfigFactory {
     }
 
     public getConfigObject(): IConfig {
-        let config = kernel.get<IConfig>(TYPES.Config);
+        //let config = kernel.get<IConfig>(TYPES.Config);
+        let config = kernel.get<IConfig>(TYPES["Config"]);
         config.setConfigFile(this._configFile);
         return config;
     }

@@ -8,7 +8,8 @@ class ConfigFactory {
         this._configFile = configFile;
     }
     getConfigObject() {
-        let config = kernel_1.kernel.get(types_1.default.Config);
+        //let config = kernel.get<IConfig>(TYPES.Config);
+        let config = kernel_1.kernel.get(types_1.default["Config"]);
         config.setConfigFile(this._configFile);
         return config;
     }
