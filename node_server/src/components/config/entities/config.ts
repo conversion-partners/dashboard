@@ -9,7 +9,7 @@ import TYPES from "../constants/types";
 class Config implements IConfig {
     private _configService: IConfigService;
     private _accountService: IAccountService;
-
+    private _kernel: inversify.IKernel;
 
     public constructor(
         @inject(TYPES.ConfigService) @named("not-throwable") configService: IConfigService,
@@ -19,6 +19,9 @@ class Config implements IConfig {
         this._configService = configService;
         this._accountService = accountService;
         this._configService.setUrlStrategy(urlStrategy);
+    }
+    public setKernel(kernel){
+        this._kernel = kernel;
     }
     public setConfigFile(configFile: string) {
         this._configService.setConfigFile(configFile);

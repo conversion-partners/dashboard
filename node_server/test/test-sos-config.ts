@@ -10,6 +10,7 @@ async function main() {
     let goodBaseAccountPath = "/var/www/dashboard/data/accounts";
 
     let config = kernel.get<IConfig>(TYPES.Config);
+    config.setKernel(kernel);
     config.setConfigFile('/var/www/dashboard/node_server/test/test-sos-config-configfile.json');
     let baseAccountPath = await config.getBaseAccountPath();
 

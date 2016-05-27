@@ -15,6 +15,7 @@ function main() {
     return __awaiter(this, void 0, void 0, function* () {
         let goodBaseAccountPath = "/var/www/dashboard/data/accounts";
         let config = kernel_1.kernel.get(types_1.default.Config);
+        config.setKernel(kernel_1.kernel);
         config.setConfigFile('/var/www/dashboard/node_server/test/test-sos-config-configfile.json');
         let baseAccountPath = yield config.getBaseAccountPath();
         test('base account path test', function (t) {
