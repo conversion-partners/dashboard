@@ -17,21 +17,20 @@ class FileAccountService implements IAccountService {
         this._domain = domain;
     }
 
-    private async getAccountFromDb() {
+    private async getAccountFromDb(): Promise<IAccount> {
         let _accountDb = await this.getAccountDb();
+        //if (err) reject(err);
+        class Tmp implements IAccount {
+            public domain: string;
+            public account: string;
+        }
+        let temp = new Tmp();
+        return temp;
     }
 
     private async getAccount(): Promise<IAccount> {
-
-
-
+        let temp = await this.getAccountFromDb();
         return new Promise<IAccount>(function (resolve, reject) {
-            //if (err) reject(err);
-            class Tmp implements IAccount {
-                public domain: string;
-                public account: string;
-            }
-            let temp = new Tmp();
             resolve(temp);
         });
     }

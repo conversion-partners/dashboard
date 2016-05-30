@@ -25,17 +25,19 @@ let FileAccountService = class FileAccountService {
         this._domain = domain;
     }
     getAccountFromDb() {
-        return __awaiter(this, void 0, void 0, function* () {
+        return __awaiter(this, void 0, Promise, function* () {
             let _accountDb = yield this.getAccountDb();
+            //if (err) reject(err);
+            class Tmp {
+            }
+            let temp = new Tmp();
+            return temp;
         });
     }
     getAccount() {
         return __awaiter(this, void 0, Promise, function* () {
+            let temp = yield this.getAccountFromDb();
             return new Promise(function (resolve, reject) {
-                //if (err) reject(err);
-                class Tmp {
-                }
-                let temp = new Tmp();
                 resolve(temp);
             });
         });
