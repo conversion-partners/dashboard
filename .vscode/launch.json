@@ -54,6 +54,16 @@
             "outDir": "${workspaceRoot}/node_server/dist"
         },
         {
+            "name": "Test file run",
+            "type": "node",
+            "request": "launch",
+            "program": "${file}",
+            "cwd": "${workspaceRoot}",
+            "stopOnEntry": false,
+            "sourceMaps": true,
+            "outDir": "${workspaceRoot}/node_server/dist"
+        },
+        {
             "name": "Launch tape tests",
             "type": "node",
             "request": "launch",
