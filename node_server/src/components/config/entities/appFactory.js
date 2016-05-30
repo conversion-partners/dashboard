@@ -13,7 +13,7 @@ class AppFactory {
             throw "No config service defined please set : file";
         }
         if (this._confObj.accountService.type == "file") {
-            this._accountService = types_1.default.AccountService;
+            this._accountService = types_1.default.FileAccountService;
         }
         else {
             throw "No account service defined please set : file";

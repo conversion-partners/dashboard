@@ -39,7 +39,7 @@ interface IConfigService {
 }
 
 interface IAccountService {
-
+    setDomain(domain: string):void;
 }
 
 interface IUrlStrategy {

@@ -9,9 +9,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -20,15 +17,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments)).next());
     });
 };
-const inversify_1 = require("inversify");
 const kernel_1 = require("../config/kernel");
 const types_1 = require("../constants/types");
 let Config = class Config {
-    constructor(configService, accountService, urlStrategy) {
-        this._configService2 = configService;
-        this._accountService2 = accountService;
-        //this._configService.setUrlStrategy(urlStrategy);
-    }
     setConfigService(configService) {
         this._configService = configService;
     }
@@ -62,14 +53,8 @@ let Config = class Config {
     }
 };
 Config = __decorate([
-    kernel_1.provide(types_1.default.Config),
-    __param(0, inversify_1.inject(types_1.default.ConfigService)),
-    __param(0, inversify_1.named("not-throwable")),
-    __param(1, inversify_1.inject(types_1.default.AccountService)),
-    __param(1, inversify_1.named("not-throwable")),
-    __param(2, inversify_1.inject(types_1.default.UrlStrategy)),
-    __param(2, inversify_1.named("not-throwable")), 
-    __metadata('design:paramtypes', [Object, Object, Object])
+    kernel_1.provide(types_1.default.Config), 
+    __metadata('design:paramtypes', [])
 ], Config);
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = Config;

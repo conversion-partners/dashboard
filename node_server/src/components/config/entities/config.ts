@@ -8,36 +8,20 @@ import TYPES from "../constants/types";
 @provide(TYPES.Config)
 class Config implements IConfig {
     private _configService: IConfigService;
-    private _configService2: IConfigService;
     private _accountService: IAccountService;
-    private _accountService2: IAccountService;
     private _urlStrategy: IUrlStrategy;
     private _kernel: inversify.IKernel;
-
-    public constructor(
-        @inject(TYPES.ConfigService) @named("not-throwable") configService: IConfigService,
-        @inject(TYPES.AccountService) @named("not-throwable") accountService: IAccountService,
-        @inject(TYPES.UrlStrategy) @named("not-throwable") urlStrategy: IUrlStrategy
-    ) {
-        this._configService2 = configService;
-        this._accountService2 = accountService;
-        //this._configService.setUrlStrategy(urlStrategy);
-    }
 
     public setConfigService(configService: IConfigService): void {
         this._configService = configService;
     }
-
     public setAccountService(accountService: IAccountService): void {
         this._accountService = accountService;
     }
-
     public setUrlStrategy(urlStrategy: IUrlStrategy): void {
         this._urlStrategy = urlStrategy;
         this._configService.setUrlStrategy(urlStrategy);
     }
-
-
     public setConfigFile(configFile: string) {
         this._configService.setConfigFile(configFile);
     }

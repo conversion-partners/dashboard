@@ -20,20 +20,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 const fs = require('fs');
 const kernel_1 = require("../config/kernel");
 const types_1 = require("../constants/types");
-let ConfigService = class ConfigService {
-    setUrlStrategy(urlStrategy) {
-        return __awaiter(this, void 0, void 0, function* () {
-            this._urlStrategy = urlStrategy;
-        });
+let FileAccountService = class FileAccountService {
+    setDomain(domain) {
+        this._domain = domain;
     }
     setConfigFile(configFile) {
         return __awaiter(this, void 0, void 0, function* () {
             this._configFile = configFile;
-        });
-    }
-    setRequestUrl(url) {
-        return __awaiter(this, void 0, void 0, function* () {
-            this._urlStrategy.setRequestUrl(url);
         });
     }
     getConfigObj() {
@@ -59,17 +52,16 @@ let ConfigService = class ConfigService {
     getAccountPath() {
         return __awaiter(this, void 0, void 0, function* () {
             let configObj = yield this.getConfigObj();
-            let urlStrategy = this._urlStrategy;
             return new Promise(function (resolve, reject) {
-                resolve(configObj.path.account + "/" + urlStrategy.getAccount());
+                resolve(configObj.path.account + "/" + "... to be implemented");
             });
         });
     }
 };
-ConfigService = __decorate([
-    kernel_1.provideNamed(types_1.default.ConfigService, "not-throwable"), 
+FileAccountService = __decorate([
+    kernel_1.provideNamed(types_1.default.FileAccountService, "not-throwable"), 
     __metadata('design:paramtypes', [])
-], ConfigService);
+], FileAccountService);
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = ConfigService;
-//# sourceMappingURL=configService.js.map
+exports.default = FileAccountService;
+//# sourceMappingURL=fileAccountService.js.map

@@ -6,25 +6,19 @@ import {  inject, named } from "inversify";
 import { provideNamed } from "../config/kernel";
 import TYPES from "../constants/types";
 
-@provideNamed(TYPES.AccountService, "not-throwable")
-class AccountService implements IAccountService {
+@provideNamed(TYPES.FileAccountService, "not-throwable")
+class FileAccountService implements IAccountService {
 
     private _configFile: string;
-    private _requestUrl: string;
-    private _urlStrategy: IUrlStrategy;
-    
-   
-    public constructor(
-        @inject(TYPES.UrlStrategy) @named("not-throwable") urlStrategy: IUrlStrategy
-    ) {
-        this._urlStrategy = urlStrategy;
+    private _domain: string;
+
+    public setDomain(domain: string){
+        this._domain = domain;
     }
     
+
     public async setConfigFile(configFile: string) {
         this._configFile = configFile;
-    }
-    public async setRequestUrl(url: string) {
-        this._urlStrategy.setRequestUrl(url);
     }
 
     public async getConfigObj(): Promise<IConfigObject> {
@@ -46,13 +40,12 @@ class AccountService implements IAccountService {
 
     public async getAccountPath() {
         let configObj = await this.getConfigObj();
-        let urlStrategy = this._urlStrategy;
         return new Promise(function (resolve, reject) {
-            resolve(configObj.path.account + "/" + urlStrategy.getAccount());
+            resolve(configObj.path.account + "/" + "... to be implemented");
         });
     }
 }
 
 
 
-export default AccountService;
+export default FileAccountService;

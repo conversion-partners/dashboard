@@ -21,7 +21,7 @@ class AppFactory implements IAppFactory {
             throw "No config service defined please set : file";
         }
         if (this._confObj.accountService.type == "file") {
-            this._accountService = TYPES.AccountService;
+            this._accountService = TYPES.FileAccountService;
 
         } else {
             throw "No account service defined please set : file";
