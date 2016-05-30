@@ -12,23 +12,18 @@ class AppFactory {
         else {
             throw "No config service defined please set : file";
         }
-        if (this._confObj.configService.type == "file") {
-            this._configService = types_1.default.ConfigService;
+        if (this._confObj.accountService.type == "file") {
+            this._accountService = types_1.default.AccountService;
         }
         else {
-            throw "No config service defined please set : file";
+            throw "No account service defined please set : file";
         }
-        /*
-                "type" : "file",
-        "source" : "/path.dsafasd.sda.fads.f//////"
-    },
-    "configService" : {
-        "type" : "file",
-        "source" : "/pathefdsafsadfsd"
-    },
-    "urlStrategy" : {
-        "type" : "domain-language"
-        */
+        if (this._confObj.urlStrategy.type == "domain-language") {
+            this._urlStrategy = types_1.default.UrlStrategy;
+        }
+        else {
+            throw "No account service defined please set : file";
+        }
     }
     setConfigFile(configFile) {
         this._configFile = configFile;
@@ -37,11 +32,11 @@ class AppFactory {
         let config = kernel_1.kernel.get(types_1.default.Config);
         let configService = kernel_1.kernel.get(types_1.default[this._configService]);
         let accountService = kernel_1.kernel.get(types_1.default[this._accountService]);
-        //        let urlStrategy = kernel.get<IUrlStrategy>(TYPES[this._urlStrategy]);
+        let urlStrategy = kernel_1.kernel.get(types_1.default[this._urlStrategy]);
         config.setConfigFile(this._configFile);
         config.setConfigService(configService);
         config.setAccountService(accountService);
-        //      config.setUrlStrategy(urlStrategy);
+        config.setUrlStrategy(urlStrategy);
         return config;
     }
     getApp() {
