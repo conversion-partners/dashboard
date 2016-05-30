@@ -25,11 +25,7 @@ let FileAccountService = class FileAccountService {
         this._domain = domain;
     }
     setConfigObject(configObject) {
-    }
-    setDataFile(dataFile) {
-        return __awaiter(this, void 0, void 0, function* () {
-            this._dataFile = dataFile;
-        });
+        this._dataFile = configObject.dataFile;
     }
     getAccount() {
         return __awaiter(this, void 0, Promise, function* () {

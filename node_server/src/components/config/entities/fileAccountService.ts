@@ -17,11 +17,7 @@ class FileAccountService implements IAccountService {
     }
     
     public setConfigObject(configObject: IAccountServiceJSON):void{
-        
-    }
-    
-    public async setDataFile(dataFile: string) {
-        this._dataFile = dataFile;
+        this._dataFile = configObject.dataFile;
     }
     public async getAccount(): Promise<IAccount> {
         let _dataFile = this._dataFile;

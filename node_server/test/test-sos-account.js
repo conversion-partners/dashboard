@@ -1,0 +1,31 @@
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator.throw(value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments)).next());
+    });
+};
+let test = require('tape');
+/*
+import { kernel } from "../src/components/config/config/kernel";
+import TYPES from "../src/components/config/constants/types";
+import "../src/components/config/config/wiring";
+*/
+const fileAccountService_1 = require("../src/components/config/entities/fileAccountService");
+function main() {
+    return __awaiter(this, void 0, void 0, function* () {
+        let accountService = new fileAccountService_1.default();
+        class ConfObject {
+        }
+        let configObject = new ConfObject();
+        configObject.type = "file";
+        configObject.dataFile = "/asdfsdaf";
+        accountService.setConfigObject(configObject);
+        accountService.setDomain("http://www.sos.nl");
+        let account = accountService.getAccount();
+    });
+}
+main();
+//# sourceMappingURL=test-sos-account.js.map

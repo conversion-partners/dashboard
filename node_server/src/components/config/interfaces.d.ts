@@ -29,8 +29,8 @@ interface IConfigService {
 }
 interface IAccountService {
     setDomain(domain: string): void;
-    setDataFile(dataFile: string): void;
     setConfigObject(configObject: IAccountServiceJSON):void;
+    getAccount(): Promise<IAccount>;
 }
 interface IAccount {
     domain: string;
