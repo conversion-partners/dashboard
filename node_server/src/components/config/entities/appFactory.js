@@ -5,6 +5,7 @@ const types_1 = require("../constants/types");
 require("../config/wiring");
 class AppFactory {
     constructor(confFile) {
+        //yup cleanup
         this._confObj = require(confFile);
         if (this._confObj.configService.type == "file") {
             this._configService = types_1.default.ConfigService;

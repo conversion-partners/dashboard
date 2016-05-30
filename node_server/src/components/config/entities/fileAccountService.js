@@ -29,7 +29,7 @@ let FileAccountService = class FileAccountService {
             this._configFile = configFile;
         });
     }
-    getConfigObj() {
+    getAccount() {
         return __awaiter(this, void 0, Promise, function* () {
             let _configFile = this._configFile;
             return new Promise(function (resolve, reject) {
@@ -38,22 +38,6 @@ let FileAccountService = class FileAccountService {
                         reject(err);
                     resolve(JSON.parse(data));
                 });
-            });
-        });
-    }
-    getBaseAccountPath() {
-        return __awaiter(this, void 0, void 0, function* () {
-            let configObj = yield this.getConfigObj();
-            return new Promise(function (resolve, reject) {
-                resolve(configObj.path.account);
-            });
-        });
-    }
-    getAccountPath() {
-        return __awaiter(this, void 0, void 0, function* () {
-            let configObj = yield this.getConfigObj();
-            return new Promise(function (resolve, reject) {
-                resolve(configObj.path.account + "/" + "... to be implemented");
             });
         });
     }
