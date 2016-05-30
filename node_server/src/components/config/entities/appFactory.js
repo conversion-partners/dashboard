@@ -33,10 +33,10 @@ class AppFactory {
         let configService = kernel_1.kernel.get(types_1.default[this._configService]);
         let accountService = kernel_1.kernel.get(types_1.default[this._accountService]);
         let urlStrategy = kernel_1.kernel.get(types_1.default[this._urlStrategy]);
-        config.setConfigFile(this._configFile);
         config.setConfigService(configService);
         config.setAccountService(accountService);
         config.setUrlStrategy(urlStrategy);
+        config.setConfigFile(this._configFile);
         return config;
     }
     getApp() {

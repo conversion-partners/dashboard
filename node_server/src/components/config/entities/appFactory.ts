@@ -45,10 +45,11 @@ class AppFactory implements IAppFactory {
         let accountService = kernel.get<IAccountService>(TYPES[this._accountService]);
         let urlStrategy = kernel.get<IUrlStrategy>(TYPES[this._urlStrategy]);
 
-        config.setConfigFile(this._configFile);
+
         config.setConfigService(configService);
         config.setAccountService(accountService);
         config.setUrlStrategy(urlStrategy);
+        config.setConfigFile(this._configFile);
 
         return config;
     }

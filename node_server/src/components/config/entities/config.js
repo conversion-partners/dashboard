@@ -25,18 +25,19 @@ const kernel_1 = require("../config/kernel");
 const types_1 = require("../constants/types");
 let Config = class Config {
     constructor(configService, accountService, urlStrategy) {
-        this._configService = configService;
-        this._accountService = accountService;
-        this._configService.setUrlStrategy(urlStrategy);
+        this._configService2 = configService;
+        this._accountService2 = accountService;
+        //this._configService.setUrlStrategy(urlStrategy);
     }
     setConfigService(configService) {
-        this._configService2 = configService;
+        this._configService = configService;
     }
     setAccountService(accountService) {
-        this._accountService2 = accountService;
+        this._accountService = accountService;
     }
     setUrlStrategy(urlStrategy) {
-        this._urlStrategy2 = urlStrategy;
+        this._urlStrategy = urlStrategy;
+        this._configService.setUrlStrategy(urlStrategy);
     }
     setConfigFile(configFile) {
         this._configService.setConfigFile(configFile);
