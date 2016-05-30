@@ -11,15 +11,35 @@ class FileAccountService implements IAccountService {
 
     private _dataFile: string;
     private _domain: string;
+    private _accountDb: IAccountDB;
 
     public setDomain(domain: string) {
         this._domain = domain;
     }
-    
-    public setConfigObject(configObject: IAccountServiceJSON):void{
+
+    private async getAccountFromDb() {
+        let _accountDb = await this.getAccountDb();
+    }
+
+    private async getAccount(): Promise<IAccount> {
+
+
+
+        return new Promise<IAccount>(function (resolve, reject) {
+            //if (err) reject(err);
+            class Tmp implements IAccount {
+                public domain: string;
+                public account: string;
+            }
+            let temp = new Tmp();
+            resolve(temp);
+        });
+    }
+
+    public setConfigObject(configObject: IAccountServiceJSON): void {
         this._dataFile = configObject.dataFile;
     }
-    public async getAccount(): Promise<IAccount> {
+    private async getAccountDb(): Promise<IAccountDB> {
         let _dataFile = this._dataFile;
         return new Promise<IAccount>(function (resolve, reject) {
             fs.readFile(_dataFile, 'utf8', function (err, data) {

@@ -18,7 +18,7 @@ async function main() {
 
     let configObject = new ConfObject();
     configObject.type = "file";
-    configObject.dataFile = "/asdfsdaf";
+    configObject.dataFile = __dirname + "/test-sos-account.json";
 
     accountService.setConfigObject(configObject);
 

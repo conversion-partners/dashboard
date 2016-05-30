@@ -21,7 +21,7 @@ function main() {
         }
         let configObject = new ConfObject();
         configObject.type = "file";
-        configObject.dataFile = "/asdfsdaf";
+        configObject.dataFile = __dirname + "/test-sos-account.json";
         accountService.setConfigObject(configObject);
         accountService.setDomain("http://www.sos.nl");
         let account = accountService.getAccount();

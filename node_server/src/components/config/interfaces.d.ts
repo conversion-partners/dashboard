@@ -30,7 +30,10 @@ interface IConfigService {
 interface IAccountService {
     setDomain(domain: string): void;
     setConfigObject(configObject: IAccountServiceJSON):void;
-    getAccount(): Promise<IAccount>;
+    //getAccountDb(): Promise<IAccount>;
+}
+interface IAccountDB {
+    
 }
 interface IAccount {
     domain: string;

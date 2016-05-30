@@ -24,10 +24,26 @@ let FileAccountService = class FileAccountService {
     setDomain(domain) {
         this._domain = domain;
     }
+    getAccountFromDb() {
+        return __awaiter(this, void 0, void 0, function* () {
+            let _accountDb = yield this.getAccountDb();
+        });
+    }
+    getAccount() {
+        return __awaiter(this, void 0, Promise, function* () {
+            return new Promise(function (resolve, reject) {
+                //if (err) reject(err);
+                class Tmp {
+                }
+                let temp = new Tmp();
+                resolve(temp);
+            });
+        });
+    }
     setConfigObject(configObject) {
         this._dataFile = configObject.dataFile;
     }
-    getAccount() {
+    getAccountDb() {
         return __awaiter(this, void 0, Promise, function* () {
             let _dataFile = this._dataFile;
             return new Promise(function (resolve, reject) {

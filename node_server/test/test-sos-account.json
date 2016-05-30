@@ -1,0 +1,9 @@
+{
+    "aliases" : {
+      "www.sos.nl" : "sos.nl"  
+    },
+    "sos.nl" : {
+        "account" : "sos",
+        "users" : ["robert","victor"]
+    }
+}
