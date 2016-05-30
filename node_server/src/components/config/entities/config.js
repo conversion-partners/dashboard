@@ -32,6 +32,12 @@ let Config = class Config {
     setConfigService(configService) {
         this._configService2 = configService;
     }
+    setAccountService(accountService) {
+        this._accountService2 = accountService;
+    }
+    setUrlStrategy(urlStrategy) {
+        this._urlStrategy2 = urlStrategy;
+    }
     setConfigFile(configFile) {
         this._configService.setConfigFile(configFile);
     }

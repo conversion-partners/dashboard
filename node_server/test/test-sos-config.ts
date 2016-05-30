@@ -4,24 +4,24 @@ import { kernel } from "../src/components/config/config/kernel";
 import TYPES from "../src/components/config/constants/types";
 import "../src/components/config/config/wiring";
 */
-import ConfigFactory from "../src/components/config/entities/configFactory";
+import AppFactory from "../src/components/config/entities/appFactory";
 
 async function main() {
-    
-    let configFactory = new ConfigFactory('/var/www/dashboard/node_server/config/config.json');
-    configFactory.setConfigFile('/var/www/dashboard/node_server/test/test-sos-config-configfile.json');
-    let config = configFactory.getConfigObject();
-    
-    let baseAccountPath = await config.getBaseAccountPath();
+
+    let appFactory = new AppFactory('/var/www/dashboard/node_server/config/config.json');
+    appFactory.setConfigFile('/var/www/dashboard/node_server/test/test-sos-config-configfile.json');
+    let app = appFactory.getConfigObject();
+
+    let baseAccountPath = await app.getBaseAccountPath();
     let goodBaseAccountPath = "/var/www/dashboard/data/accounts";
     test('base account path test', function (t) {
         t.equal(goodBaseAccountPath, baseAccountPath);
         t.end();
     });
 
-    config.setRequestUrl('http://www.shop-online-shop.nl/nl/winkels');
+    app.setRequestUrl('http://www.shop-online-shop.nl/nl/winkels');
     let goodAccountPath = "/var/www/dashboard/data/accounts/sos";
-    let accountPath = await config.getAccountPath();
+    let accountPath = await app.getAccountPath();
     console.log(accountPath);
     test('account path test', function (t) {
         t.equal(goodAccountPath, accountPath);

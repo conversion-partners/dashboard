@@ -2,20 +2,31 @@
 /// <reference path="../../../node_modules/inversify-dts/inversify-binding-decorators/inversify-binding-decorators.d.ts" />
 /// <reference path="../../../node_modules/inversify-dts/inversify-logger-middleware/inversify-logger-middleware.d.ts" />
 
-interface IConfigFactory {
+interface IAppFactory {
     setConfigFile(configFile: string): void;
     getConfigObject(): IConfig;
+    getApp(): IApp;
 }
 
+interface IApp {
 
+}
 
 interface IConfig {
     setConfigService(configService: IConfigService): void;
+    setAccountService(accountService: IAccountService): void;
+    setUrlStrategy(urlStrategy: IUrlStrategy): void;
+
+
     getBaseAccountPath(): Object;
     setConfigFile(configFile: string): void;
     getConfigObj(): Promise<IConfigObject>;
     setRequestUrl(url: string): void;
     getAccountPath(): Object;
+
+
+
+
 }
 
 interface IConfigService {
@@ -39,9 +50,17 @@ interface IUrlStrategy {
 interface IConfigObject {
     path: IPathObject;
     configService: IConfigServiceJSON;
+    accountService: IAccountServiceJSON;
+    urlStrategy: IUrlStrategyJSON;
 }
 
 interface IConfigServiceJSON {
+    type: string
+}
+interface IAccountServiceJSON {
+    type: string
+}
+interface IUrlStrategyJSON {
     type: string
 }
 

@@ -10,6 +10,8 @@ class Config implements IConfig {
     private _configService: IConfigService;
     private _configService2: IConfigService;
     private _accountService: IAccountService;
+    private _accountService2: IAccountService;
+    private _urlStrategy2: IUrlStrategy;
     private _kernel: inversify.IKernel;
 
     public constructor(
@@ -25,6 +27,15 @@ class Config implements IConfig {
     public setConfigService(configService: IConfigService): void {
         this._configService2 = configService;
     }
+
+    public setAccountService(accountService: IAccountService): void {
+        this._accountService2 = accountService;
+    }
+
+    public setUrlStrategy(urlStrategy: IUrlStrategy): void {
+        this._urlStrategy2 = urlStrategy;
+    }
+
 
     public setConfigFile(configFile: string) {
         this._configService.setConfigFile(configFile);
