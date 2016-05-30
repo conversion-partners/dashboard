@@ -4,7 +4,7 @@
     },
     "accountService" : {
         "type" : "file",
-        "source" : "/path.dsafasd.sda.fads.f//////"
+        "dataFile" : "/path.dsafasd.sda.fads.f//////"
     },
     "configService" : {
         "type" : "file",

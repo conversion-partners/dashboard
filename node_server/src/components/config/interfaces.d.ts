@@ -29,6 +29,8 @@ interface IConfigService {
 }
 interface IAccountService {
     setDomain(domain: string): void;
+    setDataFile(dataFile: string): void;
+    setConfigObject(configObject: IAccountServiceJSON):void;
 }
 interface IAccount {
     domain: string;
@@ -48,7 +50,8 @@ interface IConfigServiceJSON {
     type: string
 }
 interface IAccountServiceJSON {
-    type: string
+    type: string;
+    dataFile : string;
 }
 interface IUrlStrategyJSON {
     type: string

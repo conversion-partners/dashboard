@@ -24,16 +24,18 @@ let FileAccountService = class FileAccountService {
     setDomain(domain) {
         this._domain = domain;
     }
-    setConfigFile(configFile) {
+    setConfigObject(configObject) {
+    }
+    setDataFile(dataFile) {
         return __awaiter(this, void 0, void 0, function* () {
-            this._configFile = configFile;
+            this._dataFile = dataFile;
         });
     }
     getAccount() {
         return __awaiter(this, void 0, Promise, function* () {
-            let _configFile = this._configFile;
+            let _dataFile = this._dataFile;
             return new Promise(function (resolve, reject) {
-                fs.readFile(_configFile, 'utf8', function (err, data) {
+                fs.readFile(_dataFile, 'utf8', function (err, data) {
                     if (err)
                         reject(err);
                     resolve(JSON.parse(data));

@@ -9,19 +9,24 @@ import TYPES from "../constants/types";
 @provideNamed(TYPES.FileAccountService, "not-throwable")
 class FileAccountService implements IAccountService {
 
-    private _configFile: string;
+    private _dataFile: string;
     private _domain: string;
 
     public setDomain(domain: string) {
         this._domain = domain;
     }
-    public async setConfigFile(configFile: string) {
-        this._configFile = configFile;
+    
+    public setConfigObject(configObject: IAccountServiceJSON):void{
+        
+    }
+    
+    public async setDataFile(dataFile: string) {
+        this._dataFile = dataFile;
     }
     public async getAccount(): Promise<IAccount> {
-        let _configFile = this._configFile;
+        let _dataFile = this._dataFile;
         return new Promise<IAccount>(function (resolve, reject) {
-            fs.readFile(_configFile, 'utf8', function (err, data) {
+            fs.readFile(_dataFile, 'utf8', function (err, data) {
                 if (err) reject(err);
                 resolve(JSON.parse(data));
             });

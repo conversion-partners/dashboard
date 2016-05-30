@@ -44,6 +44,7 @@ class AppFactory implements IAppFactory {
         let config = kernel.get<IConfig>(TYPES.Config);
         let configService = kernel.get<IConfigService>(TYPES[this._configService]);
         let accountService = kernel.get<IAccountService>(TYPES[this._accountService]);
+        accountService.setConfigObject(this._confObj.accountService);
         let urlStrategy = kernel.get<IUrlStrategy>(TYPES[this._urlStrategy]);
 
 
