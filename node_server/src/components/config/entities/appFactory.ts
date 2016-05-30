@@ -13,6 +13,7 @@ class AppFactory implements IAppFactory {
     private _urlStrategy: string;
 
     public constructor(confFile: string) {
+        //yup cleanup
         this._confObj = require(confFile);
         if (this._confObj.configService.type == "file") {
             this._configService = TYPES.ConfigService;
