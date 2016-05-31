@@ -8,29 +8,22 @@ import FileAccountService from "../src/components/config/entities/fileAccountSer
 
 async function main() {
 
-
     let accountService = new FileAccountService();
-
     class ConfObject implements IAccountServiceJSON {
         public type: string;
         public dataFile: string;
     }
-
     let configObject = new ConfObject();
     configObject.type = "file";
     configObject.dataFile = __dirname + "/test-sos-account.json";
-
     accountService.setConfigObject(configObject);
-
     accountService.setDomain("http://www.sos.nl");
-
     let account = await accountService.getAccount();
-    console.log();
-    
+
     test('account equals sos', function (t) {
         t.equal(account.account, "sos");
         t.end();
     });
-    
+
 }
 main();
