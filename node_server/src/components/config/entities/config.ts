@@ -2,7 +2,6 @@
 
 import {  inject, named } from "inversify";
 import { provide } from "../config/kernel";
-
 import TYPES from "../constants/types";
 
 @provide(TYPES.Config)

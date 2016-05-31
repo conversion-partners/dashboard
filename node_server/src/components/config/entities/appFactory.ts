@@ -7,6 +7,7 @@ import "../config/wiring";
 class AppFactory implements IAppFactory {
 
     private _configFile: string;
+    private _config: IConfig;
     private _confObj: IConfigObject;
     private _configService: string;
     private _accountService: string;
@@ -52,11 +53,13 @@ class AppFactory implements IAppFactory {
         config.setAccountService(accountService);
         config.setUrlStrategy(urlStrategy);
         config.setConfigFile(this._configFile);
-
+        this._config = config;
         return config;
     }
     public getApp(): IApp {
-        return null;
+        let app = kernel.get<IApp>(TYPES.App);
+        app.setConfigObject(this._config);
+        return app;
     }
 }
 

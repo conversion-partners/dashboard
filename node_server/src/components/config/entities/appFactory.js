@@ -39,10 +39,13 @@ class AppFactory {
         config.setAccountService(accountService);
         config.setUrlStrategy(urlStrategy);
         config.setConfigFile(this._configFile);
+        this._config = config;
         return config;
     }
     getApp() {
-        return null;
+        let app = kernel_1.kernel.get(types_1.default.App);
+        app.setConfigObject(this._config);
+        return app;
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });

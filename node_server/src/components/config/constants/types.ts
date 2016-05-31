@@ -1,4 +1,5 @@
 const TYPES = {
+    App: "App",
     Config: "Config",
     ConfigService: "ConfigService",
     FileAccountService: "FileAccountService",

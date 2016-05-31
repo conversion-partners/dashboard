@@ -1,5 +1,5 @@
 {
     "path" : {
-        "account" : "/var/www/dashboard/data/accounts"
+        "account" : "/var/www/sos-dashboard/data/accounts"
     }
 }
