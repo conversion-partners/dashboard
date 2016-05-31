@@ -31,6 +31,7 @@ interface IAccountService {
     setDomain(domain: string): void;
     setConfigObject(configObject: IAccountServiceJSON):void;
     //getAccountDb(): Promise<IAccount>;
+    getAccount(): Promise<IAccount>;
 }
 interface IAccountDB {
     

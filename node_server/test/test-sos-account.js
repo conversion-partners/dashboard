@@ -24,7 +24,12 @@ function main() {
         configObject.dataFile = __dirname + "/test-sos-account.json";
         accountService.setConfigObject(configObject);
         accountService.setDomain("http://www.sos.nl");
-        let account = accountService.getAccount();
+        let account = yield accountService.getAccount();
+        console.log();
+        test('account equals sos', function (t) {
+            t.equal(account.account, "sos");
+            t.end();
+        });
     });
 }
 main();

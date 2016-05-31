@@ -8,8 +8,8 @@ import AppFactory from "../src/components/config/entities/appFactory";
 
 async function main() {
 
-    let appFactory = new AppFactory('/var/www/dashboard/node_server/config/config.json');
-    appFactory.setConfigFile('/var/www/dashboard/node_server/test/test-sos-config-configfile.json');
+    let appFactory = new AppFactory(__dirname+'/../config/config.json');
+    appFactory.setConfigFile(__dirname+'/test-sos-config-configfile.json');
     let app = appFactory.getConfigObject();
 
     let baseAccountPath = await app.getBaseAccountPath();

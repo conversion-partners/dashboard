@@ -24,6 +24,13 @@ async function main() {
 
     accountService.setDomain("http://www.sos.nl");
 
-    let account = accountService.getAccount();
+    let account = await accountService.getAccount();
+    console.log();
+    
+    test('account equals sos', function (t) {
+        t.equal(account.account, "sos");
+        t.end();
+    });
+    
 }
 main();
