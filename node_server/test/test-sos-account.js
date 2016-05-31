@@ -8,11 +8,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 let test = require('tape');
-/*
-import { kernel } from "../src/components/config/config/kernel";
-import TYPES from "../src/components/config/constants/types";
-import "../src/components/config/config/wiring";
-*/
 const fileAccountService_1 = require("../src/components/config/entities/fileAccountService");
 function main() {
     return __awaiter(this, void 0, void 0, function* () {

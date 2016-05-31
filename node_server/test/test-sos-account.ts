@@ -1,9 +1,5 @@
 let test = require('tape');
-/*
-import { kernel } from "../src/components/config/config/kernel";
-import TYPES from "../src/components/config/constants/types";
-import "../src/components/config/config/wiring";
-*/
+
 import FileAccountService from "../src/components/config/entities/fileAccountService";
 
 async function main() {
