@@ -9,7 +9,7 @@ import AppFactory from "../src/components/config/entities/appFactory";
 async function main() {
 
     let appFactory = new AppFactory(__dirname+'/../config/config.json');
-    appFactory.setConfigFile(__dirname+'/test-sos-config-configfile.json');
+    appFactory.setConfigFile(__dirname+'/test-sos-config.json');
     let app = appFactory.getConfigObject();
 
     let baseAccountPath = await app.getBaseAccountPath();
