@@ -13,8 +13,8 @@ class UrlStrategy implements IUrlStrategy {
     private _requestUrl: string;
     private _parsedUrl: NodeURL.Url;
 
-    public getAccount() : string {
-        return this._parsedUrl['path'];
+    public getDomain() : string {
+        return this._parsedUrl.host;
     }
     
     public setRequestUrl(requestUrl: string){

@@ -16,6 +16,7 @@ class Config implements IConfig {
     }
     public setAccountService(accountService: IAccountService): void {
         this._accountService = accountService;
+        this._configService.setAccountService(accountService);
     }
     public setUrlStrategy(urlStrategy: IUrlStrategy): void {
         this._urlStrategy = urlStrategy;

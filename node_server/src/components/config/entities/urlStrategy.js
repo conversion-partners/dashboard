@@ -14,8 +14,8 @@ const kernel_1 = require("../config/kernel");
 const types_1 = require("../constants/types");
 const NodeURL = require('url');
 let UrlStrategy = class UrlStrategy {
-    getAccount() {
-        return this._parsedUrl['path'];
+    getDomain() {
+        return this._parsedUrl.host;
     }
     setRequestUrl(requestUrl) {
         this._requestUrl = requestUrl;

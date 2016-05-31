@@ -25,6 +25,7 @@ let Config = class Config {
     }
     setAccountService(accountService) {
         this._accountService = accountService;
+        this._configService.setAccountService(accountService);
     }
     setUrlStrategy(urlStrategy) {
         this._urlStrategy = urlStrategy;

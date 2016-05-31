@@ -26,6 +26,11 @@ let FileConfigService = class FileConfigService {
             this._urlStrategy = urlStrategy;
         });
     }
+    setAccountService(accountService) {
+        return __awaiter(this, void 0, void 0, function* () {
+            this._accountService = accountService;
+        });
+    }
     setConfigFile(configFile) {
         return __awaiter(this, void 0, void 0, function* () {
             this._configFile = configFile;
@@ -60,8 +65,12 @@ let FileConfigService = class FileConfigService {
         return __awaiter(this, void 0, void 0, function* () {
             let configObj = yield this.getConfigObj();
             let urlStrategy = this._urlStrategy;
+            let domain = urlStrategy.getDomain();
+            let accountService = this._accountService;
+            accountService.setDomain("http://www.sos.nl");
+            let account = yield accountService.getAccount();
             return new Promise(function (resolve, reject) {
-                resolve(configObj.path.account + "/" + urlStrategy.getAccount());
+                resolve(configObj.path.account + "/" + account.account);
             });
         });
     }

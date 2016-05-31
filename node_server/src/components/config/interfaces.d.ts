@@ -14,15 +14,16 @@ interface IConfig {
     setConfigService(configService: IConfigService): void;
     setAccountService(accountService: IAccountService): void;
     setUrlStrategy(urlStrategy: IUrlStrategy): void;
-    getBaseAccountPath(): Object;
     setConfigFile(configFile: string): void;
-    getConfigObj(): Promise<IConfigObject>;
     setRequestUrl(url: string): void;
+    getBaseAccountPath(): Object;
+    getConfigObj(): Promise<IConfigObject>;
     getAccountPath(): Object;
 }
 interface IConfigService {
     setConfigFile(configFile: string): void;
     setUrlStrategy(urlStrategy: IUrlStrategy): void;
+    setAccountService(accountService: IAccountService): void;
     getConfigObj(): Promise<IConfigObject>;
     getBaseAccountPath(): Object;
     setRequestUrl(url: string): void;
@@ -31,7 +32,6 @@ interface IConfigService {
 interface IAccountService {
     setDomain(domain: string): void;
     setConfigObject(configObject: IAccountServiceJSON):void;
-    //getAccountDb(): Promise<IAccount>;
     getAccount(): Promise<IAccount>;
 }
 interface IAccountDB {
@@ -42,7 +42,7 @@ interface IAccount {
     account: string;
 }
 interface IUrlStrategy {
-    getAccount(): string;
+    getDomain(): string;
     setRequestUrl(url: string): void;
 }
 interface IConfigObject {
