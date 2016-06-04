@@ -46,7 +46,7 @@ class FileConfigService implements IConfigService {
         let urlStrategy = this._urlStrategy;
         let domain = urlStrategy.getDomain();
         let accountService = this._accountService;
-        accountService.setDomain("http://www.sos.nl");
+        accountService.setDomain(domain);
         let account = await accountService.getAccount();
         return new Promise(function (resolve, reject) {
             resolve(configObj.path.account + "/" + account.account);

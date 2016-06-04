@@ -11,17 +11,17 @@ import NodeURL = require('url');
 @provideNamed(TYPES.FileAccountService, "not-throwable")
 class FileAccountService implements IAccountService {
 
-    private _domain: NodeURL.Url;
+    private _domain: string;
     private _dataFile: string;
     private _accountDb: IAccountDB;
 
     public setDomain(domain: string) {
-        this._domain = NodeURL.parse(domain);
+        this._domain = domain;
     }
 
     private async getAccountFromDb(): Promise<IAccount> {
         let _accountDb = await this.getAccountDb();
-        let accountAlias = _accountDb["aliases"][this._domain.host];
+        let accountAlias = _accountDb["aliases"][this._domain];
         let account = _accountDb["accounts"][accountAlias];
         //if (err) reject(err);
         class Tmp implements IAccount {

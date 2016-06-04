@@ -4,7 +4,7 @@
     },
     "accountService" : {
         "type" : "file",
-        "dataFile" : "/path.dsafasd.sda.fads.f//////"
+        "dataFile" : "/var/www/sos-dashboard/node_server/config/accounts.json"
     },
     "configService" : {
         "type" : "file",

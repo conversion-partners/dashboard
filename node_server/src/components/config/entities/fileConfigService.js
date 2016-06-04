@@ -67,7 +67,7 @@ let FileConfigService = class FileConfigService {
             let urlStrategy = this._urlStrategy;
             let domain = urlStrategy.getDomain();
             let accountService = this._accountService;
-            accountService.setDomain("http://www.sos.nl");
+            accountService.setDomain(domain);
             let account = yield accountService.getAccount();
             return new Promise(function (resolve, reject) {
                 resolve(configObj.path.account + "/" + account.account);

@@ -20,15 +20,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 const fs = require('fs');
 const kernel_1 = require("../config/kernel");
 const types_1 = require("../constants/types");
-const NodeURL = require('url');
 let FileAccountService = class FileAccountService {
     setDomain(domain) {
-        this._domain = NodeURL.parse(domain);
+        this._domain = domain;
     }
     getAccountFromDb() {
         return __awaiter(this, void 0, Promise, function* () {
             let _accountDb = yield this.getAccountDb();
-            let accountAlias = _accountDb["aliases"][this._domain.host];
+            let accountAlias = _accountDb["aliases"][this._domain];
             let account = _accountDb["accounts"][accountAlias];
             //if (err) reject(err);
             class Tmp {

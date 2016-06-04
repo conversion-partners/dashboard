@@ -16,15 +16,12 @@ function main() {
         let app = appFactory.getConfigObject();
         let baseAccountPath = yield app.getBaseAccountPath();
         let goodBaseAccountPath = "/var/www/sos-dashboard/data/accounts";
-        test('base account path test', function (t) {
-            t.equal(goodBaseAccountPath, baseAccountPath);
-            t.end();
-        });
         app.setRequestUrl('http://www.shop-online-shop.nl/nl/winkels');
         let goodAccountPath = "/var/www/sos-dashboard/data/accounts/sos";
         let accountPath = yield app.getAccountPath();
-        console.log(accountPath);
-        test('account path test', function (t) {
+        test('base account path test', function (t) {
+            t.plan(2);
+            t.equal(goodBaseAccountPath, baseAccountPath);
             t.equal(goodAccountPath, accountPath);
             t.end();
         });
