@@ -1,0 +1,16 @@
+{
+    "app":{
+        
+    },
+    "accountService" : {
+        "type" : "file",
+        "dataFile" : "/var/www/sos-dashboard/node_server/config/accounts.json"
+    },
+    "configService" : {
+        "type" : "file",
+        "source" : "/var/www/sos-dashboard/node_server/config/file-config-service.json"
+    },
+    "urlStrategy" : {
+        "type" : "domain-language"
+    }
+}

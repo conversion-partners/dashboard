@@ -11,7 +11,7 @@ let test = require('tape');
 const appFactory_1 = require("../src/components/config/entities/appFactory");
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        let appFactory = new appFactory_1.default(__dirname + '/../config/config.json');
+        let appFactory = new appFactory_1.default(__dirname + '/config/config.json');
         let config = appFactory.getConfigObject();
         let baseAccountPath = yield config.getBaseAccountPath();
         let goodBaseAccountPath = "/var/www/sos-dashboard/data/accounts";

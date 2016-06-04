@@ -13,6 +13,7 @@ function main() {
     return __awaiter(this, void 0, void 0, function* () {
         let appFactory = new appFactory_1.default(__dirname + '/../config/config.json');
         let app = appFactory.getApp();
+        app.setRequest("http://www.shop-online-shop.nl/nl/");
         test('base account path test', function (t) {
             t.plan(2);
             t.end();

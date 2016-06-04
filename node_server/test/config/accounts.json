@@ -1,6 +1,7 @@
 {
     "aliases": {
-        "www.sos.nl": "sos.nl"
+        "www.sos.nl": "sos.nl",
+        "www.shop-online-shop.nl": "sos.nl"
     },
     "accounts": {
         "sos.nl": {

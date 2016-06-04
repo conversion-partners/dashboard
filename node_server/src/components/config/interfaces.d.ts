@@ -8,6 +8,7 @@ interface IAppFactory {
 }
 interface IApp {
     setConfigObject(config: IConfig): void;
+    setRequest(url: string): void;
 }
 interface IConfig {
     setConfigService(configService: IConfigService): void;

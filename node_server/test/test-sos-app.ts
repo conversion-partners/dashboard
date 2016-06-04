@@ -7,6 +7,7 @@ async function main() {
     let appFactory = new AppFactory(__dirname + '/../config/config.json');
     let app = appFactory.getApp();
 
+    app.setRequest("http://www.shop-online-shop.nl/nl/");
 
 
     test('base account path test', function (t) {

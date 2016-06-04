@@ -11,7 +11,7 @@ async function main() {
     }
     let configObject = new ConfObject();
     configObject.type = "file";
-    configObject.dataFile = __dirname + "/test-sos-account.json";
+    configObject.dataFile = __dirname + "/config/accounts.json";
     accountService.setConfigObject(configObject);
     accountService.setDomain("www.sos.nl");
     let account = await accountService.getAccount();

@@ -4,7 +4,7 @@ import AppFactory from "../src/components/config/entities/appFactory";
 
 async function main() {
 
-    let appFactory = new AppFactory(__dirname + '/../config/config.json');
+    let appFactory = new AppFactory(__dirname + '/config/config.json');
    
     let config = appFactory.getConfigObject();
 
