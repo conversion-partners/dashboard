@@ -31,8 +31,8 @@ let Config = class Config {
         this._urlStrategy = urlStrategy;
         this._configService.setUrlStrategy(urlStrategy);
     }
-    setConfigFile(configFile) {
-        this._configService.setConfigFile(configFile);
+    setConfigObject(configObject) {
+        this._configService.setConfigObject(configObject);
     }
     setRequestUrl(url) {
         this._configService.setRequestUrl(url);

@@ -3,7 +3,6 @@
 /// <reference path="../../../node_modules/inversify-dts/inversify-logger-middleware/inversify-logger-middleware.d.ts" />
 
 interface IAppFactory {
-    setConfigFile(configFile: string): void;
     getConfigObject(): IConfig;
     getApp(): IApp;
 }
@@ -14,14 +13,14 @@ interface IConfig {
     setConfigService(configService: IConfigService): void;
     setAccountService(accountService: IAccountService): void;
     setUrlStrategy(urlStrategy: IUrlStrategy): void;
-    setConfigFile(configFile: string): void;
+    setConfigObject(configObject: IConfigObject): void;
     setRequestUrl(url: string): void;
     getBaseAccountPath(): Object;
     getConfigObj(): Promise<IConfigObject>;
     getAccountPath(): Object;
 }
 interface IConfigService {
-    setConfigFile(configFile: string): void;
+    setConfigObject(configObject: IConfigObject): void;
     setUrlStrategy(urlStrategy: IUrlStrategy): void;
     setAccountService(accountService: IAccountService): void;
     getConfigObj(): Promise<IConfigObject>;
@@ -52,7 +51,8 @@ interface IConfigObject {
     urlStrategy: IUrlStrategyJSON;
 }
 interface IConfigServiceJSON {
-    type: string
+    type: string;
+    source: string;
 }
 interface IAccountServiceJSON {
     type: string;

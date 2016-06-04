@@ -8,7 +8,7 @@
     },
     "configService" : {
         "type" : "file",
-        "source" : "/pathefdsafsadfsd"
+        "source" : "/var/www/sos-dashboard/node_server/config/file-config-service.json"
     },
     "urlStrategy" : {
         "type" : "domain-language"

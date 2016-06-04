@@ -26,9 +26,6 @@ class AppFactory {
             throw "No account service defined please set : file";
         }
     }
-    setConfigFile(configFile) {
-        this._configFile = configFile;
-    }
     getConfigObject() {
         let config = kernel_1.kernel.get(types_1.default.Config);
         let configService = kernel_1.kernel.get(types_1.default[this._configService]);
@@ -38,7 +35,7 @@ class AppFactory {
         config.setConfigService(configService);
         config.setAccountService(accountService);
         config.setUrlStrategy(urlStrategy);
-        config.setConfigFile(this._configFile);
+        config.setConfigObject(this._confObj);
         this._config = config;
         return config;
     }

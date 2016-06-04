@@ -15,6 +15,7 @@ class AppFactory implements IAppFactory {
 
     public constructor(confFile: string) {
         //yup cleanup
+        
         this._confObj = require(confFile);
         if (this._confObj.configService.type == "file") {
             this._configService = TYPES.ConfigService;
@@ -37,9 +38,7 @@ class AppFactory implements IAppFactory {
 
     }
 
-    public setConfigFile(configFile: string): void {
-        this._configFile = configFile;
-    }
+
 
     public getConfigObject(): IConfig {
         let config = kernel.get<IConfig>(TYPES.Config);
@@ -52,7 +51,7 @@ class AppFactory implements IAppFactory {
         config.setConfigService(configService);
         config.setAccountService(accountService);
         config.setUrlStrategy(urlStrategy);
-        config.setConfigFile(this._configFile);
+        config.setConfigObject(this._confObj);
         this._config = config;
         return config;
     }

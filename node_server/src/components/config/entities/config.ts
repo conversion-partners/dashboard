@@ -22,8 +22,8 @@ class Config implements IConfig {
         this._urlStrategy = urlStrategy;
         this._configService.setUrlStrategy(urlStrategy);
     }
-    public setConfigFile(configFile: string) {
-        this._configService.setConfigFile(configFile);
+    public setConfigObject(configObject: IConfigObject) {
+        this._configService.setConfigObject(configObject);
     }
     public setRequestUrl(url: string) {
         this._configService.setRequestUrl(url);

@@ -21,6 +21,9 @@ const fs = require('fs');
 const kernel_1 = require("../config/kernel");
 const types_1 = require("../constants/types");
 let FileConfigService = class FileConfigService {
+    setConfigObject(configObject) {
+        this._configObject = configObject;
+    }
     setUrlStrategy(urlStrategy) {
         return __awaiter(this, void 0, void 0, function* () {
             this._urlStrategy = urlStrategy;
@@ -43,7 +46,7 @@ let FileConfigService = class FileConfigService {
     }
     getConfigObj() {
         return __awaiter(this, void 0, Promise, function* () {
-            let _configFile = this._configFile;
+            let _configFile = this._configObject.configService.source;
             return new Promise(function (resolve, reject) {
                 fs.readFile(_configFile, 'utf8', function (err, data) {
                     if (err)

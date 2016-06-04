@@ -13,6 +13,11 @@ class FileConfigService implements IConfigService {
     private _requestUrl: string;
     private _urlStrategy: IUrlStrategy;
     private _accountService: IAccountService;
+    private _configObject: IConfigObject;
+
+    public setConfigObject(configObject: IConfigObject): void {
+        this._configObject = configObject;
+    }
 
     public async setUrlStrategy(urlStrategy: IUrlStrategy) {
         this._urlStrategy = urlStrategy;
@@ -20,14 +25,14 @@ class FileConfigService implements IConfigService {
     public async setAccountService(accountService: IAccountService) {
         this._accountService = accountService;
     }
-    public async setConfigFile(configFile: string) {
+    private async setConfigFile(configFile: string) {
         this._configFile = configFile;
     }
     public async setRequestUrl(url: string) {
         this._urlStrategy.setRequestUrl(url);
     }
     public async getConfigObj(): Promise<IConfigObject> {
-        let _configFile = this._configFile;
+        let _configFile = this._configObject.configService.source;
         return new Promise<IConfigObject>(function (resolve, reject) {
             fs.readFile(_configFile, 'utf8', function (err, data) {
                 if (err) reject(err);
