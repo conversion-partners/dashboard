@@ -28,7 +28,7 @@ class AppFactory implements IAppFactory {
             throw "No account service defined please set : file";
         }
         if (this._confObj.urlStrategy.type == "domain-language") {
-            this._urlStrategy = TYPES.UrlStrategy;
+            this._urlStrategy = TYPES.DomainLanguageUrlStrategy;
 
         } else {
             throw "No account service defined please set : file";

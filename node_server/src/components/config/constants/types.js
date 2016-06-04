@@ -4,7 +4,7 @@ const TYPES = {
     Config: "Config",
     ConfigService: "ConfigService",
     FileAccountService: "FileAccountService",
-    UrlStrategy: "UrlStrategy",
+    DomainLanguageUrlStrategy: "DomainLanguageUrlStrategy",
     Warrior: "Warrior",
     Weapon: "Weapon"
 };

@@ -7,8 +7,8 @@ import TYPES from "../constants/types";
 
 import NodeURL = require('url');
 
-@provideNamed(TYPES.UrlStrategy, "not-throwable")
-class UrlStrategy implements IUrlStrategy {
+@provideNamed(TYPES.DomainLanguageUrlStrategy, "not-throwable")
+class DomainLanguageUrlStrategy implements IUrlStrategy {
 
     private _requestUrl: string;
     private _parsedUrl: NodeURL.Url;
@@ -27,4 +27,4 @@ class UrlStrategy implements IUrlStrategy {
 
 
 
-export default UrlStrategy;
+export default DomainLanguageUrlStrategy;

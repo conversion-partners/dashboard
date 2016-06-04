@@ -19,7 +19,7 @@ class AppFactory {
             throw "No account service defined please set : file";
         }
         if (this._confObj.urlStrategy.type == "domain-language") {
-            this._urlStrategy = types_1.default.UrlStrategy;
+            this._urlStrategy = types_1.default.DomainLanguageUrlStrategy;
         }
         else {
             throw "No account service defined please set : file";
