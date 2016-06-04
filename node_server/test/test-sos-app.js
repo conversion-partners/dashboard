@@ -13,19 +13,12 @@ function main() {
     return __awaiter(this, void 0, void 0, function* () {
         let appFactory = new appFactory_1.default(__dirname + '/../config/config.json');
         appFactory.setConfigFile(__dirname + '/test-sos-config.json');
-        let config = appFactory.getConfigObject();
-        let baseAccountPath = yield config.getBaseAccountPath();
-        let goodBaseAccountPath = "/var/www/sos-dashboard/data/accounts";
-        config.setRequestUrl('http://www.shop-online-shop.nl/nl/winkels');
-        let goodAccountPath = "/var/www/sos-dashboard/data/accounts/sos";
-        let accountPath = yield config.getAccountPath();
+        let app = appFactory.getApp();
         test('base account path test', function (t) {
             t.plan(2);
-            t.equal(goodBaseAccountPath, baseAccountPath);
-            t.equal(goodAccountPath, accountPath);
             t.end();
         });
     });
 }
 main();
-//# sourceMappingURL=test-sos-config.js.map
+//# sourceMappingURL=test-sos-app.js.map
