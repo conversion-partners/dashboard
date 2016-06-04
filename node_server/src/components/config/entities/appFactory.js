@@ -5,7 +5,6 @@ const types_1 = require("../constants/types");
 require("../config/wiring");
 class AppFactory {
     constructor(confFile) {
-        //yup cleanup
         this._confObj = require(confFile);
         if (this._confObj.configService.type == "file") {
             this._configService = types_1.default.ConfigService;
@@ -36,12 +35,11 @@ class AppFactory {
         config.setAccountService(accountService);
         config.setUrlStrategy(urlStrategy);
         config.setConfigObject(this._confObj);
-        this._config = config;
         return config;
     }
     getApp() {
         let app = kernel_1.kernel.get(types_1.default.App);
-        app.setConfigObject(this._config);
+        app.setConfigObject(this.getConfigObject());
         return app;
     }
 }

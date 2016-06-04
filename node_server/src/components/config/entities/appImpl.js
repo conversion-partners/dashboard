@@ -2,7 +2,9 @@
 "use strict";
 require("../config/wiring");
 class AppImpl {
-    setConfigObject(config) { }
+    setConfigObject(config) {
+        this._config = config;
+    }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = AppImpl;

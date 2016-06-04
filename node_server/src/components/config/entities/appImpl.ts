@@ -6,8 +6,11 @@ import "../config/wiring";
 
 class AppImpl implements IApp {
 
+    private _config: IConfig;
 
-    public setConfigObject(config: IConfig): void{}
+    public setConfigObject(config: IConfig): void{
+        this._config = config;
+    }
 
 
 }

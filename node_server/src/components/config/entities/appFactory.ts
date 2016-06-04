@@ -7,15 +7,13 @@ import "../config/wiring";
 class AppFactory implements IAppFactory {
 
     private _configFile: string;
-    private _config: IConfig;
     private _confObj: IConfigObject;
     private _configService: string;
     private _accountService: string;
     private _urlStrategy: string;
 
     public constructor(confFile: string) {
-        //yup cleanup
-        
+
         this._confObj = require(confFile);
         if (this._confObj.configService.type == "file") {
             this._configService = TYPES.ConfigService;
@@ -46,18 +44,15 @@ class AppFactory implements IAppFactory {
         let accountService = kernel.get<IAccountService>(TYPES[this._accountService]);
         accountService.setConfigObject(this._confObj.accountService);
         let urlStrategy = kernel.get<IUrlStrategy>(TYPES[this._urlStrategy]);
-
-
         config.setConfigService(configService);
         config.setAccountService(accountService);
         config.setUrlStrategy(urlStrategy);
         config.setConfigObject(this._confObj);
-        this._config = config;
         return config;
     }
     public getApp(): IApp {
         let app = kernel.get<IApp>(TYPES.App);
-        app.setConfigObject(this._config);
+        app.setConfigObject(this.getConfigObject());
         return app;
     }
 }
