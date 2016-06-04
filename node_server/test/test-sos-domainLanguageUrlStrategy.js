@@ -14,13 +14,19 @@ require("../src/components/config/config/wiring");
 let test = require('tape');
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        let urlStrategy = kernel_1.kernel.get(types_1.default[this._urlStrategy]);
-        urlStrategy.setRequestUrl("http://www.shop-online-shop.nl/nl/");
+        let urlStrategy = kernel_1.kernel.get(types_1.default.DomainLanguageUrlStrategy);
+        urlStrategy.setRequestUrl("http://sos.nl/nl/");
+        let country = urlStrategy.getCountry();
+        let language = urlStrategy.getLanguage();
+        let pagePath = urlStrategy.getPagePath();
         test('base account path test', function (t) {
-            t.plan(2);
+            t.plan(3);
+            t.equal(country, "null");
+            t.equal(language, "nl");
+            t.equal(pagePath, "sos.nl_nl-null");
             t.end();
         });
     });
 }
 main();
-//# sourceMappingURL=test-sos-urlstrategy.js.map
+//# sourceMappingURL=test-sos-domainLanguageUrlStrategy.js.map

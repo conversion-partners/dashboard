@@ -14,12 +14,21 @@ const kernel_1 = require("../config/kernel");
 const types_1 = require("../constants/types");
 const NodeURL = require('url');
 let DomainLanguageUrlStrategy = class DomainLanguageUrlStrategy {
-    getDomain() {
-        return this._parsedUrl.host;
-    }
     setRequestUrl(requestUrl) {
         this._requestUrl = requestUrl;
         this._parsedUrl = NodeURL.parse(requestUrl);
+    }
+    getDomain() {
+        return this._parsedUrl.host;
+    }
+    getCountry() {
+        return "null";
+    }
+    getLanguage() {
+        return this._parsedUrl.pathname.split("/").slice(-2, -1).toString();
+    }
+    getPagePath() {
+        return this.getDomain() + "_" + this.getLanguage() + "-" + this.getCountry();
     }
 };
 DomainLanguageUrlStrategy = __decorate([

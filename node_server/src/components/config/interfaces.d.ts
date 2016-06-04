@@ -9,6 +9,7 @@ interface IAppFactory {
 interface IApp {
     setConfigObject(config: IConfig): void;
     setRequest(url: string): void;
+    getPage(): string;
 }
 interface IConfig {
     setConfigService(configService: IConfigService): void;
@@ -31,19 +32,22 @@ interface IConfigService {
 }
 interface IAccountService {
     setDomain(domain: string): void;
-    setConfigObject(configObject: IAccountServiceJSON):void;
+    setConfigObject(configObject: IAccountServiceJSON): void;
     getAccount(): Promise<IAccount>;
 }
 interface IAccountDB {
-    
+
 }
 interface IAccount {
     domain: string;
     account: string;
 }
 interface IUrlStrategy {
-    getDomain(): string;
     setRequestUrl(url: string): void;
+    getDomain(): string;
+    getCountry(): string;
+    getLanguage(): string;
+    getPagePath(): string;
 }
 interface IConfigObject {
     path: IPathObject;
@@ -57,7 +61,7 @@ interface IConfigServiceJSON {
 }
 interface IAccountServiceJSON {
     type: string;
-    dataFile : string;
+    dataFile: string;
 }
 interface IUrlStrategyJSON {
     type: string

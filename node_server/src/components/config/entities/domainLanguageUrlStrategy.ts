@@ -13,16 +13,23 @@ class DomainLanguageUrlStrategy implements IUrlStrategy {
     private _requestUrl: string;
     private _parsedUrl: NodeURL.Url;
 
-    public getDomain() : string {
-        return this._parsedUrl.host;
-    }
-    
-    public setRequestUrl(requestUrl: string){
+    public setRequestUrl(requestUrl: string) {
         this._requestUrl = requestUrl;
         this._parsedUrl = NodeURL.parse(requestUrl);
     }
+    public getDomain(): string {
+        return this._parsedUrl.host;
+    }
+    public getCountry(): string {
+        return "null";
+    }
+    public getLanguage(): string {
+        return this._parsedUrl.pathname.split("/").slice(-2, -1).toString();
+    }
+    public getPagePath(): string {
+        return this.getDomain() + "_" + this.getLanguage() + "-" + this.getCountry();
+    }
 
-    
 }
 
 
