@@ -18,7 +18,7 @@ function main() {
         configObject.type = "file";
         configObject.dataFile = __dirname + "/test-sos-account.json";
         accountService.setConfigObject(configObject);
-        accountService.setDomain("http://www.sos.nl");
+        accountService.setDomain("www.sos.nl");
         let account = yield accountService.getAccount();
         test('account equals sos', function (t) {
             t.equal(account.account, "sos");
